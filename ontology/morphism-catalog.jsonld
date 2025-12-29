@@ -1,0 +1,155 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "catty": "http://catty.org/ontology/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dct": "http://purl.org/dc/terms/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "wd": "http://www.wikidata.org/entity/"
+  },
+  "@graph": [
+    {
+      "@id": "catty:Morphism_LK_to_LJ",
+      "@type": "catty:SequentRestrictionMorphism",
+      "rdfs:label": "LK → LJ (Sequent Restriction)",
+      "rdfs:comment": "Morphism from classical to intuitionistic logic by restricting to single-conclusion sequents",
+      "catty:domain": "catty:LK",
+      "catty:codomain": "catty:LJ",
+      "dct:description": "Embedding of LJ into LK via the translation that encodes a single-conclusion sequent Γ ⊢ A as the multi-conclusion sequent Γ ⊢ A, ⊥ (or more standardly, restricting to single-conclusion sequents). This is the categorical inclusion functor from the subcategory of intuitionistic provable sequents.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Sequent_calculus"
+    },
+    {
+      "@id": "catty:Morphism_LJ_to_LDJ",
+      "@type": "catty:SequentRestrictionMorphism",
+      "rdfs:label": "LJ → LDJ (Dualization)",
+      "rdfs:comment": "Morphism from intuitionistic to dual-intuitionistic logic by dualizing sequent form",
+      "catty:domain": "catty:LJ",
+      "catty:codomain": "catty:LDJ",
+      "dct:description": "Dual intuitionistic logic is obtained by switching the roles of antecedent and succedent. This represents a duality functor in the logic category.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Dual_intuitionistic_logic"
+    },
+    {
+      "@id": "catty:Morphism_LK_to_LJW",
+      "@type": "catty:ProofSystemEmbedding",
+      "rdfs:label": "LK → LJW (Double Translation)",
+      "rdfs:comment": "Embedding of relevance logic (LJ without weakening) into classical logic via double negation translation",
+      "catty:domain": "catty:LK",
+      "catty:codomain": "catty:LJW",
+      "dct:description": "Relevant logics can be embedded into classical logic via double negation translations. This is a functorial embedding from the relevance logic subcategory into the full classical logic category.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Double-negation_translation"
+    },
+    {
+      "@id": "catty:Morphism_LJ_to_LJW",
+      "@type": "catty:StructuralRuleMorphism",
+      "rdfs:label": "LJ → LJW (Remove Weakening)",
+      "rdfs:comment": "Morphism removing the weakening structural rule",
+      "catty:domain": "catty:LJ",
+      "catty:codomain": "catty:LJW",
+      "dct:description": "This morphism represents the restriction of intuitionistic logic to its relevant fragment by eliminating the weakening rule. This is a forgetful functor in the logic lattice.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Relevance_logic"
+    },
+    {
+      "@id": "catty:Morphism_LJ_to_LJC",
+      "@type": "catty:StructuralRuleMorphism",
+      "rdfs:label": "LJ → LJC (Remove Contraction)",
+      "rdfs:comment": "Morphism removing the contraction structural rule",
+      "catty:domain": "catty:LJ",
+      "catty:codomain": "catty:LJC",
+      "dct:description": "This morphism represents the restriction of intuitionistic logic to an affine-like fragment by eliminating the contraction rule. This is a forgetful functor in the logic lattice.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Affine_logic"
+    },
+    {
+      "@id": "catty:Morphism_LJ_to_LL",
+      "@type": "catty:StructuralRuleMorphism",
+      "rdfs:label": "LJ → LL (Remove Weakening and Contraction)",
+      "rdfs:comment": "Morphism removing both weakening and contraction to obtain linear logic",
+      "catty:domain": "catty:LJ",
+      "catty:codomain": "catty:LL",
+      "dct:description": "This morphism represents the restriction from intuitionistic to linear logic by eliminating both weakening and contraction. Linear logic is the most restricted logic in the substructural hierarchy.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Linear_logic"
+    },
+    {
+      "@id": "catty:Morphism_LL_to_ALL",
+      "@type": "catty:StructuralRuleMorphism",
+      "rdfs:label": "LL → ALL (Add Weakening)",
+      "rdfs:comment": "Morphism adding the weakening structural rule to obtain affine linear logic",
+      "catty:domain": "catty:LL",
+      "catty:codomain": "catty:ALL",
+      "dct:description": "Affine linear logic reintroduces weakening while maintaining the restriction on contraction. This represents a free functor in the lattice.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Affine_logic"
+    },
+    {
+      "@id": "catty:Morphism_LL_to_RLL",
+      "@type": "catty:StructuralRuleMorphism",
+      "rdfs:label": "LL → RLL (Add Contraction)",
+      "rdfs:comment": "Morphism adding the contraction structural rule to obtain relevant linear logic",
+      "catty:domain": "catty:LL",
+      "catty:codomain": "catty:RLL",
+      "dct:description": "Relevant linear logic reintroduces contraction while maintaining the restriction on weakening. This represents a free functor in the lattice.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Relevance_logic"
+    },
+    {
+      "@id": "catty:Morphism_LL_to_MLL",
+      "@type": "catty:StructuralRuleMorphism",
+      "rdfs:label": "LL → MLL (Multiplicative Fragment)",
+      "rdfs:comment": "Morphism to the multiplicative fragment of linear logic",
+      "catty:domain": "catty:LL",
+      "catty:codomain": "catty:MLL",
+      "dct:description": "The multiplicative fragment MLL is a subsystem of full linear logic, containing only the multiplicative connectives (⊗, ⅋). This is a forgetful functor.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Linear_logic"
+    },
+    {
+      "@id": "catty:Morphism_MLL_to_MALL",
+      "@type": "catty:StructuralRuleMorphism",
+      "rdfs:label": "MLL → MALL (Add Additive Connectives)",
+      "rdfs:comment": "Morphism adding additive connectives to obtain MALL",
+      "catty:domain": "catty:MLL",
+      "catty:codomain": "catty:MALL",
+      "dct:description": "MALL adds the additive connectives (⊕, &) to the multiplicative fragment. This is a free functor.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Linear_logic"
+    },
+    {
+      "@id": "catty:Adjoint_LK_LJ",
+      "@type": "catty:AdjointFunctors",
+      "rdfs:label": "Adjoint Pair: LK ↔ LJ",
+      "rdfs:comment": "The intuitionistic sublogic LJ is a reflective subcategory of classical logic LK. The inclusion functor has a left adjoint (double negation).",
+      "dct:description": "The inclusion functor F: LJ → LK has a left adjoint G: LK → LJ given by the Gödel-Gentzen double negation translation. This makes LJ a reflective subcategory of LK.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Double-negation_translation"
+    },
+    {
+      "@id": "catty:Adjoint_LJ_LL",
+      "@type": "catty:AdjointFunctors",
+      "rdfs:label": "Adjoint Pair: LJ ↔ LL",
+      "rdfs:comment": "Linear logic LL can be embedded into intuitionistic logic LJ via translation, with adjoint recovery via monadic constructs.",
+      "dct:description": "There is an embedding of linear logic into intuitionistic logic via Girard's translation (using exponential modalities). This gives adjoint relationships between the substructural and intuitionistic categories.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Linear_logic"
+    },
+    {
+      "@id": "catty:NaturalTransformation_GodelGentzen",
+      "@type": "catty:NaturalTransformation",
+      "rdfs:label": "Gödel-Gentzen Translation",
+      "rdfs:comment": "The double negation translation as a natural transformation from the identity functor on LK to the double-negation functor",
+      "dct:description": "The Gödel-Gentzen translation provides a natural transformation η: Id_{LK} → (-)∘¬∘¬ mapping classical formulas to their double-negation translated intuitionistic counterparts.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Double-negation_translation"
+    },
+    {
+      "@id": "catty:NaturalTransformation_Continuation",
+      "@type": "catty:NaturalTransformation",
+      "rdfs:label": "Continuation-Passing Style Translation",
+      "rdfs:comment": "The CPS translation as a natural transformation relating classical and intuitionistic/linear proof structures",
+      "dct:description": "The continuation-passing style translation provides a natural transformation between classical logic (via control operators) and linear logic, demonstrating the categorical coherence of the Curry-Howard correspondence with control effects.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Continuation-passing_style"
+    },
+    {
+      "@id": "catty:CurryHoward_Program_Proof",
+      "@type": "catty:NaturalTransformation",
+      "rdfs:label": "Program as Proof (Curry-Howard)",
+      "rdfs:comment": "The fundamental natural transformation of the Curry-Howard correspondence mapping programs to proofs",
+      "dct:description": "Under the Curry-Howard isomorphism, programs (type-theoretic morphisms) correspond to proofs (logic-theoretic morphisms). This is a natural transformation between the type theory and logic categories.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence"
+    }
+  ]
+}

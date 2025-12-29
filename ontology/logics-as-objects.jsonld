@@ -1,0 +1,157 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "catty": "http://catty.org/ontology/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dct": "http://purl.org/dc/terms/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "dbo": "http://dbpedia.org/ontology/",
+    "wd": "http://www.wikidata.org/entity/"
+  },
+  "@graph": [
+    {
+      "@id": "catty:LogicAsCategory",
+      "@type": "catty:LogicAsCategory",
+      "rdfs:label": "Category of Logics",
+      "rdfs:comment": "The category whose objects are formal logics and morphisms are proof-theoretic relationships"
+    },
+    {
+      "@id": "catty:TypeTheoryAsCategory",
+      "@type": "catty:TypeTheoryAsCategory",
+      "rdfs:label": "Category of Type Theories",
+      "rdfs:comment": "The category whose objects are type theories and morphisms are type-theoretic functions"
+    },
+    {
+      "@id": "catty:CurryHowardCH",
+      "@type": "catty:CurryHowardEquivalence",
+      "rdfs:label": "Curry-Howard Correspondence",
+      "rdfs:comment": "The canonical equivalence between logic and type theory",
+      "catty:sourceCategory": "catty:LogicAsCategory",
+      "catty:targetCategory": "catty:TypeTheoryAsCategory"
+    },
+    {
+      "@id": "catty:LK",
+      "@type": "catty:Logic",
+      "rdfs:label": "LK (Classical Sequent Calculus)",
+      "rdfs:comment": "Gentzen's classical sequent calculus with multi-conclusion sequents",
+      "catty:hasSequentForm": "catty:MultiConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Weakening", "catty:Contraction", "catty:Exchange"],
+      "catty:latticeCoordinate": "(0,0)",
+      "owl:sameAs": "wd:Q3525872",
+      "dct:source": "https://en.wikipedia.org/wiki/Sequent_calculus"
+    },
+    {
+      "@id": "catty:MultiConclusionSequent",
+      "@type": "catty:SequentForm",
+      "rdfs:label": "Multi-Conclusion Sequent",
+      "rdfs:comment": "Sequent of the form Γ ⊢ Δ where Γ, Δ are multisets of formulas"
+    },
+    {
+      "@id": "catty:LJ",
+      "@type": "catty:Logic",
+      "rdfs:label": "LJ (Intuitionistic Sequent Calculus)",
+      "rdfs:comment": "Gentzen's intuitionistic sequent calculus with single-conclusion sequents",
+      "catty:hasSequentForm": "catty:SingleConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Weakening", "catty:Contraction", "catty:Exchange"],
+      "catty:latticeCoordinate": "(1,0)",
+      "owl:sameAs": "wd:Q7680564",
+      "dct:source": "https://en.wikipedia.org/wiki/Sequent_calculus"
+    },
+    {
+      "@id": "catty:SingleConclusionSequent",
+      "@type": "catty:SequentForm",
+      "rdfs:label": "Single-Conclusion Sequent",
+      "rdfs:comment": "Sequent of the form Γ ⊢ A where Γ is a multiset and A is a single formula"
+    },
+    {
+      "@id": "catty:LDJ",
+      "@type": "catty:Logic",
+      "rdfs:label": "LDJ (Dual Intuitionistic Sequent Calculus)",
+      "rdfs:comment": "Dual intuitionistic logic with single-antecedent, multi-conclusion sequents",
+      "catty:hasSequentForm": "catty:SingleAntecedentSequent",
+      "catty:hasStructuralRule": ["catty:Weakening", "catty:Contraction", "catty:Exchange"],
+      "catty:latticeCoordinate": "(2,0)",
+      "dct:source": "https://en.wikipedia.org/wiki/Dual_intuitionistic_logic"
+    },
+    {
+      "@id": "catty:SingleAntecedentSequent",
+      "@type": "catty:SequentForm",
+      "rdfs:label": "Single-Antecedent Sequent",
+      "rdfs:comment": "Sequent of the form A ⊢ Δ where A is a single formula and Δ is a multiset"
+    },
+    {
+      "@id": "catty:LJW",
+      "@type": "catty:Logic",
+      "rdfs:label": "LJW (LJ without Weakening)",
+      "rdfs:comment": "Intuitionistic sequent calculus without the weakening structural rule",
+      "catty:hasSequentForm": "catty:SingleConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Contraction", "catty:Exchange"],
+      "catty:latticeCoordinate": "(1,1)",
+      "dct:source": "https://en.wikipedia.org/wiki/Relevance_logic"
+    },
+    {
+      "@id": "catty:LJC",
+      "@type": "catty:Logic",
+      "rdfs:label": "LJC (LJ without Contraction)",
+      "rdfs:comment": "Intuitionistic sequent calculus without the contraction structural rule",
+      "catty:hasSequentForm": "catty:SingleConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Weakening", "catty:Exchange"],
+      "catty:latticeCoordinate": "(1,2)",
+      "dct:source": "https://en.wikipedia.org/wiki/Linear_logic"
+    },
+    {
+      "@id": "catty:LL",
+      "@type": "catty:Logic",
+      "rdfs:label": "LL (Linear Logic)",
+      "rdfs:comment": "Girard's linear logic with no structural rules (resource-sensitive)",
+      "catty:hasSequentForm": "catty:SingleConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Exchange"],
+      "catty:latticeCoordinate": "(1,3)",
+      "owl:sameAs": "wd:Q847878",
+      "dct:source": "https://en.wikipedia.org/wiki/Linear_logic"
+    },
+    {
+      "@id": "catty:ALL",
+      "@type": "catty:Logic",
+      "rdfs:label": "ALL (Affine Linear Logic)",
+      "rdfs:comment": "Affine linear logic with weakening but no contraction",
+      "catty:hasSequentForm": "catty:SingleConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Weakening", "catty:Exchange"],
+      "catty:latticeCoordinate": "(1,4)",
+      "dct:source": "https://en.wikipedia.org/wiki/Linear_logic"
+    },
+    {
+      "@id": "catty:RLL",
+      "@type": "catty:Logic",
+      "rdfs:label": "RLL (Relevant Linear Logic)",
+      "rdfs:comment": "Relevant linear logic with contraction but no weakening",
+      "catty:hasSequentForm": "catty:SingleConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Contraction", "catty:Exchange"],
+      "catty:latticeCoordinate": "(1,5)",
+      "dct:source": "https://en.wikipedia.org/wiki/Relevance_logic"
+    },
+    {
+      "@id": "catty:MLL",
+      "@type": "catty:Logic",
+      "rdfs:label": "MLL (Multiplicative Linear Logic)",
+      "rdfs:comment": "Multiplicative fragment of linear logic without additive connectives",
+      "catty:hasSequentForm": "catty:SingleConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Exchange"],
+      "catty:latticeCoordinate": "(1,6)",
+      "dct:source": "https://en.wikipedia.org/wiki/Linear_logic"
+    },
+    {
+      "@id": "catty:MALL",
+      "@type": "catty:Logic",
+      "rdfs:label": "MALL (Multiplicative-Additive Linear Logic)",
+      "rdfs:comment": "Linear logic with multiplicative and additive connectives",
+      "catty:hasSequentForm": "catty:SingleConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Exchange"],
+      "catty:latticeCoordinate": "(1,7)",
+      "dct:source": "https://en.wikipedia.org/wiki/Linear_logic"
+    }
+  ]
+}

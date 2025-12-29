@@ -1,0 +1,281 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "catty": "http://catty.org/ontology/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dct": "http://purl.org/dc/terms/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "wd": "http://www.wikidata.org/entity/",
+    "dbo": "http://dbpedia.org/ontology/",
+    "skos": "http://www.w3.org/2004/02/skos/core#"
+  },
+  "@graph": [
+    {
+      "@id": "catty:CompleteLatticeExample",
+      "@type": "catty:LogicLattice",
+      "rdfs:label": "Complete Example: Logic Lattice Category",
+      "rdfs:comment": "A complete example showing the 2D logic lattice with logics as objects and morphisms representing sequent restrictions and structural rules",
+      "dct:description": "This example demonstrates Catty's categorical model of the logic lattice. The lattice is a poset category where objects are logics positioned by their sequent form (horizontal axis) and structural rule configuration (vertical axis). Morphisms exist from Logic A to Logic B iff A is more restrictive than B (i.e., every proof in A is also a proof in B)."
+    },
+    {
+      "@id": "catty:LK",
+      "@type": "catty:Logic",
+      "rdfs:label": "LK (Classical Sequent Calculus)",
+      "rdfs:comment": "Gentzen's classical sequent calculus with multi-conclusion sequents and full structural rules",
+      "catty:hasSequentForm": "catty:MultiConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Weakening", "catty:Contraction", "catty:Exchange"],
+      "catty:latticeCoordinate": "(0,0)",
+      "dct:description": "The classical sequent calculus LK is the starting point (coordinate (0,0)) in the logic lattice. It has the least restrictive sequent form (multi-conclusion) and all structural rules (weakening, contraction, exchange). Every other logic in the lattice is a restriction of LK.",
+      "owl:sameAs": "wd:Q3525872",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Sequent_calculus"
+    },
+    {
+      "@id": "catty:MultiConclusionSequent",
+      "@type": "catty:SequentForm",
+      "rdfs:label": "Multi-Conclusion Sequent",
+      "rdfs:comment": "Sequent of the form Γ ⊢ Δ where Γ, Δ are multisets of formulas",
+      "dct:description": "Multi-conclusion sequents allow multiple formulas in the succedent. This is the most permissive sequent form and corresponds to classical logic. The sequent Γ ⊢ Δ is provable iff the conjunction of Γ entails the disjunction of Δ."
+    },
+    {
+      "@id": "catty:Weakening",
+      "@type": "catty:StructuralRule",
+      "rdfs:label": "Weakening",
+      "rdfs:comment": "The weakening structural rule allows adding arbitrary formulas anywhere in the sequent",
+      "dct:description": "Weakening (also called thinning) allows adding arbitrary formulas to the antecedent or succedent of a sequent. Antecedent weakening: from Γ ⊢ Δ, infer A, Γ ⊢ Δ. Succedent weakening: from Γ ⊢ Δ, infer Γ ⊢ A, Δ. This represents the logical principle that additional assumptions don't invalidate a proof."
+    },
+    {
+      "@id": "catty:Contraction",
+      "@type": "catty:StructuralRule",
+      "rdfs:label": "Contraction",
+      "rdfs:comment": "The contraction structural rule allows duplicating formulas in the sequent",
+      "dct:description": "Contraction allows identifying (contracting) two copies of the same formula. From A, A, Γ ⊢ Δ, infer A, Γ ⊢ Δ. This represents the logical principle that using a formula multiple times doesn't add new information."
+    },
+    {
+      "@id": "catty:Exchange",
+      "@type": "catty:StructuralRule",
+      "rdfs:label": "Exchange",
+      "rdfs:comment": "The exchange structural rule allows reordering formulas in the sequent",
+      "dct:description": "Exchange allows reordering formulas in the antecedent or succedent. Since we use multisets, this is implicit. From Γ₁, A, B, Γ₂ ⊢ Δ, infer Γ₁, B, A, Γ₂ ⊢ Δ. This represents the logical principle that the order of assumptions doesn't matter."
+    },
+    {
+      "@id": "catty:LJ",
+      "@type": "catty:Logic",
+      "rdfs:label": "LJ (Intuitionistic Sequent Calculus)",
+      "rdfs:comment": "Gentzen's intuitionistic sequent calculus with single-conclusion sequents and full structural rules",
+      "catty:hasSequentForm": "catty:SingleConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Weakening", "catty:Contraction", "catty:Exchange"],
+      "catty:latticeCoordinate": "(1,0)",
+      "dct:description": "LJ is obtained from LK by restricting to single-conclusion sequents (coordinate (1,0)). This restriction corresponds to intuitionistic logic, which rejects the law of excluded middle. Every provable sequent in LJ is also provable in LK, giving a morphism LJ → LK.",
+      "owl:sameAs": "wd:Q7680564",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Sequent_calculus"
+    },
+    {
+      "@id": "catty:SingleConclusionSequent",
+      "@type": "catty:SequentForm",
+      "rdfs:label": "Single-Conclusion Sequent",
+      "rdfs:comment": "Sequent of the form Γ ⊢ A where Γ is a multiset and A is a single formula",
+      "dct:description": "Single-conclusion sequents allow only one formula in the succedent. This restriction corresponds to intuitionistic logic. The sequent Γ ⊢ A is provable iff Γ entails A constructively."
+    },
+    {
+      "@id": "catty:LL",
+      "@type": "catty:Logic",
+      "rdfs:label": "LL (Linear Logic)",
+      "rdfs:comment": "Girard's linear logic with single-conclusion sequents and only the exchange structural rule",
+      "catty:hasSequentForm": "catty:SingleConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Exchange"],
+      "catty:latticeCoordinate": "(1,3)",
+      "dct:description": "Linear logic LL is obtained from LJ by removing both weakening and contraction (coordinate (1,3)). Only exchange remains. This makes LL resource-sensitive: each hypothesis must be used exactly once. LL is the core substructural logic, and many other substructural logics can be obtained by adding back structural rules.",
+      "owl:sameAs": "wd:Q847878",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Linear_logic"
+    },
+    {
+      "@id": "catty:ALL",
+      "@type": "catty:Logic",
+      "rdfs:label": "ALL (Affine Linear Logic)",
+      "rdfs:comment": "Affine linear logic with weakening but no contraction",
+      "catty:hasSequentForm": "catty:SingleConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Weakening", "catty:Exchange"],
+      "catty:latticeCoordinate": "(1,4)",
+      "dct:description": "Affine linear logic ALL is obtained from LL by adding back weakening (coordinate (1,4)). This allows discarding resources but not duplicating them. It's useful for modeling unique resources that may be discarded.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Linear_logic"
+    },
+    {
+      "@id": "catty:RLL",
+      "@type": "catty:Logic",
+      "rdfs:label": "RLL (Relevant Linear Logic)",
+      "rdfs:comment": "Relevant linear logic with contraction but no weakening",
+      "catty:hasSequentForm": "catty:SingleConclusionSequent",
+      "catty:hasStructuralRule": ["catty:Contraction", "catty:Exchange"],
+      "catty:latticeCoordinate": "(1,5)",
+      "dct:description": "Relevant linear logic RLL is obtained from LL by adding back contraction (coordinate (1,5)). This allows using resources multiple times but not discarding them. It's closely related to relevance logic.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Relevance_logic"
+    },
+    {
+      "@id": "catty:Morphism_LJ_to_LK",
+      "@type": "catty:SequentRestrictionMorphism",
+      "rdfs:label": "LJ → LK (Inclusion)",
+      "rdfs:comment": "The inclusion morphism from intuitionistic to classical logic",
+      "catty:domain": "catty:LJ",
+      "catty:codomain": "catty:LK",
+      "dct:description": "Every provable sequent in LJ is also provable in LK. This gives an inclusion functor from the subcategory of intuitionistic provable sequents to the full classical category. The morphism exists because LJ (coordinate (1,0)) is more restrictive than LK (coordinate (0,0))."
+    },
+    {
+      "@id": "catty:Morphism_LL_to_LJ",
+      "@type": "catty:StructuralRuleMorphism",
+      "rdfs:label": "LL → LJ (Add Weakening and Contraction)",
+      "rdfs:comment": "The morphism from linear to intuitionistic logic by adding back structural rules",
+      "catty:domain": "catty:LL",
+      "catty:codomain": "catty:LJ",
+      "dct:description": "Every provable sequent in LL is also provable in LJ (by adding weakening and contraction). This gives a forgetful functor from linear logic to intuitionistic logic. The morphism exists because LL (coordinate (1,3)) is more restrictive than LJ (coordinate (1,0))."
+    },
+    {
+      "@id": "catty:Morphism_LL_to_ALL",
+      "@type": "catty:StructuralRuleMorphism",
+      "rdfs:label": "LL → ALL (Add Weakening)",
+      "rdfs:comment": "The morphism from linear to affine linear logic by adding weakening",
+      "catty:domain": "catty:LL",
+      "catty:codomain": "catty:ALL",
+      "dct:description": "Every provable sequent in LL is also provable in ALL (by adding weakening). This gives a free functor from linear logic to affine linear logic. The morphism exists because LL (coordinate (1,3)) is more restrictive than ALL (coordinate (1,4))."
+    },
+    {
+      "@id": "catty:Morphism_LL_to_RLL",
+      "@type": "catty:StructuralRuleMorphism",
+      "rdfs:label": "LL → RLL (Add Contraction)",
+      "rdfs:comment": "The morphism from linear to relevant linear logic by adding contraction",
+      "catty:domain": "catty:LL",
+      "catty:codomain": "catty:RLL",
+      "dct:description": "Every provable sequent in LL is also provable in RLL (by adding contraction). This gives a free functor from linear logic to relevant linear logic. The morphism exists because LL (coordinate (1,3)) is more restrictive than RLL (coordinate (1,5))."
+    },
+    {
+      "@id": "catty:Morphism_ALL_to_LJ",
+      "@type": "catty:StructuralRuleMorphism",
+      "rdfs:label": "ALL → LJ (Add Contraction)",
+      "rdfs:comment": "The morphism from affine to intuitionistic logic by adding contraction",
+      "catty:domain": "catty:ALL",
+      "catty:codomain": "catty:LJ",
+      "dct:description": "Every provable sequent in ALL is also provable in LJ (by adding contraction). This gives a free functor from affine linear logic to intuitionistic logic. The morphism exists because ALL (coordinate (1,4)) is more restrictive than LJ (coordinate (1,0))."
+    },
+    {
+      "@id": "catty:Morphism_RLL_to_LJ",
+      "@type": "catty:StructuralRuleMorphism",
+      "rdfs:label": "RLL → LJ (Add Weakening)",
+      "rdfs:comment": "The morphism from relevant to intuitionistic logic by adding weakening",
+      "catty:domain": "catty:RLL",
+      "catty:codomain": "catty:LJ",
+      "dct:description": "Every provable sequent in RLL is also provable in LJ (by adding weakening). This gives a free functor from relevant linear logic to intuitionistic logic. The morphism exists because RLL (coordinate (1,5)) is more restrictive than LJ (coordinate (1,0))."
+    },
+    {
+      "@id": "catty:LatticeOrder_LJ_LK",
+      "@type": "catty:LatticeMorphism",
+      "rdfs:label": "LJ ≤ LK",
+      "rdfs:comment": "LJ is less than or equal to LK in the lattice order (LJ is more restrictive)",
+      "catty:domain": "catty:LJ",
+      "catty:codomain": "catty:LK",
+      "dct:description": "In the lattice order, Logic A ≤ Logic B iff A is more restrictive than B. Here, LJ ≤ LK because LJ has single-conclusion sequents (more restrictive) while LK has multi-conclusion sequents. Every intuitionistic proof is also a classical proof."
+    },
+    {
+      "@id": "catty:LatticeOrder_LL_LJ",
+      "@type": "catty:LatticeMorphism",
+      "rdfs:label": "LL ≤ LJ",
+      "rdfs:comment": "LL is less than or equal to LJ in the lattice order (LL is more restrictive)",
+      "catty:domain": "catty:LL",
+      "catty:codomain": "catty:LJ",
+      "dct:description": "LL ≤ LJ because LL has no weakening or contraction (more restrictive) while LJ has both. Every linear logic proof is also an intuitionistic proof."
+    },
+    {
+      "@id": "catty:LatticeOrder_LL_ALL",
+      "@type": "catty:LatticeMorphism",
+      "rdfs:label": "LL ≤ ALL",
+      "rdfs:comment": "LL is less than or equal to ALL in the lattice order (LL is more restrictive)",
+      "catty:domain": "catty:LL",
+      "catty:codomain": "catty:ALL",
+      "dct:description": "LL ≤ ALL because LL has no weakening (more restrictive) while ALL has weakening. Every linear logic proof is also an affine linear logic proof."
+    },
+    {
+      "@id": "catty:LatticeOrder_LL_RLL",
+      "@type": "catty:LatticeMorphism",
+      "rdfs:label": "LL ≤ RLL",
+      "rdfs:comment": "LL is less than or equal to RLL in the lattice order (LL is more restrictive)",
+      "catty:domain": "catty:LL",
+      "catty:codomain": "catty:RLL",
+      "dct:description": "LL ≤ RLL because LL has no contraction (more restrictive) while RLL has contraction. Every linear logic proof is also a relevant linear logic proof."
+    },
+    {
+      "@id": "catty:LatticeOrder_ALL_LJ",
+      "@type": "catty:LatticeMorphism",
+      "rdfs:label": "ALL ≤ LJ",
+      "rdfs:comment": "ALL is less than or equal to LJ in the lattice order (ALL is more restrictive)",
+      "catty:domain": "catty:ALL",
+      "catty:codomain": "catty:LJ",
+      "dct:description": "ALL ≤ LJ because ALL has no contraction (more restrictive) while LJ has contraction. Every affine linear logic proof is also an intuitionistic proof."
+    },
+    {
+      "@id": "catty:LatticeOrder_RLL_LJ",
+      "@type": "catty:LatticeMorphism",
+      "rdfs:label": "RLL ≤ LJ",
+      "rdfs:comment": "RLL is less than or equal to LJ in the lattice order (RLL is more restrictive)",
+      "catty:domain": "catty:RLL",
+      "catty:codomain": "catty:LJ",
+      "dct:description": "RLL ≤ LJ because RLL has no weakening (more restrictive) while LJ has weakening. Every relevant linear logic proof is also an intuitionistic proof."
+    },
+    {
+      "@id": "catty:LatticeOrder_ALL_RLL",
+      "@type": "catty:LatticeMorphism",
+      "rdfs:label": "ALL ∧ RLL = LL",
+      "rdfs:comment": "The meet (intersection) of ALL and RLL is LL",
+      "catty:domain": "catty:LL",
+      "catty:codomain": "catty:ALL",
+      "dct:description": "In the lattice, the meet (greatest lower bound) of ALL and RLL is LL. This is because LL has neither weakening nor contraction, while ALL has weakening and RLL has contraction. Their meet is the most restrictive logic that is a restriction of both."
+    },
+    {
+      "@id": "catty:Adjoint_LK_LJ",
+      "@type": "catty:AdjointFunctors",
+      "rdfs:label": "Adjoint Pair: LK ↔ LJ",
+      "rdfs:comment": "The inclusion functor LJ → LK has a left adjoint (double negation translation)",
+      "dct:description": "The inclusion functor F: LJ → LK has a left adjoint G: LK → LJ given by the Gödel-Gentzen double negation translation. This makes LJ a reflective subcategory of LK. The adjunction demonstrates the categorical relationship between classical and intuitionistic logic.",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Double-negation_translation"
+    },
+    {
+      "@id": "catty:CurryHowardCH",
+      "@type": "catty:CurryHowardEquivalence",
+      "rdfs:label": "Curry-Howard Correspondence",
+      "rdfs:comment": "The categorical equivalence between the category of logics and the category of type theories",
+      "dct:description": "The Curry-Howard correspondence is an equivalence of categories: the category of logics (with proof-theoretic morphisms) is equivalent to the category of type theories (with type-theoretic morphisms). Under this correspondence: (1) Propositions correspond to types, (2) Proofs correspond to programs (terms), (3) Sequent rules correspond to type constructors, (4) LJ ↔ STLC (simply typed lambda calculus), (5) LL ↔ Linear Types.",
+      "catty:sourceCategory": "catty:LogicAsCategory",
+      "catty:targetCategory": "catty:TypeTheoryAsCategory",
+      "owl:sameAs": "wd:Q2627038",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence"
+    },
+    {
+      "@id": "catty:CurryHowardFunctor",
+      "@type": "catty:Functor",
+      "rdfs:label": "Curry-Howard Functor",
+      "rdfs:comment": "The functor implementing the Curry-Howard correspondence",
+      "catty:sourceCategory": "catty:LogicAsCategory",
+      "catty:targetCategory": "catty:TypeTheoryAsCategory",
+      "dct:description": "The Curry-Howard functor F maps: (1) Objects: LK ↔ System F, LJ ↔ STLC, LL ↔ Linear Types, ALL ↔ Affine Types. (2) Morphisms: Logic embeddings map to type translations. (3) Natural transformations: Proof transformations map to program transformations.",
+      "catty:objectMapping": {
+        "catty:LJ": "catty:STLC",
+        "catty:LL": "catty:LinearTypeSystem",
+        "catty:ALL": "catty:AffineTypeSystem"
+      }
+    },
+    {
+      "@id": "catty:LogicAsCategory",
+      "@type": "catty:LogicAsCategory",
+      "rdfs:label": "Category of Logics",
+      "rdfs:comment": "The category whose objects are formal logics and morphisms are proof-theoretic relationships",
+      "dct:description": "The Logic-as-Category model provides the categorical foundation for Catty. Objects: LK, LJ, LL, ALL, RLL, etc. Morphisms: Sequents restrictions, structural rule embeddings, proof system translations. This is a poset category (at most one morphism between any two logics)."
+    },
+    {
+      "@id": "catty:TypeTheoryAsCategory",
+      "@type": "catty:TypeTheoryAsCategory",
+      "rdfs:label": "Category of Type Theories",
+      "rdfs:comment": "The category whose objects are type theories and morphisms are type-theoretic transformations",
+      "dct:description": "The Type-Theory-as-Category model is the target of the Curry-Howard functor. Objects: STLC, System F, Linear Types, etc. Morphisms: Type translations, embeddings, functorial mappings. This category provides the programmatic side of the Curry-Howard correspondence."
+    }
+  ]
+}

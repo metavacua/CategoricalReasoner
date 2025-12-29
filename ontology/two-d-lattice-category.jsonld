@@ -1,0 +1,244 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "catty": "http://catty.org/ontology/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dct": "http://purl.org/dc/terms/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "math": "http://www.w3.org/2000/10/swap/math#"
+  },
+  "@graph": [
+    {
+      "@id": "catty:LogicLattice",
+      "@type": "catty:LogicLattice",
+      "rdfs:label": "Two-Dimensional Logic Lattice Category",
+      "rdfs:comment": "A poset category representing the 2D lattice of logics. Horizontal axis: sequent restrictions. Vertical axis: structural rules (presence/absence of weakening, contraction, exchange).",
+      "dct:description": "The Logic Lattice is a categorical formalization of the parametric space of logics. Objects are logics positioned by their sequent form (horizontal) and structural rule configuration (vertical). Morphisms represent the inclusion relationships: a morphism exists from Logic A to Logic B iff A is a restriction (more constraints) of B (fewer constraints). This makes the lattice a poset category.",
+      "prov:wasGeneratedBy": "catty:LatticeConstructionProcess"
+    },
+    {
+      "@id": "catty:LatticeConstructionProcess",
+      "@type": "prov:Activity",
+      "rdfs:label": "Lattice Construction Process",
+      "rdfs:comment": "The process of constructing the two-dimensional lattice of logics as a categorical structure"
+    },
+    {
+      "@id": "catty:LatticeOrder",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "lattice order",
+      "rdfs:comment": "The partial order relation in the lattice: Logic A ≤ Logic B iff A is more restrictive than B (A has fewer sequents provable)",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "catty:Logic",
+      "owl:propertyChainAxiom": ["catty:hasSequentForm", "catty:hasStructuralRule"]
+    },
+    {
+      "@id": "catty:SequentRestrictionAxis",
+      "@type": "catty:LatticeAxis",
+      "rdfs:label": "Sequent Restriction Axis",
+      "rdfs:comment": "The horizontal axis of the lattice, representing sequent form restrictions (multi-conclusion → single-conclusion → single-antecedent)",
+      "dct:description": "The sequent restriction axis orders logics by the restrictiveness of their sequent form: LK (multi-conclusion, x=0) → LJ (single-conclusion, x=1) → LDJ (single-antecedent, x=2). Morphisms along this axis are sequent restriction morphisms.",
+      "catty:axisDirection": "horizontal",
+      "catty:axisMin": 0,
+      "catty:axisMax": 2
+    },
+    {
+      "@id": "catty:StructuralRuleAxis",
+      "@type": "catty:LatticeAxis",
+      "rdfs:label": "Structural Rule Axis",
+      "rdfs:comment": "The vertical axis of the lattice, representing the presence/absence of structural rules",
+      "dct:description": "The structural rule axis orders logics by the restrictiveness of their structural rules. Moving up (increasing y) removes rules: (0) full intuitionistic/classical → (1) without weakening → (2) without contraction → (3) without both (linear) → (4+) variants. Morphisms along this axis are structural rule morphisms.",
+      "catty:axisDirection": "vertical",
+      "catty:axisMin": 0,
+      "catty:axisMax": 10
+    },
+    {
+      "@id": "catty:LatticeAxis",
+      "@type": "owl:Class",
+      "rdfs:label": "Lattice Axis",
+      "rdfs:comment": "An axis of the two-dimensional lattice, representing a dimension of logical variation"
+    },
+    {
+      "@id": "catty:LatticeCoordinate",
+      "@type": "owl:Class",
+      "rdfs:label": "Lattice Coordinate",
+      "rdfs:comment": "A coordinate (x,y) in the logic lattice"
+    },
+    {
+      "@id": "catty:LatticeMorphism",
+      "@type": "catty:LogicMorphism",
+      "rdfs:label": "Lattice Morphism",
+      "rdfs:comment": "A morphism in the lattice poset category: exists iff source ≤ target (source is more restrictive)",
+      "dct:description": "In the lattice poset category, there is at most one morphism between any two logics. A morphism f: A → B exists iff A is more restrictive than B (i.e., every proof in A is also a proof in B). This makes the lattice a poset category, a special case of a thin category.",
+      "owl:equivalentClass": { "@type": "owl:Class", "owl:intersectionOf": ["catty:LogicMorphism", "catty:PosetMorphism"] }
+    },
+    {
+      "@id": "catty:PosetMorphism",
+      "@type": "owl:Class",
+      "rdfs:label": "Poset Morphism",
+      "rdfs:comment": "A morphism in a poset category (at most one morphism between any two objects)"
+    },
+    {
+      "@id": "catty:LatticeNode_LK",
+      "@type": "catty:LatticeCoordinate",
+      "rdfs:label": "Lattice Node: LK",
+      "catty:logic": "catty:LK",
+      "catty:x": 0,
+      "catty:y": 0,
+      "catty:neighbors": ["catty:LJ", "catty:LJW", "catty:LJC"],
+      "dct:description": "Root node of the classical/intuitionistic branch: full structural rules, multi-conclusion sequents"
+    },
+    {
+      "@id": "catty:LatticeNode_LJ",
+      "@type": "catty:LatticeCoordinate",
+      "rdfs:label": "Lattice Node: LJ",
+      "catty:logic": "catty:LJ",
+      "catty:x": 1,
+      "catty:y": 0,
+      "catty:neighbors": ["catty:LK", "catty:LDJ", "catty:LJW", "catty:LJC", "catty:LL"],
+      "dct:description": "Intuitionistic logic: full structural rules, single-conclusion sequents"
+    },
+    {
+      "@id": "catty:LatticeNode_LDJ",
+      "@type": "catty:LatticeCoordinate",
+      "rdfs:label": "Lattice Node: LDJ",
+      "catty:logic": "catty:LDJ",
+      "catty:x": 2,
+      "catty:y": 0,
+      "catty:neighbors": ["catty:LJ"],
+      "dct:description": "Dual intuitionistic logic: full structural rules, single-antecedent sequents"
+    },
+    {
+      "@id": "catty:LatticeNode_LJW",
+      "@type": "catty:LatticeCoordinate",
+      "rdfs:label": "Lattice Node: LJW",
+      "catty:logic": "catty:LJW",
+      "catty:x": 1,
+      "catty:y": 1,
+      "catty:neighbors": ["catty:LJ", "catty:LK", "catty:RLL"],
+      "dct:description": "Relevant intuitionistic logic: no weakening, single-conclusion sequents"
+    },
+    {
+      "@id": "catty:LatticeNode_LJC",
+      "@type": "catty:LatticeCoordinate",
+      "rdfs:label": "Lattice Node: LJC",
+      "catty:logic": "catty:LJC",
+      "catty:x": 1,
+      "catty:y": 2,
+      "catty:neighbors": ["catty:LJ", "catty:ALL"],
+      "dct:description": "Affine intuitionistic logic: no contraction, single-conclusion sequents"
+    },
+    {
+      "@id": "catty:LatticeNode_LL",
+      "@type": "catty:LatticeCoordinate",
+      "rdfs:label": "Lattice Node: LL",
+      "catty:logic": "catty:LL",
+      "catty:x": 1,
+      "catty:y": 3,
+      "catty:neighbors": ["catty:LJ", "catty:ALL", "catty:RLL", "catty:MLL"],
+      "dct:description": "Linear logic: no weakening or contraction, single-conclusion sequents (core substructural logic)"
+    },
+    {
+      "@id": "catty:LatticeNode_ALL",
+      "@type": "catty:LatticeCoordinate",
+      "rdfs:label": "Lattice Node: ALL",
+      "catty:logic": "catty:ALL",
+      "catty:x": 1,
+      "catty:y": 4,
+      "catty:neighbors": ["catty:LL", "catty:LJC"],
+      "dct:description": "Affine linear logic: with weakening, no contraction"
+    },
+    {
+      "@id": "catty:LatticeNode_RLL",
+      "@type": "catty:LatticeCoordinate",
+      "rdfs:label": "Lattice Node: RLL",
+      "catty:logic": "catty:RLL",
+      "catty:x": 1,
+      "catty:y": 5,
+      "catty:neighbors": ["catty:LL", "catty:LJW"],
+      "dct:description": "Relevant linear logic: with contraction, no weakening"
+    },
+    {
+      "@id": "catty:LatticeNode_MLL",
+      "@type": "catty:LatticeCoordinate",
+      "rdfs:label": "Lattice Node: MLL",
+      "catty:logic": "catty:MLL",
+      "catty:x": 1,
+      "catty:y": 6,
+      "catty:neighbors": ["catty:LL", "catty:MALL"],
+      "dct:description": "Multiplicative linear logic: no structural rules, only multiplicative connectives"
+    },
+    {
+      "@id": "catty:LatticeNode_MALL",
+      "@type": "catty:LatticeCoordinate",
+      "rdfs:label": "Lattice Node: MALL",
+      "catty:logic": "catty:MALL",
+      "catty:x": 1,
+      "catty:y": 7,
+      "catty:neighbors": ["catty:MLL"],
+      "dct:description": "Multiplicative-additive linear logic: no structural rules, both multiplicative and additive connectives"
+    },
+    {
+      "@id": "catty:LatticeMeet",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "lattice meet",
+      "rdfs:comment": "The meet (greatest lower bound) operation in the lattice",
+      "rdfs:domain": ["catty:Logic", "catty:Logic"],
+      "rdfs:range": "catty:Logic",
+      "dct:description": "For two logics A and B, their meet A ∧ B is the most restrictive logic that is a restriction of both A and B. In the lattice, this corresponds to the component-wise maximum of coordinates: (max(x_A, x_B), max(y_A, y_B))."
+    },
+    {
+      "@id": "catty:LatticeJoin",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "lattice join",
+      "rdfs:comment": "The join (least upper bound) operation in the lattice",
+      "rdfs:domain": ["catty:Logic", "catty:Logic"],
+      "rdfs:range": "catty:Logic",
+      "dct:description": "For two logics A and B, their join A ∨ B is the least restrictive logic that extends both A and B. In the lattice, this corresponds to the component-wise minimum of coordinates: (min(x_A, x_B), min(y_A, y_B))."
+    },
+    {
+      "@id": "catty:LatticeTop",
+      "@type": "catty:Logic",
+      "rdfs:label": "Lattice Top Element",
+      "rdfs:comment": "The top element of the lattice: the least restrictive logic (most permissive)",
+      "dct:description": "The top element ⊤ is the logic with the fewest restrictions. This is typically LK (classical logic with full structural rules and multi-conclusion sequents) in the sequent calculus lattice. Every logic in the lattice is a restriction of ⊤."
+    },
+    {
+      "@id": "catty:LatticeBottom",
+      "@type": "catty:Logic",
+      "rdfs:label": "Lattice Bottom Element",
+      "rdfs:comment": "The bottom element of the lattice: the most restrictive logic (least permissive)",
+      "dct:description": "The bottom element ⊥ would be the most restrictive logic theoretically possible. In practice, linear logic fragments or even more restricted substructural logics approach the bottom. The lattice may not have a true bottom element (not complete)."
+    },
+    {
+      "@id": "catty:LatticeCompleteness",
+      "@type": "owl:Class",
+      "rdfs:label": "Lattice Completeness Property",
+      "rdfs:comment": "The completeness property of the lattice (whether all meets and joins exist)",
+      "dct:description": "The logic lattice is not necessarily complete: meets and joins of arbitrary pairs of logics may not correspond to well-known logic systems. However, finite meets and joins typically correspond to the intersection and union of provable sequents respectively."
+    },
+    {
+      "@id": "catty:LatticeAsDistributive",
+      "@type": "owl:Class",
+      "rdfs:label": "Distributive Lattice Property",
+      "rdfs:comment": "The distributive property of the lattice: A ∧ (B ∨ C) = (A ∧ B) ∨ (A ∧ C)",
+      "dct:description": "The logic lattice may not be fully distributive. The interaction between sequent restrictions and structural rules can create non-distributive behavior. This requires further investigation for specific lattice regions."
+    },
+    {
+      "@id": "catty:LatticeSubcategory_Intuitionistic",
+      "@type": "catty:LogicLattice",
+      "rdfs:label": "Intuitionistic Sublattice",
+      "rdfs:comment": "The sublattice of the full lattice containing only intuitionistic and substructural logics (x ≥ 1)",
+      "dct:description": "The intuitionistic sublattice is the full subcategory of the logic lattice induced by the objects with x ≥ 1 (LJ, LJW, LJC, LL, ALL, RLL, MLL, MALL, etc.). This is a full subcategory closed under the lattice order."
+    },
+    {
+      "@id": "catty:LatticeSubcategory_Substructural",
+      "@type": "catty:LogicLattice",
+      "rdfs:label": "Substructural Sublattice",
+      "rdfs:comment": "The sublattice of substructural logics (logics with restricted structural rules)",
+      "dct:description": "The substructural sublattice is the subcategory induced by logics with y ≥ 1 (logics that have removed at least one structural rule). This includes linear logic, relevant logic, affine logic, and their variants."
+    }
+  ]
+}

@@ -1,0 +1,323 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix catty: <http://catty.org/ontology/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+# Shapes for Catty Ontology Validation
+
+# Shape: Logic
+catty:LogicShape a sh:NodeShape ;
+    sh:targetClass catty:Logic ;
+    sh:property [
+        sh:path catty:hasSequentForm ;
+        sh:class catty:SequentForm ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each Logic must have exactly one SequentForm" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasStructuralRule ;
+        sh:class catty:StructuralRule ;
+        sh:minCount 1 ;
+        sh:message "Each Logic must have at least one StructuralRule" ;
+    ] ;
+    sh:property [
+        sh:path catty:latticeCoordinate ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:pattern "\\(\\d+,\\d+\\)" ;
+        sh:message "Each Logic must have exactly one latticeCoordinate in format (x,y)" ;
+    ] ;
+    sh:message "Invalid Logic: must have exactly one SequentForm, at least one StructuralRule, and exactly one latticeCoordinate" .
+
+# Shape: LogicMorphism
+catty:LogicMorphismShape a sh:NodeShape ;
+    sh:targetClass catty:LogicMorphism ;
+    sh:property [
+        sh:path catty:domain ;
+        sh:class catty:Logic ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each LogicMorphism must have exactly one domain Logic" ;
+    ] ;
+    sh:property [
+        sh:path catty:codomain ;
+        sh:class catty:Logic ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each LogicMorphism must have exactly one codomain Logic" ;
+    ] ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "Each LogicMorphism must have a label" ;
+    ] ;
+    sh:message "Invalid LogicMorphism: must have domain, codomain, and label" .
+
+# Shape: SequentRestrictionMorphism
+catty:SequentRestrictionMorphismShape a sh:NodeShape ;
+    sh:targetClass catty:SequentRestrictionMorphism ;
+    sh:property [
+        sh:path catty:domain ;
+        sh:class catty:Logic ;
+    ] ;
+    sh:property [
+        sh:path catty:codomain ;
+        sh:class catty:Logic ;
+    ] ;
+    sh:message "Invalid SequentRestrictionMorphism" .
+
+# Shape: StructuralRuleMorphism
+catty:StructuralRuleMorphismShape a sh:NodeShape ;
+    sh:targetClass catty:StructuralRuleMorphism ;
+    sh:property [
+        sh:path catty:domain ;
+        sh:class catty:Logic ;
+    ] ;
+    sh:property [
+        sh:path catty:codomain ;
+        sh:class catty:Logic ;
+    ] ;
+    sh:message "Invalid StructuralRuleMorphism" .
+
+# Shape: Functor
+catty:FunctorShape a sh:NodeShape ;
+    sh:targetClass catty:Functor ;
+    sh:property [
+        sh:path catty:sourceCategory ;
+        sh:class catty:Category ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each Functor must have exactly one sourceCategory" ;
+    ] ;
+    sh:property [
+        sh:path catty:targetCategory ;
+        sh:class catty:Category ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each Functor must have exactly one targetCategory" ;
+    ] ;
+    sh:message "Invalid Functor: must have sourceCategory and targetCategory" .
+
+# Shape: NaturalTransformation
+catty:NaturalTransformationShape a sh:NodeShape ;
+    sh:targetClass catty:NaturalTransformation ;
+    sh:property [
+        sh:path catty:sourceFunctor ;
+        sh:class catty:Functor ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each NaturalTransformation must have exactly one sourceFunctor" ;
+    ] ;
+    sh:property [
+        sh:path catty:targetFunctor ;
+        sh:class catty:Functor ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each NaturalTransformation must have exactly one targetFunctor" ;
+    ] ;
+    sh:message "Invalid NaturalTransformation: must have sourceFunctor and targetFunctor" .
+
+# Shape: AdjointFunctors
+catty:AdjointFunctorsShape a sh:NodeShape ;
+    sh:targetClass catty:AdjointFunctors ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "Each AdjointFunctors must have a label" ;
+    ] ;
+    sh:message "Invalid AdjointFunctors" .
+
+# Shape: CurryHowardEquivalence
+catty:CurryHowardEquivalenceShape a sh:NodeShape ;
+    sh:targetClass catty:CurryHowardEquivalence ;
+    sh:property [
+        sh:path catty:sourceCategory ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each CurryHowardEquivalence must have exactly one sourceCategory" ;
+    ] ;
+    sh:property [
+        sh:path catty:targetCategory ;
+        sh:nodeKind sh:IRI ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each CurryHowardEquivalence must have exactly one targetCategory" ;
+    ] ;
+    sh:message "Invalid CurryHowardEquivalence" .
+
+# Shape: LogicLattice
+catty:LogicLatticeShape a sh:NodeShape ;
+    sh:targetClass catty:LogicLattice ;
+    sh:property [
+        sh:rdfs:label ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "Each LogicLattice must have a label" ;
+    ] ;
+    sh:message "Invalid LogicLattice" .
+
+# Shape: LatticeCoordinate
+catty:LatticeCoordinateShape a sh:NodeShape ;
+    sh:targetClass catty:LatticeCoordinate ;
+    sh:property [
+        sh:path catty:logic ;
+        sh:class catty:Logic ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each LatticeCoordinate must reference exactly one Logic" ;
+    ] ;
+    sh:property [
+        sh:path catty:x ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each LatticeCoordinate must have exactly one x value (integer)" ;
+    ] ;
+    sh:property [
+        sh:path catty:y ;
+        sh:datatype xsd:integer ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each LatticeCoordinate must have exactly one y value (integer)" ;
+    ] ;
+    sh:message "Invalid LatticeCoordinate" .
+
+# Shape: StructuralRule
+catty:StructuralRuleShape a sh:NodeShape ;
+    sh:targetClass catty:StructuralRule ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "Each StructuralRule must have a label" ;
+    ] ;
+    sh:message "Invalid StructuralRule" .
+
+# Shape: SequentForm
+catty:SequentFormShape a sh:NodeShape ;
+    sh:targetClass catty:SequentForm ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "Each SequentForm must have a label" ;
+    ] ;
+    sh:message "Invalid SequentForm" .
+
+# Shape: Category
+catty:CategoryShape a sh:NodeShape ;
+    sh:targetClass catty:Category ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "Each Category must have a label" ;
+    ] ;
+    sh:message "Invalid Category" .
+
+# Shape: Morphism
+catty:MorphismShape a sh:NodeShape ;
+    sh:targetClass catty:Morphism ;
+    sh:property [
+        sh:path catty:domain ;
+        sh:class catty:Object ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each Morphism must have exactly one domain" ;
+    ] ;
+    sh:property [
+        sh:path catty:codomain ;
+        sh:class catty:Object ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each Morphism must have exactly one codomain" ;
+    ] ;
+    sh:message "Invalid Morphism" .
+
+# Shape: Object
+catty:ObjectShape a sh:NodeShape ;
+    sh:targetClass catty:Object ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:message "Each Object must have a label" ;
+    ] ;
+    sh:message "Invalid Object" .
+
+# Constraint: Lattice coordinates must be comparable
+# This ensures that if there's a morphism A → B, then A must be ≤ B in the lattice
+catty:LatticeOrderConstraint a sh:NodeShape ;
+    sh:targetSubjectsOf catty:domain ;
+    sh:sparql """
+        PREFIX catty: <http://catty.org/ontology/>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+        SELECT $this $domain $codomain
+        WHERE {
+            $this catty:domain $domain ;
+                  catty:codomain $codomain .
+            $domain catty:latticeCoordinate $domainCoord .
+            $codomain catty:latticeCoordinate $codomainCoord .
+            BIND(STRAFTER($domainCoord, "(") AS $dxStr)
+            BIND(SUBSTR($dxStr, 1, STRBEFORE($dxStr, ",")) AS $dx)
+            BIND(STRAFTER($codomainCoord, "(") AS $dyStr)
+            BIND(SUBSTR($dyStr, 1, STRBEFORE($dyStr, ",")) AS $dy)
+            FILTER(xsd:integer($dx) < 0 || xsd:integer($dx) > 2)
+            FILTER(xsd:integer($dy) < 0 || xsd:integer($dy) > 10)
+        }
+    """ ;
+    sh:message "Invalid lattice coordinate: x must be 0-2, y must be 0-10" .
+
+# Constraint: A morphism must respect lattice order
+# If morphism A → B exists, then A must be ≤ B (more restrictive)
+catty:LatticeMorphismOrderConstraint a sh:NodeShape ;
+    sh:targetClass catty:LogicMorphism ;
+    sh:sparql """
+        PREFIX catty: <http://catty.org/ontology/>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+        SELECT $this $domain $codomain
+        WHERE {
+            $this catty:domain $domain ;
+                  catty:codomain $codomain .
+            $domain catty:latticeCoordinate $domainCoord .
+            $codomain catty:latticeCoordinate $codomainCoord .
+            BIND(STRAFTER($domainCoord, "(") AS $dxStr)
+            BIND(SUBSTR($dxStr, 1, STRBEFORE($dxStr, ",")) AS $domainX)
+            BIND(STRAFTER(STRAFTER($dxStr, ","), "") AS $dyStr)
+            BIND(SUBSTR($dyStr, 1, STRBEFORE($dyStr, ")")) AS $domainY)
+            BIND(STRAFTER($codomainCoord, "(") AS $cxStr)
+            BIND(SUBSTR($cxStr, 1, STRBEFORE($cxStr, ",")) AS $codomainX)
+            BIND(STRAFTER(STRAFTER($cxStr, ","), "") AS $cyStr)
+            BIND(SUBSTR($cyStr, 1, STRBEFORE($cyStr, ")")) AS $codomainY)
+            FILTER(xsd:integer($domainX) < xsd:integer($codomainX))
+            FILTER(xsd:integer($domainY) >= xsd:integer($codomainY))
+        }
+    """ ;
+    sh:message "Invalid lattice morphism: domain must be more restrictive than codomain (domain.x <= codomain.x AND domain.y >= codomain.y)" .
+
+# Constraint: Each logic must have a valid lattice position
+catty:ValidLatticePositionConstraint a sh:NodeShape ;
+    sh:targetClass catty:Logic ;
+    sh:sparql """
+        PREFIX catty: <http://catty.org/ontology/>
+        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+        SELECT $this $coord
+        WHERE {
+            $this catty:latticeCoordinate $coord .
+            BIND(STRAFTER($coord, "(") AS $xStr)
+            BIND(SUBSTR($xStr, 1, STRBEFORE($xStr, ",")) AS $x)
+            BIND(STRAFTER(STRAFTER($coord, ","), "") AS $yStr)
+            BIND(SUBSTR($yStr, 1, STRBEFORE($yStr, ")")) AS $y)
+            FILTER(xsd:integer($x) < 0 || xsd:integer($x) > 2)
+            FILTER(xsd:integer($y) < 0 || xsd:integer($y) > 10)
+        }
+    """ ;
+    sh:message "Invalid lattice coordinate: x must be in [0,2], y must be in [0,10]" .

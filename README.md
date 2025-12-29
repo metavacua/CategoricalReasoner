@@ -1,8 +1,66 @@
 # Catty
 
-Catty is a minimal LaTeX thesis repository scaffold. It is intentionally light on content and focuses on a reliable build pipeline (PDF locally, HTML deployment to GitHub Pages) so chapters can be added incrementally over time.
+Catty is a thesis on the categorical modeling of formal logics, where logics are objects in a category with morphisms representing sequent restrictions and structural rules. The thesis includes a comprehensive audit of RDF/OWL schemas and knowledge graphs that support this category-theoretic framework.
 
 Deployed thesis (after running the Deploy workflow): https://<owner>.github.io/Catty/
+
+## Overview
+
+Catty organizes logics as a **parametric category** where:
+- **Objects**: Formal logics (LK, LJ, LDJ, linear logic, etc.)
+- **Morphisms**: Relationships between logics via sequent restrictions and structural rule presence/absence
+- **Structure**: A two-dimensional lattice (horizontal: sequent restrictions; vertical: structural rules) IS the categorical structure
+- **Curry-Howard**: A categorical equivalence between logics (as categories), types, proofs, and programs
+
+## Project Structure
+
+```
+├── thesis/                      # LaTeX thesis source
+│   ├── main.tex                # Main document
+│   ├── preamble.tex            # Document preamble
+│   └── chapters/
+│       └── categorical-semantic-audit.tex  # Comprehensive audit chapter
+│
+├── ontology/                    # RDF/OWL schemas and knowledge graphs
+│   ├── catty-categorical-schema.jsonld     # Core categorical schema
+│   ├── logics-as-objects.jsonld            # Logics as categorical objects
+│   ├── morphism-catalog.jsonld              # Morphisms between logics
+│   ├── two-d-lattice-category.jsonld        # 2D lattice as category
+│   ├── curry-howard-categorical-model.jsonld # Curry-Howard equivalence
+│   ├── catty-complete-example.jsonld         # Complete working example
+│   ├── catty-shapes.ttl                    # SHACL validation constraints
+│   ├── ontological-inventory.md            # Resource inventory
+│   ├── README.md                           # Ontology documentation
+│   └── queries/
+│       └── sparql-examples.md              # SPARQL query examples
+│
+├── scripts/                     # Utility scripts
+├── .github/workflows/           # CI/CD workflows
+└── README.md                    # This file
+```
+
+## Key Deliverables
+
+### Categorical Semantic Audit
+
+The thesis includes a comprehensive audit (Chapter 1) of:
+
+1. **Category Theory Foundation** - RDF/OWL representations from DBPedia, Wikidata
+2. **Logics as Categorical Objects** - Modeling LK, LJ, LDJ, linear logic as objects
+3. **Morphism Catalog** - Sequents restriction morphisms, structural rule morphisms
+4. **Two-Dimensional Lattice** - Formalized as a poset category
+5. **Curry-Howard Model** - Equivalence of logic and type theory categories
+6. **Reusable Ontologies** - Inventory of 11+ resources with license compatibility
+7. **Integration Roadmap** - How to import and extend external resources
+
+### Ontology Files
+
+The `ontology/` directory contains:
+
+- **Complete RDF/OWL Schema**: Category theory primitives, logic-specific classes
+- **Knowledge Graph Data**: 10+ logics with categorical properties and morphisms
+- **SHACL Validation**: Constraints for lattice order and morphism validity
+- **SPARQL Examples**: 15+ queries for exploring the ontology
 
 ## Build (PDF)
 
