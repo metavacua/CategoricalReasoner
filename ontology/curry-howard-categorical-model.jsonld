@@ -29,8 +29,8 @@
       "rdfs:label": "Category of Logics",
       "rdfs:comment": "The category whose objects are formal logics (LK, LJ, LL, etc.) and morphisms are proof-theoretic relationships (sequent restrictions, structural rule embeddings, translations)",
       "dct:description": "In the Logic-as-Category model, each formal logic is an object in the category. Morphisms represent relationships between logics: sequent restrictions, structural rule embeddings, proof system translations, and functorial mappings. The composition of morphisms corresponds to the composition of logical translations.",
-      "catty:objects": ["catty:LK", "catty:LJ", "catty:LDJ", "catty:LL", "catty:MLL", "catty:MALL"],
-      "catty:morphisms": ["catty:SequentRestrictionMorphism", "catty:StructuralRuleMorphism", "catty:ProofSystemEmbedding"]
+      "catty:objects": ["catty:LM", "catty:LK", "catty:LJ", "catty:LDJ", "catty:LL", "catty:ALL", "catty:RLL"],
+      "catty:morphisms": ["catty:Extension", "catty:Interpretation"]
     },
     {
       "@id": "catty:TypeTheoryAsCategory",

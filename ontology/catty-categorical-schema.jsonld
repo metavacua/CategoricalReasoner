@@ -146,15 +146,88 @@
       "@id": "catty:Logic",
       "@type": "owl:Class",
       "rdfs:label": "Logic",
-      "rdfs:comment": "A formal logic as an object in the logic category",
+      "rdfs:comment": "A formal logic characterized by a logical signature and logical axioms",
       "rdfs:subClassOf": "catty:Object"
+    },
+    {
+      "@id": "catty:LogicalTheory",
+      "@type": "owl:Class",
+      "rdfs:label": "Logical Theory",
+      "rdfs:comment": "A theory consisting of a logical signature, logical axioms, theoretical signature, and theoretical axioms",
+      "rdfs:subClassOf": "catty:Object"
+    },
+    {
+      "@id": "catty:LogicalSignature",
+      "@type": "owl:Class",
+      "rdfs:label": "Logical Signature",
+      "rdfs:comment": "The set of symbols and connectives used by a logic"
+    },
+    {
+      "@id": "catty:TheoreticalSignature",
+      "@type": "owl:Class",
+      "rdfs:label": "Theoretical Signature",
+      "rdfs:comment": "The set of symbols and constants used by a specific theory"
+    },
+    {
+      "@id": "catty:LogicalAxiom",
+      "@type": "owl:Class",
+      "rdfs:label": "Logical Axiom",
+      "rdfs:comment": "An axiom that is part of the logic's definition"
+    },
+    {
+      "@id": "catty:TheoreticalAxiom",
+      "@type": "owl:Class",
+      "rdfs:label": "Theoretical Axiom",
+      "rdfs:comment": "An axiom specific to a theory, supported by a logic"
+    },
+    {
+      "@id": "catty:hasLogicalSignature",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "has logical signature",
+      "rdfs:domain": ["catty:Logic", "catty:LogicalTheory"],
+      "rdfs:range": "catty:LogicalSignature"
+    },
+    {
+      "@id": "catty:hasTheoreticalSignature",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "has theoretical signature",
+      "rdfs:domain": "catty:LogicalTheory",
+      "rdfs:range": "catty:TheoreticalSignature"
+    },
+    {
+      "@id": "catty:hasLogicalAxiom",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "has logical axiom",
+      "rdfs:domain": ["catty:Logic", "catty:LogicalTheory"],
+      "rdfs:range": "catty:LogicalAxiom"
+    },
+    {
+      "@id": "catty:hasTheoreticalAxiom",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "has theoretical axiom",
+      "rdfs:domain": "catty:LogicalTheory",
+      "rdfs:range": "catty:TheoreticalAxiom"
     },
     {
       "@id": "catty:LogicMorphism",
       "@type": "owl:Class",
       "rdfs:label": "Logic Morphism",
-      "rdfs:comment": "A morphism between logics (sequent restriction or structural rule mapping)",
+      "rdfs:comment": "A morphism between logics or theories (extension, interpretation, or restriction)",
       "rdfs:subClassOf": "catty:Morphism"
+    },
+    {
+      "@id": "catty:Extension",
+      "@type": "owl:Class",
+      "rdfs:label": "Extension",
+      "rdfs:comment": "A morphism where the target logic extends the source logic (validates more sequents or adds rules/axioms)",
+      "rdfs:subClassOf": "catty:LogicMorphism"
+    },
+    {
+      "@id": "catty:Interpretation",
+      "@type": "owl:Class",
+      "rdfs:label": "Interpretation",
+      "rdfs:comment": "A morphism representing an interpretability relationship between logics",
+      "rdfs:subClassOf": "catty:LogicMorphism"
     },
     {
       "@id": "catty:hasSequentForm",
@@ -182,25 +255,64 @@
       "@id": "catty:StructuralRule",
       "@type": "owl:Class",
       "rdfs:label": "Structural Rule",
-      "rdfs:comment": "A structural rule (weakening, contraction, exchange)"
+      "rdfs:comment": "A structural rule (weakening, contraction, exchange) which may be applied to the LHS (antecedent) or RHS (succedent) of a sequent"
     },
     {
       "@id": "catty:Weakening",
-      "@type": "catty:StructuralRule",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "catty:StructuralRule",
       "rdfs:label": "Weakening",
-      "rdfs:comment": "The weakening structural rule (addition of arbitrary formulas)"
+      "rdfs:comment": "The weakening structural rule (addition of arbitrary formulas). Its absence implies a 'no erasure' principle."
+    },
+    {
+      "@id": "catty:LHSWeakening",
+      "@type": "catty:Weakening",
+      "rdfs:label": "LHS Weakening",
+      "rdfs:comment": "Weakening on the left hand side (antecedent) of entailment"
+    },
+    {
+      "@id": "catty:RHSWeakening",
+      "@type": "catty:Weakening",
+      "rdfs:label": "RHS Weakening",
+      "rdfs:comment": "Weakening on the right hand side (succedent) of entailment"
     },
     {
       "@id": "catty:Contraction",
-      "@type": "catty:StructuralRule",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "catty:StructuralRule",
       "rdfs:label": "Contraction",
-      "rdfs:comment": "The contraction structural rule (duplication of formulas)"
+      "rdfs:comment": "The contraction structural rule (duplication of formulas). Its absence implies a 'no cloning' principle."
+    },
+    {
+      "@id": "catty:LHSContraction",
+      "@type": "catty:Contraction",
+      "rdfs:label": "LHS Contraction",
+      "rdfs:comment": "Contraction on the left hand side (antecedent) of entailment"
+    },
+    {
+      "@id": "catty:RHSContraction",
+      "@type": "catty:Contraction",
+      "rdfs:label": "RHS Contraction",
+      "rdfs:comment": "Contraction on the right hand side (succedent) of entailment"
     },
     {
       "@id": "catty:Exchange",
-      "@type": "catty:StructuralRule",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "catty:StructuralRule",
       "rdfs:label": "Exchange",
-      "rdfs:comment": "The exchange structural rule (reordering of formulas)"
+      "rdfs:comment": "The exchange structural rule (reordering of formulas). Its absence implies a 'no partial swapping' principle, as in non-commutative or order logics."
+    },
+    {
+      "@id": "catty:LHSExchange",
+      "@type": "catty:Exchange",
+      "rdfs:label": "LHS Exchange",
+      "rdfs:comment": "Exchange on the left hand side (antecedent) of entailment"
+    },
+    {
+      "@id": "catty:RHSExchange",
+      "@type": "catty:Exchange",
+      "rdfs:label": "RHS Exchange",
+      "rdfs:comment": "Exchange on the right hand side (succedent) of entailment"
     },
     {
       "@id": "catty:latticeCoordinate",

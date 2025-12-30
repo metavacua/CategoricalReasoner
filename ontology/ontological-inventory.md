@@ -701,7 +701,7 @@ OMDoc supports structured mathematical markup including:
 | CC BY 4.0 | Compatible | Yes | No |
 | CC BY-SA 3.0 | Compatible | Yes | Yes |
 
-**Catty License**: MIT License
+**Catty License**: GNU Affero General Public License v3.0 (AGPL-3.0)
 - All compatible resources can be used
 - Attribution required for non-PD licenses
 - Share-alike restrictions for CC BY-SA resources

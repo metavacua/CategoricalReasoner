@@ -75,7 +75,7 @@ Several academic projects have attempted to formalize logic systems in OWL:
   \item Typically model logics as classes with properties (e.g., \texttt{hasStructuralRule}, \texttt{hasSequentForm})
 \end{itemize}
 
-\textbf{Assessment**: Most existing logic ontologies treat logics as flat classes without categorical structure. However, they provide useful property definitions that can be incorporated into Catty's categorical model.
+\textbf{Assessment}: Most existing logic ontologies treat logics as flat classes without categorical structure. However, they provide useful property definitions that can be incorporated into Catty's categorical model.
 
 \section{Type Theory Knowledge Graphs}
 
@@ -99,7 +99,7 @@ The HoTT community has developed semantic resources:
   \item Proof representations as paths
 \end{itemize}
 
-\textbf{Assessment**: HoTT resources are valuable for Curry-Howard modeling but are specialized. License varies by project.
+\textbf{Assessment}: HoTT resources are valuable for Curry-Howard modeling but are specialized. License varies by project.
 
 \section{Proof Assistant Export Formats}
 
@@ -161,7 +161,7 @@ ProofWiki has structured content on:
   \item Proof-theoretic semantics
 \end{itemize}
 
-\textbf{Assessment**: ProofWiki content is Creative Commons Attribution-ShareAlike 3.0. No native RDF but can be semantically annotated.
+\textbf{Assessment}: ProofWiki content is Creative Commons Attribution-ShareAlike 3.0. No native RDF but can be semantically annotated.
 
 \section{Proposed Categorical Schema for Catty}
 
@@ -177,51 +177,61 @@ Based on the audit, we propose the following RDF/OWL schema extension for repres
 
 :Logic a owl:Class ;
     rdfs:label "Logic" ;
-    rdfs:comment "A formal logic as an object in the logic category" ;
+    rdfs:comment "A formal logic characterized by a logical signature and axioms" ;
     rdfs:subClassOf :Object .
 
-:LogicMorphism a owl:Class ;
-    rdfs:label "Logic Morphism" ;
-    rdfs:comment "A morphism between logics (sequent restriction or rule mapping)" ;
-    rdfs:subClassOf :Morphism .
+:LogicalTheory a owl:Class ;
+    rdfs:label "Logical Theory" ;
+    rdfs:comment "A theory consisting of signatures and axioms" ;
+    rdfs:subClassOf :Object .
+
+:LogicalSignature a owl:Class ;
+    rdfs:label "Logical Signature" ;
+    rdfs:comment "The set of symbols and connectives used by a logic" .
+
+:LogicalAxiom a owl:Class ;
+    rdfs:label "Logical Axiom" ;
+    rdfs:comment "An axiom that is part of the logic's definition" .
 \end{verbatim}
 
 \subsection{Key Properties for Logics-as-Objects}
 
 \begin{verbatim}
-:hasSequentForm a owl:ObjectProperty ;
-    rdfs:domain :Logic ;
-    rdfs:range :SequentForm ;
-    rdfs:label "has sequent form" .
+:hasLogicalSignature a owl:ObjectProperty ;
+    rdfs:domain [:Logic, :LogicalTheory] ;
+    rdfs:range :LogicalSignature .
+
+:hasLogicalAxiom a owl:ObjectProperty ;
+    rdfs:domain [:Logic, :LogicalTheory] ;
+    rdfs:range :LogicalAxiom .
 
 :hasStructuralRule a owl:ObjectProperty ;
     rdfs:domain :Logic ;
     rdfs:range :StructuralRule ;
     rdfs:label "has structural rule" .
 
-:positionInLattice a owl:DatatypeProperty ;
-    rdfs:domain :Logic ;
-    rdfs:range xsd:integer ;
-    rdfs:comment "Position in 2D lattice (x: sequent restrictions, y: structural rules)" .
+:LHSWeakening a owl:Class ; rdfs:subClassOf :Weakening .
+:RHSWeakening a owl:Class ; rdfs:subClassOf :Weakening .
+:LHSContraction a owl:Class ; rdfs:subClassOf :Contraction .
+:RHSContraction a owl:Class ; rdfs:subClassOf :Contraction .
 \end{verbatim}
 
 \subsection{Morphism Types}
 
 \begin{verbatim}
-:SequentRestrictionMorphism a owl:Class ;
-    rdfs:subClassOf :LogicMorphism ;
-    rdfs:label "Sequent Restriction Morphism" ;
-    rdfs:comment "Morphism imposing sequent form restrictions" .
+:LogicMorphism a owl:Class ;
+    rdfs:label "Logic Morphism" ;
+    rdfs:subClassOf :Morphism .
 
-:StructuralRuleMorphism a owl:Class ;
+:Extension a owl:Class ;
     rdfs:subClassOf :LogicMorphism ;
-    rdfs:label "Structural Rule Morphism" ;
-    rdfs:comment "Morphism adding/removing structural rules" .
+    rdfs:label "Extension" ;
+    rdfs:comment "A morphism where the target extends the source" .
 
-:ProofSystemEmbedding a owl:Class ;
+:Interpretation a owl:Class ;
     rdfs:subClassOf :LogicMorphism ;
-    rdfs:label "Proof System Embedding" ;
-    rdfs:comment "Functorial embedding of one proof system into another" .
+    rdfs:label "Interpretation" ;
+    rdfs:comment "Morphism representing interpretability" .
 \end{verbatim}
 
 \subsection{Two-Dimensional Lattice as Category}

@@ -6,31 +6,29 @@
 **File**: `ontology/catty-categorical-schema.jsonld`
 - Core categorical classes: Category, Object, Morphism, Composition
 - Functor, Natural Transformation, Adjoint Functors
-- Logic-specific classes: Logic, LogicMorphism, SequentForm, StructuralRule
-- Lattice structure classes: LogicLattice, LatticeAxis, LatticeCoordinate
+- Logic-specific classes: Logic, LogicalTheory, LogicalSignature, LogicalAxiom, TheoreticalAxiom
+- LHS/RHS Structural rule classes: Weakening, Contraction, Exchange
+- Morphism types: Extension, Interpretation
 - Curry-Howard classes: CurryHowardEquivalence, LogicAsCategory, TypeTheoryAsCategory
 
 ### 2. Logics-as-Objects Model ✓
 **File**: `ontology/logics-as-objects.jsonld`
 - 10+ formal logics modeled as categorical objects:
-  - LK (classical sequent calculus)
-  - LJ (intuitionistic sequent calculus)
+  - LM (minimal common sublogic for LJ and LDJ)
+  - LK (terminal classical logic)
+  - LJ (intuitionistic logic)
   - LDJ (dual intuitionistic logic)
-  - LJW, LJC (intuitionistic without weakening/contraction)
   - LL (linear logic)
   - ALL, RLL (affine and relevant linear logic)
-  - MLL, MALL (multiplicative fragments)
-- Properties: sequent form, structural rules, lattice coordinates
+- Properties: logical signatures, logical axioms, LHS/RHS structural rules
 - External links: owl:sameAs to Wikidata, dct:source to Wikipedia
 
 ### 3. Morphism Catalog ✓
 **File**: `ontology/morphism-catalog.jsonld`
 - 12+ morphisms between logics:
-  - Sequent restriction morphisms (LK → LJ, LJ → LDJ)
-  - Structural rule morphisms (LJ → LJW, LJ → LJC, LJ → LL)
-  - Proof system embeddings
-  - 2 adjoint functor pairs (LK ↔ LJ, LJ ↔ LL)
-  - 3 natural transformations (Gödel-Gentzen, CPS, Curry-Howard)
+  - Extensions (LM → LJ, LM → LDJ, LJ → LK, LDJ → LK, LL → ALL → LK, LL → RLL → LK)
+  - Interpretations (LK → LJ via double negation translation)
+  - Adjoint functor pairs (LK ↔ LJ)
 - Each morphism documented with domain, codomain, description, source
 
 ### 4. Two-Dimensional Lattice as Category ✓
@@ -190,7 +188,7 @@
 | ProofWiki | CC BY-SA 3.0 | ✓✓ Yes (attribution + share-alike) |
 | COLORE | CC BY 4.0 | ✓✓ Yes (attribution) |
 
-**All resources are compatible with Catty's MIT license.**
+**All resources are compatible with Catty's AGPL-3.0 license.**
 
 ## Next Steps for Development
 

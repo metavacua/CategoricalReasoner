@@ -7,10 +7,15 @@ Deployed thesis (after running the Deploy workflow): https://<owner>.github.io/C
 ## Overview
 
 Catty organizes logics as a **parametric category** where:
-- **Objects**: Formal logics (LK, LJ, LDJ, linear logic, etc.)
-- **Morphisms**: Relationships between logics via sequent restrictions and structural rule presence/absence
-- **Structure**: A two-dimensional lattice (horizontal: sequent restrictions; vertical: structural rules) IS the categorical structure
+- **Objects**: Formal logics (LM, LK, LJ, LDJ, linear logic, etc.)
+- **Morphisms**: Relationships between logics via extension, interpretation, and structural rule configuration
+- **Functors**: Maps between proof systems
+- **Structure**: A two-dimensional lattice (horizontal: sequent restrictions; vertical: structural rules) formalized as a categorical structure
 - **Curry-Howard**: A categorical equivalence between logics (as categories), types, proofs, and programs
+
+## License
+
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. See the `LICENSE` file for details.
 
 ## Project Structure
 

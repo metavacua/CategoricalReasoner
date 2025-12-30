@@ -7,19 +7,19 @@ This directory contains example SPARQL queries for querying the Catty categorica
 ### Basic Queries
 
 #### `all-logics.rq`
-List all logics with their sequent form and lattice coordinates.
+List all logics with their logical signatures and axioms.
 
 ```sparql
 PREFIX catty: <http://catty.org/ontology/>
 
-SELECT ?logic ?label ?sequentForm ?coordinate
+SELECT ?logic ?label ?signature ?axiom
 WHERE {
   ?logic a catty:Logic ;
-         rdfs:label ?label ;
-         catty:hasSequentForm ?sequentForm ;
-         catty:latticeCoordinate ?coordinate .
+         rdfs:label ?label .
+  OPTIONAL { ?logic catty:hasLogicalSignature ?signature . }
+  OPTIONAL { ?logic catty:hasLogicalAxiom ?axiom . }
 }
-ORDER BY ?coordinate
+ORDER BY ?label
 ```
 
 #### `structural-rules.rq`
@@ -53,18 +53,18 @@ WHERE {
 ```
 
 #### `lattice-order.rq`
-Get all lattice order relations (Logic A ≤ Logic B).
+Get all lattice order relations (Logic A extends Logic B).
 
 ```sparql
 PREFIX catty: <http://catty.org/ontology/>
 
 SELECT ?source ?sourceLabel ?target ?targetLabel
 WHERE {
-  ?morphism catty:domain ?source ;
+  ?morphism a catty:Extension ;
+            catty:domain ?source ;
             catty:codomain ?target .
   ?source rdfs:label ?sourceLabel .
   ?target rdfs:label ?targetLabel .
-  FILTER (?morphism a catty:LatticeMorphism)
 }
 ORDER BY ?sourceLabel ?targetLabel
 ```
@@ -118,23 +118,21 @@ WHERE {
 
 ### Lattice Queries
 
-#### `lattice-positions.rq`
-Get all logics with their lattice positions.
+#### `extension-hierarchy.rq`
+Get the extension hierarchy of logics (Logic A extends Logic B).
 
 ```sparql
 PREFIX catty: <http://catty.org/ontology/>
 
-SELECT ?logic ?label ?x ?y
+SELECT ?source ?sourceLabel ?target ?targetLabel
 WHERE {
-  ?logic a catty:Logic ;
-         rdfs:label ?label ;
-         catty:latticeCoordinate ?coord .
-  BIND(STRAFTER(?coord, "(") AS ?xStr)
-  BIND(SUBSTR(?xStr, 1, STRBEFORE(?xStr, ",")) AS ?x)
-  BIND(STRAFTER(STRAFTER(?coord, ","), "") AS ?yStr)
-  BIND(SUBSTR(?yStr, 1, STRBEFORE(?yStr, ")")) AS ?y)
+  ?morphism a catty:Extension ;
+            catty:domain ?source ;
+            catty:codomain ?target .
+  ?source rdfs:label ?sourceLabel .
+  ?target rdfs:label ?targetLabel .
 }
-ORDER BY xsd:integer(?y) xsd:integer(?x)
+ORDER BY ?sourceLabel ?targetLabel
 ```
 
 #### `lattice-neighbors.rq`
@@ -182,24 +180,20 @@ WHERE {
 }
 ```
 
-#### `invalid-lattice-positions.rq`
-Find logics with invalid lattice coordinates.
+#### `terminal-logics.rq`
+Find terminal logics (logics that are not extended by any other logic).
 
 ```sparql
 PREFIX catty: <http://catty.org/ontology/>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT ?logic ?label ?coord ?x ?y
+SELECT ?logic ?label
 WHERE {
   ?logic a catty:Logic ;
-         rdfs:label ?label ;
-         catty:latticeCoordinate ?coord .
-  BIND(STRAFTER(?coord, "(") AS ?xStr)
-  BIND(SUBSTR(?xStr, 1, STRBEFORE(?xStr, ",")) AS ?x)
-  BIND(STRAFTER(STRAFTER(?coord, ","), "") AS ?yStr)
-  BIND(SUBSTR(?yStr, 1, STRBEFORE(?yStr, ")")) AS ?y)
-  FILTER(xsd:integer(?x) < 0 || xsd:integer(?x) > 2)
-  FILTER(xsd:integer(?y) < 0 || xsd:integer(?y) > 10)
+         rdfs:label ?label .
+  FILTER NOT EXISTS {
+    ?morphism a catty:Extension ;
+              catty:domain ?logic .
+  }
 }
 ```
 
