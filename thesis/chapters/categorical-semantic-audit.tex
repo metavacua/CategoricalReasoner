@@ -279,6 +279,17 @@ The Curry-Howard correspondence is modeled as a categorical equivalence:
     rdfs:comment "Correspondence between proof transformations and program transformations" .
 \end{verbatim}
 
+\section{Categorical Morphisms and Structural Relevance}
+
+Morphisms in Catty represent the extension or interpretation of logics. Specifically, extending a logic by adding an axiom (e.g., LEM, LNC, Explosion) or a structural rule (e.g., Weakening, Contraction) is formalized as a categorical morphism.
+
+The presence of specific axioms is structurally linked to the configuration of structural rules:
+\begin{itemize}
+  \item \textbf{Full structural rules} (LK) allow for the validation of all classical principles.
+  \item \textbf{Resource-sensitive rules} (LL) correspond to the absence of axioms related to cloning and erasure.
+  \item \textbf{Sequent restrictions} (LHS/RHS) directly impact the validity of dual classical principles like LEM and LNC.
+\end{itemize}
+
 \section{Integration Roadmap}
 
 \subsection{Direct Import Resources}
@@ -322,6 +333,8 @@ For SynthPlayground agent reasoning, prioritize:
 \end{enumerate}
 
 \section{License Compatibility Assessment}
+
+All referenced external resources are assessed for compatibility with Catty's **GNU Affero General Public License v3.0 (AGPL-3.0)**.
 
 \begin{table}[h]
 \centering

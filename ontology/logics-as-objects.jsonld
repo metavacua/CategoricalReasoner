@@ -15,8 +15,8 @@
     {
       "@id": "catty:LM",
       "@type": "catty:Logic",
-      "rdfs:label": "LM (Minimal Common Sublogic)",
-      "rdfs:comment": "A common sublogic to LJ and LDJ containing conjunction, disjunction, and units, but lacking negation. It extends to either LJ or LDJ.",
+      "rdfs:label": "LM (Minimal Base)",
+      "rdfs:comment": "Minimal common sublogic for LJ and LDJ. No negation, no explosion, no LEM, no LNC.",
       "catty:hasLogicalSignature": {
         "@id": "catty:LM_Signature",
         "@type": "catty:LogicalSignature",
@@ -27,21 +27,21 @@
       "@id": "catty:LJ",
       "@type": "catty:Logic",
       "rdfs:label": "LJ (Intuitionistic Logic)",
-      "rdfs:comment": "Intuitionistic sequent calculus. Invalidates one direction of double negation. Extends LM and is extended by LK.",
+      "rdfs:comment": "Extends LM with LNC and Explosion. Single-conclusion sequents (RHS restriction).",
       "catty:hasSequentForm": "catty:SingleConclusionSequent",
       "catty:hasStructuralRule": [
         "catty:LHSWeakening", "catty:RHSWeakening",
         "catty:LHSContraction", "catty:RHSContraction",
         "catty:LHSExchange", "catty:RHSExchange"
       ],
-      "catty:hasLogicalAxiom": "catty:Axiom_LNC",
+      "catty:hasLogicalAxiom": ["catty:Axiom_LNC", "catty:Axiom_Explosion"],
       "owl:sameAs": "wd:Q7680564"
     },
     {
       "@id": "catty:LDJ",
       "@type": "catty:Logic",
       "rdfs:label": "LDJ (Dual Intuitionistic Logic)",
-      "rdfs:comment": "Dual intuitionistic logic. Invalidates the other direction of double negation compared to LJ. Extends LM and is extended by LK.",
+      "rdfs:comment": "Extends LM with LEM. Single-antecedent sequents (LHS restriction).",
       "catty:hasSequentForm": "catty:SingleAntecedentSequent",
       "catty:hasStructuralRule": [
         "catty:LHSWeakening", "catty:RHSWeakening",
@@ -54,21 +54,21 @@
       "@id": "catty:LK",
       "@type": "catty:Logic",
       "rdfs:label": "LK (Classical Logic)",
-      "rdfs:comment": "The terminal logic in this category. Validates both LEM and LNC. Full structural rules and multi-conclusion sequents.",
+      "rdfs:comment": "The terminal logic. Validates LEM, LNC, Explosion, and DNE. Full structural rules.",
       "catty:hasSequentForm": "catty:MultiConclusionSequent",
       "catty:hasStructuralRule": [
         "catty:LHSWeakening", "catty:RHSWeakening",
         "catty:LHSContraction", "catty:RHSContraction",
         "catty:LHSExchange", "catty:RHSExchange"
       ],
-      "catty:hasLogicalAxiom": ["catty:Axiom_LEM", "catty:Axiom_LNC"],
+      "catty:hasLogicalAxiom": ["catty:Axiom_LEM", "catty:Axiom_LNC", "catty:Axiom_Explosion", "catty:Axiom_DNE"],
       "owl:sameAs": "wd:Q3525872"
     },
     {
       "@id": "catty:LL",
       "@type": "catty:Logic",
       "rdfs:label": "LL (Linear Logic)",
-      "rdfs:comment": "Girard's linear logic. Resource-sensitive (no weakening or contraction). Extending LL with weakening and contraction results in LK.",
+      "rdfs:comment": "Substructural logic without weakening or contraction. Resource-sensitive.",
       "catty:hasSequentForm": "catty:MultiConclusionSequent",
       "catty:hasStructuralRule": ["catty:LHSExchange", "catty:RHSExchange"],
       "owl:sameAs": "wd:Q847878"
@@ -77,7 +77,7 @@
       "@id": "catty:ALL",
       "@type": "catty:Logic",
       "rdfs:label": "ALL (Affine Linear Logic)",
-      "rdfs:comment": "Linear logic with weakening but no contraction. Implements a 'no cloning' principle but allows erasure.",
+      "rdfs:comment": "Linear logic with weakening. Allows erasure but no cloning.",
       "catty:hasStructuralRule": [
         "catty:LHSWeakening", "catty:RHSWeakening",
         "catty:LHSExchange", "catty:RHSExchange"
@@ -87,7 +87,7 @@
       "@id": "catty:RLL",
       "@type": "catty:Logic",
       "rdfs:label": "RLL (Relevant Linear Logic)",
-      "rdfs:comment": "Linear logic with contraction but no weakening. Implements a 'no erasure' principle but allows cloning.",
+      "rdfs:comment": "Linear logic with contraction. Allows cloning but no erasure.",
       "catty:hasStructuralRule": [
         "catty:LHSContraction", "catty:RHSContraction",
         "catty:LHSExchange", "catty:RHSExchange"
@@ -104,6 +104,18 @@
       "@type": "catty:LogicalAxiom",
       "rdfs:label": "Law of Non-Contradiction",
       "rdfs:comment": "¬(A ∧ ¬A)"
+    },
+    {
+      "@id": "catty:Axiom_Explosion",
+      "@type": "catty:LogicalAxiom",
+      "rdfs:label": "Principle of Explosion",
+      "rdfs:comment": "⊥ ⊢ A (Ex Falso Quodlibet)"
+    },
+    {
+      "@id": "catty:Axiom_DNE",
+      "@type": "catty:LogicalAxiom",
+      "rdfs:label": "Double Negation Elimination",
+      "rdfs:comment": "¬¬A ⊢ A"
     }
   ]
 }

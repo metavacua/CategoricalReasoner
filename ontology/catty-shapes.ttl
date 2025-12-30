@@ -55,6 +55,26 @@ catty:ExtensionShape a sh:NodeShape ;
     sh:targetClass catty:Extension ;
     sh:subClassOf catty:LogicMorphismShape .
 
+# Shape: AddLEM
+catty:AddLEMShape a sh:NodeShape ;
+    sh:targetClass catty:AddLEM ;
+    sh:subClassOf catty:ExtensionShape .
+
+# Shape: AddLNC
+catty:AddLNCShape a sh:NodeShape ;
+    sh:targetClass catty:AddLNC ;
+    sh:subClassOf catty:ExtensionShape .
+
+# Shape: AddExplosion
+catty:AddExplosionShape a sh:NodeShape ;
+    sh:targetClass catty:AddExplosion ;
+    sh:subClassOf catty:ExtensionShape .
+
+# Shape: AddStructuralRule
+catty:AddStructuralRuleShape a sh:NodeShape ;
+    sh:targetClass catty:AddStructuralRule ;
+    sh:subClassOf catty:ExtensionShape .
+
 # Shape: Interpretation
 catty:InterpretationShape a sh:NodeShape ;
     sh:targetClass catty:Interpretation ;

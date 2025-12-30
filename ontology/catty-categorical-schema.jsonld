@@ -223,6 +223,41 @@
       "rdfs:subClassOf": "catty:LogicMorphism"
     },
     {
+      "@id": "catty:AddAxiom",
+      "@type": "owl:Class",
+      "rdfs:label": "Add Axiom",
+      "rdfs:comment": "An extension morphism that adds a specific logical axiom",
+      "rdfs:subClassOf": "catty:Extension"
+    },
+    {
+      "@id": "catty:AddLEM",
+      "@type": "owl:Class",
+      "rdfs:label": "Add LEM",
+      "rdfs:comment": "Extension by adding the Law of Excluded Middle",
+      "rdfs:subClassOf": "catty:AddAxiom"
+    },
+    {
+      "@id": "catty:AddLNC",
+      "@type": "owl:Class",
+      "rdfs:label": "Add LNC",
+      "rdfs:comment": "Extension by adding the Law of Non-Contradiction",
+      "rdfs:subClassOf": "catty:AddAxiom"
+    },
+    {
+      "@id": "catty:AddExplosion",
+      "@type": "owl:Class",
+      "rdfs:label": "Add Explosion",
+      "rdfs:comment": "Extension by adding the Principle of Explosion (Ex Falso Quodlibet)",
+      "rdfs:subClassOf": "catty:AddAxiom"
+    },
+    {
+      "@id": "catty:AddStructuralRule",
+      "@type": "owl:Class",
+      "rdfs:label": "Add Structural Rule",
+      "rdfs:comment": "An extension morphism that adds a structural rule (LHS, RHS, or both)",
+      "rdfs:subClassOf": "catty:Extension"
+    },
+    {
       "@id": "catty:Interpretation",
       "@type": "owl:Class",
       "rdfs:label": "Interpretation",

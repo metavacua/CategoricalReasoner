@@ -16,130 +16,94 @@
     {
       "@id": "catty:CompleteLatticeExample",
       "@type": "catty:LogicLattice",
-      "rdfs:label": "Complete Example: Logic Lattice Category",
-      "rdfs:comment": "A category where objects are logics and morphisms are extension or interpretation relationships. The lattice structure emerges from the restriction and extension of logical rules and axioms.",
-      "dct:description": "The logic category formalizes the space of formal systems. LK (Classical Logic) acts as the terminal logic, validating both the Law of Excluded Middle (LEM) and the Law of Non-Contradiction (LNC). LM acts as a common minimal sublogic for LJ and LDJ. Substructural logics (LL, ALL, RLL) are characterized by the absence of specific structural rules on the LHS and RHS."
+      "rdfs:label": "Complete Example: Logic Category",
+      "rdfs:comment": "A category where objects are logics and morphisms are extension or interpretation relationships.",
+      "dct:description": "This example demonstrates how logics are related via the addition of axioms (LEM, LNC, Explosion) and structural rules. LK is the terminal logic validating all classical principles. Substructural logics are characterized by the absence of specific structural rules, which corresponds to the absence of certain logical axioms."
     },
     {
       "@id": "catty:LM",
       "@type": "catty:Logic",
       "rdfs:label": "LM (Minimal Base)",
-      "rdfs:comment": "Initial logic with conjunction and disjunction, but no negation.",
-      "catty:hasLogicalSignature": "catty:LM_Signature"
+      "rdfs:comment": "Initial logic with conjunction and disjunction. No negation."
     },
     {
       "@id": "catty:LJ",
       "@type": "catty:Logic",
       "rdfs:label": "LJ (Intuitionistic)",
-      "rdfs:comment": "Extends LM, validates LNC, invalidates one direction of DNE. Restricts RHS to single formula.",
-      "catty:hasSequentForm": "catty:SingleConclusionSequent",
-      "catty:hasStructuralRule": [
-        "catty:LHSWeakening", "catty:RHSWeakening",
-        "catty:LHSContraction", "catty:RHSContraction",
-        "catty:LHSExchange", "catty:RHSExchange"
-      ],
-      "catty:hasLogicalAxiom": "catty:Axiom_LNC"
+      "rdfs:comment": "Extends LM, validates LNC and Explosion. Single-conclusion sequents.",
+      "catty:hasLogicalAxiom": ["catty:Axiom_LNC", "catty:Axiom_Explosion"]
     },
     {
       "@id": "catty:LDJ",
       "@type": "catty:Logic",
       "rdfs:label": "LDJ (Dual Intuitionistic)",
-      "rdfs:comment": "Extends LM, validates LEM, invalidates the other direction of DNE. Restricts LHS to single formula.",
-      "catty:hasSequentForm": "catty:SingleAntecedentSequent",
-      "catty:hasStructuralRule": [
-        "catty:LHSWeakening", "catty:RHSWeakening",
-        "catty:LHSContraction", "catty:RHSContraction",
-        "catty:LHSExchange", "catty:RHSExchange"
-      ],
+      "rdfs:comment": "Extends LM, validates LEM. Single-antecedent sequents.",
       "catty:hasLogicalAxiom": "catty:Axiom_LEM"
     },
     {
       "@id": "catty:LK",
       "@type": "catty:Logic",
       "rdfs:label": "LK (Classical)",
-      "rdfs:comment": "Terminal logic. Validates LEM and LNC. Full multi-conclusion sequents and structural rules.",
-      "catty:hasSequentForm": "catty:MultiConclusionSequent",
-      "catty:hasStructuralRule": [
-        "catty:LHSWeakening", "catty:RHSWeakening",
-        "catty:LHSContraction", "catty:RHSContraction",
-        "catty:LHSExchange", "catty:RHSExchange"
-      ],
-      "catty:hasLogicalAxiom": ["catty:Axiom_LEM", "catty:Axiom_LNC"]
+      "rdfs:comment": "Terminal logic. Validates LEM, LNC, Explosion, and DNE. Full structural rules.",
+      "catty:hasLogicalAxiom": ["catty:Axiom_LEM", "catty:Axiom_LNC", "catty:Axiom_Explosion", "catty:Axiom_DNE"]
     },
     {
       "@id": "catty:LL",
       "@type": "catty:Logic",
       "rdfs:label": "LL (Linear)",
-      "rdfs:comment": "Substructural logic without weakening or contraction. No Cloning (contraction absence) and No Erasure (weakening absence).",
-      "catty:hasStructuralRule": ["catty:LHSExchange", "catty:RHSExchange"]
+      "rdfs:comment": "No cloning (contraction) and No erasure (weakening)."
     },
     {
       "@id": "catty:ALL",
       "@type": "catty:Logic",
       "rdfs:label": "ALL (Affine)",
-      "rdfs:comment": "Linear logic + Weakening. Allows erasure but no cloning.",
-      "catty:hasStructuralRule": [
-        "catty:LHSWeakening", "catty:RHSWeakening",
-        "catty:LHSExchange", "catty:RHSExchange"
-      ]
+      "rdfs:comment": "Linear logic + Weakening. Allows erasure."
     },
     {
       "@id": "catty:RLL",
       "@type": "catty:Logic",
       "rdfs:label": "RLL (Relevant)",
-      "rdfs:comment": "Linear logic + Contraction. Allows cloning but no erasure.",
-      "catty:hasStructuralRule": [
-        "catty:LHSContraction", "catty:RHSContraction",
-        "catty:LHSExchange", "catty:RHSExchange"
-      ]
+      "rdfs:comment": "Linear logic + Contraction. Allows cloning."
     },
     {
       "@id": "catty:Morphism_LM_to_LJ",
       "@type": "catty:Extension",
       "catty:domain": "catty:LM",
-      "catty:codomain": "catty:LJ"
+      "catty:codomain": "catty:LJ",
+      "rdfs:comment": "Adds LNC and Explosion."
     },
     {
       "@id": "catty:Morphism_LM_to_LDJ",
       "@type": "catty:Extension",
       "catty:domain": "catty:LM",
-      "catty:codomain": "catty:LDJ"
+      "catty:codomain": "catty:LDJ",
+      "rdfs:comment": "Adds LEM."
     },
     {
       "@id": "catty:Morphism_LJ_to_LK",
-      "@type": "catty:Extension",
+      "@type": "catty:AddLEM",
       "catty:domain": "catty:LJ",
       "catty:codomain": "catty:LK"
     },
     {
       "@id": "catty:Morphism_LDJ_to_LK",
-      "@type": "catty:Extension",
+      "@type": "catty:AddLNC",
       "catty:domain": "catty:LDJ",
       "catty:codomain": "catty:LK"
     },
     {
       "@id": "catty:Morphism_LL_to_ALL",
-      "@type": "catty:Extension",
+      "@type": "catty:AddStructuralRule",
       "catty:domain": "catty:LL",
-      "catty:codomain": "catty:ALL"
+      "catty:codomain": "catty:ALL",
+      "rdfs:label": "Add Weakening"
     },
     {
       "@id": "catty:Morphism_LL_to_RLL",
-      "@type": "catty:Extension",
+      "@type": "catty:AddStructuralRule",
       "catty:domain": "catty:LL",
-      "catty:codomain": "catty:RLL"
-    },
-    {
-      "@id": "catty:Morphism_ALL_to_LK",
-      "@type": "catty:Extension",
-      "catty:domain": "catty:ALL",
-      "catty:codomain": "catty:LK"
-    },
-    {
-      "@id": "catty:Morphism_RLL_to_LK",
-      "@type": "catty:Extension",
-      "catty:domain": "catty:RLL",
-      "catty:codomain": "catty:LK"
+      "catty:codomain": "catty:RLL",
+      "rdfs:label": "Add Contraction"
     },
     {
       "@id": "catty:Axiom_LEM",
@@ -152,6 +116,18 @@
       "@type": "catty:LogicalAxiom",
       "rdfs:label": "LNC",
       "rdfs:comment": "¬(A ∧ ¬A)"
+    },
+    {
+      "@id": "catty:Axiom_Explosion",
+      "@type": "catty:LogicalAxiom",
+      "rdfs:label": "Explosion",
+      "rdfs:comment": "⊥ ⊢ A"
+    },
+    {
+      "@id": "catty:Axiom_DNE",
+      "@type": "catty:LogicalAxiom",
+      "rdfs:label": "DNE",
+      "rdfs:comment": "¬¬A ⊢ A"
     }
   ]
 }

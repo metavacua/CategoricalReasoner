@@ -8,7 +8,7 @@
 - Functor, Natural Transformation, Adjoint Functors
 - Logic-specific classes: Logic, LogicalTheory, LogicalSignature, LogicalAxiom, TheoreticalAxiom
 - LHS/RHS Structural rule classes: Weakening, Contraction, Exchange
-- Morphism types: Extension, Interpretation
+- Morphism types: Extension, Interpretation, AddLEM, AddLNC, AddExplosion, AddStructuralRule
 - Curry-Howard classes: CurryHowardEquivalence, LogicAsCategory, TypeTheoryAsCategory
 
 ### 2. Logics-as-Objects Model ✓
@@ -20,7 +20,7 @@
   - LDJ (dual intuitionistic logic)
   - LL (linear logic)
   - ALL, RLL (affine and relevant linear logic)
-- Properties: logical signatures, logical axioms, LHS/RHS structural rules
+- Properties: logical signatures, logical axioms (LEM, LNC, Explosion, DNE), LHS/RHS structural rules
 - External links: owl:sameAs to Wikidata, dct:source to Wikipedia
 
 ### 3. Morphism Catalog ✓

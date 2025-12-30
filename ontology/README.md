@@ -74,12 +74,17 @@ LL is the resource-sensitive core. Adding structural rules leads to LK.
 
 ### Morphisms
 
-A morphism A → B represents that B extends A (Extension) or that A is interpretable in B (Interpretation).
+A morphism A → B represents that B extends A (Extension) or that A is interpretable in B (Interpretation). Extending a logic by adding an axiom (LEM, LNC, Explosion) or a structural rule (Weakening, Contraction, Exchange) is modeled as a categorical morphism.
+
+The presence of specific axioms is structurally linked to the configuration of structural rules:
+- **Full structural rules (LK)** allow for full classical principles.
+- **Resource-sensitive rules (LL)** correspond to the absence of certain axioms (No Cloning/No Erasure).
+- **LHS/RHS restrictions** (Single-conclusion vs Multi-conclusion) directly relate to the validity of LEM and LNC.
 
 - **LL → ALL**: Adds weakening (allows erasure, maintains 'no cloning').
 - **LL → RLL**: Adds contraction (allows cloning, maintains 'no erasure').
-- **ALL/RLL → LK**: Adding the remaining structural rules results in Classical Logic.
-- **LJ/LDJ → LK**: Proper extension to the terminal classical system.
+- **ALL/RLL → LK**: Adding the remaining structural rules and classical axioms results in Classical Logic.
+- **LJ/LDJ → LK**: Extension to the terminal classical system by adding the missing classical axiom (LEM or LNC).
 
 ### License
 
