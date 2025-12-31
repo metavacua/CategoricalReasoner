@@ -1,0 +1,237 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "catty": "http://catty.org/ontology/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dct": "http://purl.org/dc/terms/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "wd": "http://www.wikidata.org/entity/",
+    "foaf": "http://xmlns.com/foaf/0.1/"
+  },
+  "@graph": [
+    {
+      "@id": "catty:CurryHowardCH",
+      "@type": "catty:CurryHowardEquivalence",
+      "rdfs:label": "Curry-Howard Correspondence",
+      "rdfs:comment": "The canonical categorical equivalence between logic (as a category of logics and proofs) and type theory (as a category of types and programs)",
+      "dct:description": "The Curry-Howard correspondence is a fundamental isomorphism between proof theory and type theory. Categorically, it is an equivalence of categories: the category of logics (with proof-theoretic morphisms) is equivalent to the category of type theories (with type-theoretic morphisms). This equivalence maps propositions to types, proofs to programs, and sequent rules to type-theoretic constructions.",
+      "catty:sourceCategory": "catty:LogicAsCategory",
+      "catty:targetCategory": "catty:TypeTheoryAsCategory",
+      "owl:sameAs": "wd:Q2627038",
+      "prov:wasDerivedFrom": ["https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence", "https://ncatlab.org/nlab/show/Curry-Howard+correspondence"]
+    },
+    {
+      "@id": "catty:LogicAsCategory",
+      "@type": "catty:LogicAsCategory",
+      "rdfs:label": "Category of Logics",
+      "rdfs:comment": "The category whose objects are formal logics (LK, LJ, LL, etc.) and morphisms are proof-theoretic relationships (sequent restrictions, structural rule embeddings, translations)",
+      "dct:description": "In the Logic-as-Category model, each formal logic is an object in the category. Morphisms represent relationships between logics: sequent restrictions, structural rule embeddings, proof system translations, and functorial mappings. The composition of morphisms corresponds to the composition of logical translations.",
+      "catty:objects": ["catty:LM", "catty:LK", "catty:LJ", "catty:LDJ", "catty:LL", "catty:ALL", "catty:RLL"],
+      "catty:morphisms": ["catty:Extension", "catty:Interpretation"]
+    },
+    {
+      "@id": "catty:TypeTheoryAsCategory",
+      "@type": "catty:TypeTheoryAsCategory",
+      "rdfs:label": "Category of Type Theories",
+      "rdfs:comment": "The category whose objects are type theories (Simply Typed Lambda Calculus, System F, Linear Types, etc.) and morphisms are type-theoretic transformations (translations, embeddings, functorial mappings)",
+      "dct:description": "In the Type-Theory-as-Category model, each type theory is an object. Types are objects in a locally cartesian closed category (or similar categorical structure), and programs are morphisms between types. Morphisms between type theories represent translations, embeddings, and functorial mappings.",
+      "catty:objects": ["catty:STLC", "catty:SystemF", "catty:SystemFω", "catty:LinearTypeSystem", "catty:AffineTypeSystem"],
+      "catty:morphisms": ["catty:TypeTranslation", "catty:TypeEmbedding", "catty:TypeFunctor"]
+    },
+    {
+      "@id": "catty:STLC",
+      "@type": "catty:TypeTheory",
+      "rdfs:label": "Simply Typed Lambda Calculus",
+      "rdfs:comment": "The simply typed lambda calculus, corresponding to intuitionistic propositional logic under Curry-Howard",
+      "catty:correspondsToLogic": "catty:LJ",
+      "owl:sameAs": "wd:Q1758677",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus"
+    },
+    {
+      "@id": "catty:SystemF",
+      "@type": "catty:TypeTheory",
+      "rdfs:label": "System F",
+      "rdfs:comment": "Polymorphic lambda calculus (second-order lambda calculus), corresponding to second-order intuitionistic logic",
+      "catty:correspondsToLogic": "catty:LJ2",
+      "owl:sameAs": "wd:Q2635249",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/System_F"
+    },
+    {
+      "@id": "catty:LinearTypeSystem",
+      "@type": "catty:TypeTheory",
+      "rdfs:label": "Linear Type System",
+      "rdfs:comment": "Linear type system (resource-aware types), corresponding to linear logic",
+      "catty:correspondsToLogic": "catty:LL",
+      "owl:sameAs": "wd:Q1138516",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Linear_type_system"
+    },
+    {
+      "@id": "catty:AffineTypeSystem",
+      "@type": "catty:TypeTheory",
+      "rdfs:label": "Affine Type System",
+      "rdfs:comment": "Affine type system (unique types with discard), corresponding to affine linear logic",
+      "catty:correspondsToLogic": "catty:ALL",
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Affine_type_system"
+    },
+    {
+      "@id": "catty:propositionAsType",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "proposition as type",
+      "rdfs:comment": "The Curry-Howard mapping from logical propositions to types",
+      "dct:description": "Under the Curry-Howard correspondence, each logical proposition corresponds to a type: A ⊢ B (A entails B) maps to the function type A → B. Propositions are types, and proofs are terms (programs) inhabiting those types.",
+      "rdfs:domain": "catty:Proposition",
+      "rdfs:range": "catty:Type"
+    },
+    {
+      "@id": "catty:proofAsProgram",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "proof as program",
+      "rdfs:comment": "The Curry-Howard mapping from proofs to programs (terms)",
+      "dct:description": "Under the Curry-Howard correspondence, each proof corresponds to a program (lambda term): a proof of A ⊢ B corresponds to a lambda function of type A → B. The proof structure maps to the program structure.",
+      "rdfs:domain": "catty:Proof",
+      "rdfs:range": "catty:Program"
+    },
+    {
+      "@id": "catty:sequentRuleAsTypeConstructor",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "sequent rule as type constructor",
+      "rdfs:comment": "The Curry-Howard mapping from sequent rules to type constructors",
+      "dct:description": "Sequent rules map to type constructors: conjunction introduction maps to product types (A ∧ B → A × B), implication introduction maps to function types (A ⊢ B → A → B), disjunction introduction maps to sum types (A ⊢ A ∨ B → A + B), etc.",
+      "rdfs:domain": "catty:SequentRule",
+      "rdfs:range": "catty:TypeConstructor"
+    },
+    {
+      "@id": "catty:CurryHowardFunctor",
+      "@type": "catty:Functor",
+      "rdfs:label": "Curry-Howard Functor",
+      "rdfs:comment": "The functor from the category of logics to the category of type theories implementing the Curry-Howard correspondence",
+      "catty:sourceCategory": "catty:LogicAsCategory",
+      "catty:targetCategory": "catty:TypeTheoryAsCategory",
+      "dct:description": "The Curry-Howard functor F: Logic → Type maps each logic to its corresponding type theory (LJ → STLC, LL → Linear Types, etc.), and each logic morphism (e.g., sequent restriction) to a type theory morphism (e.g., type translation). This functor is an equivalence of categories.",
+      "catty:objectMapping": {
+        "catty:LJ": "catty:STLC",
+        "catty:LL": "catty:LinearTypeSystem",
+        "catty:ALL": "catty:AffineTypeSystem"
+      },
+      "catty:morphismMapping": {
+        "catty:Morphism_LJ_to_LL": "catty:Translation_STLC_to_LinearTypes"
+      }
+    },
+    {
+      "@id": "catty:CurryHowardInverseFunctor",
+      "@type": "catty:Functor",
+      "rdfs:label": "Curry-Howard Inverse Functor",
+      "rdfs:comment": "The inverse functor from the category of type theories to the category of logics",
+      "catty:sourceCategory": "catty:TypeTheoryAsCategory",
+      "catty:targetCategory": "catty:LogicAsCategory",
+      "dct:description": "The inverse functor G: Type → Logic maps each type theory back to its corresponding logic (STLC → LJ, Linear Types → LL, etc.). The pair (F, G) forms an equivalence of categories, demonstrating the bidirectional nature of the Curry-Howard correspondence."
+    },
+    {
+      "@id": "catty:CurryHowardNaturalTransformation",
+      "@type": "catty:NaturalTransformation",
+      "rdfs:label": "Curry-Howard Natural Transformation",
+      "rdfs:comment": "The natural transformation between the identity functor on Logic and the composition GF (Logic → Type → Logic)",
+      "dct:description": "The natural transformation η: Id_Logic → G ∘ F maps each logic to its corresponding logic under the round-trip Curry-Howard correspondence. This natural transformation is the identity for the core correspondences (e.g., LJ → STLC → LJ), demonstrating the equivalence."
+    },
+    {
+      "@id": "catty:CurryHowardInverseNaturalTransformation",
+      "@type": "catty:NaturalTransformation",
+      "rdfs:label": "Curry-Howard Inverse Natural Transformation",
+      "rdfs:comment": "The natural transformation between the identity functor on Type and the composition FG (Type → Logic → Type)",
+      "dct:description": "The natural transformation ε: Id_Type → F ∘ G maps each type theory to its corresponding type theory under the round-trip Curry-Howard correspondence. This natural transformation is also the identity for core correspondences."
+    },
+    {
+      "@id": "catty:Proof",
+      "@type": "owl:Class",
+      "rdfs:label": "Proof",
+      "rdfs:comment": "A formal proof in a logic, corresponding to a program under Curry-Howard",
+      "rdfs:subClassOf": "catty:Morphism",
+      "dct:description": "In the categorical model, a proof of A ⊢ B is a morphism from proposition A to proposition B in the logic category. Under Curry-Howard, this corresponds to a program (lambda term) of type A → B."
+    },
+    {
+      "@id": "catty:Program",
+      "@type": "owl:Class",
+      "rdfs:label": "Program",
+      "rdfs:comment": "A program (term) in a type theory, corresponding to a proof under Curry-Howard",
+      "rdfs:subClassOf": "catty:Morphism",
+      "dct:description": "In the categorical model, a program of type A → B is a morphism from type A to type B in the type theory category. Under Curry-Howard, this corresponds to a proof of A ⊢ B."
+    },
+    {
+      "@id": "catty:Proposition",
+      "@type": "owl:Class",
+      "rdfs:label": "Proposition",
+      "rdfs:comment": "A logical proposition, corresponding to a type under Curry-Howard",
+      "rdfs:subClassOf": "catty:Object",
+      "dct:description": "In the categorical model, propositions are objects in the logic category. Under Curry-Howard, each proposition corresponds to a type."
+    },
+    {
+      "@id": "catty:Type",
+      "@type": "owl:Class",
+      "rdfs:label": "Type",
+      "rdfs:comment": "A type in type theory, corresponding to a proposition under Curry-Howard",
+      "rdfs:subClassOf": "catty:Object",
+      "dct:description": "In the categorical model, types are objects in the type theory category (forming a Cartesian closed category for STLC, a linear category for linear types, etc.). Under Curry-Howard, each type corresponds to a proposition."
+    },
+    {
+      "@id": "catty:CategoricalSemantics_STLC",
+      "@type": "owl:Class",
+      "rdfs:label": "Categorical Semantics of STLC",
+      "rdfs:comment": "The categorical semantics of simply typed lambda calculus is given by Cartesian closed categories",
+      "dct:description": "The STLC corresponds categorically to Cartesian closed categories (CCCs): types are objects, function types A → B are exponential objects B^A, products A × B are categorical products, and programs are morphisms. This is the Curry-Howard correspondence at the categorical level: LJ ↔ CCCs.",
+      "prov:wasDerivedFrom": "https://ncatlab.org/nlab/show/Curry-Howard+correspondence"
+    },
+    {
+      "@id": "catty:CategoricalSemantics_LL",
+      "@type": "owl:Class",
+      "rdfs:label": "Categorical Semantics of Linear Logic",
+      "rdfs:comment": "The categorical semantics of linear logic is given by *-autonomous categories",
+      "dct:description": "Linear logic corresponds categorically to *-autonomous categories: multiplicative conjunction ⊗ is the monoidal product, linear implication A ⊸ B is the dual object A^⊥ ⅋ B (internal hom), additives ⊕, & give the biproduct structure, and exponentials !A, ?A model controlled structural rules. This is the Curry-Howard correspondence: LL ↔ *-autonomous categories.",
+      "prov:wasDerivedFrom": "https://ncatlab.org/nlab/show/linear+logic"
+    },
+    {
+      "@id": "catty:CurryHowardEquivalence_CCC",
+      "@type": "catty:EquivalenceOfCategories",
+      "rdfs:label": "Curry-Howard Equivalence: LJ ↔ CCC",
+      "rdfs:comment": "The equivalence between intuitionistic logic (LJ) and Cartesian closed categories (STLC)",
+      "catty:sourceCategory": "catty:LJ",
+      "catty:targetCategory": "catty:STLC",
+      "dct:description": "The fundamental Curry-Howard equivalence: the category of intuitionistic proofs (LJ) is equivalent to the category of programs in simply typed lambda calculus, which is precisely the category of morphisms in a Cartesian closed category."
+    },
+    {
+      "@id": "catty:CurryHowardEquivalence_StarAutonomous",
+      "@type": "catty:EquivalenceOfCategories",
+      "rdfs:label": "Curry-Howard Equivalence: LL ↔ *-Autonomous",
+      "rdfs:comment": "The equivalence between linear logic (LL) and *-autonomous categories",
+      "catty:sourceCategory": "catty:LL",
+      "catty:targetCategory": "catty:LinearTypeSystem",
+      "dct:description": "The Curry-Howard equivalence for linear logic: the category of linear logic proofs is equivalent to the category of programs in linear type systems, which is precisely the category of morphisms in a *-autonomous category."
+    },
+    {
+      "@id": "catty:CPS_Translation",
+      "@type": "catty:NaturalTransformation",
+      "rdfs:label": "Continuation-Passing Style Translation",
+      "rdfs:comment": "The CPS translation as a natural transformation between classical and intuitionistic/linear categories",
+      "dct:description": "The continuation-passing style (CPS) translation provides a categorical embedding of classical logic (with control operators) into linear logic/intuitionistic logic. This is represented as a natural transformation between the corresponding functors.",
+      "prov:wasDerivedFrom": "https://ncatlab.org/nlab/show/continuation-passing+style+translation"
+    },
+    {
+      "@id": "catty:DoubleNegationTranslation",
+      "@type": "catty:NaturalTransformation",
+      "rdfs:label": "Double Negation Translation",
+      "rdfs:comment": "The Gödel-Gentzen double negation translation as a natural transformation",
+      "dct:description": "The double negation translation provides a categorical embedding of classical logic into intuitionistic logic. This is represented as a natural transformation between the identity functor on classical logic and the double-negation functor.",
+      "prov:wasDerivedFrom": "https://ncatlab.org/nlab/show/double+negation+translation"
+    },
+    {
+      "@id": "catty:CurryHowardForLattice",
+      "@type": "catty:NaturalTransformation",
+      "rdfs:label": "Curry-Howard for the Logic Lattice",
+      "rdfs:comment": "The Curry-Howard correspondence extended to the full logic lattice",
+      "dct:description": "The Curry-Howard correspondence extends to the entire logic lattice: each node (logic) in the lattice corresponds to a type theory category, and each morphism (sequent restriction/structural rule embedding) corresponds to a type translation functor. This gives a functor between the logic lattice category and the type theory lattice category.",
+      "catty:mapsLatticeTo": "catty:TypeTheoryLattice"
+    }
+  ]
+}

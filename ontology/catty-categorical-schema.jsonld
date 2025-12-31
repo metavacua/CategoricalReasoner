@@ -1,0 +1,454 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "catty": "http://catty.org/ontology/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dct": "http://purl.org/dc/terms/",
+    "prov": "http://www.w3.org/ns/prov#"
+  },
+  "@graph": [
+    {
+      "@id": "catty:Category",
+      "@type": "owl:Class",
+      "rdfs:label": "Category",
+      "rdfs:comment": "A category consisting of objects and morphisms with composition"
+    },
+    {
+      "@id": "catty:Object",
+      "@type": "owl:Class",
+      "rdfs:label": "Object",
+      "rdfs:comment": "An object in a category",
+      "rdfs:subClassOf": { "@type": "owl:Class", "owl:equivalentClass": "catty:CategoryObject" }
+    },
+    {
+      "@id": "catty:Morphism",
+      "@type": "owl:Class",
+      "rdfs:label": "Morphism",
+      "rdfs:comment": "A morphism (arrow) in a category",
+      "rdfs:subClassOf": {
+        "@type": "owl:Restriction",
+        "owl:onProperty": "catty:domain",
+        "owl:cardinality": 1
+      },
+      "rdfs:subClassOf": {
+        "@type": "owl:Restriction",
+        "owl:onProperty": "catty:codomain",
+        "owl:cardinality": 1
+      }
+    },
+    {
+      "@id": "catty:domain",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "domain",
+      "rdfs:comment": "The domain (source) of a morphism",
+      "rdfs:domain": "catty:Morphism",
+      "rdfs:range": "catty:Object"
+    },
+    {
+      "@id": "catty:codomain",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "codomain",
+      "rdfs:comment": "The codomain (target) of a morphism",
+      "rdfs:domain": "catty:Morphism",
+      "rdfs:range": "catty:Object"
+    },
+    {
+      "@id": "catty:composition",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "composition",
+      "rdfs:comment": "Composition of morphisms",
+      "rdfs:domain": "catty:Morphism",
+      "rdfs:range": "catty:Morphism"
+    },
+    {
+      "@id": "catty:Functor",
+      "@type": "owl:Class",
+      "rdfs:label": "Functor",
+      "rdfs:comment": "A functor mapping between categories, preserving structure",
+      "rdfs:subClassOf": {
+        "@type": "owl:Restriction",
+        "owl:onProperty": "catty:sourceCategory",
+        "owl:cardinality": 1
+      },
+      "rdfs:subClassOf": {
+        "@type": "owl:Restriction",
+        "owl:onProperty": "catty:targetCategory",
+        "owl:cardinality": 1
+      }
+    },
+    {
+      "@id": "catty:sourceCategory",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "source category",
+      "rdfs:domain": "catty:Functor",
+      "rdfs:range": "catty:Category"
+    },
+    {
+      "@id": "catty:targetCategory",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "target category",
+      "rdfs:domain": "catty:Functor",
+      "rdfs:range": "catty:Category"
+    },
+    {
+      "@id": "catty:NaturalTransformation",
+      "@type": "owl:Class",
+      "rdfs:label": "Natural Transformation",
+      "rdfs:comment": "A natural transformation between functors",
+      "rdfs:subClassOf": {
+        "@type": "owl:Restriction",
+        "owl:onProperty": "catty:sourceFunctor",
+        "owl:cardinality": 1
+      },
+      "rdfs:subClassOf": {
+        "@type": "owl:Restriction",
+        "owl:onProperty": "catty:targetFunctor",
+        "owl:cardinality": 1
+      }
+    },
+    {
+      "@id": "catty:sourceFunctor",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "source functor",
+      "rdfs:domain": "catty:NaturalTransformation",
+      "rdfs:range": "catty:Functor"
+    },
+    {
+      "@id": "catty:targetFunctor",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "target functor",
+      "rdfs:domain": "catty:NaturalTransformation",
+      "rdfs:range": "catty:Functor"
+    },
+    {
+      "@id": "catty:AdjointFunctors",
+      "@type": "owl:Class",
+      "rdfs:label": "Adjoint Functors",
+      "rdfs:comment": "Pair of functors in adjunction (left and right adjoint)"
+    },
+    {
+      "@id": "catty:EquivalenceOfCategories",
+      "@type": "owl:Class",
+      "rdfs:label": "Equivalence of Categories",
+      "rdfs:comment": "An equivalence relation between categories"
+    },
+    {
+      "@id": "catty:LogicCategory",
+      "@type": "owl:Class",
+      "rdfs:label": "Logic Category",
+      "rdfs:comment": "A category whose objects are formal logics and morphisms are proof-theoretic relationships",
+      "rdfs:subClassOf": "catty:Category"
+    },
+    {
+      "@id": "catty:Logic",
+      "@type": "owl:Class",
+      "rdfs:label": "Logic",
+      "rdfs:comment": "A formal logic characterized by a logical signature and logical axioms",
+      "rdfs:subClassOf": "catty:Object"
+    },
+    {
+      "@id": "catty:LogicalTheory",
+      "@type": "owl:Class",
+      "rdfs:label": "Logical Theory",
+      "rdfs:comment": "A theory consisting of a logical signature, logical axioms, theoretical signature, and theoretical axioms",
+      "rdfs:subClassOf": "catty:Object"
+    },
+    {
+      "@id": "catty:LogicalSignature",
+      "@type": "owl:Class",
+      "rdfs:label": "Logical Signature",
+      "rdfs:comment": "The set of symbols and connectives used by a logic"
+    },
+    {
+      "@id": "catty:TheoreticalSignature",
+      "@type": "owl:Class",
+      "rdfs:label": "Theoretical Signature",
+      "rdfs:comment": "The set of symbols and constants used by a specific theory"
+    },
+    {
+      "@id": "catty:LogicalAxiom",
+      "@type": "owl:Class",
+      "rdfs:label": "Logical Axiom",
+      "rdfs:comment": "An axiom that is part of the logic's definition"
+    },
+    {
+      "@id": "catty:TheoreticalAxiom",
+      "@type": "owl:Class",
+      "rdfs:label": "Theoretical Axiom",
+      "rdfs:comment": "An axiom specific to a theory, supported by a logic"
+    },
+    {
+      "@id": "catty:hasLogicalSignature",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "has logical signature",
+      "rdfs:domain": ["catty:Logic", "catty:LogicalTheory"],
+      "rdfs:range": "catty:LogicalSignature"
+    },
+    {
+      "@id": "catty:hasTheoreticalSignature",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "has theoretical signature",
+      "rdfs:domain": "catty:LogicalTheory",
+      "rdfs:range": "catty:TheoreticalSignature"
+    },
+    {
+      "@id": "catty:hasLogicalAxiom",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "has logical axiom",
+      "rdfs:domain": ["catty:Logic", "catty:LogicalTheory"],
+      "rdfs:range": "catty:LogicalAxiom"
+    },
+    {
+      "@id": "catty:hasTheoreticalAxiom",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "has theoretical axiom",
+      "rdfs:domain": "catty:LogicalTheory",
+      "rdfs:range": "catty:TheoreticalAxiom"
+    },
+    {
+      "@id": "catty:LogicMorphism",
+      "@type": "owl:Class",
+      "rdfs:label": "Logic Morphism",
+      "rdfs:comment": "A morphism between logics or theories (extension, interpretation, or restriction)",
+      "rdfs:subClassOf": "catty:Morphism"
+    },
+    {
+      "@id": "catty:Extension",
+      "@type": "owl:Class",
+      "rdfs:label": "Extension",
+      "rdfs:comment": "A morphism where the target logic extends the source logic (validates more sequents or adds rules/axioms)",
+      "rdfs:subClassOf": "catty:LogicMorphism"
+    },
+    {
+      "@id": "catty:AddAxiom",
+      "@type": "owl:Class",
+      "rdfs:label": "Add Axiom",
+      "rdfs:comment": "An extension morphism that adds a specific logical axiom",
+      "rdfs:subClassOf": "catty:Extension"
+    },
+    {
+      "@id": "catty:AddLEM",
+      "@type": "owl:Class",
+      "rdfs:label": "Add LEM",
+      "rdfs:comment": "Extension by adding the Law of Excluded Middle",
+      "rdfs:subClassOf": "catty:AddAxiom"
+    },
+    {
+      "@id": "catty:AddLNC",
+      "@type": "owl:Class",
+      "rdfs:label": "Add LNC",
+      "rdfs:comment": "Extension by adding the Law of Non-Contradiction",
+      "rdfs:subClassOf": "catty:AddAxiom"
+    },
+    {
+      "@id": "catty:AddExplosion",
+      "@type": "owl:Class",
+      "rdfs:label": "Add Explosion",
+      "rdfs:comment": "Extension by adding the Principle of Explosion (Ex Falso Quodlibet)",
+      "rdfs:subClassOf": "catty:AddAxiom"
+    },
+    {
+      "@id": "catty:AddStructuralRule",
+      "@type": "owl:Class",
+      "rdfs:label": "Add Structural Rule",
+      "rdfs:comment": "An extension morphism that adds a structural rule (LHS, RHS, or both)",
+      "rdfs:subClassOf": "catty:Extension"
+    },
+    {
+      "@id": "catty:Interpretation",
+      "@type": "owl:Class",
+      "rdfs:label": "Interpretation",
+      "rdfs:comment": "A morphism representing an interpretability relationship between logics",
+      "rdfs:subClassOf": "catty:LogicMorphism"
+    },
+    {
+      "@id": "catty:hasSequentForm",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "has sequent form",
+      "rdfs:comment": "The sequent form used by a logic",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "catty:SequentForm"
+    },
+    {
+      "@id": "catty:SequentForm",
+      "@type": "owl:Class",
+      "rdfs:label": "Sequent Form",
+      "rdfs:comment": "The form of sequents (e.g., single-conclusion, multi-conclusion, hypersequent)"
+    },
+    {
+      "@id": "catty:hasStructuralRule",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "has structural rule",
+      "rdfs:comment": "A structural rule available in the logic",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "catty:StructuralRule"
+    },
+    {
+      "@id": "catty:StructuralRule",
+      "@type": "owl:Class",
+      "rdfs:label": "Structural Rule",
+      "rdfs:comment": "A structural rule (weakening, contraction, exchange) which may be applied to the LHS (antecedent) or RHS (succedent) of a sequent"
+    },
+    {
+      "@id": "catty:Weakening",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "catty:StructuralRule",
+      "rdfs:label": "Weakening",
+      "rdfs:comment": "The weakening structural rule (addition of arbitrary formulas). Its absence implies a 'no erasure' principle."
+    },
+    {
+      "@id": "catty:LHSWeakening",
+      "@type": "catty:Weakening",
+      "rdfs:label": "LHS Weakening",
+      "rdfs:comment": "Weakening on the left hand side (antecedent) of entailment"
+    },
+    {
+      "@id": "catty:RHSWeakening",
+      "@type": "catty:Weakening",
+      "rdfs:label": "RHS Weakening",
+      "rdfs:comment": "Weakening on the right hand side (succedent) of entailment"
+    },
+    {
+      "@id": "catty:Contraction",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "catty:StructuralRule",
+      "rdfs:label": "Contraction",
+      "rdfs:comment": "The contraction structural rule (duplication of formulas). Its absence implies a 'no cloning' principle."
+    },
+    {
+      "@id": "catty:LHSContraction",
+      "@type": "catty:Contraction",
+      "rdfs:label": "LHS Contraction",
+      "rdfs:comment": "Contraction on the left hand side (antecedent) of entailment"
+    },
+    {
+      "@id": "catty:RHSContraction",
+      "@type": "catty:Contraction",
+      "rdfs:label": "RHS Contraction",
+      "rdfs:comment": "Contraction on the right hand side (succedent) of entailment"
+    },
+    {
+      "@id": "catty:Exchange",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "catty:StructuralRule",
+      "rdfs:label": "Exchange",
+      "rdfs:comment": "The exchange structural rule (reordering of formulas). Its absence implies a 'no partial swapping' principle, as in non-commutative or order logics."
+    },
+    {
+      "@id": "catty:LHSExchange",
+      "@type": "catty:Exchange",
+      "rdfs:label": "LHS Exchange",
+      "rdfs:comment": "Exchange on the left hand side (antecedent) of entailment"
+    },
+    {
+      "@id": "catty:RHSExchange",
+      "@type": "catty:Exchange",
+      "rdfs:label": "RHS Exchange",
+      "rdfs:comment": "Exchange on the right hand side (succedent) of entailment"
+    },
+    {
+      "@id": "catty:latticeCoordinate",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:label": "lattice coordinate",
+      "rdfs:comment": "Position in 2D lattice as coordinate pair (x,y)",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "xsd:string"
+    },
+    {
+      "@id": "catty:SequentRestrictionMorphism",
+      "@type": "owl:Class",
+      "rdfs:label": "Sequent Restriction Morphism",
+      "rdfs:comment": "A morphism that imposes sequent form restrictions",
+      "rdfs:subClassOf": "catty:LogicMorphism"
+    },
+    {
+      "@id": "catty:StructuralRuleMorphism",
+      "@type": "owl:Class",
+      "rdfs:label": "Structural Rule Morphism",
+      "@type": "owl:Class",
+      "rdfs:comment": "A morphism that adds or removes structural rules",
+      "rdfs:subClassOf": "catty:LogicMorphism"
+    },
+    {
+      "@id": "catty:ProofSystemEmbedding",
+      "@type": "owl:Class",
+      "rdfs:label": "Proof System Embedding",
+      "rdfs:comment": "A functorial embedding of one proof system into another",
+      "rdfs:subClassOf": {
+        "@type": "owl:Class",
+        "owl:intersectionOf": [
+          { "@type": "catty:LogicMorphism" },
+          { "@type": "catty:Functor" }
+        ]
+      }
+    },
+    {
+      "@id": "catty:LogicLattice",
+      "@type": "owl:Class",
+      "rdfs:label": "Logic Lattice",
+      "rdfs:comment": "The 2D poset category of logics organized by sequent restrictions (horizontal) and structural rules (vertical)",
+      "rdfs:subClassOf": "catty:PosetCategory"
+    },
+    {
+      "@id": "catty:PosetCategory",
+      "@type": "owl:Class",
+      "rdfs:label": "Poset Category",
+      "rdfs:comment": "A category representing a partially ordered set (at most one morphism between any two objects)",
+      "rdfs:subClassOf": "catty:Category"
+    },
+    {
+      "@id": "catty:CurryHowardEquivalence",
+      "@type": "owl:Class",
+      "rdfs:label": "Curry-Howard Equivalence",
+      "rdfs:comment": "The categorical equivalence between Logic-as-Category and Type-Theory-as-Category",
+      "rdfs:subClassOf": "catty:EquivalenceOfCategories"
+    },
+    {
+      "@id": "catty:LogicAsCategory",
+      "@type": "owl:Class",
+      "rdfs:label": "Logic as Category",
+      "rdfs:comment": "Category of logics with proof-theoretic morphisms",
+      "rdfs:subClassOf": "catty:LogicCategory"
+    },
+    {
+      "@id": "catty:TypeTheoryAsCategory",
+      "@type": "owl:Class",
+      "rdfs:label": "Type Theory as Category",
+      "rdfs:comment": "Category of type theories with type-theoretic morphisms",
+      "rdfs:subClassOf": "catty:Category"
+    },
+    {
+      "@id": "catty:Type",
+      "@type": "owl:Class",
+      "rdfs:label": "Type",
+      "rdfs:comment": "A type in type theory, corresponding to a proposition",
+      "rdfs:subClassOf": "catty:Object"
+    },
+    {
+      "@id": "catty:TypeMorphism",
+      "@type": "owl:Class",
+      "rdfs:label": "Type Morphism",
+      "rdfs:comment": "A morphism between types (functions/programs)",
+      "rdfs:subClassOf": "catty:Morphism"
+    },
+    {
+      "@id": "catty:proofAsProgram",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "proof as program",
+      "rdfs:comment": "Correspondence between a proof transformation and a program transformation under Curry-Howard",
+      "rdfs:domain": "catty:LogicMorphism",
+      "rdfs:range": "catty:TypeMorphism"
+    },
+    {
+      "@id": "catty:propositionAsType",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "proposition as type",
+      "rdfs:comment": "Correspondence between a proposition and a type under Curry-Howard",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "catty:Type"
+    }
+  ]
+}

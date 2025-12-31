@@ -1,0 +1,99 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix catty: <http://catty.org/ontology/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+# Shapes for Catty Ontology Validation
+
+# Shape: Logic
+catty:LogicShape a sh:NodeShape ;
+    sh:targetClass catty:Logic ;
+    sh:property [
+        sh:path catty:hasLogicalSignature ;
+        sh:class catty:LogicalSignature ;
+        sh:minCount 1 ;
+        sh:message "Each Logic must have at least one LogicalSignature" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasStructuralRule ;
+        sh:class catty:StructuralRule ;
+        sh:message "Each Logic can have structural rules" ;
+    ] ;
+    sh:message "Invalid Logic" .
+
+# Shape: LogicalTheory
+catty:LogicalTheoryShape a sh:NodeShape ;
+    sh:targetClass catty:LogicalTheory ;
+    sh:property [ sh:path catty:hasLogicalSignature ; sh:class catty:LogicalSignature ; sh:minCount 1 ] ;
+    sh:property [ sh:path catty:hasLogicalAxiom ; sh:class catty:LogicalAxiom ; sh:minCount 1 ] ;
+    sh:property [ sh:path catty:hasTheoreticalSignature ; sh:class catty:TheoreticalSignature ; sh:minCount 1 ] ;
+    sh:property [ sh:path catty:hasTheoreticalAxiom ; sh:class catty:TheoreticalAxiom ; sh:minCount 1 ] ;
+    sh:message "Invalid LogicalTheory: must have logical/theoretical signatures and axioms" .
+
+# Shape: LogicMorphism
+catty:LogicMorphismShape a sh:NodeShape ;
+    sh:targetClass catty:LogicMorphism ;
+    sh:property [
+        sh:path catty:domain ;
+        sh:class catty:Object ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:property [
+        sh:path catty:codomain ;
+        sh:class catty:Object ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+    ] ;
+    sh:message "Invalid LogicMorphism" .
+
+# Shape: Extension
+catty:ExtensionShape a sh:NodeShape ;
+    sh:targetClass catty:Extension ;
+    sh:subClassOf catty:LogicMorphismShape .
+
+# Shape: AddLEM
+catty:AddLEMShape a sh:NodeShape ;
+    sh:targetClass catty:AddLEM ;
+    sh:subClassOf catty:ExtensionShape .
+
+# Shape: AddLNC
+catty:AddLNCShape a sh:NodeShape ;
+    sh:targetClass catty:AddLNC ;
+    sh:subClassOf catty:ExtensionShape .
+
+# Shape: AddExplosion
+catty:AddExplosionShape a sh:NodeShape ;
+    sh:targetClass catty:AddExplosion ;
+    sh:subClassOf catty:ExtensionShape .
+
+# Shape: AddStructuralRule
+catty:AddStructuralRuleShape a sh:NodeShape ;
+    sh:targetClass catty:AddStructuralRule ;
+    sh:subClassOf catty:ExtensionShape .
+
+# Shape: Interpretation
+catty:InterpretationShape a sh:NodeShape ;
+    sh:targetClass catty:Interpretation ;
+    sh:subClassOf catty:LogicMorphismShape .
+
+# Shape: LogicalSignature
+catty:LogicalSignatureShape a sh:NodeShape ;
+    sh:targetClass catty:LogicalSignature ;
+    sh:property [ sh:path rdfs:comment ; sh:minCount 1 ] .
+
+# Shape: LogicalAxiom
+catty:LogicalAxiomShape a sh:NodeShape ;
+    sh:targetClass catty:LogicalAxiom .
+
+# Shape: StructuralRule
+catty:StructuralRuleShape a sh:NodeShape ;
+    sh:targetClass catty:StructuralRule ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+    ] .
