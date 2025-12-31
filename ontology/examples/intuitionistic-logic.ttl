@@ -1,0 +1,61 @@
+@prefix catty: <https://owner.github.io/Catty/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+
+# Intuitionistic Logic (LJ) - Gentzen, 1935
+catty:IntuitionisticLogic a catty:Logic, owl:NamedIndividual ;
+    rdfs:label "Intuitionistic Logic (LJ)"@en ;
+    rdfs:comment "Gentzen's sequent calculus for intuitionistic logic. Restricted succedent: Γ ⊢ A (single conclusion). Constructive proofs."@en ;
+
+    # External references
+    owl:sameAs wd:Q179899 ;  # Wikidata: Intuitionistic logic
+    skos:exactMatch dbr:Intuitionistic_logic ;
+    dcterms:source <https://ncatlab.org/nlab/show/intuitionistic+logic> ;
+    dcterms:bibliographicCitation "Gentzen, G. (1935); Heyting, A. (1930)" ;
+
+    # Structural rules (all present on LHS; RHS restricted makes right-side rules moot)
+    catty:hasStructuralRule catty:Exchange,
+                            catty:WeakeningLeft,
+                            catty:ContractionLeft ;
+
+    # Sequent restrictions
+    catty:hasSequentRestriction catty:UnrestrictedAntecedent,
+                                 catty:RestrictedSuccedent ;
+
+    # Logical axioms (LEM absent; LNC and Explosion present)
+    catty:provesAxiom catty:LNC, catty:Explosion ;
+    catty:notProvableAxiom catty:LEM, catty:DoubleNegationElimination ;
+
+    # Logical connectives
+    catty:hasConnective catty:Conjunction, catty:Disjunction,
+                        catty:Negation, catty:Implication,
+                        catty:Bottom, catty:Top ;
+
+    # Position in lattice
+    catty:inFamily catty:FullStructuralFamily ;
+    catty:horizontalPosition catty:LeftOfDiamond ;
+    catty:verticalPosition catty:FullStructuralLayer ;
+
+    # Morphisms
+    catty:extendsLogic catty:MonotonicLogic ;
+    catty:extendedByLogic catty:ClassicalLogic ;
+
+    # Physical realizability
+    catty:isQuantumSafe false ;
+    catty:allowsCloning true ;
+    catty:allowsErasure true ;
+
+    # Computational interpretation
+    catty:computationalInterpretation "Constructive computation; explicit witnesses required for existentials"@en ;
+    catty:curryHowardCorrespondence "Simply typed lambda calculus; dependent types"@en .
+
+# Sequent restriction
+catty:RestrictedSuccedent a catty:SequentRestriction ;
+    rdfs:label "Restricted Succedent"@en ;
+    rdfs:comment "Succedent has at most one formula (A) or is empty"@en .

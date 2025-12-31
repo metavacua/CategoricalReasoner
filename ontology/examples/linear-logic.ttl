@@ -1,0 +1,86 @@
+@prefix catty: <https://owner.github.io/Catty/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+
+# Linear Logic (LL) - Girard, 1987
+catty:LinearLogic a catty:Logic, owl:NamedIndividual ;
+    rdfs:label "Linear Logic (LL)"@en ;
+    rdfs:comment "Girard's resource-sensitive logic. No weakening or contraction (W=0, C=0). Exchange present (E=1). Quantum-safe: embodies no-cloning and no-erasure theorems."@en ;
+
+    # External references
+    owl:sameAs wd:Q1149560 ;  # Wikidata: Linear logic
+    skos:exactMatch dbr:Linear_logic ;
+    dcterms:source <https://ncatlab.org/nlab/show/linear+logic> ;
+    dcterms:bibliographicCitation "Girard, J.-Y. (1987). Linear Logic. Theoretical Computer Science 50(1): 1-102." ;
+
+    # Structural rules (Exchange only; no W, C)
+    catty:hasStructuralRule catty:Exchange ;
+
+    # Sequent restrictions (unrestricted)
+    catty:hasSequentRestriction catty:UnrestrictedAntecedent,
+                                 catty:UnrestrictedSuccedent ;
+
+    # Logical axioms
+    catty:provesAxiom catty:LEM, catty:LNC ;
+    catty:notProvableAxiom catty:Explosion ;  # No weakening → no explosion
+
+    # Logical connectives (multiplicative and additive variants)
+    catty:hasConnective catty:TensorProduct,      # ⊗ (multiplicative conjunction)
+                        catty:LinearImplication,   # ⊸ (linear implication)
+                        catty:ParallelComposition, # ⅋ (multiplicative disjunction)
+                        catty:AdditiveConjunction, # & (with)
+                        catty:AdditiveDisjunction, # ⊕ (plus)
+                        catty:LinearNegation,      # ⊥ (linear negation)
+                        catty:ExponentialOfCourse, # ! (of course, allows contraction)
+                        catty:ExponentialWhyNot ;  # ? (why not, allows weakening)
+
+    # Position in lattice
+    catty:inFamily catty:LinearFamily ;
+    catty:horizontalPosition catty:TopOfDiamond ;
+    catty:verticalPosition catty:LinearLayer ;
+
+    # Morphisms
+    catty:extendedByLogic catty:AffineLogic, catty:RelevantLogic ;
+
+    # Physical realizability (QUANTUM-SAFE)
+    catty:isQuantumSafe true ;
+    catty:allowsCloning false ;  # No contraction → no-cloning
+    catty:allowsErasure false ;  # No weakening → no-erasure
+    catty:quantumCorrespondence "No-cloning theorem (Wootters & Zurek, 1982); No-erasure theorem (Pati & Braunstein, 2000)"@en ;
+
+    # Computational interpretation
+    catty:computationalInterpretation "Resource-sensitive computation; single-use values"@en ;
+    catty:curryHowardCorrespondence "Linear types; session types"@en ;
+    catty:hardwareTarget "Quantum circuits; resource-constrained systems"@en .
+
+# Logical family
+catty:LinearFamily a catty:LogicalFamily ;
+    rdfs:label "Linear Family"@en ;
+    rdfs:comment "Logics with Exchange but without Weakening or Contraction: E=1, W=0, C=0"@en ;
+    catty:hasStructuralConfiguration "E=1, W_L=0, W_R=0, C_L=0, C_R=0"^^xsd:string .
+
+# Linear connectives
+catty:TensorProduct a catty:LogicalConnective ;
+    rdfs:label "Tensor Product (⊗)"@en ;
+    rdfs:comment "Multiplicative conjunction in linear logic"@en .
+
+catty:LinearImplication a catty:LogicalConnective ;
+    rdfs:label "Linear Implication (⊸)"@en ;
+    rdfs:comment "A ⊸ B consumes A to produce B"@en .
+
+catty:LinearNegation a catty:LogicalConnective ;
+    rdfs:label "Linear Negation (⊥)"@en ;
+    rdfs:comment "Involutive negation in linear logic"@en .
+
+catty:ExponentialOfCourse a catty:LogicalConnective ;
+    rdfs:label "Exponential ! (Of Course)"@en ;
+    rdfs:comment "Allows contraction locally; !A can be used multiple times"@en .
+
+catty:ExponentialWhyNot a catty:LogicalConnective ;
+    rdfs:label "Exponential ? (Why Not)"@en ;
+    rdfs:comment "Allows weakening locally; ?A can be discarded"@en .
