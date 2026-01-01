@@ -9,7 +9,7 @@ all: $(PDF)
 
 $(PDF): $(TEX) preamble.tex frontmatter/*.tex chapters/*.tex backmatter/bibliography.bib
 	$(LATEX) $(LATEX_FLAGS) $(TEX)
-	bibtex main || true
+	@if [ -f main.aux ]; then bibtex main; fi
 	$(LATEX) $(LATEX_FLAGS) $(TEX)
 	$(LATEX) $(LATEX_FLAGS) $(TEX)
 

@@ -31,6 +31,7 @@ The logic-witness formalism requires machine-readable specifications that:
 \begin{lstlisting}[language=Turtle, caption=Classical Logic (LK) in TTL]
 @prefix catty: <https://owner.github.io/Catty/ontology#> .
 @prefix dbr: <http://dbpedia.org/resource/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 catty:ClassicalLogic a catty:Logic ;
@@ -114,6 +115,9 @@ Example instance files in \texttt{ontologies/examples/}:
 \subsection{Example SHACL Constraint}
 
 \begin{lstlisting}[language=Turtle, caption=SHACL Constraint for Logic Class]
+@prefix catty: <https://owner.github.io/Catty/ontology#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
 catty:LogicShape a sh:NodeShape ;
     sh:targetClass catty:Logic ;
     sh:property [

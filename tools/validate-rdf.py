@@ -132,7 +132,11 @@ def main():
 
         # Print result
         status_icon = "✓" if success else "✗"
-        print(f"{status_icon} {filepath.relative_to(target_path if target_path.is_dir() else target_path.parent)}")
+        try:
+            display_path = filepath.relative_to(target_path if target_path.is_dir() else target_path.parent)
+        except ValueError:
+            display_path = filepath
+        print(f"{status_icon} {display_path}")
         print(f"  {message}")
 
     # Summary
