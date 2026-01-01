@@ -1,0 +1,258 @@
+\chapter{Theoretical Formalism}
+
+\section{Tarski-Mostowski-Robinson Foundation}
+
+\subsection{Theories as Structured Pairs}
+
+A \textbf{formal theory} $T$ is defined as:
+\[ T = (\text{LogicalSignature} \cup \text{TheoreticalSignature}) \otimes (\text{LogicalAxioms} \cup \text{TheoreticalAxioms}) \]
+
+\textbf{Components}:
+\begin{itemize}
+\item \textbf{LogicalSignature}: Determined by choice of categorizable logic $L$
+  \begin{itemize}
+  \item Structural rules: $(E, W_L, W_R, C_L, C_R)$
+  \item Sequent restrictions: (LHS-restricted, RHS-restricted)
+  \item Logical connectives: $\{\wedge, \vee, \neg, \to, \bot, \top, \ldots\}$ (subset determined by $L$)
+  \item Quantifiers: $\forall, \exists$ (if first-order)
+  \end{itemize}
+\item \textbf{TheoreticalSignature}: Domain-specific predicates, functions, constants
+  \begin{itemize}
+  \item Example (arithmetic): $\{0, S, +, \times, <, \ldots\}$
+  \item Example (geometry): $\{\text{Point}, \text{Line}, \text{Between}, \ldots\}$
+  \end{itemize}
+\item \textbf{LogicalAxioms}: Axioms specific to logic $L$
+  \begin{itemize}
+  \item Explosion: $\bot \to Q$ (if $W$ present)
+  \item LEM: $P \vee \neg P$ (if succedent unrestricted)
+  \item LNC: $\neg(P \wedge \neg P)$ (if antecedent unrestricted)
+  \end{itemize}
+\item \textbf{TheoreticalAxioms}: Domain-specific axioms
+  \begin{itemize}
+  \item Example (Robinson): Seven axioms for arithmetic
+  \item Example (Euclidean geometry): Five postulates
+  \end{itemize}
+\end{itemize}
+
+\subsection{Consistency of Theories}
+
+The consistency of $T$ depends on:
+\begin{enumerate}
+\item \textbf{Internal consistency of $L$}: The logic itself must be consistent
+\item \textbf{Compatibility of LogicalAxioms and TheoreticalAxioms}: The two sets must not contradict each other
+\end{enumerate}
+
+\textbf{Key insight}: Changing the logic $L$ while preserving the theoretical signature may require adapting theoretical axioms to maintain consistency.
+
+\section{Theory Transformations Under Logic Changes}
+
+\subsection{The Transformation Problem}
+
+\textbf{Given}: Theory $T$ in logic $L$
+
+\textbf{Goal}: Construct theory $T'$ in logic $L'$ that ``corresponds'' to $T$
+
+\textbf{Challenges}:
+\begin{itemize}
+\item Some logical axioms in $L$ may not exist in $L'$ (e.g., LEM in classical but not intuitionistic)
+\item Some theoretical axioms may depend on logical properties unavailable in $L'$
+\item Expressiveness may differ (e.g., negation in classical vs. monotonic)
+\end{itemize}
+
+\subsection{Systematic Transformation Procedure}
+
+\textbf{Step 1: Identify Dependencies}
+\begin{itemize}
+\item Determine which theoretical axioms depend on LEM, LNC, Explosion, or other logical properties
+\item Classify axioms by logical requirements
+\end{itemize}
+
+\textbf{Step 2: Rewrite or Eliminate Axioms}
+\begin{itemize}
+\item \textbf{Rewrite}: Adapt axioms to $L'$ if possible (e.g., constructivize for intuitionistic logic)
+\item \textbf{Eliminate}: Remove axioms that cannot be expressed in $L'$ (e.g., negation-dependent axioms in monotonic)
+\item \textbf{Restrict}: Limit applicability of axioms to positive fragments
+\end{itemize}
+
+\textbf{Step 3: Verify Consistency}
+\begin{itemize}
+\item Ensure $T'$ is consistent in $L'$
+\item Check that rewritten axioms preserve intended semantics where possible
+\end{itemize}
+
+\textbf{Step 4: Generate $T'$}
+\begin{itemize}
+\item Construct $T' = (\text{LogicalSignature}_{L'} \cup \text{TheoreticalSignature}) \otimes (\text{LogicalAxioms}_{L'} \cup \text{TheoreticalAxioms}')$
+\item Document changes and limitations
+\end{itemize}
+
+\subsection{Examples of Theory Transformations}
+
+\subsubsection{Classical Robinson $\to$ Intuitionistic Robinson}
+
+\textbf{Changes}:
+\begin{itemize}
+\item Remove LEM-dependent proofs (not axioms themselves, but derived theorems)
+\item Constructivize existential statements (require explicit witnesses)
+\item All seven Robinson axioms remain (they are constructively valid)
+\end{itemize}
+
+\textbf{Expressiveness}: Intuitionistic Robinson is strictly weaker (fewer theorems provable).
+
+\subsubsection{Classical Robinson $\to$ Monotonic Robinson}
+
+\textbf{Changes}:
+\begin{itemize}
+\item Eliminate Axiom 1: $\neg S(x) = 0$ (requires negation)
+\item Eliminate Axiom 3: $x \neq 0 \to \exists y(x = S(y))$ (requires implication)
+\item Retain Axioms 2, 4, 5, 6, 7 (positive, no negation/implication)
+\end{itemize}
+
+\textbf{Result}: Drastically limited expressiveness; monotonic Robinson is a weak fragment.
+
+\subsubsection{Classical Robinson $\to$ Linear Robinson}
+
+\textbf{Changes}:
+\begin{itemize}
+\item Adapt axioms for single-use resources
+\item Modify equality to linear equality (resource-aware)
+\item Rewrite successor, addition, multiplication for linear context
+\end{itemize}
+
+\textbf{Result}: Different proof strategies; resource consumption is explicit.
+
+\section{Robinson Arithmetic as Canonical Case Study}
+
+\subsection{Robinson's Q: Seven Axioms}
+
+Robinson arithmetic (Q) consists of seven axioms over the signature $\{0, S, +, \times\}$:
+
+\begin{enumerate}
+\item $\neg S(x) = 0$ \quad (Zero is not a successor)
+\item $S(x) = S(y) \to x = y$ \quad (Successor is injective)
+\item $x \neq 0 \to \exists y(x = S(y))$ \quad (Non-zero numbers have predecessors)
+\item $x + 0 = x$ \quad (Additive identity)
+\item $x + S(y) = S(x + y)$ \quad (Recursive addition)
+\item $x \times 0 = 0$ \quad (Multiplicative zero)
+\item $x \times S(y) = x \times y + x$ \quad (Recursive multiplication)
+\end{enumerate}
+
+\subsection{Robinson in Different Logics}
+
+\subsubsection{Classical Robinson (LK)}
+
+\textbf{Logical Signature}: Full structural rules, unrestricted sequents, LEM, LNC, Explosion
+
+\textbf{Axioms}: All seven axioms hold
+
+\textbf{Theorems}: All classical arithmetic tautologies, LEM-dependent results
+
+\textbf{Decidability}: Essentially undecidable (Robinson, 1950)
+
+\subsubsection{Intuitionistic Robinson (LJ)}
+
+\textbf{Logical Signature}: Full structural rules, restricted RHS, no LEM, LNC present, Explosion
+
+\textbf{Axioms}: All seven axioms (constructively valid)
+
+\textbf{Theorems}: Subset of classical theorems; existential claims require witnesses
+
+\textbf{Decidability}: Essentially undecidable (constructively)
+
+\textbf{Fragment Relationship}: $\text{theorems}_{\text{LJ}} \subset \text{theorems}_{\text{LK}}$
+
+\subsubsection{Dual-Intuitionistic Robinson (LDJ)}
+
+\textbf{Logical Signature}: Full structural rules, restricted LHS, LEM present, no LNC
+
+\textbf{Axioms}: Modified axioms for dual-intuitionistic context
+
+\textbf{Theorems}: Different subset of classical theorems; refutations require counter-witnesses
+
+\textbf{Decidability}: Essentially undecidable (dual-intuitionistic)
+
+\subsubsection{Monotonic Robinson}
+
+\textbf{Logical Signature}: Full structural rules, both restricted, no LEM, no LNC, no negation/implication
+
+\textbf{Axioms}: Axioms 2, 4, 5, 6, 7 only (Axioms 1, 3 eliminated)
+
+\textbf{Theorems}: Drastically limited; only positive lattice operations
+
+\textbf{Decidability}: Potentially decidable (due to severe restrictions; requires formal proof)
+
+\subsubsection{Linear Robinson (LL)}
+
+\textbf{Logical Signature}: Exchange, no weakening, no contraction, unrestricted sequents (resource-sensitive)
+
+\textbf{Axioms}: All seven axioms adapted for linear context
+
+\textbf{Theorems}: Same algorithmic structure, different resource semantics
+
+\textbf{Decidability}: Essentially undecidable (linear logic is undecidable in general)
+
+\subsection{Why Robinson Arithmetic?}
+
+Robinson arithmetic serves as the canonical case study because:
+\begin{enumerate}
+\item \textbf{Minimal yet non-trivial}: Seven axioms capture essential arithmetic
+\item \textbf{Well-studied}: Extensive literature on decidability, consistency, interpretations
+\item \textbf{Expressible in all canonical logics}: All four horizontal positions (LK, LJ, LDJ, Monotonic) have Robinson variants
+\item \textbf{Clear interpretation}: Successor, addition, multiplication are intuitive
+\item \textbf{Undecidability}: Provides a reference point for computational complexity
+\end{enumerate}
+
+\section{Peano Arithmetic vs. Heyting Arithmetic}
+
+\subsection{Peano Arithmetic (PA)}
+
+\textbf{Definition}: Classical logic (LK) + Robinson's Q + Induction schema
+
+\textbf{Induction Schema}:
+\[ [P(0) \wedge \forall x (P(x) \to P(S(x)))] \to \forall x P(x) \]
+
+\textbf{Strength}: PA is a powerful theory; proves many arithmetic truths
+
+\textbf{Consistency}: Proven consistent relative to set theory (but not provable within PA by Gödel's Second Incompleteness Theorem)
+
+\subsection{Heyting Arithmetic (HA)}
+
+\textbf{Definition}: Intuitionistic logic (LJ) + Constructive Robinson + Constructive induction
+
+\textbf{Constructive Induction}: Same schema as PA, but interpreted constructively (requires explicit witnesses)
+
+\textbf{Strength}: HA is strictly weaker than PA (fewer provable theorems)
+
+\textbf{Fragment Relationship}: $\text{theorems}_{\text{HA}} \subset \text{theorems}_{\text{PA}}$
+
+\subsection{Key Insight: Logic Determines Provability}
+
+\textbf{Same theoretical signature} (arithmetic), \textbf{different logics} $\Rightarrow$ \textbf{different theorems}.
+
+\begin{itemize}
+\item Every Heyting theorem is a Peano theorem (LJ is a fragment of LK)
+\item \textbf{Converse is false}: PA has LEM-dependent theorems unprovable in HA
+\end{itemize}
+
+\textbf{Generalization}: This relationship scales to any two logics $L_1, L_2$ where $L_1$ is a fragment of $L_2$ (i.e., $L_1$ has more restrictions than $L_2$).
+
+\subsection{Computational Interpretation}
+
+\begin{itemize}
+\item \textbf{PA proofs}: May use non-constructive methods (LEM, proof by contradiction)
+\item \textbf{HA proofs}: Must be constructive (explicit witnesses for existential claims)
+\end{itemize}
+
+\textbf{Curry-Howard perspective}: HA proofs are programs; PA proofs may not be directly executable.
+
+\section{Vacancies: Future Formalization}
+
+The following require further development:
+\begin{itemize}
+\item Formal proofs of decidability properties for Robinson variants
+\item Complete transformation procedures for all logic pairs
+\item Mechanized verification of theory transformations
+\item Decidability of monotonic Robinson (currently conjectured decidable)
+\item Formal semantics for linear Robinson
+\item Extension to higher-order logics and type theories
+\end{itemize}

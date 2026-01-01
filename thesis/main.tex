@@ -2,22 +2,82 @@
 
 \input{preamble}
 
-\title{Theoretical Metalinguistics}
+\title{The Logic-Witness Formalism:\\ A Categorical Framework for Formal Logics}
 \author{Ian Douglas Lawrence Norman McLean}
-\date{29-12-2025}
+\date{\today}
 
 \begin{document}
 
 \hypersetup{pageanchor=false}
-\maketitle
-\hypersetup{pageanchor=true}
 
-\begin{center}
-\href{main.pdf}{Download PDF}
-\end{center}
+% Front Matter
+\input{frontmatter/titlepage}
+
+\hypersetup{pageanchor=true}
+\pagenumbering{roman}
+
+\input{frontmatter/abstract}
+\input{frontmatter/acknowledgments}
 
 \tableofcontents
+\listoffigures
+\listoftables
 
-\input{chapters/categorical-semantic-audit}
+% Main Content
+\cleardoublepage
+\pagenumbering{arabic}
+
+\part{Metamathematical Formalism}
+
+\input{chapters/introduction}
+\input{chapters/chapter2-logical-formalism}
+\input{chapters/chapter3-theoretical-formalism}
+\input{chapters/chapter4-witness-formalism}
+
+\part{Technical Implementation}
+
+\input{chapters/chapter5-semantic-web}
+\input{chapters/chapter6-roadmap}
+
+% Conclusions
+\input{chapters/conclusions}
+
+% Back Matter
+\appendix
+
+\chapter{External Ontologies and Vocabularies}
+\label{app:external-ontologies}
+
+See \texttt{ontology/external-ontologies.md} for a comprehensive catalog of external ontologies and vocabularies used in this work.
+
+\chapter{SPARQL Query Examples}
+\label{app:sparql}
+
+See \texttt{ontology/queries/sparql-examples.md} for example SPARQL queries demonstrating how to explore the Catty knowledge graph.
+
+\chapter{License and Attribution}
+\label{app:license}
+
+This work is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0) or later. See the \texttt{LICENSE} file in the repository root for full license text.
+
+\section{External Resource Licenses}
+
+The following external resources are referenced in this work:
+
+\begin{itemize}
+\item \textbf{Wikidata}: CC0 (Public Domain) --- Fully compatible with AGPL-3.0
+\item \textbf{DBpedia}: CC BY-SA 3.0 --- Compatible with attribution
+\item \textbf{OpenMath}: BSD 3-Clause --- Fully compatible
+\item \textbf{nLab}: CC BY-SA 3.0 --- Compatible with attribution
+\item \textbf{Isabelle/AFP}: Varies (mostly BSD) --- Compatible
+\item \textbf{Coq Standard Library}: CeCILL-B (BSD-compatible) --- Compatible
+\item \textbf{Lean MathLib}: Apache 2.0 --- Fully compatible
+\end{itemize}
+
+All attributions and citations are provided in the bibliography.
+
+% Bibliography
+\bibliographystyle{plain}
+\bibliography{backmatter/bibliography}
 
 \end{document}

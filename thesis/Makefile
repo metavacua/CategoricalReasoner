@@ -7,7 +7,9 @@ LATEX_FLAGS := -interaction=nonstopmode -halt-on-error -file-line-error
 
 all: $(PDF)
 
-$(PDF): $(TEX) preamble.tex chapters/chapter1.tex
+$(PDF): $(TEX) preamble.tex frontmatter/*.tex chapters/*.tex backmatter/bibliography.bib
+	$(LATEX) $(LATEX_FLAGS) $(TEX)
+	@if [ -f main.aux ]; then bibtex main; fi
 	$(LATEX) $(LATEX_FLAGS) $(TEX)
 	$(LATEX) $(LATEX_FLAGS) $(TEX)
 
