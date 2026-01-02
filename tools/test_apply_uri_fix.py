@@ -31,22 +31,26 @@ INVALID_URIS = [
 
 VALID_URI = "https://metavacua.github.io/CategoricalReasoner/ontology/"
 
-# Files to update
-ONTOLOGY_FILES = [
-    "ontology/catty-categorical-schema.jsonld",
-    "ontology/catty-complete-example.jsonld",
-    "ontology/curry-howard-categorical-model.jsonld",
-    "ontology/logics-as-objects.jsonld",
-    "ontology/morphism-catalog.jsonld",
-    "ontology/two-d-lattice-category.jsonld",
-    "ontology/catty-shapes.ttl",
-    "ontology/examples/classical-logic.ttl",
-    "ontology/examples/dual-intuitionistic-logic.ttl",
-    "ontology/examples/intuitionistic-logic.ttl",
-    "ontology/examples/linear-logic.ttl",
-    "ontology/examples/monotonic-logic.ttl",
-    "ontology/queries/sparql-examples.md",
-]
+# Ontology directory
+ONTOLOGY_DIR = Path("ontology")
+
+
+def find_all_ontology_files(repo_root: Path) -> List[Path]:
+    """Find all ontology files in the repository."""
+    ontology_dir = repo_root / ONTOLOGY_DIR
+    if not ontology_dir.exists():
+        return []
+
+    files = []
+    for pattern in ['*.jsonld', '*.ttl', '*.rdf', '*.owl']:
+        files.extend(ontology_dir.rglob(pattern))
+
+    # Also check markdown files in queries directory
+    queries_dir = ontology_dir / 'queries'
+    if queries_dir.exists():
+        files.extend(queries_dir.glob('*.md'))
+
+    return sorted(files)
 
 
 def update_file(filepath: Path, dry_run: bool = False) -> Tuple[bool, int, Dict[str, int]]:
@@ -138,29 +142,33 @@ Examples:
     script_dir = Path(__file__).parent
     repo_root = script_dir.parent
 
+    # Find all ontology files dynamically
+    ontology_files = find_all_ontology_files(repo_root)
+
+    if not ontology_files:
+        print("⚠️  No ontology files found!")
+        return 1
+
+    print(f"Found {len(ontology_files)} ontology file(s) to process\n")
+
     modified_files = []
     grand_total_replacements = 0
 
-    for file_path_str in ONTOLOGY_FILES:
-        filepath = repo_root / file_path_str
-
-        if not filepath.exists():
-            print(f"⚠️  {file_path_str}")
-            print(f"    File not found\n")
-            continue
+    for filepath in ontology_files:
+        rel_path = filepath.relative_to(repo_root)
 
         was_modified, total_replacements, replacements_by_uri = update_file(filepath, args.dry_run)
 
         if was_modified:
             status = "Would update" if args.dry_run else "Updated"
-            print(f"✅ {status}: {file_path_str}")
+            print(f"✅ {status}: {rel_path}")
             for uri, count in replacements_by_uri.items():
                 print(f"    • {count}× {uri}")
             print(f"    Total: {total_replacements} replacement(s)\n")
             modified_files.append(filepath)
             grand_total_replacements += total_replacements
         else:
-            print(f"ℹ️  No changes: {file_path_str}\n")
+            print(f"ℹ️  No changes: {rel_path}\n")
 
     # Summary
     print("=" * 80)
