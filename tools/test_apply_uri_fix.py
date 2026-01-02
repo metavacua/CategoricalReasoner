@@ -1,3 +1,4 @@
+# pylint: disable=redefined-outer-name, unused-argument
 #!/usr/bin/env python3
 """
 Script to apply the URI fix for Issue #8.
