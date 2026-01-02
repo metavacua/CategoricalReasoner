@@ -195,3 +195,33 @@ This means:
 - ✅ Files in subdirectories are included
 - ✅ No manual updates to file lists needed
 - ✅ Consistent validation across all scripts
+
+## Infrastructure Validation Tests
+
+### `test_infrastructure_validation.py`
+Validates that the infrastructure itself is working correctly:
+- All required scripts exist
+- All required documentation exists
+- CI/CD workflow is configured
+- Ontology files can be found dynamically
+- Validation scripts run correctly
+- Invalid URI patterns are detected
+
+**Usage:**
+```bash
+python3 tools/test_infrastructure_validation.py
+```
+
+### `test_fix_script_validation.py`
+Validates that the automated fix script works correctly:
+- Fix script runs in dry-run mode
+- Fix script has help documentation
+- Fix script finds all ontology files
+
+**Usage:**
+```bash
+python3 tools/test_fix_script_validation.py
+```
+
+### `test_comprehensive_validation.py`
+Master test that runs all validation checks:
