@@ -103,6 +103,22 @@ The validation infrastructure detects:
 +PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 ```
 
+
+### 9. ontology/examples/classical-logic.ttl
+**Line 1:**
+```diff
+-@prefix catty: <https://owner.github.io/Catty/ontology#> .
++@prefix catty: <https://metavacua.github.io/CategoricalReasoner/ontology/> .
+```
+
+### 10-13. Other Example Files
+The following files in `ontology/examples/` also need the same fix on line 1:
+- `ontology/examples/dual-intuitionistic-logic.ttl`
+- `ontology/examples/intuitionistic-logic.ttl`
+- `ontology/examples/linear-logic.ttl`
+- `ontology/examples/monotonic-logic.ttl`
+
+All use the placeholder `https://owner.github.io/Catty/ontology#` which needs to be replaced.
 ### 9. ontology/ontological-inventory.md (if exists)
 **Documentation references:**
 Update any documentation that references the old URI.
