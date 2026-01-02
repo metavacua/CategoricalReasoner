@@ -143,8 +143,6 @@ Examples:
             if response.lower() != 'y':
                 print("\nAborted.")
                 return 0
-            print()
-        else:
 
     script_dir = Path(__file__).parent
     repo_root = script_dir.parent
