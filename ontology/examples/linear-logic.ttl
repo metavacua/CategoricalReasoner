@@ -1,0 +1,38 @@
+@prefix catty: <https://owner.github.io/Catty/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+
+# Linear Logic (LL) - Girard, 1987
+catty:LinearLogic a catty:Logic, owl:NamedIndividual ;
+    rdfs:label "Linear Logic (LL)"@en ;
+    rdfs:comment "Girard's resource-sensitive logic. No weakening or contraction (W=0, C=0). Exchange present (E=1). Quantum-safe: embodies no-cloning and no-erasure theorems."@en ;
+    
+    # External references
+    owl:sameAs wd:Q1149560 ;  # Wikidata: Linear logic
+    skos:exactMatch dbr:Linear_logic ;
+    dcterms:source <https://ncatlab.org/nlab/show/linear+logic> ;
+    dcterms:bibliographicCitation "Girard, J.-Y. (1987). Linear Logic. Theoretical Computer Science 50(1): 1-102." ;
+    
+    # Structural rules (W=0, C=0, E=1)
+    catty:hasStructuralRule catty:Exchange ;
+    catty:lacksStructuralRule catty:Weakening, catty:Contraction ;
+    
+    # Sequent form
+    catty:hasSequentForm catty:SymmetricSequent ;
+    
+    # Logical connectives
+    catty:hasLogicalConnective catty:LinearImplication, catty:Tensor, catty:Par, catty:One, catty:Zero ;
+    
+    # Lattice coordinates (horizontal: symmetric, vertical: linear)
+    catty:latticeCoordinate "(symmetric, linear)" ;
+    
+    # Categorical properties
+    catty:isQuantumSafe "true"^^xsd:boolean ;
+    catty:embodiesNoCloningTheorem "true"^^xsd:boolean ;
+    catty:embodiesNoErasureTheorem "true"^^xsd:boolean .
