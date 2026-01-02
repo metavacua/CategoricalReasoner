@@ -42,7 +42,7 @@ This is the correct GitHub Pages URL for the Categorical Reasoner project.
 
 ## Files Requiring Changes
 
-The following 8 files need to be updated:
+The validation scripts automatically discover all ontology files that need to be updated:
 
 ### JSON-LD Files (line 4 in each)
 1. `ontology/catty-categorical-schema.jsonld`
