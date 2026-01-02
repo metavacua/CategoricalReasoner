@@ -31,14 +31,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install rdflib pyshacl jsonschema
-      - name: Test validation infrastructure
-        run: |
-          echo ""
-          echo "=========================================="
-          echo "Testing Validation Infrastructure"
-          echo "=========================================="
-          python3 tools/test_infrastructure_validation.py
-
 
       - name: Apply URI fixes
         run: |
@@ -46,8 +38,15 @@ jobs:
           echo "=========================================="
           echo "Applying URI Fixes"
           echo "=========================================="
-          # Run the fix script non-interactively
-          python3 -c "import sys; sys.path.insert(0, 'tools'); from test_apply_uri_fix import find_all_ontology_files, update_file; from pathlib import Path; repo_root = Path('.'); files = find_all_ontology_files(repo_root); [update_file(f, dry_run=False) for f in files]; print('✅ URI fixes applied')"
+          python3 tools/test_apply_uri_fix.py --yes
+
+      - name: Test validation infrastructure
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "Testing Validation Infrastructure"
+          echo "=========================================="
+          python3 tools/test_infrastructure_validation.py
 
 
       - name: Run comprehensive URI validation
