@@ -1,3 +1,4 @@
+# pylint: disable=redefined-outer-name, unused-argument
 #!/usr/bin/env python3
 """
 Test to validate and document the URI fix for Issue #8.
