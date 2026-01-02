@@ -1,0 +1,38 @@
+@prefix catty: <https://owner.github.io/Catty/ontology#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+
+# Classical Logic (LK) - Gentzen, 1934
+catty:ClassicalLogic a catty:Logic, owl:NamedIndividual ;
+    rdfs:label "Classical Logic (LK)"@en ;
+    rdfs:comment "Gentzen's classical sequent calculus with full structural rules. Includes Law of Excluded Middle (LEM) and Double Negation Elimination (DNE)."@en ;
+    
+    # External references
+    owl:sameAs wd:Q192960 ;  # Wikidata: Classical logic
+    skos:exactMatch dbr:Classical_logic ;
+    dcterms:source <https://ncatlab.org/nlab/show/classical+logic> ;
+    dcterms:bibliographicCitation "Gentzen, G. (1934). Untersuchungen über das logische Schließen. Mathematische Zeitschrift 39: 176-210." ;
+    
+    # Structural rules (W=1, C=1, E=1)
+    catty:hasStructuralRule catty:Weakening, catty:Contraction, catty:Exchange ;
+    
+    # Sequent form
+    catty:hasSequentForm catty:SymmetricSequent ;
+    
+    # Logical axioms
+    catty:hasLogicalAxiom catty:LawOfExcludedMiddle, catty:DoubleNegationElimination ;
+    
+    # Logical connectives
+    catty:hasLogicalConnective catty:ClassicalImplication, catty:Conjunction, catty:Disjunction, catty:Negation ;
+    
+    # Lattice coordinates (horizontal: symmetric, vertical: full)
+    catty:latticeCoordinate "(symmetric, full)" ;
+    
+    # Categorical properties
+    catty:isQuantumSafe "false"^^xsd:boolean .
