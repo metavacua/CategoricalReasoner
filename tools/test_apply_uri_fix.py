@@ -40,6 +40,11 @@ ONTOLOGY_FILES = [
     "ontology/morphism-catalog.jsonld",
     "ontology/two-d-lattice-category.jsonld",
     "ontology/catty-shapes.ttl",
+    "ontology/examples/classical-logic.ttl",
+    "ontology/examples/dual-intuitionistic-logic.ttl",
+    "ontology/examples/intuitionistic-logic.ttl",
+    "ontology/examples/linear-logic.ttl",
+    "ontology/examples/monotonic-logic.ttl",
     "ontology/queries/sparql-examples.md",
 ]
 
