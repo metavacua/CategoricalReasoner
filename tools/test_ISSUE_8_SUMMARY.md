@@ -192,6 +192,30 @@ This infrastructure addresses that by:
 ### Adding New Validation Rules
 
 To add new URI patterns to check, edit `tools/test_ontology_uris.py`:
+
+```python
+# Add to PROBLEMATIC_PATTERNS list
+PROBLEMATIC_PATTERNS = [
+    (r'http://catty\.org/', 'Invalid domain: catty.org'),
+    (r'https?://owner\.github\.io/', 'Invalid placeholder: owner.github.io'),
+    # Add your new pattern here:
+    (r'your-regex-pattern', 'Description of the issue'),
+]
+```
+
+### Example: Detecting Different Problematic Patterns
+
+The infrastructure catches various issues:
+
+```
+❌ ontology/example.jsonld
+    ✗ 2 error(s)
+    ❌ Invalid domain: catty.org: "catty": "http://catty.org/ontology/" (line 4)
+       Fix: Change to: "https://metavacua.github.io/CategoricalReasoner/ontology/"
+    ❌ Invalid placeholder: owner.github.io: @prefix ex: <https://owner.github.io/...> (line 10)
+       Fix: Replace with valid URI: https://metavacua.github.io/CategoricalReasoner/ontology/
+```
+
 ## Impact
 
 This fix is necessary for:
