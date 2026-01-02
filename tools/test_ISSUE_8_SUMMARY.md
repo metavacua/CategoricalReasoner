@@ -236,3 +236,79 @@ This fix is necessary for:
 - Issue: https://github.com/metavacua/CategoricalReasoner/issues/8
 - GitHub Pages URL: https://metavacua.github.io/CategoricalReasoner/
 - Referenced file: https://github.com/metavacua/CategoricalReasoner/blob/0e68f389bb541299af3c2e8018e3536e356040f6/ontology/catty-categorical-schema.jsonld#L4
+## Infrastructure Usage Examples
+
+### Example 1: Developer Adding a New Ontology
+
+A developer creates `ontology/new-feature.jsonld`:
+
+```json
+{
+  "@context": {
+    "catty": "http://catty.org/ontology/"
+  }
+}
+```
+
+**What happens:**
+1. Developer runs `./tools/test_run_uri_validation.sh` before committing
+2. Validation detects the invalid URI
+3. Developer runs `python3 tools/test_apply_uri_fix.py` to fix it
+4. Validation passes
+5. CI/CD validates on push to ensure no regressions
+
+### Example 2: Detecting Multiple Problematic Patterns
+
+An ontology file contains:
+```turtle
+@prefix catty: <https://owner.github.io/Catty/ontology#> .
+@prefix ex: <http://example.org/ontology/> .
+```
+
+**What the infrastructure detects:**
+- Line 1: Invalid placeholder domain `owner.github.io`
+- Line 2: Non-HTTPS URI (warning, may be acceptable for external ontologies)
+
+### Example 3: CI/CD Catching Invalid Changes
+
+A pull request modifies an ontology file and accidentally introduces:
+```json
+"catty": "http://catty.org/ontology/"
+```
+
+**What happens:**
+1. CI/CD runs ontology validation workflow
+2. Validation fails with clear error message
+3. PR cannot be merged until fixed
+4. Developer is notified of the specific issue and line number
+
+### Example 4: Comprehensive Validation Report
+
+Running `python3 tools/test_ontology_uris.py` produces:
+
+```
+✅ ontology/catty-categorical-schema.jsonld
+    ✓ Valid
+
+❌ ontology/new-ontology.jsonld
+    ✗ 2 error(s)
+    ❌ Uses invalid URI: http://catty.org/ontology/ (line 4)
+       Fix: Change to: "https://metavacua.github.io/CategoricalReasoner/ontology/"
+    ❌ Invalid placeholder: owner.github.io (line 8)
+       Fix: Replace with valid URI
+
+⚠️  ontology/experimental/test.owl
+    Unsupported file type
+```
+
+## Continuous Improvement
+
+The infrastructure is designed to evolve:
+
+1. **Pattern Detection**: Add new problematic patterns as they are discovered
+2. **File Type Support**: Extend validation to new RDF formats
+3. **Custom Rules**: Add project-specific validation rules
+4. **Integration**: Connect with RDF validators, reasoners, and semantic web tools
+5. **Reporting**: Enhanced reporting with suggestions and auto-fixes
+
+This ensures that as the project grows, ontology quality remains high and issues are caught early.
