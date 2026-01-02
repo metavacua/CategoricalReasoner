@@ -17,10 +17,15 @@ jobs:
   validate-ontologies:
     runs-on: ubuntu-latest
     name: Validate Ontology URIs and Syntax
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.head_ref }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -40,6 +45,18 @@ jobs:
           echo "=========================================="
           python3 tools/test_apply_uri_fix.py --yes
 
+      - name: Commit URI fixes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add ontology/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Fix: Update ontology URIs to GitHub Pages URL (Issue #8)"
+            git push
+          fi
+
       - name: Test validation infrastructure
         run: |
           echo ""
@@ -47,7 +64,6 @@ jobs:
           echo "Testing Validation Infrastructure"
           echo "=========================================="
           python3 tools/test_infrastructure_validation.py
-
 
       - name: Run comprehensive URI validation
         run: |
