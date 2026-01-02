@@ -9,8 +9,28 @@
 % Minimal helpers
 \newcommand{\code}[1]{\texttt{#1}}
 
+\lstdefinelanguage{Turtle}
+{
+  morekeywords={@prefix, @base, a},
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]',
+}
+
+\lstdefinelanguage{SPARQL}
+{
+  morekeywords={SELECT, WHERE, PREFIX, FILTER, NOT, EXISTS, a},
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]',
+}
+
 \lstset{
-  basicstyle=\ttfamily,
+  basicstyle=\ttfamily\small,
   breaklines=true,
   columns=fullflexible,
+  frame=single,
+  numbers=left,
+  numberstyle=\tiny,
+  xleftmargin=2em,
 }

@@ -1,23 +1,40 @@
 \documentclass[12pt]{report}
-
+\usepackage[utf8]{inputenc}
 \input{preamble}
 
-\title{Theoretical Metalinguistics}
+\title{The Logic-Witness Formalism}
 \author{Ian Douglas Lawrence Norman McLean}
-\date{29-12-2025}
+\date{\today}
 
 \begin{document}
 
 \hypersetup{pageanchor=false}
 \maketitle
-\hypersetup{pageanchor=true}
 
-\begin{center}
-\href{main.pdf}{Download PDF}
-\end{center}
+% Front Matter
+\input{frontmatter/titlepage}
+\input{frontmatter/abstract}
+\input{frontmatter/acknowledgments}
 
-\tableofcontents
+% Main Content
+\part{Mathematical Formalism}
+\input{chapters/introduction}
+\input{chapters/chapter2-logical-formalism}
+\input{chapters/chapter3-theoretical-formalism}
+\input{chapters/chapter4-witness-formalism}
 
+\part{Technical Implementation}
 \input{chapters/categorical-semantic-audit}
+\input{chapters/chapter5-semantic-web}
+\input{chapters/chapter6-roadmap}
+
+% Conclusions
+\input{chapters/conclusions}
+
+% Back Matter
+\appendix
+\nocite{*}
+\bibstyle{plain}
+\bibliography{backmatter/bibliography}
 
 \end{document}

@@ -1,0 +1,289 @@
+\chapter{Semantic Web as Integration Interface}
+
+\section{Motivation for Semantic Web Technologies}
+
+The logic-witness formalism requires machine-readable specifications that:
+\begin{enumerate}
+\item Decouple formalism from implementation technology
+\item Enable validation and reasoning about categorical structures
+\item Provide a standard interchange format
+\item Link to external knowledge bases (DBpedia, Wikidata)
+\item Support incremental development and modular composition
+\end{enumerate}
+
+\textbf{Solution}: RDF/OWL ontologies with SHACL validation and SPARQL querying.
+
+\section{RDF/TTL Specifications}
+
+\subsection{Resource Description Framework (RDF)}
+
+\textbf{RDF} provides a graph-based data model where:
+\begin{itemize}
+\item \textbf{Resources}: Entities (logics, theories, axioms, morphisms)
+\item \textbf{Properties}: Relationships between resources
+\item \textbf{Triples}: (subject, predicate, object) statements
+\end{itemize}
+
+\textbf{Turtle (TTL)}: A human-readable serialization of RDF.
+
+\subsection{Example: Classical Logic in RDF}
+
+\begin{lstlisting}[language=Turtle, caption=Classical Logic (LK) in TTL]
+@prefix catty: <https://owner.github.io/Catty/ontology#> .
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+catty:ClassicalLogic a catty:Logic ;
+    rdfs:label "Classical Logic (LK)"@en ;
+    catty:hasStructuralRule catty:Exchange,
+                            catty:WeakeningLeft,
+                            catty:WeakeningRight,
+                            catty:ContractionLeft,
+                            catty:ContractionRight ;
+    catty:hasSequentRestriction catty:UnrestrictedAntecedent,
+                                 catty:UnrestrictedSuccedent ;
+    catty:provesAxiom catty:LEM, catty:LNC, catty:Explosion ;
+    skos:exactMatch dbr:Classical_logic .
+\end{lstlisting}
+
+\subsection{Benefits of RDF Representation}
+
+\begin{itemize}
+\item \textbf{Modularity}: Logics, theories, and morphisms are separate resources
+\item \textbf{Extensibility}: New logics can be added without modifying existing specifications
+\item \textbf{Interoperability}: RDF is a W3C standard with broad tool support
+\item \textbf{Linked Data}: Direct integration with DBpedia, Wikidata, OpenMath
+\item \textbf{Validation}: SHACL constraints enforce categorical axioms
+\item \textbf{Querying}: SPARQL enables complex queries over the knowledge graph
+\end{itemize}
+
+\section{Ontology Architecture}
+
+\subsection{Core Ontologies}
+
+\textbf{1. Logical Formalism Ontology} (\texttt{logical-formalism.ttl}):
+\begin{itemize}
+\item Classes: \texttt{Logic}, \texttt{StructuralRule}, \texttt{Sequent}, \texttt{Axiom}, \texttt{Diamond}, \texttt{Morphism}
+\item Properties: \texttt{hasStructuralRule}, \texttt{hasSequentRestriction}, \texttt{provesAxiom}
+\item Captures the two-dimensional lattice structure
+\end{itemize}
+
+\textbf{2. Theoretical Formalism Ontology} (\texttt{theoretical-formalism.ttl}):
+\begin{itemize}
+\item Classes: \texttt{Theory}, \texttt{Signature}, \texttt{TheoreticalAxiom}, \texttt{Theorem}
+\item Properties: \texttt{hasLogic}, \texttt{hasSignature}, \texttt{hasAxiom}, \texttt{provesTheorem}
+\item Represents theories as logic-signature-axiom triples
+\end{itemize}
+
+\textbf{3. Witness Formalism Ontology} (\texttt{witness-formalism.ttl}):
+\begin{itemize}
+\item Classes: \texttt{WitnessProgram}, \texttt{WitnessFunctor}, \texttt{CodeGenerator}
+\item Properties: \texttt{instantiatesTheory}, \texttt{targetsLanguage}, \texttt{isQuantumSafe}
+\item Represents the Curry-Howard correspondence and code generation
+\end{itemize}
+
+\textbf{4. DBpedia Mappings} (\texttt{dbpedia-mappings.ttl}):
+\begin{itemize}
+\item Links Catty concepts to DBpedia URIs
+\item Uses \texttt{owl:sameAs}, \texttt{skos:exactMatch}, \texttt{skos:closeMatch}
+\item Provides grounding for logical definitions
+\end{itemize}
+
+\subsection{Example Instance Data}
+
+Example instance files in \texttt{ontologies/examples/}:
+\begin{itemize}
+\item \texttt{classical-logic.ttl}: LK specification
+\item \texttt{intuitionistic-logic.ttl}: LJ specification
+\item \texttt{dual-intuitionistic-logic.ttl}: LDJ specification
+\item \texttt{monotonic-logic.ttl}: Monotonic logic specification
+\item \texttt{linear-logic.ttl}: LL specification
+\end{itemize}
+
+\section{SHACL Validation}
+
+\subsection{Shapes Constraint Language (SHACL)}
+
+\textbf{SHACL} validates RDF graphs against constraints:
+\begin{itemize}
+\item Ensure logics have required properties (structural rules, sequent restrictions)
+\item Validate categorical axioms (composition, identity, commutativity)
+\item Enforce lattice order (morphisms respect structural containment)
+\end{itemize}
+
+\subsection{Example SHACL Constraint}
+
+\begin{lstlisting}[language=Turtle, caption=SHACL Constraint for Logic Class]
+@prefix catty: <https://owner.github.io/Catty/ontology#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+catty:LogicShape a sh:NodeShape ;
+    sh:targetClass catty:Logic ;
+    sh:property [
+        sh:path catty:hasStructuralRule ;
+        sh:minCount 0 ;
+        sh:maxCount 5 ;
+        sh:class catty:StructuralRule
+    ] ;
+    sh:property [
+        sh:path catty:hasSequentRestriction ;
+        sh:minCount 2 ;
+        sh:maxCount 2 ;
+        sh:class catty:SequentRestriction
+    ] .
+\end{lstlisting}
+
+\textbf{Interpretation}: Every logic must have 0--5 structural rules and exactly 2 sequent restrictions (LHS and RHS).
+
+\section{SPARQL Queries}
+
+\subsection{Example Queries}
+
+\textbf{Query 1: Find all quantum-safe logics}
+
+\begin{lstlisting}[language=SPARQL]
+PREFIX catty: <https://owner.github.io/Catty/ontology#>
+
+SELECT ?logic WHERE {
+    ?logic a catty:Logic .
+    FILTER NOT EXISTS { ?logic catty:hasStructuralRule catty:WeakeningLeft }
+    FILTER NOT EXISTS { ?logic catty:hasStructuralRule catty:WeakeningRight }
+    FILTER NOT EXISTS { ?logic catty:hasStructuralRule catty:ContractionLeft }
+    FILTER NOT EXISTS { ?logic catty:hasStructuralRule catty:ContractionRight }
+}
+\end{lstlisting}
+
+\textbf{Query 2: Find all morphisms from intuitionistic to classical logics}
+
+\begin{lstlisting}[language=SPARQL]
+PREFIX catty: <https://owner.github.io/Catty/ontology#>
+
+SELECT ?morphism ?source ?target WHERE {
+    ?morphism a catty:Morphism ;
+              catty:hasSource ?source ;
+              catty:hasTarget ?target .
+    ?source catty:hasSequentRestriction catty:RestrictedSuccedent .
+    ?target catty:hasSequentRestriction catty:UnrestrictedSuccedent .
+}
+\end{lstlisting}
+
+\section{Information Flow Architecture}
+
+\subsection{Processing Pipeline}
+
+\[ \text{RDF Specification} \to \text{Parser} \to \text{In-Memory Graph} \to \text{Validator} \to \text{Code Generator} \to \text{Executable Program} \]
+
+\textbf{Step 1: RDF Specification}
+\begin{itemize}
+\item Logic, theory, and witness specified in TTL files
+\item References to external ontologies (DBpedia, Wikidata)
+\end{itemize}
+
+\textbf{Step 2: Parser}
+\begin{itemize}
+\item RDFLib (Python) or Apache Jena (Java) parses TTL files
+\item Constructs in-memory RDF graph
+\end{itemize}
+
+\textbf{Step 3: Validator}
+\begin{itemize}
+\item SHACL validation ensures categorical axioms are satisfied
+\item Reports violations or confirms validity
+\end{itemize}
+
+\textbf{Step 4: Code Generator}
+\begin{itemize}
+\item Traverses RDF graph to extract logic-theory pairing
+\item Applies witness functor to generate executable code
+\item Outputs program in target language (Haskell, Rust, Q\#, etc.)
+\end{itemize}
+
+\textbf{Step 5: Executable Program}
+\begin{itemize}
+\item The witness: constructive implementation of the theory
+\item Can be software or hardware (circuit specification)
+\end{itemize}
+
+\subsection{Tool Ecosystem}
+
+\textbf{Python + RDFLib}:
+\begin{itemize}
+\item Rapid prototyping
+\item RDF parsing, SPARQL queries, SHACL validation
+\item Suitable for research and experimentation
+\end{itemize}
+
+\textbf{Java + Apache Jena}:
+\begin{itemize}
+\item Production-grade RDF processing
+\item SPARQL endpoints, reasoning, ontology manipulation
+\item Suitable for large-scale synthesis engine
+\end{itemize}
+
+\textbf{Hybrid Approach}:
+\begin{itemize}
+\item Prototype in Python (fast iteration)
+\item Deploy in Java (production robustness)
+\end{itemize}
+
+\section{DBpedia Alignment}
+
+\subsection{Strategy}
+
+\textbf{Grounding via Linked Data}:
+\begin{itemize}
+\item Link Catty concepts to DBpedia URIs using \texttt{owl:sameAs}, \texttt{skos:exactMatch}
+\item Leverage DBpedia's structured knowledge (extracted from Wikipedia)
+\item Validate definitions against established mathematical concepts
+\end{itemize}
+
+\subsection{Example Mappings}
+
+\begin{itemize}
+\item \texttt{catty:ClassicalLogic} $\to$ \texttt{dbr:Classical\_logic} (exact match)
+\item \texttt{catty:IntuitionisticLogic} $\to$ \texttt{dbr:Intuitionistic\_logic} (exact match)
+\item \texttt{catty:SequentCalculus} $\to$ \texttt{dbr:Sequent\_calculus} (exact match)
+\item \texttt{catty:StructuralRule} $\to$ \texttt{dbr:Structural\_rule} (exact match)
+\end{itemize}
+
+\subsection{Benefits}
+
+\begin{itemize}
+\item \textbf{Validation}: Ensures Catty definitions align with established mathematical concepts
+\item \textbf{Interoperability}: Catty ontologies can be integrated with other knowledge graphs
+\item \textbf{Discoverability}: Linked data enables discovery via semantic web search engines
+\end{itemize}
+
+\section{Deployment to GitHub Pages}
+
+\subsection{Publishing Ontologies}
+
+Ontologies are published to GitHub Pages for public access:
+\begin{itemize}
+\item \textbf{Base URI}: \texttt{https://owner.github.io/Catty/ontology/}
+\item \textbf{Content negotiation}: Serve TTL for RDF clients, HTML for browsers
+\item \textbf{Dereferenceable URIs}: All Catty concepts have resolvable URIs
+\end{itemize}
+
+\subsection{Web Interface}
+
+GitHub Pages provides:
+\begin{itemize}
+\item Landing page with project overview
+\item Download links for thesis PDF
+\item Ontology browser (optional: generated from RDF)
+\item SPARQL endpoint (optional: for advanced queries)
+\end{itemize}
+
+\section{Vacancies: Future Integration}
+
+The following are identified for future work:
+\begin{itemize}
+\item Full SPARQL endpoint for querying the Catty knowledge graph
+\item Interactive ontology browser (web-based visualization)
+\item Automated code generation from RDF specifications (witness functor implementation)
+\item Integration with external proof assistants (Isabelle, Coq, Lean)
+\item Reasoning engine for inferring new morphisms or validating categorical axioms
+\item Alignment with additional knowledge bases (MathWorld, Metamath, OpenMath)
+\end{itemize}

@@ -1,0 +1,164 @@
+\chapter{Introduction}
+
+\section{Motivation}
+
+The proliferation of formal logics---classical, intuitionistic, linear, relevance, and many others---demands a systematic framework for understanding their relationships. This white paper presents the \emph{logic-witness formalism}, a categorical approach grounded in sequent calculi and physical realizability.
+
+Our central thesis: \textbf{Formal logics form a two-dimensional lattice category}, where:
+\begin{itemize}
+\item The \textbf{horizontal dimension} captures antecedent/succedent restrictions (classical $\leftrightarrow$ intuitionistic $\leftrightarrow$ dual-intuitionistic $\leftrightarrow$ monotonic)
+\item The \textbf{vertical dimension} captures structural rule presence/absence (full structural $\leftrightarrow$ affine $\leftrightarrow$ relevant $\leftrightarrow$ linear $\leftrightarrow$ non-structural)
+\end{itemize}
+
+This structure is not merely organizational---it reflects deep connections between logical expressiveness, computational behavior, and physical constraints from quantum mechanics.
+
+\section{The Two-Dimensional Structure}
+
+\subsection{Horizontal Dimension: Sequent Restrictions}
+
+Consider a fixed set of structural rules. Within this configuration, logics differ by how sequents are restricted:
+
+\begin{center}
+\begin{tabular}{l|l|l}
+\textbf{Antecedent} & \textbf{Succedent} & \textbf{Logic} \\ \hline
+Unrestricted ($\Gamma$) & Unrestricted ($\Delta$) & Classical (LK) \\
+Unrestricted ($\Gamma$) & Restricted ($A$) & Intuitionistic (LJ) \\
+Restricted ($A$) & Unrestricted ($\Delta$) & Dual-Intuitionistic (LDJ) \\
+Restricted ($A$) & Restricted ($B$) & Monotonic
+\end{tabular}
+\end{center}
+
+These four logics form a \textbf{horizontal diamond}---a commutative diagram parametrized by the presence/absence of the Law of Excluded Middle (LEM) and Law of Non-Contradiction (LNC).
+
+\subsection{Vertical Dimension: Structural Rules}
+
+Across logical families, structural rules vary:
+\begin{itemize}
+\item \textbf{Exchange (E)}: Order of premises is irrelevant
+\item \textbf{Weakening (W)}: Premises can be added freely (corresponds to erasure in computation)
+\item \textbf{Contraction (C)}: Duplicate premises can be merged (corresponds to copying in computation)
+\end{itemize}
+
+Five binary parameters (E, $W_L$, $W_R$, $C_L$, $C_R$) yield $2^5 = 32$ theoretical combinations. Meaningful clusters form logical families:
+\begin{itemize}
+\item \textbf{Full structural}: E, W, C all present (classical logic family)
+\item \textbf{Affine}: E, W present; C absent (allows erasure, no cloning)
+\item \textbf{Relevant}: E, C present; W absent (allows cloning, no erasure)
+\item \textbf{Linear}: E present; W, C absent (quantum-safe core)
+\item \textbf{Non-structural}: E, W, C all absent (maximally resource-constrained)
+\end{itemize}
+
+\subsection{The Full Category}
+
+The complete structure is a \textbf{lattice of lattices}:
+\begin{itemize}
+\item Each horizontal plane represents a logical family's diamond
+\item Vertical arrows represent extension morphisms respecting structural containment
+\item Morphisms compose, forming a category with both 2D (horizontal) and 3D (vertical) commutative diagrams
+\end{itemize}
+
+\section{Physical Grounding}
+
+The categorical structure is not abstract formalism for its own sake---it is grounded in \textbf{physical realizability}:
+
+\begin{itemize}
+\item \textbf{No-cloning theorem} (Wootters \& Zurek, 1982): Quantum states cannot be copied $\Rightarrow$ logics without contraction (C=0) are quantum-realizable
+\item \textbf{No-erasure theorem} (Pati \& Braunstein, 2000): Quantum information cannot be destroyed $\Rightarrow$ logics without weakening (W=0) are quantum-safe
+\item \textbf{Non-structural logics}: Both C=0 and W=0 $\Rightarrow$ maximally quantum-safe
+\end{itemize}
+
+This connection is precise: structural rules in proof theory correspond directly to resource management constraints in computation and physical laws in quantum mechanics.
+
+\section{The Witness Formalism}
+
+Through the \textbf{Curry-Howard-Kleene-Lambek correspondence}, logic, types, proofs, and programs are deeply connected:
+\begin{center}
+\textbf{Logic} = \textbf{Type System} \\
+\textbf{Proof} = \textbf{Program} \\
+\textbf{Proof Composition} = \textbf{Program Composition}
+\end{center}
+
+We extend this with the \textbf{witness functor}:
+\[ W: (\text{Logic}, \text{Theory}) \to \text{ExecutableProgram} \]
+
+A logic-theory pairing does not merely specify behavior---it \emph{instantiates} as executable code or physical circuit. The witness is constructive: it \emph{is} what the theory claims.
+
+\section{Scope and Structure of This White Paper}
+
+\subsection{What This Paper Provides}
+
+\begin{enumerate}
+\item \textbf{Correct abstract structure}: The two-dimensional lattice category is fully specified
+\item \textbf{Logical signatures}: Formal characterization of what makes a logic categorizable
+\item \textbf{Theoretical signatures}: Meta-theorems governing relationships within the category
+\item \textbf{Physical grounding}: Precise connection between structural rules and quantum mechanics
+\item \textbf{Robinson arithmetic case study}: Instantiation across all canonical logics
+\item \textbf{Semantic web formalization}: RDF/OWL ontologies for machine-readable specifications
+\end{enumerate}
+
+\subsection{Identified Vacancies}
+
+This white paper focuses on establishing the correct categorical structure. The following are explicitly identified as future work:
+
+\begin{itemize}
+\item Formal proofs of all meta-theorems (statements are correct; proofs are deferred)
+\item Complete specification of all morphisms between logical families
+\item Detailed commutative diagrams for every horizontal diamond
+\item Full vertical hierarchy of all 32 structural rule combinations
+\item Natural transformations and categorical limits/colimits
+\item Decidability properties and their relationship to logical structure
+\item Mechanized verification in Isabelle/AFP (long-term goal)
+\end{itemize}
+
+These vacancies are intentional: the foundation is correct and complete at this stage; details follow incrementally.
+
+\subsection{Incremental Development Approach}
+
+This repository adopts an \textbf{issue-driven development model}:
+\begin{itemize}
+\item Each theorem, proof, or chapter extension is tracked as a GitHub issue
+\item No placeholders: sections are either substantive or explicitly marked as future work
+\item Contributions follow a clear workflow (see \texttt{CONTRIBUTING.md})
+\item Semantic web specifications are validated before merging
+\end{itemize}
+
+\section{Organization}
+
+\textbf{Part I: Metamathematical Formalism}
+\begin{itemize}
+\item Chapter 2: Logical Formalism and the Category of Categorizable Logics
+\item Chapter 3: Theoretical Formalism (Tarski-Mostowski-Robinson Framework)
+\item Chapter 4: Witness Formalism (Curry-Howard-Kleene-Lambek Correspondence)
+\end{itemize}
+
+\textbf{Part II: Technical Implementation}
+\begin{itemize}
+\item Chapter 5: Semantic Web Integration (RDF/OWL Specifications)
+\item Chapter 6: Technical Roadmap and Future Work
+\end{itemize}
+
+\textbf{Appendices}:
+\begin{itemize}
+\item Appendix A: External Ontologies and Vocabularies
+\item Appendix B: SPARQL Query Examples
+\item Appendix C: License and Attribution
+\end{itemize}
+
+\section{Prerequisites and Audience}
+
+This white paper assumes familiarity with:
+\begin{itemize}
+\item \textbf{Mathematical logic}: Sequent calculi, proof theory, model theory
+\item \textbf{Category theory}: Categories, functors, natural transformations, commutative diagrams
+\item \textbf{Type theory}: Curry-Howard correspondence, constructive logic
+\item \textbf{Semantic web}: RDF, OWL, ontologies (for implementation chapters)
+\end{itemize}
+
+The intended audience includes:
+\begin{itemize}
+\item Researchers in proof theory and formal logic
+\item Category theorists interested in applications to logic
+\item Programming language designers working on type systems
+\item Quantum computing researchers interested in quantum-safe logics
+\item Semantic web practitioners modeling formal knowledge
+\end{itemize}
