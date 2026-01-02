@@ -144,6 +144,54 @@ curl -I https://metavacua.github.io/CategoricalReasoner/ontology/
 
 Expected output: HTTP 200 OK or appropriate response.
 
+
+## Infrastructure Details
+
+### Automated Validation in CI/CD
+
+A GitHub Actions workflow (`.github/workflows/ontology-validation.yml`) runs on every push and pull request to:
+1. Validate all ontology URIs
+2. Check for multiple problematic patterns (not just catty.org)
+3. Validate RDF syntax
+4. Report untested files
+
+### Validation Scripts
+
+**`tools/test_ontology_uris.py`** - Comprehensive validation that:
+- Automatically discovers all ontology files (*.jsonld, *.ttl, *.rdf, *.owl, *.md)
+- Checks for multiple invalid URI patterns:
+  - `http://catty.org/ontology/`
+  - `https://owner.github.io/Catty/ontology#`
+  - Non-HTTPS ontology URIs
+  - Inconsistent @prefix declarations
+- Reports untested/untestable files
+- Provides detailed fix instructions
+
+**`tools/test_validate_uri.py`** - Quick validation for known files
+
+**`tools/test_apply_uri_fix.py`** - Automated fix application with:
+- Dry-run mode to preview changes
+- Support for multiple invalid URI patterns
+- Backup and rollback capabilities
+
+**`tools/test_run_uri_validation.sh`** - Complete validation workflow
+
+### How It Addresses the Review Concern
+
+The reviewer noted: "Some of the other ontologies have different but similar problematic code. Ideally, we want infrastructure so that when ontologies are changed or added they are made valid or at least we know when they are untested and untestable without alteration."
+
+This infrastructure addresses that by:
+
+1. **Automatic Discovery**: New ontology files are automatically found and validated
+2. **Multiple Pattern Detection**: Not limited to just `catty.org` - detects various problematic patterns
+3. **CI/CD Integration**: Every change triggers validation, preventing invalid URIs from being merged
+4. **Explicit Reporting**: Untested and untestable files are clearly identified in validation output
+5. **Automated Fixes**: Scripts can automatically correct known issues
+6. **Extensible**: Easy to add new validation rules and patterns
+
+### Adding New Validation Rules
+
+To add new URI patterns to check, edit `tools/test_ontology_uris.py`:
 ## Impact
 
 This fix is necessary for:
