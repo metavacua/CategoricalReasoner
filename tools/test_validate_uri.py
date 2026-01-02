@@ -11,8 +11,9 @@ https://github.com/metavacua/CategoricalReasoner/issues/8
 
 PROBLEM:
 --------
-All Catty ontology files currently use an invalid URI that points to a non-existent domain:
+All Catty ontology files currently use invalid URIs that point to non-existent domains:
     http://catty.org/ontology/
+    https://owner.github.io/Catty/ontology#
 
 SOLUTION:
 ---------
@@ -20,7 +21,7 @@ Update all ontology files to use the valid GitHub Pages URI:
     https://metavacua.github.io/CategoricalReasoner/ontology/
 
 This test will:
-1. Check all ontology files for the invalid URI
+1. Check all ontology files for invalid URIs
 2. Report which files need to be updated
 3. Provide exact line-by-line changes needed
 4. Offer automated fix commands
@@ -32,20 +33,33 @@ from pathlib import Path
 from typing import List, Tuple
 
 # URI configuration
-INVALID_URI = "http://catty.org/ontology/"
+INVALID_URIS = [
+    "http://catty.org/ontology/",
+    "https://owner.github.io/Catty/ontology#",
+    "http://owner.github.io/Catty/ontology#",
+]
 VALID_URI = "https://metavacua.github.io/CategoricalReasoner/ontology/"
 
-# Expected files to check
-ONTOLOGY_FILES = [
-    "ontology/catty-categorical-schema.jsonld",
-    "ontology/catty-complete-example.jsonld",
-    "ontology/curry-howard-categorical-model.jsonld",
-    "ontology/logics-as-objects.jsonld",
-    "ontology/morphism-catalog.jsonld",
-    "ontology/two-d-lattice-category.jsonld",
-    "ontology/catty-shapes.ttl",
-    "ontology/queries/sparql-examples.md",
-]
+# Ontology directory
+ONTOLOGY_DIR = Path("ontology")
+
+
+def find_all_ontology_files(repo_root: Path) -> List[Path]:
+    """Find all ontology files in the repository."""
+    ontology_dir = repo_root / ONTOLOGY_DIR
+    if not ontology_dir.exists():
+        return []
+
+    files = []
+    for pattern in ['*.jsonld', '*.ttl', '*.rdf', '*.owl']:
+        files.extend(ontology_dir.rglob(pattern))
+
+    # Also check markdown files in queries directory
+    queries_dir = ontology_dir / 'queries'
+    if queries_dir.exists():
+        files.extend(queries_dir.glob('*.md'))
+
+    return sorted(files)
 
 
 def check_file_uri(filepath: Path) -> Tuple[bool, str, List[str]]:
@@ -60,25 +74,38 @@ def check_file_uri(filepath: Path) -> Tuple[bool, str, List[str]]:
             content = f.read()
             lines = content.splitlines()
 
-        if INVALID_URI not in content:
+        # Check for any invalid URIs
+        has_invalid = False
+        for invalid_uri in INVALID_URIS:
+            if invalid_uri in content:
+                has_invalid = True
+                break
+
+        if not has_invalid:
             if VALID_URI in content:
                 return True, "✅ Uses correct URI", []
             else:
                 return True, "ℹ️  No catty URI found", []
 
-        # Find all lines with invalid URI
+        # Find all lines with invalid URIs
         invalid_lines = []
         for i, line in enumerate(lines, 1):
-            if INVALID_URI in line:
-                invalid_lines.append(f"Line {i}: {line.strip()}")
+            for invalid_uri in INVALID_URIS:
+                if invalid_uri in line:
+                    invalid_lines.append((i, line.strip(), invalid_uri))
+                    break  # Only report each line once
 
         fix_instructions = [
             f"Found {len(invalid_lines)} line(s) with invalid URI:",
-            *invalid_lines,
-            "",
-            "Replace with:",
-            *[line.replace(INVALID_URI, VALID_URI) for line in invalid_lines]
         ]
+        for line_num, line_text, invalid_uri in invalid_lines:
+            fix_instructions.append(f"Line {line_num}: {line_text}")
+
+        fix_instructions.append("")
+        fix_instructions.append("Replace with:")
+        for line_num, line_text, invalid_uri in invalid_lines:
+            fixed_line = line_text.replace(invalid_uri, VALID_URI)
+            fix_instructions.append(f"Line {line_num}: {fixed_line}")
 
         return False, f"❌ Uses invalid URI ({len(invalid_lines)} occurrence(s))", fix_instructions
 
@@ -97,29 +124,35 @@ def main():
     """Main test function."""
     print_section("Catty Ontology URI Validation Test - Issue #8")
 
-    print(f"Invalid URI:  {INVALID_URI}")
-    print(f"Valid URI:    {VALID_URI}")
+    print(f"Invalid URIs:")
+    for uri in INVALID_URIS:
+        print(f"  • {uri}")
+    print(f"\nValid URI:    {VALID_URI}")
 
     script_dir = Path(__file__).parent
     repo_root = script_dir.parent
 
     print_section("Checking Ontology Files", "-")
 
+    # Find all ontology files dynamically
+    ontology_files = find_all_ontology_files(repo_root)
+
+    if not ontology_files:
+        print("⚠️  No ontology files found!")
+        return 1
+
+    print(f"Found {len(ontology_files)} ontology file(s) to check\n")
+
     results = []
     files_to_fix = []
 
-    for file_path_str in ONTOLOGY_FILES:
-        filepath = repo_root / file_path_str
-
-        if not filepath.exists():
-            print(f"⚠️  {file_path_str}")
-            print(f"    File not found\n")
-            continue
+    for filepath in ontology_files:
+        rel_path = filepath.relative_to(repo_root)
 
         is_valid, message, fix_instructions = check_file_uri(filepath)
         results.append((filepath, is_valid, message))
 
-        print(f"{file_path_str}")
+        print(f"{rel_path}")
         print(f"    {message}")
 
         if not is_valid:
@@ -157,40 +190,17 @@ def main():
 
     print(f"\n\nMANUAL FIX:")
     print(f"{'=' * 80}")
-    print(f"\nIn each file, replace:")
-    print(f"  {INVALID_URI}")
-    print(f"with:")
+    print(f"\nIn each file, replace any of these invalid URIs:")
+    for uri in INVALID_URIS:
+        print(f"  • {uri}")
+    print(f"\nwith:")
     print(f"  {VALID_URI}")
-
-    print(f"\n\nAUTOMATED FIX (Unix/Linux/Mac):")
-    print(f"{'=' * 80}")
-    print(f"\nRun this command from the repository root:")
-    print(f"\n  find ontology/ -type f \\( -name '*.jsonld' -o -name '*.ttl' -o -name '*.md' \\) \\")
-    print(f"    -exec sed -i.bak 's|{INVALID_URI}|{VALID_URI}|g' {{}} +")
-    print(f"\n  # Remove backup files after verifying changes:")
-    print(f"  find ontology/ -name '*.bak' -delete")
 
     print(f"\n\nAUTOMATED FIX (Python script):")
     print(f"{'=' * 80}")
-    print(f"\nCreate and run this Python script:")
-    print(f"""
-```python
-#!/usr/bin/env python3
-from pathlib import Path
-
-OLD_URI = "{INVALID_URI}"
-NEW_URI = "{VALID_URI}"
-
-ontology_dir = Path("ontology")
-for filepath in ontology_dir.rglob("*"):
-    if filepath.suffix in ['.jsonld', '.ttl', '.md'] and filepath.is_file():
-        content = filepath.read_text()
-        if OLD_URI in content:
-            new_content = content.replace(OLD_URI, NEW_URI)
-            filepath.write_text(new_content)
-            print(f"Updated: {{filepath}}")
-```
-""")
+    print(f"\nRun the automated fix script:")
+    print(f"  python3 tools/test_apply_uri_fix.py --dry-run  # Preview changes")
+    print(f"  python3 tools/test_apply_uri_fix.py            # Apply changes")
 
     print(f"\n\nVERIFICATION:")
     print(f"{'=' * 80}")
@@ -199,11 +209,14 @@ for filepath in ontology_dir.rglob("*"):
 
     print(f"\n\nADDITIONAL VALIDATION:")
     print(f"{'=' * 80}")
-    print(f"\n1. Validate RDF syntax:")
+    print(f"\n1. Comprehensive URI validation:")
+    print(f"     python3 tools/test_ontology_uris.py")
+    print(f"\n2. Validate RDF syntax:")
     print(f"     python3 tools/validate-rdf.py --all")
-    print(f"\n2. Check for any remaining references:")
-    print(f"     grep -r '{INVALID_URI}' ontology/")
-    print(f"\n3. Verify GitHub Pages deployment:")
+    print(f"\n3. Check for any remaining references:")
+    for uri in INVALID_URIS:
+        print(f"     grep -r '{uri}' ontology/")
+    print(f"\n4. Verify GitHub Pages deployment:")
     print(f"     curl -I {VALID_URI}")
 
     print_section("", "-")
