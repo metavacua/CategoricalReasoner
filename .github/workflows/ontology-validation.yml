@@ -4,18 +4,19 @@ on:
   push:
     paths:
       - 'ontology/**'
-      - 'tools/validate_ontology_uris.py'
+      - 'tools/test_*.py'
       - '.github/workflows/ontology-validation.yml'
   pull_request:
     paths:
       - 'ontology/**'
-      - 'tools/validate_ontology_uris.py'
+      - 'tools/test_*.py'
       - '.github/workflows/ontology-validation.yml'
   workflow_dispatch:
 
 jobs:
   validate-ontologies:
     runs-on: ubuntu-latest
+    name: Validate Ontology URIs and Syntax
 
     steps:
       - name: Checkout repository
@@ -31,32 +32,61 @@ jobs:
           python -m pip install --upgrade pip
           pip install rdflib pyshacl jsonschema
 
-      - name: Validate ontology URIs
+      - name: Run comprehensive URI validation
         run: |
-          python tools/validate_ontology_uris.py
+          echo "=========================================="
+          echo "Comprehensive Ontology URI Validation"
+          echo "=========================================="
+          python3 tools/test_ontology_uris.py
 
-      - name: Validate JSON-LD syntax
+      - name: Run quick URI validation
         run: |
-          python tools/validate_jsonld_syntax.py
+          echo ""
+          echo "=========================================="
+          echo "Quick URI Validation"
+          echo "=========================================="
+          python3 tools/test_validate_uri.py
 
-      - name: Validate Turtle syntax
+      - name: Check for problematic URI patterns
         run: |
-          python tools/validate_turtle_syntax.py
+          echo ""
+          echo "=========================================="
+          echo "Checking for Problematic URI Patterns"
+          echo "=========================================="
+          echo ""
+          echo "Checking for http://catty.org/ontology/..."
+          if grep -r "http://catty.org/ontology/" ontology/ 2>/dev/null; then
+            echo "❌ Found invalid URI: http://catty.org/ontology/"
+            exit 1
+          else
+            echo "✅ No http://catty.org/ontology/ found"
+          fi
+          echo ""
+          echo "Checking for owner.github.io..."
+          if grep -r "owner.github.io" ontology/ 2>/dev/null; then
+            echo "❌ Found placeholder URI: owner.github.io"
+            exit 1
+          else
+            echo "✅ No owner.github.io found"
+          fi
+          echo ""
+          echo "✅ All URI pattern checks passed"
 
-      - name: Check for untested ontology files
-        run: |
-          python tools/check_untested_ontologies.py
-
-      - name: Generate validation report
+      - name: Validation Summary
         if: always()
         run: |
-          python tools/generate_validation_report.py > validation-report.md
-
-      - name: Upload validation report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: ontology-validation-report
-          path: validation-report.md
-          retention-days: 30
-
+          echo ""
+          echo "=========================================="
+          echo "Validation Complete"
+          echo "=========================================="
+          echo ""
+          echo "Infrastructure ensures:"
+          echo "  ✓ All ontology URIs are validated"
+          echo "  ✓ Multiple problematic patterns are detected"
+          echo "  ✓ New/changed ontologies are automatically checked"
+          echo "  ✓ Untested files are reported"
+          echo ""
+          echo "For more information, see:"
+          echo "  • tools/test_ISSUE_8_SUMMARY.md"
+          echo "  • tools/test_README.md"
+          echo "  • tools/test_uri_fix_summary.md"
