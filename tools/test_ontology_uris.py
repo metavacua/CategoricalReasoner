@@ -1,3 +1,4 @@
+# pylint: disable=redefined-outer-name, unused-argument
 #!/usr/bin/env python3
 """
 Comprehensive test and migration guide for Catty ontology URI fix.
