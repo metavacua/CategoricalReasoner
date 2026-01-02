@@ -117,6 +117,11 @@ Examples:
         '--dry-run',
         action='store_true',
         help='Show what would be changed without modifying files'
+    parser.add_argument(
+        '--yes', '-y',
+        action='store_true',
+        help='Skip confirmation prompt (useful for CI/CD)'
+    )
     )
     args = parser.parse_args()
 
