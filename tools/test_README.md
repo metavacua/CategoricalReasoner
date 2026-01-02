@@ -16,7 +16,7 @@ The validation infrastructure ensures that:
 
 #### `test_ontology_uris.py` (Primary Validation)
 Comprehensive validation script that:
-- Scans all ontology files (`.jsonld`, `.ttl`, `.rdf`, `.owl`, `.md`)
+- Scans all ontology files recursively (`.jsonld`, `.ttl`, `.rdf`, `.owl`, `.md`)
 - Detects multiple problematic URI patterns:
   - Invalid domains (catty.org, owner.github.io)
   - Non-HTTPS URIs
@@ -32,7 +32,7 @@ python3 tools/test_ontology_uris.py
 
 #### `test_validate_uri.py` (Focused Validation)
 Focused validation for the specific Issue #8 fix:
-- Checks known ontology files for the catty.org → GitHub Pages URI migration
+- Checks all ontology files dynamically for the catty.org → GitHub Pages URI migration
 - Provides detailed fix instructions
 - Offers automated fix commands
 
@@ -43,12 +43,17 @@ python3 tools/test_validate_uri.py
 
 #### `test_apply_uri_fix.py` (Automated Fix)
 Automated script to fix invalid URIs:
+- Discovers all ontology files dynamically
 - Replaces invalid URIs with valid GitHub Pages URIs
-- Creates backups before modification
+- Supports dry-run mode for preview
 - Validates changes after application
 
 **Usage:**
 ```bash
+# Preview changes
+python3 tools/test_apply_uri_fix.py --dry-run
+
+# Apply changes
 python3 tools/test_apply_uri_fix.py
 ```
 
@@ -92,9 +97,9 @@ The validation infrastructure is integrated into the CI/CD pipeline via `.github
 1. Checkout repository
 2. Set up Python environment
 3. Install dependencies (rdflib, pyshacl)
-4. Run URI validation
-5. Run RDF syntax validation
-6. Run SHACL validation (if shapes exist)
+4. Run comprehensive URI validation
+5. Run quick URI validation
+6. Check for problematic URI patterns
 7. Report results
 
 ### Status Checks
@@ -108,7 +113,8 @@ The validation infrastructure is integrated into the CI/CD pipeline via `.github
 # Check if your changes are valid
 python3 tools/test_ontology_uris.py
 
-# Apply automated fixes
+# Apply automated fixes (preview first)
+python3 tools/test_apply_uri_fix.py --dry-run
 python3 tools/test_apply_uri_fix.py
 
 # Verify fixes
@@ -125,17 +131,23 @@ The validation runs automatically on:
 ```bash
 # Add to .git/hooks/pre-commit
 #!/bin/bash
+python3 tools/test_ontology_uris.py
+if [ $? -ne 0 ]; then
+    echo "❌ Ontology URI validation failed"
+    echo "Run: python3 tools/test_apply_uri_fix.py"
+    exit 1
+fi
+```
 
-## Issue #8: Catty specific ontologies have invalidate URI
+## Issue #8: Catty specific ontologies have invalid URI
 
 ### Problem
 
-The Catty ontology files currently use an invalid URI:
-```
-http://catty.org/ontology/
-```
+The Catty ontology files currently use invalid URIs:
+- `http://catty.org/ontology/`
+- `https://owner.github.io/Catty/ontology#`
 
-This domain does not exist and the ontology cannot be resolved.
+These domains do not exist and the ontologies cannot be resolved.
 
 ### Solution
 
@@ -151,18 +163,17 @@ Run the validation test:
 python3 tools/test_ontology_uris.py
 ```
 
-This will check all ontology files and report which ones need to be updated.
+This will check all ontology files recursively and report which ones need to be updated.
 
 ### Files Affected
 
-1. `ontology/catty-categorical-schema.jsonld` (line 4)
-2. `ontology/catty-complete-example.jsonld` (line 4)
-3. `ontology/curry-howard-categorical-model.jsonld` (line 4)
-4. `ontology/logics-as-objects.jsonld` (line 4)
-5. `ontology/morphism-catalog.jsonld` (line 4)
-6. `ontology/two-d-lattice-category.jsonld` (line 4)
-7. `ontology/catty-shapes.ttl` (line 6)
-8. `ontology/queries/sparql-examples.md` (multiple lines)
+The scripts automatically discover all ontology files in:
+- `ontology/*.jsonld`
+- `ontology/*.ttl`
+- `ontology/*.rdf`
+- `ontology/*.owl`
+- `ontology/examples/*.ttl`
+- `ontology/queries/*.md`
 
 ### Detailed Instructions
 
@@ -170,3 +181,17 @@ See `test_uri_fix_summary.md` for:
 - Exact line-by-line changes needed
 - Automated fix commands
 - Verification steps
+
+## Dynamic File Discovery
+
+All validation scripts now use dynamic file discovery to:
+- Automatically find all ontology files recursively
+- Support new files without code changes
+- Handle files in subdirectories (e.g., `ontology/examples/`)
+- Ensure comprehensive coverage
+
+This means:
+- ✅ New ontology files are automatically validated
+- ✅ Files in subdirectories are included
+- ✅ No manual updates to file lists needed
+- ✅ Consistent validation across all scripts
