@@ -136,13 +136,15 @@ Examples:
     if args.dry_run:
         print("⚠️  DRY RUN MODE: No files will be modified\n")
     else:
-        print("⚠️  WARNING: This will modify files in place!")
-        print("   Make sure you have committed any changes first.\n")
-        response = input("Continue? [y/N]: ")
-        if response.lower() != 'y':
-            print("\nAborted.")
-            return 0
-        print()
+        if not args.yes:
+            print("⚠️  WARNING: This will modify files in place!")
+            print("   Make sure you have committed any changes first.\n")
+            response = input("Continue? [y/N]: ")
+            if response.lower() != 'y':
+                print("\nAborted.")
+                return 0
+            print()
+        else:
 
     script_dir = Path(__file__).parent
     repo_root = script_dir.parent
