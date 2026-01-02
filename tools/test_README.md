@@ -1,4 +1,3 @@
-# URI Validation Test for Catty Ontologies
 # Ontology URI Validation Infrastructure
 
 This directory contains the validation infrastructure for Catty ontology URIs, addressing Issue #8.
