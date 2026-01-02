@@ -25,6 +25,17 @@
 *.html
 site/
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+
 # OS / editor
 .DS_Store
 *.swp

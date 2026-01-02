@@ -39,8 +39,15 @@ This project is licensed under the **GNU Affero General Public License v3.0 (AGP
 │   └── queries/
 │       └── sparql-examples.md              # SPARQL query examples
 │
+├── .catty/                      # Operational model (task/artifact system)
+│   ├── operations.yaml          # Main operational model
+│   ├── phases.yaml              # Dependency graph
+│   ├── validation/              # Validation framework
+│   └── *.md                     # Documentation
+│
 ├── scripts/                     # Utility scripts
 ├── .github/workflows/           # CI/CD workflows
+├── OPERATIONS_MODEL.md          # Operational model overview
 └── README.md                    # This file
 ```
 
@@ -90,3 +97,19 @@ If this is the first deployment, ensure GitHub Pages is set to deploy from Actio
 **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 The workflow builds `main.pdf`, converts the expanded LaTeX source to `index.html` using Pandoc, and deploys the resulting site to GitHub Pages.
+
+## Operational Model
+
+This project includes a **formal operational model** that defines the complete task/artifact system. See `OPERATIONS_MODEL.md` for an overview, or explore `.catty/` directory for:
+
+- **Task specifications**: Unambiguous, executable instructions for creating all project artifacts
+- **Dependency graph**: Complete task sequencing and parallelization opportunities
+- **Validation framework**: Automated validation with SHACL shapes and testable acceptance criteria
+- **Comprehensive documentation**: README, quick start guide, task execution guide, dependency graphs
+
+**Quick validation:**
+```sh
+python .catty/validation/validate.py --artifact catty-categorical-schema
+```
+
+See `.catty/README.md` for complete documentation.
