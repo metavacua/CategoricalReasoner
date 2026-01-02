@@ -127,7 +127,7 @@ All packages are standard and included in modern LaTeX distributions.
 
 The PDF is automatically built and deployed to GitHub Pages via GitHub Actions. See `.github/workflows/deploy.yml` for the deployment workflow.
 
-**Public URL** (after deployment): `https://<owner>.github.io/Catty/`
+**Public URL** (after deployment): `https://metavacua.github.io/Catty/`
 
 ## License
 

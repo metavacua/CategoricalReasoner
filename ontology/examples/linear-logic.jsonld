@@ -1,0 +1,94 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "catty": "http://catty.org/ontology/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "dct": "http://purl.org/dc/terms/",
+    "dbr": "http://dbpedia.org/resource/",
+    "wd": "http://www.wikidata.org/entity/"
+  },
+  "@graph": [
+    {
+      "@id": "catty:LL",
+      "@type": ["catty:Logic", "owl:NamedIndividual"],
+      "rdfs:label": { "@language": "en", "@value": "Linear Logic (LL)" },
+      "rdfs:comment": { "@language": "en", "@value": "Girard's resource-sensitive logic. No weakening or contraction (W=0, C=0). Exchange present (E=1). Quantum-safe: embodies no-cloning and no-erasure theorems." },
+      "owl:sameAs": "wd:Q1149560",
+      "skos:exactMatch": "dbr:Linear_logic",
+      "dct:source": "https://ncatlab.org/nlab/show/linear+logic",
+      "dct:bibliographicCitation": "Girard, J.-Y. (1987). Linear Logic. Theoretical Computer Science 50(1): 1-102.",
+      "catty:hasStructuralRule": [
+        "catty:LHSExchange",
+        "catty:RHSExchange"
+      ],
+      "catty:hasSequentRestriction": [
+        "catty:UnrestrictedAntecedent",
+        "catty:UnrestrictedSuccedent"
+      ],
+      "catty:provesAxiom": ["catty:Axiom_LEM", "catty:Axiom_LNC"],
+      "catty:notProvableAxiom": "catty:Axiom_Explosion",
+      "catty:hasConnective": [
+        "catty:TensorProduct",
+        "catty:LinearImplication",
+        "catty:ParallelComposition",
+        "catty:AdditiveConjunction",
+        "catty:AdditiveDisjunction",
+        "catty:LinearNegation",
+        "catty:ExponentialOfCourse",
+        "catty:ExponentialWhyNot"
+      ],
+      "catty:inFamily": "catty:LinearFamily",
+      "catty:horizontalPosition": "catty:TopOfDiamond",
+      "catty:verticalPosition": "catty:LinearLayer",
+      "catty:extendedByLogic": ["catty:AffineLogic", "catty:RelevantLogic"],
+      "catty:isQuantumSafe": true,
+      "catty:allowsCloning": false,
+      "catty:allowsErasure": false,
+      "catty:quantumCorrespondence": { "@language": "en", "@value": "No-cloning theorem (Wootters & Zurek, 1982); No-erasure theorem (Pati & Braunstein, 2000)" },
+      "catty:computationalInterpretation": { "@language": "en", "@value": "Resource-sensitive computation; single-use values" },
+      "catty:curryHowardCorrespondence": { "@language": "en", "@value": "Linear types; session types" },
+      "catty:hardwareTarget": { "@language": "en", "@value": "Quantum circuits; resource-constrained systems" }
+    },
+    {
+      "@id": "catty:LinearFamily",
+      "@type": "catty:LogicalFamily",
+      "rdfs:label": { "@language": "en", "@value": "Linear Family" },
+      "rdfs:comment": { "@language": "en", "@value": "Logics with Exchange but without Weakening or Contraction: E=1, W=0, C=0" },
+      "catty:hasStructuralConfiguration": "E=1, W_L=0, W_R=0, C_L=0, C_R=0"
+    },
+    {
+      "@id": "catty:TensorProduct",
+      "@type": "catty:LogicalConnective",
+      "rdfs:label": { "@language": "en", "@value": "Tensor Product (⊗)" },
+      "rdfs:comment": { "@language": "en", "@value": "Multiplicative conjunction in linear logic" }
+    },
+    {
+      "@id": "catty:LinearImplication",
+      "@type": "catty:LogicalConnective",
+      "rdfs:label": { "@language": "en", "@value": "Linear Implication (⊸)" },
+      "rdfs:comment": { "@language": "en", "@value": "A ⊸ B consumes A to produce B" }
+    },
+    {
+      "@id": "catty:LinearNegation",
+      "@type": "catty:LogicalConnective",
+      "rdfs:label": { "@language": "en", "@value": "Linear Negation (⊥)" },
+      "rdfs:comment": { "@language": "en", "@value": "Involutive negation in linear logic" }
+    },
+    {
+      "@id": "catty:ExponentialOfCourse",
+      "@type": "catty:LogicalConnective",
+      "rdfs:label": { "@language": "en", "@value": "Exponential ! (Of Course)" },
+      "rdfs:comment": { "@language": "en", "@value": "Allows contraction locally; !A can be used multiple times" }
+    },
+    {
+      "@id": "catty:ExponentialWhyNot",
+      "@type": "catty:LogicalConnective",
+      "rdfs:label": { "@language": "en", "@value": "Exponential ? (Why Not)" },
+      "rdfs:comment": { "@language": "en", "@value": "Allows weakening locally; ?A can be discarded" }
+    }
+  ]
+}

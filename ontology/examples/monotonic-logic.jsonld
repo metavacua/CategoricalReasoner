@@ -1,0 +1,53 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "catty": "http://catty.org/ontology/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "dct": "http://purl.org/dc/terms/",
+    "dbr": "http://dbpedia.org/resource/",
+    "wd": "http://www.wikidata.org/entity/"
+  },
+  "@graph": [
+    {
+      "@id": "catty:MonotonicLogic",
+      "@type": ["catty:Logic", "owl:NamedIndividual"],
+      "rdfs:label": { "@language": "en", "@value": "Monotonic Logic" },
+      "rdfs:comment": { "@language": "en", "@value": "Both antecedent and succedent restricted: A ⊢ B. Formal intersection of LJ and LDJ. No negation or implication (structurally inexpressible). Only positive lattice operations." },
+      "skos:related": ["dbr:Lattice_(order)", "wd:Q715439"],
+      "dct:source": "https://ncatlab.org/nlab/show/partial+order",
+      "catty:hasStructuralRule": [
+        "catty:LHSExchange",
+        "catty:RHSExchange",
+        "catty:LHSWeakening",
+        "catty:RHSWeakening",
+        "catty:LHSContraction",
+        "catty:RHSContraction"
+      ],
+      "catty:hasSequentRestriction": [
+        "catty:RestrictedAntecedent",
+        "catty:RestrictedSuccedent"
+      ],
+      "catty:notProvableAxiom": ["catty:Axiom_LEM", "catty:Axiom_LNC"],
+      "catty:provesAxiom": "catty:Axiom_Explosion",
+      "catty:hasConnective": [
+        "catty:Conjunction",
+        "catty:Disjunction",
+        "catty:Bottom",
+        "catty:Top"
+      ],
+      "catty:inFamily": "catty:FullStructuralFamily",
+      "catty:horizontalPosition": "catty:BottomOfDiamond",
+      "catty:verticalPosition": "catty:FullStructuralLayer",
+      "catty:extendedByLogic": ["catty:LJ", "catty:LDJ"],
+      "catty:isQuantumSafe": false,
+      "catty:allowsCloning": true,
+      "catty:allowsErasure": true,
+      "catty:computationalInterpretation": { "@language": "en", "@value": "Monotone functions over partially ordered types; lattice operations only" },
+      "catty:curryHowardCorrespondence": { "@language": "en", "@value": "Order-theoretic types; monotone maps" }
+    }
+  ]
+}

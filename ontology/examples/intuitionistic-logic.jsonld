@@ -1,0 +1,62 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "catty": "http://catty.org/ontology/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "dct": "http://purl.org/dc/terms/",
+    "dbr": "http://dbpedia.org/resource/",
+    "wd": "http://www.wikidata.org/entity/"
+  },
+  "@graph": [
+    {
+      "@id": "catty:LJ",
+      "@type": ["catty:Logic", "owl:NamedIndividual"],
+      "rdfs:label": { "@language": "en", "@value": "Intuitionistic Logic (LJ)" },
+      "rdfs:comment": { "@language": "en", "@value": "Gentzen's sequent calculus for intuitionistic logic. Restricted succedent: Γ ⊢ A (single conclusion). Constructive proofs." },
+      "owl:sameAs": "wd:Q179899",
+      "skos:exactMatch": "dbr:Intuitionistic_logic",
+      "dct:source": "https://ncatlab.org/nlab/show/intuitionistic+logic",
+      "dct:bibliographicCitation": "Gentzen, G. (1935); Heyting, A. (1930)",
+      "catty:hasStructuralRule": [
+        "catty:LHSExchange",
+        "catty:RHSExchange",
+        "catty:LHSWeakening",
+        "catty:LHSContraction"
+      ],
+      "catty:hasSequentRestriction": [
+        "catty:UnrestrictedAntecedent",
+        "catty:RestrictedSuccedent"
+      ],
+      "catty:provesAxiom": [
+        "catty:Axiom_LNC",
+        "catty:Axiom_Explosion"
+      ],
+      "catty:notProvableAxiom": [
+        "catty:Axiom_LEM",
+        "catty:Axiom_DNE"
+      ],
+      "catty:hasConnective": [
+        "catty:Conjunction",
+        "catty:Disjunction",
+        "catty:Negation",
+        "catty:Implication",
+        "catty:Bottom",
+        "catty:Top"
+      ],
+      "catty:inFamily": "catty:FullStructuralFamily",
+      "catty:horizontalPosition": "catty:LeftOfDiamond",
+      "catty:verticalPosition": "catty:FullStructuralLayer",
+      "catty:extendsLogic": "catty:MonotonicLogic",
+      "catty:extendedByLogic": "catty:LK",
+      "catty:isQuantumSafe": false,
+      "catty:allowsCloning": true,
+      "catty:allowsErasure": true,
+      "catty:computationalInterpretation": { "@language": "en", "@value": "Constructive computation; explicit witnesses required for existentials" },
+      "catty:curryHowardCorrespondence": { "@language": "en", "@value": "Simply typed lambda calculus; dependent types" }
+    }
+  ]
+}

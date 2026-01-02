@@ -4,7 +4,7 @@
 
 Catty presents a rigorous metamathematical framework for modeling formal logics as objects in a **two-dimensional lattice category**. This categorical structure connects proof theory, quantum mechanics, and computational semantics through the witness functor.
 
-**Deployed Documentation**: https://<owner>.github.io/Catty/
+**Deployed Documentation**: https://metavacua.github.io/Catty/
 
 ## Overview
 

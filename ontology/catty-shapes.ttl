@@ -22,6 +22,18 @@ catty:LogicShape a sh:NodeShape ;
         sh:class catty:StructuralRule ;
         sh:message "Each Logic can have structural rules" ;
     ] ;
+    sh:property [
+        sh:path catty:hasSequentRestriction ;
+        sh:class catty:SequentRestriction ;
+        sh:minCount 2 ;
+        sh:maxCount 2 ;
+        sh:message "Each Logic must have exactly two sequent restrictions (LHS and RHS)" ;
+    ] ;
+    sh:property [
+        sh:path catty:isQuantumSafe ;
+        sh:datatype xsd:boolean ;
+        sh:maxCount 1 ;
+    ] ;
     sh:message "Invalid Logic" .
 
 # Shape: LogicalTheory

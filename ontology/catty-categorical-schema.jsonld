@@ -287,6 +287,159 @@
       "rdfs:range": "catty:StructuralRule"
     },
     {
+      "@id": "catty:hasSequentRestriction",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "has sequent restriction",
+      "rdfs:comment": "A restriction on the form of sequents in the logic",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "catty:SequentRestriction"
+    },
+    {
+      "@id": "catty:SequentRestriction",
+      "@type": "owl:Class",
+      "rdfs:label": "Sequent Restriction",
+      "rdfs:comment": "A specific restriction on antecedents or succedents"
+    },
+    {
+      "@id": "catty:provesAxiom",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "proves axiom",
+      "rdfs:comment": "A logical axiom that is provable in the logic",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "catty:LogicalAxiom"
+    },
+    {
+      "@id": "catty:notProvableAxiom",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "not provable axiom",
+      "rdfs:comment": "A logical axiom that is not provable in the logic",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "catty:LogicalAxiom"
+    },
+    {
+      "@id": "catty:hasConnective",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "has connective",
+      "rdfs:comment": "A logical connective available in the logic",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "catty:LogicalConnective"
+    },
+    {
+      "@id": "catty:LogicalConnective",
+      "@type": "owl:Class",
+      "rdfs:label": "Logical Connective",
+      "rdfs:comment": "A connective (operator) in a formal logic"
+    },
+    {
+      "@id": "catty:inFamily",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "in family",
+      "rdfs:comment": "The logical family to which this logic belongs",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "catty:LogicalFamily"
+    },
+    {
+      "@id": "catty:LogicalFamily",
+      "@type": "owl:Class",
+      "rdfs:label": "Logical Family",
+      "rdfs:comment": "A family of logics sharing structural characteristics"
+    },
+    {
+      "@id": "catty:hasStructuralConfiguration",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:label": "has structural configuration",
+      "rdfs:comment": "String representation of structural rule settings (E, W, C)",
+      "rdfs:domain": "catty:LogicalFamily",
+      "rdfs:range": "xsd:string"
+    },
+    {
+      "@id": "catty:horizontalPosition",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "horizontal position",
+      "rdfs:comment": "Position of the logic in the horizontal dimension of the lattice",
+      "rdfs:domain": "catty:Logic"
+    },
+    {
+      "@id": "catty:verticalPosition",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "vertical position",
+      "rdfs:comment": "Position of the logic in the vertical dimension of the lattice",
+      "rdfs:domain": "catty:Logic"
+    },
+    {
+      "@id": "catty:isQuantumSafe",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:label": "is quantum safe",
+      "rdfs:comment": "Whether the logic is safe for quantum computation (no-cloning/no-erasure)",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "xsd:boolean"
+    },
+    {
+      "@id": "catty:allowsCloning",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:label": "allows cloning",
+      "rdfs:comment": "Whether the logic allows cloning of resources (contraction)",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "xsd:boolean"
+    },
+    {
+      "@id": "catty:allowsErasure",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:label": "allows erasure",
+      "rdfs:comment": "Whether the logic allows erasure of resources (weakening)",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "xsd:boolean"
+    },
+    {
+      "@id": "catty:extendsLogic",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "extends logic",
+      "rdfs:comment": "The logic that this logic extends",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "catty:Logic",
+      "owl:inverseOf": "catty:extendedByLogic"
+    },
+    {
+      "@id": "catty:extendedByLogic",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "extended by logic",
+      "rdfs:comment": "The logic that extends this logic",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "catty:Logic"
+    },
+    {
+      "@id": "catty:computationalInterpretation",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:label": "computational interpretation",
+      "rdfs:comment": "Description of the logic's interpretation in terms of computation",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "xsd:string"
+    },
+    {
+      "@id": "catty:curryHowardCorrespondence",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:label": "Curry-Howard correspondence",
+      "rdfs:comment": "Description of the Curry-Howard mapping for this logic",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "xsd:string"
+    },
+    {
+      "@id": "catty:quantumCorrespondence",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:label": "quantum correspondence",
+      "rdfs:comment": "Description of the logic's relationship to quantum principles",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "xsd:string"
+    },
+    {
+      "@id": "catty:hardwareTarget",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:label": "hardware target",
+      "rdfs:comment": "Suggested hardware implementation for the logic",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "xsd:string"
+    },
+    {
       "@id": "catty:StructuralRule",
       "@type": "owl:Class",
       "rdfs:label": "Structural Rule",

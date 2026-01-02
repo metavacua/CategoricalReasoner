@@ -100,14 +100,14 @@ This document catalogs existing ontologies and vocabularies relevant to Catty's 
 ## Domain-Specific Resources
 
 ### 12. Proof and Program Ontology
-- **URI**: Custom (to be published at `https://<owner>.github.io/Catty/ontology/`)
+- **URI**: Custom (to be published at `https://metavacua.github.io/Catty/ontology/`)
 - **License**: AGPL-3.0
 - **Coverage**: Curry-Howard correspondence, witness formalism
 - **Status**: Original contribution extending external resources
 - **Usage**: Core Catty ontology
 
 ### 13. Logical Formalism Ontology
-- **URI**: Custom (to be published at `https://<owner>.github.io/Catty/ontology/`)
+- **URI**: Custom (to be published at `https://metavacua.github.io/Catty/ontology/`)
 - **License**: AGPL-3.0
 - **Coverage**: Two-dimensional lattice category, structural rules, sequent restrictions
 - **Status**: Original contribution
@@ -118,7 +118,7 @@ This document catalogs existing ontologies and vocabularies relevant to Catty's 
 ### Namespace Prefixes
 
 ```turtle
-@prefix catty: <https://<owner>.github.io/Catty/ontology#> .
+@prefix catty: <https://metavacua.github.io/Catty/ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
