@@ -1,5 +1,23 @@
 # Issue #8: Catty Specific Ontologies Have Invalid URI
 
+## Response to Review Comment
+
+**Reviewer's Concern:** "Some of the other ontologies have different but similar problematic code. Ideally, we want infrastructure so that when ontologies are changed or added they are made valid or at least we know when they are untested and untestable without alteration."
+
+**Infrastructure Solution:**
+
+This PR addresses the infrastructure concern by:
+
+1. **CI/CD Integration**: Added `.github/workflows/ontology-validation.yml` that runs on every push and PR to validate all ontology URIs
+2. **Comprehensive Validation**: The validation scripts check for:
+   - Invalid/non-dereferenceable URIs (e.g., `http://catty.org/ontology/`, `https://owner.github.io/Catty/ontology#`)
+   - Missing or malformed @context in JSON-LD files
+   - Inconsistent URI patterns across files
+   - RDF syntax validation
+3. **Automated Detection**: New ontologies or changes trigger automatic validation, ensuring no invalid URIs are introduced
+4. **Clear Reporting**: Test failures provide specific line numbers and fix instructions
+5. **Documentation**: Comprehensive guides for maintaining valid ontologies
+
 ## Summary
 
 All Catty ontology files currently use an invalid URI that points to a non-existent domain. This needs to be fixed to use the valid GitHub Pages URL.
