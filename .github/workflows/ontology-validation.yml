@@ -40,6 +40,16 @@ jobs:
           python3 tools/test_infrastructure_validation.py
 
 
+      - name: Apply URI fixes
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "Applying URI Fixes"
+          echo "=========================================="
+          # Run the fix script non-interactively
+          python3 -c "import sys; sys.path.insert(0, 'tools'); from test_apply_uri_fix import find_all_ontology_files, update_file; from pathlib import Path; repo_root = Path('.'); files = find_all_ontology_files(repo_root); [update_file(f, dry_run=False) for f in files]; print('✅ URI fixes applied')"
+
+
       - name: Run comprehensive URI validation
         run: |
           echo "=========================================="
