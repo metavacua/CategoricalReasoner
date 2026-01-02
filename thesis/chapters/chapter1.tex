@@ -1,0 +1,54 @@
+\chapter{Prelude: Motivation and Scope}
+
+This document serves as a prelude to the formal work presented in \textbf{Chapter 2: Logical Formalism}. It establishes the motivation for adopting sequent calculi as the canonical presentation for categorizable formal logics and outlines the scope of the theoretical formalism that follows.
+
+\section{Motivation}
+
+The proliferation of formal logics---classical, intuitionistic, linear, substructural, and many others---demands a unified framework for understanding their relationships. Traditional comparisons often focus on extension (does logic $A$ prove theorem $T$?) or conservativity. However, these approaches fail to capture the structural nuances that distinguish logics.
+
+The \textbf{logic-witness formalism} addresses this by introducing a two-dimensional lattice structure where:
+
+\begin{enumerate}
+    \item \textbf{Horizontal Dimension}: Variations in sequent form (antecedent/succedent restrictions), distinguishing classical, intuitionistic, dual-intuitionistic, and monotonic logics.
+    \item \textbf{Vertical Dimension}: Variations in structural rule presence (exchange, weakening, contraction), distinguishing full structural, affine, relevant, linear, and non-structural logics.
+\end{enumerate}
+
+This categorical approach is not merely organizational; it reflects deep connections between logical expressiveness, computational behavior (via Curry-Howard), and physical constraints (via quantum realizability).
+
+\section{Scope}
+
+This work focuses specifically on \textbf{categorizable logics} that admit a formal specification in terms of:
+\begin{itemize}
+    \item Structural rule configurations (exchange, weakening, contraction)
+    \item Sequent form restrictions (restricted antecedent, restricted succedent)
+    \item Logical connectives (determined by the above restrictions)
+\end{itemize}
+
+We exclude higher-order logic from the initial scope, focusing on propositional and first-order fragments that align with the two-dimensional lattice model. This restriction allows for a rigorous treatment of the categorical relationships without the complexities of quantifier alternation.
+
+\section{From Logic to Computation}
+
+A central contribution of this work is the \textbf{witness functor}, a map from pairs $(\text{Logic}, \text{Theory})$ to executable programs or physical circuits. This extends the Curry-Howard-Kleene-Lambek correspondence by providing a constructive synthesis path for theories formulated in different logics.
+
+By formalizing the logic-theory pairings in a category-theoretic framework, we enable:
+\begin{enumerate}
+    \item Machine-checkable specifications of logical theories
+    \item Automated translation between logic variants (e.g., classical to intuitionistic)
+    \item Proof-carrying code generation
+    \item Hardware synthesis with physical realizability guarantees
+\end{enumerate}
+
+\section{From Computation to Physics}
+
+The vertical dimension of the lattice (structural rule presence/absence) has direct physical interpretations:
+\begin{itemize}
+    \item \textbf{Weakening (Erasure)}: The ability to discard information.
+    \item \textbf{Contraction (Cloning)}: The ability to duplicate information.
+    \item \textbf{Exchange}: The ability to reorder information.
+\end{itemize}
+
+In quantum mechanics, the no-cloning and no-erasure theorems are fundamental constraints. Logics that lack weakening and contraction (Linear Logic) are naturally compatible with these quantum symmetries. Thus, the lattice structure provides a systematic classification of logics based on their physical realizability.
+
+\section{Conclusion}
+
+The categorical framework presented in Chapter 2 and developed in subsequent chapters provides a comprehensive foundation for the logic-witness formalism. This prelude establishes the necessary context and motivation for the formal constructions that follow.
