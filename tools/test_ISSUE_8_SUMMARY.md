@@ -73,6 +73,21 @@ The validation scripts automatically discover all ontology files that need to be
 **Change required:**
 Replace all occurrences of `http://catty.org/ontology/` with `https://metavacua.github.io/CategoricalReasoner/ontology/`
 
+### Example Files (line 1 in each)
+9. `ontology/examples/classical-logic.ttl`
+10. `ontology/examples/dual-intuitionistic-logic.ttl`
+11. `ontology/examples/intuitionistic-logic.ttl`
+12. `ontology/examples/linear-logic.ttl`
+13. `ontology/examples/monotonic-logic.ttl`
+
+**Change required:**
+```diff
+- @prefix catty: <https://owner.github.io/Catty/ontology#> .
++ @prefix catty: <https://metavacua.github.io/CategoricalReasoner/ontology/> .
+```
+
+**Note:** The validation scripts automatically discover all ontology files recursively, including those in subdirectories like `ontology/examples/`.
+
 ## How to Apply the Fix
 
 ### Option 1: Manual Fix
