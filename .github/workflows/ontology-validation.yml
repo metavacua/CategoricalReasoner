@@ -1,0 +1,62 @@
+name: Ontology Validation
+
+on:
+  push:
+    paths:
+      - 'ontology/**'
+      - 'tools/validate_ontology_uris.py'
+      - '.github/workflows/ontology-validation.yml'
+  pull_request:
+    paths:
+      - 'ontology/**'
+      - 'tools/validate_ontology_uris.py'
+      - '.github/workflows/ontology-validation.yml'
+  workflow_dispatch:
+
+jobs:
+  validate-ontologies:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install rdflib pyshacl jsonschema
+
+      - name: Validate ontology URIs
+        run: |
+          python tools/validate_ontology_uris.py
+
+      - name: Validate JSON-LD syntax
+        run: |
+          python tools/validate_jsonld_syntax.py
+
+      - name: Validate Turtle syntax
+        run: |
+          python tools/validate_turtle_syntax.py
+
+      - name: Check for untested ontology files
+        run: |
+          python tools/check_untested_ontologies.py
+
+      - name: Generate validation report
+        if: always()
+        run: |
+          python tools/generate_validation_report.py > validation-report.md
+
+      - name: Upload validation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ontology-validation-report
+          path: validation-report.md
+          retention-days: 30
+
