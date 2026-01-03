@@ -3,8 +3,9 @@ import sys
 import time
 try:
     from rdflib import Graph
+    import owlrl
 except ImportError:
-    print("rdflib not found. Please install it with 'pip install rdflib'")
+    print("rdflib or owlrl not found. Please install them with 'pip install rdflib owlrl'")
     sys.exit(1)
 
 def run_benchmarks():
@@ -17,7 +18,9 @@ def run_benchmarks():
         elif filename.endswith(".ttl"):
             g.parse(os.path.join(ontology_dir, filename), format="turtle")
     
-    print(f"Loaded {len(g)} triples.")
+    print(f"Loaded {len(g)} triples. Expanding with RDFS...")
+    owlrl.DeductiveClosure(owlrl.RDFS_Semantics).expand(g)
+    print(f"After expansion: {len(g)} triples.")
 
     query_dir = "benchmarks/queries"
     results_dir = "results"

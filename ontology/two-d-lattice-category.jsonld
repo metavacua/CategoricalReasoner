@@ -8,7 +8,11 @@
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "dct": "http://purl.org/dc/terms/",
     "prov": "http://www.w3.org/ns/prov#",
-    "math": "http://www.w3.org/2000/10/swap/math#"
+    "math": "http://www.w3.org/2000/10/swap/math#",
+    "catty:logic": { "@type": "@id" },
+    "rdfs:subClassOf": { "@type": "@id" },
+    "rdfs:domain": { "@type": "@id" },
+    "rdfs:range": { "@type": "@id" }
   },
   "@graph": [
     {

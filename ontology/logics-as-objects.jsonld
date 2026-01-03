@@ -9,32 +9,38 @@
     "dct": "http://purl.org/dc/terms/",
     "prov": "http://www.w3.org/ns/prov#",
     "dbo": "http://dbpedia.org/ontology/",
-    "wd": "http://www.wikidata.org/entity/"
+    "wd": "http://www.wikidata.org/entity/",
+    "hasLogicalSignature": { "@id": "catty:hasLogicalSignature", "@type": "@id" },
+    "hasLogicalAxiom": { "@id": "catty:hasLogicalAxiom", "@type": "@id" },
+    "hasStructuralRule": { "@id": "catty:hasStructuralRule", "@type": "@id" },
+    "hasSequentForm": { "@id": "catty:hasSequentForm", "@type": "@id" }
   },
   "@graph": [
+    {
+      "@id": "catty:StandardSignature",
+      "@type": "catty:LogicalSignature",
+      "rdfs:comment": "Standard signature with common logical connectives (∧, ∨, ⊤, ⊥, ¬, ⊢)"
+    },
     {
       "@id": "catty:LM",
       "@type": "catty:Logic",
       "rdfs:label": "LM (Minimal Base)",
       "rdfs:comment": "Minimal common sublogic for LJ and LDJ. No negation, no explosion, no LEM, no LNC.",
-      "catty:hasLogicalSignature": {
-        "@id": "catty:LM_Signature",
-        "@type": "catty:LogicalSignature",
-        "rdfs:comment": "Signature containing ∧, ∨, ⊤, ⊥"
-      }
+      "hasLogicalSignature": "catty:StandardSignature"
     },
     {
       "@id": "catty:LJ",
       "@type": "catty:Logic",
       "rdfs:label": "LJ (Intuitionistic Logic)",
       "rdfs:comment": "Extends LM with LNC and Explosion. Single-conclusion sequents (RHS restriction).",
-      "catty:hasSequentForm": "catty:SingleConclusionSequent",
-      "catty:hasStructuralRule": [
+      "hasSequentForm": "catty:SingleConclusionSequent",
+      "hasLogicalSignature": "catty:StandardSignature",
+      "hasStructuralRule": [
         "catty:LHSWeakening", "catty:RHSWeakening",
         "catty:LHSContraction", "catty:RHSContraction",
         "catty:LHSExchange", "catty:RHSExchange"
       ],
-      "catty:hasLogicalAxiom": ["catty:Axiom_LNC", "catty:Axiom_Explosion"],
+      "hasLogicalAxiom": ["catty:Axiom_LNC", "catty:Axiom_Explosion"],
       "owl:sameAs": "wd:Q7680564"
     },
     {
@@ -42,26 +48,28 @@
       "@type": "catty:Logic",
       "rdfs:label": "LDJ (Dual Intuitionistic Logic)",
       "rdfs:comment": "Extends LM with LEM. Single-antecedent sequents (LHS restriction).",
-      "catty:hasSequentForm": "catty:SingleAntecedentSequent",
-      "catty:hasStructuralRule": [
+      "hasSequentForm": "catty:SingleAntecedentSequent",
+      "hasLogicalSignature": "catty:StandardSignature",
+      "hasStructuralRule": [
         "catty:LHSWeakening", "catty:RHSWeakening",
         "catty:LHSContraction", "catty:RHSContraction",
         "catty:LHSExchange", "catty:RHSExchange"
       ],
-      "catty:hasLogicalAxiom": "catty:Axiom_LEM"
+      "hasLogicalAxiom": "catty:Axiom_LEM"
     },
     {
       "@id": "catty:LK",
       "@type": "catty:Logic",
       "rdfs:label": "LK (Classical Logic)",
       "rdfs:comment": "The terminal logic. Validates LEM, LNC, Explosion, and DNE. Full structural rules.",
-      "catty:hasSequentForm": "catty:MultiConclusionSequent",
-      "catty:hasStructuralRule": [
+      "hasSequentForm": "catty:MultiConclusionSequent",
+      "hasLogicalSignature": "catty:StandardSignature",
+      "hasStructuralRule": [
         "catty:LHSWeakening", "catty:RHSWeakening",
         "catty:LHSContraction", "catty:RHSContraction",
         "catty:LHSExchange", "catty:RHSExchange"
       ],
-      "catty:hasLogicalAxiom": ["catty:Axiom_LEM", "catty:Axiom_LNC", "catty:Axiom_Explosion", "catty:Axiom_DNE"],
+      "hasLogicalAxiom": ["catty:Axiom_LEM", "catty:Axiom_LNC", "catty:Axiom_Explosion", "catty:Axiom_DNE"],
       "owl:sameAs": "wd:Q3525872"
     },
     {
@@ -69,8 +77,9 @@
       "@type": "catty:Logic",
       "rdfs:label": "LL (Linear Logic)",
       "rdfs:comment": "Substructural logic without weakening or contraction. Resource-sensitive.",
-      "catty:hasSequentForm": "catty:MultiConclusionSequent",
-      "catty:hasStructuralRule": ["catty:LHSExchange", "catty:RHSExchange"],
+      "hasSequentForm": "catty:MultiConclusionSequent",
+      "hasLogicalSignature": "catty:StandardSignature",
+      "hasStructuralRule": ["catty:LHSExchange", "catty:RHSExchange"],
       "owl:sameAs": "wd:Q847878"
     },
     {
@@ -78,7 +87,8 @@
       "@type": "catty:Logic",
       "rdfs:label": "ALL (Affine Linear Logic)",
       "rdfs:comment": "Linear logic with weakening. Allows erasure but no cloning.",
-      "catty:hasStructuralRule": [
+      "hasLogicalSignature": "catty:StandardSignature",
+      "hasStructuralRule": [
         "catty:LHSWeakening", "catty:RHSWeakening",
         "catty:LHSExchange", "catty:RHSExchange"
       ]
@@ -88,7 +98,8 @@
       "@type": "catty:Logic",
       "rdfs:label": "RLL (Relevant Linear Logic)",
       "rdfs:comment": "Linear logic with contraction. Allows cloning but no erasure.",
-      "catty:hasStructuralRule": [
+      "hasLogicalSignature": "catty:StandardSignature",
+      "hasStructuralRule": [
         "catty:LHSContraction", "catty:RHSContraction",
         "catty:LHSExchange", "catty:RHSExchange"
       ]
