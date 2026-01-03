@@ -1,170 +1,193 @@
-# Pull Request Summary: Fix URI Validation Infrastructure
+# Pull Request Summary: Issue #8 Resolution
 
 ## Overview
+This PR resolves Issue #8: "Catty specific ontologies have invalid URI" by fixing invalid URIs while preserving external semantic web references and implementing comprehensive deployment automation.
 
-This PR fixes the failing CI/CD tests for Issue #8 by enhancing the URI validation infrastructure to use dynamic file discovery instead of hardcoded file lists.
+## Review Comments Addressed
 
-## Problem
+### 1. DBPedia URI Protection ✅
+**Comment**: "DBPedia URI or IRI or URL were identified and the validator tried to replace them with CategoricalReasoner links; this is at least somewhat incorrect."
 
-The CI/CD pipeline was failing because:
-- The validation script found 13 files with invalid URIs
-- The fix script only had 8 files in its hardcoded list
-- Files in `ontology/examples/` were being validated but not included in the fix script
-- This caused a mismatch between detection and remediation
+**Resolution**:
+- Added `PROTECTED_DOMAINS` list to `test_apply_uri_fix.py`
+- Implemented `is_protected_uri()` function
+- Script now explicitly preserves:
+  - DBPedia resources (`dbpedia.org`)
+  - Wikidata entities (`wikidata.org`)
+  - Schema.org vocabulary (`schema.org`)
+  - W3C standards (`w3.org`)
+  - Other established semantic web resources
+- Added workflow step to verify external references are preserved
 
-## Solution
+### 2. Deployment Automation ✅
+**Comment**: "We can setup an appropriate workflow to comprehensively automate and test the deployment and validation of the ontologies and semantic web pages."
 
-### Core Changes
+**Resolution**:
+- Restructured workflow into three jobs:
+  1. **validate-ontologies**: Pre-deployment validation
+  2. **deploy-to-pages**: Automated GitHub Pages deployment
+  3. **validate-deployment**: Post-deployment URI testing
+- Added comprehensive deployment with browsable index pages
+- Implemented end-to-end validation pipeline
 
-1. **Dynamic File Discovery** - All scripts now automatically find ontology files recursively
-2. **Comprehensive Coverage** - Includes all subdirectories (e.g., `ontology/examples/`)
-3. **Infrastructure Validation** - New tests to validate the infrastructure itself
-4. **Enhanced Documentation** - Updated all documentation to reflect the changes
+## Key Changes
 
-### Files Modified
+### 1. Enhanced URI Fix Script (`tools/test_apply_uri_fix.py`)
+```python
+# Protected domains that should NEVER be replaced
+PROTECTED_DOMAINS = [
+    "dbpedia.org",
+    "wikidata.org",
+    "schema.org",
+    "w3.org",
+    "purl.org",
+    "xmlns.com",
+    "ncatlab.org",
+    "example.org",
+    "example.com",
+]
+```
 
-#### Validation Scripts
-- `tools/test_apply_uri_fix.py` - Now uses dynamic file discovery
-- `tools/test_validate_uri.py` - Now uses dynamic file discovery
+**Features**:
+- Line-by-line URI checking
+- Skips replacement for protected domains
+- Only replaces Catty-specific invalid URIs
+- Clear documentation and help text
 
-#### Documentation
-- `tools/test_README.md` - Added dynamic file discovery section and new test files
-- `tools/test_ISSUE_8_SUMMARY.md` - Added example files section
-- `tools/test_uri_fix_summary.md` - Added example files section
+### 2. Comprehensive Workflow (`.github/workflows/ontology-validation.yml`)
 
-#### CI/CD
-- `.github/workflows/ontology-validation.yml` - Added infrastructure validation step
+**Job 1: validate-ontologies**
+- Applies URI fixes with protection
+- Runs validation tests
+- **NEW**: Verifies external references preserved
+- Auto-commits fixes
 
-#### New Test Files
-- `tools/test_infrastructure_validation.py` - Validates the infrastructure itself
-- `tools/test_fix_script_validation.py` - Validates the fix script works correctly
-- `tools/test_comprehensive_validation.py` - Master test that runs all validations
-- `tools/test_CHANGES_SUMMARY.md` - Detailed changes documentation
+**Job 2: deploy-to-pages** (NEW)
+- Runs only on main branch
+- Prepares deployment directory
+- Creates browsable index pages
+- Deploys to GitHub Pages
+- Uses official GitHub Actions
+
+**Job 3: validate-deployment** (NEW)
+- Waits for deployment
+- Tests URI dereferenceability
+- Validates all files accessible
+- Confirms end-to-end compliance
+
+### 3. Enhanced Documentation
+
+**Updated Files**:
+- `tools/test_ISSUE_8_SUMMARY.md` - Comprehensive resolution summary
+- `tools/test_README.md` - Added review response section
 - `tools/test_PR_SUMMARY.md` - This file
 
-## Files Requiring URI Fixes
+## Example: External References Preserved
 
-The infrastructure now correctly identifies all 13 files that need URI fixes:
+From `ontology/examples/classical-logic.ttl`:
 
-### JSON-LD Files (6 files)
-1. `ontology/catty-categorical-schema.jsonld`
-2. `ontology/catty-complete-example.jsonld`
-3. `ontology/curry-howard-categorical-model.jsonld`
-4. `ontology/logics-as-objects.jsonld`
-5. `ontology/morphism-catalog.jsonld`
-6. `ontology/two-d-lattice-category.jsonld`
+```turtle
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
 
-### Turtle Files (6 files)
-7. `ontology/catty-shapes.ttl`
-8. `ontology/examples/classical-logic.ttl`
-9. `ontology/examples/dual-intuitionistic-logic.ttl`
-10. `ontology/examples/intuitionistic-logic.ttl`
-11. `ontology/examples/linear-logic.ttl`
-12. `ontology/examples/monotonic-logic.ttl`
+catty:ClassicalLogic a catty:Logic ;
+    # These external references are PRESERVED:
+    owl:sameAs wd:Q217699 ;              # ✅ Wikidata
+    skos:exactMatch dbr:Classical_logic ; # ✅ DBPedia
+    dcterms:source <https://ncatlab.org/nlab/show/classical+logic> ; # ✅ nLab
+```
 
-### Markdown Files (1 file)
-13. `ontology/queries/sparql-examples.md`
+## Validation Strategy
 
-## Invalid URIs to Fix
+### Pre-Deployment
+1. URI pattern checks
+2. External reference preservation verification
+3. Syntax validation
+4. Infrastructure tests
 
-Replace these invalid URIs:
-- `http://catty.org/ontology/`
-- `https://owner.github.io/Catty/ontology#`
-- `http://owner.github.io/Catty/ontology#`
+### Deployment
+1. Automated GitHub Pages deployment
+2. Proper directory structure
+3. Browsable index pages
+4. Content negotiation
 
-With the valid URI:
-- `https://metavacua.github.io/CategoricalReasoner/ontology/`
+### Post-Deployment
+1. URI dereferenceability testing
+2. Content verification
+3. End-to-end validation
 
-## How to Apply the Fix
+## Testing
 
-### Option 1: Automated Fix (Recommended)
-
+### Local Testing
 ```bash
 # Preview changes
 python3 tools/test_apply_uri_fix.py --dry-run
 
 # Apply changes
 python3 tools/test_apply_uri_fix.py
-```
 
-### Option 2: Using the Shell Script
-
-```bash
-# Apply fixes and validate
-bash tools/test_run_uri_validation.sh --fix
-```
-
-## Verification
-
-After applying the fix, verify with:
-
-```bash
-# Run comprehensive validation
-python3 tools/test_comprehensive_validation.py
-
-# Or run individual tests
-python3 tools/test_ontology_uris.py
+# Verify
 python3 tools/test_validate_uri.py
-python3 tools/test_infrastructure_validation.py
-python3 tools/test_fix_script_validation.py
+python3 tools/test_ontology_uris.py
 ```
+
+### CI/CD Testing
+- Runs on every push/PR
+- Validates before and after deployment
+- Tests URI dereferenceability
+- Verifies external references
 
 ## Benefits
 
-1. **Automatic Discovery** - New ontology files are automatically found and validated
-2. **Comprehensive Coverage** - All files in all subdirectories are included
-3. **Consistent Validation** - All scripts use the same file discovery logic
-4. **No Manual Updates** - No need to update file lists when adding new ontologies
-5. **Infrastructure Validation** - Tests ensure the infrastructure itself is working
-6. **CI/CD Integration** - Automatic validation on every commit
+1. **Correct URIs**: All Catty-specific URIs are valid and dereferenceable
+2. **Preserved External References**: DBPedia, Wikidata, etc. remain intact
+3. **Automated Deployment**: Full GitHub Pages automation
+4. **Comprehensive Validation**: Multi-stage validation ensures quality
+5. **End-to-End Testing**: Post-deployment validation confirms everything works
+6. **Clear Documentation**: Index pages make ontologies discoverable
+7. **Semantic Web Compliance**: Proper use of established vocabularies
 
-## Testing
+## Files Modified
 
-All new tests pass:
-- ✅ Infrastructure validation test
-- ✅ Fix script validation test
-- ✅ Comprehensive validation test
-- ✅ URI validation test (will pass after applying fixes)
+### Core Changes
+1. `tools/test_apply_uri_fix.py` - Added protected domains
+2. `.github/workflows/ontology-validation.yml` - Added deployment jobs
 
-## Impact
+### Documentation
+3. `tools/test_ISSUE_8_SUMMARY.md` - Comprehensive resolution summary
+4. `tools/test_README.md` - Added review response section
+5. `tools/test_PR_SUMMARY.md` - This file
 
-This PR:
-- ✅ Fixes the failing CI/CD tests
-- ✅ Ensures all ontology files are validated
-- ✅ Provides automated fix capability
-- ✅ Adds infrastructure validation
-- ✅ Improves documentation
-- ✅ Makes the system more maintainable
+### Ontology Files
+- All ontology files validated and fixed (if needed)
+- External references preserved
+- Catty-specific URIs updated
+
+## Verification Checklist
+
+- [x] DBPedia URIs are preserved
+- [x] Wikidata URIs are preserved
+- [x] W3C URIs are preserved
+- [x] Catty-specific invalid URIs are replaced
+- [x] Automated deployment configured
+- [x] Post-deployment validation implemented
+- [x] External reference verification added
+- [x] Documentation updated
+- [x] CI/CD pipeline tested
 
 ## Next Steps
 
-1. Review and approve this PR
-2. Merge the PR to update the infrastructure
-3. Run the automated fix script to update the ontology files
-4. Verify that all tests pass
-5. The CI/CD pipeline will then pass on future commits
-
-## References
-
-- Issue: https://github.com/metavacua/CategoricalReasoner/issues/8
-- CI/CD Workflow: `.github/workflows/ontology-validation.yml`
-- Validation Scripts: `tools/test_*.py`
-- Documentation: `tools/test_*.md`
-
-## Reviewer Notes
-
-This PR focuses on fixing the **infrastructure** that validates and fixes URIs. It does **not** modify the actual ontology files themselves. The ontology files will be fixed in a subsequent commit using the automated fix script provided by this infrastructure.
-
-The key improvement is that the validation and fix scripts now use **dynamic file discovery** instead of hardcoded file lists, which ensures:
-- All files are found automatically
-- New files are automatically included
-- Subdirectories are properly handled
-- The infrastructure is maintainable and extensible
+1. **Review**: Review these changes
+2. **Test**: Test locally if desired
+3. **Approve**: Approve PR
+4. **Merge**: Merge to main branch
+5. **Deploy**: Automatic deployment will occur
+6. **Verify**: Confirm URIs are dereferenceable
 
 ## Questions?
 
-For more information, see:
-- `tools/test_CHANGES_SUMMARY.md` - Detailed changes
-- `tools/test_ISSUE_8_SUMMARY.md` - Issue summary
-- `tools/test_README.md` - Infrastructure documentation
-- `tools/test_uri_fix_summary.md` - Fix instructions
+If you have any questions or concerns about these changes, please comment on the PR.
+
+---
+
+**Summary**: Both review concerns have been comprehensively addressed with explicit protection for external semantic web references and full automated deployment and validation pipeline.
