@@ -1,225 +1,242 @@
-# Quick Start Guide: URI Validation Infrastructure
+# Quick Start Guide: Testing Issue #8 Resolution
 
 ## For Reviewers
 
-### What This PR Does
-This PR fixes the failing CI/CD tests by enhancing the URI validation infrastructure to use **dynamic file discovery** instead of hardcoded file lists.
+This guide helps you quickly test and verify the Issue #8 resolution.
 
-### Key Changes
-1. ✅ All validation scripts now automatically find ontology files
-2. ✅ Files in subdirectories (e.g., `ontology/examples/`) are now included
-3. ✅ New infrastructure validation tests added
-4. ✅ Documentation updated and expanded
+## TL;DR
 
-### Files Modified
-- `tools/test_apply_uri_fix.py` - Dynamic file discovery
-- `tools/test_validate_uri.py` - Dynamic file discovery
-- `tools/test_README.md` - Updated documentation
-- `tools/test_ISSUE_8_SUMMARY.md` - Added example files
-- `tools/test_uri_fix_summary.md` - Added example files
-- `.github/workflows/ontology-validation.yml` - Added infrastructure validation
-
-### New Files
-- `tools/test_infrastructure_validation.py` - Infrastructure validation test
-- `tools/test_fix_script_validation.py` - Fix script validation test
-- `tools/test_comprehensive_validation.py` - Master validation test
-- `tools/test_CHANGES_SUMMARY.md` - Detailed changes
-- `tools/test_PR_SUMMARY.md` - PR summary
-- `tools/test_CHECKLIST.md` - Pre/post-merge checklist
-- `tools/test_FINAL_SUMMARY.md` - Comprehensive summary
-- `tools/test_QUICK_START.md` - This guide
-
-### Quick Review
 ```bash
-# 1. Verify infrastructure works
-python3 tools/test_infrastructure_validation.py
+# 1. Preview what would be changed (safe, no modifications)
+python3 tools/test_apply_uri_fix.py --dry-run
 
-# 2. Verify fix script works
-python3 tools/test_fix_script_validation.py
+# 2. Verify external references are preserved
+grep -r "dbpedia.org" ontology/
+grep -r "wikidata.org" ontology/
 
-# 3. Run comprehensive validation
-python3 tools/test_comprehensive_validation.py
+# 3. Run validation
+python3 tools/test_ontology_uris.py
 ```
 
-### Expected Results
-- ✅ Infrastructure tests pass
-- ❌ URI validation tests fail (13 files need fixing - this is expected)
-- ✅ Fix script can find all 13 files
+## What Was Changed
 
-### After Merge
+### 1. Protected External References ✅
+- DBPedia, Wikidata, and other semantic web URIs are now explicitly protected
+- Script only replaces Catty-specific invalid URIs
+- External references are preserved
+
+### 2. Automated Deployment ✅
+- Three-job workflow: validate → deploy → validate-deployment
+- Automated GitHub Pages deployment
+- Post-deployment URI testing
+
+## Quick Tests
+
+### Test 1: Verify Protected Domains (30 seconds)
+
 ```bash
-# Apply fixes
-python3 tools/test_apply_uri_fix.py --dry-run  # Preview
-python3 tools/test_apply_uri_fix.py            # Apply
+# Check that external references exist and are preserved
+echo "Checking DBPedia references..."
+grep -r "dbpedia.org" ontology/ | head -3
 
-# Verify
-python3 tools/test_ontology_uris.py
+echo "Checking Wikidata references..."
+grep -r "wikidata.org" ontology/ | head -3
 
-# Commit
-git add ontology/
-git commit -m "Fix: Update ontology URIs to GitHub Pages URL (Issue #8)"
-git push
+echo "Checking W3C references..."
+grep -r "w3.org" ontology/ | head -3
 ```
 
----
+**Expected**: You should see external references in the ontology files.
 
-## For Users
+### Test 2: Preview URI Fixes (1 minute)
 
-### Problem
-The ontology files use invalid URIs that need to be fixed.
-
-### Solution
-This infrastructure provides automated tools to:
-1. Detect invalid URIs
-2. Fix them automatically
-3. Validate the fixes
-4. Prevent future issues
-
-### Usage
 ```bash
-# Check for invalid URIs
-python3 tools/test_ontology_uris.py
+# See what would be changed WITHOUT modifying files
+python3 tools/test_apply_uri_fix.py --dry-run
+```
 
-# Apply fixes
+**Expected**:
+- Shows which files would be modified
+- Shows which URIs would be replaced
+- Shows protected domains that are preserved
+- No files are actually modified
+
+### Test 3: Run Validation (1 minute)
+
+```bash
+# Run comprehensive validation
+python3 tools/test_ontology_uris.py
+```
+
+**Expected**:
+- Reports on all ontology files
+- Shows any invalid URIs
+- Provides fix suggestions
+
+### Test 4: Verify Workflow (30 seconds)
+
+```bash
+# Check workflow syntax
+cat .github/workflows/ontology-validation.yml | grep -A 5 "Verify external references"
+```
+
+**Expected**: You should see the new workflow step that verifies external references.
+
+## Detailed Testing (Optional)
+
+### Test the Fix Script
+
+```bash
+# 1. Create a backup (optional)
+cp -r ontology ontology.backup
+
+# 2. Preview changes
+python3 tools/test_apply_uri_fix.py --dry-run
+
+# 3. Apply changes (if you want to test)
 python3 tools/test_apply_uri_fix.py
 
-# Verify fixes
-python3 tools/test_validate_uri.py
+# 4. Verify external references are still there
+grep -r "dbpedia.org" ontology/
+grep -r "wikidata.org" ontology/
+
+# 5. Restore backup (if you made changes)
+rm -rf ontology
+mv ontology.backup ontology
 ```
 
----
+### Test the Workflow Locally
 
-## For Developers
-
-### Adding New Ontology Files
-Just add your file to the `ontology/` directory. The infrastructure will automatically:
-- Find it
-- Validate it
-- Include it in fix operations
-- Report any issues
-
-### Adding New Validation Rules
-Edit `tools/test_ontology_uris.py`:
-```python
-PROBLEMATIC_PATTERNS = [
-    (r'http://catty\.org/', 'Invalid domain: catty.org'),
-    (r'https?://owner\.github\.io/', 'Invalid placeholder: owner.github.io'),
-    # Add your pattern here:
-    (r'your-pattern', 'Your description'),
-]
-```
-
-### Running Tests Locally
 ```bash
-# Quick validation
+# Install dependencies
+pip install rdflib pyshacl jsonschema
+
+# Run the validation steps
+python3 tools/test_infrastructure_validation.py
+python3 tools/test_ontology_uris.py
 python3 tools/test_validate_uri.py
 
-# Comprehensive validation
-python3 tools/test_ontology_uris.py
-
-# Infrastructure validation
-python3 tools/test_infrastructure_validation.py
-
-# All tests
-python3 tools/test_comprehensive_validation.py
+# Check for problematic patterns
+grep -r "http://catty.org/ontology/" ontology/ && echo "❌ Found invalid URI" || echo "✅ No invalid URIs"
+grep -r "owner.github.io" ontology/ && echo "❌ Found placeholder" || echo "✅ No placeholders"
 ```
 
----
+## Key Files to Review
 
-## Documentation
+### 1. URI Fix Script
+**File**: `tools/test_apply_uri_fix.py`
 
-### Quick Reference
-- **Main Docs**: `tools/test_README.md`
-- **Issue Summary**: `tools/test_ISSUE_8_SUMMARY.md`
-- **Fix Instructions**: `tools/test_uri_fix_summary.md`
-- **Changes**: `tools/test_CHANGES_SUMMARY.md`
-- **PR Summary**: `tools/test_PR_SUMMARY.md`
-- **Checklist**: `tools/test_CHECKLIST.md`
-- **Final Summary**: `tools/test_FINAL_SUMMARY.md`
+**Key sections to review**:
+- Lines 30-42: `PROTECTED_DOMAINS` list
+- Lines 45-55: `is_protected_uri()` function
+- Lines 80-105: Replacement logic with protection
 
-### Scripts
-- **Validation**: `test_ontology_uris.py`, `test_validate_uri.py`
-- **Fix**: `test_apply_uri_fix.py`
-- **Testing**: `test_infrastructure_validation.py`, `test_fix_script_validation.py`, `test_comprehensive_validation.py`
-- **Shell**: `test_run_uri_validation.sh`
+### 2. Workflow
+**File**: `.github/workflows/ontology-validation.yml`
 
----
+**Key sections to review**:
+- Lines 40-58: URI fix application with protection note
+- Lines 83-106: External reference verification (NEW)
+- Lines 108-200: Deployment job (NEW)
+- Lines 202-280: Post-deployment validation (NEW)
 
-## FAQ
+### 3. Documentation
+**Files**:
+- `tools/test_ISSUE_8_SUMMARY.md` - Comprehensive summary
+- `tools/test_PR_SUMMARY.md` - PR summary
+- `tools/test_FINAL_SUMMARY.md` - Final summary
 
-### Q: Why are the tests failing?
-**A**: The tests are detecting 13 files with invalid URIs. This is expected and will be fixed after merging this PR.
+## Example: What Gets Preserved
 
-### Q: What URIs are invalid?
-**A**:
+From `ontology/examples/classical-logic.ttl`:
+
+```turtle
+# These are PRESERVED (not replaced):
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+
+catty:ClassicalLogic a catty:Logic ;
+    owl:sameAs wd:Q217699 ;              # ✅ Preserved
+    skos:exactMatch dbr:Classical_logic ; # ✅ Preserved
+```
+
+## Example: What Gets Replaced
+
+```turtle
+# BEFORE (invalid):
+@prefix catty: <http://catty.org/ontology/> .
+
+# AFTER (valid):
+@prefix catty: <https://metavacua.github.io/CategoricalReasoner/ontology/> .
+```
+
+## Review Checklist
+
+Quick checklist for reviewers:
+
+- [ ] Protected domains list is comprehensive
+- [ ] `is_protected_uri()` function works correctly
+- [ ] Replacement logic checks each line
+- [ ] External references are preserved
+- [ ] Workflow has three jobs
+- [ ] Deployment job runs on main branch only
+- [ ] Post-deployment validation tests URIs
+- [ ] Documentation is clear and complete
+
+## Common Questions
+
+### Q: Will this replace DBPedia URIs?
+**A**: No. DBPedia URIs are in the `PROTECTED_DOMAINS` list and are explicitly preserved.
+
+### Q: Will this replace Wikidata URIs?
+**A**: No. Wikidata URIs are in the `PROTECTED_DOMAINS` list and are explicitly preserved.
+
+### Q: What URIs will be replaced?
+**A**: Only Catty-specific invalid URIs:
 - `http://catty.org/ontology/`
 - `https://owner.github.io/Catty/ontology#`
 - `http://owner.github.io/Catty/ontology#`
 
-### Q: What is the correct URI?
-**A**: `https://metavacua.github.io/CategoricalReasoner/ontology/`
+### Q: How do I know external references are preserved?
+**A**:
+1. Check the `PROTECTED_DOMAINS` list in the script
+2. Run the workflow step that verifies external references
+3. Grep for external references before and after
 
-### Q: How many files need to be fixed?
-**A**: 13 files (6 JSON-LD, 6 Turtle, 1 Markdown)
-
-### Q: Can I fix them manually?
-**A**: Yes, but the automated script is recommended for consistency.
-
-### Q: Will this break anything?
-**A**: No. The old URIs were never functional, so this is purely a fix.
-
-### Q: What about new files?
-**A**: They will be automatically discovered and validated.
-
-### Q: How do I know if it worked?
-**A**: Run `python3 tools/test_ontology_uris.py` - it should report 0 issues.
-
----
-
-## Quick Commands
-
-### Validation
-```bash
-python3 tools/test_ontology_uris.py              # Comprehensive
-python3 tools/test_validate_uri.py               # Quick
-python3 tools/test_comprehensive_validation.py   # All tests
-```
-
-### Fix
-```bash
-python3 tools/test_apply_uri_fix.py --dry-run    # Preview
-python3 tools/test_apply_uri_fix.py              # Apply
-bash tools/test_run_uri_validation.sh --fix      # Shell script
-```
-
-### Infrastructure
-```bash
-python3 tools/test_infrastructure_validation.py  # Validate infrastructure
-python3 tools/test_fix_script_validation.py      # Validate fix script
-```
-
----
-
-## Status
-
-- ✅ Infrastructure enhanced with dynamic file discovery
-- ✅ All validation tests working correctly
-- ✅ Fix script can find and update all files
-- ✅ Documentation complete
-- ⏳ Waiting for merge
-- ⏳ Ontology files to be fixed after merge
-
----
+### Q: What happens after merge?
+**A**:
+1. Workflow runs automatically
+2. URIs are fixed (if needed)
+3. Ontologies are deployed to GitHub Pages
+4. Post-deployment validation confirms URIs work
 
 ## Need Help?
 
-1. Read `tools/test_README.md` for detailed documentation
-2. Check `tools/test_CHECKLIST.md` for step-by-step guide
-3. Review `tools/test_FINAL_SUMMARY.md` for comprehensive overview
-4. See `tools/test_ISSUE_8_SUMMARY.md` for issue context
+### Documentation
+- `tools/test_ISSUE_8_SUMMARY.md` - Comprehensive summary
+- `tools/test_PR_SUMMARY.md` - PR summary
+- `tools/test_README.md` - Full documentation
+
+### Testing
+- `tools/test_apply_uri_fix.py --help` - Script help
+- `tools/test_ontology_uris.py` - Validation script
+- `tools/test_validate_uri.py` - Quick validation
+
+### Questions
+- Comment on the PR
+- Check the documentation files
+- Review the workflow file
+
+## Summary
+
+**What's Protected**: DBPedia, Wikidata, W3C, and other external semantic web references
+
+**What's Replaced**: Only Catty-specific invalid URIs
+
+**What's Automated**: Validation, deployment, and post-deployment testing
+
+**What's Documented**: Comprehensive documentation in multiple files
 
 ---
 
-**Ready to Review**: ✅
-**Ready to Merge**: ✅
-**Ready to Fix**: ⏳ (after merge)
+**Ready to review?** Start with the quick tests above, then review the key files.
