@@ -2,6 +2,8 @@
 
 This directory contains the validation infrastructure for Catty ontology URIs, addressing Issue #8.
 
+**IMPORTANT**: This infrastructure preserves external semantic web references (DBPedia, Wikidata, etc.) and only replaces Catty-specific invalid URIs.
+
 ## Overview
 
 The validation infrastructure ensures that:
@@ -9,6 +11,7 @@ The validation infrastructure ensures that:
 2. New or modified ontologies are automatically validated
 3. Problematic URI patterns are detected and reported
 4. Untested/untestable ontologies are identified
+5. External semantic web references (DBPedia, Wikidata, etc.) are preserved
 
 ## Components
 
