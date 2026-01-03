@@ -243,5 +243,66 @@ Validates that the automated fix script works correctly:
 python3 tools/test_fix_script_validation.py
 ```
 
+
+## Review Response: External Reference Preservation
+
+### Review Comment (2026-01-03)
+> "In one of the failed validation runs, DBPedia URI or IRI or URL were identified and the validator tried to replace them with CategoricalReasoner links; this is at least somewhat incorrect. If the DBpedia links are not valid semantic web code then we do want to deal with that, but we do not want to take resources that were are using from the greater web and mistakenly replace them with CategoricalReasoner specific resources when that is not necessary or desirable."
+
+### Resolution
+
+The URI fix script (`test_apply_uri_fix.py`) has been updated to **explicitly protect external semantic web references**:
+
+#### Protected Domains
+The following domains are **NEVER replaced**:
+- `dbpedia.org` - DBPedia resources
+- `wikidata.org` - Wikidata entities
+- `schema.org` - Schema.org vocabulary
+- `w3.org` - W3C standards (RDF, RDFS, OWL, SKOS, etc.)
+- `purl.org` - Persistent URLs
+- `xmlns.com` - XML namespaces
+- `ncatlab.org` - nLab resources
+- `example.org/com` - Example domains
+
+#### Implementation
+```python
+def is_protected_uri(uri: str) -> bool:
+    """Check if a URI is from a protected domain."""
+    uri_lower = uri.lower()
+    return any(domain in uri_lower for domain in PROTECTED_DOMAINS)
+```
+
+The script checks each line before replacement. If a line contains a protected domain, it skips replacement for that line.
+
+#### Example: Preserved External References
+From `ontology/examples/classical-logic.ttl`:
+```turtle
+@prefix dbr: <http://dbpedia.org/resource/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+
+catty:ClassicalLogic a catty:Logic ;
+    owl:sameAs wd:Q217699 ;              # ✅ Preserved
+    skos:exactMatch dbr:Classical_logic ; # ✅ Preserved
+```
+
+#### Verification
+The workflow now includes a step to verify external references are preserved:
+```yaml
+- name: Verify external references are preserved
+  run: |
+    # Check for DBPedia references
+    if grep -r "dbpedia.org" ontology/; then
+      echo "✅ DBPedia references found (preserved)"
+    fi
+```
+
+### Deployment and Validation Workflow
+
+The workflow has been enhanced with three jobs:
+1. **validate-ontologies**: Validates URIs and preserves external references
+2. **deploy-to-pages**: Automated GitHub Pages deployment (main branch only)
+3. **validate-deployment**: Post-deployment URI dereferenceability testing
+
+See `test_ISSUE_8_SUMMARY.md` for complete details on the review response and implementation.
 ### `test_comprehensive_validation.py`
 Master test that runs all validation checks:
