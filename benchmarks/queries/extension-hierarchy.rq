@@ -1,0 +1,12 @@
+PREFIX catty: <http://catty.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?source ?sourceLabel ?target ?targetLabel
+WHERE {
+  ?morphism a catty:Extension ;
+            catty:domain ?source ;
+            catty:codomain ?target .
+  ?source rdfs:label ?sourceLabel .
+  ?target rdfs:label ?targetLabel .
+}
+ORDER BY ?sourceLabel ?targetLabel
