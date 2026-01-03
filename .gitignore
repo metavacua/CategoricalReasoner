@@ -31,3 +31,11 @@ site/
 *.swo
 .idea/
 .vscode/
+
+# Benchmark results
+results/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class

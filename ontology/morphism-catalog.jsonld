@@ -1,6 +1,7 @@
 {
   "@context": {
     "@version": 1.1,
+    "@vocab": "http://catty.org/ontology/",
     "catty": "http://catty.org/ontology/",
     "owl": "http://www.w3.org/2002/07/owl#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
@@ -8,92 +9,94 @@
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "dct": "http://purl.org/dc/terms/",
     "prov": "http://www.w3.org/ns/prov#",
-    "wd": "http://www.wikidata.org/entity/"
+    "wd": "http://www.wikidata.org/entity/",
+    "domain": { "@type": "@id" },
+    "codomain": { "@type": "@id" }
   },
   "@graph": [
     {
-      "@id": "catty:Morphism_LM_to_LJ",
-      "@type": "catty:Extension",
+      "@id": "Morphism_LM_to_LJ",
+      "@type": "Extension",
       "rdfs:label": "LM → LJ",
       "rdfs:comment": "Extension by adding negation, LNC, and Explosion, and restricting the RHS.",
-      "catty:domain": "catty:LM",
-      "catty:codomain": "catty:LJ"
+      "domain": "LM",
+      "codomain": "LJ"
     },
     {
-      "@id": "catty:Morphism_LM_to_LDJ",
-      "@type": "catty:Extension",
+      "@id": "Morphism_LM_to_LDJ",
+      "@type": "Extension",
       "rdfs:label": "LM → LDJ",
       "rdfs:comment": "Extension by adding negation and LEM, and restricting the LHS.",
-      "catty:domain": "catty:LM",
-      "catty:codomain": "catty:LDJ"
+      "domain": "LM",
+      "codomain": "LDJ"
     },
     {
-      "@id": "catty:Morphism_LJ_to_LK",
-      "@type": "catty:AddLEM",
+      "@id": "Morphism_LJ_to_LK",
+      "@type": "AddLEM",
       "rdfs:label": "LJ → LK (Add LEM)",
       "rdfs:comment": "Extension of intuitionistic logic to classical logic by adding the Law of Excluded Middle and removing RHS restriction.",
-      "catty:domain": "catty:LJ",
-      "catty:codomain": "catty:LK"
+      "domain": "LJ",
+      "codomain": "LK"
     },
     {
-      "@id": "catty:Morphism_LDJ_to_LK",
-      "@type": "catty:AddLNC",
+      "@id": "Morphism_LDJ_to_LK",
+      "@type": "AddLNC",
       "rdfs:label": "LDJ → LK (Add LNC)",
       "rdfs:comment": "Extension of dual-intuitionistic logic to classical logic by adding the Law of Non-Contradiction and removing LHS restriction.",
-      "catty:domain": "catty:LDJ",
-      "catty:codomain": "catty:LK"
+      "domain": "LDJ",
+      "codomain": "LK"
     },
     {
-      "@id": "catty:Morphism_LL_to_ALL",
-      "@type": "catty:AddStructuralRule",
+      "@id": "Morphism_LL_to_ALL",
+      "@type": "AddStructuralRule",
       "rdfs:label": "LL → ALL (Add Weakening)",
       "rdfs:comment": "Extension by adding LHS and RHS Weakening. Allows erasure.",
-      "catty:domain": "catty:LL",
-      "catty:codomain": "catty:ALL"
+      "domain": "LL",
+      "codomain": "ALL"
     },
     {
-      "@id": "catty:Morphism_LL_to_RLL",
-      "@type": "catty:AddStructuralRule",
+      "@id": "Morphism_LL_to_RLL",
+      "@type": "AddStructuralRule",
       "rdfs:label": "LL → RLL (Add Contraction)",
       "rdfs:comment": "Extension by adding LHS and RHS Contraction. Allows cloning.",
-      "catty:domain": "catty:LL",
-      "catty:codomain": "catty:RLL"
+      "domain": "LL",
+      "codomain": "RLL"
     },
     {
-      "@id": "catty:Morphism_ALL_to_LK",
-      "@type": "catty:AddStructuralRule",
+      "@id": "Morphism_ALL_to_LK",
+      "@type": "AddStructuralRule",
       "rdfs:label": "ALL → LK (Add Contraction)",
       "rdfs:comment": "Extension by adding contraction and classical axioms (LEM, LNC, DNE).",
-      "catty:domain": "catty:ALL",
-      "catty:codomain": "catty:LK"
+      "domain": "ALL",
+      "codomain": "LK"
     },
     {
-      "@id": "catty:Morphism_RLL_to_LK",
-      "@type": "catty:AddStructuralRule",
+      "@id": "Morphism_RLL_to_LK",
+      "@type": "AddStructuralRule",
       "rdfs:label": "RLL → LK (Add Weakening)",
       "rdfs:comment": "Extension by adding weakening and classical axioms (LEM, LNC, DNE).",
-      "catty:domain": "catty:RLL",
-      "catty:codomain": "catty:LK"
+      "domain": "RLL",
+      "codomain": "LK"
     },
     {
-      "@id": "catty:Morphism_LL_to_LK",
-      "@type": "catty:Extension",
+      "@id": "Morphism_LL_to_LK",
+      "@type": "Extension",
       "rdfs:label": "LL → LK",
       "rdfs:comment": "Extension of linear logic to classical logic by adding both weakening and contraction, and classical axioms.",
-      "catty:domain": "catty:LL",
-      "catty:codomain": "catty:LK"
+      "domain": "LL",
+      "codomain": "LK"
     },
     {
-      "@id": "catty:Interpretation_LK_to_LJ",
-      "@type": "catty:Interpretation",
+      "@id": "Interpretation_LK_to_LJ",
+      "@type": "Interpretation",
       "rdfs:label": "LK → LJ (Double Negation)",
       "rdfs:comment": "Interpretation via the Gödel-Gentzen translation.",
-      "catty:domain": "catty:LK",
-      "catty:codomain": "catty:LJ"
+      "domain": "LK",
+      "codomain": "LJ"
     },
     {
-      "@id": "catty:Adjoint_LK_LJ",
-      "@type": "catty:AdjointFunctors",
+      "@id": "Adjoint_LK_LJ",
+      "@type": "AdjointFunctors",
       "rdfs:label": "Adjoint Pair: LK ↔ LJ",
       "rdfs:comment": "Reflective subcategory relationship.",
       "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Double-negation_translation"
