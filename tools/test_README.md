@@ -41,6 +41,23 @@ Focused validation for the specific Issue #8 fix:
 
 **Usage:**
 ```bash
+
+**IMPORTANT**: This script ONLY replaces Catty-specific invalid URIs. It preserves
+external semantic web references (DBPedia, Wikidata, schema.org, etc.) as these
+are legitimate resources from the greater web.
+
+**Protected Domains** (will NOT be replaced):
+- `dbpedia.org` - DBPedia resources
+- `wikidata.org` - Wikidata entities
+- `schema.org` - Schema.org vocabulary
+- `w3.org` - W3C standards (RDF, RDFS, OWL, etc.)
+- `purl.org` - Persistent URLs
+- `xmlns.com` - XML namespaces
+- `ncatlab.org` - nLab resources
+- `example.org/com` - Example domains
+
+This ensures we respect the semantic web ecosystem by maintaining links to
+established vocabularies while fixing Catty-specific resources.
 python3 tools/test_validate_uri.py
 ```
 
