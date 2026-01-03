@@ -6,6 +6,10 @@ Script to apply the URI fix for Issue #8.
 This script updates all Catty ontology files to use the correct GitHub Pages URI.
 It handles multiple invalid URI patterns that may exist in the codebase.
 
+IMPORTANT: This script ONLY replaces Catty-specific invalid URIs. It preserves
+external semantic web references (DBPedia, Wikidata, schema.org, etc.) as these
+are legitimate resources from the greater web.
+
 WARNING: This script will modify files in place. Make sure you have committed
 any changes before running this script, or run with --dry-run first.
 
@@ -17,12 +21,13 @@ Issue #8: Catty specific ontologies have invalid URI
 """
 
 import argparse
+import re
 import sys
 from pathlib import Path
 from typing import Dict, List, Tuple
 
 # URI configuration
-# Multiple invalid URIs that need to be replaced
+# Multiple invalid URIs that need to be replaced (ONLY Catty-specific URIs)
 INVALID_URIS = [
     "http://catty.org/ontology/",
     "https://owner.github.io/Catty/ontology#",
@@ -31,8 +36,35 @@ INVALID_URIS = [
 
 VALID_URI = "https://metavacua.github.io/CategoricalReasoner/ontology/"
 
+# Well-known semantic web vocabularies that should NEVER be replaced
+PROTECTED_DOMAINS = [
+    "dbpedia.org",
+    "wikidata.org",
+    "schema.org",
+    "w3.org",
+    "purl.org",
+    "xmlns.com",
+    "ncatlab.org",
+    "example.org",
+    "example.com",
+]
+
 # Ontology directory
 ONTOLOGY_DIR = Path("ontology")
+
+
+def is_protected_uri(uri: str) -> bool:
+    """
+    Check if a URI is from a protected domain (external semantic web resource).
+
+    Args:
+        uri: The URI to check
+
+    Returns:
+        True if the URI should be protected from replacement
+    """
+    uri_lower = uri.lower()
+    return any(domain in uri_lower for domain in PROTECTED_DOMAINS)
 
 
 def find_all_ontology_files(repo_root: Path) -> List[Path]:
@@ -72,13 +104,31 @@ def update_file(filepath: Path, dry_run: bool = False) -> Tuple[bool, int, Dict[
         replacements_by_uri = {}
         total_replacements = 0
 
-        # Replace each invalid URI
+        # Replace each invalid URI, but only if it's not a protected domain
         for invalid_uri in INVALID_URIS:
             if invalid_uri in content:
-                count = content.count(invalid_uri)
-                replacements_by_uri[invalid_uri] = count
-                total_replacements += count
-                content = content.replace(invalid_uri, VALID_URI)
+                # Check each occurrence to ensure we're not replacing protected URIs
+                lines = content.split('\n')
+                new_lines = []
+                count = 0
+
+                for line in lines:
+                    if invalid_uri in line:
+                        # Check if this line contains a protected domain
+                        # If so, skip replacement for this line
+                        if not is_protected_uri(line):
+                            new_line = line.replace(invalid_uri, VALID_URI)
+                            count += line.count(invalid_uri)
+                            new_lines.append(new_line)
+                        else:
+                            new_lines.append(line)
+                    else:
+                        new_lines.append(line)
+
+                if count > 0:
+                    replacements_by_uri[invalid_uri] = count
+                    total_replacements += count
+                    content = '\n'.join(new_lines)
 
         # Check if any changes were made
         if content == original_content:
@@ -111,6 +161,10 @@ Examples:
 
   # Verify changes
   python3 tools/test_validate_uri.py
+
+Note:
+  This script ONLY replaces Catty-specific invalid URIs.
+  External semantic web references (DBPedia, Wikidata, etc.) are preserved.
 """
     )
     parser.add_argument(
@@ -128,10 +182,14 @@ Examples:
     print("=" * 80)
     print(f"{'DRY RUN: ' if args.dry_run else ''}Applying URI Fix for Issue #8")
     print("=" * 80)
-    print(f"\nInvalid URIs to replace:")
+    print(f"\nInvalid URIs to replace (Catty-specific only):")
     for uri in INVALID_URIS:
         print(f"  • {uri}")
-    print(f"\nValid URI: {VALID_URI}\n")
+    print(f"\nValid URI: {VALID_URI}")
+    print(f"\nProtected domains (will NOT be replaced):")
+    for domain in PROTECTED_DOMAINS:
+        print(f"  • {domain}")
+    print()
 
     if args.dry_run:
         print("⚠️  DRY RUN MODE: No files will be modified\n")
