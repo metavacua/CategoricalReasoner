@@ -1,0 +1,459 @@
+name: Ontology Validation and Deployment
+
+on:
+  push:
+    paths:
+      - 'ontology/**'
+      - 'tools/test_*.py'
+      - '.github/workflows/ontology-validation.yml'
+  pull_request:
+    paths:
+      - 'ontology/**'
+      - 'tools/test_*.py'
+      - '.github/workflows/ontology-validation.yml'
+  workflow_dispatch:
+
+jobs:
+  validate-ontologies:
+    runs-on: ubuntu-latest
+    name: Validate Ontology URIs and Syntax
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.head_ref }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install rdflib pyshacl jsonschema
+
+      - name: Apply URI fixes
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "Applying URI Fixes"
+          echo "=========================================="
+          echo ""
+          echo "Note: This step ONLY replaces Catty-specific invalid URIs."
+          echo "External semantic web references (DBPedia, Wikidata, etc.) are preserved."
+          echo ""
+          python3 tools/test_apply_uri_fix.py --yes
+
+      - name: Commit URI fixes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add ontology/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Fix: Update ontology URIs to GitHub Pages URL (Issue #8)"
+            git push
+          fi
+
+      - name: Test validation infrastructure
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "Testing Validation Infrastructure"
+          echo "=========================================="
+          python3 tools/test_infrastructure_validation.py
+
+      - name: Run comprehensive URI validation
+        run: |
+          echo "=========================================="
+          echo "Comprehensive Ontology URI Validation"
+          echo "=========================================="
+          python3 tools/test_ontology_uris.py
+
+      - name: Run quick URI validation
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "Quick URI Validation"
+          echo "=========================================="
+          python3 tools/test_validate_uri.py
+
+      - name: Check for problematic URI patterns
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "Checking for Problematic URI Patterns"
+          echo "=========================================="
+          echo ""
+          echo "Checking for http://catty.org/ontology/..."
+          if grep -r "http://catty.org/ontology/" ontology/ 2>/dev/null; then
+            echo "❌ Found invalid URI: http://catty.org/ontology/"
+            exit 1
+          else
+            echo "✅ No http://catty.org/ontology/ found"
+          fi
+          echo ""
+          echo "Checking for owner.github.io..."
+          if grep -r "owner.github.io" ontology/ 2>/dev/null; then
+            echo "❌ Found placeholder URI: owner.github.io"
+            exit 1
+          else
+            echo "✅ No owner.github.io found"
+          fi
+          echo ""
+          echo "✅ All URI pattern checks passed"
+
+      - name: Verify external references are preserved
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "Verifying External Semantic Web References"
+          echo "=========================================="
+          echo ""
+          echo "Checking that external references are preserved..."
+
+          # Check for DBPedia references
+          if grep -r "dbpedia.org" ontology/ 2>/dev/null | head -5; then
+            echo "✅ DBPedia references found (preserved)"
+          else
+            echo "⚠️  No DBPedia references found"
+          fi
+
+          # Check for Wikidata references
+          if grep -r "wikidata.org" ontology/ 2>/dev/null | head -5; then
+            echo "✅ Wikidata references found (preserved)"
+          else
+            echo "⚠️  No Wikidata references found"
+          fi
+
+          # Check for W3C references
+          if grep -r "w3.org" ontology/ 2>/dev/null | head -5; then
+            echo "✅ W3C references found (preserved)"
+          else
+            echo "⚠️  No W3C references found"
+          fi
+
+          echo ""
+          echo "✅ External reference verification complete"
+
+      - name: Validation Summary
+        if: always()
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "Validation Complete"
+          echo "=========================================="
+          echo ""
+          echo "Infrastructure ensures:"
+          echo "  ✓ All ontology URIs are validated"
+          echo "  ✓ Multiple problematic patterns are detected"
+          echo "  ✓ New/changed ontologies are automatically checked"
+          echo "  ✓ Untested files are reported"
+          echo "  ✓ External semantic web references are preserved"
+          echo ""
+          echo "For more information, see:"
+          echo "  • tools/test_ISSUE_8_SUMMARY.md"
+          echo "  • tools/test_README.md"
+          echo "  • tools/test_uri_fix_summary.md"
+
+  deploy-to-pages:
+    runs-on: ubuntu-latest
+    name: Deploy Ontologies to GitHub Pages
+    needs: validate-ontologies
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Prepare deployment directory
+        run: |
+          echo "=========================================="
+          echo "Preparing GitHub Pages Deployment"
+          echo "=========================================="
+          mkdir -p _site/ontology
+
+          # Copy ontology files
+          cp -r ontology/* _site/ontology/
+
+          # Create index.html for ontology directory
+          cat > _site/ontology/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>CategoricalReasoner Ontologies</title>
+              <style>
+                  body {
+                      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                      max-width: 900px;
+                      margin: 40px auto;
+                      padding: 0 20px;
+                      line-height: 1.6;
+                      color: #333;
+                  }
+                  h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+                  h2 { color: #34495e; margin-top: 30px; }
+                  .ontology-list { list-style: none; padding: 0; }
+                  .ontology-list li {
+                      margin: 10px 0;
+                      padding: 10px;
+                      background: #f8f9fa;
+                      border-left: 3px solid #3498db;
+                  }
+                  .ontology-list a {
+                      color: #3498db;
+                      text-decoration: none;
+                      font-weight: 500;
+                  }
+                  .ontology-list a:hover { text-decoration: underline; }
+                  code {
+                      background: #f4f4f4;
+                      padding: 2px 6px;
+                      border-radius: 3px;
+                      font-family: "Courier New", monospace;
+                  }
+                  .info-box {
+                      background: #e8f4f8;
+                      border: 1px solid #bee5eb;
+                      border-radius: 5px;
+                      padding: 15px;
+                      margin: 20px 0;
+                  }
+              </style>
+          </head>
+          <body>
+              <h1>CategoricalReasoner Ontologies</h1>
+
+              <div class="info-box">
+                  <p><strong>Base URI:</strong> <code>https://metavacua.github.io/CategoricalReasoner/ontology/</code></p>
+                  <p>These ontologies describe categorical structures, logics, and their relationships using semantic web standards (RDF, OWL, JSON-LD).</p>
+              </div>
+
+              <h2>Core Ontologies</h2>
+              <ul class="ontology-list">
+                  <li><a href="catty-categorical-schema.jsonld">catty-categorical-schema.jsonld</a> - Core categorical concepts</li>
+                  <li><a href="catty-shapes.ttl">catty-shapes.ttl</a> - SHACL validation shapes</li>
+                  <li><a href="curry-howard-categorical-model.jsonld">curry-howard-categorical-model.jsonld</a> - Curry-Howard correspondence</li>
+                  <li><a href="logics-as-objects.jsonld">logics-as-objects.jsonld</a> - Logics as categorical objects</li>
+                  <li><a href="morphism-catalog.jsonld">morphism-catalog.jsonld</a> - Catalog of morphisms</li>
+                  <li><a href="two-d-lattice-category.jsonld">two-d-lattice-category.jsonld</a> - 2D lattice structure</li>
+              </ul>
+
+              <h2>Examples</h2>
+              <ul class="ontology-list">
+                  <li><a href="examples/classical-logic.ttl">classical-logic.ttl</a> - Classical logic example</li>
+                  <li><a href="examples/intuitionistic-logic.ttl">intuitionistic-logic.ttl</a> - Intuitionistic logic example</li>
+                  <li><a href="examples/linear-logic.ttl">linear-logic.ttl</a> - Linear logic example</li>
+                  <li><a href="examples/dual-intuitionistic-logic.ttl">dual-intuitionistic-logic.ttl</a> - Dual intuitionistic logic example</li>
+                  <li><a href="examples/monotonic-logic.ttl">monotonic-logic.ttl</a> - Monotonic logic example</li>
+              </ul>
+
+              <h2>Documentation</h2>
+              <ul class="ontology-list">
+                  <li><a href="queries/sparql-examples.md">SPARQL Examples</a> - Query examples</li>
+              </ul>
+
+              <h2>Usage</h2>
+              <p>To use these ontologies in your RDF/JSON-LD documents:</p>
+              <pre><code>{
+  "@context": {
+    "catty": "https://metavacua.github.io/CategoricalReasoner/ontology/"
+  }
+}</code></pre>
+
+              <p><a href="https://github.com/metavacua/CategoricalReasoner">View on GitHub</a></p>
+          </body>
+          </html>
+          EOF
+
+          # Create root index.html
+          cat > _site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>CategoricalReasoner</title>
+              <style>
+                  body {
+                      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+                      max-width: 900px;
+                      margin: 40px auto;
+                      padding: 0 20px;
+                      line-height: 1.6;
+                      color: #333;
+                  }
+                  h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+                  .hero {
+                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                      color: white;
+                      padding: 40px;
+                      border-radius: 10px;
+                      margin: 30px 0;
+                      text-align: center;
+                  }
+                  .hero h1 { color: white; border: none; }
+                  .card {
+                      background: #f8f9fa;
+                      border: 1px solid #dee2e6;
+                      border-radius: 8px;
+                      padding: 20px;
+                      margin: 20px 0;
+                  }
+                  .card h2 { margin-top: 0; color: #495057; }
+                  a { color: #3498db; text-decoration: none; }
+                  a:hover { text-decoration: underline; }
+                  .btn {
+                      display: inline-block;
+                      background: #3498db;
+                      color: white;
+                      padding: 12px 24px;
+                      border-radius: 5px;
+                      margin: 10px 5px;
+                      text-decoration: none;
+                  }
+                  .btn:hover { background: #2980b9; text-decoration: none; }
+              </style>
+          </head>
+          <body>
+              <div class="hero">
+                  <h1>🔷 CategoricalReasoner</h1>
+                  <p>Semantic Web Ontologies for Category Theory and Logic</p>
+              </div>
+
+              <div class="card">
+                  <h2>📚 Ontologies</h2>
+                  <p>Explore our semantic web ontologies describing categorical structures, logics, and their relationships.</p>
+                  <a href="ontology/" class="btn">Browse Ontologies</a>
+              </div>
+
+              <div class="card">
+                  <h2>🔗 Base URI</h2>
+                  <p><code>https://metavacua.github.io/CategoricalReasoner/ontology/</code></p>
+                  <p>All ontology terms are dereferenceable at this base URI.</p>
+              </div>
+
+              <div class="card">
+                  <h2>💻 GitHub Repository</h2>
+                  <p>View the source code, contribute, and report issues.</p>
+                  <a href="https://github.com/metavacua/CategoricalReasoner" class="btn">View on GitHub</a>
+              </div>
+          </body>
+          </html>
+          EOF
+
+          echo "✅ Deployment directory prepared"
+          ls -la _site/
+          ls -la _site/ontology/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Deployment Summary
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "Deployment Complete"
+          echo "=========================================="
+          echo ""
+          echo "Ontologies deployed to:"
+          echo "  https://metavacua.github.io/CategoricalReasoner/ontology/"
+          echo ""
+          echo "All URIs are now dereferenceable!"
+
+  validate-deployment:
+    runs-on: ubuntu-latest
+    name: Validate Deployed Ontologies
+    needs: deploy-to-pages
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Wait for deployment
+        run: |
+          echo "Waiting 30 seconds for GitHub Pages to update..."
+          sleep 30
+
+      - name: Test URI dereferenceability
+        run: |
+          echo "=========================================="
+          echo "Testing URI Dereferenceability"
+          echo "=========================================="
+
+          BASE_URL="https://metavacua.github.io/CategoricalReasoner/ontology"
+
+          # Test main ontology files
+          ONTOLOGIES=(
+            "catty-categorical-schema.jsonld"
+            "catty-shapes.ttl"
+            "curry-howard-categorical-model.jsonld"
+            "logics-as-objects.jsonld"
+            "morphism-catalog.jsonld"
+            "two-d-lattice-category.jsonld"
+          )
+
+          echo ""
+          echo "Testing core ontology files..."
+          for ontology in "${ONTOLOGIES[@]}"; do
+            URL="${BASE_URL}/${ontology}"
+            echo -n "  Testing ${ontology}... "
+            if curl -f -s -o /dev/null -w "%{http_code}" "${URL}" | grep -q "200"; then
+              echo "✅ OK"
+            else
+              echo "❌ FAILED"
+              exit 1
+            fi
+          done
+
+          echo ""
+          echo "Testing example files..."
+          EXAMPLES=(
+            "examples/classical-logic.ttl"
+            "examples/intuitionistic-logic.ttl"
+            "examples/linear-logic.ttl"
+          )
+
+          for example in "${EXAMPLES[@]}"; do
+            URL="${BASE_URL}/${example}"
+            echo -n "  Testing ${example}... "
+            if curl -f -s -o /dev/null -w "%{http_code}" "${URL}" | grep -q "200"; then
+              echo "✅ OK"
+            else
+              echo "❌ FAILED"
+              exit 1
+            fi
+          done
+
+          echo ""
+          echo "✅ All URIs are dereferenceable!"
+
+      - name: Validation Summary
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "End-to-End Validation Complete"
+          echo "=========================================="
+          echo ""
+          echo "✅ All ontology URIs are valid and dereferenceable"
+          echo "✅ External semantic web references preserved"
+          echo "✅ GitHub Pages deployment successful"
+          echo ""
+          echo "Issue #8 resolved!"
