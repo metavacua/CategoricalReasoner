@@ -72,7 +72,7 @@ metadata:
       github_pages:
         format: "HTML5 + PDF"
         source: "LaTeX converted via Pandoc"
-        url_pattern: "https://<owner>.github.io/Catty/"
+        url_pattern: "https://metavacua.github.io/CategoricalReasoner/"
         artifacts: ["index.html", "main.pdf"]
       triplestore:
         status: "Not deployed"
@@ -526,7 +526,7 @@ artifacts:
       - "HTML5 converted from expanded LaTeX using Pandoc"
       - "Contains all thesis chapters (Introduction, Audit, Conclusions)"
       - "Semantic HTML structure with sections and headings"
-      - "Deployed to GitHub Pages at https://<owner>.github.io/Catty/"
+      - "Deployed to GitHub Pages at https://metavacua.github.io/CategoricalReasoner/"
     produces_from: ["task:convert-latex-to-html"]
     consumed_by: ["task:build-github-pages-site"]
     validation:
@@ -1497,13 +1497,13 @@ tasks:
       5. Uploads site/ as Pages artifact
       6. Deploys to GitHub Pages
       
-      Result: Thesis accessible at https://<owner>.github.io/Catty/
+      Result: Thesis accessible at https://metavacua.github.io/CategoricalReasoner/
       - index.html: HTML version of thesis
       - main.pdf: PDF version of thesis (downloadable)
       
       Verification:
       - Check GitHub Actions tab for successful workflow run
-      - Visit https://<owner>.github.io/Catty/ to verify deployment
+      - Visit https://metavacua.github.io/CategoricalReasoner/ to verify deployment
       - Verify both HTML and PDF are accessible
       
       Note: First deployment requires enabling GitHub Pages in repository settings:
@@ -1513,10 +1513,10 @@ tasks:
       - "site/ directory exists with index.html and main.pdf"
       - "workflow can be triggered manually from GitHub UI"
       - "workflow runs successfully (check GitHub Actions tab)"
-      - "GitHub Pages site is accessible at https://<owner>.github.io/Catty/"
+      - "GitHub Pages site is accessible at https://metavacua.github.io/CategoricalReasoner/"
       - "HTML thesis is viewable at site root"
       - "PDF thesis is downloadable from /main.pdf"
-    validation_script: "echo 'Manual verification required: 1) Run workflow from GitHub UI, 2) Check https://<owner>.github.io/Catty/, 3) Verify HTML and PDF are accessible'"
+    validation_script: "echo 'Manual verification required: 1) Run workflow from GitHub UI, 2) Check https://metavacua.github.io/CategoricalReasoner/, 3) Verify HTML and PDF are accessible'"
 
   # --------------------------------------------------------------------------
   # Phase 3: Validation Framework Tasks

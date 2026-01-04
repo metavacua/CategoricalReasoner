@@ -2,7 +2,7 @@
 
 Catty is a thesis on the categorical modeling of formal logics, where logics are objects in a category with morphisms representing sequent restrictions and structural rules. The thesis includes a comprehensive audit of RDF/OWL schemas and knowledge graphs that support this category-theoretic framework.
 
-Deployed thesis (after running the Deploy workflow): https://<owner>.github.io/Catty/
+Deployed thesis (after running the Deploy workflow): https://metavacua.github.io/CategoricalReasoner/
 
 ## Overview
 
@@ -30,8 +30,8 @@ This project is evaluated against the **SWTI** (Nature Scientific Reports 2022) 
 ### Deployment & Access
 
 The ontology is deployed along with the thesis:
-- **RDF/OWL Access**: Available at `https://<owner>.github.io/Catty/ontology/`
-- **SPARQL Benchmarks**: Available at `https://<owner>.github.io/Catty/benchmarks/queries/`
+- **RDF/OWL Access**: Available at `https://metavacua.github.io/CategoricalReasoner/ontology/`
+- **SPARQL Benchmarks**: Available at `https://metavacua.github.io/CategoricalReasoner/benchmarks/queries/`
 
 #### Local SPARQL Endpoint
 

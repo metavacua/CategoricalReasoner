@@ -10,7 +10,7 @@ This directory contains example SPARQL queries for querying the Catty categorica
 List all logics with their logical signatures and axioms.
 
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 
 SELECT ?logic ?label ?signature ?axiom
 WHERE {
@@ -26,7 +26,7 @@ ORDER BY ?label
 Get all structural rules for a given logic.
 
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 
 SELECT ?rule ?ruleLabel
 WHERE {
@@ -41,7 +41,7 @@ WHERE {
 Find all morphisms from a specific logic.
 
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 
 SELECT ?morphism ?target ?targetLabel ?morphismType
 WHERE {
@@ -56,7 +56,7 @@ WHERE {
 Get all lattice order relations (Logic A extends Logic B).
 
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 
 SELECT ?source ?sourceLabel ?target ?targetLabel
 WHERE {
@@ -75,7 +75,7 @@ ORDER BY ?sourceLabel ?targetLabel
 Find all adjoint functor pairs.
 
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 
 SELECT ?adjoint ?label ?source ?target
 WHERE {
@@ -92,7 +92,7 @@ WHERE {
 Get the type theory corresponding to a logic under Curry-Howard.
 
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 
 SELECT ?logic ?logicLabel ?typeTheory ?typeTheoryLabel
 WHERE {
@@ -107,7 +107,7 @@ WHERE {
 Get the Curry-Howard functor mappings.
 
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 
 SELECT ?logic ?typeTheory
 WHERE {
@@ -122,7 +122,7 @@ WHERE {
 Get the extension hierarchy of logics (Logic A extends Logic B).
 
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 
 SELECT ?source ?sourceLabel ?target ?targetLabel
 WHERE {
@@ -139,7 +139,7 @@ ORDER BY ?sourceLabel ?targetLabel
 Find all immediate neighbors of a logic in the lattice.
 
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 
 SELECT ?neighbor ?neighborLabel ?relation
 WHERE {
@@ -165,7 +165,7 @@ WHERE {
 Find logics that have no morphisms to/from them.
 
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 
 SELECT ?logic ?label
 WHERE {
@@ -184,7 +184,7 @@ WHERE {
 Find terminal logics (logics that are not extended by any other logic).
 
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 
 SELECT ?logic ?label
 WHERE {
@@ -269,7 +269,7 @@ Most queries can output results in various formats:
 ### Find all paths in the lattice
 
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 
 SELECT ?source ?sourceLabel ?target ?targetLabel (COUNT(?path) AS ?distance)
 WHERE {
@@ -289,7 +289,7 @@ GROUP BY ?source ?sourceLabel ?target ?targetLabel
 ### Validate Curry-Howard correspondence
 
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology/>
 
 SELECT ?logic ?logicLabel ?typeTheory ?typeTheoryLabel
 WHERE {
