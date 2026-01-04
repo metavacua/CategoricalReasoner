@@ -49,12 +49,27 @@ Access the Blazegraph workbench at `http://localhost:9999/blazegraph/`. You can 
 ```
 ├── thesis/                      # LaTeX thesis source
 ├── ontology/                    # RDF/OWL schemas and knowledge graphs
-├── benchmarks/                  # S4: SPARQL benchmarks and datasets
-├── deployment/                  # S9: Docker/K8s deployment configs
-├── tests/                       # S6: Consistency and validation tests
+│   ├── catty-categorical-schema.jsonld     # Core categorical schema
+│   ├── logics-as-objects.jsonld            # Logics as categorical objects
+│   ├── morphism-catalog.jsonld              # Morphisms between logics
+│   ├── two-d-lattice-category.jsonld        # 2D lattice as category
+│   ├── curry-howard-categorical-model.jsonld # Curry-Howard equivalence
+│   ├── catty-complete-example.jsonld         # Complete working example
+│   ├── catty-shapes.ttl                    # SHACL validation constraints
+│   ├── ontological-inventory.md            # Resource inventory
+│   ├── README.md                           # Ontology documentation
+│   └── queries/
+│       └── sparql-examples.md              # SPARQL query examples
+│
+├── .catty/                      # Operational model (task/artifact system)
+│   ├── operations.yaml          # Main operational model
+│   ├── phases.yaml              # Dependency graph
+│   ├── validation/              # Validation framework
+│   └── *.md                     # Documentation
+│
 ├── scripts/                     # Utility scripts
-├── results/                     # S4: Benchmark results
-├── .github/workflows/           # CI/CD (SWTI Validation and Deploy)
+├── .github/workflows/           # CI/CD workflows
+├── OPERATIONS_MODEL.md          # Operational model overview
 └── README.md                    # This file
 ```
 
@@ -104,3 +119,19 @@ If this is the first deployment, ensure GitHub Pages is set to deploy from Actio
 **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 The workflow builds `main.pdf`, converts the expanded LaTeX source to `index.html` using Pandoc, and deploys the resulting site to GitHub Pages.
+
+## Operational Model
+
+This project includes a **formal operational model** that defines the complete task/artifact system. See `OPERATIONS_MODEL.md` for an overview, or explore `.catty/` directory for:
+
+- **Task specifications**: Unambiguous, executable instructions for creating all project artifacts
+- **Dependency graph**: Complete task sequencing and parallelization opportunities
+- **Validation framework**: Automated validation with SHACL shapes and testable acceptance criteria
+- **Comprehensive documentation**: README, quick start guide, task execution guide, dependency graphs
+
+**Quick validation:**
+```sh
+python .catty/validation/validate.py --artifact catty-categorical-schema
+```
+
+See `.catty/README.md` for complete documentation.

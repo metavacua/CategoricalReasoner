@@ -1,0 +1,77 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix catty: <http://catty.ai/ontology#> .
+
+# SHACL Shapes for Two-Dimensional Lattice Validation
+
+# Lattice Node Shape
+catty:LatticeNodeShape
+    a sh:NodeShape ;
+    sh:targetClass catty:LatticeNode ;
+    sh:property [
+        sh:path catty:latticeX ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 2 ;
+        sh:message "Lattice node must have latticeX coordinate (integer 0-2)" ;
+    ] ;
+    sh:property [
+        sh:path catty:latticeY ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 10 ;
+        sh:message "Lattice node must have latticeY coordinate (integer 0-10)" ;
+    ] ;
+    sh:property [
+        sh:path catty:logicInstance ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class catty:Logic ;
+        sh:message "Lattice node must reference exactly one Logic instance" ;
+    ] .
+
+# Lattice Order Constraint (SPARQL-based)
+catty:LatticeOrderTransitivityShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf catty:latticeOrder ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Lattice order must be transitive: if A ≤ B and B ≤ C, then A ≤ C" ;
+        sh:select """
+            PREFIX catty: <http://catty.ai/ontology#>
+            SELECT $this
+            WHERE {
+                $this catty:latticeOrder ?b .
+                ?b catty:latticeOrder ?c .
+                FILTER NOT EXISTS {
+                    $this catty:latticeOrder ?c .
+                }
+            }
+        """ ;
+    ] .
+
+# Coordinate Uniqueness Constraint
+catty:LatticeCoordinateUniquenessShape
+    a sh:NodeShape ;
+    sh:targetClass catty:LatticeNode ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "No two lattice nodes should have the same coordinates" ;
+        sh:select """
+            PREFIX catty: <http://catty.ai/ontology#>
+            SELECT $this
+            WHERE {
+                $this catty:latticeX ?x ;
+                      catty:latticeY ?y .
+                ?other catty:latticeX ?x ;
+                       catty:latticeY ?y .
+                FILTER ($this != ?other)
+            }
+        """ ;
+    ] .
