@@ -21,7 +21,7 @@ This document identifies incongruities between the operational model (`.catty/op
   2. Uses `latexpand` to expand LaTeX includes
   3. Converts expanded LaTeX to HTML using Pandoc
   4. Deploys both PDF and HTML to GitHub Pages
-  5. Makes thesis accessible at `https://username.github.io/Catty/`
+  5. Makes thesis accessible at `https://metavacua.github.io/CategoricalReasoner/`
 
 **Missing from Operational Model:**
 - ❌ Artifact: `thesis-html` (index.html generated from LaTeX)
@@ -319,7 +319,7 @@ deploy-to-github-pages:
     5. Convert to HTML (pandoc)
     6. Copy PDF to site/
     7. Upload and deploy to GitHub Pages
-    Result: Site available at https://username.github.io/Catty/
+    Result: Site available at https://metavacua.github.io/CategoricalReasoner/
   acceptance_criteria:
     - "workflow file .github/workflows/deploy.yml exists"
     - "workflow runs successfully (manual verification)"
