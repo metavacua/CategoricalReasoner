@@ -75,7 +75,7 @@ Added `semantic_web_technologies` section to metadata:
 
 #### Deployment
 - **GitHub Pages**: HTML5 + PDF
-- **URL**: `https://<owner>.github.io/Catty/`
+- **URL**: `https://username.github.io/Catty/`
 - **Triplestore**: Not deployed (Blazegraph removed)
 
 ### 4. Updated Documentation (✅ Complete)
@@ -231,7 +231,7 @@ Format: YAML (GitHub Actions)
 5. **Test GitHub Pages deployment** (manual):
    - Push changes to GitHub
    - Go to Actions → Deploy → Run workflow
-   - Verify site at `https://<owner>.github.io/Catty/`
+   - Verify site at `https://username.github.io/Catty/`
 
 ### For Coding Agents
 
