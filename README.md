@@ -17,15 +17,37 @@ Catty organizes logics as a **parametric category** where:
 
 This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. See the `LICENSE` file for details.
 
+## Semantic Web Technology Index (SWTI)
+
+This project is evaluated against the **SWTI** (Nature Scientific Reports 2022) criteria. We aim for a high level of compliance in data standards, evaluation, and accessibility.
+
+### Knowledge Processing & Evaluation
+
+- **Validation**: Ontologies are validated using RDFS and SHACL (see `scripts/validate_rdf.py` and `tests/test_consistency.py`).
+- **Benchmarks**: Reproducible SPARQL benchmarks are available in `benchmarks/queries/` and can be run with `benchmarks/run.py`.
+- **Reasoning**: We use SHACL for consistency checking and categorical transformations as a multi-step processing workflow.
+
+### Deployment & Access
+
+The ontology is deployed along with the thesis:
+- **RDF/OWL Access**: Available at `https://<owner>.github.io/Catty/ontology/`
+- **SPARQL Benchmarks**: Available at `https://<owner>.github.io/Catty/benchmarks/queries/`
+
+#### Local SPARQL Endpoint
+
+You can run a local SPARQL endpoint (Blazegraph) using Docker Compose:
+
+```sh
+cd deployment
+docker-compose up -d
+```
+
+Access the Blazegraph workbench at `http://localhost:9999/blazegraph/`. You can then upload the files from the `ontology/` directory to query them.
+
 ## Project Structure
 
 ```
 ├── thesis/                      # LaTeX thesis source
-│   ├── main.tex                # Main document
-│   ├── preamble.tex            # Document preamble
-│   └── chapters/
-│       └── categorical-semantic-audit.tex  # Comprehensive audit chapter
-│
 ├── ontology/                    # RDF/OWL schemas and knowledge graphs
 │   ├── catty-categorical-schema.jsonld     # Core categorical schema
 │   ├── logics-as-objects.jsonld            # Logics as categorical objects

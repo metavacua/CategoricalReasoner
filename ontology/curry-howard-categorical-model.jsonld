@@ -9,7 +9,15 @@
     "dct": "http://purl.org/dc/terms/",
     "prov": "http://www.w3.org/ns/prov#",
     "wd": "http://www.wikidata.org/entity/",
-    "foaf": "http://xmlns.com/foaf/0.1/"
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "catty:sourceCategory": { "@type": "@id" },
+    "catty:targetCategory": { "@type": "@id" },
+    "catty:objects": { "@type": "@id" },
+    "catty:morphisms": { "@type": "@id" },
+    "catty:correspondsToLogic": { "@type": "@id" },
+    "rdfs:subClassOf": { "@type": "@id" },
+    "rdfs:domain": { "@type": "@id" },
+    "rdfs:range": { "@type": "@id" }
   },
   "@graph": [
     {
@@ -215,7 +223,7 @@
       "rdfs:label": "Continuation-Passing Style Translation",
       "rdfs:comment": "The CPS translation as a natural transformation between classical and intuitionistic/linear categories",
       "dct:description": "The continuation-passing style (CPS) translation provides a categorical embedding of classical logic (with control operators) into linear logic/intuitionistic logic. This is represented as a natural transformation between the corresponding functors.",
-      "prov:wasDerivedFrom": "https://ncatlab.org/nlab/show/continuation-passing+style+translation"
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Continuation-passing_style"
     },
     {
       "@id": "catty:DoubleNegationTranslation",
@@ -223,7 +231,7 @@
       "rdfs:label": "Double Negation Translation",
       "rdfs:comment": "The Gödel-Gentzen double negation translation as a natural transformation",
       "dct:description": "The double negation translation provides a categorical embedding of classical logic into intuitionistic logic. This is represented as a natural transformation between the identity functor on classical logic and the double-negation functor.",
-      "prov:wasDerivedFrom": "https://ncatlab.org/nlab/show/double+negation+translation"
+      "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Double-negation_translation"
     },
     {
       "@id": "catty:CurryHowardForLattice",

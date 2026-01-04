@@ -7,7 +7,27 @@
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "dct": "http://purl.org/dc/terms/",
-    "prov": "http://www.w3.org/ns/prov#"
+    "prov": "http://www.w3.org/ns/prov#",
+    "catty:hasLogicalSignature": { "@type": "@id" },
+    "catty:hasLogicalAxiom": { "@type": "@id" },
+    "catty:hasStructuralRule": { "@type": "@id" },
+    "catty:hasSequentForm": { "@type": "@id" },
+    "catty:domain": { "@type": "@id" },
+    "catty:codomain": { "@type": "@id" },
+    "catty:sourceCategory": { "@type": "@id" },
+    "catty:targetCategory": { "@type": "@id" },
+    "catty:sourceFunctor": { "@type": "@id" },
+    "catty:targetFunctor": { "@type": "@id" },
+    "catty:logic": { "@type": "@id" },
+    "catty:objects": { "@type": "@id" },
+    "catty:morphisms": { "@type": "@id" },
+    "catty:correspondsToLogic": { "@type": "@id" },
+    "rdfs:subClassOf": { "@type": "@id" },
+    "rdfs:domain": { "@type": "@id" },
+    "rdfs:range": { "@type": "@id" },
+    "owl:equivalentClass": { "@type": "@id" },
+    "owl:onProperty": { "@type": "@id" },
+    "owl:intersectionOf": { "@type": "@id", "@container": "@list" }
   },
   "@graph": [
     {
@@ -143,18 +163,25 @@
       "rdfs:subClassOf": "catty:Category"
     },
     {
+      "@id": "catty:LogicalEntity",
+      "@type": "owl:Class",
+      "rdfs:label": "Logical Entity",
+      "rdfs:comment": "An entity in the logical domain (logic or theory)",
+      "rdfs:subClassOf": "catty:Object"
+    },
+    {
       "@id": "catty:Logic",
       "@type": "owl:Class",
       "rdfs:label": "Logic",
       "rdfs:comment": "A formal logic characterized by a logical signature and logical axioms",
-      "rdfs:subClassOf": "catty:Object"
+      "rdfs:subClassOf": "catty:LogicalEntity"
     },
     {
       "@id": "catty:LogicalTheory",
       "@type": "owl:Class",
       "rdfs:label": "Logical Theory",
       "rdfs:comment": "A theory consisting of a logical signature, logical axioms, theoretical signature, and theoretical axioms",
-      "rdfs:subClassOf": "catty:Object"
+      "rdfs:subClassOf": "catty:LogicalEntity"
     },
     {
       "@id": "catty:LogicalSignature",
@@ -184,7 +211,7 @@
       "@id": "catty:hasLogicalSignature",
       "@type": "owl:ObjectProperty",
       "rdfs:label": "has logical signature",
-      "rdfs:domain": ["catty:Logic", "catty:LogicalTheory"],
+      "rdfs:domain": "catty:LogicalEntity",
       "rdfs:range": "catty:LogicalSignature"
     },
     {
@@ -198,7 +225,7 @@
       "@id": "catty:hasLogicalAxiom",
       "@type": "owl:ObjectProperty",
       "rdfs:label": "has logical axiom",
-      "rdfs:domain": ["catty:Logic", "catty:LogicalTheory"],
+      "rdfs:domain": "catty:LogicalEntity",
       "rdfs:range": "catty:LogicalAxiom"
     },
     {
@@ -368,7 +395,6 @@
       "@id": "catty:StructuralRuleMorphism",
       "@type": "owl:Class",
       "rdfs:label": "Structural Rule Morphism",
-      "@type": "owl:Class",
       "rdfs:comment": "A morphism that adds or removes structural rules",
       "rdfs:subClassOf": "catty:LogicMorphism"
     },
@@ -380,8 +406,8 @@
       "rdfs:subClassOf": {
         "@type": "owl:Class",
         "owl:intersectionOf": [
-          { "@type": "catty:LogicMorphism" },
-          { "@type": "catty:Functor" }
+          "catty:LogicMorphism",
+          "catty:Functor"
         ]
       }
     },
