@@ -1,0 +1,205 @@
+metadata:
+  version: "1.0"
+  last_updated: "2026-01-05T00:00:00Z"
+  purpose: "Approved citation registry for Catty thesis - all citations must be pre-registered here"
+  instructions: "LLMs: You may only cite keys from this registry. To add new citations, STOP and request addition."
+
+citations:
+  girard1987linear:
+    author: "Jean-Yves Girard"
+    title: "Linear Logic"
+    year: 1987
+    type: journal
+    journal: "Theoretical Computer Science"
+    volume: "50"
+    pages: "1-102"
+    doi: "10.1016/0304-3975(87)90045-4"
+    wikidata: "Q56558858"
+    dbpedia: "http://dbpedia.org/resource/Linear_logic"
+    local_ontology: true
+    notes: "Foundational paper introducing linear logic and resource-aware computation"
+
+  kripke1965semantical:
+    author: "Saul A. Kripke"
+    title: "Semantical Analysis of Intuitionistic Logic I"
+    year: 1965
+    type: journal
+    journal: "Studies in Logic and the Foundations of Mathematics"
+    volume: "40"
+    pages: "92-130"
+    doi: "10.1016/S0049-237X(08)71685-9"
+    wikidata: "Q29029616"
+    dbpedia: "http://dbpedia.org/resource/Kripke_semantics"
+    local_ontology: true
+    notes: "Introduces Kripke semantics for intuitionistic logic and modal logic"
+
+  sambin2003basic:
+    author: "Giovanni Sambin and Giulia Battilotti and Claudia Faggian"
+    title: "Basic Logic: Reflection, Symmetry, Visibility"
+    year: 2003
+    type: journal
+    journal: "The Journal of Symbolic Logic"
+    volume: "68"
+    number: "3"
+    pages: "869-888"
+    doi: "10.2178/jsl/1058448442"
+    wikidata: "Q56474321"
+    local_ontology: true
+    notes: "Introduces basic logic with reflection and symmetry principles"
+
+  lawvere1963functorial:
+    author: "F. William Lawvere"
+    title: "Functorial Semantics of Algebraic Theories"
+    year: 1963
+    type: conference
+    booktitle: "Proceedings of the National Academy of Sciences"
+    volume: "50"
+    number: "5"
+    pages: "869-872"
+    doi: "10.1073/pnas.50.5.869"
+    wikidata: "Q29398537"
+    dbpedia: "http://dbpedia.org/resource/Functorial_semantics"
+    local_ontology: true
+    notes: "Foundation of categorical logic and algebraic theories"
+
+  maclane1971categories:
+    author: "Saunders Mac Lane"
+    title: "Categories for the Working Mathematician"
+    year: 1971
+    type: book
+    publisher: "Springer-Verlag"
+    isbn: "978-0-387-98403-2"
+    wikidata: "Q1049706"
+    dbpedia: "http://dbpedia.org/resource/Categories_for_the_Working_Mathematician"
+    local_ontology: true
+    notes: "Standard reference for category theory"
+
+  prawitz1965natural:
+    author: "Dag Prawitz"
+    title: "Natural Deduction: A Proof-Theoretical Study"
+    year: 1965
+    type: book
+    publisher: "Almqvist & Wiksell"
+    wikidata: "Q56426780"
+    local_ontology: true
+    notes: "Foundational work on natural deduction and proof theory"
+
+  troelstra2000basic:
+    author: "Anne Sjerp Troelstra and Helmut Schwichtenberg"
+    title: "Basic Proof Theory"
+    year: 2000
+    type: book
+    publisher: "Cambridge University Press"
+    edition: "2nd"
+    isbn: "978-0-521-77911-1"
+    wikidata: "Q29466841"
+    local_ontology: true
+    notes: "Comprehensive treatment of structural proof theory"
+
+  abramsky1994proofs:
+    author: "Samson Abramsky"
+    title: "Proofs as Processes"
+    year: 1994
+    type: journal
+    journal: "Theoretical Computer Science"
+    volume: "135"
+    number: "1"
+    pages: "5-9"
+    doi: "10.1016/0304-3975(94)00103-0"
+    wikidata: "Q56558122"
+    local_ontology: true
+    notes: "Connects proof theory to process calculi via category theory"
+
+  seely1989linear:
+    author: "R. A. G. Seely"
+    title: "Linear Logic, *-Autonomous Categories and Cofree Coalgebras"
+    year: 1989
+    type: journal
+    journal: "Contemporary Mathematics"
+    volume: "92"
+    pages: "371-382"
+    doi: "10.1090/conm/092/1003210"
+    wikidata: "Q56558921"
+    local_ontology: true
+    notes: "Categorical semantics of linear logic"
+
+  jacobs1999categorical:
+    author: "Bart Jacobs"
+    title: "Categorical Logic and Type Theory"
+    year: 1999
+    type: book
+    publisher: "Elsevier"
+    isbn: "978-0-444-50170-7"
+    wikidata: "Q29466853"
+    dbpedia: "http://dbpedia.org/resource/Categorical_logic"
+    local_ontology: true
+    notes: "Comprehensive treatment of categorical logic and dependent type theory"
+
+  lambek1988introduction:
+    author: "Joachim Lambek and Philip J. Scott"
+    title: "Introduction to Higher Order Categorical Logic"
+    year: 1988
+    type: book
+    publisher: "Cambridge University Press"
+    isbn: "978-0-521-35653-4"
+    wikidata: "Q56474567"
+    local_ontology: true
+    notes: "Standard reference for higher-order categorical logic"
+
+  barr1990category:
+    author: "Michael Barr and Charles Wells"
+    title: "Category Theory for Computing Science"
+    year: 1990
+    type: book
+    publisher: "Prentice Hall"
+    isbn: "978-0-13-120486-7"
+    wikidata: "Q29466902"
+    local_ontology: true
+    notes: "Category theory from computational perspective"
+
+  urban2015categorical:
+    author: "Josef Urban"
+    title: "Categorical Structures and Ontologies in Mathematics"
+    year: 2015
+    type: conference
+    booktitle: "Intelligent Computer Mathematics"
+    pages: "130-145"
+    doi: "10.1007/978-3-319-20615-8_9"
+    local_ontology: true
+    notes: "Connects category theory to mathematical ontologies"
+
+  trafford2020categorical:
+    author: "James Trafford"
+    title: "Categorical Semantic Models for Defeasible Reasoning"
+    year: 2020
+    type: journal
+    journal: "Synthese"
+    volume: "197"
+    pages: "4965-4993"
+    doi: "10.1007/s11229-018-01998-z"
+    wikidata: "Q87665432"
+    local_ontology: true
+    notes: "Categorical approach to non-monotonic reasoning"
+
+  curry1958combinatory:
+    author: "Haskell B. Curry and Robert Feys"
+    title: "Combinatory Logic, Volume I"
+    year: 1958
+    type: book
+    publisher: "North-Holland"
+    wikidata: "Q29466814"
+    dbpedia: "http://dbpedia.org/resource/Combinatory_logic"
+    local_ontology: true
+    notes: "Foundation of combinatory logic and lambda calculus"
+
+  howard1980formulae:
+    author: "William A. Howard"
+    title: "The Formulae-as-Types Notion of Construction"
+    year: 1980
+    type: book
+    booktitle: "To H.B. Curry: Essays on Combinatory Logic, Lambda Calculus and Formalism"
+    pages: "479-490"
+    publisher: "Academic Press"
+    wikidata: "Q56558101"
+    local_ontology: true
+    notes: "Establishes Curry-Howard correspondence between proofs and programs"

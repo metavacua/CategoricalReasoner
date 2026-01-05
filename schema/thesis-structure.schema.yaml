@@ -1,0 +1,323 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+$id: "https://metavacua.github.io/catty/schema/thesis-structure"
+title: "Catty Thesis Structure Schema"
+description: "Prescriptive schema defining all valid thesis structures for the Catty categorical reasoner thesis"
+version: "1.0.0"
+
+definitions:
+  identifier:
+    type: string
+    pattern: "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"
+    description: "Lowercase hyphenated identifier (e.g., 'thm-weakening', 'def-category')"
+
+  citation_key:
+    type: string
+    pattern: "^[a-z]+[0-9]{4}[a-z]+$"
+    description: "Citation key format: lastname+year+shortname (e.g., 'girard1987linear')"
+
+  content_type:
+    enum:
+      - text
+      - definition
+      - theorem
+      - lemma
+      - proof
+      - example
+      - remark
+      - proposition
+      - corollary
+      - conjecture
+    description: "Valid content types in thesis"
+
+  base_element:
+    type: object
+    required:
+      - id
+      - title
+      - type
+    properties:
+      id:
+        $ref: "#/definitions/identifier"
+      title:
+        type: string
+        minLength: 1
+      type:
+        $ref: "#/definitions/content_type"
+      citations:
+        type: array
+        items:
+          $ref: "#/definitions/citation_key"
+        description: "Citations referenced by this element"
+
+  text_element:
+    allOf:
+      - $ref: "#/definitions/base_element"
+      - type: object
+        required:
+          - content
+        properties:
+          type:
+            const: text
+          content:
+            type: string
+            minLength: 1
+
+  definition_element:
+    allOf:
+      - $ref: "#/definitions/base_element"
+      - type: object
+        required:
+          - term
+          - meaning
+        properties:
+          type:
+            const: definition
+          id:
+            type: string
+            pattern: "^def-[a-z0-9]+(-[a-z0-9]+)*$"
+          term:
+            type: string
+            minLength: 1
+            description: "The term being defined"
+          meaning:
+            type: string
+            minLength: 1
+            description: "The definition of the term"
+          examples:
+            type: array
+            items:
+              type: string
+
+  theorem_element:
+    allOf:
+      - $ref: "#/definitions/base_element"
+      - type: object
+        required:
+          - statement
+          - proof
+        properties:
+          type:
+            enum: [theorem, lemma, proposition, corollary]
+          id:
+            type: string
+            pattern: "^(thm|lem|prop|cor)-[a-z0-9]+(-[a-z0-9]+)*$"
+          statement:
+            type: string
+            minLength: 1
+            description: "The formal statement of the theorem"
+          proof:
+            $ref: "#/definitions/proof_element"
+          premises:
+            type: array
+            items:
+              type: string
+            description: "References to premises (theorem IDs)"
+
+  proof_element:
+    type: object
+    required:
+      - id
+      - steps
+      - conclusion
+    properties:
+      id:
+        type: string
+        pattern: "^proof-[a-z0-9]+(-[a-z0-9]+)*$"
+      steps:
+        type: array
+        items:
+          type: object
+          required:
+            - description
+          properties:
+            description:
+              type: string
+              minLength: 1
+            citations:
+              type: array
+              items:
+                $ref: "#/definitions/citation_key"
+        minItems: 1
+      conclusion:
+        type: string
+        minLength: 1
+      citations:
+        type: array
+        items:
+          $ref: "#/definitions/citation_key"
+
+  example_element:
+    allOf:
+      - $ref: "#/definitions/base_element"
+      - type: object
+        required:
+          - description
+          - instantiation
+        properties:
+          type:
+            const: example
+          id:
+            type: string
+            pattern: "^ex-[a-z0-9]+(-[a-z0-9]+)*$"
+          description:
+            type: string
+            minLength: 1
+          instantiation:
+            type: string
+            minLength: 1
+            description: "Concrete instance or demonstration"
+
+  remark_element:
+    allOf:
+      - $ref: "#/definitions/base_element"
+      - type: object
+        required:
+          - content
+        properties:
+          type:
+            const: remark
+          id:
+            type: string
+            pattern: "^rem-[a-z0-9]+(-[a-z0-9]+)*$"
+          content:
+            type: string
+            minLength: 1
+
+  conjecture_element:
+    allOf:
+      - $ref: "#/definitions/base_element"
+      - type: object
+        required:
+          - statement
+        properties:
+          type:
+            const: conjecture
+          id:
+            type: string
+            pattern: "^conj-[a-z0-9]+(-[a-z0-9]+)*$"
+          statement:
+            type: string
+            minLength: 1
+          rationale:
+            type: string
+
+  subsection:
+    type: object
+    required:
+      - id
+      - title
+      - content
+    properties:
+      id:
+        $ref: "#/definitions/identifier"
+        pattern: "^subsec-[a-z0-9]+(-[a-z0-9]+)*$"
+      title:
+        type: string
+        minLength: 1
+      content:
+        type: array
+        items:
+          oneOf:
+            - $ref: "#/definitions/text_element"
+            - $ref: "#/definitions/definition_element"
+            - $ref: "#/definitions/theorem_element"
+            - $ref: "#/definitions/example_element"
+            - $ref: "#/definitions/remark_element"
+            - $ref: "#/definitions/conjecture_element"
+
+  section:
+    type: object
+    required:
+      - id
+      - title
+      - content
+    properties:
+      id:
+        type: string
+        pattern: "^sec-[a-z0-9]+(-[a-z0-9]+)*$"
+      title:
+        type: string
+        minLength: 1
+      content:
+        type: array
+        items:
+          oneOf:
+            - $ref: "#/definitions/text_element"
+            - $ref: "#/definitions/definition_element"
+            - $ref: "#/definitions/theorem_element"
+            - $ref: "#/definitions/example_element"
+            - $ref: "#/definitions/remark_element"
+            - $ref: "#/definitions/conjecture_element"
+            - $ref: "#/definitions/subsection"
+
+  chapter:
+    type: object
+    required:
+      - id
+      - title
+      - sections
+    properties:
+      id:
+        type: string
+        pattern: "^ch-[a-z0-9]+(-[a-z0-9]+)*$"
+      title:
+        type: string
+        minLength: 1
+      abstract:
+        type: string
+      sections:
+        type: array
+        items:
+          $ref: "#/definitions/section"
+        minItems: 1
+
+  part:
+    type: object
+    required:
+      - id
+      - title
+      - chapters
+    properties:
+      id:
+        type: string
+        pattern: "^part-[a-z0-9]+(-[a-z0-9]+)*$"
+      title:
+        type: string
+        minLength: 1
+      description:
+        type: string
+      chapters:
+        type: array
+        items:
+          $ref: "#/definitions/chapter"
+        minItems: 1
+
+type: object
+required:
+  - thesis_id
+  - title
+  - structure
+properties:
+  thesis_id:
+    type: string
+    const: "catty-thesis"
+  title:
+    type: string
+    minLength: 1
+  author:
+    type: string
+  description:
+    type: string
+  structure:
+    type: array
+    items:
+      oneOf:
+        - $ref: "#/definitions/part"
+        - $ref: "#/definitions/chapter"
+    minItems: 1
+
+# Nesting constraints (enforced in validators):
+# - proof cannot contain theorem
+# - theorem must contain exactly one proof
+# - subsection cannot contain subsection
+# - all IDs must be globally unique across entire thesis
