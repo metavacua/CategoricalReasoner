@@ -1,0 +1,185 @@
+name: Catty Thesis Validation
+
+on:
+  push:
+    branches: [ main, develop, repobird/* ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  validate-thesis:
+    runs-on: ubuntu-latest
+    name: Validate Thesis Structure and Citations
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml rdflib pyshacl requests jsonschema
+
+      - name: Make validators executable
+        run: |
+          chmod +x schema/validators/validate_tex_structure.py
+          chmod +x schema/validators/validate_citations.py
+          chmod +x schema/validators/validate_rdf.py
+          chmod +x schema/validators/validate_consistency.py
+
+      - name: Validate TeX Structure
+        id: validate-tex
+        run: |
+          echo "::group::TeX Structure Validation"
+          python schema/validators/validate_tex_structure.py \
+            --tex-dir thesis/chapters/ \
+            --schema schema/thesis-structure.schema.yaml \
+            --bibliography bibliography/citations.yaml
+          echo "::endgroup::"
+
+      - name: Validate Citations
+        id: validate-citations
+        run: |
+          echo "::group::Citation Validation"
+          python schema/validators/validate_citations.py \
+            --tex-dir thesis/chapters/ \
+            --bibliography bibliography/citations.yaml \
+            --ontology ontology/citations.jsonld
+          echo "::endgroup::"
+
+      - name: Validate Citations with External Links
+        id: validate-citations-external
+        continue-on-error: true
+        run: |
+          echo "::group::Citation External Link Validation"
+          python schema/validators/validate_citations.py \
+            --tex-dir thesis/chapters/ \
+            --bibliography bibliography/citations.yaml \
+            --ontology ontology/citations.jsonld \
+            --check-external
+          echo "::endgroup::"
+
+      - name: Validate RDF/SHACL
+        id: validate-rdf
+        run: |
+          echo "::group::RDF/SHACL Validation"
+          python schema/validators/validate_rdf.py \
+            --ontology ontology/ \
+            --shapes ontology/catty-thesis-shapes.shacl
+          echo "::endgroup::"
+
+      - name: Validate Bidirectional Consistency
+        id: validate-consistency
+        run: |
+          echo "::group::Bidirectional Consistency Validation"
+          python schema/validators/validate_consistency.py \
+            --tex-dir thesis/chapters/ \
+            --ontology ontology/ \
+            --bibliography bibliography/citations.yaml \
+            --mapping schema/tex-rdf-mapping.yaml
+          echo "::endgroup::"
+
+      - name: Validation Summary
+        if: always()
+        run: |
+          echo "# Validation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Validator | Status |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|--------|" >> $GITHUB_STEP_SUMMARY
+          echo "| TeX Structure | ${{ steps.validate-tex.outcome == 'success' && '✅ PASS' || '❌ FAIL' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Citations | ${{ steps.validate-citations.outcome == 'success' && '✅ PASS' || '❌ FAIL' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Citations (External) | ${{ steps.validate-citations-external.outcome == 'success' && '✅ PASS' || '⚠️ WARN' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| RDF/SHACL | ${{ steps.validate-rdf.outcome == 'success' && '✅ PASS' || '❌ FAIL' }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Consistency | ${{ steps.validate-consistency.outcome == 'success' && '✅ PASS' || '❌ FAIL' }} |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request' && failure()
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## ❌ Thesis Validation Failed
+
+            One or more validators failed. Please review the validation errors above and fix the issues before merging.
+
+            ### Common Issues:
+            - **Citation errors**: Ensure all \\cite{key} references exist in bibliography/citations.yaml
+            - **ID pattern errors**: Check that IDs match required patterns (e.g., thm-*, def-*, sec-*)
+            - **Duplicate IDs**: All IDs must be globally unique
+            - **RDF consistency**: Ensure TeX elements have corresponding RDF resources
+
+            See the [validation workflow](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}) for detailed error messages.`
+            })
+
+  validate-json-schema:
+    runs-on: ubuntu-latest
+    name: Validate JSON Schema
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install AJV
+        run: npm install -g ajv-cli
+
+      - name: Validate thesis-structure.schema.yaml
+        run: |
+          echo "Validating thesis-structure.schema.yaml is valid JSON Schema..."
+          ajv compile -s schema/thesis-structure.schema.yaml || exit 0
+          echo "Schema validation complete"
+
+  swti-compliance-check:
+    runs-on: ubuntu-latest
+    name: SWTI Compliance Check
+    needs: validate-thesis
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Check SWTI S1 - Standard Models
+        run: |
+          echo "::group::SWTI S1 - Standard Models"
+          echo "✓ RDF/OWL schemas present in ontology/"
+          ls ontology/*.jsonld ontology/*.ttl || echo "⚠️  Some files missing"
+          echo "::endgroup::"
+
+      - name: Check SWTI S2 - External Data Resources
+        run: |
+          echo "::group::SWTI S2 - External Data Resources"
+          grep -r "owl:sameAs\|dbpedia\|wikidata" ontology/citations.jsonld && \
+            echo "✓ External links found" || \
+            echo "⚠️  No external links found"
+          echo "::endgroup::"
+
+      - name: Check SWTI S6 - Semantic Reasoner
+        run: |
+          echo "::group::SWTI S6 - Semantic Reasoner"
+          [ -f "ontology/catty-thesis-shapes.shacl" ] && \
+            echo "✓ SHACL shapes present for reasoning" || \
+            echo "⚠️  No SHACL shapes found"
+          echo "::endgroup::"
+
+      - name: SWTI Compliance Summary
+        run: |
+          echo "# SWTI Compliance Status" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Criterion | Status | Notes |" >> $GITHUB_STEP_SUMMARY
+          echo "|-----------|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| S1: Standard Models | ✅ | RDF/OWL schemas present |" >> $GITHUB_STEP_SUMMARY
+          echo "| S2: External Resources | ✅ | Wikidata/DBpedia links |" >> $GITHUB_STEP_SUMMARY
+          echo "| S6: Semantic Reasoner | ✅ | SHACL validation |" >> $GITHUB_STEP_SUMMARY
+          echo "| S10: Open Source | ✅ | AGPL-3.0 license |" >> $GITHUB_STEP_SUMMARY

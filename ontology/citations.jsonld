@@ -1,0 +1,376 @@
+{
+  "@context": {
+    "@vocab": "http://metavacua.github.io/catty/ontology#",
+    "catty": "http://metavacua.github.io/catty/",
+    "bibo": "http://purl.org/ontology/bibo/",
+    "dct": "http://purl.org/dc/terms/",
+    "foaf": "http://xmlns.com/foaf/0.1/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "schema": "http://schema.org/",
+    "wd": "http://www.wikidata.org/entity/",
+    "dbr": "http://dbpedia.org/resource/"
+  },
+  "@graph": [
+    {
+      "@id": "catty:citations/girard1987linear",
+      "@type": "bibo:AcademicArticle",
+      "dct:identifier": "girard1987linear",
+      "dct:creator": {
+        "@type": "foaf:Person",
+        "foaf:name": "Jean-Yves Girard"
+      },
+      "dct:title": "Linear Logic",
+      "dct:issued": "1987",
+      "bibo:pageStart": "1",
+      "bibo:pageEnd": "102",
+      "bibo:volume": "50",
+      "dct:isPartOf": {
+        "@type": "bibo:Journal",
+        "dct:title": "Theoretical Computer Science"
+      },
+      "bibo:doi": "10.1016/0304-3975(87)90045-4",
+      "owl:sameAs": [
+        {"@id": "wd:Q56558858"},
+        {"@id": "dbr:Linear_logic"}
+      ],
+      "rdfs:seeAlso": [
+        {"@id": "https://doi.org/10.1016/0304-3975(87)90045-4"}
+      ],
+      "rdfs:comment": "Foundational paper introducing linear logic and resource-aware computation"
+    },
+    {
+      "@id": "catty:citations/kripke1965semantical",
+      "@type": "bibo:AcademicArticle",
+      "dct:identifier": "kripke1965semantical",
+      "dct:creator": {
+        "@type": "foaf:Person",
+        "foaf:name": "Saul A. Kripke"
+      },
+      "dct:title": "Semantical Analysis of Intuitionistic Logic I",
+      "dct:issued": "1965",
+      "bibo:pageStart": "92",
+      "bibo:pageEnd": "130",
+      "bibo:volume": "40",
+      "dct:isPartOf": {
+        "@type": "bibo:Journal",
+        "dct:title": "Studies in Logic and the Foundations of Mathematics"
+      },
+      "bibo:doi": "10.1016/S0049-237X(08)71685-9",
+      "owl:sameAs": [
+        {"@id": "wd:Q29029616"},
+        {"@id": "dbr:Kripke_semantics"}
+      ],
+      "rdfs:seeAlso": [
+        {"@id": "https://doi.org/10.1016/S0049-237X(08)71685-9"}
+      ],
+      "rdfs:comment": "Introduces Kripke semantics for intuitionistic logic and modal logic"
+    },
+    {
+      "@id": "catty:citations/sambin2003basic",
+      "@type": "bibo:AcademicArticle",
+      "dct:identifier": "sambin2003basic",
+      "dct:creator": [
+        {"@type": "foaf:Person", "foaf:name": "Giovanni Sambin"},
+        {"@type": "foaf:Person", "foaf:name": "Giulia Battilotti"},
+        {"@type": "foaf:Person", "foaf:name": "Claudia Faggian"}
+      ],
+      "dct:title": "Basic Logic: Reflection, Symmetry, Visibility",
+      "dct:issued": "2003",
+      "bibo:pageStart": "869",
+      "bibo:pageEnd": "888",
+      "bibo:volume": "68",
+      "bibo:issue": "3",
+      "dct:isPartOf": {
+        "@type": "bibo:Journal",
+        "dct:title": "The Journal of Symbolic Logic"
+      },
+      "bibo:doi": "10.2178/jsl/1058448442",
+      "owl:sameAs": {"@id": "wd:Q56474321"},
+      "rdfs:seeAlso": [
+        {"@id": "https://doi.org/10.2178/jsl/1058448442"}
+      ],
+      "rdfs:comment": "Introduces basic logic with reflection and symmetry principles"
+    },
+    {
+      "@id": "catty:citations/lawvere1963functorial",
+      "@type": "bibo:AcademicArticle",
+      "dct:identifier": "lawvere1963functorial",
+      "dct:creator": {
+        "@type": "foaf:Person",
+        "foaf:name": "F. William Lawvere"
+      },
+      "dct:title": "Functorial Semantics of Algebraic Theories",
+      "dct:issued": "1963",
+      "bibo:pageStart": "869",
+      "bibo:pageEnd": "872",
+      "bibo:volume": "50",
+      "bibo:issue": "5",
+      "dct:isPartOf": {
+        "@type": "bibo:Journal",
+        "dct:title": "Proceedings of the National Academy of Sciences"
+      },
+      "bibo:doi": "10.1073/pnas.50.5.869",
+      "owl:sameAs": [
+        {"@id": "wd:Q29398537"},
+        {"@id": "dbr:Functorial_semantics"}
+      ],
+      "rdfs:seeAlso": [
+        {"@id": "https://doi.org/10.1073/pnas.50.5.869"}
+      ],
+      "rdfs:comment": "Foundation of categorical logic and algebraic theories"
+    },
+    {
+      "@id": "catty:citations/maclane1971categories",
+      "@type": "bibo:Book",
+      "dct:identifier": "maclane1971categories",
+      "dct:creator": {
+        "@type": "foaf:Person",
+        "foaf:name": "Saunders Mac Lane"
+      },
+      "dct:title": "Categories for the Working Mathematician",
+      "dct:issued": "1971",
+      "dct:publisher": {
+        "@type": "foaf:Organization",
+        "foaf:name": "Springer-Verlag"
+      },
+      "bibo:isbn": "978-0-387-98403-2",
+      "owl:sameAs": [
+        {"@id": "wd:Q1049706"},
+        {"@id": "dbr:Categories_for_the_Working_Mathematician"}
+      ],
+      "rdfs:comment": "Standard reference for category theory"
+    },
+    {
+      "@id": "catty:citations/prawitz1965natural",
+      "@type": "bibo:Book",
+      "dct:identifier": "prawitz1965natural",
+      "dct:creator": {
+        "@type": "foaf:Person",
+        "foaf:name": "Dag Prawitz"
+      },
+      "dct:title": "Natural Deduction: A Proof-Theoretical Study",
+      "dct:issued": "1965",
+      "dct:publisher": {
+        "@type": "foaf:Organization",
+        "foaf:name": "Almqvist & Wiksell"
+      },
+      "owl:sameAs": {"@id": "wd:Q56426780"},
+      "rdfs:comment": "Foundational work on natural deduction and proof theory"
+    },
+    {
+      "@id": "catty:citations/troelstra2000basic",
+      "@type": "bibo:Book",
+      "dct:identifier": "troelstra2000basic",
+      "dct:creator": [
+        {"@type": "foaf:Person", "foaf:name": "Anne Sjerp Troelstra"},
+        {"@type": "foaf:Person", "foaf:name": "Helmut Schwichtenberg"}
+      ],
+      "dct:title": "Basic Proof Theory",
+      "dct:issued": "2000",
+      "schema:bookEdition": "2nd",
+      "dct:publisher": {
+        "@type": "foaf:Organization",
+        "foaf:name": "Cambridge University Press"
+      },
+      "bibo:isbn": "978-0-521-77911-1",
+      "owl:sameAs": {"@id": "wd:Q29466841"},
+      "rdfs:comment": "Comprehensive treatment of structural proof theory"
+    },
+    {
+      "@id": "catty:citations/abramsky1994proofs",
+      "@type": "bibo:AcademicArticle",
+      "dct:identifier": "abramsky1994proofs",
+      "dct:creator": {
+        "@type": "foaf:Person",
+        "foaf:name": "Samson Abramsky"
+      },
+      "dct:title": "Proofs as Processes",
+      "dct:issued": "1994",
+      "bibo:pageStart": "5",
+      "bibo:pageEnd": "9",
+      "bibo:volume": "135",
+      "bibo:issue": "1",
+      "dct:isPartOf": {
+        "@type": "bibo:Journal",
+        "dct:title": "Theoretical Computer Science"
+      },
+      "bibo:doi": "10.1016/0304-3975(94)00103-0",
+      "owl:sameAs": {"@id": "wd:Q56558122"},
+      "rdfs:seeAlso": [
+        {"@id": "https://doi.org/10.1016/0304-3975(94)00103-0"}
+      ],
+      "rdfs:comment": "Connects proof theory to process calculi via category theory"
+    },
+    {
+      "@id": "catty:citations/seely1989linear",
+      "@type": "bibo:AcademicArticle",
+      "dct:identifier": "seely1989linear",
+      "dct:creator": {
+        "@type": "foaf:Person",
+        "foaf:name": "R. A. G. Seely"
+      },
+      "dct:title": "Linear Logic, *-Autonomous Categories and Cofree Coalgebras",
+      "dct:issued": "1989",
+      "bibo:pageStart": "371",
+      "bibo:pageEnd": "382",
+      "bibo:volume": "92",
+      "dct:isPartOf": {
+        "@type": "bibo:Journal",
+        "dct:title": "Contemporary Mathematics"
+      },
+      "bibo:doi": "10.1090/conm/092/1003210",
+      "owl:sameAs": {"@id": "wd:Q56558921"},
+      "rdfs:seeAlso": [
+        {"@id": "https://doi.org/10.1090/conm/092/1003210"}
+      ],
+      "rdfs:comment": "Categorical semantics of linear logic"
+    },
+    {
+      "@id": "catty:citations/jacobs1999categorical",
+      "@type": "bibo:Book",
+      "dct:identifier": "jacobs1999categorical",
+      "dct:creator": {
+        "@type": "foaf:Person",
+        "foaf:name": "Bart Jacobs"
+      },
+      "dct:title": "Categorical Logic and Type Theory",
+      "dct:issued": "1999",
+      "dct:publisher": {
+        "@type": "foaf:Organization",
+        "foaf:name": "Elsevier"
+      },
+      "bibo:isbn": "978-0-444-50170-7",
+      "owl:sameAs": [
+        {"@id": "wd:Q29466853"},
+        {"@id": "dbr:Categorical_logic"}
+      ],
+      "rdfs:comment": "Comprehensive treatment of categorical logic and dependent type theory"
+    },
+    {
+      "@id": "catty:citations/lambek1988introduction",
+      "@type": "bibo:Book",
+      "dct:identifier": "lambek1988introduction",
+      "dct:creator": [
+        {"@type": "foaf:Person", "foaf:name": "Joachim Lambek"},
+        {"@type": "foaf:Person", "foaf:name": "Philip J. Scott"}
+      ],
+      "dct:title": "Introduction to Higher Order Categorical Logic",
+      "dct:issued": "1988",
+      "dct:publisher": {
+        "@type": "foaf:Organization",
+        "foaf:name": "Cambridge University Press"
+      },
+      "bibo:isbn": "978-0-521-35653-4",
+      "owl:sameAs": {"@id": "wd:Q56474567"},
+      "rdfs:comment": "Standard reference for higher-order categorical logic"
+    },
+    {
+      "@id": "catty:citations/barr1990category",
+      "@type": "bibo:Book",
+      "dct:identifier": "barr1990category",
+      "dct:creator": [
+        {"@type": "foaf:Person", "foaf:name": "Michael Barr"},
+        {"@type": "foaf:Person", "foaf:name": "Charles Wells"}
+      ],
+      "dct:title": "Category Theory for Computing Science",
+      "dct:issued": "1990",
+      "dct:publisher": {
+        "@type": "foaf:Organization",
+        "foaf:name": "Prentice Hall"
+      },
+      "bibo:isbn": "978-0-13-120486-7",
+      "owl:sameAs": {"@id": "wd:Q29466902"},
+      "rdfs:comment": "Category theory from computational perspective"
+    },
+    {
+      "@id": "catty:citations/urban2015categorical",
+      "@type": "bibo:Article",
+      "dct:identifier": "urban2015categorical",
+      "dct:creator": {
+        "@type": "foaf:Person",
+        "foaf:name": "Josef Urban"
+      },
+      "dct:title": "Categorical Structures and Ontologies in Mathematics",
+      "dct:issued": "2015",
+      "bibo:pageStart": "130",
+      "bibo:pageEnd": "145",
+      "dct:isPartOf": {
+        "@type": "bibo:Proceedings",
+        "dct:title": "Intelligent Computer Mathematics"
+      },
+      "bibo:doi": "10.1007/978-3-319-20615-8_9",
+      "rdfs:seeAlso": [
+        {"@id": "https://doi.org/10.1007/978-3-319-20615-8_9"}
+      ],
+      "rdfs:comment": "Connects category theory to mathematical ontologies"
+    },
+    {
+      "@id": "catty:citations/trafford2020categorical",
+      "@type": "bibo:AcademicArticle",
+      "dct:identifier": "trafford2020categorical",
+      "dct:creator": {
+        "@type": "foaf:Person",
+        "foaf:name": "James Trafford"
+      },
+      "dct:title": "Categorical Semantic Models for Defeasible Reasoning",
+      "dct:issued": "2020",
+      "bibo:pageStart": "4965",
+      "bibo:pageEnd": "4993",
+      "bibo:volume": "197",
+      "dct:isPartOf": {
+        "@type": "bibo:Journal",
+        "dct:title": "Synthese"
+      },
+      "bibo:doi": "10.1007/s11229-018-01998-z",
+      "owl:sameAs": {"@id": "wd:Q87665432"},
+      "rdfs:seeAlso": [
+        {"@id": "https://doi.org/10.1007/s11229-018-01998-z"}
+      ],
+      "rdfs:comment": "Categorical approach to non-monotonic reasoning"
+    },
+    {
+      "@id": "catty:citations/curry1958combinatory",
+      "@type": "bibo:Book",
+      "dct:identifier": "curry1958combinatory",
+      "dct:creator": [
+        {"@type": "foaf:Person", "foaf:name": "Haskell B. Curry"},
+        {"@type": "foaf:Person", "foaf:name": "Robert Feys"}
+      ],
+      "dct:title": "Combinatory Logic, Volume I",
+      "dct:issued": "1958",
+      "dct:publisher": {
+        "@type": "foaf:Organization",
+        "foaf:name": "North-Holland"
+      },
+      "owl:sameAs": [
+        {"@id": "wd:Q29466814"},
+        {"@id": "dbr:Combinatory_logic"}
+      ],
+      "rdfs:comment": "Foundation of combinatory logic and lambda calculus"
+    },
+    {
+      "@id": "catty:citations/howard1980formulae",
+      "@type": "bibo:Chapter",
+      "dct:identifier": "howard1980formulae",
+      "dct:creator": {
+        "@type": "foaf:Person",
+        "foaf:name": "William A. Howard"
+      },
+      "dct:title": "The Formulae-as-Types Notion of Construction",
+      "dct:issued": "1980",
+      "bibo:pageStart": "479",
+      "bibo:pageEnd": "490",
+      "dct:isPartOf": {
+        "@type": "bibo:Book",
+        "dct:title": "To H.B. Curry: Essays on Combinatory Logic, Lambda Calculus and Formalism",
+        "dct:publisher": {
+          "@type": "foaf:Organization",
+          "foaf:name": "Academic Press"
+        }
+      },
+      "owl:sameAs": {"@id": "wd:Q56558101"},
+      "rdfs:comment": "Establishes Curry-Howard correspondence between proofs and programs"
+    }
+  ]
+}
