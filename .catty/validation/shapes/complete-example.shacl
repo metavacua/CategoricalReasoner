@@ -2,7 +2,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix catty: <http://catty.ai/ontology#> .
+@prefix catty: <https://metavacua.github.io/CategoricalReasoner/ontology#> .
 
 # SHACL Shapes for Complete Example Validation
 
@@ -14,7 +14,7 @@ catty:MinimumLogicCountShape
         a sh:SPARQLConstraint ;
         sh:message "Complete example must contain at least 6 logic instances" ;
         sh:select """
-            PREFIX catty: <http://catty.ai/ontology#>
+            PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology#>
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             SELECT $this
             WHERE {
@@ -37,7 +37,7 @@ catty:MinimumMorphismCountShape
         a sh:SPARQLConstraint ;
         sh:message "Complete example must contain at least 10 morphism instances" ;
         sh:select """
-            PREFIX catty: <http://catty.ai/ontology#>
+            PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology#>
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             SELECT $this
             WHERE {
@@ -60,7 +60,7 @@ catty:AllStructuralRulesShape
         a sh:SPARQLConstraint ;
         sh:message "Complete example must define all structural rules (Weakening, Contraction, Exchange)" ;
         sh:select """
-            PREFIX catty: <http://catty.ai/ontology#>
+            PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology#>
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             SELECT $this
             WHERE {
@@ -79,7 +79,7 @@ catty:CategoricalCompletenessShape
         a sh:SPARQLConstraint ;
         sh:message "Complete example must demonstrate complete categorical structure (objects and morphisms)" ;
         sh:select """
-            PREFIX catty: <http://catty.ai/ontology#>
+            PREFIX catty: <https://metavacua.github.io/CategoricalReasoner/ontology#>
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             SELECT $this
             WHERE {

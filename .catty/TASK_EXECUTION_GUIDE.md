@@ -232,7 +232,7 @@ Create `ontology/catty-categorical-schema.jsonld`:
 ```json
 {
   "@context": {
-    "catty": "http://catty.ai/ontology#",
+    "catty": "https://metavacua.github.io/CategoricalReasoner/ontology#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "owl": "http://www.w3.org/2002/07/owl#",
@@ -306,7 +306,7 @@ Output:
 ```json
 {
   "@context": {
-    "catty": "http://catty.ai/ontology#",
+    "catty": "https://metavacua.github.io/CategoricalReasoner/ontology#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "owl": "http://www.w3.org/2002/07/owl#",
@@ -335,7 +335,7 @@ Output:
 **Template:**
 
 ```turtle
-@prefix catty: <http://catty.ai/ontology#> .
+@prefix catty: <https://metavacua.github.io/CategoricalReasoner/ontology#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
@@ -481,7 +481,7 @@ from rdflib import Graph, Namespace
 g = Graph()
 g.parse(artifact_path)
 
-CATTY = Namespace("http://catty.ai/ontology#")
+CATTY = Namespace("https://metavacua.github.io/CategoricalReasoner/ontology#")
 logics = list(g.subjects(RDF.type, CATTY.Logic))
 assert len(logics) >= 7, f"Expected at least 7 logics, found {len(logics)}"
 ```

@@ -75,7 +75,7 @@ Added `semantic_web_technologies` section to metadata:
 
 #### Deployment
 - **GitHub Pages**: HTML5 + PDF
-- **URL**: `https://<owner>.github.io/Catty/`
+- **URL**: `https://metavacua.github.io/CategoricalReasoner/`
 - **Triplestore**: Not deployed (Blazegraph removed)
 
 ### 4. Updated Documentation (✅ Complete)
@@ -231,7 +231,7 @@ Format: YAML (GitHub Actions)
 5. **Test GitHub Pages deployment** (manual):
    - Push changes to GitHub
    - Go to Actions → Deploy → Run workflow
-   - Verify site at `https://<owner>.github.io/Catty/`
+   - Verify site at `https://metavacua.github.io/CategoricalReasoner/`
 
 ### For Coding Agents
 

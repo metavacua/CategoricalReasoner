@@ -417,7 +417,7 @@ Record Category := {
 
 ```turtle
 @prefix coq: <http://coq.inria.fr/library/> .
-@prefix catty: <http://catty.org/ontology/> .
+@prefix catty: <https://metavacua.github.io/CategoricalReasoner/ontology/> .
 
 coq:Category a owl:Class ;
     rdfs:label "Category (Coq)" ;
@@ -486,7 +486,7 @@ end CategoryTheory
 
 ```turtle
 @prefix lean: <http://leanprover.org/library/> .
-@prefix catty: <http://catty.org/ontology/> .
+@prefix catty: <https://metavacua.github.io/CategoricalReasoner/ontology/> .
 
 lean:CategoryTheory.Category a owl:Class ;
     rdfs:label "Category (Lean)" ;
