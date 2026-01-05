@@ -7,7 +7,7 @@ LATEX_FLAGS := -interaction=nonstopmode -halt-on-error -file-line-error
 
 all: $(PDF)
 
-$(PDF): $(TEX) preamble.tex chapters/chapter1.tex
+$(PDF): $(TEX) preamble.tex chapters/categorical-semantic-audit.tex chapters/conclusions.tex chapters/introduction.tex
 	$(LATEX) $(LATEX_FLAGS) $(TEX)
 	$(LATEX) $(LATEX_FLAGS) $(TEX)
 
