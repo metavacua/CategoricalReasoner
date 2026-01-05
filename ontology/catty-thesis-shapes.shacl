@@ -1,0 +1,441 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix catty: <http://catty.org/ontology/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+# =============================================================================
+# Catty Thesis SHACL Shapes
+# =============================================================================
+# Purpose: Enforce RDF constraints for thesis artifacts
+# These shapes validate all thesis-related RDF resources
+# =============================================================================
+
+catty:ThesisShapes a sh:NodeShape ;
+  sh:targetClass catty:Thesis ;
+  rdfs:label "Thesis Shape" ;
+  rdfs:comment "Validates thesis-level structure" ;
+  sh:property [
+    sh:path dct:title ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path dct:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^catty-thesis-v[0-9]+\\.[0-9]+\\.[0-9]+$" ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] .
+
+catty:TheoremShape a sh:NodeShape ;
+  sh:targetClass catty:Theorem ;
+  rdfs:label "Theorem Shape" ;
+  rdfs:comment "Validates theorem resources" ;
+  sh:property [
+    sh:path dct:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^thm-[a-z0-9-]+$" ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Theorem ID must match pattern thm-[lowercase-hyphenated]" ;
+  ] ;
+  sh:property [
+    sh:path dct:title ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path catty:hasStatement ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Theorem must have exactly one statement" ;
+  ] ;
+  sh:property [
+    sh:path catty:hasProof ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Theorem must reference exactly one proof resource" ;
+  ] ;
+  sh:property [
+    sh:path catty:hasPremise ;
+    sh:nodeKind sh:IRI ;
+    rdfs:comment "Optional premises for the theorem" ;
+  ] ;
+  sh:property [
+    sh:path dct:references ;
+    sh:nodeKind sh:IRI ;
+    rdfs:comment "Optional citations for the theorem" ;
+  ] ;
+  sh:property [
+    sh:path catty:provedFrom ;
+    sh:nodeKind sh:IRI ;
+    rdfs:comment "Optional provenance for the proof" ;
+  ] .
+
+catty:DefinitionShape a sh:NodeShape ;
+  sh:targetClass catty:Definition ;
+  rdfs:label "Definition Shape" ;
+  rdfs:comment "Validates definition resources" ;
+  sh:property [
+    sh:path dct:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^def-[a-z0-9-]+$" ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Definition ID must match pattern def-[lowercase-hyphenated]" ;
+  ] ;
+  sh:property [
+    sh:path dct:title ;
+    sh:datatype xsd:string ;
+    sh:minCount 0 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path catty:definedTerm ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Definition must have exactly one term" ;
+  ] ;
+  sh:property [
+    sh:path catty:definition ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Definition must have exactly one meaning" ;
+  ] ;
+  sh:property [
+    sh:path dct:references ;
+    sh:nodeKind sh:IRI ;
+    rdfs:comment "Optional citations for the definition" ;
+  ] ;
+  sh:property [
+    sh:path catty:definedFrom ;
+    sh:nodeKind sh:IRI ;
+    rdfs:comment "Optional provenance for the definition" ;
+  ] .
+
+catty:ProofShape a sh:NodeShape ;
+  sh:targetClass catty:Proof ;
+  rdfs:label "Proof Shape" ;
+  rdfs:comment "Validates proof resources" ;
+  sh:property [
+    sh:path dct:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^prf-[a-z0-9-]+$" ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Proof ID must match pattern prf-[lowercase-hyphenated]" ;
+  ] ;
+  sh:property [
+    sh:path catty:hasStep ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    rdfs:comment "Proof must have at least one step" ;
+  ] ;
+  sh:property [
+    sh:path catty:hasConclusion ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Proof must have exactly one conclusion" ;
+  ] ;
+  sh:property [
+    sh:path catty:proves ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Proof must prove exactly one theorem" ;
+  ] .
+
+catty:LemmaShape a sh:NodeShape ;
+  sh:targetClass catty:Lemma ;
+  rdfs:label "Lemma Shape" ;
+  rdfs:comment "Validates lemma resources" ;
+  sh:property [
+    sh:path dct:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^lem-[a-z0-9-]+$" ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Lemma ID must match pattern lem-[lowercase-hyphenated]" ;
+  ] ;
+  sh:property [
+    sh:path dct:title ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path catty:hasStatement ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Lemma must have exactly one statement" ;
+  ] ;
+  sh:property [
+    sh:path catty:hasProof ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Lemma must reference exactly one proof resource" ;
+  ] ;
+  sh:property [
+    sh:path catty:provedFrom ;
+    sh:nodeKind sh:IRI ;
+    rdfs:comment "Optional provenance for the lemma proof" ;
+  ] .
+
+catty:PropositionShape a sh:NodeShape ;
+  sh:targetClass catty:Proposition ;
+  rdfs:label "Proposition Shape" ;
+  rdfs:comment "Validates proposition resources" ;
+  sh:property [
+    sh:path dct:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^prop-[a-z0-9-]+$" ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Proposition ID must match pattern prop-[lowercase-hyphenated]" ;
+  ] ;
+  sh:property [
+    sh:path dct:title ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path catty:hasStatement ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Proposition must have exactly one statement" ;
+  ] ;
+  sh:property [
+    sh:path catty:hasProof ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 0 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Proposition may have a proof" ;
+  ] ;
+  sh:property [
+    sh:path catty:provedFrom ;
+    sh:nodeKind sh:IRI ;
+    rdfs:comment "Optional provenance for the proposition proof" ;
+  ] .
+
+catty:ExampleShape a sh:NodeShape ;
+  sh:targetClass catty:Example ;
+  rdfs:label "Example Shape" ;
+  rdfs:comment "Validates example resources" ;
+  sh:property [
+    sh:path dct:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^ex-[a-z0-9-]+$" ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Example ID must match pattern ex-[lowercase-hyphenated]" ;
+  ] ;
+  sh:property [
+    sh:path dct:title ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path catty:description ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Example must have exactly one description" ;
+  ] ;
+  sh:property [
+    sh:path catty:instantiation ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Example must have exactly one instantiation" ;
+  ] ;
+  sh:property [
+    sh:path dct:references ;
+    sh:nodeKind sh:IRI ;
+    rdfs:comment "Optional citations for the example" ;
+  ] .
+
+catty:SectionShape a sh:NodeShape ;
+  sh:targetClass catty:Section ;
+  rdfs:label "Section Shape" ;
+  rdfs:comment "Validates section resources" ;
+  sh:property [
+    sh:path dct:identifier ;
+    sh:datatype xsd:string ;
+    sh:pattern "^sec-[a-z0-9-]+$" ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Section ID must match pattern sec-[lowercase-hyphenated]" ;
+  ] ;
+  sh:property [
+    sh:path dct:title ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] ;
+  sh:property [
+    sh:path catty:hasContent ;
+    sh:datatype xsd:string ;
+    rdfs:comment "Optional content for the section" ;
+  ] ;
+  sh:property [
+    sh:path dct:references ;
+    sh:nodeKind sh:IRI ;
+    rdfs:comment "Optional citations for the section" ;
+  ] ;
+  sh:property [
+    sh:path prov:wasDerivedFrom ;
+    sh:nodeKind sh:IRI ;
+    rdfs:comment "Optional provenance for the section" ;
+  ] .
+
+catty:CitationShape a sh:NodeShape ;
+  sh:targetClass bibo:Article, bibo:Book, bibo:Document ;
+  rdfs:label "Citation Shape" ;
+  rdfs:comment "Validates citation resources" ;
+  sh:property [
+    sh:path dct:creator ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    rdfs:comment "Citation must have at least one creator" ;
+  ] ;
+  sh:property [
+    sh:path dct:title ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Citation must have exactly one title" ;
+  ] ;
+  sh:property [
+    sh:path dct:issued ;
+    sh:datatype xsd:gYear ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Citation must have exactly one year" ;
+  ] ;
+  sh:property [
+    sh:path dct:identifier ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    rdfs:comment "Citation must have exactly one identifier matching YAML registry" ;
+  ] ;
+  sh:property [
+    sh:path rdfs:comment ;
+    sh:datatype xsd:string ;
+    rdfs:comment "Optional comment describing the citation" ;
+  ] ;
+  sh:property [
+    sh:path rdfs:seeAlso ;
+    sh:nodeKind sh:IRI ;
+    rdfs:comment "External links (DOI, URL, Wikidata)" ;
+  ] ;
+  sh:property [
+    sh:path bibo:doi ;
+    sh:datatype xsd:string ;
+    sh:pattern "^10\\.[0-9]{4,}/.+$" ;
+    rdfs:comment "DOI must match pattern 10.xxxx/..." ;
+  ] .
+
+catty:ProvenanceLinkShape a sh:NodeShape ;
+  sh:targetSubjectsOf dct:references, catty:definedFrom, catty:provedFrom, prov:wasDerivedFrom ;
+  rdfs:label "Provenance Link Shape" ;
+  rdfs:comment "Validates provenance links point to registered citations" ;
+  sh:property [
+    sh:path dct:references ;
+    sh:nodeKind sh:IRI ;
+    sh:class bibo:Article, bibo:Book, bibo:Document ;
+    rdfs:comment "References must point to citation resources" ;
+  ] ;
+  sh:property [
+    sh:path catty:definedFrom ;
+    sh:nodeKind sh:IRI ;
+    sh:class bibo:Article, bibo:Book, bibo:Document ;
+    rdfs:comment "definedFrom must point to citation resources" ;
+  ] ;
+  sh:property [
+    sh:path catty:provedFrom ;
+    sh:nodeKind sh:IRI ;
+    sh:class bibo:Article, bibo:Book, bibo:Document ;
+    rdfs:comment "provedFrom must point to citation resources" ;
+  ] ;
+  sh:property [
+    sh:path prov:wasDerivedFrom ;
+    sh:nodeKind sh:IRI ;
+    rdfs:comment "wasDerivedFrom must point to citation resources" ;
+  ] .
+
+catty:UniquenessShape a sh:NodeShape ;
+  sh:targetSubjectsOf dct:identifier ;
+  rdfs:label "Uniqueness Shape" ;
+  rdfs:comment "Validates all IDs are globally unique" ;
+  sh:property [
+    sh:path dct:identifier ;
+    sh:datatype xsd:string ;
+    sh:uniqueLang true ;
+    rdfs:comment "All dct:identifier values must be unique" ;
+  ] .
+
+catty:ExternalLinkShape a sh:NodeShape ;
+  sh:targetSubjectsOf rdfs:seeAlso ;
+  rdfs:label "External Link Shape" ;
+  rdfs:comment "Validates external links are properly formatted" ;
+  sh:property [
+    sh:path rdfs:seeAlso ;
+    sh:nodeKind sh:IRI ;
+    rdfs:comment "External links must be valid URIs" ;
+  ] .
+
+catty:WikidataLinkShape a sh:NodeShape ;
+  sh:targetSubjectsOf <http://www.w3.org/2002/07/owl#sameAs> ;
+  rdfs:label "Wikidata Link Shape" ;
+  rdfs:comment "Validates Wikidata Q-IDs are properly formatted" ;
+  sh:property [
+    sh:path owl:sameAs ;
+    sh:nodeKind sh:IRI ;
+    sh:pattern "^[a-z]+:Q[0-9]+$" ;
+    rdfs:comment "Wikidata links must match prefix:Q[0-9]+ pattern" ;
+  ] .
+
+catty:CircularReferenceShape a sh:NodeShape ;
+  sh:targetClass catty:Theorem, catty:Lemma, catty:Proposition ;
+  rdfs:label "Circular Reference Shape" ;
+  rdfs:comment "Prevents circular references in proofs" ;
+  sh:property [
+    sh:path catty:hasProof ;
+    sh:node [
+      sh:not [
+        sh:path catty:proves ;
+        sh:nodeKind sh:IRI ;
+      ] ;
+    ] ;
+    rdfs:comment "Proof cannot reference the theorem it proves" ;
+  ] .
+
+catty:NestingConstraintShape a sh:NodeShape ;
+  sh:targetClass catty:Proof ;
+  rdfs:label "Nesting Constraint Shape" ;
+  rdfs:comment "Enforces proper nesting constraints" ;
+  sh:property [
+    sh:path rdf:type ;
+    sh:not [
+      sh:in (catty:Theorem catty:Lemma catty:Proposition) ;
+    ] ;
+    rdfs:comment "Proof cannot be typed as theorem/lemma/proposition" ;
+  ] .

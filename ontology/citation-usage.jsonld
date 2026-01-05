@@ -1,0 +1,199 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "catty": "http://catty.org/ontology/",
+    "dct": "http://purl.org/dc/terms/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dct:references": { "@type": "@id" },
+    "dct:isReferencedBy": { "@type": "@id" },
+    "prov:wasDerivedFrom": { "@type": "@id" }
+  },
+  "@graph": [
+    {
+      "@id": "catty:CitationUsageModel",
+      "@type": "owl:Ontology",
+      "rdfs:label": "Citation Usage and Provenance Model",
+      "rdfs:comment": "Tracks which TeX elements cite which sources and provenance relationships",
+      "dct:description": "This model defines how citations are used in thesis content and tracks provenance links between theorems, definitions, sections and their source materials"
+    },
+    {
+      "@id": "catty:hasCitation",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "has citation",
+      "rdfs:comment": "A TeX element (theorem, definition, section) cites a bibliographic source",
+      "rdfs:domain": [
+        "catty:Theorem",
+        "catty:Definition",
+        "catty:Lemma",
+        "catty:Proposition",
+        "catty:Example",
+        "catty:Remark",
+        "catty:Section"
+      ],
+      "rdfs:range": [
+        "bibo:Article",
+        "bibo:Book",
+        "bibo:Document"
+      ],
+      "owl:equivalentProperty": "dct:references"
+    },
+    {
+      "@id": "catty:isCitedIn",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "is cited in",
+      "rdfs:comment": "A bibliographic source is cited by one or more TeX elements",
+      "rdfs:domain": [
+        "bibo:Article",
+        "bibo:Book",
+        "bibo:Document"
+      ],
+      "rdfs:range": [
+        "catty:Theorem",
+        "catty:Definition",
+        "catty:Lemma",
+        "catty:Proposition",
+        "catty:Example",
+        "catty:Remark",
+        "catty:Section"
+      ],
+      "owl:inverseOf": "catty:hasCitation",
+      "owl:equivalentProperty": "dct:isReferencedBy"
+    },
+    {
+      "@id": "catty:definedFrom",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "defined from",
+      "rdfs:comment": "A definition is derived from or inspired by a bibliographic source",
+      "rdfs:domain": "catty:Definition",
+      "rdfs:range": [
+        "bibo:Article",
+        "bibo:Book",
+        "bibo:Document"
+      ],
+      "rdfs:subPropertyOf": "prov:wasDerivedFrom"
+    },
+    {
+      "@id": "catty:provedFrom",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "proved from",
+      "rdfs:comment": "A theorem or proposition is proved using techniques from a bibliographic source",
+      "rdfs:domain": [
+        "catty:Theorem",
+        "catty:Proposition",
+        "catty:Lemma"
+      ],
+      "rdfs:range": [
+        "bibo:Article",
+        "bibo:Book",
+        "bibo:Document"
+      ],
+      "rdfs:subPropertyOf": "prov:wasDerivedFrom"
+    },
+    {
+      "@id": "catty:inspiredBy",
+      "@type": "owl:ObjectProperty",
+      "rdfs:label": "inspired by",
+      "rdfs:comment": "Content is conceptually inspired by but not directly citing a source",
+      "rdfs:domain": [
+        "catty:Theorem",
+        "catty:Definition",
+        "catty:Section"
+      ],
+      "rdfs:range": [
+        "bibo:Article",
+        "bibo:Book",
+        "bibo:Document"
+      ],
+      "rdfs:subPropertyOf": "prov:wasInfluencedBy"
+    },
+    {
+      "@id": "catty:CitationCount",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:label": "citation count",
+      "rdfs:comment": "Number of times a bibliographic source is cited in the thesis",
+      "rdfs:domain": [
+        "bibo:Article",
+        "bibo:Book",
+        "bibo:Document"
+      ],
+      "rdfs:range": "xsd:nonNegativeInteger"
+    },
+    {
+      "@id": "catty:Section",
+      "@type": "owl:Class",
+      "rdfs:label": "Section",
+      "rdfs:comment": "A section in the thesis document"
+    },
+    {
+      "@id": "catty:Theorem",
+      "@type": "owl:Class",
+      "rdfs:label": "Theorem",
+      "rdfs:comment": "A theorem in the thesis"
+    },
+    {
+      "@id": "catty:Definition",
+      "@type": "owl:Class",
+      "rdfs:label": "Definition",
+      "rdfs:comment": "A definition in the thesis"
+    },
+    {
+      "@id": "catty:Lemma",
+      "@type": "owl:Class",
+      "rdfs:label": "Lemma",
+      "rdfs:comment": "A lemma in the thesis"
+    },
+    {
+      "@id": "catty:Proposition",
+      "@type": "owl:Class",
+      "rdfs:label": "Proposition",
+      "rdfs:comment": "A proposition in the thesis"
+    },
+    {
+      "@id": "catty:Example",
+      "@type": "owl:Class",
+      "rdfs:label": "Example",
+      "rdfs:comment": "An example in the thesis"
+    },
+    {
+      "@id": "catty:Remark",
+      "@type": "owl:Class",
+      "rdfs:label": "Remark",
+      "rdfs:comment": "A remark in the thesis"
+    },
+    {
+      "@id": "catty:CitationValidation",
+      "@type": "owl:Class",
+      "rdfs:label": "Citation Validation",
+      "rdfs:comment": "Constraints for validating citation usage"
+    },
+    {
+      "@id": "catty:ValidCitation",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "catty:CitationValidation",
+      "rdfs:label": "Valid Citation",
+      "rdfs:comment": "A citation that passes all validation checks"
+    },
+    {
+      "@id": "catty:CitationMustExist",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "owl:Restriction",
+      "rdfs:label": "Citation Must Exist",
+      "rdfs:comment": "Constraint: every citation key must exist in the citation registry",
+      "owl:onProperty": "catty:hasCitation",
+      "owl:minCardinality": 0
+    },
+    {
+      "@id": "catty:ExternalLinksMustResolve",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": "owl:Restriction",
+      "rdfs:label": "External Links Must Resolve",
+      "rdfs:comment": "Constraint: all external links (DOI, URL, Wikidata) must be resolvable",
+      "owl:onProperty": "rdfs:seeAlso",
+      "owl:minCardinality": 0
+    }
+  ]
+}
