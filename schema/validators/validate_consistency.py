@@ -242,6 +242,9 @@ class ConsistencyValidator:
 
         missing_rdf = set()
         for elem in self.tex_elements:
+            # Skip sections - they are structural elements and don't require RDF
+            if elem.element_type == 'section':
+                continue
             if elem.id not in self.rdf_elements:
                 missing_rdf.add((elem.id, elem.file, elem.line_number))
 
@@ -254,7 +257,7 @@ class ConsistencyValidator:
                     severity="ERROR"
                 ))
         else:
-            print("  ✓ All TeX elements have corresponding RDF resources")
+            print("  ✓ All TeX elements (theorems, definitions, lemmas, examples) have corresponding RDF resources")
 
     def validate_rdf_to_tex(self):
         """Validate that every RDF resource is referenced in TeX"""

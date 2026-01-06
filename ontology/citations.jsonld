@@ -9,12 +9,13 @@
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "wd": "http://www.wikidata.org/entity/",
     "dct:creator": { "@type": "xsd:string" },
     "dct:title": { "@type": "xsd:string" },
     "dct:issued": { "@type": "xsd:gYear" },
     "dct:identifier": { "@type": "xsd:string" },
     "rdfs:seeAlso": { "@type": "@id" },
-    "owl:sameAs": { "@type": "@id" }
+    "owl:sameAs": { "@type": "@id", "@id": "owl:sameAs" }
   },
   "@graph": [
     {
@@ -29,7 +30,7 @@
         "https://doi.org/10.1016/0304-3975(87)90045-4",
         "https://www.wikidata.org/wiki/Q739867"
       ],
-      "owl:sameAs": "wd:Q739867",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q739867",
       "rdfs:comment": "Foundational paper introducing linear logic with structural restrictions"
     },
     {
@@ -43,7 +44,7 @@
         "https://www.jstor.org/stable/2269533",
         "https://www.wikidata.org/wiki/Q1020794"
       ],
-      "owl:sameAs": "wd:Q1020794",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q1020794",
       "rdfs:comment": "Kripke semantics for intuitionistic logic using possible worlds"
     },
     {
@@ -59,7 +60,7 @@
         "https://arxiv.org/abs/math/0301250",
         "https://www.wikidata.org/wiki/Q7263983"
       ],
-      "owl:sameAs": "wd:Q7263983",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q7263983",
       "rdfs:comment": "Basic Logic as foundation for substructural logics with structural rules"
     },
     {
@@ -97,7 +98,7 @@
         "https://www.tac.mta.ca/tac/reprints/articles/5/tr5.pdf",
         "https://www.wikidata.org/wiki/Q7262928"
       ],
-      "owl:sameAs": "wd:Q7262928",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q7262928",
       "rdfs:comment": "Foundational work on functorial semantics connecting algebra and category theory"
     },
     {
@@ -112,7 +113,7 @@
         "https://link.springer.com/book/10.1007/978-1-4757-4721-8",
         "https://www.wikidata.org/wiki/Q265095"
       ],
-      "owl:sameAs": "wd:Q265095",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q265095",
       "rdfs:comment": "Standard textbook on category theory"
     },
     {
@@ -126,7 +127,7 @@
         "https://link.springer.com/chapter/10.1007/978-94-009-2847-4_3",
         "https://www.wikidata.org/wiki/Q7268374"
       ],
-      "owl:sameAs": "wd:Q7268374",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q7268374",
       "rdfs:comment": "Category theory applied to linguistics and formal grammar"
     },
     {
@@ -141,7 +142,7 @@
         "https://www.cambridge.org/core/books/substructural-logics",
         "https://www.wikidata.org/wiki/Q7268375"
       ],
-      "owl:sameAs": "wd:Q7268375",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q7268375",
       "rdfs:comment": "Comprehensive treatment of substructural logics including linear and relevant logics"
     },
     {
@@ -156,7 +157,7 @@
         "https://direct.mit.edu/books/book/4534/Basic-Category-Theory-for-Computer-Scientists",
         "https://www.wikidata.org/wiki/Q4813689"
       ],
-      "owl:sameAs": "wd:Q4813689",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q4813689",
       "rdfs:comment": "Category theory for computer science applications"
     },
     {
@@ -171,7 +172,7 @@
         "https://www.jstor.org/stable/2368996",
         "https://www.wikidata.org/wiki/Q7262930"
       ],
-      "owl:sameAs": "wd:Q7262930",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q7262930",
       "rdfs:comment": "Early work on Curry-Howard correspondence connecting logic and computation"
     },
     {
@@ -185,7 +186,7 @@
         "https://www.sciencedirect.com/science/article/pi/S0049237X08711797",
         "https://www.wikidata.org/wiki/Q521559"
       ],
-      "owl:sameAs": "wd:Q521559",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q521559",
       "rdfs:comment": "Formalization of Curry-Howard correspondence: propositions as types, proofs as programs"
     },
     {
@@ -200,7 +201,7 @@
         "https://www.cambridge.org/core/books/proof-analysis",
         "https://www.wikidata.org/wiki/Q7268376"
       ],
-      "owl:sameAs": "wd:Q7268376",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q7268376",
       "rdfs:comment": "Structural proof theory and sequent calculus analysis"
     }
   ]

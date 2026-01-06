@@ -409,8 +409,8 @@ catty:WikidataLinkShape a sh:NodeShape ;
   sh:property [
     sh:path owl:sameAs ;
     sh:nodeKind sh:IRI ;
-    sh:pattern "^[a-z]+:Q[0-9]+$" ;
-    rdfs:comment "Wikidata links must match prefix:Q[0-9]+ pattern" ;
+    sh:pattern "^[a-z]+://[a-z]+.wikidata.org/entity/Q[0-9]+$" ;
+    rdfs:comment "Wikidata links must match full URI pattern" ;
   ] .
 
 catty:CircularReferenceShape a sh:NodeShape ;
