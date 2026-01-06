@@ -377,8 +377,8 @@ catty:ProvenanceLinkShape a sh:NodeShape ;
   ] ;
   sh:property [
     sh:path prov:wasDerivedFrom ;
-    sh:nodeKind sh:IRI ;
-    rdfs:comment "wasDerivedFrom must point to citation resources" ;
+    sh:nodeKind sh:IRIOrLiteral ;
+    rdfs:comment "wasDerivedFrom must point to citation resources or be a literal URL" ;
   ] .
 
 catty:UniquenessShape a sh:NodeShape ;

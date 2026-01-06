@@ -49,25 +49,28 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
-          const comment = `❌ **Thesis Validation Failed**
+          const comment = `❌ **Thesis Validation FAILED**
 
-          The following validation checks must pass before this PR can be merged:
+          **Status**: The pull request has validation failures and cannot be merged.
 
-          - ✅ TeX structure validation
-          - ✅ Citation validation
-          - ✅ RDF/SHACL validation
-          - ✅ Bidirectional consistency validation
+          **Validation Results**:
+          - ❌ TeX structure validation: FAILED
+          - ❌ Citation validation: FAILED  
+          - ❌ RDF/SHACL validation: FAILED
+          - ❌ Bidirectional consistency validation: FAILED
 
-          Please fix the validation errors and push again.
+          **Action Required**: Please fix the validation errors and push again.
 
-          To run validation locally:
+          **Run validation locally**:
           \`\`\`bash
+          cd thesis && make clean && make
           python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
           python schema/validators/validate_citations.py --tex-dir thesis/chapters/ --bibliography bibliography/citations.yaml --ontology ontology/citations.jsonld
           python schema/validators/validate_rdf.py --ontology ontology/ --shapes ontology/catty-thesis-shapes.shacl
           python schema/validators/validate_consistency.py --tex-dir thesis/chapters/ --ontology ontology/ --bibliography bibliography/citations.yaml --mapping schema/tex-rdf-mapping.yaml
           \`\`\`
-          `;
+
+          **Exit Codes**: 0=PASS, 1=FAIL, 2=ERROR`;
 
           github.rest.issues.createComment({
             issue_number: context.issue.number,
@@ -81,15 +84,19 @@ jobs:
       uses: actions/github-script@v6
       with:
         script: |
-          const comment = `✅ **Thesis Validation Passed**
+          const comment = `✅ **Thesis Validation PASSED**
 
-          All validation checks passed successfully:
-          - ✅ TeX structure validation
-          - ✅ Citation validation
-          - ✅ RDF/SHACL validation
-          - ✅ Bidirectional consistency validation
+          **Status**: All validation checks passed successfully.
 
-          This PR is ready for review.`;
+          **Validation Results**:
+          - ✅ TeX structure validation: PASSED
+          - ✅ Citation validation: PASSED
+          - ✅ RDF/SHACL validation: PASSED
+          - ✅ Bidirectional consistency validation: PASSED
+
+          **Exit Codes**: 0=PASS, 1=FAIL, 2=ERROR
+
+          This PR is ready for review and merge.`;
 
           github.rest.issues.createComment({
             issue_number: context.issue.number,

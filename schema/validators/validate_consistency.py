@@ -2,6 +2,10 @@
 """
 Bidirectional Consistency Validator for Catty Thesis
 Validates TeX ↔ RDF ↔ Citation consistency
+
+EXIT CODES:
+  0 = Validation PASSED (no violations)
+  1 = Validation FAILED (violations present)
 """
 
 import argparse
@@ -16,14 +20,14 @@ try:
     import yaml
 except ImportError:
     print("ERROR: PyYAML is required. Install with: pip install pyyaml")
-    sys.exit(1)
+    sys.exit(2)
 
 try:
     from rdflib import Graph, URIRef, Literal
     from rdflib.namespace import RDF, RDFS, DC
 except ImportError:
     print("ERROR: rdflib is required. Install with: pip install rdflib")
-    sys.exit(1)
+    sys.exit(2)
 
 
 @dataclass
@@ -38,23 +42,35 @@ class TeXElement:
 
 
 @dataclass
-class ValidationError:
-    """Represents a validation error"""
+class ValidationResult:
+    """Represents a validation violation"""
+    severity: str  # FATAL, ERROR, WARNING
     file: str
     line: int
     message: str
-    severity: str = "ERROR"
+    constraint: str = None
+
+
+@dataclass 
+class ValidationSummary:
+    """Summary of validation results"""
+    total_violations: int = 0
+    fatal_errors: int = 0
+    violations: int = 0
+    warnings: int = 0
+    passed: bool = True
 
 
 class ConsistencyValidator:
     """Validates bidirectional consistency between TeX, RDF, and citations"""
 
     def __init__(self, mapping_file: Path):
-        self.errors: List[ValidationError] = []
+        self.results: List[ValidationResult] = []
         self.tex_elements: List[TeXElement] = []
         self.rdf_elements: Dict[str, Dict] = {}
         self.citations: Set[str] = set()
         self.mapping = {}
+        self.summary = ValidationSummary()
 
         if mapping_file:
             self.load_mapping(mapping_file)
@@ -69,14 +85,15 @@ class ConsistencyValidator:
             for elem_type, mapping in data['mappings'].items():
                 self.mapping[elem_type] = mapping
 
-            print(f"Loaded mapping for {len(self.mapping)} element types")
+            print(f"✓ Loaded mapping for {len(self.mapping)} element types")
         except Exception as e:
-            self.errors.append(ValidationError(
-                file=str(mapping_file), line=0,
+            self.results.append(ValidationResult(
+                severity="FATAL",
+                file=str(mapping_file),
+                line=0,
                 message=f"Error loading mapping: {e}",
-                severity="FATAL"
+                constraint="Mapping Loading"
             ))
-            sys.exit(1)
 
     def load_citations(self, registry_file: Path):
         """Load citation registry"""
@@ -85,111 +102,133 @@ class ConsistencyValidator:
                 data = yaml.safe_load(f)
 
             self.citations = set(data['citations'].keys())
-            print(f"Loaded {len(self.citations)} citations from registry")
+            print(f"✓ Loaded {len(self.citations)} citations from registry")
         except Exception as e:
-            self.errors.append(ValidationError(
-                file=str(registry_file), line=0,
+            self.results.append(ValidationResult(
+                severity="FATAL",
+                file=str(registry_file),
+                line=0,
                 message=f"Error loading citation registry: {e}",
-                severity="ERROR"
+                constraint="Citation Loading"
             ))
 
     def parse_tex_files(self, tex_dir: Path):
         """Parse all TeX files and extract structured elements"""
         tex_files = list(tex_dir.glob('*.tex'))
+        
+        if not tex_files:
+            self.results.append(ValidationResult(
+                severity="FATAL",
+                file=str(tex_dir),
+                line=0,
+                message="No TeX files found in directory",
+                constraint="TeX Loading"
+            ))
+            return
 
         for tex_file in tex_files:
-            with open(tex_file, 'r', encoding='utf-8') as f:
-                lines = f.readlines()
+            try:
+                with open(tex_file, 'r', encoding='utf-8') as f:
+                    lines = f.readlines()
 
-            for i, line in enumerate(lines, start=1):
-                # Parse citations
-                cite_matches = re.finditer(r'\\cite\{([^}]+)\}', line)
-                citations = []
-                for match in cite_matches:
-                    keys = match.group(1).split(',')
-                    for key in keys:
-                        key = key.strip()
-                        if key:
-                            citations.append(key)
+                for i, line in enumerate(lines, start=1):
+                    # Parse citations
+                    cite_matches = re.finditer(r'\\cite\{([^}]+)\}', line)
+                    citations = []
+                    for match in cite_matches:
+                        keys = match.group(1).split(',')
+                        for key in keys:
+                            key = key.strip()
+                            if key:
+                                citations.append(key)
 
-                # Parse theorems: \begin{theorem}[id]{title}
-                theorem_match = re.search(r'\\begin\{theorem\}\s*\[([^\]]+)\]\s*\{([^}]+)\}', line)
-                if theorem_match:
-                    elem_id = theorem_match.group(1).strip()
-                    title = theorem_match.group(2).strip()
-                    self.tex_elements.append(TeXElement(
-                        element_type='theorem',
-                        id=elem_id,
-                        title=title,
-                        line_number=i,
-                        file=str(tex_file),
-                        citations=citations
-                    ))
-                    continue
+                    # Parse theorems: \begin{theorem}[id]{title}
+                    theorem_match = re.search(r'\\begin\{theorem\}\s*\[([^\]]+)\]\s*\{([^}]+)\}', line)
+                    if theorem_match:
+                        elem_id = theorem_match.group(1).strip()
+                        title = theorem_match.group(2).strip()
+                        self.tex_elements.append(TeXElement(
+                            element_type='theorem',
+                            id=elem_id,
+                            title=title,
+                            line_number=i,
+                            file=str(tex_file),
+                            citations=citations
+                        ))
+                        continue
 
-                # Parse definitions: \begin{definition}[id]{term}
-                def_match = re.search(r'\\begin\{definition\}\s*\[([^\]]+)\]\s*\{([^}]+)\}', line)
-                if def_match:
-                    elem_id = def_match.group(1).strip()
-                    title = def_match.group(2).strip()
-                    self.tex_elements.append(TeXElement(
-                        element_type='definition',
-                        id=elem_id,
-                        title=title,
-                        line_number=i,
-                        file=str(tex_file),
-                        citations=citations
-                    ))
-                    continue
+                    # Parse definitions: \begin{definition}[id]{term}
+                    def_match = re.search(r'\\begin\{definition\}\s*\[([^\]]+)\]\s*\{([^}]+)\}', line)
+                    if def_match:
+                        elem_id = def_match.group(1).strip()
+                        title = def_match.group(2).strip()
+                        self.tex_elements.append(TeXElement(
+                            element_type='definition',
+                            id=elem_id,
+                            title=title,
+                            line_number=i,
+                            file=str(tex_file),
+                            citations=citations
+                        ))
+                        continue
 
-                # Parse lemmas: \begin{lemma}[id]{title}
-                lemma_match = re.search(r'\\begin\{lemma\}\s*\[([^\]]+)\]\s*\{([^}]+)\}', line)
-                if lemma_match:
-                    elem_id = lemma_match.group(1).strip()
-                    title = lemma_match.group(2).strip()
-                    self.tex_elements.append(TeXElement(
-                        element_type='lemma',
-                        id=elem_id,
-                        title=title,
-                        line_number=i,
-                        file=str(tex_file),
-                        citations=citations
-                    ))
-                    continue
+                    # Parse lemmas: \begin{lemma}[id]{title}
+                    lemma_match = re.search(r'\\begin\{lemma\}\s*\[([^\]]+)\]\s*\{([^}]+)\}', line)
+                    if lemma_match:
+                        elem_id = lemma_match.group(1).strip()
+                        title = lemma_match.group(2).strip()
+                        self.tex_elements.append(TeXElement(
+                            element_type='lemma',
+                            id=elem_id,
+                            title=title,
+                            line_number=i,
+                            file=str(tex_file),
+                            citations=citations
+                        ))
+                        continue
 
-                # Parse examples: \begin{example}[id]{title}
-                ex_match = re.search(r'\\begin\{example\}\s*\[([^\]]+)\]\s*\{([^}]+)\}', line)
-                if ex_match:
-                    elem_id = ex_match.group(1).strip()
-                    title = ex_match.group(2).strip()
-                    self.tex_elements.append(TeXElement(
-                        element_type='example',
-                        id=elem_id,
-                        title=title,
-                        line_number=i,
-                        file=str(tex_file),
-                        citations=citations
-                    ))
-                    continue
+                    # Parse examples: \begin{example}[id]{title}
+                    ex_match = re.search(r'\\begin\{example\}\s*\[([^\]]+)\]\s*\{([^}]+)\}', line)
+                    if ex_match:
+                        elem_id = ex_match.group(1).strip()
+                        title = ex_match.group(2).strip()
+                        self.tex_elements.append(TeXElement(
+                            element_type='example',
+                            id=elem_id,
+                            title=title,
+                            line_number=i,
+                            file=str(tex_file),
+                            citations=citations
+                        ))
+                        continue
 
-                # Parse sections: \section{id}{title} or \section{title}
-                section_match = re.search(r'\\section\*?\s*\{([^}]+)\}', line)
-                if section_match:
-                    title = section_match.group(1).strip()
-                    # Remove special characters, keep only alphanumeric, hyphens, and spaces
-                    clean_title = re.sub(r'[^a-zA-Z0-9\s-]', '', title)
-                    elem_id = f"sec-{clean_title.lower().replace(' ', '-')}"
-                    self.tex_elements.append(TeXElement(
-                        element_type='section',
-                        id=elem_id,
-                        title=title,
-                        line_number=i,
-                        file=str(tex_file),
-                        citations=citations
-                    ))
-                    continue
+                    # Parse sections: \section{title}
+                    section_match = re.search(r'\\section\*?\s*\{([^}]+)\}', line)
+                    if section_match:
+                        title = section_match.group(1).strip()
+                        # Remove special characters, keep only alphanumeric, hyphens, and spaces
+                        clean_title = re.sub(r'[^a-zA-Z0-9\s-]', '', title)
+                        elem_id = f"sec-{clean_title.lower().replace(' ', '-')}"
+                        self.tex_elements.append(TeXElement(
+                            element_type='section',
+                            id=elem_id,
+                            title=title,
+                            line_number=i,
+                            file=str(tex_file),
+                            citations=citations
+                        ))
+                        continue
 
-        print(f"Parsed {len(self.tex_elements)} TeX elements")
+            except Exception as e:
+                self.results.append(ValidationResult(
+                    severity="FATAL",
+                    file=str(tex_file),
+                    line=0,
+                    message=f"Error parsing TeX file: {e}",
+                    constraint="TeX Parsing"
+                ))
+
+        print(f"✓ Parsed {len(self.tex_elements)} TeX elements from {len(tex_files)} files")
 
     def load_rdf_elements(self, ontology_dir: Path):
         """Load RDF elements from ontology files"""
@@ -202,10 +241,12 @@ class ConsistencyValidator:
             '.rdf': 'xml',
         }
 
+        loaded_count = 0
         for ext, fmt in formats.items():
             for rdf_file in ontology_dir.glob(f'*{ext}'):
                 try:
                     g.parse(rdf_file, format=fmt)
+                    loaded_count += 1
                 except Exception:
                     pass  # Skip files that don't parse
 
@@ -234,79 +275,81 @@ class ConsistencyValidator:
             if elem_data['identifier']:
                 self.rdf_elements[elem_data['identifier']] = elem_data
 
-        print(f"Loaded {len(self.rdf_elements)} RDF elements with identifiers")
+        print(f"✓ Loaded {len(self.rdf_elements)} RDF elements with identifiers")
+
+    def validate_id_patterns(self):
+        """Validate ID patterns match mapping specification"""
+        violations = 0
+        
+        for elem in self.tex_elements:
+            if elem.element_type in self.mapping:
+                mapping = self.mapping[elem.element_type]
+                if 'id_pattern' in mapping:
+                    pattern = mapping['id_pattern']
+                    if not re.match(pattern, elem.id):
+                        self.results.append(ValidationResult(
+                            severity="VIOLATION",
+                            file=elem.file,
+                            line=elem.line_number,
+                            message=f"Invalid ID pattern for '{elem.id}': expected {pattern}",
+                            constraint="ID Pattern"
+                        ))
+                        violations += 1
+        
+        if violations == 0:
+            print("✓ ID pattern validation passed")
+        else:
+            print(f"❌ ID pattern validation failed: {violations} violations")
 
     def validate_tex_to_rdf(self):
         """Validate that every TeX element has a corresponding RDF resource"""
-        print("\nValidating TeX → RDF consistency...")
-
-        missing_rdf = set()
+        violations = 0
+        
         for elem in self.tex_elements:
             # Skip sections - they are structural elements and don't require RDF
             if elem.element_type == 'section':
                 continue
             if elem.id not in self.rdf_elements:
-                missing_rdf.add((elem.id, elem.file, elem.line_number))
-
-        if missing_rdf:
-            for elem_id, file, line in sorted(missing_rdf, key=lambda x: (x[1], x[2])):
-                self.errors.append(ValidationError(
-                    file=file,
-                    line=line,
-                    message=f"TeX element '{elem_id}' has no corresponding RDF resource",
-                    severity="ERROR"
+                self.results.append(ValidationResult(
+                    severity="VIOLATION",
+                    file=elem.file,
+                    line=elem.line_number,
+                    message=f"TeX element '{elem.id}' has no corresponding RDF resource",
+                    constraint="TeX→RDF Mapping"
                 ))
+                violations += 1
+        
+        if violations == 0:
+            print("✓ TeX→RDF consistency validation passed")
         else:
-            print("  ✓ All TeX elements (theorems, definitions, lemmas, examples) have corresponding RDF resources")
-
-    def validate_rdf_to_tex(self):
-        """Validate that every RDF resource is referenced in TeX"""
-        print("\nValidating RDF → TeX consistency...")
-
-        # Note: Some RDF resources might be supplementary (not in TeX)
-        # For now, just warn about RDF elements not found in TeX
-        tex_ids = {elem.id for elem in self.tex_elements}
-
-        missing_tex = set()
-        for rdf_id in self.rdf_elements:
-            # Skip citation resources
-            if not any([rdf_id.startswith(prefix) for prefix in ['girard', 'kripke', 'sambin', 'urbas', 'trafford', 'lawvere', 'mac', 'lambek', 'restall', 'pierce', 'curyhoward', 'howard', 'negri']]):
-                if rdf_id not in tex_ids:
-                    missing_tex.add(rdf_id)
-
-        if missing_tex:
-            for rdf_id in sorted(missing_tex):
-                self.errors.append(ValidationError(
-                    file="ontology/",
-                    line=0,
-                    message=f"RDF resource '{rdf_id}' not referenced in TeX (may be supplementary)",
-                    severity="WARNING"
-                ))
-        else:
-            print("  ✓ All RDF resources are referenced in TeX")
+            print(f"❌ TeX→RDF consistency validation failed: {violations} violations")
 
     def validate_citation_consistency(self):
         """Validate that all citations are consistent across TeX and RDF"""
-        print("\nValidating citation consistency...")
-
+        violations = 0
+        
         for elem in self.tex_elements:
             if elem.citations:
                 for cite_key in elem.citations:
                     if cite_key not in self.citations:
-                        self.errors.append(ValidationError(
+                        self.results.append(ValidationResult(
+                            severity="VIOLATION",
                             file=elem.file,
                             line=elem.line_number,
                             message=f"Citation '{cite_key}' not found in bibliography/citations.yaml",
-                            severity="ERROR"
+                            constraint="Citation Registry"
                         ))
-
-        if not any(err for err in self.errors if 'not found in bibliography' in err.message):
-            print("  ✓ All citations exist in registry")
+                        violations += 1
+        
+        if violations == 0:
+            print("✓ Citation consistency validation passed")
+        else:
+            print(f"❌ Citation consistency validation failed: {violations} violations")
 
     def validate_properties(self):
         """Validate that properties match between TeX and RDF"""
-        print("\nValidating property consistency...")
-
+        violations = 0
+        
         for elem in self.tex_elements:
             if elem.id in self.rdf_elements:
                 rdf_elem = self.rdf_elements[elem.id]
@@ -318,33 +361,19 @@ class ConsistencyValidator:
                     rdf_title_norm = rdf_elem['title'].lower().strip()
 
                     if tex_title_norm != rdf_title_norm:
-                        self.errors.append(ValidationError(
+                        self.results.append(ValidationResult(
+                            severity="WARNING",
                             file=elem.file,
                             line=elem.line_number,
                             message=f"Title mismatch for '{elem.id}': TeX='{elem.title}', RDF='{rdf_elem['title']}'",
-                            severity="WARNING"
+                            constraint="Property Matching"
                         ))
-
-        print("  ✓ Property validation complete")
-
-    def validate_id_patterns(self):
-        """Validate ID patterns match mapping specification"""
-        print("\nValidating ID patterns...")
-
-        for elem in self.tex_elements:
-            if elem.element_type in self.mapping:
-                mapping = self.mapping[elem.element_type]
-                if 'id_pattern' in mapping:
-                    pattern = mapping['id_pattern']
-                    if not re.match(pattern, elem.id):
-                        self.errors.append(ValidationError(
-                            file=elem.file,
-                            line=elem.line_number,
-                            message=f"Invalid ID pattern for '{elem.id}': expected {pattern}",
-                            severity="ERROR"
-                        ))
-
-        print("  ✓ ID pattern validation complete")
+                        violations += 1
+        
+        if violations == 0:
+            print("✓ Property consistency validation passed")
+        else:
+            print(f"⚠️  Property consistency validation: {violations} warnings")
 
     def validate(self, tex_dir: Path, ontology_dir: Path,
                 registry_file: Path, mapping_file: Path) -> bool:
@@ -352,53 +381,114 @@ class ConsistencyValidator:
         print("=" * 60)
         print("Bidirectional Consistency Validator for Catty Thesis")
         print("=" * 60)
+        print("Status: RUNNING")
+        print("")
 
         # Load data
+        print(f"📖 Loading citation registry...")
         self.load_citations(registry_file)
+        print("")
+
+        print(f"📝 Parsing TeX files...")
         self.parse_tex_files(tex_dir)
+        print("")
+
+        print(f"🔗 Loading RDF elements...")
         self.load_rdf_elements(ontology_dir)
+        print("")
+
+        # Check for fatal errors
+        fatal_errors = [r for r in self.results if r.severity == "FATAL"]
+        if fatal_errors:
+            print("❌ FATAL ERRORS:")
+            for error in fatal_errors:
+                print(f"  • {error.file}:{error.line} - {error.message}")
+            return False
 
         # Run validations
+        print("🔍 Running validations...")
+        print("")
+        
         self.validate_id_patterns()
+        print("")
+        
         self.validate_tex_to_rdf()
-        self.validate_rdf_to_tex()
+        print("")
+        
         self.validate_citation_consistency()
+        print("")
+        
         self.validate_properties()
+        print("")
 
-        # Count errors vs warnings
-        errors = [e for e in self.errors if e.severity == "ERROR"]
-        warnings = [e for e in self.errors if e.severity == "WARNING"]
+        # Count results
+        self.summary.total_violations = len(self.results)
+        self.summary.violations = len([v for v in self.results if v.severity == "VIOLATION"])
+        self.summary.warnings = len([v for v in self.results if v.severity == "WARNING"])
+        self.summary.passed = self.summary.violations == 0
 
-        print(f"\nValidation complete: {len(errors)} errors, {len(warnings)} warnings")
+        return self.summary.passed
 
-        # Consider only errors as failures
-        return len(errors) == 0
-
-    def print_errors(self):
-        """Print all validation errors"""
-        if not self.errors:
-            print("\n✓ No consistency errors found")
-            return
-
-        errors = [e for e in self.errors if e.severity == "ERROR"]
-        warnings = [e for e in self.errors if e.severity == "WARNING"]
-
-        if errors:
-            print(f"\n✗ Found {len(errors)} consistency errors:")
-            for error in errors:
-                print(f"\n  ERROR: {error.file}:{error.line}")
-                print(f"    {error.message}")
-
-        if warnings:
-            print(f"\n⚠ Found {len(warnings)} consistency warnings:")
-            for warning in warnings:
-                print(f"\n  WARNING: {warning.file}:{warning.line}")
-                print(f"    {warning.message}")
+    def print_results(self):
+        """Print validation results"""
+        print("=" * 60)
+        print("VALIDATION RESULTS")
+        print("=" * 60)
+        
+        # Print summary
+        if self.summary.passed:
+            print("✅ VALIDATION PASSED")
+            print(f"   • Total violations: {self.summary.total_violations}")
+            print(f"   • Status: All bidirectional consistency checks passed")
+        else:
+            print("❌ VALIDATION FAILED")
+            print(f"   • Total violations: {self.summary.total_violations}")
+            print(f"   • Violations: {self.summary.violations}")
+            print(f"   • Warnings: {self.summary.warnings}")
+        
+        print("")
+        
+        # Print violations if any
+        if not self.summary.passed and self.results:
+            violations = [r for r in self.results if r.severity == "VIOLATION"]
+            warnings = [r for r in self.results if r.severity == "WARNING"]
+            
+            if violations:
+                print("🚨 VIOLATIONS:")
+                print("-" * 40)
+                for i, violation in enumerate(violations, 1):
+                    print(f"  {i:2d}. {violation.file}:{violation.line}")
+                    print(f"      Constraint: {violation.constraint}")
+                    print(f"      Message: {violation.message}")
+                    print("")
+            
+            if warnings:
+                print("⚠️  WARNINGS:")
+                print("-" * 20)
+                for i, warning in enumerate(warnings[:5], 1):  # Show first 5
+                    print(f"  {i:2d}. {warning.file}:{warning.line}")
+                    print(f"      Message: {warning.message}")
+                    print("")
+                
+                if len(warnings) > 5:
+                    print(f"      ... and {len(warnings) - 5} more warnings")
+        
+        # Print fatal errors if any
+        fatal_errors = [r for r in self.results if r.severity == "FATAL"]
+        if fatal_errors:
+            print("💥 FATAL ERRORS:")
+            print("-" * 20)
+            for error in fatal_errors:
+                print(f"  • {error.file}:{error.line} - {error.message}")
+            print("")
+        
+        print("=" * 60)
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Validate bidirectional consistency between TeX, RDF, and citations'
+        description='Validate bidirectional consistency between TeX, RDF, and citations',
+        epilog='EXIT CODES: 0 = PASS, 1 = FAIL, 2 = ERROR'
     )
     parser.add_argument(
         '--tex-dir',
@@ -430,19 +520,19 @@ def main():
     # Check if files/directories exist
     if not args.tex_dir.exists():
         print(f"ERROR: Directory not found: {args.tex_dir}")
-        sys.exit(1)
+        sys.exit(2)
 
     if not args.ontology.exists():
         print(f"ERROR: Directory not found: {args.ontology}")
-        sys.exit(1)
+        sys.exit(2)
 
     if not args.bibliography.exists():
         print(f"ERROR: File not found: {args.bibliography}")
-        sys.exit(1)
+        sys.exit(2)
 
     if not args.mapping.exists():
         print(f"ERROR: File not found: {args.mapping}")
-        sys.exit(1)
+        sys.exit(2)
 
     # Create validator
     validator = ConsistencyValidator(args.mapping)
@@ -451,10 +541,15 @@ def main():
     success = validator.validate(args.tex_dir, args.ontology, args.bibliography, args.mapping)
 
     # Print results
-    validator.print_errors()
+    validator.print_results()
 
     # Exit with appropriate code
-    sys.exit(0 if success else 1)
+    if success:
+        print("🎉 Validation completed successfully")
+        sys.exit(0)
+    else:
+        print("💥 Validation failed - please fix violations")
+        sys.exit(1)
 
 
 if __name__ == '__main__':

@@ -2,38 +2,55 @@
 """
 RDF/SHACL Validator for Catty Thesis
 Validates RDF graphs against SHACL shapes
+
+EXIT CODES:
+  0 = Validation PASSED (no violations)
+  1 = Validation FAILED (violations present)
 """
 
 import argparse
 import sys
 from pathlib import Path
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 from dataclasses import dataclass
 
 # Try to import required libraries
 try:
-    from rdflib import Graph
+    from rdflib import Graph, URIRef, Literal
     from pyshacl import validate
+    import rdflib
 except ImportError:
     print("ERROR: rdflib and pyshacl are required. Install with:")
     print("  pip install rdflib pyshacl")
-    sys.exit(1)
+    sys.exit(2)
 
 
 @dataclass
-class ValidationError:
-    """Represents a validation error"""
-    file: str
+class ValidationResult:
+    """Represents a validation violation"""
+    severity: str  # FATAL, ERROR, WARNING
+    focus_node: str
+    constraint: str
     message: str
-    severity: str = "ERROR"
+    path: str = None
+
+
+@dataclass 
+class ValidationSummary:
+    """Summary of validation results"""
+    total_violations: int = 0
+    fatal_errors: int = 0
+    violations: int = 0
+    warnings: int = 0
+    conforms: bool = True
 
 
 class RDFValidator:
     """Validates RDF against SHACL shapes"""
 
     def __init__(self):
-        self.errors: List[ValidationError] = []
-        self.warnings: List[ValidationError] = []
+        self.results: List[ValidationResult] = []
+        self.summary = ValidationSummary()
 
     def load_ontology(self, ontology_dir: Path) -> Graph:
         """Load all RDF files from ontology directory"""
@@ -42,26 +59,37 @@ class RDFValidator:
         # Supported formats
         formats = {
             '.jsonld': 'json-ld',
-            '.ttl': 'turtle',
+            '.ttl': 'turtle', 
             '.rdf': 'xml',
             '.n3': 'n3',
             '.nt': 'nt',
         }
 
+        loaded_count = 0
         # Load all RDF files
         for ext, fmt in formats.items():
             for rdf_file in ontology_dir.glob(f'*{ext}'):
                 try:
                     g.parse(rdf_file, format=fmt)
-                    print(f"Loaded {rdf_file} ({fmt})")
+                    print(f"✓ Loaded {rdf_file.name} ({fmt})")
+                    loaded_count += 1
                 except Exception as e:
-                    self.errors.append(ValidationError(
-                        file=str(rdf_file),
-                        message=f"Error parsing RDF: {e}",
-                        severity="ERROR"
+                    self.results.append(ValidationResult(
+                        severity="FATAL",
+                        focus_node=str(rdf_file),
+                        constraint="RDF Parsing",
+                        message=f"Error parsing RDF: {e}"
                     ))
 
-        print(f"Total triples loaded: {len(g)}")
+        if loaded_count == 0:
+            self.results.append(ValidationResult(
+                severity="FATAL",
+                focus_node=str(ontology_dir),
+                constraint="RDF Loading",
+                message="No RDF files could be loaded from directory"
+            ))
+
+        print(f"📊 Total triples loaded: {len(g)}")
         return g
 
     def load_shapes(self, shapes_file: Path) -> Graph:
@@ -79,48 +107,107 @@ class RDFValidator:
                 fmt = 'turtle'  # Default
 
             shapes_g.parse(shapes_file, format=fmt)
-            print(f"Loaded {len(shapes_g)} shape triples from {shapes_file}")
+            if len(shapes_g) == 0:
+                self.results.append(ValidationResult(
+                    severity="FATAL",
+                    focus_node=str(shapes_file),
+                    constraint="SHACL Loading", 
+                    message="SHACL shapes file is empty"
+                ))
+                return None
+
+            print(f"✓ Loaded {len(shapes_g)} shape triples from {shapes_file.name}")
             return shapes_g
         except Exception as e:
-            self.errors.append(ValidationError(
-                file=str(shapes_file),
-                message=f"Error parsing SHACL shapes: {e}",
-                severity="FATAL"
+            self.results.append(ValidationResult(
+                severity="FATAL",
+                focus_node=str(shapes_file),
+                constraint="SHACL Parsing",
+                message=f"Error parsing SHACL shapes: {e}"
             ))
             return None
+
+    def parse_shacl_results(self, results_graph: Graph) -> List[ValidationResult]:
+        """Parse SHACL validation results into structured format"""
+        violations = []
+        
+        # SHACL violation types
+        SHACL_violation = URIRef("http://www.w3.org/ns/shacl#Violation")
+        SHACL_warning = URIRef("http://www.w3.org/ns/shacl#Warning")
+        
+        # Extract violation details
+        for result in results_graph.subjects():
+            severity = "VIOLATION"  # Default
+            focus_node = ""
+            constraint = ""
+            message = ""
+            path = ""
+            
+            # Get severity
+            for severity_type in results_graph.objects(result, URIRef("http://www.w3.org/ns/shacl#resultSeverity")):
+                if severity_type == SHACL_violation:
+                    severity = "VIOLATION"
+                elif severity_type == SHACL_warning:
+                    severity = "WARNING"
+            
+            # Get focus node
+            for focus in results_graph.objects(result, URIRef("http://www.w3.org/ns/shacl#focusNode")):
+                focus_node = str(focus)
+            
+            # Get constraint
+            for constraint_comp in results_graph.objects(result, URIRef("http://www.w3.org/ns/shacl#sourceConstraintComponent")):
+                constraint = str(constraint_comp).split("/")[-1]  # Get just the local name
+            
+            # Get message
+            for msg in results_graph.objects(result, URIRef("http://www.w3.org/ns/shacl#resultMessage")):
+                message = str(msg)
+            
+            # Get path
+            for path_prop in results_graph.objects(result, URIRef("http://www.w3.org/ns/shacl#resultPath")):
+                path = str(path_prop).split("/")[-1]  # Get just the local name
+            
+            violations.append(ValidationResult(
+                severity=severity,
+                focus_node=focus_node,
+                constraint=constraint,
+                message=message,
+                path=path
+            ))
+        
+        return violations
 
     def validate(self, ontology_dir: Path, shapes_file: Path) -> bool:
         """Validate RDF against SHACL shapes"""
         print("=" * 60)
         print("RDF/SHACL Validator for Catty Thesis")
         print("=" * 60)
+        print("Status: RUNNING")
+        print("")
 
         # Load ontology
-        print(f"\nLoading RDF from {ontology_dir}...")
+        print(f"📁 Loading RDF from {ontology_dir}...")
         data_graph = self.load_ontology(ontology_dir)
+        print("")
 
-        if len(data_graph) == 0:
-            self.errors.append(ValidationError(
-                file=str(ontology_dir),
-                message="No RDF triples loaded from ontology directory",
-                severity="ERROR"
-            ))
+        # Check for fatal errors during loading
+        fatal_errors = [r for r in self.results if r.severity == "FATAL"]
+        if fatal_errors:
+            print("❌ FATAL ERRORS during RDF loading:")
+            for error in fatal_errors:
+                print(f"  • {error.focus_node}: {error.message}")
             return False
 
         # Load shapes
-        print(f"\nLoading SHACL shapes from {shapes_file}...")
+        print(f"📋 Loading SHACL shapes from {shapes_file}...")
         shapes_graph = self.load_shapes(shapes_file)
+        print("")
 
-        if shapes_graph is None or len(shapes_graph) == 0:
-            self.errors.append(ValidationError(
-                file=str(shapes_file),
-                message="Failed to load SHACL shapes",
-                severity="FATAL"
-            ))
+        if shapes_graph is None:
+            print("❌ FATAL: Failed to load SHACL shapes")
             return False
 
         # Validate
-        print("\nValidating RDF against SHACL shapes...")
+        print("🔍 Running SHACL validation...")
         try:
             conforms, results_graph, results_text = validate(
                 data_graph,
@@ -129,49 +216,95 @@ class RDFValidator:
                 inference='rdfs',
                 abort_on_first=False,
                 allow_infos=False,
-                allow_warnings=False,
+                allow_warnings=False,  # Treat warnings as violations
                 meta_shacl=False,
                 debug=False
             )
 
-            if conforms:
-                print("✓ RDF graph conforms to all SHACL shapes")
-                return True
-            else:
-                print("✗ RDF graph does not conform to SHACL shapes")
-                print("\nValidation results:")
-                print(results_text)
-
-                # Parse and extract specific violations
-                for result in results_graph.subjects(None, None):
-                    # Extract violation details
-                    print(f"\nViolation: {result}")
-
-                return False
+            # Parse results
+            violations = self.parse_shacl_results(results_graph)
+            self.results.extend(violations)
+            
+            # Count results
+            self.summary.conforms = conforms
+            self.summary.total_violations = len(violations)
+            self.summary.violations = len([v for v in violations if v.severity == "VIOLATION"])
+            self.summary.warnings = len([v for v in violations if v.severity == "WARNING"])
+            
+            return conforms
 
         except Exception as e:
-            self.errors.append(ValidationError(
-                file="validation",
-                message=f"SHACL validation error: {e}",
-                severity="FATAL"
+            self.results.append(ValidationResult(
+                severity="FATAL",
+                focus_node="validation",
+                constraint="SHACL Execution",
+                message=f"SHACL validation error: {e}"
             ))
             return False
 
-    def print_errors(self):
-        """Print all validation errors"""
-        if not self.errors:
-            print("\n✓ No RDF errors found")
-            return
-
-        print(f"\n✗ Found {len(self.errors)} RDF errors:")
-        for error in self.errors:
-            print(f"\n  {error.severity}: {error.file}")
-            print(f"    {error.message}")
+    def print_results(self):
+        """Print validation results"""
+        print("=" * 60)
+        print("VALIDATION RESULTS")
+        print("=" * 60)
+        
+        # Print summary
+        if self.summary.conforms:
+            print("✅ VALIDATION PASSED")
+            print(f"   • Total violations: {self.summary.total_violations}")
+            print(f"   • Status: RDF graph conforms to all SHACL shapes")
+        else:
+            print("❌ VALIDATION FAILED")
+            print(f"   • Total violations: {self.summary.total_violations}")
+            print(f"   • Violations: {self.summary.violations}")
+            print(f"   • Warnings: {self.summary.warnings}")
+        
+        print("")
+        
+        # Print violations if any
+        if not self.summary.conforms and self.results:
+            print("VIOLATIONS:")
+            print("-" * 40)
+            
+            # Group by severity
+            violations = [r for r in self.results if r.severity == "VIOLATION"]
+            warnings = [r for r in self.results if r.severity == "WARNING"]
+            
+            if violations:
+                print(f"\n🚨 VIOLATIONS ({len(violations)}):")
+                for i, violation in enumerate(violations[:10], 1):  # Show first 10
+                    print(f"  {i:2d}. Focus: {violation.focus_node}")
+                    print(f"      Constraint: {violation.constraint}")
+                    print(f"      Path: {violation.path}")
+                    print(f"      Message: {violation.message}")
+                    print("")
+                
+                if len(violations) > 10:
+                    print(f"      ... and {len(violations) - 10} more violations")
+            
+            if warnings:
+                print(f"\n⚠️  WARNINGS ({len(warnings)}):")
+                for i, warning in enumerate(warnings[:5], 1):  # Show first 5
+                    print(f"  {i:2d}. Focus: {warning.focus_node}")
+                    print(f"      Message: {warning.message}")
+                    print("")
+        
+        # Print fatal errors if any
+        fatal_errors = [r for r in self.results if r.severity == "FATAL"]
+        if fatal_errors:
+            print("💥 FATAL ERRORS:")
+            print("-" * 20)
+            for error in fatal_errors:
+                print(f"  • {error.focus_node}: {error.message}")
+            print("")
+        
+        print("=" * 60)
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Validate RDF against SHACL shapes'
+        description='Validate RDF against SHACL shapes',
+        epilog='EXIT CODES: 0 = PASS, 1 = FAIL, 2 = ERROR'
     )
     parser.add_argument(
         '--ontology',
@@ -191,12 +324,12 @@ def main():
     # Check if directory exists
     if not args.ontology.exists():
         print(f"ERROR: Directory not found: {args.ontology}")
-        sys.exit(1)
+        sys.exit(2)
 
     # Check if shapes file exists
     if not args.shapes.exists():
         print(f"ERROR: SHACL shapes file not found: {args.shapes}")
-        sys.exit(1)
+        sys.exit(2)
 
     # Create validator
     validator = RDFValidator()
@@ -205,10 +338,15 @@ def main():
     success = validator.validate(args.ontology, args.shapes)
 
     # Print results
-    validator.print_errors()
+    validator.print_results()
 
     # Exit with appropriate code
-    sys.exit(0 if success else 1)
+    if success:
+        print("🎉 Validation completed successfully")
+        sys.exit(0)
+    else:
+        print("💥 Validation failed - please fix violations")
+        sys.exit(1)
 
 
 if __name__ == '__main__':
