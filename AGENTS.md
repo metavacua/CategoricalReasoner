@@ -163,9 +163,7 @@ catty-thesis/
 ├── ontology/               # RDF/OWL ontologies
 ├── schema/                 # Validation schemas and constraints
 ├── thesis/                 # LaTeX thesis source
-├── scripts/                # Utility scripts
-├── benchmarks/             # Evaluation and testing
-└── tests/                  # Automated testing
+└── scripts/                # Utility scripts
 ```
 
 ## Validation Protocol
