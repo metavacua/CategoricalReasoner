@@ -9,6 +9,8 @@ on:
 jobs:
   validate:
     runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.validate.outputs.result }}
 
     steps:
     - name: Checkout code
@@ -25,52 +27,54 @@ jobs:
         pip install pyyaml rdflib pyshacl
 
     - name: Validate TeX structure
+      id: validate_tex
       run: |
         python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
-      continue-on-error: false
 
     - name: Validate citations
+      id: validate_citations
       run: |
         python schema/validators/validate_citations.py --tex-dir thesis/chapters/ --bibliography bibliography/citations.yaml --ontology ontology/citations.jsonld
-      continue-on-error: false
 
     - name: Validate RDF
+      id: validate_rdf
       run: |
         python schema/validators/validate_rdf.py --ontology ontology/ --shapes ontology/catty-thesis-shapes.shacl
-      continue-on-error: false
 
     - name: Validate bidirectional consistency
+      id: validate_consistency
       run: |
         python schema/validators/validate_consistency.py --tex-dir thesis/chapters/ --ontology ontology/ --bibliography bibliography/citations.yaml --mapping schema/tex-rdf-mapping.yaml
-      continue-on-error: false
+
+    - name: Set validation result
+      id: set_result
+      if: steps.validate_tex.outputs.result == 'success' && steps.validate_citations.outputs.result == 'success' && steps.validate_rdf.outputs.result == 'success' && steps.validate_consistency.outputs.result == 'success'
+        run: echo "pass"
+      else
+        run: echo "fail"
 
     - name: Comment validation results on PR
-      if: failure() && github.event_name == 'pull_request'
+      if: failure()
       uses: actions/github-script@v6
       with:
         script: |
-          const comment = `❌ **Thesis Validation FAILED**
+          const comment = `❌ **Thesis Validation Failed**
 
           **Status**: The pull request has validation failures and cannot be merged.
 
           **Validation Results**:
           - ❌ TeX structure validation: FAILED
-          - ❌ Citation validation: FAILED  
+          - ❌ Citation validation: FAILED
           - ❌ RDF/SHACL validation: FAILED
           - ❌ Bidirectional consistency validation: FAILED
 
           **Action Required**: Please fix the validation errors and push again.
 
-          **Run validation locally**:
+          **To run validation locally**:
           \`\`\`bash
-          cd thesis && make clean && make
-          python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
-          python schema/validators/validate_citations.py --tex-dir thesis/chapters/ --bibliography bibliography/citations.yaml --ontology ontology/citations.jsonld
-          python schema/validators/validate_rdf.py --ontology ontology/ --shapes ontology/catty-thesis-shapes.shacl
-          python schema/validators/validate_consistency.py --tex-dir thesis/chapters/ --ontology ontology/ --bibliography bibliography/citations.yaml --mapping schema/tex-rdf-mapping.yaml
+          cd thesis && python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/ && python schema/validators/validate_citations.py --tex-dir thesis/chapters/ --bibliography bibliography/citations.yaml --ontology ontology/citations.jsonld && python schema/validators/validate_rdf.py --ontology ontology/ --shapes ontology/catty-thesis-shapes.shacl && python schema/validators/validate_consistency.py --tex-dir thesis/chapters/ --ontology ontology/ --bibliography bibliography/citations.yaml --mapping schema/tex-rdf-mapping.yaml
           \`\`\`
-
-          **Exit Codes**: 0=PASS, 1=FAIL, 2=ERROR`;
+          `;
 
           github.rest.issues.createComment({
             issue_number: context.issue.number,
@@ -80,11 +84,11 @@ jobs:
           })
 
     - name: Comment success on PR
-      if: success() && github.event_name == 'pull_request'
+      if: success()
       uses: actions/github-script@v6
       with:
         script: |
-          const comment = `✅ **Thesis Validation PASSED**
+          const comment = `✅ **Thesis Validation Passed**
 
           **Status**: All validation checks passed successfully.
 
@@ -93,8 +97,6 @@ jobs:
           - ✅ Citation validation: PASSED
           - ✅ RDF/SHACL validation: PASSED
           - ✅ Bidirectional consistency validation: PASSED
-
-          **Exit Codes**: 0=PASS, 1=FAIL, 2=ERROR
 
           This PR is ready for review and merge.`;
 
