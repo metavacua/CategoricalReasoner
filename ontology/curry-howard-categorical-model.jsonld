@@ -17,7 +17,8 @@
     "catty:correspondsToLogic": { "@type": "@id" },
     "rdfs:subClassOf": { "@type": "@id" },
     "rdfs:domain": { "@type": "@id" },
-    "rdfs:range": { "@type": "@id" }
+    "rdfs:range": { "@type": "@id" },
+    "owl:sameAs": { "@type": "@id" }
   },
   "@graph": [
     {
@@ -28,7 +29,7 @@
       "dct:description": "The Curry-Howard correspondence is a fundamental isomorphism between proof theory and type theory. Categorically, it is an equivalence of categories: the category of logics (with proof-theoretic morphisms) is equivalent to the category of type theories (with type-theoretic morphisms). This equivalence maps propositions to types, proofs to programs, and sequent rules to type-theoretic constructions.",
       "catty:sourceCategory": "catty:LogicAsCategory",
       "catty:targetCategory": "catty:TypeTheoryAsCategory",
-      "owl:sameAs": "wd:Q2627038",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q2627038",
       "prov:wasDerivedFrom": ["https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence", "https://ncatlab.org/nlab/show/Curry-Howard+correspondence"]
     },
     {
@@ -55,7 +56,7 @@
       "rdfs:label": "Simply Typed Lambda Calculus",
       "rdfs:comment": "The simply typed lambda calculus, corresponding to intuitionistic propositional logic under Curry-Howard",
       "catty:correspondsToLogic": "catty:LJ",
-      "owl:sameAs": "wd:Q1758677",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q1758677",
       "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus"
     },
     {
@@ -64,7 +65,7 @@
       "rdfs:label": "System F",
       "rdfs:comment": "Polymorphic lambda calculus (second-order lambda calculus), corresponding to second-order intuitionistic logic",
       "catty:correspondsToLogic": "catty:LJ2",
-      "owl:sameAs": "wd:Q2635249",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q2635249",
       "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/System_F"
     },
     {
@@ -73,7 +74,7 @@
       "rdfs:label": "Linear Type System",
       "rdfs:comment": "Linear type system (resource-aware types), corresponding to linear logic",
       "catty:correspondsToLogic": "catty:LL",
-      "owl:sameAs": "wd:Q1138516",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q1138516",
       "prov:wasDerivedFrom": "https://en.wikipedia.org/wiki/Linear_type_system"
     },
     {

@@ -1,0 +1,88 @@
+% =============================================================================
+% Catty Thesis Citation Macros
+% =============================================================================
+% Purpose: Enforce structured, machine-readable citation format in TeX
+%
+% LLM INSTRUCTION: You may only use \cite{key} where key exists in
+% bibliography/citations.yaml. Do not invent new keys.
+% If you need to cite a source not in the registry, stop and
+% report the missing citation.
+% =============================================================================
+
+% Base citation macro - key must exist in registry
+% Usage: \cite{key} where key is from bibliography/citations.yaml
+\newcommand{\cite}[1]{%
+  \textbf{[}#1\textbf{]}%
+}
+
+% Citation with page number
+% Usage: \citepage{key}{page}
+\newcommand{\citepage}[2]{%
+  \textbf{[}#1, p. #2\textbf{]}%
+}
+
+% Citation with figure/table reference
+% Usage: \citefigure{key}{fig}
+\newcommand{\citefigure}[2]{%
+  \textbf{[}#1, #2\textbf{]}%
+}
+
+% Definition cites source for provenance
+% Usage: \definedfrom{term}{key}
+\newcommand{\definedfrom}[2]{%
+  \textit{#1} \cite{#2}%
+}
+
+% Theorem cites proof source for provenance
+% Usage: \provedfrom{theorem}{key}
+\newcommand{\provedfrom}[2]{%
+  \textbf{#1} \cite{#2}%
+}
+
+% Multiple citations
+% Usage: \cites{key1}{key2}{...}
+\newcommand{\cites}[1]{%
+  \textbf{[}#1\textbf{]}%
+}
+
+% Citation with note
+% Usage: \citenote{key}{note}
+\newcommand{\citenote}[2]{%
+  \textbf{[}#1\textbf{]} \textit{(#2)}%
+}
+
+% =============================================================================
+% Citation Validation Helpers
+% =============================================================================
+
+% Generate citation key labels for cross-referencing
+% These are used internally by validators
+\newcommand{\citekey}[1]{%
+  \label{cite:#1}%
+  #1%
+}
+
+% Check if citation key exists (for pre-compile validation)
+% This is a no-op in LaTeX but is parsed by the citation validator
+\newcommand{\validatecite}[1]{%
+  % Validator: check if #1 exists in bibliography/citations.yaml
+}
+
+% =============================================================================
+% Example Usage (for documentation)
+% =============================================================================
+
+% Simple citation:
+%   Linear logic was introduced by Girard \cite{girard1987linear}.
+
+% Citation with page:
+%   Kripke semantics uses possible worlds \citepage{kripke1965semantical}{42}.
+
+% Definition with provenance:
+%   We define \definedfrom{structural rules}{urbas1993structural} as...
+
+% Theorem with proof source:
+%   \provedfrom{Main Theorem}{sambin2003basic} states that...
+
+% Multiple citations:
+%   Both \cite{restall2000substructural} and \cite{pierce1991category} discuss...

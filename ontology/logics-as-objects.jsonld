@@ -13,7 +13,8 @@
     "hasLogicalSignature": { "@id": "catty:hasLogicalSignature", "@type": "@id" },
     "hasLogicalAxiom": { "@id": "catty:hasLogicalAxiom", "@type": "@id" },
     "hasStructuralRule": { "@id": "catty:hasStructuralRule", "@type": "@id" },
-    "hasSequentForm": { "@id": "catty:hasSequentForm", "@type": "@id" }
+    "hasSequentForm": { "@id": "catty:hasSequentForm", "@type": "@id" },
+    "owl:sameAs": { "@type": "@id" }
   },
   "@graph": [
     {
@@ -41,8 +42,8 @@
         "catty:LHSExchange", "catty:RHSExchange"
       ],
       "hasLogicalAxiom": ["catty:Axiom_LNC", "catty:Axiom_Explosion"],
-      "owl:sameAs": "wd:Q7680564"
-    },
+      "owl:sameAs": "http://www.wikidata.org/entity/Q7680564"
+      },
     {
       "@id": "catty:LDJ",
       "@type": "catty:Logic",
@@ -70,9 +71,9 @@
         "catty:LHSExchange", "catty:RHSExchange"
       ],
       "hasLogicalAxiom": ["catty:Axiom_LEM", "catty:Axiom_LNC", "catty:Axiom_Explosion", "catty:Axiom_DNE"],
-      "owl:sameAs": "wd:Q3525872"
-    },
-    {
+      "owl:sameAs": "http://www.wikidata.org/entity/Q3525872"
+      },
+      {
       "@id": "catty:LL",
       "@type": "catty:Logic",
       "rdfs:label": "LL (Linear Logic)",
@@ -80,8 +81,8 @@
       "hasSequentForm": "catty:MultiConclusionSequent",
       "hasLogicalSignature": "catty:StandardSignature",
       "hasStructuralRule": ["catty:LHSExchange", "catty:RHSExchange"],
-      "owl:sameAs": "wd:Q847878"
-    },
+      "owl:sameAs": "http://www.wikidata.org/entity/Q847878"
+      },
     {
       "@id": "catty:ALL",
       "@type": "catty:Logic",

@@ -1,0 +1,234 @@
+# =============================================================================
+# Catty Thesis Structure Schema
+# =============================================================================
+# Purpose: Define all valid thesis structures (chapters, sections, content types)
+# This is a prescriptive schema that rejects anything outside defined structure
+#
+# Validation: Run with JSON Schema validator or custom Python validator
+# =============================================================================
+
+$schema: http://json-schema.org/draft-07/schema#
+title: Catty Thesis Structure Schema
+description: Prescriptive schema for thesis content structure
+
+# Root level: thesis definition
+type: object
+required:
+  - thesis_id
+  - title
+properties:
+  thesis_id:
+    type: string
+    description: "Unique identifier for the thesis"
+    pattern: "^catty-thesis-v[0-9]+\\.[0-9]+\\.[0-9]+$"
+
+  title:
+    type: string
+    description: "Thesis title"
+
+  description:
+    type: string
+    description: "Optional thesis description"
+
+  chapters:
+    type: array
+    description: "List of chapters in the thesis"
+    items:
+      $ref: "#/definitions/chapter"
+
+definitions:
+  # Chapter structure
+  chapter:
+    type: object
+    required:
+      - chapter_id
+      - title
+      - sections
+    properties:
+      chapter_id:
+        type: string
+        description: "Unique chapter identifier"
+        pattern: "^chapter-[a-z0-9-]+$"
+
+      title:
+        type: string
+        description: "Chapter title"
+
+      sections:
+        type: array
+        description: "List of sections in the chapter"
+        items:
+          $ref: "#/definitions/section"
+
+      subsections:
+        type: array
+        description: "Optional subsections within chapter"
+        items:
+          $ref: "#/definitions/subsection"
+
+  # Section structure
+  section:
+    type: object
+    required:
+      - section_id
+      - title
+    properties:
+      section_id:
+        type: string
+        description: "Unique section identifier"
+        pattern: "^sec-[a-z0-9-]+$"
+
+      title:
+        type: string
+        description: "Section title"
+
+      content:
+        type: array
+        description: "Content elements in the section"
+        items:
+          $ref: "#/definitions/content_element"
+
+      subsections:
+        type: array
+        description: "Optional subsections"
+        items:
+          $ref: "#/definitions/subsection"
+
+      citations:
+        type: array
+        description: "Citations used in this section"
+        items:
+          type: string
+          pattern: "^[a-z0-9]+$"
+
+  # Subsection structure (optional)
+  subsection:
+    type: object
+    required:
+      - subsection_id
+      - title
+    properties:
+      subsection_id:
+        type: string
+        description: "Unique subsection identifier"
+        pattern: "^subsec-[a-z0-9-]+$"
+
+      title:
+        type: string
+        description: "Subsection title"
+
+      content:
+        type: array
+        description: "Content elements in the subsection"
+        items:
+          $ref: "#/definitions/content_element"
+
+      citations:
+        type: array
+        description: "Citations used in this subsection"
+        items:
+          type: string
+          pattern: "^[a-z0-9]+$"
+
+  # Content element types
+  content_element:
+    type: object
+    required:
+      - type
+      - id
+    properties:
+      type:
+        type: string
+        enum:
+          - text
+          - definition
+          - theorem
+          - lemma
+          - proof
+          - example
+          - remark
+          - proposition
+          - corollary
+          - conjecture
+        description: "Type of content element"
+
+      id:
+        type: string
+        description: "Unique identifier for this element"
+        pattern: "^[a-z]+-[a-z0-9-]+$"
+
+      title:
+        type: string
+        description: "Title of the element (optional for text)"
+
+      # Definition-specific fields
+      term:
+        type: string
+        description: "Term being defined (required for definitions)"
+
+      meaning:
+        type: string
+        description: "Meaning/definition of the term (required for definitions)"
+
+      # Theorem-specific fields
+      statement:
+        type: string
+        description: "The theorem statement (required for theorems)"
+
+      proof:
+        type: string
+        description: "Proof identifier (required for theorems)"
+
+      premises:
+        type: array
+        description: "Optional list of premises"
+        items:
+          type: string
+
+      # Proof-specific fields
+      steps:
+        type: array
+        description: "Proof steps (required for proofs)"
+        items:
+          type: string
+
+      conclusion:
+        type: string
+        description: "Proof conclusion (required for proofs)"
+
+      # Example-specific fields
+      description:
+        type: string
+        description: "Description of the example (required for examples)"
+
+      instantiation:
+        type: string
+        description: "Concrete instantiation (required for examples)"
+
+      # Citation tracking for all elements
+      citations:
+        type: array
+        description: "Citations referenced by this element"
+        items:
+          type: string
+          pattern: "^[a-z0-9]+$"
+
+      # LaTeX source reference
+      tex_location:
+        type: object
+        description: "Location in LaTeX source"
+        properties:
+          file:
+            type: string
+            pattern: "^.+\\.tex$"
+
+          line:
+            type: integer
+            minimum: 1
+
+# Nesting constraints (enforced by validators)
+# - Proof cannot contain theorem (circular)
+# - Theorem must contain proof reference
+# - Definition must have term and meaning
+# - All IDs must be globally unique
+# - All citation keys must exist in registry

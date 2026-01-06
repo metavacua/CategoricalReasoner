@@ -1,0 +1,108 @@
+name: Thesis Validation
+
+on:
+  pull_request:
+    branches: [ main, master ]
+  push:
+    branches: [ main, master ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    outputs:
+      result: ${{ steps.validate.outputs.result }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyyaml rdflib pyshacl
+
+    - name: Validate TeX structure
+      id: validate_tex
+      run: |
+        python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
+
+    - name: Validate citations
+      id: validate_citations
+      run: |
+        python schema/validators/validate_citations.py --tex-dir thesis/chapters/ --bibliography bibliography/citations.yaml --ontology ontology/citations.jsonld
+
+    - name: Validate RDF
+      id: validate_rdf
+      run: |
+        python schema/validators/validate_rdf.py --ontology ontology/ --shapes ontology/catty-thesis-shapes.shacl
+
+    - name: Validate bidirectional consistency
+      id: validate_consistency
+      run: |
+        python schema/validators/validate_consistency.py --tex-dir thesis/chapters/ --ontology ontology/ --bibliography bibliography/citations.yaml --mapping schema/tex-rdf-mapping.yaml
+
+    - name: Set validation result
+      id: set_result
+      if: steps.validate_tex.outputs.result == 'success' && steps.validate_citations.outputs.result == 'success' && steps.validate_rdf.outputs.result == 'success' && steps.validate_consistency.outputs.result == 'success'
+        run: echo "pass"
+      else
+        run: echo "fail"
+
+    - name: Comment validation results on PR
+      if: failure()
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const comment = `❌ **Thesis Validation Failed**
+
+          **Status**: The pull request has validation failures and cannot be merged.
+
+          **Validation Results**:
+          - ❌ TeX structure validation: FAILED
+          - ❌ Citation validation: FAILED
+          - ❌ RDF/SHACL validation: FAILED
+          - ❌ Bidirectional consistency validation: FAILED
+
+          **Action Required**: Please fix the validation errors and push again.
+
+          **To run validation locally**:
+          \`\`\`bash
+          cd thesis && python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/ && python schema/validators/validate_citations.py --tex-dir thesis/chapters/ --bibliography bibliography/citations.yaml --ontology ontology/citations.jsonld && python schema/validators/validate_rdf.py --ontology ontology/ --shapes ontology/catty-thesis-shapes.shacl && python schema/validators/validate_consistency.py --tex-dir thesis/chapters/ --ontology ontology/ --bibliography bibliography/citations.yaml --mapping schema/tex-rdf-mapping.yaml
+          \`\`\`
+          `;
+
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          })
+
+    - name: Comment success on PR
+      if: success()
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const comment = `✅ **Thesis Validation Passed**
+
+          **Status**: All validation checks passed successfully.
+
+          **Validation Results**:
+          - ✅ TeX structure validation: PASSED
+          - ✅ Citation validation: PASSED
+          - ✅ RDF/SHACL validation: PASSED
+          - ✅ Bidirectional consistency validation: PASSED
+
+          This PR is ready for review and merge.`;
+
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: comment
+          })

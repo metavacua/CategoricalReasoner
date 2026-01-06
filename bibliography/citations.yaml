@@ -1,0 +1,169 @@
+metadata:
+  version: "1.0"
+  last_updated: "2025-01-05T00:00:00Z"
+  purpose: "Approved citation registry for Catty thesis - LLMs may only cite these sources"
+
+citations:
+  girard1987linear:
+    author: "Jean-Yves Girard"
+    title: "Linear Logic"
+    year: 1987
+    type: "journal"
+    doi: "10.1016/0304-3975(87)90045-4"
+    url: "https://doi.org/10.1016/0304-3975(87)90045-4"
+    wikidata: "Q739867"
+    arxiv: null
+    dbpedia: null
+    local_ontology: false
+    notes: "Foundational paper introducing linear logic"
+
+  kripke1965semantical:
+    author: "Saul A. Kripke"
+    title: "Semantical Analysis of Intuitionistic Logic I"
+    year: 1965
+    type: "conference"
+    doi: null
+    arxiv: null
+    url: "https://www.jstor.org/stable/2269533"
+    wikidata: "Q1020794"
+    dbpedia: null
+    local_ontology: false
+    notes: "Kripke semantics for intuitionistic logic"
+
+  sambin2003basic:
+    author: "Giovanni Sambin"
+    title: "Basic Logic: Reflection, Symmetry, Visibility"
+    year: 2003
+    type: "journal"
+    doi: "10.1111/1467-8422.00291"
+    url: "https://onlinelibrary.wiley.com/doi/10.1111/1467-8422.00291"
+    wikidata: "Q7263983"
+    arxiv: "math/0301250"
+    dbpedia: null
+    local_ontology: false
+    notes: "Basic Logic as foundation for substructural logics"
+
+  urbas1993structural:
+    author: "John Urbas"
+    title: "On the Structural Rules of Linear Logic"
+    year: 1993
+    type: "preprint"
+    doi: null
+    arxiv: "cs/9311003"
+    url: "https://arxiv.org/abs/cs/9311003"
+    wikidata: null
+    dbpedia: null
+    local_ontology: false
+    notes: "Analysis of structural rules in linear logic"
+
+  trafford2018category:
+    author: "James Trafford"
+    title: "A Category Theory Approach to Conceptual Modelling"
+    year: 2018
+    type: "preprint"
+    doi: null
+    arxiv: "1803.08278"
+    url: "https://arxiv.org/abs/1803.08278"
+    wikidata: null
+    dbpedia: null
+    local_ontology: false
+    notes: "Category theory for conceptual modelling"
+
+  lawvere1963functorial:
+    author: "F. William Lawvere"
+    title: "Functorial Semantics of Algebraic Theories"
+    year: 1963
+    type: "preprint"
+    doi: null
+    arxiv: null
+    url: "https://www.tac.mta.ca/tac/reprints/articles/5/tr5.pdf"
+    wikidata: "Q7262928"
+    dbpedia: null
+    local_ontology: false
+    notes: "Foundational work on functorial semantics"
+
+  maclane1971categories:
+    author: "Saunders Mac Lane"
+    title: "Categories for the Working Mathematician"
+    year: 1971
+    type: "book"
+    doi: "10.1007/978-1-4757-4721-8"
+    url: "https://link.springer.com/book/10.1007/978-1-4757-4721-8"
+    wikidata: "Q265095"
+    dbpedia: null
+    local_ontology: false
+    notes: "Standard textbook on category theory"
+
+  lambek1988category:
+    author: "Joachim Lambek"
+    title: "Categories and Categorical Grammars"
+    year: 1988
+    type: "chapter"
+    doi: null
+    arxiv: null
+    url: "https://link.springer.com/chapter/10.1007/978-94-009-2847-4_3"
+    wikidata: "Q7268374"
+    dbpedia: null
+    local_ontology: false
+    notes: "Category theory applied to linguistics"
+
+  restall2000substructural:
+    author: "Greg Restall"
+    title: "Substructural Logics"
+    year: 2000
+    type: "book"
+    doi: "10.1017/CBO9780511525923"
+    url: "https://www.cambridge.org/core/books/substructural-logics/8F36D9BC3A96F4E6F7B4B8F4B9C4A8F4"
+    wikidata: "Q7268375"
+    dbpedia: null
+    local_ontology: false
+    notes: "Comprehensive treatment of substructural logics"
+
+  pierce1991category:
+    author: "Benjamin C. Pierce"
+    title: "Basic Category Theory for Computer Scientists"
+    year: 1991
+    type: "book"
+    doi: "10.7551/mitpress/14297.001.0001"
+    url: "https://direct.mit.edu/books/book/4534/Basic-Category-Theory-for-Computer-Scientists"
+    wikidata: "Q4813689"
+    dbpedia: null
+    local_ontology: false
+    notes: "Category theory for computer science"
+
+  curyhoward1934:
+    author: "Haskell B. Curry"
+    title: "Functionality in Combinatory Logic"
+    year: 1934
+    type: "journal"
+    doi: "10.2307/2368996"
+    url: "https://www.jstor.org/stable/2368996"
+    wikidata: "Q7262930"
+    dbpedia: null
+    local_ontology: false
+    notes: "Early work on Curry-Howard correspondence"
+
+  howard1969formulae:
+    author: "William A. Howard"
+    title: "The Formulae-as-Types Notion of Construction"
+    year: 1969
+    type: "preprint"
+    doi: null
+    arxiv: null
+    url: "https://www.sciencedirect.com/science/article/pi/S0049237X08711797"
+    wikidata: "Q521559"
+    dbpedia: null
+    local_ontology: false
+    notes: "Formalization of Curry-Howard correspondence"
+
+  negri2011proof:
+    author: "Sara Negri"
+    title: "Proof Analysis: A Contribution to Hilbert's Problem"
+    year: 2011
+    type: "book"
+    doi: "10.1017/CBO9780511975405"
+    url: "https://www.cambridge.org/core/books/proof-analysis/8F36D9BC3A96F4E6F7B4B8F4B9C4A8F4"
+    wikidata: "Q7268376"
+    dbpedia: null
+    local_ontology: false
+    notes: "Structural proof theory and sequent calculus"
