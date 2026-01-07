@@ -1,0 +1,27 @@
+{
+  "concept_iri": "http://dbpedia.org/resource/Intuitionistic_logic",
+  "label": "Intuitionistic logic",
+  "abstract": "Intuitionistic logic, sometimes more generally called constructive logic, refers to systems of symbolic logic that differ from the systems used for classical logic by more closely mirroring the notion of constructive proof. In particular, intuitionistic logic does not accept the law of excluded middle and the double negation elimination, which are fundamental inference rules in classical logic. Intuitionistic logic emerged from the development of intuitionistic mathematics, which L. E. J. Brouwer developed in the early 20th century. Brouwer's ideas were formalized by Arend Heyting in the 1930s.",
+  "influenced": [
+    "http://dbpedia.org/resource/Constructive_mathematics",
+    "http://dbpedia.org/resource/Type_theory"
+  ],
+  "influencedBy": [
+    "http://dbpedia.org/resource/L._E._J._Brouwer",
+    "http://dbpedia.org/resource/Mathematical_constructivism"
+  ],
+  "domain": [
+    "http://dbpedia.org/resource/Mathematical_logic"
+  ],
+  "sameAs": [
+    "http://www.wikidata.org/entity/Q1993854",
+    "http://rdf.freebase.com/ns/m.03cxd"
+  ],
+  "page": [
+    "http://en.wikipedia.org/wiki/Intuitionistic_logic"
+  ],
+  "foundationYear": null,
+  "retrieved_at": "2025-01-07T02:00:00Z",
+  "source_endpoint": "https://dbpedia.org/sparql",
+  "raw_bindings": []
+}

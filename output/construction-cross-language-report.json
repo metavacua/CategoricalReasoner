@@ -1,0 +1,16 @@
+{
+  "triple_counts_match": true,
+  "graphs_isomorphic": true,
+  "provenance_links_match": true,
+  "differences": {
+    "only_in_python": [],
+    "only_in_java": [],
+    "modified": []
+  },
+  "statistics": {
+    "python_triples": 14,
+    "java_triples": 14,
+    "identical_triples": 14,
+    "difference_count": 0
+  }
+}

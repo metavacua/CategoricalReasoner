@@ -1,0 +1,71 @@
+[
+  {
+    "@id": "http://catty.org/logic/intuitionistic-logic",
+    "@type": [
+      "http://catty.org/ontology/Logic"
+    ],
+    "http://purl.org/dc/terms/description": [
+      {
+        "@language": "en",
+        "@value": "Intuitionistic logic, sometimes more generally called constructive logic, refers to systems of symbolic logic that differ from the systems used for classical logic by more closely mirroring the notion of constructive proof. In particular, intuitionistic logic does not accept the law of excluded middle and the double negation elimination, which are fundamental inference rules in classical logic. Intuitionistic logic emerged from the development of intuitionistic mathematics, which L. E. J. Brouwer developed in the early 20th century. Brouwer's ideas were formalized by Arend Heyting in the 1930s."
+      }
+    ],
+    "http://purl.org/dc/terms/isBasedOn": [
+      {
+        "@id": "http://dbpedia.org/resource/Intuitionistic_logic"
+      }
+    ],
+    "http://purl.org/dc/terms/references": [
+      {
+        "@id": "http://en.wikipedia.org/wiki/Intuitionistic_logic"
+      }
+    ],
+    "http://purl.org/dc/terms/source": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#anyURI",
+        "@value": "https://dbpedia.org/sparql"
+      }
+    ],
+    "http://www.w3.org/2000/01/rdf-schema#label": [
+      {
+        "@language": "en",
+        "@value": "Intuitionistic logic"
+      }
+    ],
+    "http://www.w3.org/2002/07/owl#sameAs": [
+      {
+        "@id": "http://www.wikidata.org/entity/Q1993854"
+      },
+      {
+        "@id": "http://rdf.freebase.com/ns/m.03cxd"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#broader": [
+      {
+        "@id": "http://dbpedia.org/resource/L._E._J._Brouwer"
+      },
+      {
+        "@id": "http://dbpedia.org/resource/Mathematical_constructivism"
+      }
+    ],
+    "http://www.w3.org/2004/02/skos/core#narrower": [
+      {
+        "@id": "http://dbpedia.org/resource/Constructive_mathematics"
+      },
+      {
+        "@id": "http://dbpedia.org/resource/Type_theory"
+      }
+    ],
+    "http://www.w3.org/ns/prov#generatedAtTime": [
+      {
+        "@type": "http://www.w3.org/2001/XMLSchema#dateTime",
+        "@value": "2025-01-07T02:00:00+00:00"
+      }
+    ],
+    "http://www.w3.org/ns/prov#wasDerivedFrom": [
+      {
+        "@id": "http://dbpedia.org/resource/Intuitionistic_logic"
+      }
+    ]
+  }
+]
