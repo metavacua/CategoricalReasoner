@@ -1,0 +1,187 @@
+{
+  "statistics": {
+    "total_facts": 14,
+    "extracted_facts": 10,
+    "inferred_facts": 0,
+    "schema_facts": 4,
+    "equivalent_facts": 0,
+    "unjustified_facts": 0
+  },
+  "report": {
+    "extracted": [
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://purl.org/dc/terms/description",
+        "object": "Intuitionistic logic, sometimes more generally called constructive logic, refers to systems of symbolic logic that differ from the systems used for classical logic by more closely mirroring the notion",
+        "justification": {
+          "type": "extracted",
+          "source_field": "abstract",
+          "source_iri": "http://dbpedia.org/resource/Intuitionistic_logic",
+          "retrieval_query": "DBPedia SPARQL: dbo:abstract",
+          "extraction_method": "direct_property_mapping"
+        }
+      },
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://www.w3.org/2002/07/owl#sameAs",
+        "object": "http://rdf.freebase.com/ns/m.03cxd",
+        "justification": {
+          "type": "extracted",
+          "source_field": "sameAs",
+          "source_iri": "http://rdf.freebase.com/ns/m.03cxd",
+          "retrieval_query": "DBPedia SPARQL: owl:sameAs",
+          "extraction_method": "direct_property_mapping"
+        }
+      },
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://www.w3.org/2004/02/skos/core#broader",
+        "object": "http://dbpedia.org/resource/L._E._J._Brouwer",
+        "justification": {
+          "type": "extracted",
+          "source_field": "influencedBy",
+          "source_iri": "http://dbpedia.org/resource/L._E._J._Brouwer",
+          "retrieval_query": "DBPedia SPARQL: dbo:influencedBy",
+          "extraction_method": "semantic_mapping",
+          "mapping_rule": "dbo:influencedBy \u2192 skos:broader (concept hierarchy)"
+        }
+      },
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://www.w3.org/2004/02/skos/core#broader",
+        "object": "http://dbpedia.org/resource/Mathematical_constructivism",
+        "justification": {
+          "type": "extracted",
+          "source_field": "influencedBy",
+          "source_iri": "http://dbpedia.org/resource/Mathematical_constructivism",
+          "retrieval_query": "DBPedia SPARQL: dbo:influencedBy",
+          "extraction_method": "semantic_mapping",
+          "mapping_rule": "dbo:influencedBy \u2192 skos:broader (concept hierarchy)"
+        }
+      },
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://www.w3.org/2002/07/owl#sameAs",
+        "object": "http://www.wikidata.org/entity/Q1993854",
+        "justification": {
+          "type": "extracted",
+          "source_field": "sameAs",
+          "source_iri": "http://www.wikidata.org/entity/Q1993854",
+          "retrieval_query": "DBPedia SPARQL: owl:sameAs",
+          "extraction_method": "direct_property_mapping"
+        }
+      },
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://www.w3.org/2004/02/skos/core#narrower",
+        "object": "http://dbpedia.org/resource/Type_theory",
+        "justification": {
+          "type": "extracted",
+          "source_field": "influenced",
+          "source_iri": "http://dbpedia.org/resource/Type_theory",
+          "retrieval_query": "DBPedia SPARQL: dbo:influenced",
+          "extraction_method": "semantic_mapping",
+          "mapping_rule": "dbo:influenced \u2192 skos:narrower (concept hierarchy)"
+        }
+      },
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://www.w3.org/2004/02/skos/core#narrower",
+        "object": "http://dbpedia.org/resource/Constructive_mathematics",
+        "justification": {
+          "type": "extracted",
+          "source_field": "influenced",
+          "source_iri": "http://dbpedia.org/resource/Constructive_mathematics",
+          "retrieval_query": "DBPedia SPARQL: dbo:influenced",
+          "extraction_method": "semantic_mapping",
+          "mapping_rule": "dbo:influenced \u2192 skos:narrower (concept hierarchy)"
+        }
+      },
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://purl.org/dc/terms/references",
+        "object": "http://en.wikipedia.org/wiki/Intuitionistic_logic",
+        "justification": {
+          "type": "extracted",
+          "source_field": "page",
+          "source_iri": "http://en.wikipedia.org/wiki/Intuitionistic_logic",
+          "retrieval_query": "DBPedia SPARQL: foaf:page",
+          "extraction_method": "direct_property_mapping"
+        }
+      },
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://purl.org/dc/terms/isBasedOn",
+        "object": "http://dbpedia.org/resource/Intuitionistic_logic",
+        "justification": {
+          "type": "extracted",
+          "source_field": "concept_iri",
+          "source_iri": "http://dbpedia.org/resource/Intuitionistic_logic",
+          "retrieval_query": "DBPedia SPARQL: main subject IRI",
+          "extraction_method": "direct_iri_reference"
+        }
+      },
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+        "object": "Intuitionistic logic",
+        "justification": {
+          "type": "extracted",
+          "source_field": "label",
+          "source_iri": "http://dbpedia.org/resource/Intuitionistic_logic",
+          "retrieval_query": "DBPedia SPARQL: rdfs:label",
+          "extraction_method": "direct_property_mapping"
+        }
+      }
+    ],
+    "inferred": [],
+    "schema_defined": [
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "object": "http://catty.org/ontology/Logic",
+        "justification": {
+          "type": "schema_defined",
+          "schema_element": "rdf:type",
+          "schema_definition": "Type assertion required by RDF schema",
+          "structural": true
+        }
+      },
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://www.w3.org/ns/prov#wasDerivedFrom",
+        "object": "http://dbpedia.org/resource/Intuitionistic_logic",
+        "justification": {
+          "type": "schema_defined",
+          "schema_element": "prov:wasDerivedFrom",
+          "schema_definition": "Provenance tracking (PROV-O)",
+          "structural": true
+        }
+      },
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://purl.org/dc/terms/source",
+        "object": "https://dbpedia.org/sparql",
+        "justification": {
+          "type": "schema_defined",
+          "schema_element": "dct:source",
+          "schema_definition": "Source attribution (Dublin Core)",
+          "structural": true
+        }
+      },
+      {
+        "subject": "http://catty.org/logic/intuitionistic-logic",
+        "predicate": "http://www.w3.org/ns/prov#generatedAtTime",
+        "object": "2025-01-07T02:00:00+00:00",
+        "justification": {
+          "type": "schema_defined",
+          "schema_element": "prov:generatedAtTime",
+          "schema_definition": "Timestamp for provenance (PROV-O)",
+          "structural": true
+        }
+      }
+    ],
+    "equivalent_mapping": [],
+    "unjustified": []
+  }
+}

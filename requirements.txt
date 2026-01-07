@@ -1,0 +1,18 @@
+# Python dependencies for Catty Thesis Project
+# DBPedia Data Construction and Semantic Validation
+
+# Core RDF libraries
+rdflib>=7.0.0
+pyshacl>=0.25.0
+
+# SPARQL query support
+SPARQLWrapper>=2.0.0
+
+# HTTP client for data retrieval
+requests>=2.31.0
+
+# YAML processing for schemas
+PyYAML>=6.0
+
+# Data format support
+jsonschema>=4.17.0
