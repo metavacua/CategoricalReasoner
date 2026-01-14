@@ -1,0 +1,60 @@
+metadata:
+  version: "1.0"
+  description: "Catty IRI Configuration Registry"
+
+localhost:
+  base_url: "http://localhost:8080"
+  namespace_path: "/ontology"
+
+production:
+  base_url: "https://metavacua.github.io/CategoricalReasoner"
+  namespace_path: "/ontology"
+
+ontologies:
+  catty-categorical-schema:
+    localhost_iri: "http://localhost:8080/ontology/catty-categorical-schema#"
+    production_iri: "https://metavacua.github.io/CategoricalReasoner/ontology/catty-categorical-schema#"
+    context_url: "http://localhost:8080/ontology/context.jsonld"
+    file: "ontology/catty-categorical-schema.jsonld"
+
+  logics-as-objects:
+    localhost_iri: "http://localhost:8080/ontology/logics-as-objects#"
+    production_iri: "https://metavacua.github.io/CategoricalReasoner/ontology/logics-as-objects#"
+    context_url: "http://localhost:8080/ontology/context.jsonld"
+    file: "ontology/logics-as-objects.jsonld"
+
+  morphism-catalog:
+    localhost_iri: "http://localhost:8080/ontology/morphism-catalog#"
+    production_iri: "https://metavacua.github.io/CategoricalReasoner/ontology/morphism-catalog#"
+    context_url: "http://localhost:8080/ontology/context.jsonld"
+    file: "ontology/morphism-catalog.jsonld"
+
+  two-d-lattice-category:
+    localhost_iri: "http://localhost:8080/ontology/two-d-lattice-category#"
+    production_iri: "https://metavacua.github.io/CategoricalReasoner/ontology/two-d-lattice-category#"
+    context_url: "http://localhost:8080/ontology/context.jsonld"
+    file: "ontology/two-d-lattice-category.jsonld"
+
+  curry-howard-categorical-model:
+    localhost_iri: "http://localhost:8080/ontology/curry-howard-categorical-model#"
+    production_iri: "https://metavacua.github.io/CategoricalReasoner/ontology/curry-howard-categorical-model#"
+    context_url: "http://localhost:8080/ontology/context.jsonld"
+    file: "ontology/curry-howard-categorical-model.jsonld"
+
+  catty-complete-example:
+    localhost_iri: "http://localhost:8080/ontology/catty-complete-example#"
+    production_iri: "https://metavacua.github.io/CategoricalReasoner/ontology/catty-complete-example#"
+    context_url: "http://localhost:8080/ontology/context.jsonld"
+    file: "ontology/catty-complete-example.jsonld"
+
+  citations:
+    localhost_iri: "http://localhost:8080/ontology/citations#"
+    production_iri: "https://metavacua.github.io/CategoricalReasoner/ontology/citations#"
+    context_url: "http://localhost:8080/ontology/context.jsonld"
+    file: "ontology/citations.jsonld"
+
+  citation-usage:
+    localhost_iri: "http://localhost:8080/ontology/citation-usage#"
+    production_iri: "https://metavacua.github.io/CategoricalReasoner/ontology/citation-usage#"
+    context_url: "http://localhost:8080/ontology/context.jsonld"
+    file: "ontology/citation-usage.jsonld"

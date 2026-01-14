@@ -1,0 +1,30 @@
+metadata:
+  name: "morphism-catalog"
+  description: "Catalog of morphisms between logics (extensions, interpretations, adjunctions)"
+  version: "1.0.0"
+  authors:
+    - "metavacua"
+  created: "2026-01-14"
+
+iri:
+  config_key: "morphism-catalog"
+
+rdf:
+  format: "JSON-LD"
+  context_imports:
+    - "catty-categorical-schema"
+    - "logics-as-objects"
+
+validation:
+  shacl_shapes: []
+
+sparql_examples:
+  - query_id: "all-morphisms"
+    description: "Retrieve all morphisms with their domain/codomain"
+    expected_result_count: "10+"
+    query: |
+      PREFIX catty: <http://localhost:8080/ontology/catty-categorical-schema#>
+      SELECT ?m ?d ?c WHERE {
+        ?m catty:domain ?d ;
+           catty:codomain ?c .
+      }
