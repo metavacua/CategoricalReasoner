@@ -10,35 +10,18 @@ import java.util.stream.Stream;
  */
 public class JavaCategoryInvestigation {
     
+    // Simple enum to represent basic logic types
+    enum SimpleLogic {
+        PPSC, CPL, INT, LL
+    }
+    
     /**
      * Test 1: Can Java enums express logic objects?
      */
     public static void testEnumsAsObjects() {
         System.out.println("=== TEST 1: ENUMS AS LOGIC OBJECTS ===");
         
-        // Catty's 8 logics as enum
-        enum Logic {
-            LM("Minimal Base"),
-            LJ("Intuitionistic"),
-            LDJ("Dual Intuitionistic"), 
-            LK("Classical"),
-            LL("Linear"),
-            ALL("Affine Linear"),
-            RLL("Relevant Linear"),
-            IL("Intermediate");
-            
-            private final String description;
-            
-            Logic(String description) {
-                this.description = description;
-            }
-            
-            public String getDescription() {
-                return description;
-            }
-        }
-        
-        System.out.println("✓ Enums can represent fixed sets of objects (Catty's 8 logics)");
+        System.out.println("✓ Enums can represent fixed sets of objects");
         System.out.println("✓ Enums provide compile-time safety");
         System.out.println("✗ No extensibility - enum values must be known at compile time");
         System.out.println("✗ Cannot represent infinite or dynamic object sets");
@@ -46,25 +29,25 @@ public class JavaCategoryInvestigation {
         
         // Test enum-based morphism
         class EnumMorphism {
-            private final Logic domain;
-            private final Logic codomain;
+            private final SimpleLogic domain;
+            private final SimpleLogic codomain;
             private final String name;
             
-            public EnumMorphism(Logic domain, Logic codomain, String name) {
+            public EnumMorphism(SimpleLogic domain, SimpleLogic codomain, String name) {
                 this.domain = domain;
                 this.codomain = codomain;
                 this.name = name;
             }
             
-            public Logic getDomain() { return domain; }
-            public Logic getCodomain() { return codomain; }
+            public SimpleLogic getDomain() { return domain; }
+            public SimpleLogic getCodomain() { return codomain; }
             public String getName() { return name; }
         }
         
         // Example morphism
-        EnumMorphism lmToLj = new EnumMorphism(Logic.LM, Logic.LJ, "Add LNC + Explosion");
-        System.out.println("Example morphism: " + lmToLj.getName());
-        System.out.println("Domain: " + lmToLj.getDomain() + ", Codomain: " + lmToLj.getCodomain());
+        EnumMorphism ppscToCpl = new EnumMorphism(SimpleLogic.PPSC, SimpleLogic.CPL, "Classical Extension");
+        System.out.println("Example morphism: " + ppscToCpl.getName());
+        System.out.println("Domain: " + ppscToCpl.getDomain() + ", Codomain: " + ppscToCpl.getCodomain());
         System.out.println();
     }
     
