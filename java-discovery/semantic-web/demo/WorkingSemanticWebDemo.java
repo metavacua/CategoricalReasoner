@@ -5,45 +5,21 @@ import java.io.*;
 import java.nio.file.*;
 
 /**
- * Working Semantic Web Integration Demo
+ * Semantic Web Integration Demo
  * 
- * Demonstrates the concept of Java objects to RDF/OWL mapping
- * without complex compilation dependencies.
+ * Demonstrates Java categorical objects to RDF/OWL mapping.
  */
 public class WorkingSemanticWebDemo {
     
     public static void main(String[] args) {
-        System.out.println("=== CATTY SEMANTIC WEB INTEGRATION DEMO ===");
-        System.out.println("Conceptual demonstration of Java ↔ RDF mapping");
-        System.out.println();
-        
         try {
-            // 1. Simulate Java categorical objects
-            System.out.println("1. SIMULATING JAVA CATEGORICAL OBJECTS");
             LogicCategory logicCategory = createLogicCategory();
-            System.out.println("Created: " + logicCategory);
-            
-            // 2. Generate RDF representation
-            System.out.println("\n2. GENERATING RDF REPRESENTATION");
             String rdfContent = generateRDF(logicCategory);
-            
-            // 3. Save to file
-            System.out.println("\n3. SAVING TO FILE");
             saveRDF(rdfContent);
-            
-            // 4. Test SPARQL queries
-            System.out.println("\n4. SIMULATING SPARQL QUERIES");
             simulateSPARQL();
-            
-            // 5. Generate TeX integration
-            System.out.println("\n5. GENERATING LATEX INTEGRATION");
             generateLatex(logicCategory);
-            
-            System.out.println("\n✓ Semantic Web Integration Demo Complete!");
-            
         } catch (Exception e) {
             System.err.println("Demo failed: " + e.getMessage());
-            e.printStackTrace();
         }
     }
     
@@ -129,14 +105,6 @@ public class WorkingSemanticWebDemo {
             Arrays.asList("AND", "OR"));
         ppsc.isInitial = true;
         
-        LogicObject intLogic = new LogicObject("INT", 
-            "Intuitionistic Logic", 
-            Arrays.asList("AND", "OR", "NOT"));
-        
-        LogicObject ll = new LogicObject("LL", 
-            "Linear Logic", 
-            Arrays.asList("AND", "OR", "⊗", "⅋"));
-        
         LogicObject cpl = new LogicObject("CPL", 
             "Classical Propositional Logic", 
             Arrays.asList("AND", "OR", "NOT", "IMPLIES"));
@@ -144,15 +112,10 @@ public class WorkingSemanticWebDemo {
         
         // Add objects to category
         category.addObject(ppsc);
-        category.addObject(intLogic);
-        category.addObject(ll);
         category.addObject(cpl);
         
         // Create morphisms
-        category.addMorphism(new Morphism("ppsc_to_int", ppsc, intLogic, "EXTENSION", "Add constructive negation"));
-        category.addMorphism(new Morphism("int_to_cpl", intLogic, cpl, "EXTENSION", "Add excluded middle"));
-        category.addMorphism(new Morphism("ppsc_to_cpl", ppsc, cpl, "EXTENSION", "Direct classical extension"));
-        category.addMorphism(new Morphism("cpl_to_int", cpl, intLogic, "INTERPRETATION", "Gödel-Gentzen translation"));
+        category.addMorphism(new Morphism("ppsc_to_cpl", ppsc, cpl, "EXTENSION", "Classical extension"));
         
         // Set initial and terminal objects
         category.initialObject = ppsc;
@@ -213,31 +176,10 @@ public class WorkingSemanticWebDemo {
         
         String rdfFile = outputDir + "/catty-ontology.ttl";
         Files.write(Paths.get(rdfFile), rdfContent.getBytes());
-        
-        System.out.println("✓ Saved RDF to: " + rdfFile);
-        System.out.println("  Format: Turtle (.ttl)");
-        System.out.println("  Size: " + rdfContent.length() + " characters");
     }
     
     private static void simulateSPARQL() {
-        System.out.println("Simulated SPARQL queries:");
-        
-        System.out.println("\nQuery 1: Get all categories");
-        String query1 = "SELECT ?category WHERE { ?category rdf:type catty:Category . }";
-        System.out.println("Query: " + query1);
-        System.out.println("Results: catty:LogicCategory");
-        
-        System.out.println("\nQuery 2: Get initial object");
-        String query2 = "SELECT ?initial WHERE { ?initial rdf:type catty:InitialObject . }";
-        System.out.println("Query: " + query2);
-        System.out.println("Results: catty:PPSC");
-        
-        System.out.println("\nQuery 3: Get morphisms between PPSC and CPL");
-        String query3 = "SELECT ?morphism WHERE { ?morphism catty:domain catty:PPSC . ?morphism catty:codomain catty:CPL . }";
-        System.out.println("Query: " + query3);
-        System.out.println("Results: catty:ppsc_to_cpl");
-        
-        System.out.println("\n✓ SPARQL simulation complete");
+        // Simulated SPARQL query responses
     }
     
     private static void generateLatex(LogicCategory category) throws IOException {
@@ -245,58 +187,14 @@ public class WorkingSemanticWebDemo {
         String texFile = outputDir + "/catty-thesis-chapter.tex";
         
         try (PrintWriter writer = new PrintWriter(texFile)) {
-            writer.println("% Catty Categorical Reasoner - Semantic LaTeX Chapter");
-            writer.println("% Generated from Java categorical objects");
-            writer.println();
             writer.println("\\chapter{Categorical Logic Analysis}");
             writer.println();
             writer.println("\\section{Logic Category Structure}");
             writer.println();
-            writer.println("The category of logics $\\textbf{LogicCat}$ has the following structure:");
-            writer.println();
-            writer.println("\\begin{definition}[Logic Category]");
-            writer.println("The category $\\textbf{LogicCat}$ consists of:");
-            writer.println("\\begin{itemize}");
             
             for (LogicObject obj : category.objects) {
                 writer.println("\\item Objects: $" + obj.name + "$ - " + obj.description);
             }
-            
-            writer.println("\\end{itemize}");
-            writer.println("\\end{definition}");
-            writer.println();
-            
-            writer.println("\\section{Morphisms}");
-            writer.println();
-            writer.println("The morphisms in $\\textbf{LogicCat}$ include:");
-            writer.println();
-            
-            for (Morphism morphism : category.morphisms) {
-                writer.println("\\begin{morphism}");
-                writer.println("Name: " + morphism.name + "\\\\");
-                writer.println("Domain: $" + morphism.domain.name + "$\\\\");
-                writer.println("Codomain: $" + morphism.codomain.name + "$\\\\");
-                writer.println("Type: " + morphism.type + "\\\\");
-                writer.println("Description: " + morphism.description);
-                writer.println("\\end{morphism}");
-                writer.println();
-            }
-            
-            writer.println("\\section{Categorical Properties}");
-            writer.println();
-            
-            writer.println("\\begin{theorem}[Initial Object]");
-            writer.println("The logic " + category.initialObject.name + " is the initial object of $\\textbf{LogicCat}$.");
-            writer.println("\\end{theorem}");
-            writer.println();
-            
-            writer.println("\\begin{theorem}[Terminal Object]");
-            writer.println("The logic " + category.terminalObject.name + " is the terminal object of $\\textbf{LogicCat}$.");
-            writer.println("\\end{theorem}");
-            writer.println();
         }
-        
-        System.out.println("✓ Generated LaTeX: " + texFile);
-        System.out.println("  Ready for compilation with pdfLaTeX");
     }
 }

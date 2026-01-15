@@ -19,7 +19,7 @@ public class SemanticWebIntegrationDemo {
     public static void main(String[] args) {
         System.out.println("=== CATTY SEMANTIC WEB INTEGRATION DEMO ===");
         System.out.println("Java Categorical Objects ↔ RDF/OWL Ontologies");
-        System.out.println("Using Apache Jena TDB2 v4.10.0");
+        System.out.println("Using Apache Jena TDB2 v5.6.0");
         System.out.println();
         
         try {

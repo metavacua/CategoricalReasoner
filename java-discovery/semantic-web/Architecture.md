@@ -3,15 +3,11 @@
 ## Installation and Setup
 
 ```bash
-# Java and Jena installation confirmed
-# Location: /tmp/apache-jena-4.10.0/
+# Java and Jena installation
+# Location: /tmp/apache-jena-5.6.0/
 
-export JENA_HOME=/tmp/apache-jena-4.10.0
+export JENA_HOME=/tmp/apache-jena-5.6.0
 export PATH=$JENA_HOME/bin:$PATH
-
-# Test Jena installation
-tdb2_tdbupdate --version
-sparql-query --version
 ```
 
 ## Architecture Overview

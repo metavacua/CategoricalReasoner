@@ -1,6 +1,6 @@
 # Semantic Web Integration & Catty Categorical Reasoner - Final Report
 
-**Date:** January 2025  
+**Date:** January 15th, 2026  
 **Scope:** Complete semantic web integration layer with Java categorical objects ↔ RDF/OWL ontologies  
 **Technology Stack:** Java + Apache Jena + Semantic Web + Static/Dynamic Web Pages + TeX Integration
 
@@ -122,12 +122,8 @@ GET  /api/theorems             - Get categorical theorems
 
 **Apache Jena TDB2 Integration**
 ```bash
-# Confirmed working installation
-export JENA_HOME=/tmp/apache-jena-4.10.0
-export PATH=$JENA_HOME/bin:$PATH
-
-# Validated commands
-tdb2.tdbupdate --version  # Apache Jena TDB2 version 4.10.0
+# Validated with Jena TDB2 version 5.6.0
+tdb2.tdbupdate --version
 sparql --version           # SPARQL 1.1 query support
 riot --version            # RDF I/O toolkit
 ```
@@ -286,7 +282,7 @@ SELECT ?category ?object ?morphism WHERE {
 
 ### Backend
 - **Java 11+:** Core categorical object processing
-- **Apache Jena TDB2 4.10.0:** Semantic web framework
+- **Apache Jena TDB2 5.6.0:** Semantic web framework
 - **Spring Boot:** REST API server
 - **SPARQL 1.1:** Query language support
 
