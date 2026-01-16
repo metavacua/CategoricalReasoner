@@ -1,3 +1,13 @@
+#!/bin/bash
+# Fix compilation errors in SemanticWebServer.java
+
+echo "Fixing SemanticWebServer compilation errors..."
+
+# Create backup
+cp src/main/java/org/catty/server/SemanticWebServer.java src/main/java/org/catty/server/SemanticWebServer.java.bak
+
+# Fix missing import and compilation errors
+cat > src/main/java/org/catty/server/SemanticWebServer.java << 'EOF'
 package org.catty.server;
 
 import org.apache.jena.fuseki.main.FusekiServer;

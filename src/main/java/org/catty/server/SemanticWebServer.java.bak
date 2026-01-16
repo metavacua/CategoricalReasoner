@@ -4,12 +4,12 @@ import org.apache.jena.fuseki.main.FusekiServer;
 import org.apache.jena.fuseki.system.FusekiLogging;
 import org.apache.jena.query.Dataset;
 import org.apache.jena.query.DatasetFactory;
-import org.apache.jena.query.ReadWrite;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFLanguages;
 import org.apache.jena.shared.JenaException;
 import org.apache.jena.tdb2.TDB2Factory;
+import org.apache.jena.tdb2.sys.TDBInternal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -142,7 +142,7 @@ public class SemanticWebServer {
                 dataset.abort();
                 throw new IOException("Failed to load ontologies", e);
             } finally {
-                if (dataset.isInTransaction()) {
+                if (dataset.isInTransaction() && ((DatasetGraphTransaction)dataset.asDatasetGraph()).isInTransaction()) {
                     dataset.end();
                 }
             }
@@ -163,3 +163,111 @@ public class SemanticWebServer {
     }
     
     /**
+     * Starts the semantic web server.
+     * 
+     * @throws IOException if the server cannot be started
+     */
+    public void start() throws IOException {
+        LOG.info("Starting Semantic Web Server on {}:{}{}", host, port, datasetName);
+        
+        try {
+            FusekiLogging.setLogging();
+            
+            server = FusekiServer.create()
+                    .add(datasetName, dataset, true)
+                    .loopback(true) // Localhost-only binding
+                    .port(port)
+                    .build();
+            
+            server.start();
+            
+            LOG.info("Semantic Web Server started successfully");
+            LOG.info("SPARQL Query Endpoint: http://{}:{}{}/query", host, port, datasetName);
+            LOG.info("SPARQL Update Endpoint: http://{}:{}{}/update", host, port, datasetName);
+            LOG.info("Fuseki Service UI: http://{}:{}{}", host, port, datasetName);
+            
+        } catch (Exception e) {
+            LOG.error("Failed to start server", e);
+            throw new IOException("Failed to start server", e);
+        }
+    }
+    
+    /**
+     * Stops the semantic web server.
+     */
+    public void stop() {
+        LOG.info("Stopping Semantic Web Server");
+        
+        if (server != null) {
+            server.stop();
+            LOG.info("Server stopped");
+        }
+        
+        if (dataset != null) {
+            dataset.close();
+            LOG.info("Dataset closed");
+        }
+    }
+    
+    /**
+     * Gets the underlying dataset.
+     * 
+     * @return the dataset instance
+     */
+    public Dataset getDataset() {
+        return dataset;
+    }
+    
+    /**
+     * Gets the current server instance.
+     * 
+     * @return the FusekiServer instance, or null if not started
+     */
+    public FusekiServer getServer() {
+        return server;
+    }
+    
+    /**
+     * Main entry point for the Semantic Web Server.
+     * 
+     * @param args command line arguments (optional: [host] [port] [dataset])
+     */
+    public static void main(String[] args) {
+        String host = DEFAULT_HOST;
+        int port = DEFAULT_PORT;
+        String datasetName = DEFAULT_DATASET;
+        
+        // Parse command line arguments
+        if (args.length >= 1) host = args[0];
+        if (args.length >= 2) {
+            try {
+                port = Integer.parseInt(args[1]);
+            } catch (NumberFormatException e) {
+                LOG.error("Invalid port number: {}", args[1]);
+                System.exit(1);
+            }
+        }
+        if (args.length >= 3) datasetName = args[2];
+        
+        // Add shutdown hook for graceful shutdown
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            LOG.info("Shutdown hook triggered - performing cleanup");
+        }));
+        
+        try {
+            SemanticWebServer server = new SemanticWebServer(host, port, datasetName);
+            server.start();
+            
+            // Keep the server running
+            LOG.info("Server running (press Ctrl+C to stop)");
+            Thread.currentThread().join();
+            
+        } catch (IOException e) {
+            LOG.error("Failed to start Semantic Web Server", e);
+            System.exit(1);
+        } catch (InterruptedException e) {
+            LOG.info("Server interrupted, shutting down...");
+            Thread.currentThread().interrupt();
+        }
+    }
+}
