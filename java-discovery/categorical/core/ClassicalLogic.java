@@ -3,21 +3,30 @@ package org.catty.categorical.core;
 import java.util.*;
 
 /**
- * Concrete implementation of Classical Propositional Logic.
- * Represents the terminal object in the category of logics.
+ * Concrete implementation of Classical First-Order Predicate Logic.
+ * Terminal object in the category of logics with complete first-order signature.
  */
-public class ClassicalLogic extends AbstractLogic {
+public final class ClassicalLogic extends AbstractLogic {
     
     public ClassicalLogic() {
-        super("CPL", 
-              "Classical Propositional Logic", 
-              new HashSet<>(Arrays.asList("AND", "OR", "NOT", "IMPLIES", "IFF", "XOR")));
+        super("http://localhost/categorical-logics#", 
+              "LK", 
+              "Classical First-Order Predicate Logic", 
+              new HashSet<>(Arrays.asList(
+                  "∧", "∨", "¬", "→", "↔", "⊤", "⊥", "⊢",  // Propositional
+                  "∀", "∃", "=",  // First-order quantifiers and equality
+                  "LEM", "LNC", "Explosion", "DNE", "Peirce"))); // Classical axioms
         
-        CategoricalProperties props = new CategoricalProperties()
-            .setTerminal(true)
-            .setClassical(true)
-            .setMonotonic(true)
-            .setConstructive(false);
+        CategoricalProperties props = new CategoricalProperties(
+            false, // isInitial
+            true,  // isTerminal - LK is terminal
+            true,  // isMonotonic
+            true,  // isClassical - classical logic
+            false, // isConstructive - not constructive
+            false, // isParaconsistent
+            false, // isParacomplete
+            false  // isResourceSensitive
+        );
         
         setProperty("categoricalProperties", props);
     }
@@ -37,16 +46,26 @@ public class ClassicalLogic extends AbstractLogic {
         return (CategoricalProperties) getProperty("categoricalProperties");
     }
     
-    public boolean isClassical() {
-        return getCategoricalProperties().isClassical();
+    /**
+     * Check if this logic has first-order predicate structure
+     */
+    public boolean hasFirstOrderStructure() {
+        return hasConnective("∀") && hasConnective("∃") && hasConnective("=");
     }
     
-    public boolean isConstructive() {
-        return getCategoricalProperties().isConstructive();
+    /**
+     * Check if this logic has classical propositional structure
+     */
+    public boolean hasClassicalPropositionalStructure() {
+        return hasConnective("∧") && hasConnective("∨") && hasConnective("¬") && 
+               hasConnective("→") && hasConnective("↔");
     }
     
-    public boolean hasBooleanAlgebra() {
-        return hasConnective("NOT") && hasConnective("IMPLIES") && 
-               hasConnective("AND") && hasConnective("OR");
+    /**
+     * Check if this logic has all classical axioms
+     */
+    public boolean hasAllClassicalAxioms() {
+        return hasConnective("LEM") && hasConnective("LNC") && 
+               hasConnective("Explosion") && hasConnective("DNE") && hasConnective("Peirce");
     }
 }
