@@ -15,12 +15,41 @@ def test_consistency():
     # Load all ontology files
     data_graph = Graph()
     ontology_dir = "ontology"
+
+    # JSON-LD remote context URLs are intentionally set to localhost for Catty.
+    # In test environments we may not be running an HTTP server, so we intercept
+    # the fetch and serve the context from the repo.
+    import urllib.request
+    from io import BytesIO
+    from urllib.response import addinfourl
+    from email.message import Message
+
+    context_url_map = {
+        "http://localhost:8080/ontology/context.jsonld": os.path.join(ontology_dir, "context.jsonld"),
+        "https://metavacua.github.io/CategoricalReasoner/ontology/context.jsonld": os.path.join(
+            ontology_dir, "context.jsonld"
+        ),
+    }
+
+    real_urlopen = urllib.request.urlopen
+
+    def mock_urlopen(url, *args, **kwargs):
+        req_url = url.full_url if isinstance(url, urllib.request.Request) else str(url)
+        if req_url in context_url_map and os.path.exists(context_url_map[req_url]):
+            data = open(context_url_map[req_url], "rb").read()
+            headers = Message()
+            headers.add_header("Content-Type", "application/ld+json")
+            return addinfourl(BytesIO(data), headers, req_url)
+        return real_urlopen(url, *args, **kwargs)
+
+    urllib.request.urlopen = mock_urlopen
+
     for filename in os.listdir(ontology_dir):
         if filename.endswith(".jsonld"):
             data_graph.parse(os.path.join(ontology_dir, filename), format="json-ld")
         elif filename.endswith(".ttl") and filename != "catty-shapes.ttl":
             data_graph.parse(os.path.join(ontology_dir, filename), format="turtle")
-    
+
     # Load shapes
     shacl_path = os.path.join(ontology_dir, "catty-shapes.ttl")
     shapes_graph = Graph()

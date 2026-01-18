@@ -1,26 +1,17 @@
 {
-  "@context": {
-    "@version": 1.1,
-    "catty": "http://catty.org/ontology/",
-    "bibo": "http://purl.org/ontology/bibo/",
-    "dct": "http://purl.org/dc/terms/",
-    "prov": "http://www.w3.org/ns/prov#",
-    "owl": "http://www.w3.org/2002/07/owl#",
-    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
-    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
-    "xsd": "http://www.w3.org/2001/XMLSchema#",
-    "wd": "http://www.wikidata.org/entity/",
-    "dct:creator": { "@type": "xsd:string" },
-    "dct:title": { "@type": "xsd:string" },
-    "dct:issued": { "@type": "xsd:gYear" },
-    "dct:identifier": { "@type": "xsd:string" },
-    "rdfs:seeAlso": { "@type": "@id" },
-    "owl:sameAs": { "@type": "@id", "@id": "owl:sameAs" }
-  },
+  "@context": [
+    "context.jsonld",
+    {
+      "@base": "http://localhost:8080/ontology/citations#"
+    }
+  ],
   "@graph": [
     {
-      "@id": "http://metavacua.github.io/catty/citations/girard1987linear",
-      "@type": ["bibo:Article", "bibo:AcademicArticle"],
+      "@id": "girard1987linear",
+      "@type": [
+        "bibo:Article",
+        "bibo:AcademicArticle"
+      ],
       "dct:creator": "Jean-Yves Girard",
       "dct:title": "Linear Logic",
       "dct:issued": "1987",
@@ -34,8 +25,11 @@
       "rdfs:comment": "Foundational paper introducing linear logic with structural restrictions"
     },
     {
-      "@id": "http://metavacua.github.io/catty/citations/kripke1965semantical",
-      "@type": ["bibo:Article", "bibo:ConferenceProceedings"],
+      "@id": "kripke1965semantical",
+      "@type": [
+        "bibo:Article",
+        "bibo:ConferenceProceedings"
+      ],
       "dct:creator": "Saul A. Kripke",
       "dct:title": "Semantical Analysis of Intuitionistic Logic I",
       "dct:issued": "1965",
@@ -48,8 +42,11 @@
       "rdfs:comment": "Kripke semantics for intuitionistic logic using possible worlds"
     },
     {
-      "@id": "http://metavacua.github.io/catty/citations/sambin2003basic",
-      "@type": ["bibo:Article", "bibo:AcademicArticle"],
+      "@id": "sambin2003basic",
+      "@type": [
+        "bibo:Article",
+        "bibo:AcademicArticle"
+      ],
       "dct:creator": "Giovanni Sambin",
       "dct:title": "Basic Logic: Reflection, Symmetry, Visibility",
       "dct:issued": "2003",
@@ -64,8 +61,11 @@
       "rdfs:comment": "Basic Logic as foundation for substructural logics with structural rules"
     },
     {
-      "@id": "http://metavacua.github.io/catty/citations/urbas1993structural",
-      "@type": ["bibo:Article", "bibo:Document"],
+      "@id": "urbas1993structural",
+      "@type": [
+        "bibo:Article",
+        "bibo:Document"
+      ],
       "dct:creator": "John Urbas",
       "dct:title": "On the Structural Rules of Linear Logic",
       "dct:issued": "1993",
@@ -76,8 +76,11 @@
       "rdfs:comment": "Analysis of structural rules (weakening, contraction, exchange) in linear logic"
     },
     {
-      "@id": "http://metavacua.github.io/catty/citations/trafford2018category",
-      "@type": ["bibo:Article", "bibo:Document"],
+      "@id": "trafford2018category",
+      "@type": [
+        "bibo:Article",
+        "bibo:Document"
+      ],
       "dct:creator": "James Trafford",
       "dct:title": "A Category Theory Approach to Conceptual Modelling",
       "dct:issued": "2018",
@@ -88,8 +91,11 @@
       "rdfs:comment": "Category theory applied to conceptual modelling and knowledge representation"
     },
     {
-      "@id": "http://metavacua.github.io/catty/citations/lawvere1963functorial",
-      "@type": ["bibo:Article", "bibo:Document"],
+      "@id": "lawvere1963functorial",
+      "@type": [
+        "bibo:Article",
+        "bibo:Document"
+      ],
       "dct:creator": "F. William Lawvere",
       "dct:title": "Functorial Semantics of Algebraic Theories",
       "dct:issued": "1963",
@@ -102,8 +108,10 @@
       "rdfs:comment": "Foundational work on functorial semantics connecting algebra and category theory"
     },
     {
-      "@id": "http://metavacua.github.io/catty/citations/maclane1971categories",
-      "@type": ["bibo:Book"],
+      "@id": "maclane1971categories",
+      "@type": [
+        "bibo:Book"
+      ],
       "dct:creator": "Saunders Mac Lane",
       "dct:title": "Categories for the Working Mathematician",
       "dct:issued": "1971",
@@ -117,8 +125,11 @@
       "rdfs:comment": "Standard textbook on category theory"
     },
     {
-      "@id": "http://metavacua.github.io/catty/citations/lambek1988category",
-      "@type": ["bibo:Chapter", "bibo:BookSection"],
+      "@id": "lambek1988category",
+      "@type": [
+        "bibo:Chapter",
+        "bibo:BookSection"
+      ],
       "dct:creator": "Joachim Lambek",
       "dct:title": "Categories and Categorical Grammars",
       "dct:issued": "1988",
@@ -131,8 +142,10 @@
       "rdfs:comment": "Category theory applied to linguistics and formal grammar"
     },
     {
-      "@id": "http://metavacua.github.io/catty/citations/restall2000substructural",
-      "@type": ["bibo:Book"],
+      "@id": "restall2000substructural",
+      "@type": [
+        "bibo:Book"
+      ],
       "dct:creator": "Greg Restall",
       "dct:title": "Substructural Logics",
       "dct:issued": "2000",
@@ -146,8 +159,10 @@
       "rdfs:comment": "Comprehensive treatment of substructural logics including linear and relevant logics"
     },
     {
-      "@id": "http://metavacua.github.io/catty/citations/pierce1991category",
-      "@type": ["bibo:Book"],
+      "@id": "pierce1991category",
+      "@type": [
+        "bibo:Book"
+      ],
       "dct:creator": "Benjamin C. Pierce",
       "dct:title": "Basic Category Theory for Computer Scientists",
       "dct:issued": "1991",
@@ -161,8 +176,11 @@
       "rdfs:comment": "Category theory for computer science applications"
     },
     {
-      "@id": "http://metavacua.github.io/catty/citations/curyhoward1934",
-      "@type": ["bibo:Article", "bibo:AcademicArticle"],
+      "@id": "curyhoward1934",
+      "@type": [
+        "bibo:Article",
+        "bibo:AcademicArticle"
+      ],
       "dct:creator": "Haskell B. Curry",
       "dct:title": "Functionality in Combinatory Logic",
       "dct:issued": "1934",
@@ -176,8 +194,11 @@
       "rdfs:comment": "Early work on Curry-Howard correspondence connecting logic and computation"
     },
     {
-      "@id": "http://metavacua.github.io/catty/citations/howard1969formulae",
-      "@type": ["bibo:Article", "bibo:Document"],
+      "@id": "howard1969formulae",
+      "@type": [
+        "bibo:Article",
+        "bibo:Document"
+      ],
       "dct:creator": "William A. Howard",
       "dct:title": "The Formulae-as-Types Notion of Construction",
       "dct:issued": "1969",
@@ -190,8 +211,10 @@
       "rdfs:comment": "Formalization of Curry-Howard correspondence: propositions as types, proofs as programs"
     },
     {
-      "@id": "http://metavacua.github.io/catty/citations/negri2011proof",
-      "@type": ["bibo:Book"],
+      "@id": "negri2011proof",
+      "@type": [
+        "bibo:Book"
+      ],
       "dct:creator": "Sara Negri",
       "dct:title": "Proof Analysis: A Contribution to Hilbert's Problem",
       "dct:issued": "2011",

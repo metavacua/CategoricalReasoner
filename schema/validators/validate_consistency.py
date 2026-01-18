@@ -231,8 +231,39 @@ class ConsistencyValidator:
         print(f"✓ Parsed {len(self.tex_elements)} TeX elements from {len(tex_files)} files")
 
     def load_rdf_elements(self, ontology_dir: Path):
-        """Load RDF elements from ontology files"""
+        """Load RDF elements from ontology files.
+
+        JSON-LD files in this repo reference a remote context URL. For offline
+        validation (no localhost server required) we intercept the context fetch
+        and serve `ontology/context.jsonld` directly.
+        """
         g = Graph()
+
+        import urllib.request
+        from io import BytesIO
+        from urllib.response import addinfourl
+        from email.message import Message
+
+        context_file = ontology_dir / "context.jsonld"
+        if context_file.exists():
+            context_url_map = {
+                "http://localhost:8080/ontology/context.jsonld": str(context_file),
+                "https://metavacua.github.io/CategoricalReasoner/ontology/context.jsonld": str(context_file),
+            }
+
+            real_urlopen = urllib.request.urlopen
+
+            def mock_urlopen(url, *args, **kwargs):
+                req_url = url.full_url if isinstance(url, urllib.request.Request) else str(url)
+                local_path = context_url_map.get(req_url)
+                if local_path:
+                    data = Path(local_path).read_bytes()
+                    headers = Message()
+                    headers.add_header("Content-Type", "application/ld+json")
+                    return addinfourl(BytesIO(data), headers, req_url)
+                return real_urlopen(url, *args, **kwargs)
+
+            urllib.request.urlopen = mock_urlopen
 
         # Load all RDF files
         formats = {

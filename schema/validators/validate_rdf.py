@@ -53,8 +53,40 @@ class RDFValidator:
         self.summary = ValidationSummary()
 
     def load_ontology(self, ontology_dir: Path) -> Graph:
-        """Load all RDF files from ontology directory"""
+        """Load all RDF files from ontology directory.
+
+        Note: JSON-LD files in this repo use a remote context URL (localhost or
+        GitHub Pages). For deterministic offline validation we intercept remote
+        context fetching and serve the context from `ontology/context.jsonld`.
+        """
         g = Graph()
+
+        # Patch urllib to resolve the remote context URL from the local repo.
+        import urllib.request
+        from io import BytesIO
+        from urllib.response import addinfourl
+        from email.message import Message
+
+        context_file = ontology_dir / "context.jsonld"
+        if context_file.exists():
+            context_url_map = {
+                "http://localhost:8080/ontology/context.jsonld": str(context_file),
+                "https://metavacua.github.io/CategoricalReasoner/ontology/context.jsonld": str(context_file),
+            }
+
+            real_urlopen = urllib.request.urlopen
+
+            def mock_urlopen(url, *args, **kwargs):
+                req_url = url.full_url if isinstance(url, urllib.request.Request) else str(url)
+                local_path = context_url_map.get(req_url)
+                if local_path:
+                    data = Path(local_path).read_bytes()
+                    headers = Message()
+                    headers.add_header("Content-Type", "application/ld+json")
+                    return addinfourl(BytesIO(data), headers, req_url)
+                return real_urlopen(url, *args, **kwargs)
+
+            urllib.request.urlopen = mock_urlopen
 
         # Supported formats
         formats = {

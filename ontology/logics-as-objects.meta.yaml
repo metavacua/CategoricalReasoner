@@ -1,0 +1,28 @@
+metadata:
+  name: "logics-as-objects"
+  description: "Logical systems represented as categorical objects"
+  version: "1.0.0"
+  authors:
+    - "metavacua"
+  created: "2026-01-14"
+
+iri:
+  config_key: "logics-as-objects"
+
+rdf:
+  format: "JSON-LD"
+  context_imports:
+    - "catty-categorical-schema"
+
+validation:
+  shacl_shapes: []
+
+sparql_examples:
+  - query_id: "all-logics"
+    description: "Retrieve all logic instances"
+    expected_result_count: "7"
+    query: |
+      PREFIX catty: <http://localhost:8080/ontology/catty-categorical-schema#>
+      SELECT ?logic WHERE {
+        ?logic a catty:Logic .
+      }

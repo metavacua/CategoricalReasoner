@@ -108,9 +108,41 @@ class CitationValidator:
             return False
 
     def load_rdf_citations(self, rdf_file: Path) -> bool:
-        """Load RDF citation resources"""
+        """Load RDF citation resources.
+
+        JSON-LD files in this repo use a remote context URL. For deterministic
+        offline validation we intercept context fetching and serve the context
+        from `ontology/context.jsonld`.
+        """
         try:
             g = Graph()
+
+            import urllib.request
+            from io import BytesIO
+            from urllib.response import addinfourl
+            from email.message import Message
+
+            context_file = rdf_file.parent / "context.jsonld"
+            if context_file.exists():
+                context_url_map = {
+                    "http://localhost:8080/ontology/context.jsonld": str(context_file),
+                    "https://metavacua.github.io/CategoricalReasoner/ontology/context.jsonld": str(context_file),
+                }
+
+                real_urlopen = urllib.request.urlopen
+
+                def mock_urlopen(url, *args, **kwargs):
+                    req_url = url.full_url if isinstance(url, urllib.request.Request) else str(url)
+                    local_path = context_url_map.get(req_url)
+                    if local_path:
+                        data = Path(local_path).read_bytes()
+                        headers = Message()
+                        headers.add_header("Content-Type", "application/ld+json")
+                        return addinfourl(BytesIO(data), headers, req_url)
+                    return real_urlopen(url, *args, **kwargs)
+
+                urllib.request.urlopen = mock_urlopen
+
             g.parse(rdf_file, format='json-ld')
 
             # Extract all citation identifiers

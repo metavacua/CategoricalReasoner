@@ -1,0 +1,27 @@
+metadata:
+  name: "citations"
+  description: "Bibliographic citation resources for the Catty thesis"
+  version: "1.0.0"
+  authors:
+    - "metavacua"
+  created: "2026-01-14"
+
+iri:
+  config_key: "citations"
+
+rdf:
+  format: "JSON-LD"
+  context_imports: []
+
+validation:
+  shacl_shapes: []
+
+sparql_examples:
+  - query_id: "all-citations"
+    description: "Retrieve all citations by identifier"
+    expected_result_count: "13"
+    query: |
+      PREFIX dct: <http://purl.org/dc/terms/>
+      SELECT ?c ?id WHERE {
+        ?c dct:identifier ?id .
+      }

@@ -1,0 +1,29 @@
+metadata:
+  name: "citation-usage"
+  description: "Provenance and usage model linking thesis artifacts to citations"
+  version: "1.0.0"
+  authors:
+    - "metavacua"
+  created: "2026-01-14"
+
+iri:
+  config_key: "citation-usage"
+
+rdf:
+  format: "JSON-LD"
+  context_imports:
+    - "citations"
+
+validation:
+  shacl_shapes:
+    - "ontology/catty-thesis-shapes.shacl"
+
+sparql_examples:
+  - query_id: "all-citation-properties"
+    description: "Retrieve all properties that relate artifacts to citations"
+    expected_result_count: "3+"
+    query: |
+      PREFIX owl: <http://www.w3.org/2002/07/owl#>
+      SELECT ?p WHERE {
+        ?p a owl:ObjectProperty .
+      }

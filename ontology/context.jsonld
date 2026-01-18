@@ -1,0 +1,60 @@
+{
+  "@context": {
+    "@version": 1.1,
+
+    "catty": "http://localhost:8080/ontology/catty-categorical-schema#",
+    "lao": "http://localhost:8080/ontology/logics-as-objects#",
+    "mc": "http://localhost:8080/ontology/morphism-catalog#",
+    "lattice": "http://localhost:8080/ontology/two-d-lattice-category#",
+    "ch": "http://localhost:8080/ontology/curry-howard-categorical-model#",
+    "ex": "http://localhost:8080/ontology/catty-complete-example#",
+    "cit": "http://localhost:8080/ontology/citations#",
+    "cu": "http://localhost:8080/ontology/citation-usage#",
+
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dct": "http://purl.org/dc/terms/",
+    "prov": "http://www.w3.org/ns/prov#",
+    "bibo": "http://purl.org/ontology/bibo/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "dbo": "http://dbpedia.org/ontology/",
+    "wd": "http://www.wikidata.org/entity/",
+    "math": "http://www.w3.org/2000/10/swap/math#",
+
+    "rdfs:subClassOf": { "@type": "@id" },
+    "rdfs:domain": { "@type": "@id" },
+    "rdfs:range": { "@type": "@id" },
+    "rdfs:seeAlso": { "@type": "@id" },
+
+    "owl:equivalentClass": { "@type": "@id" },
+    "owl:equivalentProperty": { "@type": "@id" },
+    "owl:inverseOf": { "@type": "@id" },
+    "owl:onProperty": { "@type": "@id" },
+    "owl:sameAs": { "@type": "@id" },
+    "owl:intersectionOf": { "@type": "@id", "@container": "@list" },
+
+    "dct:references": { "@type": "@id" },
+    "dct:isReferencedBy": { "@type": "@id" },
+    "prov:wasDerivedFrom": { "@type": "@id" },
+
+    "catty:hasLogicalSignature": { "@type": "@id" },
+    "catty:hasLogicalAxiom": { "@type": "@id" },
+    "catty:hasStructuralRule": { "@type": "@id" },
+    "catty:hasSequentForm": { "@type": "@id" },
+    "catty:domain": { "@type": "@id" },
+    "catty:codomain": { "@type": "@id" },
+    "catty:sourceCategory": { "@type": "@id" },
+    "catty:targetCategory": { "@type": "@id" },
+    "catty:sourceFunctor": { "@type": "@id" },
+    "catty:targetFunctor": { "@type": "@id" },
+    "catty:logic": { "@type": "@id" },
+    "catty:objects": { "@type": "@id" },
+    "catty:morphisms": { "@type": "@id" },
+    "catty:correspondsToLogic": { "@type": "@id" },
+
+    "domain": { "@id": "catty:domain", "@type": "@id" },
+    "codomain": { "@id": "catty:codomain", "@type": "@id" }
+  }
+}

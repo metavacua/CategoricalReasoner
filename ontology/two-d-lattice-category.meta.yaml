@@ -1,0 +1,30 @@
+metadata:
+  name: "two-d-lattice-category"
+  description: "2D lattice/category structure describing relationships between logics"
+  version: "1.0.0"
+  authors:
+    - "metavacua"
+  created: "2026-01-14"
+
+iri:
+  config_key: "two-d-lattice-category"
+
+rdf:
+  format: "JSON-LD"
+  context_imports:
+    - "catty-categorical-schema"
+    - "logics-as-objects"
+
+validation:
+  shacl_shapes: []
+
+sparql_examples:
+  - query_id: "all-lattice-nodes"
+    description: "Retrieve all lattice nodes and the logic they correspond to"
+    expected_result_count: "5"
+    query: |
+      PREFIX catty: <http://localhost:8080/ontology/catty-categorical-schema#>
+      SELECT ?node ?logic WHERE {
+        ?node a catty:LatticeNode ;
+              catty:logic ?logic .
+      }

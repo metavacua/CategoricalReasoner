@@ -1,0 +1,28 @@
+metadata:
+  name: "catty-categorical-schema"
+  description: "Core categorical schema and shared vocabulary for Catty"
+  version: "1.0.0"
+  authors:
+    - "metavacua"
+  created: "2026-01-14"
+
+iri:
+  config_key: "catty-categorical-schema"
+
+rdf:
+  format: "JSON-LD"
+  context_imports: []
+
+validation:
+  shacl_shapes:
+    - "ontology/catty-shapes.ttl"
+
+sparql_examples:
+  - query_id: "all-classes"
+    description: "Retrieve all OWL classes defined by the schema"
+    expected_result_count: "20+"
+    query: |
+      PREFIX owl: <http://www.w3.org/2002/07/owl#>
+      SELECT (COUNT(?c) AS ?count) WHERE {
+        ?c a owl:Class .
+      }
