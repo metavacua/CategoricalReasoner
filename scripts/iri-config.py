@@ -543,10 +543,17 @@ class IRIConfig:
         # Context URL rebinding as well
         localhost_ctx = self._localhost_context_url()
         production_ctx = self._production_context_url()
+
+        relative_contexts = ("context.jsonld", "./context.jsonld")
+
         if target == "production":
             replacements.append((localhost_ctx, production_ctx))
+            for rc in relative_contexts:
+                replacements.append((rc, production_ctx))
         else:
             replacements.append((production_ctx, localhost_ctx))
+            for rc in relative_contexts:
+                replacements.append((rc, localhost_ctx))
 
         # Longer strings first prevents partial replacements.
         replacements.sort(key=lambda p: len(p[0]), reverse=True)

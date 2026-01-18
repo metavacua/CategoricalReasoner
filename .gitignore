@@ -46,6 +46,19 @@ ENV/
 # Benchmark results
 results/
 
+# Java / Maven
+java/target/
+**/target/
+*.class
+*.jar
+*.war
+*.ear
+.classpath
+.project
+.settings/
+.idea/
+*.iml
+
 # Python
 __pycache__/
 *.py[cod]

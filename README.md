@@ -33,16 +33,29 @@ The ontology is deployed along with the thesis:
 - **RDF/OWL Access**: Available at `https://metavacua.github.io/CategoricalReasoner/ontology/`
 - **SPARQL Benchmarks**: Available at `https://metavacua.github.io/CategoricalReasoner/benchmarks/queries/`
 
-#### Local SPARQL Endpoint
+#### Local SPARQL Endpoint (No External Services)
 
-You can run a local SPARQL endpoint (Blazegraph) using Docker Compose:
+A self-contained Java + Jena localhost server is provided under `java/`.
+It loads all registered ontologies from `.catty/iri-config.yaml` into an in-memory dataset
+and exposes a small SPARQL workbench UI.
 
 ```sh
-cd deployment
-docker-compose up -d
+cd java
+mvn test
+mvn exec:java
 ```
 
-Access the Blazegraph workbench at `http://localhost:9999/blazegraph/`. You can then upload the files from the `ontology/` directory to query them.
+Then open:
+
+- UI: `http://localhost:8080/`
+- API:
+  - `GET /api/ontologies`
+  - `POST /api/query` (JSON body: `{ "query": "...", "format": "turtle|jsonld|rdfxml" }`)
+  - `GET /api/graph?format=turtle|jsonld|rdfxml`
+  - `POST /api/load` (post RDF; JSON-LD is checked for IRI safety)
+  - `POST /api/rebind` (JSON body: `{ "target": "production|localhost", "content": "..." }`)
+
+(Older Docker-based Blazegraph tooling is still available under `deployment/`, but is no longer required for local development.)
 
 ## Project Structure
 
