@@ -39,12 +39,14 @@ public final class RepoOntologyHandler implements HttpHandler {
     }
 
     final String rel = rawPath.substring(prefix.length());
-    if (rel.isBlank() || rel.contains("..") || rel.contains("\\\\")) {
+    // Security: prevent path traversal attacks
+    if (rel.isBlank() || rel.contains("..") || rel.contains("\\\\") || rel.contains("//")) {
       HttpUtil.sendText(exchange, 400, "text/plain; charset=utf-8", "Invalid path");
       return;
     }
 
     final Path file = ontologyDir.resolve(rel).normalize();
+    // Security: ensure resolved path stays within ontologyDir (prevents path traversal)
     if (!file.startsWith(ontologyDir) || !Files.exists(file) || !Files.isRegularFile(file)) {
       HttpUtil.sendText(exchange, 404, "text/plain; charset=utf-8", "Not Found");
       return;

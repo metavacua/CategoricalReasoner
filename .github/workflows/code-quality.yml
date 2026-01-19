@@ -1,0 +1,77 @@
+name: Code Quality
+
+on:
+  pull_request:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  python-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install black flake8 mypy pyyaml rdflib pyshacl types-PyYAML
+
+      - name: Check Python formatting (Black)
+        run: |
+          black --check --diff scripts/ schema/validators/ tests/ benchmarks/
+        continue-on-error: true
+
+      - name: Lint Python code (Flake8)
+        run: |
+          flake8 --max-line-length=120 --extend-ignore=E203,W503 scripts/ schema/validators/ tests/ benchmarks/
+        continue-on-error: true
+
+      - name: Type check Python code (MyPy)
+        run: |
+          mypy --ignore-missing-imports --no-strict-optional scripts/iri-config.py schema/validators/validate_iris.py
+        continue-on-error: true
+
+  java-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Check Java code style
+        run: mvn -B -ntp -f java/pom.xml verify
+        continue-on-error: true
+
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+        continue-on-error: true
+
+      - name: Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: 'trivy-results.sarif'
+        continue-on-error: true

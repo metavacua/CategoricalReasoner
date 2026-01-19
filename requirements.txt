@@ -1,0 +1,7 @@
+# Core dependencies for Catty semantic web validation
+# Install with: pip install -r requirements.txt
+
+pyyaml>=6.0.1
+rdflib>=7.0.0
+pyshacl>=0.25.0
+owlrl>=6.0.2
