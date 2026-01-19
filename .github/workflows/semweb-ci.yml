@@ -1,0 +1,55 @@
+name: Semantic Web CI
+
+on:
+  pull_request:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  python-semweb:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml rdflib pyshacl owlrl pytest
+
+      - name: Validate IRI registry and ontology IRIs
+        run: python schema/validators/validate_iris.py --config .catty/iri-config.yaml
+
+      - name: Run IRI unit + integration tests
+        run: pytest -q tests/test_iri_config.py tests/test_iri_validator.py tests/test_iri_integration.py
+
+      - name: Validate RDF parsing (all ontology files)
+        run: python scripts/validate_rdf.py
+
+      - name: Validate SHACL constraints
+        run: python tests/test_consistency.py
+
+      - name: Run SPARQL benchmark queries
+        run: python benchmarks/run.py
+
+  java-semweb:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Build and test (Maven)
+        run: mvn -B -ntp -f java/pom.xml test
