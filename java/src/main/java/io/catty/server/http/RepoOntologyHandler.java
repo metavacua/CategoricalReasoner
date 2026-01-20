@@ -4,6 +4,8 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Locale;
@@ -60,12 +62,13 @@ public final class RepoOntologyHandler implements HttpHandler {
     }
 
     final String contentType = guessContentType(rel);
-    final byte[] bytes = Files.readAllBytes(file);
 
     exchange.getResponseHeaders().set("Content-Type", contentType);
-    exchange.sendResponseHeaders(200, bytes.length);
-    exchange.getResponseBody().write(bytes);
-    exchange.getResponseBody().close();
+    exchange.sendResponseHeaders(200, size);
+
+    try (InputStream in = Files.newInputStream(file); OutputStream out = exchange.getResponseBody()) {
+      in.transferTo(out);
+    }
   }
 
   private static String guessContentType(final String rel) {
