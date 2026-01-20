@@ -1,12 +1,14 @@
 package org.catty.http;
 
 import org.apache.jena.query.Dataset;
+import org.apache.jena.query.ReadWrite;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
 import org.apache.jena.riot.RDFLanguages;
 import org.apache.jena.shared.JenaException;
 import org.catty.rdf.RDFService;
+import org.catty.sparql.SPARQLService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -151,14 +153,17 @@ public class RDFHttpHandler extends HttpServlet {
     }
     
     /**
-     * Sets CORS headers for cross-origin requests during local development.
+     * Sets secure CORS headers for localhost development.
+     * Restricts access to localhost only for security.
      * 
      * @param resp the HTTP response
      */
     private void setCorsHeaders(HttpServletResponse resp) {
-        resp.setHeader(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+        // Restrict CORS to localhost only for security
+        resp.setHeader(HEADER_ACCESS_CONTROL_ALLOW_ORIGIN, "http://localhost");
         resp.setHeader(HEADER_ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT, DELETE, OPTIONS");
         resp.setHeader(HEADER_ACCESS_CONTROL_ALLOW_HEADERS, "Content-Type, Accept, Authorization");
+        resp.setHeader(HEADER_ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
     }
     
     /**
@@ -280,7 +285,7 @@ public class RDFHttpHandler extends HttpServlet {
     }
     
     /**
-     * Handles SPARQL query requests via POST.
+     * Handles SPARQL query requests via POST with secure content type validation.
      * 
      * @param req the HTTP request
      * @param resp the HTTP response
@@ -300,16 +305,25 @@ public class RDFHttpHandler extends HttpServlet {
         LOG.info("Processing SPARQL query");
         
         resp.setStatus(HttpServletResponse.SC_OK);
-        resp.setContentType(acceptHeader != null ? acceptHeader : "application/sparql-results+json");
+        // Use secure content type whitelist instead of reflecting request headers
+        resp.setContentType(getSecureContentType(acceptHeader));
         resp.setCharacterEncoding("UTF-8");
         
-        // Note: This would integrate with SPARQLService in a real implementation
-        // For now, we'll return a placeholder response
-        resp.getWriter().write("{\"head\":{\"vars\":[]},\"results\":{\"bindings\":[]}}");
+        // Execute actual SPARQL query
+        try {
+            SPARQLService sparqlService = new SPARQLService(dataset);
+            SPARQLService.QueryResult result = sparqlService.executeQuery(queryString);
+            String out = sparqlService.serializeResults(result, 
+                SPARQLService.SPARQLResultFormat.JSON); // Default to JSON
+            resp.getWriter().write(out);
+        } catch (Exception e) {
+            LOG.error("SPARQL query execution failed", e);
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Query execution error");
+        }
     }
     
     /**
-     * Handles SPARQL update requests via POST.
+     * Handles SPARQL update requests via POST with proper error handling.
      * 
      * @param req the HTTP request
      * @param resp the HTTP response
@@ -327,11 +341,51 @@ public class RDFHttpHandler extends HttpServlet {
         
         LOG.info("Processing SPARQL update");
         
-        resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        // Execute actual SPARQL update
+        try {
+            SPARQLService sparqlService = new SPARQLService(dataset);
+            sparqlService.executeUpdate(updateString);
+            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        } catch (Exception e) {
+            LOG.error("SPARQL update execution failed", e);
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Update execution error");
+        }
     }
     
     /**
-     * Stores RDF data into a named graph via PUT.
+     * Implements secure content type whitelisting to prevent content type reflection vulnerabilities.
+     * 
+     * @param acceptHeader the HTTP Accept header value
+     * @return secure content type from whitelist
+     */
+    private String getSecureContentType(String acceptHeader) {
+        if (acceptHeader == null || acceptHeader.isEmpty()) {
+            return "application/sparql-results+json";
+        }
+        
+        // Whitelist of secure content types
+        if (acceptHeader.contains("application/sparql-results+json") || 
+            acceptHeader.contains("application/json")) {
+            return "application/sparql-results+json";
+        }
+        if (acceptHeader.contains("application/sparql-results+xml") || 
+            acceptHeader.contains("application/xml")) {
+            return "application/sparql-results+xml";
+        }
+        if (acceptHeader.contains("text/csv")) {
+            return "text/csv";
+        }
+        if (acceptHeader.contains("text/tab-separated-values") || 
+            acceptHeader.contains("text/tab-separated-values; charset=utf-8")) {
+            return "text/tab-separated-values";
+        }
+        
+        // Default to JSON if no match
+        return "application/sparql-results+json";
+    }
+    
+    /**
+     * Stores RDF data into a named graph via PUT with transaction management.
      * 
      * @param req the HTTP request
      * @param resp the HTTP response
@@ -342,13 +396,32 @@ public class RDFHttpHandler extends HttpServlet {
         String contentType = req.getHeader(HEADER_CONTENT_TYPE);
         RDFService.RDFContentType rdfContentType = getContentTypeFromString(contentType);
         
-        LOG.info("Storing data into graph: '{}' from content type: {}", graphName, contentType);
-        
-        resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        dataset.begin(ReadWrite.WRITE);
+        try {
+            // Clear existing graph and create new one
+            dataset.removeNamedModel(graphName);
+            Model model = dataset.getNamedModel(graphName);
+            
+            // Read new data from request
+            RDFDataMgr.read(model, req.getInputStream(), 
+                getLangFromContentType(contentType));
+            dataset.commit();
+            
+            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            LOG.info("Successfully stored RDF data into graph: '{}'", graphName);
+        } catch (Exception e) {
+            dataset.abort();
+            LOG.error("Failed storing graph {}", graphName, e);
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error storing graph");
+        } finally {
+            if (dataset.isInTransaction()) {
+                dataset.end();
+            }
+        }
     }
     
     /**
-     * Deletes a named graph via DELETE.
+     * Deletes a named graph via DELETE with transaction management.
      * 
      * @param req the HTTP request
      * @param resp the HTTP response
@@ -356,8 +429,21 @@ public class RDFHttpHandler extends HttpServlet {
      * @throws IOException if deletion fails
      */
     private void deleteNamedGraph(HttpServletRequest req, HttpServletResponse resp, String graphName) throws IOException {
-        LOG.info("Deleting graph: '{}'", graphName);
-        resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+        dataset.begin(ReadWrite.WRITE);
+        try {
+            dataset.removeNamedModel(graphName);
+            dataset.commit();
+            resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            LOG.info("Successfully deleted graph: '{}'", graphName);
+        } catch (Exception e) {
+            dataset.abort();
+            LOG.error("Failed deleting graph {}", graphName, e);
+            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error deleting graph");
+        } finally {
+            if (dataset.isInTransaction()) {
+                dataset.end();
+            }
+        }
     }
     
     /**

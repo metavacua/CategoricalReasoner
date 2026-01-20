@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -26,7 +25,7 @@ import java.util.HashMap;
  * This service provides:
  * - SPARQL 1.1 Query and Update execution
  * - Multiple result formats (JSON, XML, CSV, TSV)
- * - Parameterized queries with variable substitution
+ * - Parameterized queries with secure substitution
  * - Transaction support for update operations
  * - Query result processing and transformation
  * 
@@ -107,20 +106,26 @@ public class SPARQLService {
     }
     
     /**
-     * Executes a SPARQL SELECT or ASK query.
+     * Executes a SPARQL SELECT or ASK query with secure parameter substitution.
      * 
      * @param queryString the SPARQL query string
-     * @param parameters optional query parameters for variable substitution
+     * @param parameters optional query parameters for secure variable substitution
      * @return QueryResult containing the result set
      * @throws SPARQLException if query execution fails
      */
     public QueryResult executeQuery(String queryString, Map<String, String> parameters) throws SPARQLException {
-        LOG.debug("Executing SPARQL query: {}", queryString.substring(0, Math.min(100, queryString.length())));
+        if (queryString == null) {
+            throw new IllegalArgumentException("Query string cannot be null");
+        }
+        
+        LOG.debug("Executing SPARQL query: {}", 
+                 queryString.substring(0, Math.min(100, queryString.length())));
         
         dataset.begin(ReadWrite.READ);
         try {
-            // Substitute parameters if provided
-            String processedQuery = parameters != null ? substituteParameters(queryString, parameters) : queryString;
+            // Substitute parameters using secure method
+            String processedQuery = parameters != null ? 
+                substituteParametersSecure(queryString, parameters) : queryString;
             
             Query query = QueryFactory.create(processedQuery);
             
@@ -134,13 +139,10 @@ public class SPARQLService {
                         
                     case Query.QueryTypeAsk:
                         boolean result = qexec.execAsk();
-                        // Convert boolean to ResultSet
-                        String askResultQuery = String.format("ASK WHERE { BIND(%s AS ?result) }", result ? "true" : "false");
-                        Query askQuery = QueryFactory.create(askResultQuery);
-                        try (QueryExecution askExec = QueryExecutionFactory.create(askQuery, dataset)) {
-                            ResultSet askResults = askExec.execSelect();
-                            return new QueryResult(ResultSetFactory.copyResults(askResults));
-                        }
+                        // Create result set from boolean result
+                        ResultSet askResults = ResultSetFactory.makeResults(
+                            query.getResultVars(), result);
+                        return new QueryResult(askResults);
                         
                     case Query.QueryTypeConstruct:
                         Model constructResult = qexec.execConstruct();
@@ -177,21 +179,39 @@ public class SPARQLService {
     }
     
     /**
-     * Substitutes parameters in SPARQL query string.
+     * Securely substitutes parameters in SPARQL query string using ParameterizedSparqlString.
+     * This prevents SPARQL injection attacks by properly escaping and parameterizing inputs.
      * 
      * @param queryString the SPARQL query template
      * @param parameters map of parameter names to values
      * @return processed query string with substituted parameters
      */
-    private String substituteParameters(String queryString, Map<String, String> parameters) {
-        String processed = queryString;
-        for (Map.Entry<String, String> entry : parameters.entrySet()) {
-            String paramName = "?" + entry.getKey();
-            String paramValue = entry.getValue();
-            processed = processed.replace(paramName, paramValue);
+    private String substituteParametersSecure(String queryString, Map<String, String> parameters) {
+        if (queryString == null) {
+            throw new IllegalArgumentException("Query string cannot be null");
         }
-        LOG.debug("Parameter substitution completed for {} parameters", parameters.size());
-        return processed;
+        if (parameters == null || parameters.isEmpty()) {
+            return queryString;
+        }
+        
+        // Use ParameterizedSparqlString to prevent SPARQL injection
+        ParameterizedSparqlString pss = new ParameterizedSparqlString(queryString);
+        
+        for (Map.Entry<String, String> entry : parameters.entrySet()) {
+            String paramKey = entry.getKey();
+            String paramValue = entry.getValue();
+            
+            if (paramKey == null || paramValue == null) {
+                LOG.warn("Skipping null parameter: {} = {}", paramKey, paramValue);
+                continue;
+            }
+            
+            // For literal values - escape and sanitize properly
+            pss.setLiteral(paramKey, paramValue);
+        }
+        
+        LOG.debug("Secure parameter substitution completed for {} parameters", parameters.size());
+        return pss.toString();
     }
     
     /**
@@ -201,7 +221,12 @@ public class SPARQLService {
      * @throws SPARQLException if update execution fails
      */
     public void executeUpdate(String updateString) throws SPARQLException {
-        LOG.debug("Executing SPARQL UPDATE: {}", updateString.substring(0, Math.min(100, updateString.length())));
+        if (updateString == null) {
+            throw new IllegalArgumentException("Update string cannot be null");
+        }
+        
+        LOG.debug("Executing SPARQL UPDATE: {}", 
+                 updateString.substring(0, Math.min(100, updateString.length())));
         
         dataset.begin(ReadWrite.WRITE);
         try {
@@ -317,7 +342,8 @@ public class SPARQLService {
     public Model executeConstruct(String queryString, Map<String, String> parameters) throws SPARQLException {
         dataset.begin(ReadWrite.READ);
         try {
-            String processedQuery = parameters != null ? substituteParameters(queryString, parameters) : queryString;
+            String processedQuery = parameters != null ? 
+                substituteParametersSecure(queryString, parameters) : queryString;
             Query query = QueryFactory.create(processedQuery);
             
             if (query.getQueryType() != Query.QueryTypeConstruct) {
