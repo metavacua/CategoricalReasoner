@@ -52,6 +52,13 @@ public final class RepoOntologyHandler implements HttpHandler {
       return;
     }
 
+    // Security: prevent unbounded file read
+    final long size = Files.size(file);
+    if (size > 10_000_000) { // 10MB limit
+      HttpUtil.sendText(exchange, 413, "text/plain; charset=utf-8", "File too large");
+      return;
+    }
+
     final String contentType = guessContentType(rel);
     final byte[] bytes = Files.readAllBytes(file);
 

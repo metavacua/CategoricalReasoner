@@ -8,12 +8,9 @@ import argparse
 import re
 import sys
 from pathlib import Path
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Set, Tuple, Any
 from dataclasses import dataclass
-from urllib.request import urlopen
-from urllib.error import URLError, HTTPError
-import json
-from http.client import HTTPException
+import importlib.util
 
 # Try to import required libraries
 try:
@@ -28,6 +25,21 @@ try:
 except ImportError:
     print("ERROR: rdflib is required. Install with: pip install rdflib")
     sys.exit(1)
+
+
+def _load_iri_config_class(repo_root: Path):
+    """Load IRIConfig from scripts/iri-config.py via importlib."""
+    iri_config_path = repo_root / "scripts" / "iri-config.py"
+    if not iri_config_path.exists():
+        raise FileNotFoundError(f"Expected IRIConfig module not found: {iri_config_path}")
+
+    spec = importlib.util.spec_from_file_location("catty_iri_config", iri_config_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Unable to load module from {iri_config_path}")
+
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.IRIConfig
 
 
 @dataclass
@@ -117,33 +129,12 @@ class CitationValidator:
         try:
             g = Graph()
 
-            import urllib.request
-            from io import BytesIO
-            from urllib.response import addinfourl
-            from email.message import Message
+            repo_root = rdf_file.parent.parent
+            IRIConfig = _load_iri_config_class(repo_root)
+            config = IRIConfig(config_path=str(repo_root / ".catty" / "iri-config.yaml"))
 
-            context_file = rdf_file.parent / "context.jsonld"
-            if context_file.exists():
-                context_url_map = {
-                    "http://localhost:8080/ontology/context.jsonld": str(context_file),
-                    "https://metavacua.github.io/CategoricalReasoner/ontology/context.jsonld": str(context_file),
-                }
-
-                real_urlopen = urllib.request.urlopen
-
-                def mock_urlopen(url, *args, **kwargs):
-                    req_url = url.full_url if isinstance(url, urllib.request.Request) else str(url)
-                    local_path = context_url_map.get(req_url)
-                    if local_path:
-                        data = Path(local_path).read_bytes()
-                        headers = Message()
-                        headers.add_header("Content-Type", "application/ld+json")
-                        return addinfourl(BytesIO(data), headers, req_url)
-                    return real_urlopen(url, *args, **kwargs)
-
-                urllib.request.urlopen = mock_urlopen
-
-            g.parse(rdf_file, format='json-ld')
+            with config.offline_context():
+                g.parse(rdf_file, format='json-ld')
 
             # Extract all citation identifiers
             for s in g.subjects(None, None):

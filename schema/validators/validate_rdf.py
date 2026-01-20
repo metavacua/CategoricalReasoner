@@ -9,10 +9,16 @@ EXIT CODES:
 """
 
 import argparse
+import logging
 import sys
 from pathlib import Path
-from typing import List, Tuple, Dict
+from typing import List, Tuple, Dict, Optional
 from dataclasses import dataclass
+import importlib.util
+
+# Setup logging
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logger = logging.getLogger(__name__)
 
 # Try to import required libraries
 try:
@@ -20,9 +26,23 @@ try:
     from pyshacl import validate
     import rdflib
 except ImportError:
-    print("ERROR: rdflib and pyshacl are required. Install with:")
-    print("  pip install rdflib pyshacl")
+    logger.error("rdflib and pyshacl are required. Install with: pip install rdflib pyshacl")
     sys.exit(2)
+
+
+def _load_iri_config_class(repo_root: Path):
+    """Load IRIConfig from scripts/iri-config.py via importlib."""
+    iri_config_path = repo_root / "scripts" / "iri-config.py"
+    if not iri_config_path.exists():
+        raise FileNotFoundError(f"Expected IRIConfig module not found: {iri_config_path}")
+
+    spec = importlib.util.spec_from_file_location("catty_iri_config", iri_config_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Unable to load module from {iri_config_path}")
+
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.IRIConfig
 
 
 @dataclass
@@ -61,32 +81,9 @@ class RDFValidator:
         """
         g = Graph()
 
-        # Patch urllib to resolve the remote context URL from the local repo.
-        import urllib.request
-        from io import BytesIO
-        from urllib.response import addinfourl
-        from email.message import Message
-
-        context_file = ontology_dir / "context.jsonld"
-        if context_file.exists():
-            context_url_map = {
-                "http://localhost:8080/ontology/context.jsonld": str(context_file),
-                "https://metavacua.github.io/CategoricalReasoner/ontology/context.jsonld": str(context_file),
-            }
-
-            real_urlopen = urllib.request.urlopen
-
-            def mock_urlopen(url, *args, **kwargs):
-                req_url = url.full_url if isinstance(url, urllib.request.Request) else str(url)
-                local_path = context_url_map.get(req_url)
-                if local_path:
-                    data = Path(local_path).read_bytes()
-                    headers = Message()
-                    headers.add_header("Content-Type", "application/ld+json")
-                    return addinfourl(BytesIO(data), headers, req_url)
-                return real_urlopen(url, *args, **kwargs)
-
-            urllib.request.urlopen = mock_urlopen
+        repo_root = ontology_dir.parent
+        IRIConfig = _load_iri_config_class(repo_root)
+        config = IRIConfig(config_path=str(repo_root / ".catty" / "iri-config.yaml"))
 
         # Supported formats
         formats = {
@@ -99,19 +96,20 @@ class RDFValidator:
 
         loaded_count = 0
         # Load all RDF files
-        for ext, fmt in formats.items():
-            for rdf_file in ontology_dir.glob(f'*{ext}'):
-                try:
-                    g.parse(rdf_file, format=fmt)
-                    print(f"✓ Loaded {rdf_file.name} ({fmt})")
-                    loaded_count += 1
-                except Exception as e:
-                    self.results.append(ValidationResult(
-                        severity="FATAL",
-                        focus_node=str(rdf_file),
-                        constraint="RDF Parsing",
-                        message=f"Error parsing RDF: {e}"
-                    ))
+        with config.offline_context():
+            for ext, fmt in formats.items():
+                for rdf_file in ontology_dir.glob(f'*{ext}'):
+                    try:
+                        g.parse(rdf_file, format=fmt)
+                        logger.info(f"✓ Loaded {rdf_file.name} ({fmt})")
+                        loaded_count += 1
+                    except Exception as e:
+                        self.results.append(ValidationResult(
+                            severity="FATAL",
+                            focus_node=str(rdf_file),
+                            constraint="RDF Parsing",
+                            message=f"Error parsing RDF: {e}"
+                        ))
 
         if loaded_count == 0:
             self.results.append(ValidationResult(
@@ -121,7 +119,7 @@ class RDFValidator:
                 message="No RDF files could be loaded from directory"
             ))
 
-        print(f"📊 Total triples loaded: {len(g)}")
+        logger.info(f"📊 Total triples loaded: {len(g)}")
         return g
 
     def load_shapes(self, shapes_file: Path) -> Graph:
@@ -148,7 +146,7 @@ class RDFValidator:
                 ))
                 return None
 
-            print(f"✓ Loaded {len(shapes_g)} shape triples from {shapes_file.name}")
+            logger.info(f"✓ Loaded {len(shapes_g)} shape triples from {shapes_file.name}")
             return shapes_g
         except Exception as e:
             self.results.append(ValidationResult(
@@ -210,36 +208,30 @@ class RDFValidator:
 
     def validate(self, ontology_dir: Path, shapes_file: Path) -> bool:
         """Validate RDF against SHACL shapes"""
-        print("=" * 60)
-        print("RDF/SHACL Validator for Catty Thesis")
-        print("=" * 60)
-        print("Status: RUNNING")
-        print("")
+        logger.info("Starting RDF/SHACL validation...")
 
         # Load ontology
-        print(f"📁 Loading RDF from {ontology_dir}...")
+        logger.info(f"📁 Loading RDF from {ontology_dir}...")
         data_graph = self.load_ontology(ontology_dir)
-        print("")
 
         # Check for fatal errors during loading
         fatal_errors = [r for r in self.results if r.severity == "FATAL"]
         if fatal_errors:
-            print("❌ FATAL ERRORS during RDF loading:")
+            logger.error("❌ FATAL ERRORS during RDF loading:")
             for error in fatal_errors:
-                print(f"  • {error.focus_node}: {error.message}")
+                logger.error(f"  • {error.focus_node}: {error.message}")
             return False
 
         # Load shapes
-        print(f"📋 Loading SHACL shapes from {shapes_file}...")
+        logger.info(f"📋 Loading SHACL shapes from {shapes_file}...")
         shapes_graph = self.load_shapes(shapes_file)
-        print("")
 
         if shapes_graph is None:
-            print("❌ FATAL: Failed to load SHACL shapes")
+            logger.error("❌ FATAL: Failed to load SHACL shapes")
             return False
 
         # Validate
-        print("🔍 Running SHACL validation...")
+        logger.info("🔍 Running SHACL validation...")
         try:
             conforms, results_graph, results_text = validate(
                 data_graph,
@@ -276,6 +268,7 @@ class RDFValidator:
 
     def print_results(self):
         """Print validation results"""
+        # We use print here because this is the primary CLI report output.
         print("=" * 60)
         print("VALIDATION RESULTS")
         print("=" * 60)
@@ -374,10 +367,10 @@ def main():
 
     # Exit with appropriate code
     if success:
-        print("🎉 Validation completed successfully")
+        logger.info("🎉 Validation completed successfully")
         sys.exit(0)
     else:
-        print("💥 Validation failed - please fix violations")
+        logger.error("💥 Validation failed - please fix violations")
         sys.exit(1)
 
 

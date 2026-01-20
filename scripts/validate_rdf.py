@@ -1,53 +1,55 @@
+import logging
 import os
 import sys
+import importlib.util
+from pathlib import Path
+
+# Setup logging
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logger = logging.getLogger(__name__)
+
 try:
     from rdflib import Graph
 except ImportError:
-    print("rdflib not found. Please install it with 'pip install rdflib'")
+    logger.error("rdflib not found. Please install it with 'pip install rdflib'")
     sys.exit(1)
+
+
+def _load_iri_config_class(repo_root: Path):
+    """Load IRIConfig from scripts/iri-config.py via importlib."""
+    iri_config_path = repo_root / "scripts" / "iri-config.py"
+    if not iri_config_path.exists():
+        raise FileNotFoundError(f"Expected IRIConfig module not found: {iri_config_path}")
+
+    spec = importlib.util.spec_from_file_location("catty_iri_config", iri_config_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Unable to load module from {iri_config_path}")
+
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.IRIConfig
+
 
 def validate_rdf(directory):
     success = True
 
-    # JSON-LD files use a remote context URL (localhost or GitHub Pages). Allow
-    # validation to run offline by serving that context from the repo.
-    import urllib.request
-    from io import BytesIO
-    from urllib.response import addinfourl
-    from email.message import Message
+    repo_root = Path(directory).parent
+    IRIConfig = _load_iri_config_class(repo_root)
+    config = IRIConfig(config_path=str(repo_root / ".catty" / "iri-config.yaml"))
 
-    context_path = os.path.join(directory, "context.jsonld")
-    if os.path.exists(context_path):
-        context_url_map = {
-            "http://localhost:8080/ontology/context.jsonld": context_path,
-            "https://metavacua.github.io/CategoricalReasoner/ontology/context.jsonld": context_path,
-        }
-
-        real_urlopen = urllib.request.urlopen
-
-        def mock_urlopen(url, *args, **kwargs):
-            req_url = url.full_url if isinstance(url, urllib.request.Request) else str(url)
-            if req_url in context_url_map:
-                data = open(context_url_map[req_url], "rb").read()
-                headers = Message()
-                headers.add_header("Content-Type", "application/ld+json")
-                return addinfourl(BytesIO(data), headers, req_url)
-            return real_urlopen(url, *args, **kwargs)
-
-        urllib.request.urlopen = mock_urlopen
-
-    for filename in os.listdir(directory):
-        if filename.endswith(".jsonld") or filename.endswith(".ttl"):
-            path = os.path.join(directory, filename)
-            g = Graph()
-            try:
-                # Determine format
-                fmt = "json-ld" if filename.endswith(".jsonld") else "turtle"
-                g.parse(path, format=fmt)
-                print(f"✅ {filename} is valid RDF.")
-            except Exception as e:
-                print(f"❌ {filename} is invalid: {e}")
-                success = False
+    with config.offline_context():
+        for filename in os.listdir(directory):
+            if filename.endswith(".jsonld") or filename.endswith(".ttl"):
+                path = os.path.join(directory, filename)
+                g = Graph()
+                try:
+                    # Determine format
+                    fmt = "json-ld" if filename.endswith(".jsonld") else "turtle"
+                    g.parse(path, format=fmt)
+                    logger.info(f"✅ {filename} is valid RDF.")
+                except Exception as e:
+                    logger.error(f"❌ {filename} is invalid: {e}")
+                    success = False
     return success
 
 if __name__ == "__main__":

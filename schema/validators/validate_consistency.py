@@ -9,25 +9,46 @@ EXIT CODES:
 """
 
 import argparse
+import logging
 import re
 import sys
 from pathlib import Path
 from typing import Dict, List, Set, Tuple, Optional
 from dataclasses import dataclass
+import importlib.util
+
+# Setup logging
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logger = logging.getLogger(__name__)
 
 # Try to import required libraries
 try:
     import yaml
 except ImportError:
-    print("ERROR: PyYAML is required. Install with: pip install pyyaml")
+    logger.error("PyYAML is required. Install with: pip install pyyaml")
     sys.exit(2)
 
 try:
     from rdflib import Graph, URIRef, Literal
     from rdflib.namespace import RDF, RDFS, DC
 except ImportError:
-    print("ERROR: rdflib is required. Install with: pip install rdflib")
+    logger.error("rdflib is required. Install with: pip install rdflib")
     sys.exit(2)
+
+
+def _load_iri_config_class(repo_root: Path):
+    """Load IRIConfig from scripts/iri-config.py via importlib."""
+    iri_config_path = repo_root / "scripts" / "iri-config.py"
+    if not iri_config_path.exists():
+        raise FileNotFoundError(f"Expected IRIConfig module not found: {iri_config_path}")
+
+    spec = importlib.util.spec_from_file_location("catty_iri_config", iri_config_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"Unable to load module from {iri_config_path}")
+
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.IRIConfig
 
 
 @dataclass
@@ -239,31 +260,9 @@ class ConsistencyValidator:
         """
         g = Graph()
 
-        import urllib.request
-        from io import BytesIO
-        from urllib.response import addinfourl
-        from email.message import Message
-
-        context_file = ontology_dir / "context.jsonld"
-        if context_file.exists():
-            context_url_map = {
-                "http://localhost:8080/ontology/context.jsonld": str(context_file),
-                "https://metavacua.github.io/CategoricalReasoner/ontology/context.jsonld": str(context_file),
-            }
-
-            real_urlopen = urllib.request.urlopen
-
-            def mock_urlopen(url, *args, **kwargs):
-                req_url = url.full_url if isinstance(url, urllib.request.Request) else str(url)
-                local_path = context_url_map.get(req_url)
-                if local_path:
-                    data = Path(local_path).read_bytes()
-                    headers = Message()
-                    headers.add_header("Content-Type", "application/ld+json")
-                    return addinfourl(BytesIO(data), headers, req_url)
-                return real_urlopen(url, *args, **kwargs)
-
-            urllib.request.urlopen = mock_urlopen
+        repo_root = ontology_dir.parent
+        IRIConfig = _load_iri_config_class(repo_root)
+        config = IRIConfig(config_path=str(repo_root / ".catty" / "iri-config.yaml"))
 
         # Load all RDF files
         formats = {
@@ -273,13 +272,14 @@ class ConsistencyValidator:
         }
 
         loaded_count = 0
-        for ext, fmt in formats.items():
-            for rdf_file in ontology_dir.glob(f'*{ext}'):
-                try:
-                    g.parse(rdf_file, format=fmt)
-                    loaded_count += 1
-                except Exception:
-                    pass  # Skip files that don't parse
+        with config.offline_context():
+            for ext, fmt in formats.items():
+                for rdf_file in ontology_dir.glob(f'*{ext}'):
+                    try:
+                        g.parse(rdf_file, format=fmt)
+                        loaded_count += 1
+                    except Exception:
+                        pass  # Skip files that don't parse
 
         # Extract elements by type
         for s in g.subjects(RDF.type, None):

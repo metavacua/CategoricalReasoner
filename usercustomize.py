@@ -47,6 +47,11 @@ if _CONTEXT_FILE.exists():
             headers = Message()
             headers.add_header("Content-Type", "application/ld+json")
             return addinfourl(BytesIO(_CONTEXT_BYTES), headers, req_url)
-        return _real_urlopen(url, *args, **kwargs)
+
+        # Block all other network access during Catty operations to prevent SSRF
+        raise urllib.error.URLError(
+            f"Network access blocked by Catty offline mode for URL: {req_url}. "
+            "Only registered context URLs are allowed."
+        )
 
     urllib.request.urlopen = _catty_urlopen

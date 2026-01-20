@@ -12,12 +12,18 @@ The implementation is intentionally self-contained (no network calls).
 
 from __future__ import annotations
 
+import contextlib
 import json
 import logging
 import re
+import urllib.error
+import urllib.request
+from email.message import Message
+from io import BytesIO
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Mapping, MutableMapping, Optional, Sequence, Set, Tuple
 from urllib.parse import urlparse
+from urllib.response import addinfourl
 
 logger = logging.getLogger(__name__)
 
@@ -560,10 +566,17 @@ class IRIConfig:
         return replacements
 
     def _replace_many(self, s: str, replacements: Sequence[Tuple[str, str]]) -> str:
-        out = s
+        """Replace prefixes in a string.
+
+        This only replaces if the string starts with the source IRI, or is exactly
+        equal to it (e.g. for context references).
+        """
         for src, dst in replacements:
-            out = out.replace(src, dst)
-        return out
+            if s == src:
+                return dst
+            if s.startswith(src):
+                return dst + s[len(src):]
+        return s
 
     def _localhost_base_url(self) -> str:
         localhost = self._config.get("localhost")
@@ -595,10 +608,55 @@ class IRIConfig:
     def _production_context_url(self) -> str:
         return f"{self._production_base_url()}{self._production_namespace_path()}/context.jsonld"
 
+    @contextlib.contextmanager
+    def offline_context(self):
+        """A context manager that patches urllib.request.urlopen for Catty.
+
+        It serves local JSON-LD context files and blocks all other network
+        access to prevent unintended outbound requests (SSRF) during parsing.
+        """
+
+        repo_root = self.config_path.parent.parent
+        context_file = repo_root / "ontology" / "context.jsonld"
+        if not context_file.exists():
+            yield
+            return
+
+        context_bytes = context_file.read_bytes()
+        context_urls = {
+            self._localhost_context_url(),
+            self._production_context_url(),
+            "https://metavacua.github.io/CategoricalReasoner/ontology/context.jsonld",
+            "http://localhost:8080/ontology/context.jsonld",
+        }
+
+        real_urlopen = urllib.request.urlopen
+
+        def mock_urlopen(url, *args, **kwargs):
+            req_url = url.full_url if isinstance(url, urllib.request.Request) else str(url)
+            if req_url in context_urls:
+                headers = Message()
+                headers.add_header("Content-Type", "application/ld+json")
+                return addinfourl(BytesIO(context_bytes), headers, req_url)
+
+            raise urllib.error.URLError(
+                f"Network access blocked by Catty offline mode for URL: {req_url}. "
+                "Only registered context URLs are allowed."
+            )
+
+        urllib.request.urlopen = mock_urlopen
+        try:
+            yield
+        finally:
+            urllib.request.urlopen = real_urlopen
+
 
 if __name__ == "__main__":  # pragma: no cover
     import argparse
     import sys
+
+    # Setup CLI logging
+    logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
     parser = argparse.ArgumentParser(description="Rebind an ontology JSON-LD file between localhost and production IRIs")
     parser.add_argument("--config", default=".catty/iri-config.yaml", help="Path to iri-config.yaml")

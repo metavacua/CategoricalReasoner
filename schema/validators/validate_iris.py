@@ -16,10 +16,15 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import logging
 import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+
+# Setup logging
+logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
+logger = logging.getLogger(__name__)
 
 
 def _yaml_strip_quotes(value: str) -> str:
@@ -209,17 +214,17 @@ class IRIValidator:
         """
 
         if self.errors:
-            print("IRI validation failed:", file=sys.stderr)
+            logger.error("IRI validation failed:")
             for err in self.errors:
-                print(f"  [ERROR] {err.file}: {err.message}", file=sys.stderr)
+                logger.error(f"  [ERROR] {err.file}: {err.message}")
 
         if self.warnings:
-            print("IRI validation warnings:", file=sys.stderr)
+            logger.warning("IRI validation warnings:")
             for warn in self.warnings:
-                print(f"  [WARN]  {warn.file}: {warn.message}", file=sys.stderr)
+                logger.warning(f"  [WARN]  {warn.file}: {warn.message}")
 
         if not self.errors:
-            print("IRI validation successful: all ontologies conform.")
+            logger.info("IRI validation successful: all ontologies conform.")
             return True
 
         return False

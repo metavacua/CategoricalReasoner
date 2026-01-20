@@ -20,7 +20,8 @@ import org.apache.jena.query.ReadWrite;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.Lang;
-import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFParser;
+import org.apache.jena.riot.RDFParserBuilder;
 
 /**
  * Loads posted RDF into the dataset.
@@ -50,9 +51,10 @@ public final class ApiLoadHandler implements HttpHandler {
     final Lang lang = inferLang(contentType);
 
     final String body = HttpUtil.readBodyUtf8(exchange);
+    IriSafetyReport report = null;
 
     if (lang.equals(Lang.JSONLD)) {
-      final IriSafetyReport report = IriSafetyValidator.validate(body, config);
+      report = IriSafetyValidator.validate(body, config);
       if (!report.ok()) {
         final ObjectNode err = MAPPER.createObjectNode();
         err.put("ok", false);
@@ -67,7 +69,14 @@ public final class ApiLoadHandler implements HttpHandler {
 
     final Model m = ModelFactory.createDefaultModel();
     try {
-      RDFDataMgr.read(m, new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8)), lang);
+      final RDFParserBuilder builder = RDFParser.source(new ByteArrayInputStream(body.getBytes(StandardCharsets.UTF_8)))
+          .lang(lang);
+
+      if (lang.equals(Lang.JSONLD) && report != null && report.baseIri() != null) {
+        builder.base(report.baseIri());
+      }
+
+      builder.parse(m);
     } catch (Exception e) {
       HttpUtil.sendText(exchange, 400, "text/plain; charset=utf-8", "Unable to parse RDF payload: " + e.getMessage());
       return;

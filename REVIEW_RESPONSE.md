@@ -10,11 +10,28 @@ This document summarizes the proactive improvements made in response to common c
 
 #### Path Traversal Prevention (Java)
 - **File**: `java/src/main/java/io/catty/server/http/RepoOntologyHandler.java`
-- **Change**: Enhanced path validation to prevent directory traversal attacks
+- **Change**: Enhanced path validation and added file size limits
 - **Details**:
-  - Added check for `//` sequences
-  - Added explicit security comments
+  - Added check for `//` sequences to prevent path evasion
+  - Added explicit security comments for path resolution
   - Ensured normalized paths stay within `ontologyDir`
+  - Added 10MB file size limit to prevent memory/CPU denial-of-service
+
+#### SSRF and Global Patch Leak Prevention (Python)
+- **Files**: `scripts/iri-config.py`, `schema/validators/*.py`, `tests/test_consistency.py`
+- **Change**: Replaced global monkeypatching with scoped context managers and added SSRF protection
+- **Details**:
+  - Introduced `IRIConfig.offline_context()` context manager to safely patch `urlopen`
+  - Ensures `urllib.request.urlopen` is restored after operations (preventing global leaks)
+  - Updated mock `urlopen` to raise `URLError` for non-mapped URLs, completely blocking unexpected outbound requests (SSRF)
+  - Applied this protection across all validators and scripts
+
+#### Precision IRI Rebinding (Python)
+- **File**: `scripts/iri-config.py`
+- **Change**: Refined `rebind_iri` to use prefix-only matching
+- **Details**:
+  - `_replace_many` now only replaces strings that *start with* or *exactly match* registered IRIs
+  - Prevents unintentional mutation of non-IRI literals that might contain the source IRI as a substring
 
 #### Security Documentation
 - **File**: `SECURITY.md`
@@ -80,6 +97,14 @@ This document summarizes the proactive improvements made in response to common c
   - Type checking (MyPy)
   - Java code style
   - Security scanning (Trivy)
+
+#### Codebase Quality and Logging
+- **Files**: All Python scripts and validators
+- **Change**: Switched from `print()` to structured logging via the `logging` module
+- **Details**:
+  - Replaced `print()` calls with appropriate `logger.info`, `logger.error`, etc.
+  - Added logging configuration to CLI entrypoints
+  - Provides a foundation for audit trails and better debuggability in CI
 
 ### 5. Documentation
 
