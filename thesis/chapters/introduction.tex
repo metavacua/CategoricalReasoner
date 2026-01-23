@@ -1,23 +1,26 @@
-\chapter{Introduction}
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
 
-This chapter introduces the categorical framework for formal logics and establishes the motivation for the logic-witness formalism.
+This work presents Catty, a formal investigation of categorical foundations for logics and their morphisms. Rather than following a conventional linear progression, this thesis serves as a review of the literature and a foundational common reference for understanding logics as coordinate objects in a categorical structure.
 
-\section{Motivation}
+\section*{Motivation and Philosophical Stance}
+The proliferation of formal logics demands a framework that captures their structural relationships without imposing a rigid hierarchy. Catty adopts a position of logical pluralism, where different logics are seen as distinct computational universes, each with its own valid internal reasoning.
 
-The proliferation of formal logics demands a unified framework for understanding their relationships. Traditional approaches focus on extension and conservativity but fail to capture structural nuances.
+\section*{Initial Logics and Logical Plurality}
+A core tenet of this work is the use of "initial logics" to describe the categorized bases from which others extend. By identifying these initial objects, we can span the space of categorizable logics through formal morphisms that preserve or restrict logical properties.
 
-\section{Scope}
+\section*{Proofs as Witnesses}
+Catty goes beyond descriptive documentation by providing computational witnesses. The existence of logical structures is proven through executable Domain-Specific Languages (DSLs), commutative diagrams, and formal ontologies. In this framework, syntactic minimality is shown to enable greater semantic power.
 
-This work focuses on categorizable logics that admit formal specification in terms of structural rule configurations and sequent form restrictions.
-
-\section{Structure}
-
-The thesis is organized as follows:
+\section*{Structure of the Reference}
+This reference is organized into themes that explore the genesis, architecture, and formalization of the logic category:
 \begin{itemize}
-\item Chapter 2: Logical Formalism and the Category of Categorizable Logics
-\item Chapter 3: Theoretical Formalism and the Two-Dimensional Lattice
-\item Chapter 4: Witness Formalism and the Curry-Howard Extension
-\item Chapter 5: Semantic Web Integration and Knowledge Graphs
-\item Chapter 6: Roadmap and Future Directions
-\item Conclusions: Summary and Final Thoughts
+    \item \textbf{Genesis}: The foundational influences ranging from Linear Logic to Paraconsistent Reasoning.
+    \item \textbf{Architecture}: The geometry of the 2D lattice and its coordinate logic-space.
+    \item \textbf{Morphisms}: Formal relationships of extension and interpretation.
+    \item \textbf{Universes}: Logics as substrates for computation, including links to Rust and systems programming.
+    \item \textbf{Witness}: The implementation of the Catty DSL and executable categorical reasoning.
+    \item \textbf{Formalization}: Machine-readable RDF/OWL ontologies and knowledge graphs.
+    \item \textbf{Integration}: Connections to the broader semantic web and proof assistants like Isabelle.
+    \item \textbf{Philosophy}: The overarching implications of logical pluralism and the inversion principle.
 \end{itemize}

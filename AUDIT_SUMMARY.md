@@ -14,7 +14,7 @@
 ### 2. Logics-as-Objects Model ✓
 **File**: `ontology/logics-as-objects.jsonld`
 - 10+ formal logics modeled as categorical objects:
-  - LM (minimal common sublogic for LJ and LDJ)
+  - LM (initial common sublogic for LJ and LDJ)
   - LK (terminal classical logic)
   - LJ (intuitionistic logic)
   - LDJ (dual intuitionistic logic)

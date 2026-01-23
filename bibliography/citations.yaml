@@ -30,44 +30,70 @@ citations:
     local_ontology: false
     notes: "Kripke semantics for intuitionistic logic"
 
-  sambin2003basic:
-    author: "Giovanni Sambin"
-    title: "Basic Logic: Reflection, Symmetry, Visibility"
-    year: 2003
+  ardeshir2012unification:
+    author: "Mohammad Ardeshir and Vahid Vaezian"
+    title: "A unification of the basic logics of Sambin and Visser"
+    year: 2012
     type: "journal"
-    doi: "10.1111/1467-8422.00291"
-    url: "https://onlinelibrary.wiley.com/doi/10.1111/1467-8422.00291"
-    wikidata: "Q7263983"
-    arxiv: "math/0301250"
+    doi: "10.1093/jigpal/jzs002"
+    url: "https://doi.org/10.1093/jigpal/jzs002"
+    wikidata: null
+    arxiv: null
     dbpedia: null
     local_ontology: false
-    notes: "Basic Logic as foundation for substructural logics"
+    notes: "Related to LM and Basic Logic"
 
-  urbas1993structural:
-    author: "John Urbas"
-    title: "On the Structural Rules of Linear Logic"
-    year: 1993
+  zizzi2010quantum:
+    author: "Paola Zizzi"
+    title: "From Quantum Metalanguage to the Logic of Qubits"
+    year: 2010
     type: "preprint"
     doi: null
-    arxiv: "cs/9311003"
-    url: "https://arxiv.org/abs/cs/9311003"
+    arxiv: "1003.5976"
+    url: "https://arxiv.org/abs/1003.5976"
     wikidata: null
     dbpedia: null
     local_ontology: false
-    notes: "Analysis of structural rules in linear logic"
+    notes: "Primary Zizzi citation for quantum metalanguage"
 
-  trafford2018category:
+  sambin2000basic:
+    author: "Giovanni Sambin, Giulia Battilotti, and Claudia Faggian"
+    title: "Basic logic: reflection, symmetry, visibility"
+    year: 2000
+    type: "journal"
+    doi: "10.2178/jsl/1190150241"
+    url: "https://www.jstor.org/stable/2586704"
+    wikidata: null
+    arxiv: null
+    dbpedia: null
+    local_ontology: false
+    notes: "Primary Sambin citation for Basic Logic"
+
+  urbas1996dual:
+    author: "Igor Urbas"
+    title: "Dual-Intuitionistic Logic"
+    year: 1996
+    type: "journal"
+    doi: "10.1305/ndjfl/1039886520"
+    url: "https://doi.org/10.1305/ndjfl/1039886520"
+    wikidata: null
+    arxiv: null
+    dbpedia: null
+    local_ontology: false
+    notes: "Foundational paper on dual-intuitionistic logic"
+
+  trafford2015coconstructive:
     author: "James Trafford"
-    title: "A Category Theory Approach to Conceptual Modelling"
-    year: 2018
-    type: "preprint"
+    title: "Co-constructive logic for proofs and refutations"
+    year: 2015
+    type: "journal"
     doi: null
-    arxiv: "1803.08278"
-    url: "https://arxiv.org/abs/1803.08278"
+    arxiv: null
+    url: null
     wikidata: null
     dbpedia: null
     local_ontology: false
-    notes: "Category theory for conceptual modelling"
+    notes: "Relevant to co-intuitionistic logic and refutation"
 
   lawvere1963functorial:
     author: "F. William Lawvere"
