@@ -2,12 +2,12 @@
 \addcontentsline{toc}{chapter}{Anatomy of Sequent Calculus}
 
 \section*{Reflexive Axiom Schemata}
-The reflexive axiom forms the foundation of sequent calculus presentations. In LK, the reflexive axiom $\vdash A \rightarrow A$ represents the basic identity principle. Different subclassical calculi restrict or modify this axiom scheme, producing characteristically different logical behaviors.
+The reflexive axiom $\frac{\Gamma \vdash A}{\Gamma \vdash A}$ forms the foundation of sequent calculus presentations. In LK, this represents the basic identity principle. Different substructural calculi restrict or modify this axiom scheme, producing characteristically different logical behaviors.
 
-The matrix of reflexive axiom schemata determines what structures and operations a logic can prove. If a logic proves every reflexive axiom scheme of a given form, it will have specific structures or operations and a characterizing cut metarule. If the logic does not have the corresponding structures and operations, then either they're implicit or the logic is inconsistently characterized with respect to the reflexive axiom scheme.
+The matrix of reflexive axiom schemata determines what structures and operations a logic can prove. If a logic proves every reflexive axiom scheme of a given form, it will have specific structures or operations and a characterizing cut metarule. If a logic does not have the corresponding structures and operations, then either they're implicit or the logic is consistently characterized with respect to the reflexive axiom scheme.
 
 \section*{Cut Rules and Sub-Rule Preservation}
-A fundamental characteristic of subclassical calculi is that they preserve cut rules such that none contradict the cut rule of LK. They are all sub-rules of the LK cut rule. The degree of granularity requires examining each component:
+A fundamental characteristic of substructural calculi is that they preserve cut rules such that none contradict the cut rule of LK. They are all sub-rules of the LK cut rule. The degree of granularity requires examining each component:
 
 \begin{itemize}
     \item Cut elimination procedures
@@ -16,10 +16,10 @@ A fundamental characteristic of subclassical calculi is that they preserve cut r
     \item Relationship between cut and other structural rules
 \end{itemize}
 
-The preservation of cut rules determines the computational complexity and proof-theoretic properties of each subclassical logic.
+The preservation of cut rules determines the computational complexity and proof-theoretic properties of each substructural logic.
 
 \section*{Structural Rules: The Logical Parameters}
-Structural rules serve as the primary parameters that distinguish subclassical calculi:
+Structural rules serve as the primary parameters that distinguish substructural calculi:
 
 \subsection*{Weakening Rules}
 \begin{itemize}
@@ -30,7 +30,7 @@ Structural rules serve as the primary parameters that distinguish subclassical c
 
 \subsection*{Contraction Rules}
 \begin{itemize}
-    \item Left contraction: $\frac{\Gamma, A, A \vdash \Delta}{\Gamma, A \vdash \Delta}$
+    \item Left contraction: $\frac{\Gamma, A, A \vdash \Delta}{\Gamma \vdash \Delta}$
     \item Right contraction: $\frac{\Gamma \vdash \Delta, A, A}{\Gamma \vdash \Delta, A}$
     \item Critical for resource-sensitive reasoning and the explosion principle
 \end{itemize}
@@ -42,7 +42,7 @@ Structural rules serve as the primary parameters that distinguish subclassical c
     \item Essential for non-commutative logics
 \end{itemize}
 
-The matrix or vectorization of logical relations between units, axioms, rules, and operations is a key result that allows automatic construction of various categorizable logics in relation to each other.
+The matrix or vectorization of logical relations between units, axioms, rules, and operations is a key result that allows the automatic construction of various categorizable logics in relation to each other.
 
 \section*{Operational Rules}
 The operational rules define the connectives and their introduction/elimination:
@@ -69,7 +69,7 @@ The operational rules define the connectives and their introduction/elimination:
 \end{itemize}
 
 \section*{Functional Incompleteness and Classical Results}
-The subclassical calculi exhibit classical functional incompleteness, which is related to:
+The substructural calculi exhibit classical functional incompleteness, which is related to:
 
 \begin{itemize}
     \item The inability to derive certain classical tautologies
@@ -77,10 +77,10 @@ The subclassical calculi exhibit classical functional incompleteness, which is r
     \item The relationship between syntax and semantics in restricted systems
 \end{itemize}
 
-This functional incompleteness is not a deficiency but a feature that enables the logical pluralism Catty advocates. The relationship between material implication and minimal logic is explored in detail by Diener and McKubre-Jordens \cite{diener2016classifying}, who classify the various forms of material implication over minimal logic.
+This functional incompleteness is not a deficiency but a feature that enables the logical pluralism Catty advocates. The relationship between material implication and minimal logic is explored in detail by Diener and McKubre-Jordens \cite{diener2016classifying}, who classify various forms of material implication over minimal logic.
 
-\section*{From LK to Subclassical Calculi: The Restriction Matrix}
-Every valid subclassical calculus can be characterized by its restriction matrix relative to LK:
+\section*{From LK to Substructural Calculi: The Restriction Matrix}
+Every valid substructural calculus can be characterized by its restriction matrix relative to LK:
 
 \begin{table}[h]
 \centering
@@ -98,7 +98,7 @@ LDJ & Yes & Yes & Yes & Dual \\
 \caption{Restriction matrix for major logics}
 \end{table}
 
-This matrix determines the computational and proof-theoretic properties of each logic. The existence of valid subclassical calculi depends on which combinations of restrictions preserve consistency and meaningful proof theory.
+This matrix determines the computational and proof-theoretic properties of each logic. The existence of valid substructural calculi depends on which combinations of restrictions preserve consistency and meaningful proof theory.
 
 \section*{Dualization and Asymmetry}
 The asymmetry between left and right structural rules (e.g., LJ vs LDJ) produces distinct logical behaviors:
@@ -109,4 +109,4 @@ The asymmetry between left and right structural rules (e.g., LJ vs LDJ) produces
     \item This asymmetry is fundamental to understanding the logic space
 \end{itemize}
 
-Understanding these asymmetries is crucial for constructing the full categorical model of subclassical logics and their relationships.
+Understanding these asymmetries is crucial for constructing the full categorical model of substructural logics and their relationships.
