@@ -2,25 +2,41 @@
 \addcontentsline{toc}{chapter}{Genesis --- Where Catty Comes From}
 
 \section*{The Resource-Sensitive Revolution}
-Linear logic \cite{girard1987linear} establishes the computational substrate for Catty, where propositions are treated as resources. Catty's lattice begins at LL as its initial object.
+Classical linear logic (CLL) is a locally terminal object with respect to intuitionistic linear logic, dual intuitionistic linear logic or co-constructive linear logic, and monotonic linear logic. Monotonic linear logic, defined as a sublogic of Multiplicative-Additive Linear Logic without negation, XOR, Bicon, implication (lollipop), or non-implication, is initial. It is possible that additive-only linear logic is the further correct restriction as intuitionistic linear logic defines multiplicative conjunction and dual intuitionistic linear logic defines multiplicative disjunction.
+
+Given that linear logic extends to classical logic by inclusion of the weakening and contraction rules on left and right, the fact that there exists an initial logic with respect to LL that is not LL entails that the initial logic is also initial with respect to LK when LK is fixed as the terminal logic.
 
 \section*{Structural Rules and the Anatomy of Sequents}
-Structural rules (weakening, contraction, and exchange) serve as logical parameters. While Gentzen \cite{negri2011proof} focused on LJ and LK, Catty incorporates initial logics related to Sambin's Basic Logic \cite{sambin2000basic} and the unification work of Ardeshir and Vaezian \cite{ardeshir2012unification}.
+Structural rules (weakening, contraction, and exchange) serve as logical parameters. Catty incorporates initial logics specifically related to a sublogic of both Ardeshir and Vaezian's U and Sambin et al's Basic Sequent Calculus. The existence of U entails dualizations of U such that U and the dualizations share a common sublogic that excludes specifically implication, provability predicates, interpretation functions, non-implication, non-provability predicates, and non-interpretation functions. Implication and non-implication are extensions of the common sublogic.
 
 \section*{Constructive Foundations and the Witness Principle}
-Following the BHK interpretation and Kripke semantics \cite{kripke1965semantical}, proofs are treated as constructions. Syntactic minimality in these foundations enables greater semantic power.
+The BHK interpretation and Kripke semantics are most directly applicable to intuitionistic logic, which is one logic in the coordinate space. We can dualize them for LDJ or co-constructive logic where we have constructive assumptions but non-constructive consequences in proof theoretical terms or we have non-constructive assumptions but constructive consequences in refutation theoretical terms.
 
-\section*{Refutation as Construction}
-Catty integrates refutation as a constructive operation, drawing from Nelson's constructive negation, Igor Urbas's Dual-Intuitionistic Logic \cite{urbas1996dual}, and James Trafford's co-constructive logic \cite{trafford2015coconstructive}.
+LDJ and co-constructive subclassical logics are more conservative in their non-constructive proof consequences than classical logic, and this bifurcates the non-constructive classes into at least two classes where the anti-theorems of LDJ are a strict subset of the anti-theorems of LK. The law of non-contradiction is independent of LDJ unlike with LK, and LDJ invalidates double negation introduction which has consequences for many anti-theorems that are dual to double negation elimination, Peirce's law, LEM, weak LEM, Tarski's formula, and theorems that are enumerated in detail by Diener and McKubre-Jordens (2016).
+
+We are not imposing BHK and Kripke semantics on every logic; this is not possible. Instead, we are documenting and demonstrating how such correspondences and semantics relate to each other implicitly or explicitly through morphisms and dualizations. Specific fragments of BHK and Kripke semantics survive into the common sublogic, but the proper interpretations necessarily change because the common sublogic of LJ and LDJ has more restrictive syntax than either LJ or LDJ alone. BHK and dual-BHK have to be intersected to get the commonality of BHK and dual-BHK.
+
+\section*{Refutation as Co-Constructive Operation}
+Using the language of James Trafford, Catty integrates some refutations as co-constructive operations. There are non-constructive refutations at least in LK, though if we use a version of LK that is restricted to its polytime decidable fragment(s), then we would almost assuredly be restricting to refutations that are co-constructive to the corresponding constructive proofs. Catty draws from Nelson's constructive negation, Igor Urbas's Dual-Intuitionistic Logic \cite{urbas1996dual}, and James Trafford's co-constructive logic \cite{trafford2015coconstructive}.
 
 \section*{The Great Unification}
-The Curry-Howard-Lambek correspondence provides the three-fold equivalence between logic, type theory, and category theory. Catty's DSL is a computational witness of this correspondence.
+The Curry-Howard-Lambek correspondence has greatest direct affinity with LJ and intuitionistic logic. We need to formalize an explicit dual form, and we need to construct a commonality between the CHK correspondence and its dual. Catty's DSL is a computational witness of this correspondence and its dual.
 
 \section*{Paraconsistent Reasoning and Philosophy}
 Logics that avoid explosion (Ex Falso Quodlibet) are represented, drawing from the work of João Marcos, Priest, Restall, Walter Carnielli, and Paola Zizzi.
 
 \section*{Quantum Logic and Non-Distributivity}
-Connection to quantum foundations where distributivity may fail, based on Paola Zizzi's quantum metalanguage \cite{zizzi2010quantum} and Sambin's Basic Logic.
+Lq is the proper "basic quantum logic" whereas the Birkhoff-Neumann logic is a distinct entity that is A quantum logic but not THE quantum logic, and it is more semi-classical than properly quantum. Zizzi's work establishes Lq as the first logic which is substructural, many-valued and quantum at the same time. Lq introduces:
+
+\begin{itemize}
+    \item A quantum metalanguage where metalinguistic links are quantum correlations
+    \item A quantum cut rule interpreted as quantum projective measurement
+    \item Quantum superpositions and entanglement as logical connectives
+    \item An EPR rule allowing simultaneous proof of entangled theorems
+    \item The qubit theorem as logical description of optical qubit state preparation
+\end{itemize}
+
+Based on Paola Zizzi's quantum metalanguage \cite{zizzi2010quantum} and Sambin's Basic Logic.
 
 \section*{Category Theory as Metalanguage}
 Category theory \cite{maclane1971categories, pierce1991category, lawvere1963functorial} provides the formal metalanguage for Catty's structure.
