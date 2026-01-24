@@ -26,7 +26,7 @@ Catty models logics as objects in a category with morphisms representing extensi
 ### Knowledge Graph Data
 
 - **`logics-as-objects.jsonld`**: Instance data for logics as categorical objects:
-  - LM (minimal common sublogic for LJ and LDJ)
+  - LM (initial common sublogic for LJ and LDJ)
   - LK (terminal classical logic)
   - LJ (intuitionistic logic)
   - LDJ (dual intuitionistic logic)

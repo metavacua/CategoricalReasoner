@@ -92,7 +92,7 @@ description: |
   - owl:sameAs: link to Wikidata item (if available)
   - dct:source: link to Wikipedia or reference (if available)
   Logic definitions:
-  - LM: minimal logic (no LEM, no LNC, has Exchange)
+  - LM: initial logic (no LEM, no LNC, has Exchange)
   - LK: classical logic (has LEM, LNC, all structural rules)
   - LJ: intuitionistic logic (no LEM, has LNC, all structural rules)
   - LDJ: dual intuitionistic logic (has LEM, no LNC, all structural rules)

@@ -20,7 +20,7 @@
       "@type": "catty:Category",
       "rdfs:label": "Logic Category Structure",
       "rdfs:comment": "The categorical structure of formal logics where LM is the initial base and LK is the terminal system.",
-      "dct:description": "Morphisms in this category represent extensions or interpretations. The structure is characterized by commutative diagrams relating minimal logics, intuitionistic variants, and the terminal classical system."
+      "dct:description": "Morphisms in this category represent extensions or interpretations. The structure is characterized by commutative diagrams relating initial logics, intuitionistic variants, and the terminal classical system."
     },
     {
       "@id": "catty:LatticeOrder",
