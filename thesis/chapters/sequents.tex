@@ -2,9 +2,9 @@
 \addcontentsline{toc}{chapter}{Anatomy of Sequent Calculus}
 
 \section*{Reflexive Axiom Schemata}
-The reflexive axiom $\frac{\Gamma \vdash A}{\Gamma \vdash A}$ forms the foundation of sequent calculus presentations. In LK, this represents the basic identity principle. Different substructural calculi restrict or modify this axiom scheme, producing characteristically different logical behaviors.
+The reflexive axiom $\frac{\Gamma, A \vdash A}{\Gamma \vdash A}$ forms the foundation of sequent calculus presentations. In LK, the reflexive axiom represents the basic identity principle. Different substructural calculi restrict or modify this axiom scheme, producing characteristically different logical behaviors.
 
-The matrix of reflexive axiom schemata determines what structures and operations a logic can prove. If a logic proves every reflexive axiom scheme of a given form, it will have specific structures or operations and a characterizing cut metarule. If a logic does not have the corresponding structures and operations, then either they're implicit or the logic is consistently characterized with respect to the reflexive axiom scheme.
+The matrix of reflexive axiom schemata determines what structures and operations a logic can prove. If a logic proves every reflexive axiom scheme of a given form, it will have specific structures or operations and a characterizing cut metarule. If a logic does not have corresponding structures and operations, then either they're implicit or the logic is consistently characterized with respect to the reflexive axiom scheme.
 
 \section*{Cut Rules and Sub-Rule Preservation}
 A fundamental characteristic of substructural calculi is that they preserve cut rules such that none contradict the cut rule of LK. They are all sub-rules of the LK cut rule. The degree of granularity requires examining each component:
@@ -42,10 +42,10 @@ Structural rules serve as the primary parameters that distinguish substructural 
     \item Essential for non-commutative logics
 \end{itemize}
 
-The matrix or vectorization of logical relations between units, axioms, rules, and operations is a key result that allows the automatic construction of various categorizable logics in relation to each other.
+The matrix or vectorization of logical relations between units, axioms, rules, and operations is a key result that allows automatic construction of various categorizable logics in relation to each other.
 
 \section*{Operational Rules}
-The operational rules define the connectives and their introduction/elimination:
+The operational rules define connectives and their introduction/elimination:
 
 \subsection*{Multiplicative Connectives}
 \begin{itemize}
@@ -77,14 +77,14 @@ The substructural calculi exhibit classical functional incompleteness, which is 
     \item The relationship between syntax and semantics in restricted systems
 \end{itemize}
 
-This functional incompleteness is not a deficiency but a feature that enables the logical pluralism Catty advocates. The relationship between material implication and minimal logic is explored in detail by Diener and McKubre-Jordens \cite{diener2016classifying}, who classify various forms of material implication over minimal logic.
+This functional incompleteness is not a deficiency but a feature that enables logical pluralism Catty advocates. The relationship between material implication and minimal logic is explored in detail by Diener and McKubre-Jordens \cite{diener2016classifying}, who classify various forms of material implication over minimal logic.
 
 \section*{From LK to Substructural Calculi: The Restriction Matrix}
 Every valid substructural calculus can be characterized by its restriction matrix relative to LK:
 
 \begin{table}[h]
 \centering
-\begin{tabular}{|c|c|c|c|c|}
+\begin{tabular}{|c|c|c|c|}
 \hline
 Logic & Weakening & Contraction & Exchange & Cut Rule \\
 \hline
