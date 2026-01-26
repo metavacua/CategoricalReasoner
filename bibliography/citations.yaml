@@ -101,8 +101,8 @@ citations:
     year: 2015
     type: "journal"
     doi: null
-    arxiv: null
-    url: null
+    arxiv: "1507.03650"
+    url: "https://arxiv.org/abs/1507.03650"
     wikidata: null
     dbpedia: null
     local_ontology: false
