@@ -28,34 +28,30 @@ jobs:
       id: validate_tex
       run: |
         python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
-        echo "result=success" >> $GITHUB_OUTPUT
       continue-on-error: false
 
     - name: Validate citations
       id: validate_citations
       run: |
         python schema/validators/validate_citations.py --tex-dir thesis/chapters/ --bibliography bibliography/citations.yaml --ontology ontology/citations.jsonld
-        echo "result=success" >> $GITHUB_OUTPUT
       continue-on-error: false
 
     - name: Validate RDF
       id: validate_rdf
       run: |
         python schema/validators/validate_rdf.py --ontology ontology/ --shapes ontology/catty-thesis-shapes.shacl
-        echo "result=success" >> $GITHUB_OUTPUT
       continue-on-error: false
 
     - name: Validate bidirectional consistency
       id: validate_consistency
       run: |
         python schema/validators/validate_consistency.py --tex-dir thesis/chapters/ --ontology ontology/ --bibliography bibliography/citations.yaml --mapping schema/tex-rdf-mapping.yaml
-        echo "result=success" >> $GITHUB_OUTPUT
       continue-on-error: false
 
   comment-on-pr:
     needs: [validate, deploy]
     runs-on: ubuntu-latest
-    if: github.event_name == 'pull_request'
+    if: always() && github.event_name == 'pull_request'
 
     permissions:
       contents: read
@@ -64,7 +60,7 @@ jobs:
 
     steps:
     - name: Comment validation results on PR
-      if: failure()
+      if: needs.validate.result == 'failure' || needs.deploy.result == 'failure'
       uses: actions/github-script@v6
       with:
         script: |
@@ -93,8 +89,8 @@ jobs:
             body: comment
           })
 
-    - name: Comment success on PR
-      if: success()
+    - name: Comment validation success on PR
+      if: needs.validate.result == 'success' && needs.deploy.result != 'success'
       uses: actions/github-script@v6
       with:
         script: |
@@ -108,7 +104,7 @@ jobs:
           - ✅ RDF/SHACL validation: PASSED
           - ✅ Bidirectional consistency validation: PASSED
 
-          This PR is ready for review and merge.`;
+          **Note**: Validation passed but deployment encountered issues. Please check the deployment logs.`;
 
           github.rest.issues.createComment({
             issue_number: context.issue.number,
@@ -118,11 +114,21 @@ jobs:
           })
 
     - name: Comment deployment success on PR
-      if: success()
+      if: needs.validate.result == 'success' && needs.deploy.result == 'success'
       uses: actions/github-script@v6
       with:
         script: |
-          const comment = `🚀 **Thesis Deployment Successful**
+          const comment = `✅ **Thesis Validation Passed**
+
+          **Status**: All validation checks passed successfully.
+
+          **Validation Results**:
+          - ✅ TeX structure validation: PASSED
+          - ✅ Citation validation: PASSED
+          - ✅ RDF/SHACL validation: PASSED
+          - ✅ Bidirectional consistency validation: PASSED
+
+          🚀 **Deployment Successful**
 
           **Status**: All validations passed and thesis PDF has been built successfully.
 

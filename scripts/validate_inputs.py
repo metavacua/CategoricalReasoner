@@ -38,31 +38,21 @@ def validate_path(path: Union[str, Path], allowed_base: Path = None) -> Path:
     """
     if not isinstance(path, (str, Path)):
         raise SecurityError(f"Invalid path type: {type(path)}")
+
+    base_dir = (allowed_base or Path.cwd()).resolve()
     
-    # Convert to Path object and resolve
-    sanitized = Path(path).resolve()
-    
-    # Check for path traversal attempts
-    if ".." in str(path):
-        raise SecurityError(f"Path traversal attempt detected: {path}")
-    
-    # Check for absolute paths that might be dangerous
-    if sanitized.is_absolute():
-        # Allow absolute paths only if they're within the current working directory
-        # or explicitly within allowed base directory
-        if allowed_base:
-            if not str(sanitized).startswith(str(allowed_base.resolve())):
-                raise SecurityError(f"Absolute path not within allowed directory: {sanitized}")
-        else:
-            # If no base allowed, only allow current working directory paths
-            if not str(sanitized).startswith(str(Path.cwd())):
-                raise SecurityError(f"Absolute path outside working directory: {sanitized}")
-    
-    # If allowed_base is specified, ensure path is within it
-    if allowed_base and not str(sanitized).startswith(str(allowed_base.resolve())):
-        raise SecurityError(f"Path not within allowed directory: {sanitized} not in {allowed_base}")
-    
-    return sanitized
+    # Resolve the user-provided path.
+    # This will handle '..' and other relative path components.
+    resolved_path = (base_dir / path).resolve()
+
+    # Check if the resolved path is within the allowed base directory.
+    # This is a robust way to prevent path traversal.
+    try:
+        resolved_path.relative_to(base_dir)
+    except ValueError:
+        raise SecurityError(f"Path traversal attempt detected. Path '{resolved_path}' is outside of allowed base directory '{base_dir}'.")
+
+    return resolved_path
 
 def validate_identifier(identifier: str, pattern: str = r'^[a-zA-Z0-9_]+$') -> str:
     """
