@@ -14,26 +14,17 @@ from typing import Dict, List, Set, Optional, Tuple
 from dataclasses import dataclass
 import json
 
-# Import security validation utilities
+# Import security validation utilities - MANDATORY
 sys.path.append(str(Path(__file__).parent.parent.parent / 'scripts'))
 try:
     from validate_inputs import (
         validate_path, validate_identifier, validate_file_path,
         SecurityError
     )
-except ImportError:
-    # Fallback if security module not available
-    def validate_path(path, allowed_base=None):
-        return Path(path).resolve()
-    
-    def validate_identifier(identifier, pattern=None):
-        return identifier
-    
-    def validate_file_path(file_path, allowed_extensions=None):
-        return Path(file_path).resolve()
-    
-    class SecurityError(Exception):
-        pass
+except ImportError as e:
+    print(f"CRITICAL SECURITY ERROR: Cannot import security validation module: {e}")
+    print("Security validation is mandatory - aborting validation.")
+    sys.exit(2)
 
 # Try to import PyYAML; if not available, give a helpful error
 try:

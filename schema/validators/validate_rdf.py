@@ -6,6 +6,8 @@ Validates RDF graphs against SHACL shapes
 EXIT CODES:
   0 = Validation PASSED (no violations)
   1 = Validation FAILED (violations present)
+
+Enhanced with mandatory security validation and input sanitization.
 """
 
 import argparse
@@ -13,6 +15,18 @@ import sys
 from pathlib import Path
 from typing import List, Tuple, Dict
 from dataclasses import dataclass
+
+# Import security validation utilities - MANDATORY
+sys.path.append(str(Path(__file__).parent.parent / 'scripts'))
+try:
+    from validate_inputs import (
+        validate_path, validate_identifier, validate_file_path,
+        SecurityError
+    )
+except ImportError as e:
+    print(f"CRITICAL SECURITY ERROR: Cannot import security validation module: {e}")
+    print("Security validation is mandatory - aborting validation.")
+    sys.exit(2)
 
 # Try to import required libraries
 try:
@@ -308,45 +322,64 @@ def main():
     )
     parser.add_argument(
         '--ontology',
-        type=Path,
-        default=Path('ontology'),
+        type=str,
+        default='ontology',
         help='Directory containing RDF ontology files'
     )
     parser.add_argument(
         '--shapes',
-        type=Path,
-        default=Path('ontology/catty-thesis-shapes.shacl'),
+        type=str,
+        default='ontology/catty-thesis-shapes.shacl',
         help='Path to SHACL shapes file'
     )
 
     args = parser.parse_args()
 
-    # Check if directory exists
-    if not args.ontology.exists():
-        print(f"ERROR: Directory not found: {args.ontology}")
+    try:
+        # Security validation: Validate input paths
+        current_dir = Path.cwd()
+        
+        # Validate and resolve all input paths
+        try:
+            validated_ontology = validate_path(args.ontology, allowed_base=current_dir)
+            validated_shapes = validate_file_path(args.shapes, allowed_extensions=['.shacl', '.ttl', '.rdf'], allowed_base=current_dir)
+        except SecurityError as e:
+            print(f"SECURITY ERROR: Path validation failed - {e}")
+            sys.exit(2)
+        
+        # Check if directory exists using validated path
+        if not validated_ontology.exists():
+            print(f"ERROR: Directory not found: {validated_ontology}")
+            sys.exit(2)
+
+        # Check if shapes file exists using validated path
+        if not validated_shapes.exists():
+            print(f"ERROR: SHACL shapes file not found: {validated_shapes}")
+            sys.exit(2)
+
+        # Create validator
+        validator = RDFValidator()
+
+        # Validate using validated paths
+        success = validator.validate(validated_ontology, validated_shapes)
+
+        # Print results
+        validator.print_results()
+
+        # Exit with appropriate code
+        if success:
+            print("🎉 Validation completed successfully")
+            sys.exit(0)
+        else:
+            print("💥 Validation failed - please fix violations")
+            sys.exit(1)
+            
+    except SecurityError as e:
+        print(f"SECURITY ERROR: {e}")
         sys.exit(2)
-
-    # Check if shapes file exists
-    if not args.shapes.exists():
-        print(f"ERROR: SHACL shapes file not found: {args.shapes}")
-        sys.exit(2)
-
-    # Create validator
-    validator = RDFValidator()
-
-    # Validate
-    success = validator.validate(args.ontology, args.shapes)
-
-    # Print results
-    validator.print_results()
-
-    # Exit with appropriate code
-    if success:
-        print("🎉 Validation completed successfully")
-        sys.exit(0)
-    else:
-        print("💥 Validation failed - please fix violations")
-        sys.exit(1)
+    except Exception as e:
+        print(f"UNEXPECTED ERROR: {e}")
+        sys.exit(3)
 
 
 if __name__ == '__main__':

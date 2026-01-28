@@ -39,11 +39,18 @@ def validate_path(path: Union[str, Path], allowed_base: Path = None) -> Path:
     if not isinstance(path, (str, Path)):
         raise SecurityError(f"Invalid path type: {type(path)}")
 
+    # Convert to Path object for validation
+    path_obj = Path(path)
+    
+    # CRITICAL SECURITY: Explicitly disallow absolute paths
+    if path_obj.is_absolute():
+        raise SecurityError(f"Absolute paths are not allowed: {path_obj}")
+
     base_dir = (allowed_base or Path.cwd()).resolve()
     
     # Resolve the user-provided path.
     # This will handle '..' and other relative path components.
-    resolved_path = (base_dir / path).resolve()
+    resolved_path = (base_dir / path_obj).resolve()
 
     # Check if the resolved path is within the allowed base directory.
     # This is a robust way to prevent path traversal.
