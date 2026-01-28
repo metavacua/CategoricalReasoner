@@ -22,6 +22,8 @@
     "catty:objects": { "@type": "@id" },
     "catty:morphisms": { "@type": "@id" },
     "catty:correspondsToLogic": { "@type": "@id" },
+    "catty:hasFounder": { "@type": "xsd:string" },
+    "catty:yearIntroduced": { "@type": "xsd:gYear" },
     "rdfs:subClassOf": { "@type": "@id" },
     "rdfs:domain": { "@type": "@id" },
     "rdfs:range": { "@type": "@id" },
@@ -475,6 +477,22 @@
       "rdfs:comment": "Correspondence between a proposition and a type under Curry-Howard",
       "rdfs:domain": "catty:Logic",
       "rdfs:range": "catty:Type"
+    },
+    {
+      "@id": "catty:hasFounder",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:label": "has founder",
+      "rdfs:comment": "The person or people who founded or developed this logic",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "xsd:string"
+    },
+    {
+      "@id": "catty:yearIntroduced",
+      "@type": "owl:DatatypeProperty",
+      "rdfs:label": "year introduced",
+      "rdfs:comment": "The year when this logic was introduced or developed",
+      "rdfs:domain": "catty:Logic",
+      "rdfs:range": "xsd:gYear"
     }
   ]
 }
