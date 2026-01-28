@@ -1,0 +1,163 @@
+@prefix foaf:	<http://xmlns.com/foaf/0.1/> .
+@prefix wikipedia-en:	<http://en.wikipedia.org/wiki/> .
+@prefix dbr:	<http://dbpedia.org/resource/> .
+wikipedia-en:Relevance_logic	foaf:primaryTopic	dbr:Relevance_logic .
+@prefix dbo:	<http://dbpedia.org/ontology/> .
+dbr:Nuel_Belnap	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:History_of_logic	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Richard_Sylvan	dbo:notableIdea	dbr:Relevance_logic ;
+	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Jon_Michael_Dunn	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Game_semantics	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Relevant_logic	dbo:wikiPageWikiLink	dbr:Relevance_logic ;
+	dbo:wikiPageRedirects	dbr:Relevance_logic .
+dbr:Absorption_law	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Bunched_logic	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Residuated_lattice	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+<http://dbpedia.org/resource/Index_of_philosophy_articles_(R\u2013Z)>	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Conditional_statement	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:System_R	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Alasdair_Urquhart	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Index_of_logic_articles	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Non-classical_logic	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Vacuous_truth	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Minimal_logic	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Boolean_algebra	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Modal_logic	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+<http://dbpedia.org/resource/Andr\u00E9_Fuhrmann>	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Connexive_logic	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Truth_value	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Alan_Ross_Anderson	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Larisa_Maksimova	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:List_of_computer_scientists	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Proof_theory	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Hypothetical_syllogism	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+<http://dbpedia.org/resource/Relevance_(disambiguation)>	dbo:wikiPageWikiLink	dbr:Relevance_logic ;
+	dbo:wikiPageDisambiguates	dbr:Relevance_logic .
+dbr:Drinker_paradox	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+<http://dbpedia.org/resource/Lindenbaum\u2013Tarski_algebra>	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:List_of_philosophies	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Material_conditional	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Many-valued_logic	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Outline_of_logic	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Indicative_conditional	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Philosophical_logic	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Paraconsistent_logic	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Dialogical_logic	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Susanne_Bobzien	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+<http://dbpedia.org/resource/Derailment_(thought_disorder)>	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Separation_logic	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Strict_conditional	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+@prefix dbpedia-de:	<http://de.dbpedia.org/resource/> .
+dbr:Relevance_logic	owl:sameAs	dbpedia-de:Relevanzlogik ,
+		dbr:Relevance_logic ,
+		<http://pt.dbpedia.org/resource/L\u00F3gica_de_relev\u00E2ncia> ,
+		<http://ca.dbpedia.org/resource/L\u00F2gica_rellevant> .
+@prefix ns6:	<http://sw.cyc.com/concept/> .
+dbr:Relevance_logic	owl:sameAs	ns6:Mx4rozLDIPmvQdeSefw55Nx5pA .
+@prefix wikidata:	<http://www.wikidata.org/entity/> .
+dbr:Relevance_logic	owl:sameAs	wikidata:Q176630 .
+@prefix dbpedia-sv:	<http://sv.dbpedia.org/resource/> .
+dbr:Relevance_logic	owl:sameAs	dbpedia-sv:Relevanslogik ,
+		<http://zh.dbpedia.org/resource/\u76F8\u5E72\u903B\u8F91> ,
+		<http://es.dbpedia.org/resource/L\u00F3gica_relevante> .
+@prefix dbpedia-global:	<https://global.dbpedia.org/id/> .
+dbr:Relevance_logic	owl:sameAs	dbpedia-global:iRiR ,
+		<http://rdf.freebase.com/ns/m.0198ph> ,
+		<http://ja.dbpedia.org/resource/\u9069\u5207\u3055\u306E\u8AD6\u7406> .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+dbr:Relevance_logic	rdfs:label	"L\u00F2gica rellevant"@ca ,
+		"\u76F8\u5E72\u903B\u8F91"@zh ,
+		"\u9069\u5207\u3055\u306E\u8AD6\u7406"@ja ,
+		"Relevanzlogik"@de ,
+		"L\u00F3gica de relev\u00E2ncia"@pt ,
+		"L\u00F3gica relevante"@es ,
+		"Relevance logic"@en ,
+		"Relevanslogik"@sv .
+@prefix dct:	<http://purl.org/dc/terms/> .
+@prefix dbc:	<http://dbpedia.org/resource/Category:> .
+dbr:Relevance_logic	dct:subject	dbc:Substructural_logic ,
+		dbc:Non-classical_logic ,
+		dbc:Paraconsistent_logic .
+@prefix prov:	<http://www.w3.org/ns/prov#> .
+dbr:Relevance_logic	prov:wasDerivedFrom	<http://en.wikipedia.org/wiki/Relevance_logic?oldid=1304801844&ns=0> .
+@prefix gold:	<http://purl.org/linguistics/gold/> .
+dbr:Relevance_logic	gold:hypernym	dbr:Kind ;
+	foaf:isPrimaryTopicOf	wikipedia-en:Relevance_logic ;
+	dbo:wikiPageWikiLink	dbr:Monoid ,
+		<http://dbpedia.org/resource/C._I._Lewis> ,
+		dbr:Modal_logic ,
+		dbr:Predicate_calculus ,
+		dbr:Paraconsistent_logic ,
+		dbr:Entailment ,
+		dbr:Richard_Sylvan ,
+		dbr:Strict_implication ,
+		dbr:Kit_Fine ,
+		dbr:Join-semilattice ,
+		dbr:Propositional_calculus ,
+		dbr:Associative_property ,
+		dbr:Gentzen ,
+		dbr:Vacuous_truth ,
+		<http://dbpedia.org/resource/Katalin_Bimb\u00F3> ,
+		dbr:Alonzo_Church ,
+		dbr:Substructural_type_system ,
+		dbr:Homomorphism ,
+		dbr:Natural_deduction ,
+		dbr:Residuated_lattice ,
+		<http://dbpedia.org/resource/Ivan_E._Orlov> ,
+		dbr:De_Morgan_algebra ,
+		dbr:Relevant_type_system ,
+		dbr:Moh_Shaw-Kwei ,
+		dbr:Truth-functional_logic ,
+		dbr:Principle_of_explosion ,
+		<http://dbpedia.org/resource/Non_sequitur_(logic)> ,
+		dbr:Paradoxes_of_material_implication ,
+		dbr:Dag_Prawitz ,
+		dbr:Material_conditional ,
+		dbr:Identity_element ,
+		dbr:Alasdair_Urquhart ,
+		dbr:Commutative_property ,
+		<http://dbpedia.org/resource/Antecedent_(logic)> ,
+		dbr:Consequent ,
+		<http://dbpedia.org/resource/Bob_Meyer_(logician)> ,
+		dbr:Wilhelm_Ackermann ,
+		dbr:Nuel_Belnap ,
+		<http://dbpedia.org/resource/Lattice_(order)> ,
+		dbr:Stanford_Encyclopedia_of_Philosophy ,
+		dbr:Alan_Ross_Anderson ,
+		dbr:Sequent_calculus ,
+		dbr:Logical_connective ,
+		dbr:Logician ,
+		dbr:Atomic_formula ,
+		dbr:Connexive_logic ,
+		dbr:Substructural_logic ,
+		dbr:Classical_logic ,
+		dbc:Non-classical_logic ,
+		dbc:Paraconsistent_logic ,
+		dbc:Substructural_logic ,
+		dbr:Sequent .
+@prefix ns15:	<https://philarchive.org/archive/> .
+dbr:Relevance_logic	dbo:wikiPageExternalLink	ns15:URQTSO ,
+		<https://www.st-andrews.ac.uk/~slr/Relevant_Logic.pdf> ,
+		<https://www.jstor.org/stable/2272559> ,
+		<http://plato.stanford.edu/entries/logic-relevance/> ,
+		<http://consequently.org/papers/rle.pdf> ;
+	dbo:description	"logika sistemo, kiu limigas logikan implicon"@eo ,
+		"mathematical logic system that imposes certain restrictions on implication"@en .
+@prefix dbp:	<http://dbpedia.org/property/> .
+@prefix dbt:	<http://dbpedia.org/resource/Template:> .
+dbr:Relevance_logic	dbp:wikiPageUsesTemplate	dbt:Portal ,
+		dbt:Cite_journal ,
+		dbt:Isbn ,
+		dbt:Non-classical_logic ,
+		dbt:Short_description ,
+		dbt:Ordered_list .
+dbr:Paradoxes_of_material_implication	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Greg_Restall	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Proof_calculus	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:SNePS	dbo:wikiPageWikiLink	dbr:Relevance_logic .
+dbr:Relevance_conditional	dbo:wikiPageWikiLink	dbr:Relevance_logic ;
+	dbo:wikiPageRedirects	dbr:Relevance_logic .
+dbr:Relevance_criterion	dbo:wikiPageWikiLink	dbr:Relevance_logic ;
+	dbo:wikiPageRedirects	dbr:Relevance_logic .

@@ -1,0 +1,372 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix wikibase: <http://wikiba.se/ontology#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <http://schema.org/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix data: <https://www.wikidata.org/wiki/Special:EntityData/> .
+@prefix wds: <http://www.wikidata.org/entity/statement/> .
+@prefix wdref: <http://www.wikidata.org/reference/> .
+@prefix wdv: <http://www.wikidata.org/value/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix wdtn: <http://www.wikidata.org/prop/direct-normalized/> .
+@prefix p: <http://www.wikidata.org/prop/> .
+@prefix ps: <http://www.wikidata.org/prop/statement/> .
+@prefix psv: <http://www.wikidata.org/prop/statement/value/> .
+@prefix psn: <http://www.wikidata.org/prop/statement/value-normalized/> .
+@prefix pq: <http://www.wikidata.org/prop/qualifier/> .
+@prefix pqv: <http://www.wikidata.org/prop/qualifier/value/> .
+@prefix pqn: <http://www.wikidata.org/prop/qualifier/value-normalized/> .
+@prefix pr: <http://www.wikidata.org/prop/reference/> .
+@prefix prv: <http://www.wikidata.org/prop/reference/value/> .
+@prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
+@prefix wdno: <http://www.wikidata.org/prop/novalue/> .
+
+data:Q4548693 a schema:Dataset ;
+	schema:about wd:Q4548693 ;
+	cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+	schema:softwareVersion "1.0.0" ;
+	schema:version "1354894105"^^xsd:integer ;
+	schema:dateModified "2021-02-05T01:51:30Z"^^xsd:dateTime ;
+	wikibase:statements "5"^^xsd:integer ;
+	wikibase:sitelinks "3"^^xsd:integer ;
+	wikibase:identifiers "3"^^xsd:integer .
+
+wd:Q4548693 a wikibase:Item .
+
+<https://en.wikipedia.org/wiki/Structural_rule> a schema:Article ;
+	schema:about wd:Q4548693 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://en.wikipedia.org/> ;
+	schema:name "Structural rule"@en .
+
+<https://en.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://zh.wikipedia.org/wiki/%E7%BB%93%E6%9E%84%E8%A7%84%E5%88%99> a schema:Article ;
+	schema:about wd:Q4548693 ;
+	schema:inLanguage "zh" ;
+	schema:isPartOf <https://zh.wikipedia.org/> ;
+	schema:name "结构规则"@zh .
+
+<https://zh.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://pt.wikipedia.org/wiki/Regra_estrutural> a schema:Article ;
+	schema:about wd:Q4548693 ;
+	schema:inLanguage "pt" ;
+	schema:isPartOf <https://pt.wikipedia.org/> ;
+	schema:name "Regra estrutural"@pt .
+
+<https://pt.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+wd:Q4548693 wdt:P279 wd:Q1068763 ;
+	wdt:P361 wd:Q903508 ;
+	wdt:P6366 "16298940" ;
+	wdtn:P6366 <https://makg.org/entity/16298940> ;
+	wdt:P4215 "structural rule" ;
+	wdt:P646 "/m/033nvk" ;
+	p:P279 wds:Q4548693-924fa87e-4270-551f-1a2e-67f6e7beaf10 .
+
+wds:Q4548693-924fa87e-4270-551f-1a2e-67f6e7beaf10 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P279 wd:Q1068763 .
+
+wd:Q4548693 p:P361 wds:Q4548693-4d83cc06-4342-004c-85d0-5a0b1fa13cbd .
+
+wds:Q4548693-4d83cc06-4342-004c-85d0-5a0b1fa13cbd a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P361 wd:Q903508 .
+
+wd:Q4548693 p:P6366 wds:Q4548693-AB9537CA-B9A7-4D1E-A162-3BBF4A19426A .
+
+wds:Q4548693-AB9537CA-B9A7-4D1E-A162-3BBF4A19426A a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P6366 "16298940" ;
+	psn:P6366 <https://makg.org/entity/16298940> .
+
+wd:Q4548693 p:P4215 wds:Q4548693-BD8FC9D3-2D77-4318-9190-D565E7DFF2AA .
+
+wds:Q4548693-BD8FC9D3-2D77-4318-9190-D565E7DFF2AA a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P4215 "structural rule" .
+
+wd:Q4548693 p:P646 wds:Q4548693-C8E83AD6-573A-482C-B51B-0D4B9C42B667 .
+
+wds:Q4548693-C8E83AD6-573A-482C-B51B-0D4B9C42B667 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P646 "/m/033nvk" .
+
+wd:Q4548693 rdfs:label "structural rule"@en ;
+	skos:prefLabel "structural rule"@en ;
+	schema:name "structural rule"@en ;
+	rdfs:label "结构规则"@zh ;
+	skos:prefLabel "结构规则"@zh ;
+	schema:name "结构规则"@zh ;
+	rdfs:label "Structural rule"@en-ca ;
+	skos:prefLabel "Structural rule"@en-ca ;
+	schema:name "Structural rule"@en-ca ;
+	rdfs:label "structural rule"@en-gb ;
+	skos:prefLabel "structural rule"@en-gb ;
+	schema:name "structural rule"@en-gb ;
+	rdfs:label "règle structurelle d'inférence"@fr ;
+	skos:prefLabel "règle structurelle d'inférence"@fr ;
+	schema:name "règle structurelle d'inférence"@fr ;
+	rdfs:label "regra estrutural"@pt ;
+	skos:prefLabel "regra estrutural"@pt ;
+	schema:name "regra estrutural"@pt ;
+	schema:description "inference rule that does not refer to any logical connective, but instead operates on the judgment or sequents directly"@en,
+		"règle d'inférence qui ne se réfère pas à un connecteur logique, mais opère directement sur le raisonnement ou le séquent"@fr .
+
+wd:Q1068763 a wikibase:Item ;
+	rdfs:label "rule of inference"@en ;
+	skos:prefLabel "rule of inference"@en ;
+	schema:name "rule of inference"@en ;
+	schema:description "systematic logical process capable of deriving a conclusion from hypotheses"@en .
+
+wd:P279 a wikibase:Property ;
+	rdfs:label "subclass of"@en ;
+	skos:prefLabel "subclass of"@en ;
+	schema:name "subclass of"@en ;
+	schema:description "this item is a subclass (subset) of that item; ALL instances of this item are instances of that item; different from P31 (instance of), e.g.: volcano is a subclass of mountain; Everest is an instance of mountain"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#WikibaseItem> ;
+	wikibase:directClaim wdt:P279 ;
+	wikibase:claim p:P279 ;
+	wikibase:statementProperty ps:P279 ;
+	wikibase:statementValue psv:P279 ;
+	wikibase:qualifier pq:P279 ;
+	wikibase:qualifierValue pqv:P279 ;
+	wikibase:reference pr:P279 ;
+	wikibase:referenceValue prv:P279 ;
+	wikibase:novalue wdno:P279 .
+
+p:P279 a owl:ObjectProperty .
+
+psv:P279 a owl:ObjectProperty .
+
+pqv:P279 a owl:ObjectProperty .
+
+prv:P279 a owl:ObjectProperty .
+
+wdt:P279 a owl:ObjectProperty .
+
+ps:P279 a owl:ObjectProperty .
+
+pq:P279 a owl:ObjectProperty .
+
+pr:P279 a owl:ObjectProperty .
+
+wdno:P279 a owl:Class ;
+	owl:complementOf _:55a0a46aa65f620d17fa7dc3671280d4 .
+
+_:55a0a46aa65f620d17fa7dc3671280d4 a owl:Restriction ;
+	owl:onProperty wdt:P279 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q903508 a wikibase:Item ;
+	rdfs:label "metamathematics"@en ;
+	skos:prefLabel "metamathematics"@en ;
+	schema:name "metamathematics"@en ;
+	schema:description "the study of mathematics itself using mathematical methods"@en .
+
+wd:P361 a wikibase:Property ;
+	rdfs:label "part of"@en ;
+	skos:prefLabel "part of"@en ;
+	schema:name "part of"@en ;
+	schema:description "object of which the subject is a part (if this subject is already part of object A which is a part of object B, then please only make the subject part of object A), inverse property of \"has part\" (P527, see also \"has parts of the class\" (P2670))"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#WikibaseItem> ;
+	wikibase:directClaim wdt:P361 ;
+	wikibase:claim p:P361 ;
+	wikibase:statementProperty ps:P361 ;
+	wikibase:statementValue psv:P361 ;
+	wikibase:qualifier pq:P361 ;
+	wikibase:qualifierValue pqv:P361 ;
+	wikibase:reference pr:P361 ;
+	wikibase:referenceValue prv:P361 ;
+	wikibase:novalue wdno:P361 .
+
+p:P361 a owl:ObjectProperty .
+
+psv:P361 a owl:ObjectProperty .
+
+pqv:P361 a owl:ObjectProperty .
+
+prv:P361 a owl:ObjectProperty .
+
+wdt:P361 a owl:ObjectProperty .
+
+ps:P361 a owl:ObjectProperty .
+
+pq:P361 a owl:ObjectProperty .
+
+pr:P361 a owl:ObjectProperty .
+
+wdno:P361 a owl:Class ;
+	owl:complementOf _:1f19cc093e08019869fef6acaebb4b10 .
+
+_:1f19cc093e08019869fef6acaebb4b10 a owl:Restriction ;
+	owl:onProperty wdt:P361 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P6366 a wikibase:Property ;
+	rdfs:label "Microsoft Academic ID (discontinued)"@en ;
+	skos:prefLabel "Microsoft Academic ID (discontinued)"@en ;
+	schema:name "Microsoft Academic ID (discontinued)"@en ;
+	schema:description "identifier for an object or topic in the Microsoft Academic Graph (until 31 December 2021)"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P6366 ;
+	wikibase:claim p:P6366 ;
+	wikibase:statementProperty ps:P6366 ;
+	wikibase:statementValue psv:P6366 ;
+	wikibase:qualifier pq:P6366 ;
+	wikibase:qualifierValue pqv:P6366 ;
+	wikibase:reference pr:P6366 ;
+	wikibase:referenceValue prv:P6366 ;
+	wikibase:novalue wdno:P6366 ;
+	wikibase:directClaimNormalized wdtn:P6366 ;
+	wikibase:statementValueNormalized psn:P6366 ;
+	wikibase:qualifierValueNormalized pqn:P6366 ;
+	wikibase:referenceValueNormalized prn:P6366 .
+
+p:P6366 a owl:ObjectProperty .
+
+psv:P6366 a owl:ObjectProperty .
+
+pqv:P6366 a owl:ObjectProperty .
+
+prv:P6366 a owl:ObjectProperty .
+
+wdt:P6366 a owl:DatatypeProperty .
+
+ps:P6366 a owl:DatatypeProperty .
+
+pq:P6366 a owl:DatatypeProperty .
+
+pr:P6366 a owl:DatatypeProperty .
+
+psn:P6366 a owl:ObjectProperty .
+
+pqn:P6366 a owl:ObjectProperty .
+
+prn:P6366 a owl:ObjectProperty .
+
+wdtn:P6366 a owl:ObjectProperty .
+
+wdno:P6366 a owl:Class ;
+	owl:complementOf _:6f940be26025c3cdbbbed9534272bb72 .
+
+_:6f940be26025c3cdbbbed9534272bb72 a owl:Restriction ;
+	owl:onProperty wdt:P6366 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P4215 a wikibase:Property ;
+	rdfs:label "nLab ID"@en ;
+	skos:prefLabel "nLab ID"@en ;
+	schema:name "nLab ID"@en ;
+	schema:description "name of a page in nLab wiki"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P4215 ;
+	wikibase:claim p:P4215 ;
+	wikibase:statementProperty ps:P4215 ;
+	wikibase:statementValue psv:P4215 ;
+	wikibase:qualifier pq:P4215 ;
+	wikibase:qualifierValue pqv:P4215 ;
+	wikibase:reference pr:P4215 ;
+	wikibase:referenceValue prv:P4215 ;
+	wikibase:novalue wdno:P4215 ;
+	wikibase:directClaimNormalized wdtn:P4215 ;
+	wikibase:statementValueNormalized psn:P4215 ;
+	wikibase:qualifierValueNormalized pqn:P4215 ;
+	wikibase:referenceValueNormalized prn:P4215 .
+
+p:P4215 a owl:ObjectProperty .
+
+psv:P4215 a owl:ObjectProperty .
+
+pqv:P4215 a owl:ObjectProperty .
+
+prv:P4215 a owl:ObjectProperty .
+
+wdt:P4215 a owl:DatatypeProperty .
+
+ps:P4215 a owl:DatatypeProperty .
+
+pq:P4215 a owl:DatatypeProperty .
+
+pr:P4215 a owl:DatatypeProperty .
+
+psn:P4215 a owl:ObjectProperty .
+
+pqn:P4215 a owl:ObjectProperty .
+
+prn:P4215 a owl:ObjectProperty .
+
+wdtn:P4215 a owl:ObjectProperty .
+
+wdno:P4215 a owl:Class ;
+	owl:complementOf _:f9a1d8b81de5a31700d65a433ccbace3 .
+
+_:f9a1d8b81de5a31700d65a433ccbace3 a owl:Restriction ;
+	owl:onProperty wdt:P4215 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P646 a wikibase:Property ;
+	rdfs:label "Freebase ID"@en ;
+	skos:prefLabel "Freebase ID"@en ;
+	schema:name "Freebase ID"@en ;
+	schema:description "identifier for a page in the Freebase database. Format: \"/m/0\" followed by 2 to 7 characters. For IDs starting with \"/g/\", use Google Knowledge Graph ID (P2671)"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P646 ;
+	wikibase:claim p:P646 ;
+	wikibase:statementProperty ps:P646 ;
+	wikibase:statementValue psv:P646 ;
+	wikibase:qualifier pq:P646 ;
+	wikibase:qualifierValue pqv:P646 ;
+	wikibase:reference pr:P646 ;
+	wikibase:referenceValue prv:P646 ;
+	wikibase:novalue wdno:P646 ;
+	wikibase:directClaimNormalized wdtn:P646 ;
+	wikibase:statementValueNormalized psn:P646 ;
+	wikibase:qualifierValueNormalized pqn:P646 ;
+	wikibase:referenceValueNormalized prn:P646 .
+
+p:P646 a owl:ObjectProperty .
+
+psv:P646 a owl:ObjectProperty .
+
+pqv:P646 a owl:ObjectProperty .
+
+prv:P646 a owl:ObjectProperty .
+
+wdt:P646 a owl:DatatypeProperty .
+
+ps:P646 a owl:DatatypeProperty .
+
+pq:P646 a owl:DatatypeProperty .
+
+pr:P646 a owl:DatatypeProperty .
+
+psn:P646 a owl:ObjectProperty .
+
+pqn:P646 a owl:ObjectProperty .
+
+prn:P646 a owl:ObjectProperty .
+
+wdtn:P646 a owl:ObjectProperty .
+
+wdno:P646 a owl:Class ;
+	owl:complementOf _:38db277a4b10d59fd38a3fd995cbe570 .
+
+_:38db277a4b10d59fd38a3fd995cbe570 a owl:Restriction ;
+	owl:onProperty wdt:P646 ;
+	owl:someValuesFrom owl:Thing .

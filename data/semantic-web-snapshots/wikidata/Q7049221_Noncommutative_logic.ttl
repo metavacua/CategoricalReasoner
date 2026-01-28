@@ -1,0 +1,193 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix wikibase: <http://wikiba.se/ontology#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <http://schema.org/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix data: <https://www.wikidata.org/wiki/Special:EntityData/> .
+@prefix wds: <http://www.wikidata.org/entity/statement/> .
+@prefix wdref: <http://www.wikidata.org/reference/> .
+@prefix wdv: <http://www.wikidata.org/value/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix wdtn: <http://www.wikidata.org/prop/direct-normalized/> .
+@prefix p: <http://www.wikidata.org/prop/> .
+@prefix ps: <http://www.wikidata.org/prop/statement/> .
+@prefix psv: <http://www.wikidata.org/prop/statement/value/> .
+@prefix psn: <http://www.wikidata.org/prop/statement/value-normalized/> .
+@prefix pq: <http://www.wikidata.org/prop/qualifier/> .
+@prefix pqv: <http://www.wikidata.org/prop/qualifier/value/> .
+@prefix pqn: <http://www.wikidata.org/prop/qualifier/value-normalized/> .
+@prefix pr: <http://www.wikidata.org/prop/reference/> .
+@prefix prv: <http://www.wikidata.org/prop/reference/value/> .
+@prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
+@prefix wdno: <http://www.wikidata.org/prop/novalue/> .
+
+data:Q7049221 a schema:Dataset ;
+	schema:about wd:Q7049221 ;
+	cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+	schema:softwareVersion "1.0.0" ;
+	schema:version "2294448179"^^xsd:integer ;
+	schema:dateModified "2025-01-04T03:57:03Z"^^xsd:dateTime ;
+	wikibase:statements "2"^^xsd:integer ;
+	wikibase:sitelinks "2"^^xsd:integer ;
+	wikibase:identifiers "2"^^xsd:integer .
+
+wd:Q7049221 a wikibase:Item .
+
+<https://en.wikipedia.org/wiki/Noncommutative_logic> a schema:Article ;
+	schema:about wd:Q7049221 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://en.wikipedia.org/> ;
+	schema:name "Noncommutative logic"@en .
+
+<https://en.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://pt.wikipedia.org/wiki/L%C3%B3gica_n%C3%A3o_comutativa> a schema:Article ;
+	schema:about wd:Q7049221 ;
+	schema:inLanguage "pt" ;
+	schema:isPartOf <https://pt.wikipedia.org/> ;
+	schema:name "Lógica não comutativa"@pt .
+
+<https://pt.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+wd:Q7049221 wdt:P6366 "38100828" ;
+	wdtn:P6366 <https://makg.org/entity/38100828> ;
+	wdt:P646 "/m/0339v8" ;
+	p:P6366 wds:Q7049221-C9728AB4-355E-480C-91E0-746E8646131C .
+
+wds:Q7049221-C9728AB4-355E-480C-91E0-746E8646131C a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P6366 "38100828" ;
+	psn:P6366 <https://makg.org/entity/38100828> .
+
+wd:Q7049221 p:P646 wds:Q7049221-8D391213-A46C-4EDE-AC69-06941C6E64C2 .
+
+wds:Q7049221-8D391213-A46C-4EDE-AC69-06941C6E64C2 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P646 "/m/0339v8" .
+
+wd:Q7049221 rdfs:label "noncommutative logic"@en ;
+	skos:prefLabel "noncommutative logic"@en ;
+	schema:name "noncommutative logic"@en ;
+	rdfs:label "Lógica não comutativa"@pt ;
+	skos:prefLabel "Lógica não comutativa"@pt ;
+	schema:name "Lógica não comutativa"@pt ;
+	rdfs:label "nekomuta logiko"@eo ;
+	skos:prefLabel "nekomuta logiko"@eo ;
+	schema:name "nekomuta logiko"@eo ;
+	rdfs:label "有序邏輯"@zh ;
+	skos:prefLabel "有序邏輯"@zh ;
+	schema:name "有序邏輯"@zh ;
+	schema:description "logic where the order of operations affects outcomes"@en ;
+	skos:altLabel "有序逻辑"@zh .
+
+wd:P6366 a wikibase:Property ;
+	rdfs:label "Microsoft Academic ID (discontinued)"@en ;
+	skos:prefLabel "Microsoft Academic ID (discontinued)"@en ;
+	schema:name "Microsoft Academic ID (discontinued)"@en ;
+	schema:description "identifier for an object or topic in the Microsoft Academic Graph (until 31 December 2021)"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P6366 ;
+	wikibase:claim p:P6366 ;
+	wikibase:statementProperty ps:P6366 ;
+	wikibase:statementValue psv:P6366 ;
+	wikibase:qualifier pq:P6366 ;
+	wikibase:qualifierValue pqv:P6366 ;
+	wikibase:reference pr:P6366 ;
+	wikibase:referenceValue prv:P6366 ;
+	wikibase:novalue wdno:P6366 ;
+	wikibase:directClaimNormalized wdtn:P6366 ;
+	wikibase:statementValueNormalized psn:P6366 ;
+	wikibase:qualifierValueNormalized pqn:P6366 ;
+	wikibase:referenceValueNormalized prn:P6366 .
+
+p:P6366 a owl:ObjectProperty .
+
+psv:P6366 a owl:ObjectProperty .
+
+pqv:P6366 a owl:ObjectProperty .
+
+prv:P6366 a owl:ObjectProperty .
+
+wdt:P6366 a owl:DatatypeProperty .
+
+ps:P6366 a owl:DatatypeProperty .
+
+pq:P6366 a owl:DatatypeProperty .
+
+pr:P6366 a owl:DatatypeProperty .
+
+psn:P6366 a owl:ObjectProperty .
+
+pqn:P6366 a owl:ObjectProperty .
+
+prn:P6366 a owl:ObjectProperty .
+
+wdtn:P6366 a owl:ObjectProperty .
+
+wdno:P6366 a owl:Class ;
+	owl:complementOf _:6f940be26025c3cdbbbed9534272bb72 .
+
+_:6f940be26025c3cdbbbed9534272bb72 a owl:Restriction ;
+	owl:onProperty wdt:P6366 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P646 a wikibase:Property ;
+	rdfs:label "Freebase ID"@en ;
+	skos:prefLabel "Freebase ID"@en ;
+	schema:name "Freebase ID"@en ;
+	schema:description "identifier for a page in the Freebase database. Format: \"/m/0\" followed by 2 to 7 characters. For IDs starting with \"/g/\", use Google Knowledge Graph ID (P2671)"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P646 ;
+	wikibase:claim p:P646 ;
+	wikibase:statementProperty ps:P646 ;
+	wikibase:statementValue psv:P646 ;
+	wikibase:qualifier pq:P646 ;
+	wikibase:qualifierValue pqv:P646 ;
+	wikibase:reference pr:P646 ;
+	wikibase:referenceValue prv:P646 ;
+	wikibase:novalue wdno:P646 ;
+	wikibase:directClaimNormalized wdtn:P646 ;
+	wikibase:statementValueNormalized psn:P646 ;
+	wikibase:qualifierValueNormalized pqn:P646 ;
+	wikibase:referenceValueNormalized prn:P646 .
+
+p:P646 a owl:ObjectProperty .
+
+psv:P646 a owl:ObjectProperty .
+
+pqv:P646 a owl:ObjectProperty .
+
+prv:P646 a owl:ObjectProperty .
+
+wdt:P646 a owl:DatatypeProperty .
+
+ps:P646 a owl:DatatypeProperty .
+
+pq:P646 a owl:DatatypeProperty .
+
+pr:P646 a owl:DatatypeProperty .
+
+psn:P646 a owl:ObjectProperty .
+
+pqn:P646 a owl:ObjectProperty .
+
+prn:P646 a owl:ObjectProperty .
+
+wdtn:P646 a owl:ObjectProperty .
+
+wdno:P646 a owl:Class ;
+	owl:complementOf _:38db277a4b10d59fd38a3fd995cbe570 .
+
+_:38db277a4b10d59fd38a3fd995cbe570 a owl:Restriction ;
+	owl:onProperty wdt:P646 ;
+	owl:someValuesFrom owl:Thing .

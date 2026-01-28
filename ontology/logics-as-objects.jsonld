@@ -42,7 +42,7 @@
         "catty:LHSExchange", "catty:RHSExchange"
       ],
       "hasLogicalAxiom": ["catty:Axiom_LNC", "catty:Axiom_Explosion"],
-      "owl:sameAs": "http://www.wikidata.org/entity/Q7680564"
+      "owl:sameAs": "http://www.wikidata.org/entity/Q176786"
       },
     {
       "@id": "catty:LDJ",
@@ -71,7 +71,7 @@
         "catty:LHSExchange", "catty:RHSExchange"
       ],
       "hasLogicalAxiom": ["catty:Axiom_LEM", "catty:Axiom_LNC", "catty:Axiom_Explosion", "catty:Axiom_DNE"],
-      "owl:sameAs": "http://www.wikidata.org/entity/Q3525872"
+      "owl:sameAs": "http://www.wikidata.org/entity/Q236975"
       },
       {
       "@id": "catty:LL",
@@ -81,7 +81,7 @@
       "hasSequentForm": "catty:MultiConclusionSequent",
       "hasLogicalSignature": "catty:StandardSignature",
       "hasStructuralRule": ["catty:LHSExchange", "catty:RHSExchange"],
-      "owl:sameAs": "http://www.wikidata.org/entity/Q847878"
+      "owl:sameAs": "http://www.wikidata.org/entity/Q841728"
       },
     {
       "@id": "catty:ALL",
@@ -109,25 +109,29 @@
       "@id": "catty:Axiom_LEM",
       "@type": "catty:LogicalAxiom",
       "rdfs:label": "Law of Excluded Middle",
-      "rdfs:comment": "A ∨ ¬A"
+      "rdfs:comment": "A ∨ ¬A",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q468422"
     },
     {
       "@id": "catty:Axiom_LNC",
       "@type": "catty:LogicalAxiom",
       "rdfs:label": "Law of Non-Contradiction",
-      "rdfs:comment": "¬(A ∧ ¬A)"
+      "rdfs:comment": "¬(A ∧ ¬A)",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q868437"
     },
     {
       "@id": "catty:Axiom_Explosion",
       "@type": "catty:LogicalAxiom",
       "rdfs:label": "Principle of Explosion",
-      "rdfs:comment": "⊥ ⊢ A (Ex Falso Quodlibet)"
+      "rdfs:comment": "⊥ ⊢ A (Ex Falso Quodlibet)",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q60190"
     },
     {
       "@id": "catty:Axiom_DNE",
       "@type": "catty:LogicalAxiom",
       "rdfs:label": "Double Negation Elimination",
-      "rdfs:comment": "¬¬A ⊢ A"
+      "rdfs:comment": "¬¬A ⊢ A",
+      "owl:sameAs": "http://www.wikidata.org/entity/Q5300067"
     }
   ]
 }

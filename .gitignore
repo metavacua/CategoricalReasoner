@@ -46,6 +46,10 @@ ENV/
 # Benchmark results
 results/
 
+# Snapshot logs (Catty semantic-web snapshots)
+# Root ignore includes *.log (useful for LaTeX), but we want to keep fetch/verification logs.
+!data/semantic-web-snapshots/**/*.log
+
 # Python
 __pycache__/
 *.py[cod]

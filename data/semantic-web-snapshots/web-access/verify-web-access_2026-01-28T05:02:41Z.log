@@ -1,0 +1,481 @@
+# Web Access Verification
+timestamp: 2026-01-28T05:02:41Z
+repo_root: /home/engine/project
+
+## System
+Linux engine-df2ac2f1-92c9-4be1-a219-d499a3e70910-5cbb98d66-r4624 6.12.60 #1 SMP Thu Dec  4 16:27:11 UTC 2025 x86_64 x86_64 x86_64 GNU/Linux
+uid=1030(engine) gid=1010(engine) groups=1010(engine),27(sudo),994(docker)
+
+## Tool availability (pre-install)
+/usr/bin/nslookup
+/usr/bin/dig
+/usr/bin/host
+/usr/bin/ping
+/usr/bin/wget
+/usr/bin/curl
+/usr/bin/jq
+/usr/sbin/traceroute
+/usr/bin/openssl
+/usr/bin/rapper
+
+## Attempting to install missing network/semantic-web tools
+Hit:1 https://download.docker.com/linux/ubuntu noble InRelease
+Get:2 https://dl.yarnpkg.com/debian stable InRelease
+Hit:3 http://us-west-2.ec2.archive.ubuntu.com/ubuntu noble InRelease
+Hit:4 http://us-west-2.ec2.archive.ubuntu.com/ubuntu noble-updates InRelease
+Hit:5 http://us-west-2.ec2.archive.ubuntu.com/ubuntu noble-backports InRelease
+Hit:6 http://us-west-2.ec2.archive.ubuntu.com/ubuntu noble-security InRelease
+Hit:7 https://gitlab-ci-local-ppa.firecow.dk ./ InRelease
+Err:2 https://dl.yarnpkg.com/debian stable InRelease
+  The following signatures were invalid: EXPKEYSIG 23E7166788B63E1E Yarn Packaging <yarn@dan.cx>
+Fetched 17.1 kB in 3s (6779 B/s)
+Reading package lists...
+W: https://dl.yarnpkg.com/debian/dists/stable/InRelease: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details.
+W: An error occurred during the signature verification. The repository is not updated and the previous index files will be used. GPG error: https://dl.yarnpkg.com/debian stable InRelease: The following signatures were invalid: EXPKEYSIG 23E7166788B63E1E Yarn Packaging <yarn@dan.cx>
+W: Failed to fetch https://dl.yarnpkg.com/debian/dists/stable/InRelease  The following signatures were invalid: EXPKEYSIG 23E7166788B63E1E Yarn Packaging <yarn@dan.cx>
+W: Some index files failed to download. They have been ignored, or old ones used instead.
+
+## Tool versions (post-install)
+nslookup 9.18.39-0ubuntu0.24.04.2-Ubuntu
+DiG 9.18.39-0ubuntu0.24.04.2-Ubuntu
+host 9.18.39-0ubuntu0.24.04.2-Ubuntu
+ping from iputils 20240117
+libcap: yes, IDN: yes, NLS: no, error.h: yes, getrandom(): yes, __fpending(): yes
+GNU Wget 1.21.4 built on linux-gnu.
+
+-cares +digest -gpgme +https +ipv6 +iri +large-file -metalink +nls 
+curl 8.5.0 (x86_64-pc-linux-gnu) libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.7
+Release-Date: 2023-12-06, security patched: 8.5.0-2ubuntu10.6
+Protocols: dict file ftp ftps gopher gophers http https imap imaps ldap ldaps mqtt pop3 pop3s rtmp rtsp scp sftp smb smbs smtp smtps telnet tftp
+jq-1.7
+Modern traceroute for Linux, version 2.1.5
+Copyright (c) 2016  Dmitry Butskoy,   License: GPL v2 or any later
+2.0.16
+OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)
+built on: Thu Sep 18 11:12:48 2025 UTC
+platform: debian-amd64
+options:  bn(64,64)
+compiler: gcc -fPIC -pthread -m64 -Wa,--noexecstack -Wall -fzero-call-used-regs=used-gpr -DOPENSSL_TLS_SECURITY_LEVEL=2 -Wa,--noexecstack -g -O2 -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -ffile-prefix-map=/build/openssl-S7huCI/openssl-3.0.13=. -fstack-protector-strong -fstack-clash-protection -Wformat -Werror=format-security -fcf-protection -fdebug-prefix-map=/build/openssl-S7huCI/openssl-3.0.13=/usr/src/openssl-3.0.13-0ubuntu3.6 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DOPENSSL_BUILDING_OPENSSL -DNDEBUG -Wdate-time -D_FORTIFY_SOURCE=3
+Python 3.12.3
+
+## STAGE 0.1: DNS Resolution
+
+### nslookup google.com
+;; Got recursion not available from 10.20.0.10
+;; Got recursion not available from 10.20.0.10
+;; Got recursion not available from 10.20.0.10
+Server:		10.20.0.10
+Address:	10.20.0.10#53
+
+Non-authoritative answer:
+Name:	google.com
+Address: 74.125.201.139
+Name:	google.com
+Address: 74.125.201.100
+Name:	google.com
+Address: 74.125.201.101
+Name:	google.com
+Address: 74.125.201.102
+Name:	google.com
+Address: 74.125.201.138
+Name:	google.com
+Address: 74.125.201.113
+;; Truncated, retrying in TCP mode.
+Name:	google.com
+Address: 2607:f8b0:4001:c19::8a
+Name:	google.com
+Address: 2607:f8b0:4001:c19::8b
+Name:	google.com
+Address: 2607:f8b0:4001:c19::71
+Name:	google.com
+Address: 2607:f8b0:4001:c19::66
+
+real 0.07
+user 0.00
+sys 0.02
+
+### dig google.com
+
+; <<>> DiG 9.18.39-0ubuntu0.24.04.2-Ubuntu <<>> google.com +stats +time=2 +tries=1
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 59756
+;; flags: qr aa rd ra; QUERY: 1, ANSWER: 6, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: 15f5f3dfd99215d2 (echoed)
+;; QUESTION SECTION:
+;google.com.			IN	A
+
+;; ANSWER SECTION:
+google.com.		30	IN	A	74.125.201.138
+google.com.		30	IN	A	74.125.201.101
+google.com.		30	IN	A	74.125.201.100
+google.com.		30	IN	A	74.125.201.139
+google.com.		30	IN	A	74.125.201.113
+google.com.		30	IN	A	74.125.201.102
+
+;; Query time: 0 msec
+;; SERVER: 10.20.0.10#53(10.20.0.10) (UDP)
+;; WHEN: Wed Jan 28 05:02:45 UTC 2026
+;; MSG SIZE  rcvd: 207
+
+real 0.04
+user 0.00
+sys 0.02
+
+### host google.com
+google.com has address 74.125.201.102
+google.com has address 74.125.201.139
+google.com has address 74.125.201.138
+google.com has address 74.125.201.101
+google.com has address 74.125.201.113
+google.com has address 74.125.201.100
+google.com has IPv6 address 2607:f8b0:4009:81a::200e
+google.com mail is handled by 10 smtp.google.com.
+real 0.06
+user 0.01
+sys 0.01
+
+### nslookup www.wikidata.org
+Server:		10.20.0.10
+Address:	10.20.0.10#53
+
+Non-authoritative answer:
+www.wikidata.org	canonical name = dyna.wikimedia.org.
+Name:	dyna.wikimedia.org
+Address: 208.80.153.224
+;; Truncated, retrying in TCP mode.
+Name:	dyna.wikimedia.org
+Address: 2620:0:860:ed1a::1
+
+real 0.05
+user 0.00
+sys 0.02
+
+### dig www.wikidata.org
+
+; <<>> DiG 9.18.39-0ubuntu0.24.04.2-Ubuntu <<>> www.wikidata.org +stats +time=2 +tries=1
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 39955
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: 316d939e342a8a8d (echoed)
+;; QUESTION SECTION:
+;www.wikidata.org.		IN	A
+
+;; ANSWER SECTION:
+www.wikidata.org.	30	IN	CNAME	dyna.wikimedia.org.
+dyna.wikimedia.org.	30	IN	A	208.80.154.224
+
+;; Query time: 12 msec
+;; SERVER: 10.20.0.10#53(10.20.0.10) (UDP)
+;; WHEN: Wed Jan 28 05:02:45 UTC 2026
+;; MSG SIZE  rcvd: 139
+
+real 0.05
+user 0.00
+sys 0.03
+
+### host www.wikidata.org
+www.wikidata.org is an alias for dyna.wikimedia.org.
+dyna.wikimedia.org has address 208.80.153.224
+dyna.wikimedia.org has IPv6 address 2620:0:860:ed1a::1
+real 0.14
+user 0.00
+sys 0.03
+
+### nslookup dbpedia.org
+;; Got recursion not available from 10.20.0.10
+;; Got recursion not available from 10.20.0.10
+;; Got recursion not available from 10.20.0.10
+Server:		10.20.0.10
+Address:	10.20.0.10#53
+
+Non-authoritative answer:
+Name:	dbpedia.org
+Address: 31.134.204.180
+Name:	dbpedia.org
+Address: 2a12:4180:dc1:903::2
+
+real 0.15
+user 0.00
+sys 0.02
+
+### dig dbpedia.org
+;; Truncated, retrying in TCP mode.
+
+; <<>> DiG 9.18.39-0ubuntu0.24.04.2-Ubuntu <<>> dbpedia.org +stats +time=2 +tries=1
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 52412
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: f5ed37cd812a5acc (echoed)
+;; QUESTION SECTION:
+;dbpedia.org.			IN	A
+
+;; ANSWER SECTION:
+dbpedia.org.		30	IN	A	31.134.204.180
+
+;; Query time: 12 msec
+;; SERVER: 10.20.0.10#53(10.20.0.10) (TCP)
+;; WHEN: Wed Jan 28 05:02:46 UTC 2026
+;; MSG SIZE  rcvd: 79
+
+real 0.07
+user 0.00
+sys 0.02
+
+### host dbpedia.org
+dbpedia.org has address 31.134.204.180
+dbpedia.org has IPv6 address 2a12:4180:dc1:903::2
+dbpedia.org mail is handled by 0 smtp.secureserver.net.
+dbpedia.org mail is handled by 10 mailstore1.secureserver.net.
+real 0.14
+user 0.00
+sys 0.02
+
+### nslookup ncatlab.org
+;; Got recursion not available from 10.20.0.10
+;; Got recursion not available from 10.20.0.10
+;; Got recursion not available from 10.20.0.10
+Server:		10.20.0.10
+Address:	10.20.0.10#53
+
+Non-authoritative answer:
+Name:	ncatlab.org
+Address: 172.67.177.13
+Name:	ncatlab.org
+Address: 104.21.17.153
+Name:	ncatlab.org
+Address: 2606:4700:3037::ac43:b10d
+Name:	ncatlab.org
+Address: 2606:4700:3035::6815:1199
+
+real 0.19
+user 0.00
+sys 0.02
+
+### dig ncatlab.org
+
+; <<>> DiG 9.18.39-0ubuntu0.24.04.2-Ubuntu <<>> ncatlab.org +stats +time=2 +tries=1
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 8730
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: b7289073a00ecd04 (echoed)
+;; QUESTION SECTION:
+;ncatlab.org.			IN	A
+
+;; ANSWER SECTION:
+ncatlab.org.		30	IN	A	104.21.17.153
+ncatlab.org.		30	IN	A	172.67.177.13
+
+;; Query time: 16 msec
+;; SERVER: 10.20.0.10#53(10.20.0.10) (UDP)
+;; WHEN: Wed Jan 28 05:02:46 UTC 2026
+;; MSG SIZE  rcvd: 106
+
+real 0.06
+user 0.00
+sys 0.02
+
+### host ncatlab.org
+ncatlab.org has address 172.67.177.13
+ncatlab.org has address 104.21.17.153
+ncatlab.org has IPv6 address 2606:4700:3035::6815:1199
+ncatlab.org has IPv6 address 2606:4700:3037::ac43:b10d
+ncatlab.org mail is handled by 300 saunders2.andrew.cmu.edu.
+real 0.12
+user 0.00
+sys 0.02
+
+### nslookup query.wikidata.org
+Server:		10.20.0.10
+Address:	10.20.0.10#53
+
+Non-authoritative answer:
+query.wikidata.org	canonical name = dyna.wikimedia.org.
+Name:	dyna.wikimedia.org
+Address: 208.80.153.224
+Name:	dyna.wikimedia.org
+Address: 2620:0:860:ed1a::1
+
+real 0.09
+user 0.01
+sys 0.01
+
+### dig query.wikidata.org
+
+; <<>> DiG 9.18.39-0ubuntu0.24.04.2-Ubuntu <<>> query.wikidata.org +stats +time=2 +tries=1
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 3948
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: 55954dc64ce7a3f2 (echoed)
+;; QUESTION SECTION:
+;query.wikidata.org.		IN	A
+
+;; ANSWER SECTION:
+query.wikidata.org.	30	IN	CNAME	dyna.wikimedia.org.
+dyna.wikimedia.org.	30	IN	A	208.80.153.224
+
+;; Query time: 36 msec
+;; SERVER: 10.20.0.10#53(10.20.0.10) (UDP)
+;; WHEN: Wed Jan 28 05:02:46 UTC 2026
+;; MSG SIZE  rcvd: 143
+
+real 0.06
+user 0.00
+sys 0.01
+
+### host query.wikidata.org
+query.wikidata.org is an alias for dyna.wikimedia.org.
+dyna.wikimedia.org has address 208.80.153.224
+dyna.wikimedia.org has IPv6 address 2620:0:860:ed1a::1
+real 0.08
+user 0.00
+sys 0.02
+
+## STAGE 0.2: ICMP connectivity (ping)
+
+### ping 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=114 time=0.492 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=114 time=0.379 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=114 time=0.371 ms
+
+--- 8.8.8.8 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2037ms
+rtt min/avg/max/mdev = 0.371/0.414/0.492/0.055 ms
+real 2.05
+user 0.00
+sys 0.00
+
+### ping 1.1.1.1
+PING 1.1.1.1 (1.1.1.1) 56(84) bytes of data.
+64 bytes from 1.1.1.1: icmp_seq=1 ttl=60 time=11.8 ms
+64 bytes from 1.1.1.1: icmp_seq=2 ttl=60 time=11.5 ms
+64 bytes from 1.1.1.1: icmp_seq=3 ttl=60 time=11.5 ms
+
+--- 1.1.1.1 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2001ms
+rtt min/avg/max/mdev = 11.505/11.609/11.804/0.137 ms
+real 2.02
+user 0.00
+sys 0.00
+
+## STAGE 0.3: HTTPS connectivity
+
+### wget --spider https://www.wikidata.org/wiki/Q236975
+Spider mode enabled. Check if remote file exists.
+--2026-01-28 05:02:51--  https://www.wikidata.org/wiki/Q236975
+Resolving www.wikidata.org (www.wikidata.org)... 208.80.154.224, 2620:0:860:ed1a::1
+Connecting to www.wikidata.org (www.wikidata.org)|208.80.154.224|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 140472 (137K) [text/html]
+Remote file exists and could contain further links,
+but recursion is disabled -- not retrieving.
+
+real 0.20
+user 0.02
+sys 0.01
+
+### curl -I https://www.wikidata.org/wiki/Q236975
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+HTTP/2 200 
+date: Wed, 28 Jan 2026 00:43:47 GMT
+server: mw-web.codfw.main-759dc94748-tq2fk
+x-content-type-options: nosniff
+content-language: en
+link: <https://www.wikidata.org/wiki/Special:EntityData/Q236975.json>; rel="alternate"; type="application/json",<https://www.wikidata.org/wiki/Special:EntityData/Q236975.php>; rel="alternate"; type="application/vnd.php.serialized",<https://www.wikidata.org/wiki/Special:EntityData/Q236975.rdf>; rel="alternate"; type="application/rdf+xml",<https://www.wikidata.org/wiki/Special:EntityData/Q236975.n3>; rel="alternate"; type="text/n3",<https://www.wikidata.org/wiki/Special:EntityData/Q236975.ttl>; rel="alternate"; type="text/turtle",<https://www.wikidata.org/wiki/Special:EntityData/Q236975.nt>; rel="alternate"; type="application/n-triples",<https://www.wikidata.org/wiki/Special:EntityData/Q236975.jsonld>; rel="alternate"; type="application/ld+json"
+accept-ch: 
+content-security-policy-report-only: script-src 'unsafe-eval' blob: 'self' meta.wikimedia.org *.wikimedia.org *.wikipedia.org *.wikinews.org *.wiktionary.org *.wikibooks.org *.wikiversity.org *.wikisource.org wikisource.org *.wikiquote.org *.wikidata.org *.wikifunctions.org *.wikivoyage.org *.mediawiki.org 'unsafe-inline' auth.wikimedia.org; default-src 'self' data: blob: upload.wikimedia.org https://commons.wikimedia.org meta.wikimedia.org *.wikimedia.org *.wikipedia.org *.wikinews.org *.wiktionary.org *.wikibooks.org *.wikiversity.org *.wikisource.org wikisource.org *.wikiquote.org *.wikidata.org *.wikifunctions.org *.wikivoyage.org *.mediawiki.org wikimedia.org en.wikipedia.org en.wikibooks.org en.wikinews.org en.wikiquote.org en.wikisource.org en.wikiversity.org en.wikivoyage.org en.wiktionary.org www.mediawiki.org api.wikimedia.org commons.wikimedia.org foundation.wikimedia.org incubator.wikimedia.org species.wikimedia.org wikimania.wikimedia.org www.wikifunctions.org auth.wikimedia.org; style-src 'self' data: blob: upload.wikimedia.org https://commons.wikimedia.org meta.wikimedia.org *.wikimedia.org *.wikipedia.org *.wikinews.org *.wiktionary.org *.wikibooks.org *.wikiversity.org *.wikisource.org wikisource.org *.wikiquote.org *.wikidata.org *.wikifunctions.org *.wikivoyage.org *.mediawiki.org wikimedia.org 'unsafe-inline'; object-src 'none'; report-uri /w/api.php?action=cspreport&format=json&reportonly=1
+content-type: text/html; charset=UTF-8
+age: 15544
+accept-ranges: bytes
+x-cache: cp2033 hit, cp2041 miss
+x-cache-status: hit-local
+server-timing: cache;desc="hit-local", host;desc="cp2041"
+strict-transport-security: max-age=106384710; includeSubDomains; preload
+report-to: { "group": "wm_nel", "max_age": 604800, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0" }] }
+nel: { "report_to": "wm_nel", "max_age": 604800, "failure_fraction": 0.05, "success_fraction": 0.0}
+set-cookie: WMF-Last-Access=28-Jan-2026;Path=/;HttpOnly;secure;Expires=Sun, 01 Mar 2026 00:00:00 GMT
+set-cookie: WMF-Last-Access-Global=28-Jan-2026;Path=/;Domain=.wikidata.org;HttpOnly;secure;Expires=Sun, 01 Mar 2026 00:00:00 GMT
+set-cookie: WMF-DP=727;Path=/;HttpOnly;secure;Expires=Wed, 28 Jan 2026 00:00:00 GMT
+x-client-ip: 34.173.33.88
+cache-control: private, s-maxage=0, max-age=0, must-revalidate, no-transform
+vary: Accept-Encoding,X-Subdomain,Cookie,Authorization,User-Agent
+set-cookie: GeoIP=US:IA:Council_Bluffs:41.26:-95.85:v4; Path=/; secure; Domain=.wikidata.org
+set-cookie: NetworkProbeLimit=0.001;Path=/;Secure;SameSite=None;Max-Age=3600
+set-cookie: WMF-Uniq=o5uMXowhbS3W6JIgJc9GUQL2AAAAAFvdR0-kV6grLwHWrw2AD49a08JeuGOXw6iR;Domain=.wikidata.org;Path=/;HttpOnly;secure;SameSite=None;Expires=Thu, 28 Jan 2027 00:00:00 GMT
+x-request-id: 77845f94-3b49-40c9-9ea3-62e8e3b97be6
+x-analytics: 
+
+real 0.11
+user 0.03
+sys 0.01
+
+### openssl s_client (wikidata.org)
+CONNECTION ESTABLISHED
+Protocol version: TLSv1.3
+Ciphersuite: TLS_AES_128_GCM_SHA256
+Peer certificate: CN = *.wikipedia.org
+Hash used: SHA256
+Signature type: ECDSA
+Verification: OK
+Server Temp Key: X25519, 253 bits
+DONE
+real 0.83
+user 0.32
+sys 0.25
+
+## STAGE 0.4: Semantic web endpoints
+
+### Wikidata SPARQL (CSV)
+real 0.30
+user 0.03
+sys 0.01
+item,itemLabel
+http://www.wikidata.org/entity/Q236975,classical logic
+http://www.wikidata.org/entity/Q176786,intuitionistic logic
+
+### DBPedia SPARQL (CSV)
+real 0.35
+user 0.03
+sys 0.01
+"s","p","o"
+"http://dbpedia.org/resource/Intuitionistic_logic","http://www.w3.org/1999/02/22-rdf-syntax-ns#type","http://www.w3.org/2002/07/owl#Thing"
+"http://dbpedia.org/resource/Intuitionistic_logic","http://www.w3.org/1999/02/22-rdf-syntax-ns#type","http://www.w3.org/2002/07/owl#Thing"
+"http://dbpedia.org/resource/Classical_logic","http://www.w3.org/1999/02/22-rdf-syntax-ns#type","http://www.w3.org/2002/07/owl#Thing"
+"http://dbpedia.org/resource/Classical_logic","http://www.w3.org/1999/02/22-rdf-syntax-ns#type","http://www.w3.org/2002/07/owl#Thing"
+"http://dbpedia.org/resource/Intuitionistic_logic","http://www.w3.org/2002/07/owl#sameAs","http://rdf.freebase.com/ns/m.016p04"
+
+## STAGE 0.5: RDF parsing with CLI tools
+
+### rapper parse DBPedia Classical_logic.ttl
+<http://en.wikipedia.org/wiki/Classical_logic> <http://xmlns.com/foaf/0.1/primaryTopic> <http://dbpedia.org/resource/Classical_logic> .
+<http://dbpedia.org/resource/Strict_conditional> <http://dbpedia.org/ontology/wikiPageWikiLink> <http://dbpedia.org/resource/Classical_logic> .
+<http://dbpedia.org/resource/William_of_Soissons> <http://dbpedia.org/ontology/wikiPageWikiLink> <http://dbpedia.org/resource/Classical_logic> .
+<http://dbpedia.org/resource/Linear_logic> <http://dbpedia.org/ontology/wikiPageWikiLink> <http://dbpedia.org/resource/Classical_logic> .
+<http://dbpedia.org/resource/Continuation-passing_style> <http://dbpedia.org/ontology/wikiPageWikiLink> <http://dbpedia.org/resource/Classical_logic> .
+real 0.03
+user 0.00
+sys 0.01
+
+Done. Main log: /home/engine/project/data/semantic-web-snapshots/web-access/verify-web-access_2026-01-28T05:02:41Z.log

@@ -1,0 +1,267 @@
+@prefix foaf:	<http://xmlns.com/foaf/0.1/> .
+@prefix wikipedia-en:	<http://en.wikipedia.org/wiki/> .
+@prefix dbr:	<http://dbpedia.org/resource/> .
+wikipedia-en:Linear_logic	foaf:primaryTopic	dbr:Linear_logic .
+@prefix dbo:	<http://dbpedia.org/ontology/> .
+dbr:Natural_deduction	dbo:wikiPageWikiLink	dbr:Linear_logic .
+<http://dbpedia.org/resource/Decidability_(logic)>	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:No-cloning_theorem	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Actor_model	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Idempotency_of_entailment	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Substructural_logic	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Computability_logic	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Monotonicity_of_entailment	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Game_semantics	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Geometry_of_interaction	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Ludics	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Proof_net	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Affine_logic	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Noncommutative_logic	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Uniqueness_type	dbo:wikiPageWikiLink	dbr:Linear_logic .
+<http://dbpedia.org/resource/Ivan_Orlov_(philosopher)>	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Proof_mining	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Concatenative_programming_language	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Autonomous_category	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Braided_monoidal_category	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Absorption_law	dbo:wikiPageWikiLink	dbr:Linear_logic .
+<http://dbpedia.org/resource/Lollipop_(disambiguation)>	dbo:wikiPageWikiLink	dbr:Linear_logic .
+<http://dbpedia.org/resource/Question_mark_(disambiguation)>	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Dialectica_interpretation	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Anne_Sjerp_Troelstra	dbo:wikiPageWikiLink	dbr:Linear_logic .
+<http://dbpedia.org/resource/Curry\u2013Howard_correspondence>	dbo:wikiPageWikiLink	dbr:Linear_logic .
+<http://dbpedia.org/resource/Henry_Baker_(computer_scientist)>	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Valeria_de_Paiva	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:No-deleting_theorem	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Glue_semantics	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Cirquent_calculus	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Deviant_logic	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Dialectica_space	dbo:wikiPageWikiLink	dbr:Linear_logic .
+<http://dbpedia.org/resource/Fran\u00E7ois_Fages>	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Coherent_space	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Bunched_logic	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Interaction_nets	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Logics_for_computability	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Residuated_lattice	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Calculus_of_structures	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Focused_proof	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Free_choice_inference	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Linear_L	dbo:wikiPageWikiLink	dbr:Linear_logic ;
+	dbo:wikiPageRedirects	dbr:Linear_logic .
+dbr:Linear_Logic	dbo:wikiPageWikiLink	dbr:Linear_logic ;
+	dbo:wikiPageRedirects	dbr:Linear_logic .
+dbr:Intuitionistic_linear_logic	dbo:wikiPageWikiLink	dbr:Linear_logic ;
+	dbo:wikiPageRedirects	dbr:Linear_logic .
+<http://dbpedia.org/resource/\u214B>	dbo:wikiPageWikiLink	dbr:Linear_logic ;
+	dbo:wikiPageRedirects	dbr:Linear_logic .
+<http://dbpedia.org/resource/\u22B8>	dbo:wikiPageWikiLink	dbr:Linear_logic ;
+	dbo:wikiPageRedirects	dbr:Linear_logic .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+dbr:Substructural_type_system	rdfs:seeAlso	dbr:Linear_logic ;
+	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Denotational_semantics	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Exclamation_mark	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Currying	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Quantum_programming	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:List_of_functional_programming_topics	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Timeline_of_category_theory_and_related_mathematics	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Outline_of_philosophy	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Index_of_logic_articles	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Non-classical_logic	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:List_of_XML_and_HTML_character_entity_references	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Prolog	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Logic_programming	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Patrick_Lincoln	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:List_of_important_publications_in_theoretical_computer_science	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:String_diagram	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Categorial_grammar	dbo:wikiPageWikiLink	dbr:Linear_logic .
+<http://dbpedia.org/resource/*-autonomous_category>	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Chu_space	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Frame_problem	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:List_of_rules_of_inference	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Type_system	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Intellect	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Giorgi_Japaridze	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Proof_theory	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Intuitionistic_logic	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Monoidal_category	dbo:wikiPageWikiLink	dbr:Linear_logic .
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+dbr:Linear_logic	rdf:type	owl:Thing ;
+	rdfs:seeAlso	dbr:Quantale ;
+	owl:sameAs	<http://ko.dbpedia.org/resource/\uC120\uD615_\uB17C\uB9AC> ,
+		<http://pt.dbpedia.org/resource/L\u00F3gica_linear> ,
+		<https://global.dbpedia.org/id/4zVHe> .
+@prefix dbpedia-it:	<http://it.dbpedia.org/resource/> .
+dbr:Linear_logic	owl:sameAs	dbpedia-it:Logica_lineare ,
+		<http://rdf.freebase.com/ns/m.02s1gd> ,
+		<http://zh.dbpedia.org/resource/\u7EBF\u6027\u903B\u8F91> ,
+		dbr:Linear_logic ,
+		<http://es.dbpedia.org/resource/L\u00F3gica_lineal> .
+@prefix wikidata:	<http://www.wikidata.org/entity/> .
+dbr:Linear_logic	owl:sameAs	wikidata:Q841728 ,
+		<http://fr.dbpedia.org/resource/Logique_lin\u00E9aire> ,
+		<http://cs.dbpedia.org/resource/Line\u00E1rn\u00ED_logika> ,
+		<http://ru.dbpedia.org/resource/\u041B\u0438\u043D\u0435\u0439\u043D\u0430\u044F_\u043B\u043E\u0433\u0438\u043A\u0430> ,
+		<http://ja.dbpedia.org/resource/\u7DDA\u5F62\u8AD6\u7406> ;
+	rdfs:label	"\u7EBF\u6027\u903B\u8F91"@zh ,
+		"\u041B\u0438\u043D\u0435\u0439\u043D\u0430\u044F \u043B\u043E\u0433\u0438\u043A\u0430"@ru ,
+		"\u7DDA\u5F62\u8AD6\u7406"@ja ,
+		"Logique lin\u00E9aire"@fr ,
+		"\uC120\uD615 \uB17C\uB9AC"@ko ,
+		"Line\u00E1rn\u00ED logika"@cs ,
+		"L\u00F3gica linear"@pt ,
+		"L\u00F3gica lineal"@es ,
+		"Linear logic"@en ,
+		"Logica lineare"@it .
+@prefix dct:	<http://purl.org/dc/terms/> .
+@prefix dbc:	<http://dbpedia.org/resource/Category:> .
+dbr:Linear_logic	dct:subject	dbc:Logic ,
+		dbc:Substructural_logic ,
+		dbc:Linear_logic ,
+		dbc:Non-classical_logic .
+@prefix prov:	<http://www.w3.org/ns/prov#> .
+dbr:Linear_logic	prov:wasDerivedFrom	<http://en.wikipedia.org/wiki/Linear_logic?oldid=1291301995&ns=0> .
+@prefix gold:	<http://purl.org/linguistics/gold/> .
+dbr:Linear_logic	gold:hypernym	dbr:Logic ;
+	foaf:isPrimaryTopicOf	wikipedia-en:Linear_logic ;
+	dbo:wikiPageWikiLink	dbr:Admissible_rule ,
+		dbr:Identity_element ,
+		dbr:EXPSPACE ,
+		<http://dbpedia.org/resource/Backus\u2013Naur_form> ,
+		dbr:Linguistics ,
+		dbr:Quantum_information_theory ,
+		dbr:Classical_logic ,
+		dbr:Lollipop ,
+		dbr:Canonical_form ,
+		dbr:NP-complete ,
+		dbr:Proof_theory ,
+		dbr:Denotational_semantics ,
+		dbr:Chu_space ,
+		dbr:Entailment ,
+		dbr:PSPACE-complete ,
+		dbr:Ludics ,
+		dbr:Proof_net ,
+		dbr:Affine_logic ,
+		dbr:Noncommutative_logic ,
+		dbr:Uniqueness_type ,
+		dbr:Completeness_of_atomic_initial_sequents ,
+		dbc:Logic ,
+		<http://dbpedia.org/resource/Turnstile_(symbol)> ,
+		<http://dbpedia.org/resource/Theoretical_Computer_Science_(journal)> ,
+		dbr:Petri_nets ,
+		dbr:Computability_logic ,
+		dbr:Monotonicity_of_entailment ,
+		dbr:Substructural_type_system ,
+		dbr:Atomic_formula ,
+		dbr:Structural_rule ,
+		dbr:Analytic_proof ,
+		dbr:Cut-elimination_theorem ,
+		dbr:Game_semantics ,
+		dbr:Geometry_of_interaction ,
+		dbc:Non-classical_logic ,
+		dbc:Substructural_logic ,
+		dbc:Linear_logic ,
+		dbr:Cartesian_closed_categories ,
+		dbr:Horn_clauses ,
+		dbr:Idempotency_of_entailment ,
+		dbr:Substructural_logic ,
+		dbr:Programming_languages ,
+		dbr:Jean-Yves_Girard ,
+		dbr:Higher-order_logic ,
+		dbr:Intuitionistic_logic ,
+		<http://dbpedia.org/resource/Involution_(mathematics)> ,
+		dbr:Logical_disjunction ,
+		<http://dbpedia.org/resource/C*-algebras> ,
+		dbr:Undecidable_problem ,
+		dbr:Relevant_logic ,
+		dbr:Symmetric_monoidal_categories ,
+		dbr:Logic_of_unity ,
+		dbr:Tony_Hoare ,
+		dbr:Strict_logic ,
+		dbr:Lambda-calculus ,
+		dbr:Linear_logic_programming ,
+		dbr:Linear_type_system ,
+		<http://dbpedia.org/resource/A._S._Troelstra> ,
+		dbr:Exchange_rule ,
+		<http://dbpedia.org/resource/G\u00F6del\u2013Gentzen_negative_translation> ,
+		dbr:Logical_connective ,
+		dbr:Boolean_algebras ,
+		dbr:Logical_consequence ,
+		dbr:Normal_modal_logic ,
+		<http://dbpedia.org/resource/Duality_(mathematics)> ,
+		dbr:Logical_truth ,
+		<http://dbpedia.org/resource/Constructivism_(mathematics)> ,
+		dbr:Logical_conjunction ,
+		<http://dbpedia.org/resource/De_Morgan\u0027s_laws> ,
+		dbr:Quantum_physics ,
+		dbr:Sequent_calculus ,
+		dbr:Frame_problem ,
+		dbr:First-order_logic ,
+		dbr:Logical_harmony ;
+	dbo:wikiPageExternalLink	<https://web.archive.org/web/20160704202340/http:/www.cs.man.ac.uk/~pt/stable/Proofs+Types.html> ,
+		<http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html> ,
+		<https://web.archive.org/web/20060925141642/http:/www.pps.jussieu.fr/~dicosmo/index.html.en> ,
+		<http://bach.istc.kobe-u.ac.jp/llprover/> ,
+		<http://www.csl.sri.com/users/lincoln/> ,
+		<http://www.csl.sri.com/~lincoln/papers/sigact92.ps> ,
+		<http://girard.perso.math.cnrs.fr/linear.pdf> ,
+		<http://www.lix.polytechnique.fr/Labo/Dale.Miller/papers/llp.pdf> ,
+		<http://www.lix.polytechnique.fr/Labo/Dale.Miller/> ,
+		<http://www.brics.dk/LS/96/6/BRICS-LS-96-6.pdf> ,
+		<http://llwiki.ens-lyon.fr/> ,
+		<http://www.dicosmo.org/CourseNotes/LinLog/> ,
+		<http://plato.stanford.edu/entries/logic-linear/> ;
+	dbo:description	"system of resource-aware logic"@en ,
+		"syst\u00E8me formel de la logique math\u00E9matique"@fr .
+@prefix dbp:	<http://dbpedia.org/property/> .
+@prefix dbt:	<http://dbpedia.org/resource/Template:> .
+dbr:Linear_logic	dbp:wikiPageUsesTemplate	dbt:Cite_conference ,
+		dbt:Webarchive ,
+		dbt:See_also ,
+		dbt:Cite_SEP ,
+		dbt:Visible_anchor ,
+		<http://dbpedia.org/resource/Template:=> ,
+		dbt:Anchor ,
+		dbt:Harvtxt ,
+		dbt:Use_dmy_dates ,
+		dbt:Tee ,
+		dbt:Non-classical_logic ,
+		dbt:Em ,
+		dbt:Reflist ,
+		dbt:Main ,
+		dbt:Short_description ,
+		<http://dbpedia.org/resource/Template:!> ,
+		dbt:Cite_tech_report ,
+		dbt:Cite_web ,
+		dbt:Refn ,
+		dbt:Clarify ,
+		dbt:Cite_journal ,
+		dbt:Sfn ,
+		dbt:Citation_needed ,
+		dbt:Cite_book ,
+		dbt:Portal ,
+		dbt:Expand_section ,
+		dbt:Math ,
+		dbt:Redirect ,
+		dbt:Commons_category-inline ;
+	dbp:url	<https://web.archive.org/web/20160404181455/http:/bach.istc.kobe-u.ac.jp/llprover/> ;
+	dbp:date	"May 2015"@en .
+@prefix xsd:	<http://www.w3.org/2001/XMLSchema#> .
+dbr:Linear_logic	dbp:date	"2016-04-04"^^xsd:date ;
+	dbp:reason	"It is difficult to guess what this might mean without a link"@en .
+dbr:Andreas_Blass	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Jean-Yves_Girard	dbo:wikiPageWikiLink	dbr:Linear_logic ;
+	dbp:knownFor	dbr:Linear_logic ;
+	dbo:knownFor	dbr:Linear_logic .
+<http://dbpedia.org/resource/Index_of_philosophy_articles_(I\u2013Q)>	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:List_of_French_inventions_and_discoveries	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Algebra_of_sets	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Outline_of_logic	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Quantum_logic	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Closed_monoidal_category	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Question_mark	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Paraconsistent_logic	dbo:wikiPageWikiLink	dbr:Linear_logic .
+<http://dbpedia.org/resource/\u0141ukasiewicz_logic>	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:List_of_mathematical_logic_topics	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Dialogical_logic	dbo:wikiPageWikiLink	dbr:Linear_logic .
+dbr:Why_Not	dbo:wikiPageWikiLink	dbr:Linear_logic .
