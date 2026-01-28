@@ -6,6 +6,8 @@ Validates TeX ↔ RDF ↔ Citation consistency
 EXIT CODES:
   0 = Validation PASSED (no violations)
   1 = Validation FAILED (violations present)
+
+Enhanced with mandatory security validation and input sanitization.
 """
 
 import argparse
@@ -14,6 +16,18 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Set, Tuple, Optional
 from dataclasses import dataclass
+
+# Import security validation utilities - MANDATORY
+sys.path.append(str(Path(__file__).parent.parent / 'scripts'))
+try:
+    from validate_inputs import (
+        validate_path, validate_identifier, validate_file_path,
+        SecurityError
+    )
+except ImportError as e:
+    print(f"CRITICAL SECURITY ERROR: Cannot import security validation module: {e}")
+    print("Security validation is mandatory - aborting validation.")
+    sys.exit(2)
 
 # Try to import required libraries
 try:
@@ -492,64 +506,85 @@ def main():
     )
     parser.add_argument(
         '--tex-dir',
-        type=Path,
-        default=Path('thesis/chapters'),
+        type=str,
+        default='thesis/chapters',
         help='Directory containing TeX files'
     )
     parser.add_argument(
         '--ontology',
-        type=Path,
-        default=Path('ontology'),
+        type=str,
+        default='ontology',
         help='Directory containing RDF ontology files'
     )
     parser.add_argument(
         '--bibliography',
-        type=Path,
-        default=Path('bibliography/citations.yaml'),
+        type=str,
+        default='bibliography/citations.yaml',
         help='Path to citation registry YAML file'
     )
     parser.add_argument(
         '--mapping',
-        type=Path,
-        default=Path('schema/tex-rdf-mapping.yaml'),
+        type=str,
+        default='schema/tex-rdf-mapping.yaml',
         help='Path to TeX-RDF mapping file'
     )
 
     args = parser.parse_args()
 
-    # Check if files/directories exist
-    if not args.tex_dir.exists():
-        print(f"ERROR: Directory not found: {args.tex_dir}")
+    try:
+        # Security validation: Validate input paths
+        current_dir = Path.cwd()
+        
+        # Validate and resolve all input paths
+        try:
+            validated_tex_dir = validate_path(args.tex_dir, allowed_base=current_dir)
+            validated_ontology = validate_path(args.ontology, allowed_base=current_dir)
+            validated_bibliography = validate_file_path(args.bibliography, allowed_extensions=['.yaml', '.yml'], allowed_base=current_dir)
+            validated_mapping = validate_file_path(args.mapping, allowed_extensions=['.yaml', '.yml'], allowed_base=current_dir)
+        except SecurityError as e:
+            print(f"SECURITY ERROR: Path validation failed - {e}")
+            sys.exit(2)
+        
+        # Check if files/directories exist using validated paths
+        if not validated_tex_dir.exists():
+            print(f"ERROR: Directory not found: {validated_tex_dir}")
+            sys.exit(2)
+
+        if not validated_ontology.exists():
+            print(f"ERROR: Directory not found: {validated_ontology}")
+            sys.exit(2)
+
+        if not validated_bibliography.exists():
+            print(f"ERROR: File not found: {validated_bibliography}")
+            sys.exit(2)
+
+        if not validated_mapping.exists():
+            print(f"ERROR: File not found: {validated_mapping}")
+            sys.exit(2)
+
+        # Create validator
+        validator = ConsistencyValidator(validated_mapping)
+
+        # Validate using validated paths
+        success = validator.validate(validated_tex_dir, validated_ontology, validated_bibliography, validated_mapping)
+
+        # Print results
+        validator.print_results()
+
+        # Exit with appropriate code
+        if success:
+            print("🎉 Validation completed successfully")
+            sys.exit(0)
+        else:
+            print("💥 Validation failed - please fix violations")
+            sys.exit(1)
+            
+    except SecurityError as e:
+        print(f"SECURITY ERROR: {e}")
         sys.exit(2)
-
-    if not args.ontology.exists():
-        print(f"ERROR: Directory not found: {args.ontology}")
-        sys.exit(2)
-
-    if not args.bibliography.exists():
-        print(f"ERROR: File not found: {args.bibliography}")
-        sys.exit(2)
-
-    if not args.mapping.exists():
-        print(f"ERROR: File not found: {args.mapping}")
-        sys.exit(2)
-
-    # Create validator
-    validator = ConsistencyValidator(args.mapping)
-
-    # Validate
-    success = validator.validate(args.tex_dir, args.ontology, args.bibliography, args.mapping)
-
-    # Print results
-    validator.print_results()
-
-    # Exit with appropriate code
-    if success:
-        print("🎉 Validation completed successfully")
-        sys.exit(0)
-    else:
-        print("💥 Validation failed - please fix violations")
-        sys.exit(1)
+    except Exception as e:
+        print(f"UNEXPECTED ERROR: {e}")
+        sys.exit(3)
 
 
 if __name__ == '__main__':

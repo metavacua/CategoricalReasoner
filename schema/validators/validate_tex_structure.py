@@ -2,6 +2,8 @@
 """
 TeX Structure Validator for Catty Thesis
 Validates TeX files against thesis-structure.schema.yaml
+
+Enhanced with security validation and input sanitization.
 """
 
 import argparse
@@ -11,6 +13,18 @@ from pathlib import Path
 from typing import Dict, List, Set, Optional, Tuple
 from dataclasses import dataclass
 import json
+
+# Import security validation utilities - MANDATORY
+sys.path.append(str(Path(__file__).parent.parent.parent / 'scripts'))
+try:
+    from validate_inputs import (
+        validate_path, validate_identifier, validate_file_path,
+        SecurityError
+    )
+except ImportError as e:
+    print(f"CRITICAL SECURITY ERROR: Cannot import security validation module: {e}")
+    print("Security validation is mandatory - aborting validation.")
+    sys.exit(2)
 
 # Try to import PyYAML; if not available, give a helpful error
 try:
@@ -287,8 +301,8 @@ def main():
     )
     parser.add_argument(
         '--tex-dir',
-        type=Path,
-        default=Path('thesis/chapters'),
+        type=str,
+        default='thesis/chapters',
         help='Directory containing TeX files to validate'
     )
     parser.add_argument(
@@ -300,28 +314,49 @@ def main():
 
     args = parser.parse_args()
 
-    # Check if directory exists
-    if not args.tex_dir.exists():
-        print(f"ERROR: Directory not found: {args.tex_dir}")
-        sys.exit(1)
+    try:
+        # Security validation: Validate input paths
+        current_dir = Path.cwd()
+        
+        # Validate and resolve the tex directory path
+        try:
+            validated_tex_dir = validate_path(args.tex_dir, allowed_base=current_dir)
+            validated_schema_path = validate_path(args.schema, allowed_base=current_dir)
+        except SecurityError as e:
+            print(f"SECURITY ERROR: Path validation failed - {e}")
+            sys.exit(2)
+        
+        # Check if directory exists using validated path
+        if not validated_tex_dir.exists():
+            print(f"ERROR: Directory not found: {validated_tex_dir}")
+            sys.exit(1)
 
-    # Check if schema exists
-    if not Path(args.schema).exists():
-        print(f"WARNING: Schema file not found: {args.schema}")
-        print("Proceeding with basic validation only...")
-        args.schema = None
+        # Check if schema exists using validated path
+        if not validated_schema_path.exists():
+            print(f"WARNING: Schema file not found: {validated_schema_path}")
+            print("Proceeding with basic validation only...")
+            schema_path = None
+        else:
+            schema_path = validated_schema_path
 
-    # Create validator
-    validator = TeXStructureValidator(args.schema)
+        # Create validator with validated paths
+        validator = TeXStructureValidator(schema_path)
 
-    # Validate
-    success = validator.validate_directory(args.tex_dir)
+        # Validate using validated path
+        success = validator.validate_directory(validated_tex_dir)
 
-    # Print results
-    validator.print_errors()
+        # Print results
+        validator.print_errors()
 
-    # Exit with appropriate code
-    sys.exit(0 if success else 1)
+        # Exit with appropriate code
+        sys.exit(0 if success else 1)
+        
+    except SecurityError as e:
+        print(f"SECURITY ERROR: {e}")
+        sys.exit(2)
+    except Exception as e:
+        print(f"UNEXPECTED ERROR: {e}")
+        sys.exit(3)
 
 
 if __name__ == '__main__':

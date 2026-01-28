@@ -2,6 +2,8 @@
 """
 Citation Validator for Catty Thesis
 Validates citations across TeX files, YAML registry, and RDF resources
+
+Enhanced with mandatory security validation and input sanitization.
 """
 
 import argparse
@@ -14,6 +16,18 @@ from urllib.request import urlopen
 from urllib.error import URLError, HTTPError
 import json
 from http.client import HTTPException
+
+# Import security validation utilities - MANDATORY
+sys.path.append(str(Path(__file__).parent.parent / 'scripts'))
+try:
+    from validate_inputs import (
+        validate_path, validate_identifier, validate_file_path,
+        SecurityError
+    )
+except ImportError as e:
+    print(f"CRITICAL SECURITY ERROR: Cannot import security validation module: {e}")
+    print("Security validation is mandatory - aborting validation.")
+    sys.exit(2)
 
 # Try to import required libraries
 try:
@@ -372,20 +386,20 @@ def main():
     )
     parser.add_argument(
         '--tex-dir',
-        type=Path,
-        default=Path('thesis/chapters'),
+        type=str,
+        default='thesis/chapters',
         help='Directory containing TeX files'
     )
     parser.add_argument(
         '--bibliography',
-        type=Path,
-        default=Path('bibliography/citations.yaml'),
+        type=str,
+        default='bibliography/citations.yaml',
         help='Path to citation registry YAML file'
     )
     parser.add_argument(
         '--ontology',
-        type=Path,
-        default=Path('ontology/citations.jsonld'),
+        type=str,
+        default='ontology/citations.jsonld',
         help='Path to RDF citations file'
     )
     parser.add_argument(
@@ -396,17 +410,51 @@ def main():
 
     args = parser.parse_args()
 
-    # Create validator
-    validator = CitationValidator(check_external=args.check_external)
+    try:
+        # Security validation: Validate input paths
+        current_dir = Path.cwd()
+        
+        # Validate and resolve all input paths
+        try:
+            validated_tex_dir = validate_path(args.tex_dir, allowed_base=current_dir)
+            validated_bibliography = validate_file_path(args.bibliography, allowed_extensions=['.yaml', '.yml'], allowed_base=current_dir)
+            validated_ontology = validate_file_path(args.ontology, allowed_extensions=['.jsonld', '.json'], allowed_base=current_dir)
+        except SecurityError as e:
+            print(f"SECURITY ERROR: Path validation failed - {e}")
+            sys.exit(2)
+        
+        # Check if directory exists using validated path
+        if not validated_tex_dir.exists():
+            print(f"ERROR: Directory not found: {validated_tex_dir}")
+            sys.exit(1)
 
-    # Validate
-    success = validator.validate(args.tex_dir, args.bibliography, args.ontology)
+        # Check if files exist using validated paths
+        if not validated_bibliography.exists():
+            print(f"ERROR: Bibliography file not found: {validated_bibliography}")
+            sys.exit(1)
+            
+        if not validated_ontology.exists():
+            print(f"ERROR: Ontology file not found: {validated_ontology}")
+            sys.exit(1)
 
-    # Print results
-    validator.print_errors()
+        # Create validator
+        validator = CitationValidator(check_external=args.check_external)
 
-    # Exit with appropriate code
-    sys.exit(0 if success else 1)
+        # Validate using validated paths
+        success = validator.validate(validated_tex_dir, validated_bibliography, validated_ontology)
+
+        # Print results
+        validator.print_errors()
+
+        # Exit with appropriate code
+        sys.exit(0 if success else 1)
+        
+    except SecurityError as e:
+        print(f"SECURITY ERROR: {e}")
+        sys.exit(2)
+    except Exception as e:
+        print(f"UNEXPECTED ERROR: {e}")
+        sys.exit(3)
 
 
 if __name__ == '__main__':

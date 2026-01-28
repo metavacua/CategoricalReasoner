@@ -48,46 +48,6 @@
       "rdfs:comment": "Kripke semantics for intuitionistic logic using possible worlds"
     },
     {
-      "@id": "http://metavacua.github.io/catty/citations/sambin2003basic",
-      "@type": ["bibo:Article", "bibo:AcademicArticle"],
-      "dct:creator": "Giovanni Sambin",
-      "dct:title": "Basic Logic: Reflection, Symmetry, Visibility",
-      "dct:issued": "2003",
-      "dct:identifier": "sambin2003basic",
-      "bibo:doi": "10.1111/1467-8422.00291",
-      "rdfs:seeAlso": [
-        "https://onlinelibrary.wiley.com/doi/10.1111/1467-8422.00291",
-        "https://arxiv.org/abs/math/0301250",
-        "https://www.wikidata.org/wiki/Q7263983"
-      ],
-      "owl:sameAs": "http://www.wikidata.org/entity/Q7263983",
-      "rdfs:comment": "Basic Logic as foundation for substructural logics with structural rules"
-    },
-    {
-      "@id": "http://metavacua.github.io/catty/citations/urbas1993structural",
-      "@type": ["bibo:Article", "bibo:Document"],
-      "dct:creator": "John Urbas",
-      "dct:title": "On the Structural Rules of Linear Logic",
-      "dct:issued": "1993",
-      "dct:identifier": "urbas1993structural",
-      "rdfs:seeAlso": [
-        "https://arxiv.org/abs/cs/9311003"
-      ],
-      "rdfs:comment": "Analysis of structural rules (weakening, contraction, exchange) in linear logic"
-    },
-    {
-      "@id": "http://metavacua.github.io/catty/citations/trafford2018category",
-      "@type": ["bibo:Article", "bibo:Document"],
-      "dct:creator": "James Trafford",
-      "dct:title": "A Category Theory Approach to Conceptual Modelling",
-      "dct:issued": "2018",
-      "dct:identifier": "trafford2018category",
-      "rdfs:seeAlso": [
-        "https://arxiv.org/abs/1803.08278"
-      ],
-      "rdfs:comment": "Category theory applied to conceptual modelling and knowledge representation"
-    },
-    {
       "@id": "http://metavacua.github.io/catty/citations/lawvere1963functorial",
       "@type": ["bibo:Article", "bibo:Document"],
       "dct:creator": "F. William Lawvere",
@@ -188,6 +148,83 @@
       ],
       "owl:sameAs": "http://www.wikidata.org/entity/Q521559",
       "rdfs:comment": "Formalization of Curry-Howard correspondence: propositions as types, proofs as programs"
+    },
+    {
+      "@id": "http://metavacua.github.io/catty/citations/ardeshir2012unification",
+      "@type": ["bibo:Article", "bibo:AcademicArticle"],
+      "dct:creator": "Mohammad Ardeshir and Vahid Vaezian",
+      "dct:title": "A unification of the basic logics of Sambin and Visser",
+      "dct:issued": "2012",
+      "dct:identifier": "ardeshir2012unification",
+      "bibo:doi": "10.1093/jigpal/jzs002",
+      "rdfs:seeAlso": [
+        "https://doi.org/10.1093/jigpal/jzs002"
+      ],
+      "rdfs:comment": "Related to LM and Basic Logic with unification approach"
+    },
+    {
+      "@id": "http://metavacua.github.io/catty/citations/diener2016classifying",
+      "@type": ["bibo:Preprint", "bibo:Document"],
+      "dct:creator": "Hannes Diener and Maarten McKubre-Jordens",
+      "dct:title": "Classifying Material Implications over Minimal Logic",
+      "dct:issued": "2016",
+      "dct:identifier": "diener2016classifying",
+      "rdfs:seeAlso": [
+        "https://arxiv.org/abs/1606.08092"
+      ],
+      "rdfs:comment": "Classification of material implications in minimal logic"
+    },
+    {
+      "@id": "http://metavacua.github.io/catty/citations/sambin2000basic",
+      "@type": ["bibo:Article", "bibo:AcademicArticle"],
+      "dct:creator": "Giovanni Sambin, Giulia Battilotti, and Claudia Faggian",
+      "dct:title": "Basic logic: reflection, symmetry, visibility",
+      "dct:issued": "2000",
+      "dct:identifier": "sambin2000basic",
+      "bibo:doi": "10.2178/jsl/1190150241",
+      "rdfs:seeAlso": [
+        "https://www.jstor.org/stable/2586704",
+        "https://www.wikidata.org/wiki/Q7263983"
+      ],
+      "owl:sameAs": "http://www.wikidata.org/entity/Q7263983",
+      "rdfs:comment": "Primary Sambin citation for Basic Logic with reflection, symmetry, and visibility principles"
+    },
+    {
+      "@id": "http://metavacua.github.io/catty/citations/urbas1996dual",
+      "@type": ["bibo:Article", "bibo:AcademicArticle"],
+      "dct:creator": "Igor Urbas",
+      "dct:title": "Dual-Intuitionistic Logic",
+      "dct:issued": "1996",
+      "dct:identifier": "urbas1996dual",
+      "bibo:doi": "10.1305/ndjfl/1039886520",
+      "rdfs:seeAlso": [
+        "https://doi.org/10.1305/ndjfl/1039886520"
+      ],
+      "rdfs:comment": "Foundational paper on dual-intuitionistic logic"
+    },
+    {
+      "@id": "http://metavacua.github.io/catty/citations/trafford2015coconstructive",
+      "@type": ["bibo:Article", "bibo:AcademicArticle"],
+      "dct:creator": "James Trafford",
+      "dct:title": "Co-constructive logic for proofs and refutations",
+      "dct:issued": "2015",
+      "dct:identifier": "trafford2015coconstructive",
+      "rdfs:seeAlso": [
+        "https://arxiv.org/abs/1507.03650"
+      ],
+      "rdfs:comment": "Relevant to co-intuitionistic logic and refutation with co-constructive approach"
+    },
+    {
+      "@id": "http://metavacua.github.io/catty/citations/zizzi2010quantum",
+      "@type": ["bibo:Preprint", "bibo:Document"],
+      "dct:creator": "Paola Zizzi",
+      "dct:title": "From Quantum Metalanguage to the Logic of Qubits",
+      "dct:issued": "2010",
+      "dct:identifier": "zizzi2010quantum",
+      "rdfs:seeAlso": [
+        "https://arxiv.org/abs/1003.5976"
+      ],
+      "rdfs:comment": "Primary Zizzi citation for quantum metalanguage connecting quantum computing and logic"
     },
     {
       "@id": "http://metavacua.github.io/catty/citations/negri2011proof",
