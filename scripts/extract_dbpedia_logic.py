@@ -169,7 +169,7 @@ def main(turtle_file: str, output_json: str = None) -> int:
     # Save if output specified
     if output_json:
         with open(output_json, 'w') as f:
-            json.dump(caty_data, f, indent=2)
+            json.dump(catty_data, f, indent=2)
         print(f"\nCatty data saved to: {output_json}")
     
     return 0

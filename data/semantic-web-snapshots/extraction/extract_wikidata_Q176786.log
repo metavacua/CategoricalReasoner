@@ -1,0 +1,45 @@
+
+Extracting Wikidata data from: data/semantic-web-snapshots/wikidata/Q176786_Intuitionistic_logic.json
+======================================================================
+Wikidata Entity: Q176786
+======================================================================
+
+Label (en): intuitionistic logic
+Description (en): various systems of symbolic logic
+
+Claims (21 properties):
+  P10283 (OpenAlex ID): 1 value(s)
+  P10376 (property P10376): 2 value(s)
+  P1051 (PSB ID): 1 value(s)
+  P1269 (facet of): 1 value(s)
+  P1343 (described by): 1 value(s)
+  P1417 (Encyclopædia Britannica Online ID): 1 value(s)
+  P1889 (different from): 1 value(s)
+  P227 (GND ID): 1 value(s)
+  P2579 (seen in): 1 value(s)
+  P2812 (semantic scholar ID): 1 value(s)
+  P31 (instance of): 1 value(s)
+  P3123 (philosophy portal ID): 1 value(s)
+  P3827 ( JSTOR topic ID): 1 value(s)
+  P4215 (dlshub topic ID): 1 value(s)
+  P6104 (storey): 1 value(s)
+  P6366 (researchgate ID): 1 value(s)
+  P646 (freebase ID): 1 value(s)
+  P6900 (archinform ID): 1 value(s)
+  P7726 (ioss crossref ID): 1 value(s)
+  P8313 (persée article ID): 1 value(s)
+  P910 (topic's main category): 1 value(s)
+
+======================================================================
+Catty-Relevant Data:
+======================================================================
+{
+  "wikidata_id": "Q176786",
+  "label": "intuitionistic logic",
+  "description": "various systems of symbolic logic",
+  "related_logics": [],
+  "external_references": {
+    "freebase": "/m/016p04",
+    "openalex": "C178421362"
+  }
+}

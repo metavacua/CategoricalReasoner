@@ -1,0 +1,80 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Host dbpedia.org:443 was resolved.
+* IPv6: 2a12:4180:dc1:903::2
+* IPv4: 31.134.204.180
+*   Trying 31.134.204.180:443...
+* Connected to dbpedia.org (31.134.204.180) port 443
+* ALPN: curl offers h2,http/1.1
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+} [512 bytes data]
+*  CAfile: /etc/ssl/certs/ca-certificates.crt
+*  CApath: /etc/ssl/certs
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+{ [19 bytes data]
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+{ [2579 bytes data]
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+{ [264 bytes data]
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+{ [52 bytes data]
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+} [52 bytes data]
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384 / X25519 / RSASSA-PSS
+* ALPN: server accepted h2
+* Server certificate:
+*  subject: CN=dbpedia.org
+*  start date: Jan  1 01:57:25 2026 GMT
+*  expire date: Apr  1 01:57:24 2026 GMT
+*  subjectAltName: host "dbpedia.org" matched cert's "dbpedia.org"
+*  issuer: C=US; O=Let's Encrypt; CN=R12
+*  SSL certificate verify ok.
+*   Certificate level 0: Public key type RSA (2048/112 Bits/secBits), signed using sha256WithRSAEncryption
+*   Certificate level 1: Public key type RSA (2048/112 Bits/secBits), signed using sha256WithRSAEncryption
+*   Certificate level 2: Public key type RSA (4096/152 Bits/secBits), signed using sha256WithRSAEncryption
+} [5 bytes data]
+* using HTTP/2
+* [HTTP/2] [1] OPENED stream for https://dbpedia.org/data/Relevance_logic.ttl
+* [HTTP/2] [1] [:method: GET]
+* [HTTP/2] [1] [:scheme: https]
+* [HTTP/2] [1] [:authority: dbpedia.org]
+* [HTTP/2] [1] [:path: /data/Relevance_logic.ttl]
+* [HTTP/2] [1] [user-agent: curl/8.5.0]
+* [HTTP/2] [1] [accept: */*]
+} [5 bytes data]
+> GET /data/Relevance_logic.ttl HTTP/2
+> Host: dbpedia.org
+> User-Agent: curl/8.5.0
+> Accept: */*
+> 
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+{ [265 bytes data]
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+{ [265 bytes data]
+* old SSL session ID is stale, removing
+{ [5 bytes data]
+< HTTP/2 200 
+< date: Wed, 28 Jan 2026 05:10:46 GMT
+< content-type: text/turtle; charset=UTF-8
+< content-length: 7876
+< server: Virtuoso/08.03.3334 (Linux) x86_64-ubuntu_noble-linux-glibc2.39  VDB
+< expires: Fri, 27 Feb 2026 05:10:46 GMT
+< link: <http://creativecommons.org/licenses/by-sa/3.0/>; rel="license", <http://dbpedia.org/data/Relevance_logic.xml>; rel="alternate"; type="application/rdf+xml"; title="Structured Descriptor Document (RDF/XML format)", <http://dbpedia.org/data/Relevance_logic.n3>; rel="alternate"; type="text/n3"; title="Structured Descriptor Document (N3/Turtle format)", <http://dbpedia.org/data/Relevance_logic.json>; rel="alternate"; type="application/json"; title="Structured Descriptor Document (RDF/JSON format)", <http://dbpedia.org/data/Relevance_logic.atom>; rel="alternate"; type="application/atom+xml"; title="OData (Atom+Feed format)", <http://dbpedia.org/data/Relevance_logic.jsod>; rel="alternate"; type="application/odata+json"; title="OData (JSON format)", <http://dbpedia.org/page/Relevance_logic>; rel="alternate"; type="text/html"; title="XHTML+RDFa", <http://dbpedia.org/resource/Relevance_logic>; rel="http://xmlns.com/foaf/0.1/primaryTopic", <http://dbpedia.org/resource/Relevance_logic>; rev="describedby", <http://dbpedia.mementodepot.org/timegate/http://dbpedia.org/data/Relevance_logic.ttl>; rel="timegate"
+< x-sparql-default-graph: http://dbpedia.org
+< content-disposition: filename=sparql_2026-01-28_05-08-23Z.ttl
+< cache-control: max-age=2592000
+< access-control-allow-credentials: true
+< access-control-allow-methods: GET, POST, OPTIONS
+< access-control-allow-headers: Depth,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Accept-Encoding
+< accept-ranges: bytes
+< 
+{ [7876 bytes data]
+100  7876  100  7876    0     0  24921      0 --:--:-- --:--:-- --:--:-- 25003
+* Connection #0 to host dbpedia.org left intact

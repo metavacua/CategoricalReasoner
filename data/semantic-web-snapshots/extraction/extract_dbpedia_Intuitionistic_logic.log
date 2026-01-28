@@ -1,0 +1,339 @@
+
+Loading RDF from: data/semantic-web-snapshots/dbpedia/Intuitionistic_logic.ttl
+======================================================================
+DBPedia Analysis: Intuitionistic Logic
+======================================================================
+
+Basic Statistics:
+  Total triples: 407
+  Unique subjects: 199
+  Unique predicates: 16
+  Unique objects: 191
+
+Types (rdf:type):
+  owl#Thing: 1
+
+Labels:
+  [cs]: Intuicionistická logika
+  [de]: Intuitionismus
+  [en]: Intuitionistic logic
+  [eo]: Intuicia logiko
+  [es]: Lógica intuicionista
+  [fr]: Logique intuitionniste
+  [it]: Logica intuizionista
+  [ja]: 直観主義論理
+  [ko]: 직관 논리
+  [pl]: Logika intuicjonistyczna
+  [pt]: Lógica intuicionista
+  [ru]: Интуиционистская логика
+  [sv]: Intuitionistisk logik
+  [uk]: Інтуїціоністська логіка
+  [zh]: 直觉主义逻辑
+
+External Links (sameAs):
+  http://yago-knowledge.org/resource/Intuitionistic_logic
+  http://pms.dbpedia.org/resource/Antuissionism
+  http://et.dbpedia.org/resource/Intuitsionistlik_loogika
+  http://es.dbpedia.org/resource/Lógica_intuicionista
+  http://dbpedia.org/resource/Intuitionistic_logic
+  http://ja.dbpedia.org/resource/直観主義論理
+  http://hy.dbpedia.org/resource/Կոնստրուկտիվ_տրամաբանություն
+  http://zh.dbpedia.org/resource/直觉主义逻辑
+  http://sv.dbpedia.org/resource/Intuitionistisk_logik
+  http://de.dbpedia.org/resource/Intuitionismus
+  ... and 17 more
+
+Connections to other resources (306 total):
+  -> Intuitionistic_logic
+  -> Proof_by_contradiction
+  -> Intuitionistic_logic
+  -> Intuitionistic_logic
+  -> Boolean_algebra_(structure)
+  -> Intuitionistic_logic
+  -> Intuitionistic_logic
+  -> Jan_Łukasiewicz
+  -> Intuitionistic_logic
+  -> Category:Logic_in_computer_science
+  -> Intuitionistic_logic
+  -> Sole_sufficient_operator
+  -> Intuitionistic_logic
+  -> Intuitionistic_logic
+  -> Currying
+  -> Brouwer-Heyting-Kolmogorov
+  -> Law_of_non-contradiction
+  -> Double_negation_elimination
+  -> Intuitionistic_logic
+  -> Intuitionistic_logic
+  ... and 286 more
+
+======================================================================
+Catty-Relevant Data:
+======================================================================
+{
+  "source": "dbpedia",
+  "name": "Intuitionistic Logic",
+  "triples_count": 407,
+  "labels": {
+    "de": "Intuitionismus",
+    "pl": "Logika intuicjonistyczna",
+    "uk": "\u0406\u043d\u0442\u0443\u0457\u0446\u0456\u043e\u043d\u0456\u0441\u0442\u0441\u044c\u043a\u0430 \u043b\u043e\u0433\u0456\u043a\u0430",
+    "ko": "\uc9c1\uad00 \ub17c\ub9ac",
+    "cs": "Intuicionistick\u00e1 logika",
+    "en": "Intuitionistic logic",
+    "ja": "\u76f4\u89b3\u4e3b\u7fa9\u8ad6\u7406",
+    "ru": "\u0418\u043d\u0442\u0443\u0438\u0446\u0438\u043e\u043d\u0438\u0441\u0442\u0441\u043a\u0430\u044f \u043b\u043e\u0433\u0438\u043a\u0430",
+    "sv": "Intuitionistisk logik",
+    "es": "L\u00f3gica intuicionista",
+    "eo": "Intuicia logiko",
+    "zh": "\u76f4\u89c9\u4e3b\u4e49\u903b\u8f91",
+    "fr": "Logique intuitionniste",
+    "pt": "L\u00f3gica intuicionista",
+    "it": "Logica intuizionista"
+  },
+  "types": [
+    "owl#Thing"
+  ],
+  "connections": [
+    "Intuitionistic_logic",
+    "Proof_by_contradiction",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Boolean_algebra_(structure)",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Category:Logic_in_computer_science",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Finite-valued_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Infinite-valued_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Modal_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Paraconsistent_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Proof_assistants",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Four_color_theorem",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "First-order_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Propositional_logic",
+    "Logical_negation",
+    "Intuitionistic_logic",
+    "Boolean_algebra",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Constructive_proof",
+    "Intuitionistic_logic",
+    "Interpretation_(logic)",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Semantic_theory_of_truth",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Linear_logic",
+    "Intuitionistic_logic",
+    "Logical_conjunction",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Heyting_algebra",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Kripke_semantics",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Proof-theoretic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Valuation_(logic)",
+    "Logical_connective",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Category:Systems_of_formal_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Normal_modal_logic",
+    "Logical_disjunction",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Category:Non-classical_logic",
+    "Intuitionistic_logic",
+    "Generalization_(logic)",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Classical_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Game_semantics",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intermediate_logics",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intermediate_logic",
+    "Computability_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Tautology_(logic)",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Many-valued_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Quantifier_(logic)",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Minimal_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Symbolic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Boolean-valued_semantics",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic",
+    "Intuitionistic_logic"
+  ],
+  "external_references": [
+    "http://yago-knowledge.org/resource/Intuitionistic_logic",
+    "http://d-nb.info/gnd/4162199-2",
+    "http://rdf.freebase.com/ns/m.016p04"
+  ]
+}

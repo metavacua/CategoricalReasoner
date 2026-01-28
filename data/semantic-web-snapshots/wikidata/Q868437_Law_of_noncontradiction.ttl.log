@@ -1,0 +1,39 @@
+--2026-01-28 05:10:26--  https://www.wikidata.org/wiki/Special:EntityData/Q868437.ttl
+Resolving www.wikidata.org (www.wikidata.org)... 208.80.153.224, 2620:0:860:ed1a::1
+Connecting to www.wikidata.org (www.wikidata.org)|208.80.153.224|:443... connected.
+HTTP request sent, awaiting response... 
+  HTTP/1.1 200 OK
+  date: Wed, 28 Jan 2026 05:10:27 GMT
+  server: mw-web.codfw.main-759dc94748-cj5vh
+  x-content-type-options: nosniff
+  accept-ch: 
+  access-control-allow-origin: *
+  x-frame-options: DENY
+  last-modified: Mon, 27 Oct 2025 04:27:42 GMT
+  content-type: text/turtle; charset=UTF-8
+  age: 0
+  x-cache: cp2041 miss, cp2041 pass
+  x-cache-status: pass
+  server-timing: cache;desc="pass", host;desc="cp2041"
+  strict-transport-security: max-age=106384710; includeSubDomains; preload
+  report-to: { "group": "wm_nel", "max_age": 604800, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0" }] }
+  nel: { "report_to": "wm_nel", "max_age": 604800, "failure_fraction": 0.05, "success_fraction": 0.0}
+  set-cookie: WMF-Last-Access=28-Jan-2026;Path=/;HttpOnly;secure;Expires=Sun, 01 Mar 2026 00:00:00 GMT
+  set-cookie: WMF-Last-Access-Global=28-Jan-2026;Path=/;Domain=.wikidata.org;HttpOnly;secure;Expires=Sun, 01 Mar 2026 00:00:00 GMT
+  x-client-ip: 34.173.33.88
+  cache-control: private, s-maxage=0, max-age=0, must-revalidate, no-transform
+  vary: Accept-Encoding,User-Agent
+  set-cookie: GeoIP=US:IA:Council_Bluffs:41.26:-95.85:v4; Path=/; secure; Domain=.wikidata.org
+  set-cookie: NetworkProbeLimit=0.001;Path=/;Secure;SameSite=None;Max-Age=3600
+  set-cookie: WMF-Uniq=P5VM1I1QcY1TlvzSdGqOdgL2AAAAAFvd7U571hjDwdeH-J75Ek0DCbDoqNM9Kr0w;Domain=.wikidata.org;Path=/;HttpOnly;secure;SameSite=None;Expires=Thu, 28 Jan 2027 00:00:00 GMT
+  transfer-encoding: chunked
+  x-request-id: 22c15d0b-0175-4df6-9e51-b674d8877264
+  x-analytics: 
+Length: unspecified [text/turtle]
+Saving to: ‘/home/engine/project/data/semantic-web-snapshots/wikidata/Q868437_Law_of_noncontradiction.ttl’
+
+     0K .......... .......... .......... .......... .......... 1.03M
+    50K ...                                                    5.87T=0.05s
+
+2026-01-28 05:10:27 (1.10 MB/s) - ‘/home/engine/project/data/semantic-web-snapshots/wikidata/Q868437_Law_of_noncontradiction.ttl’ saved [54426]
+

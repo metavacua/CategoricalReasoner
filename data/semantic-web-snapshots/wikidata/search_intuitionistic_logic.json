@@ -1,1 +1,83 @@
-{"searchinfo":{"search":"intuitionistic logic"},"search":[{"id":"Q176786","title":"Q176786","pageid":176466,"concepturi":"http://www.wikidata.org/entity/Q176786","repository":"wikidata","url":"//www.wikidata.org/wiki/Q176786","display":{"label":{"value":"intuitionistic logic","language":"en"},"description":{"value":"various systems of symbolic logic","language":"en"}},"label":"intuitionistic logic","description":"various systems of symbolic logic","match":{"type":"label","language":"en","text":"intuitionistic logic"}},{"id":"Q114742507","title":"Q114742507","pageid":109421808,"concepturi":"http://www.wikidata.org/entity/Q114742507","repository":"wikidata","url":"//www.wikidata.org/wiki/Q114742507","display":{"label":{"value":"Intuitionistic Logics  of Confirmation and Discouragement","language":"en"},"description":{"value":"scientific article published in 2022","language":"en"}},"label":"Intuitionistic Logics  of Confirmation and Discouragement","description":"scientific article published in 2022","match":{"type":"label","language":"en","text":"Intuitionistic Logics  of Confirmation and Discouragement"}},{"id":"Q130863233","title":"Q130863233","pageid":124768599,"concepturi":"http://www.wikidata.org/entity/Q130863233","repository":"wikidata","url":"//www.wikidata.org/wiki/Q130863233","display":{"label":{"value":"Intuitionistic Logic and Kripke Semantics","language":"en"},"description":{"value":"scientific article published on 05 February 2016","language":"en"}},"label":"Intuitionistic Logic and Kripke Semantics","description":"scientific article published on 05 February 2016","match":{"type":"label","language":"en","text":"Intuitionistic Logic and Kripke Semantics"}}],"success":1}
+{
+    "searchinfo": {
+        "search": "intuitionistic logic"
+    },
+    "search": [
+        {
+            "id": "Q176786",
+            "title": "Q176786",
+            "pageid": 176466,
+            "concepturi": "http://www.wikidata.org/entity/Q176786",
+            "repository": "wikidata",
+            "url": "//www.wikidata.org/wiki/Q176786",
+            "display": {
+                "label": {
+                    "value": "intuitionistic logic",
+                    "language": "en"
+                },
+                "description": {
+                    "value": "various systems of symbolic logic",
+                    "language": "en"
+                }
+            },
+            "label": "intuitionistic logic",
+            "description": "various systems of symbolic logic",
+            "match": {
+                "type": "label",
+                "language": "en",
+                "text": "intuitionistic logic"
+            }
+        },
+        {
+            "id": "Q114742507",
+            "title": "Q114742507",
+            "pageid": 109421808,
+            "concepturi": "http://www.wikidata.org/entity/Q114742507",
+            "repository": "wikidata",
+            "url": "//www.wikidata.org/wiki/Q114742507",
+            "display": {
+                "label": {
+                    "value": "Intuitionistic Logics  of Confirmation and Discouragement",
+                    "language": "en"
+                },
+                "description": {
+                    "value": "scientific article published in 2022",
+                    "language": "en"
+                }
+            },
+            "label": "Intuitionistic Logics  of Confirmation and Discouragement",
+            "description": "scientific article published in 2022",
+            "match": {
+                "type": "label",
+                "language": "en",
+                "text": "Intuitionistic Logics  of Confirmation and Discouragement"
+            }
+        },
+        {
+            "id": "Q130863233",
+            "title": "Q130863233",
+            "pageid": 124768599,
+            "concepturi": "http://www.wikidata.org/entity/Q130863233",
+            "repository": "wikidata",
+            "url": "//www.wikidata.org/wiki/Q130863233",
+            "display": {
+                "label": {
+                    "value": "Intuitionistic Logic and Kripke Semantics",
+                    "language": "en"
+                },
+                "description": {
+                    "value": "scientific article published on 05 February 2016",
+                    "language": "en"
+                }
+            },
+            "label": "Intuitionistic Logic and Kripke Semantics",
+            "description": "scientific article published on 05 February 2016",
+            "match": {
+                "type": "label",
+                "language": "en",
+                "text": "Intuitionistic Logic and Kripke Semantics"
+            }
+        }
+    ],
+    "success": 1
+}

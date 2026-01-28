@@ -1,196 +1,161 @@
-# Web Access Capabilities and Limitations Report
+# Web Access Capabilities and Limitations (Staged Verification)
 
-**Generated:** 2026-01-28T03:40:00Z  
-**Report Type:** STAGED WEB ACCESS VERIFICATION  
-**Repository:** Catty Thesis - Categorical Foundations for Logics
-
----
-
-## Executive Summary
-
-✅ **Web Access Status: OPERATIONAL**  
-HTTPS connectivity verified. RDF data successfully fetched from Wikidata and DBPedia.
+**Updated:** 2026-01-28  
+**Repository:** Catty thesis  
+**Primary scripts:**
+- `scripts/verify-web-access.sh` (Stage 0 connectivity + tool installation + SPARQL checks)
+- `scripts/fetch-semantic-web-logics.sh` (reproducible snapshot pipeline)
 
 ---
 
-## Network Connectivity
+## 1. Network Connectivity
 
 ### DNS Resolution
 - **Status:** PASS
-- **Method:** Direct HTTP connection (DNS resolution handled by system)
-- **Note:** DNS tools (nslookup, dig, host) not installed, but HTTP resolution works
+- **Tools used:** `nslookup`, `dig`, `host`
+- **Evidence:** `data/semantic-web-snapshots/web-access/verify-web-access_*.log`
+- **Notes:** DNS resolution confirmed for `google.com`, `www.wikidata.org`, `dbpedia.org`, `ncatlab.org`, `query.wikidata.org`.
 
 ### ICMP (ping)
-- **Status:** NOT TESTED (ping command not available)
-- **Note:** Network-level ping not needed for HTTP data retrieval
-
-### HTTPS Connectivity
 - **Status:** PASS
-- **Test URL:** https://www.wikidata.org/wiki/Q236975
-- **Result:** HTTP 200 OK, 25KB downloaded
-- **Certificate Validation:** Works correctly
-- **Connection Time:** < 0.1 seconds
+- **Tool used:** `ping` (iputils)
+- **Targets tested:** `8.8.8.8`, `1.1.1.1`
+- **Evidence:** `data/semantic-web-snapshots/web-access/verify-web-access_*.log`
+
+### HTTPS + Certificate Validation
+- **Status:** PASS
+- **Tools used:** `wget`, `curl`, `openssl s_client`
+- **Evidence:** `data/semantic-web-snapshots/web-access/verify-web-access_*.log`
+- **Observed:** TLS handshake succeeds; certificate verification OK.
 
 ---
 
-## Available Tools
+## 2. CLI Tools (Availability + Installation Attempts)
 
-| Tool | Version | Status | Notes |
-|------|---------|--------|-------|
-| wget | GNU Wget 1.21.4 | ✅ Available | Used for primary fetching |
-| curl | curl 8.5.0 | ✅ Available | Available as backup |
-| python3 | Python 3.12.3 | ✅ Available | rdflib installed |
-| nslookup | Not installed | ❌ | DNS tools not needed |
-| dig | Not installed | ❌ | DNS tools not needed |
-| host | Not installed | ❌ | DNS tools not needed |
-| ping | Not installed | ❌ | Not required for HTTP |
+Stage 0 was re-run **after installing missing tools**.
 
-**Python Packages Available:**
-- rdflib (for RDF parsing)
-- pyyaml (for manifest handling)
+### Newly installed via apt
+- `dnsutils` (provides `nslookup`, `dig`, `host`)
+- `iputils-ping` (provides `ping`)
+- `jq`
+- `traceroute`
+- `raptor2-utils` (provides `rapper`, an RDF CLI parser)
 
----
+### Installed tools used in verification and/or pipeline
+- `wget` (fetch)
+- `curl` (fetch + SPARQL requests)
+- `nslookup`, `dig`, `host` (DNS)
+- `ping` (ICMP)
+- `openssl` (TLS/cert inspection)
+- `jq` (JSON inspection)
+- `rapper` (RDF parsing)
 
-## Fetch Results
-
-### Wikidata Sources
-
-| Logic | Wikidata ID | Status | Size | Notes |
-|-------|-------------|--------|------|-------|
-| LK (Classical Logic) | Q236975 | ✅ SUCCESS | 25KB | 22 properties |
-| LJ (Intuitionistic Logic) | Q176786 | ✅ SUCCESS | 18KB | 21 properties |
-| LDJ (Dual Intuitionistic Logic) | N/A | ❌ NOT FOUND | - | No dedicated entity exists |
-
-**Wikidata Data Quality:**
-- Labels and descriptions: ✅ Available
-- External identifiers (Freebase, OpenAlex): ✅ Available  
-- Taxonomy relationships: ✅ Available (subclass, part-of)
-- Formal specifications (axioms, rules): ❌ NOT AVAILABLE
-
-### DBPedia Sources
-
-| Logic | Status | Triples | Notes |
-|-------|--------|---------|-------|
-| Classical Logic | ✅ SUCCESS | 312 | Good cross-links to related logics |
-| Intuitionistic Logic | ❌ NOT FOUND | - | Resource does not exist |
-
-**DBPedia Data Quality:**
-- Category memberships: ✅ Available
-- Wikipedia cross-references: ✅ Available
-- Multi-language labels: ✅ Available (EN, DE, ES, ZH, JA, PT, CA, TR)
-- Logic-specific properties: ⚠️ LIMITED (mostly wiki navigation)
+### apt-get note
+`sudo apt-get update` produced a warning about an expired Yarn repository signing key, but Ubuntu repository packages were still installable. Full output is preserved in the `verify-web-access` log.
 
 ---
 
-## Known Limitations
+## 3. Semantic Web Connectivity (Endpoints)
 
-### Semantic Web Data Gaps
+### Wikidata SPARQL endpoint
+- **Endpoint:** https://query.wikidata.org/sparql
+- **Status:** PASS
+- **Tool used:** `curl` (Accept: text/csv)
+- **Evidence:** CSV output saved under `data/semantic-web-snapshots/web-access/wikidata_sparql_sample_*.csv`
 
-1. **Formal Properties Missing**
-   - Sequent system specifications: ❌ NOT AVAILABLE
-   - Structural rules (weakening, contraction, exchange): ❌ NOT AVAILABLE
-   - Axiom schemas (LEM, LNC, etc.): ❌ NOT AVAILABLE
-   - Cut elimination proofs: ❌ NOT AVAILABLE
-
-2. **Dual Intuitionistic Logic (LDJ)**
-   - No dedicated Wikidata entity
-   - No DBPedia resource
-   - Must be defined manually in Catty ontology
-
-3. **Relationship Data**
-   - Wikidata only provides high-level classification
-   - No functor/morphism information
-   - No natural transformation data
-
-### Technical Limitations
-
-1. **Rate Limiting**
-   - Wikidata: No rate limiting observed during testing
-   - DBPedia: No rate limiting observed during testing
-
-2. **Bot Blocking**
-   - Wikidata: ✅ No blocking (standard wget user-agent works)
-   - DBPedia: ✅ No blocking
-
-3. **Timeout Issues**
-   - None observed during testing
-   - 10-second timeout sufficient for all requests
-
-4. **Proxy/Firewall**
-   - No proxy required
-   - Direct HTTPS connection works
-   - No MITM certificate issues
+### DBPedia SPARQL endpoint
+- **Endpoint:** https://dbpedia.org/sparql
+- **Status:** PASS
+- **Tool used:** `curl` (Accept: text/csv)
+- **Evidence:** CSV output saved under `data/semantic-web-snapshots/web-access/dbpedia_sparql_sample_*.csv`
 
 ---
 
-## Recommendations
+## 4. Fetch Results (RDF / JSON-LD / Turtle Snapshots)
 
-### Immediate Actions
+### Primary snapshot manifest
+- **Manifest:** `data/semantic-web-snapshots/MANIFEST.yaml`
+- Includes SHA256 hashes, sizes, timestamps, and per-source `.log` files.
 
-1. **Proceed with Catty Ontology Development**
-   - Semantic web data provides identification and classification
-   - Formal specifications must be hand-written
-   - Create ontology entries for LK, LJ, LDJ
+### Wikidata
+**Core logic identifiers used for Catty:**
+- Classical logic: **Q236975**
+- Intuitionistic logic: **Q176786**
 
-2. **Define LDJ Manually**
-   - No external source exists for Dual Intuitionistic Logic
-   - Use categorical foundations from thesis research
-   - Reference: Q124829676 (article about dual intuitionistic logic)
+**Additional logic / proof-system items fetched (examples):**
+- Sequent calculus: **Q1771121**
+- Structural rule: **Q4548693**
+- Weakening (structural rule): **Q19720140**
+- Cut rule: **Q18400501**
+- Linear logic: **Q841728**
+- Affine logic: **Q4688943**
+- Relevance logic: **Q176630**
+- Noncommutative logic: **Q7049221**
 
-3. **Cross-Reference External IDs**
-   - Use Wikidata Q236975 for Classical Logic
-   - Use Wikidata Q176786 for Intuitionistic Logic
-   - Link to DBPedia for related logic categories
+**Axioms / proof principles fetched (examples):**
+- Principle of excluded middle: **Q468422**
+- Law of noncontradiction: **Q868437**
+- Double negation elimination: **Q5300067**
+- Principle of explosion: **Q60190**
+- Proof by contradiction: **Q184899**
+- Reductio ad absurdum: **Q14402006**
 
-### Future Enhancements
+**LDJ status:**
+- No dedicated Wikidata item for “dual intuitionistic logic” as a *logic system* was found via `wbsearchentities` during this run.
+- A related **scholarly article** item exists and was snapshotted: **Q124829676** (“Dual Intuitionistic Logic and a Variety of Negations: The Logic of Scientific Research”).
 
-1. **SPARQL Queries**
-   - Query Wikidata for additional logic entities
-   - Explore classification hierarchies
-   - Find related logical systems
+Each Wikidata item is fetched in **two formats**:
+- `Special:EntityData/<Q>.json`
+- `Special:EntityData/<Q>.ttl`
 
-2. **Ontology Integration**
-   - Import semantic web identifiers into Catty ontology
-   - Use external IDs for cross-referencing
-   - Map Wikidata classifications to Catty categories
-
-3. **Automated Updates**
-   - Run fetch pipeline periodically
-   - Track changes in Wikidata classifications
-   - Update MANIFEST.yaml with new hashes
+### DBPedia
+DBPedia TTL pages fetched (with local triple counts via `rdflib`):
+- `Classical_logic.ttl` — **312 triples**
+- `Intuitionistic_logic.ttl` — **407 triples**
+- `Sequent_calculus.ttl` — **236 triples**
+- `Linear_logic.ttl` — **251 triples**
+- `Relevance_logic.ttl` — **145 triples**
 
 ---
 
-## Verification Commands
+## 5. What Was Found vs. What Catty Needs
+
+### Found (confirmed)
+- **Stable identifiers** for logics and many related concepts (Wikidata QIDs; DBPedia resources)
+- **Separate Wikidata entities** for key axioms and proof principles (excluded middle, noncontradiction, explosion, etc.)
+- **Separate Wikidata entities** for proof-system / structural-rule concepts (sequent calculus, weakening, cut, etc.)
+- **SPARQL access** to both Wikidata and DBPedia endpoints
+
+### Not found (in this limited, reproducible scan)
+This is **NOT an exhaustive claim**, only the outcome of the current snapshot pipeline:
+- Detailed *machine-readable* sequent calculus rule schemata embedded as structured RDF *inside* the “classical logic” / “intuitionistic logic” entities.
+- Direct “morphism between logics” encoding as categorical maps (Catty will still need its own ontology structures for this).
+
+---
+
+## 6. Repository References Used
+
+Semantic web resource pointers already exist in this repo:
+- `ontology/external-ontologies.md` (DBPedia, Wikidata, COLORE, OpenMath, nLab)
+- `ontology/ontological-inventory.md` (includes SPARQL endpoints and example URIs)
+
+These documents guided which endpoints/resources to test and snapshot.
+
+---
+
+## 7. How to Reproduce
 
 ```bash
-# Test web access
-wget --spider https://www.wikidata.org/wiki/Q236975
+# Stage 0: connectivity + tools + SPARQL
+./scripts/verify-web-access.sh
 
-# Verify downloaded files
-python3 -m json.tool data/semantic-web-snapshots/wikidata/LK_Q236975.json > /dev/null
-python3 -c "from rdflib import Graph; g=Graph(); g.parse('data/semantic-web-snapshots/dbpedia/Classical_logic.ttl', format='turtle'); print(f'{len(g)} triples')"
-
-# Re-run fetch pipeline
+# Stage 1+: snapshot pipeline (writes MANIFEST.yaml + per-file .log)
 ./scripts/fetch-semantic-web-logics.sh
 
-# Extract and analyze
-python3 scripts/extract_wikidata_logic.py data/semantic-web-snapshots/wikidata/LK_Q236975.json
-python3 scripts/extract_dbpedia_logic.py data/semantic-web-snapshots/dbpedia/Classical_logic.ttl
+# Validate some artifacts
+python3 -m json.tool data/semantic-web-snapshots/wikidata/Q236975_Classical_logic.json > /dev/null
+python3 -c "from rdflib import Graph; g=Graph(); g.parse('data/semantic-web-snapshots/dbpedia/Classical_logic.ttl', format='turtle'); print(len(g))"
+
+# RDF CLI parse test
+rapper -i turtle data/semantic-web-snapshots/dbpedia/Classical_logic.ttl -o ntriples | head
 ```
-
----
-
-## Conclusion
-
-The sandbox environment has full HTTPS web access. RDF data was successfully retrieved from Wikidata and DBPedia. However, the semantic web sources do not contain the formal specifications needed for Catty's categorical foundations (sequent systems, structural rules, axiom schemas). These must be defined manually in the thesis ontology.
-
-**Next Steps:**
-1. Create Catty ontology entries using semantic web identifiers as external references
-2. Define LDJ manually (no external source available)
-3. Supplement with hand-written formal specifications for sequent systems
-
----
-
-**Report Generated By:** fetch-semantic-web-logics.sh Pipeline  
-**Report Version:** 1.0.0

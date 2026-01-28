@@ -93,7 +93,7 @@ dbr:Sequent_calculus a dbo:ScientificDiscipline ;
 
 | Relationship | Support Level | Details |
 |--------------|---------------|---------|
-| Logics as categorical objects | **Good** | Each logic is a named item (e.g., LK = Q3525872, LJ = Q7680564) |
+| Logics as categorical objects | **Good** | Each logic is a named item (e.g., classical logic = Q236975, intuitionistic logic = Q176786) |
 | Morphisms between logics | **Partial** | Embeddings can be modeled via `P1552` (maps to) |
 | Sequent restrictions | **Reference Only** | Described in descriptions, not RDF structure |
 | Structural rules | **Reference Only** | Described in descriptions |
@@ -125,15 +125,15 @@ LIMIT 20
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix schema: <http://schema.org/> .
 
-wd:Q7680564 a wdt:Q8462 ;  # LJ
+wd:Q176786 ;  # intuitionistic logic
     rdfs:label "intuitionistic logic"@en ;
-    wdt:P361 wd:Q16917 ;  # part of category theory (example mapping)
-    schema:description "Intuitionistic sequent calculus"@en .
+    wdt:P361 wd:Q8462 ;  # part of mathematical logic (example mapping)
+    schema:description "various systems of symbolic logic"@en .
 
-wd:Q847878 a wdt:Q8462 ;  # Linear Logic
+wd:Q841728 ;  # linear logic
     rdfs:label "linear logic"@en ;
-    wdt:P1552 wd:Q7680564 ;  # maps to intuitionistic logic (translation)
-    schema:description "Substructural logic without weakening/contraction"@en .
+    wdt:P1552 wd:Q176786 ;  # related via translations / interpretations (example)
+    schema:description "substructural logic"@en .
 ```
 
 ### Limitations for Catty

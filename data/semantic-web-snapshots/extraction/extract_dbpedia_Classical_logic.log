@@ -1,0 +1,304 @@
+
+Loading RDF from: data/semantic-web-snapshots/dbpedia/Classical_logic.ttl
+======================================================================
+DBPedia Analysis: Classical Logic
+======================================================================
+
+Basic Statistics:
+  Total triples: 312
+  Unique subjects: 185
+  Unique predicates: 16
+  Unique objects: 121
+
+Types (rdf:type):
+  owl#Thing: 1
+
+Labels:
+  [ca]: Lògica clàssica
+  [de]: Klassische Logik
+  [en]: Classical logic
+  [eo]: Klasika logiko
+  [es]: Lógica clásica
+  [fr]: Logique classique
+  [it]: Logica classica
+  [ja]: 古典論理
+  [ko]: 고전 논리
+  [nl]: Klassieke logica
+  [pt]: Lógica clássica
+  [ru]: Классическая логика
+  [sv]: Klassisk logik
+  [uk]: Класична логіка
+  [zh]: 经典逻辑
+
+External Links (sameAs):
+  http://et.dbpedia.org/resource/Klassikaline_loogika
+  http://fa.dbpedia.org/resource/منطق_کلاسیک
+  http://zh.dbpedia.org/resource/经典逻辑
+  http://nl.dbpedia.org/resource/Klassieke_logica
+  http://ko.dbpedia.org/resource/고전_논리
+  http://uk.dbpedia.org/resource/Класична_логіка
+  http://mk.dbpedia.org/resource/Класична_логика
+  http://dbpedia.org/resource/Classical_logic
+  http://www.wikidata.org/entity/Q236975
+  http://tl.dbpedia.org/resource/Klasikong_lohika
+  ... and 14 more
+
+Connections to other resources (241 total):
+  -> Classical_logic
+  -> Classical_logic
+  -> Classical_logic
+  -> Classical_logic
+  -> Classical_logic
+  -> Giuseppe_Peano
+  -> Classical_logic
+  -> Classical_logic
+  -> Classical_logic
+  -> Classical_logic
+  -> Classical_logic
+  -> Classical_logic
+  -> Classical_logic
+  -> Category:History_of_logic
+  -> Aristotle
+  -> Classical_logic
+  -> Classical_logic
+  -> Classical_logic
+  -> Classical_logic
+  -> David_Hilbert
+  ... and 221 more
+
+======================================================================
+Catty-Relevant Data:
+======================================================================
+{
+  "source": "dbpedia",
+  "name": "Classical Logic",
+  "triples_count": 312,
+  "labels": {
+    "sv": "Klassisk logik",
+    "uk": "\u041a\u043b\u0430\u0441\u0438\u0447\u043d\u0430 \u043b\u043e\u0433\u0456\u043a\u0430",
+    "ca": "L\u00f2gica cl\u00e0ssica",
+    "zh": "\u7ecf\u5178\u903b\u8f91",
+    "nl": "Klassieke logica",
+    "it": "Logica classica",
+    "pt": "L\u00f3gica cl\u00e1ssica",
+    "ko": "\uace0\uc804 \ub17c\ub9ac",
+    "ja": "\u53e4\u5178\u8ad6\u7406",
+    "ru": "\u041a\u043b\u0430\u0441\u0441\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u043b\u043e\u0433\u0438\u043a\u0430",
+    "eo": "Klasika logiko",
+    "es": "L\u00f3gica cl\u00e1sica",
+    "fr": "Logique classique",
+    "en": "Classical logic",
+    "de": "Klassische Logik"
+  },
+  "types": [
+    "owl#Thing"
+  ],
+  "connections": [
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Category:History_of_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Boolean-valued_semantics",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Logical_operator",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Non-classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Quantifier_(logic)",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Mathematical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Deductive_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Logicism",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Semantics",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Boolean_algebra_(structure)",
+    "Category:Logic",
+    "Term_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Boolean_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "First-order_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Stoic_logic",
+    "Algebraic_logic",
+    "Classical_logic",
+    "Higher-order_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Tractatus_Logico_Philosophicus",
+    "Classical_logic",
+    "Category:Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Propositional_logic",
+    "Classical_logic",
+    "Two-element_Boolean_algebra",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic",
+    "Classical_logic"
+  ],
+  "external_references": [
+    "http://rdf.freebase.com/ns/m.0fhpt",
+    "http://d-nb.info/gnd/4333219-5"
+  ]
+}

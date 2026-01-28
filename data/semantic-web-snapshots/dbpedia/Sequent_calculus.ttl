@@ -1,0 +1,255 @@
+@prefix foaf:	<http://xmlns.com/foaf/0.1/> .
+@prefix wikipedia-en:	<http://en.wikipedia.org/wiki/> .
+@prefix dbr:	<http://dbpedia.org/resource/> .
+wikipedia-en:Sequent_calculus	foaf:primaryTopic	dbr:Sequent_calculus .
+@prefix dbo:	<http://dbpedia.org/ontology/> .
+dbr:Quantum_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+<http://dbpedia.org/resource/\u0141ukasiewicz_logic>	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Modal_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Computability_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Relevance_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Sequent	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+@prefix dbpedia-pl:	<http://pl.dbpedia.org/resource/> .
+dbr:Sequent_calculus	owl:sameAs	dbpedia-pl:Sekwenty_Gentzena ,
+		<http://lt.dbpedia.org/resource/Sekvencinis_skai\u010Diavimas> ,
+		dbr:Sequent_calculus ,
+		<http://de.dbpedia.org/resource/Sequenzenkalk\u00FCl> .
+@prefix dbpedia-hu:	<http://hu.dbpedia.org/resource/> .
+dbr:Sequent_calculus	owl:sameAs	dbpedia-hu:Szekvenskalkulus ,
+		<http://es.dbpedia.org/resource/C\u00E1lculo_de_secuentes> .
+@prefix dbpedia-global:	<https://global.dbpedia.org/id/> .
+dbr:Sequent_calculus	owl:sameAs	dbpedia-global:j4og ,
+		<http://zh.dbpedia.org/resource/\u76F8\u7EE7\u5F0F\u6F14\u7B97> ,
+		<http://ja.dbpedia.org/resource/\u30B7\u30FC\u30AF\u30A8\u30F3\u30C8\u8A08\u7B97> ,
+		<http://fr.dbpedia.org/resource/Calcul_des_s\u00E9quents> ,
+		<http://ru.dbpedia.org/resource/\u0418\u0441\u0447\u0438\u0441\u043B\u0435\u043D\u0438\u0435_\u0441\u0435\u043A\u0432\u0435\u043D\u0446\u0438\u0439> ,
+		<http://rdf.freebase.com/ns/m.01lfnc> .
+@prefix wikidata:	<http://www.wikidata.org/entity/> .
+dbr:Sequent_calculus	owl:sameAs	wikidata:Q1771121 ,
+		<http://ko.dbpedia.org/resource/\uC2DC\uD000\uD2B8_\uACC4\uC0B0> ,
+		<http://pt.dbpedia.org/resource/C\u00E1lculo_de_sequentes> ,
+		<http://eo.dbpedia.org/resource/Sekva\u0135a_kalkulo> ,
+		<http://uk.dbpedia.org/resource/\u0427\u0438\u0441\u043B\u0435\u043D\u043D\u044F_\u0441\u0435\u043A\u0432\u0435\u043D\u0446\u0456\u0439> .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+dbr:Sequent_calculus	rdfs:label	"Calcul des s\u00E9quents"@fr ,
+		"\uC2DC\uD000\uD2B8 \uACC4\uC0B0"@ko ,
+		"Sekva\u0135a kalkulo"@eo ,
+		"\u76F8\u7EE7\u5F0F\u6F14\u7B97"@zh ,
+		"\u0427\u0438\u0441\u043B\u0435\u043D\u043D\u044F \u0441\u0435\u043A\u0432\u0435\u043D\u0446\u0456\u0439"@uk ,
+		"C\u00E1lculo de sequentes"@pt ,
+		"Sequent calculus"@en ,
+		"Sequenzenkalk\u00FCl"@de ,
+		"\u30B7\u30FC\u30AF\u30A8\u30F3\u30C8\u8A08\u7B97"@ja ,
+		"Sekwenty Gentzena"@pl ,
+		"C\u00E1lculo de secuentes"@es ,
+		"\u0418\u0441\u0447\u0438\u0441\u043B\u0435\u043D\u0438\u0435 \u0441\u0435\u043A\u0432\u0435\u043D\u0446\u0438\u0439"@ru .
+@prefix dct:	<http://purl.org/dc/terms/> .
+@prefix dbc:	<http://dbpedia.org/resource/Category:> .
+dbr:Sequent_calculus	dct:subject	dbc:Automated_theorem_proving ,
+		dbc:Logical_calculi ,
+		dbc:Proof_theory ;
+	foaf:depiction	<http://commons.wikimedia.org/wiki/Special:FilePath/Sequent_calculus_proof_tree_example.png> .
+@prefix prov:	<http://www.w3.org/ns/prov#> .
+dbr:Sequent_calculus	prov:wasDerivedFrom	<http://en.wikipedia.org/wiki/Sequent_calculus?oldid=1310015542&ns=0> .
+@prefix gold:	<http://purl.org/linguistics/gold/> .
+dbr:Sequent_calculus	gold:hypernym	dbr:Tautology ;
+	foaf:isPrimaryTopicOf	wikipedia-en:Sequent_calculus .
+@prefix dbp:	<http://dbpedia.org/property/> .
+dbr:Sequent_calculus	dbp:id	"p/s084580"@en ;
+	dbo:wikiPageExternalLink	<http://scienceblogs.com/goodmath/2006/07/17/a-brief-diversion-sequent-calc/> .
+@prefix ns15:	<http://logitext.mit.edu/logitext.fcgi/> .
+dbr:Sequent_calculus	dbo:wikiPageExternalLink	ns15:tutorial ,
+		<http://gdz.sub.uni-goettingen.de/dms/resolveppn/%3FPPN=GDZPPN002375508> ,
+		<http://gdz.sub.uni-goettingen.de/dms/resolveppn/%3FPPN=GDZPPN002375605%7Cdoi=10.1007/bf01201363%7Cs2cid=186239837> ,
+		<http://math.ucsd.edu/~sbuss/ResearchWeb/handbookI/> .
+@prefix ns16:	<https://archive.org/details/> .
+dbr:Sequent_calculus	dbo:wikiPageExternalLink	ns16:proofstypes0000gira ;
+	dbo:thumbnail	<http://commons.wikimedia.org/wiki/Special:FilePath/Sequent_calculus_proof_tree_example.png?width=300> ;
+	dbp:title	"Sequent calculus"@en ;
+	dbo:wikiPageWikiLink	dbc:Proof_theory ,
+		dbr:Inference ,
+		dbr:Stephen_Cole_Kleene ,
+		dbr:Cut-elimination ,
+		dbr:Soundness ,
+		<http://dbpedia.org/resource/Set_(mathematics)> ,
+		dbr:Consistency ,
+		dbr:Logical_disjunction ,
+		dbr:Higher-order_logic ,
+		dbr:Cirquent_calculus ,
+		<http://dbpedia.org/resource/Tautology_(logic)> ,
+		dbr:Logical_consequence ,
+		dbr:Formal_system ,
+		<http://dbpedia.org/resource/Quantification_(logic)> ,
+		dbr:First-order_logic ,
+		dbr:Formal_logic ,
+		dbr:Theorem ,
+		<http://dbpedia.org/resource/Gentzen\u0027s_consistency_proof> ,
+		dbr:Rule_of_inference ,
+		dbr:Artificial_intelligence ,
+		dbr:Well-formed_formula ,
+		<http://dbpedia.org/resource/Resolution_(logic)> ,
+		dbr:Deduction_theorem ,
+		dbr:Intuitionistic_logic ,
+		<http://dbpedia.org/resource/Frege\u0027s_propositional_calculus> ,
+		<http://dbpedia.org/resource/G\u00F6del\u0027s_incompleteness_theorems> ,
+		dbr:Proof_theory ,
+		dbr:Propositional_calculus ,
+		<http://dbpedia.org/resource/Quantifier_(logic)> ,
+		dbr:Modal_logic ,
+		dbr:Mathematical_logic ,
+		dbr:Method_of_analytic_tableaux ,
+		dbr:Computer_science ,
+		dbr:Hilbert-style_deduction_system ,
+		dbr:If_and_only_if ,
+		dbr:Substructural_logic ,
+		<http://dbpedia.org/resource/Judgment_(mathematical_logic)> ,
+		dbr:Logical_conjunction ,
+		dbr:Natural_deduction ,
+		dbr:Atomic_formula ,
+		dbc:Logical_calculi ,
+		dbr:Sequent_calculus ,
+		dbr:Metatheory ,
+		dbr:Proof_calculus ,
+		dbr:Nested_sequent_calculus ,
+		<http://dbpedia.org/resource/File:Sequent_calculus_proof_tree_example.png> ,
+		dbr:Law_of_excluded_middle ,
+		dbr:Propositional_logic ,
+		dbr:David_Hilbert ,
+		<http://dbpedia.org/resource/De_Morgan\u0027s_laws> ,
+		dbr:Cut-elimination_theorem ,
+		dbr:Gerhard_Gentzen ,
+		dbr:Argument ,
+		dbr:Formal_proof ,
+		dbr:Multiset ,
+		dbr:Classical_logic ,
+		<http://dbpedia.org/resource/Tree_(graph_theory)> ,
+		dbr:Axiom ,
+		dbr:Semantics ,
+		dbr:Sequent ,
+		dbr:Principle_of_explosion ,
+		<http://dbpedia.org/resource/Completeness_(logic)> ,
+		dbr:Automated_deduction ,
+		dbr:Free_variables_and_bound_variables ,
+		<http://dbpedia.org/resource/Turnstile_(symbol)> ,
+		dbc:Automated_theorem_proving ,
+		dbr:Disjunction_and_existence_properties ,
+		dbr:Sequence ,
+		dbr:Completeness_of_atomic_initial_sequents ,
+		dbr:Hilbert_system ;
+	dbo:description	"Methodik der Beweistheorie der Mathematik und der Programmanalyse der Informatik"@de ,
+		"style of formal logical argumentation"@en ,
+		"\u043A\u043B\u0430\u0441\u0441 \u043B\u043E\u0433\u0438\u0447\u0435\u0441\u043A\u0438\u0445 \u0438\u0441\u0447\u0438\u0441\u043B\u0435\u043D\u0438\u0439, \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u0443\u044E\u0449\u0438\u0445 \u0434\u0440\u0435\u0432\u043E\u0432\u0438\u0434\u043D\u044B\u0439 \u0432\u044B\u0432\u043E\u0434 \u0438 \u0441\u0435\u043A\u0432\u0435\u043D\u0446\u0438\u0438 (\u0443\u0441\u043B\u043E\u0432\u043D\u044B\u0435 \u0441\u0443\u0436\u0434\u0435\u043D\u0438\u044F)"@ru ,
+		"metodika teorije dokazov v matematiki in programske analize v ra\u010Dunalni\u0161tvu"@sl ,
+		"syst\u00E8me de d\u00E9duction math\u00E9matique"@fr ,
+		"logikai \u00E9rvel\u00E9si st\u00EDlus"@hu .
+@prefix dbt:	<http://dbpedia.org/resource/Template:> .
+dbr:Sequent_calculus	dbp:wikiPageUsesTemplate	dbt:Springer ,
+		dbt:Cite_arXiv ,
+		dbt:Cite_journal ,
+		dbt:Sfn ,
+		dbt:Main_article ,
+		dbt:Diagrams_in_logic ,
+		dbt:Cite_conference ,
+		dbt:Cite_book ,
+		dbt:Cite_web ,
+		dbt:Slink ,
+		dbt:Short_description ,
+		dbt:Cite_encyclopedia ,
+		dbt:Reflist ,
+		<http://dbpedia.org/resource/Template:!> ,
+		dbt:Main ,
+		dbt:Use_dmy_dates .
+dbr:Frege_system	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Typing_rule	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Kripke_semantics	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Proof_by_contradiction	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+<http://dbpedia.org/resource/Turnstile_(symbol)>	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+<http://dbpedia.org/resource/Herbrand\u0027s_theorem>	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Proof_complexity	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Geometry_of_interaction	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Linear_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Method_of_analytic_tableaux	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Cut-elimination_theorem	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Proof_net	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Multiple-conclusion_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:KeY	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Metalogic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Craig_interpolation	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Completeness_of_atomic_initial_sequents	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+@prefix ns18:	<http://dbpedia.org/resource/Logic:> .
+ns18:_The_Laws_of_Truth	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Proof_procedure	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:System_L	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Hypersequent	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Mathematical_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Gaisi_Takeuti	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:List_of_mathematical_logic_topics	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Abductive_reasoning	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Natural_deduction	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+<http://dbpedia.org/resource/Judgment_(mathematical_logic)>	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Proof-theoretic_semantics	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Gerhard_Gentzen	dbp:knownFor	dbr:Sequent_calculus ;
+	dbo:knownFor	dbr:Sequent_calculus ;
+	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Paraconsistent_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Monotonicity_of_entailment	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Nested_sequent_calculus	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Reduction_tree	dbo:wikiPageWikiLink	dbr:Sequent_calculus ;
+	dbo:wikiPageRedirects	dbr:Sequent_calculus .
+dbr:Reduction_trees	dbo:wikiPageWikiLink	dbr:Sequent_calculus ;
+	dbo:wikiPageRedirects	dbr:Sequent_calculus .
+dbr:Gentzen-style_system	dbo:wikiPageWikiLink	dbr:Sequent_calculus ;
+	dbo:wikiPageRedirects	dbr:Sequent_calculus .
+dbr:Gentzen_calculus	dbo:wikiPageWikiLink	dbr:Sequent_calculus ;
+	dbo:wikiPageRedirects	dbr:Sequent_calculus .
+dbr:Gentzen_system	dbo:wikiPageWikiLink	dbr:Sequent_calculus ;
+	dbo:wikiPageRedirects	dbr:Sequent_calculus .
+dbr:Gentzen_systems	dbo:wikiPageWikiLink	dbr:Sequent_calculus ;
+	dbo:wikiPageRedirects	dbr:Sequent_calculus .
+dbr:Inference_lines	dbo:wikiPageWikiLink	dbr:Sequent_calculus ;
+	dbo:wikiPageRedirects	dbr:Sequent_calculus .
+<http://dbpedia.org/resource/Index_of_philosophy_articles_(R\u2013Z)>	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Index_of_logic_articles	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Hilbert_system	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Bunched_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Deductive_reasoning	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+<http://dbpedia.org/resource/Jape_(software)>	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+<http://dbpedia.org/resource/Calculus_(disambiguation)>	dbo:wikiPageWikiLink	dbr:Sequent_calculus ;
+	dbo:wikiPageDisambiguates	dbr:Sequent_calculus .
+dbr:Structural_proof_theory	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Noncommutative_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Proof_calculus	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Deep_inference	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Analytic_proof	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Formal_proof	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Modus_ponens	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:First-order_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Rule_of_inference	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Proof_compression	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Inference_line	dbo:wikiPageWikiLink	dbr:Sequent_calculus ;
+	dbo:wikiPageRedirects	dbr:Sequent_calculus .
+dbr:Proof_theory	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Giorgi_Japaridze	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Arnon_Avron	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Propositional_calculus	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Idempotency_of_entailment	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Boolean_algebra	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:List_of_functional_programming_topics	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Propositional_proof_system	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:History_of_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+<http://dbpedia.org/resource/Theory_(mathematical_logic)>	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+<http://dbpedia.org/resource/Curry\u2013Howard_correspondence>	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Substructural_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Admissible_rule	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Minimal_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Extensions_of_First_Order_Logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Cut_rule	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:System_LJ	dbo:wikiPageWikiLink	dbr:Sequent_calculus ;
+	dbo:wikiPageRedirects	dbr:Sequent_calculus .
+dbr:System_LK	dbo:wikiPageWikiLink	dbr:Sequent_calculus ;
+	dbo:wikiPageRedirects	dbr:Sequent_calculus .
+<http://dbpedia.org/resource/Ivan_Orlov_(philosopher)>	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Geometric_logic	dbo:wikiPageWikiLink	dbr:Sequent_calculus .
+dbr:Cedent	dbo:wikiPageWikiLink	dbr:Sequent_calculus .

@@ -1,67 +1,418 @@
 # Semantic Web Data Manifest for Catty Thesis
-# Generated: 2026-01-28T03:42:53Z
-# This manifest provides reproducibility metadata for all fetched RDF data
+# Generated: 2026-01-28T05:09:50Z
+# This manifest provides reproducibility metadata for fetched semantic web artifacts.
 
-timestamp: "2026-01-28T03:42:53Z"
-pipeline_version: "1.0.0"
-description: "RDF data fetched from Wikidata and DBPedia for LK, LJ, LDJ logics"
+timestamp: "2026-01-28T05:09:50Z"
+pipeline:
+  name: "fetch-semantic-web-logics.sh"
+  version: "1.1.0"
+  description: "Fetch Wikidata/DBPedia snapshots for LK, LJ, LDJ-adjacent resources, plus axioms/rules referenced in Catty."
+
+tools:
+  wget: "GNU Wget 1.21.4 built on linux-gnu."
+  curl: "curl 8.5.0 (x86_64-pc-linux-gnu) libcurl/8.5.0 OpenSSL/3.0.13 zlib/1.3 brotli/1.1.0 zstd/1.5.5 libidn2/2.3.7 libpsl/0.21.2 (+libidn2/2.3.7) libssh/0.10.6/openssl/zlib nghttp2/1.59.0 librtmp/2.3 OpenLDAP/2.6.7"
+  jq: "jq-1.7"
+  rapper: "2.0.16"
 
 sources:
-  - source: "Wikidata Classical Logic (LK)"
+
+  - source: "Wikidata: Classical logic (Q236975)"
     type: "wikidata"
     url: "https://www.wikidata.org/wiki/Special:EntityData/Q236975.json"
-    file: "data/semantic-web-snapshots/wikidata/LK_Q236975.json"
-    hash_sha256: "f0ea43930225fcc37caee789cdce4a62b8d62591a4d664e98a970619b79ebb52"
-    size_bytes: 25438
-    fetched_at: "2026-01-28T03:42:53Z"
+    file: "data/semantic-web-snapshots/wikidata/Q236975_Classical_logic.json"
+    fetched_at: "2026-01-28T05:09:50Z"
     status: "success"
-    wikidata_id: "Q236975"
-    label: "classical logic"
-    description: "class of formal logics"
+    size_bytes: 25438
+    hash_sha256: "f0ea43930225fcc37caee789cdce4a62b8d62591a4d664e98a970619b79ebb52"
 
-  - source: "Wikidata Intuitionistic Logic (LJ)"
+  - source: "Wikidata: Classical logic (Q236975) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q236975.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q236975_Classical_logic.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 76146
+    hash_sha256: "b611d1c3af20530d75b1d9e5b64d6160064179926442afe8e4d7db3956955715"
+
+  - source: "Wikidata: Intuitionistic logic (Q176786)"
     type: "wikidata"
     url: "https://www.wikidata.org/wiki/Special:EntityData/Q176786.json"
-    file: "data/semantic-web-snapshots/wikidata/LJ_Q176786.json"
-    hash_sha256: "64eb5dc74c522353cbc87602e0b5e1184132e20b0b685e57357f30e4994a0263"
-    size_bytes: 17968
-    fetched_at: "2026-01-28T03:42:53Z"
+    file: "data/semantic-web-snapshots/wikidata/Q176786_Intuitionistic_logic.json"
+    fetched_at: "2026-01-28T05:09:50Z"
     status: "success"
-    wikidata_id: "Q176786"
-    label: "intuitionistic logic"
-    description: "various systems of symbolic logic"
+    size_bytes: 17968
+    hash_sha256: "64eb5dc74c522353cbc87602e0b5e1184132e20b0b685e57357f30e4994a0263"
 
-  - source: "DBPedia Classical Logic"
+  - source: "Wikidata: Intuitionistic logic (Q176786) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q176786.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q176786_Intuitionistic_logic.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 62466
+    hash_sha256: "9eaf0b6d44f8ddbe20687b1d43f49f85afd2224b6355ea37f017c8612b1d5564"
+
+  - source: "Wikidata: Sequent calculus (Q1771121)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q1771121.json"
+    file: "data/semantic-web-snapshots/wikidata/Q1771121_Sequent_calculus.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 10145
+    hash_sha256: "e03b98cd9f11e507c005136e4d478fa773e126db623112e737b07bea6088b5eb"
+
+  - source: "Wikidata: Sequent calculus (Q1771121) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q1771121.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q1771121_Sequent_calculus.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 35784
+    hash_sha256: "62716b5d92b7d0894432239acdfd6be449893dbff49c72d86c9cd71383b590de"
+
+  - source: "Wikidata: Structural rule (Q4548693)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q4548693.json"
+    file: "data/semantic-web-snapshots/wikidata/Q4548693_Structural_rule.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 2794
+    hash_sha256: "abe654b2f1a2702a4e057d388afb7c43ac80c39456db3f24d949749321f11681"
+
+  - source: "Wikidata: Structural rule (Q4548693) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q4548693.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q4548693_Structural_rule.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 12447
+    hash_sha256: "ba6664e1f5860b25530f4d036c97d7202538553dafffd37f947fb20601050ea1"
+
+  - source: "Wikidata: Weakening (structural rule) (Q19720140)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q19720140.json"
+    file: "data/semantic-web-snapshots/wikidata/Q19720140_Weakening_(structural_rule).json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 1466
+    hash_sha256: "5597d1b215dfe3d70ca599e3987dfa6b390d9db2cd997b83886e06306d1095e1"
+
+  - source: "Wikidata: Weakening (structural rule) (Q19720140) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q19720140.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q19720140_Weakening_(structural_rule).ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 6169
+    hash_sha256: "62eb89068a06c9d36aa96ac3bc7bf91ea9e14bcaeb49be265a47f770256dec3f"
+
+  - source: "Wikidata: Cut rule (Q18400501)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q18400501.json"
+    file: "data/semantic-web-snapshots/wikidata/Q18400501_Cut_rule.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 6280
+    hash_sha256: "17f6853cf8612e8a658a385fb782dc331d2bf7632d26acb2284a78fa9ff8302c"
+
+  - source: "Wikidata: Cut rule (Q18400501) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q18400501.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q18400501_Cut_rule.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 25183
+    hash_sha256: "4cce88ed283c9dcc38ae1cc88adfad3d2a5dd2023479a44c5b3f377138aa8b93"
+
+  - source: "Wikidata: Linear logic (Q841728)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q841728.json"
+    file: "data/semantic-web-snapshots/wikidata/Q841728_Linear_logic.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 10541
+    hash_sha256: "39da33e1774bec6d07f465473025bb9f6851474ecfec77f106c16dc084592d4d"
+
+  - source: "Wikidata: Linear logic (Q841728) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q841728.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q841728_Linear_logic.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 40445
+    hash_sha256: "ee136e27b78630a5b53af9ce8b9230daacf2a7753af3037ae0af3fc5bf169768"
+
+  - source: "Wikidata: Affine logic (Q4688943)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q4688943.json"
+    file: "data/semantic-web-snapshots/wikidata/Q4688943_Affine_logic.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 1833
+    hash_sha256: "b5ef2be70573d240081a18646bdd50552c40b33cc2d41ef821fddc181d217ce7"
+
+  - source: "Wikidata: Affine logic (Q4688943) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q4688943.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q4688943_Affine_logic.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 8450
+    hash_sha256: "2e0b6e1150d534c90ebb969b3fc6ac35ae589b447d98ac033f2dc2536a8140ad"
+
+  - source: "Wikidata: Relevance logic (Q176630)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q176630.json"
+    file: "data/semantic-web-snapshots/wikidata/Q176630_Relevance_logic.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 13101
+    hash_sha256: "88d8a7f66fd5679b89714116805085dcd61a7574646a7e34e428d24e8fd757aa"
+
+  - source: "Wikidata: Relevance logic (Q176630) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q176630.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q176630_Relevance_logic.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 38533
+    hash_sha256: "b89a3341c29b8722814b074526d40791fa1e848b5c7457fd54fda781ceadecab"
+
+  - source: "Wikidata: Noncommutative logic (Q7049221)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q7049221.json"
+    file: "data/semantic-web-snapshots/wikidata/Q7049221_Noncommutative_logic.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 1423
+    hash_sha256: "46b48b90ea3a1a0e6d459eedc8503b1d33fd8546ccfb81f473aaee8e72cf3798"
+
+  - source: "Wikidata: Noncommutative logic (Q7049221) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q7049221.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q7049221_Noncommutative_logic.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 6806
+    hash_sha256: "8ee3831aac0f447b685893d0d187a2d5dd82a9d128164f8815aa2973339a9f3e"
+
+  - source: "Wikidata: Non-monotonic logic (Q2488768)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q2488768.json"
+    file: "data/semantic-web-snapshots/wikidata/Q2488768_Non-monotonic_logic.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 12277
+    hash_sha256: "9cc1db108b92cba3d1b513403f74dbe27e8f3e0ea77d24bc5d8692e9e29743ce"
+
+  - source: "Wikidata: Non-monotonic logic (Q2488768) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q2488768.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q2488768_Non-monotonic_logic.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 38858
+    hash_sha256: "aee21ebc5fa0215669a964daf7cbc9195c8776b2893c7555487473a023451fd4"
+
+  - source: "Wikidata: Monotonicity of entailment (Q1945137)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q1945137.json"
+    file: "data/semantic-web-snapshots/wikidata/Q1945137_Monotonicity_of_entailment.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 3679
+    hash_sha256: "5bafcf14c99fd15990ec84b7549fbd7b1409c7e48e788be0bf59b69e711a8960"
+
+  - source: "Wikidata: Monotonicity of entailment (Q1945137) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q1945137.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q1945137_Monotonicity_of_entailment.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 11248
+    hash_sha256: "b44505535954c2be2291b3842e10a63229c8164d4900b3569309e3335b6cfa0e"
+
+  - source: "Wikidata: Principle of excluded middle (Q468422)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q468422.json"
+    file: "data/semantic-web-snapshots/wikidata/Q468422_Principle_of_excluded_middle.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 35635
+    hash_sha256: "4909e4baca685a2bb6de576d96ff8e9c41d19cdc93ff40e2931dfaae5868f537"
+
+  - source: "Wikidata: Principle of excluded middle (Q468422) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q468422.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q468422_Principle_of_excluded_middle.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 83081
+    hash_sha256: "72e533734960c0908c97b1469b9a3e77da1b1a9300d94520c2bf4a395da2e4bf"
+
+  - source: "Wikidata: Law of noncontradiction (Q868437)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q868437.json"
+    file: "data/semantic-web-snapshots/wikidata/Q868437_Law_of_noncontradiction.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 23260
+    hash_sha256: "23c9f26b8d2a741b25f4be437aedadaaaf7c6bb1209fd7c8d4189d6be23131b0"
+
+  - source: "Wikidata: Law of noncontradiction (Q868437) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q868437.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q868437_Law_of_noncontradiction.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 54426
+    hash_sha256: "8f7682e097019a12c028b90c95e6ba7b6baceb6ae448bfbcfdfe51d78ff3dbe2"
+
+  - source: "Wikidata: Double negation elimination (Q5300067)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q5300067.json"
+    file: "data/semantic-web-snapshots/wikidata/Q5300067_Double_negation_elimination.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 6982
+    hash_sha256: "4b15c4cf457194e4b6be3852cd7a34ba9a294148399e1e7f64ec97714eee154e"
+
+  - source: "Wikidata: Double negation elimination (Q5300067) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q5300067.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q5300067_Double_negation_elimination.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 20627
+    hash_sha256: "7434a2815589c8741aee15eaa6e8900c04362dd3737d4b4424acc4befda10673"
+
+  - source: "Wikidata: Principle of explosion (Q60190)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q60190.json"
+    file: "data/semantic-web-snapshots/wikidata/Q60190_Principle_of_explosion.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 15471
+    hash_sha256: "d31ba8829c5aae58147ba17757a34f55308bb1307168e53423f7b8fa36204575"
+
+  - source: "Wikidata: Principle of explosion (Q60190) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q60190.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q60190_Principle_of_explosion.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 43084
+    hash_sha256: "55da72e734116857bc742e42be4f0c36be973918a285b23401648c8946a867de"
+
+  - source: "Wikidata: Proof by contradiction (Q184899)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q184899.json"
+    file: "data/semantic-web-snapshots/wikidata/Q184899_Proof_by_contradiction.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 26654
+    hash_sha256: "fdcf3f6467c4b0d6e511797f14ab12ff335a904d69b0233af613b4472d600322"
+
+  - source: "Wikidata: Proof by contradiction (Q184899) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q184899.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q184899_Proof_by_contradiction.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 59710
+    hash_sha256: "824f1e480033564b929202b738d8e6817b795bdd1cfb156d2dde8e5d0322852d"
+
+  - source: "Wikidata: Reductio ad absurdum (Q14402006)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q14402006.json"
+    file: "data/semantic-web-snapshots/wikidata/Q14402006_Reductio_ad_absurdum.json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 24755
+    hash_sha256: "1b68052898b055abd581e2124a38622c64661b801738cdd87e5ac98ee4b58a90"
+
+  - source: "Wikidata: Reductio ad absurdum (Q14402006) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q14402006.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q14402006_Reductio_ad_absurdum.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 69649
+    hash_sha256: "337c5e0232b66aa36a69d7facd1d5455fbd0a02923516e2793770ab2925c13a8"
+
+  - source: "Wikidata: Dual intuitionistic logic (article) (Q124829676)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q124829676.json"
+    file: "data/semantic-web-snapshots/wikidata/Q124829676_Dual_intuitionistic_logic_(article).json"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 17998
+    hash_sha256: "50a730c87e7a6ac681c7648a992e0005ea5a996df8dbba2616e1001918a66f62"
+
+  - source: "Wikidata: Dual intuitionistic logic (article) (Q124829676) [Turtle]"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q124829676.ttl"
+    file: "data/semantic-web-snapshots/wikidata/Q124829676_Dual_intuitionistic_logic_(article).ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 28888
+    hash_sha256: "c872a03440bc22362d0f5a9fa60f4585ace8d488b971387bd9f0ea2701c8b047"
+
+  - source: "DBPedia: Classical logic"
     type: "dbpedia"
     url: "https://dbpedia.org/data/Classical_logic.ttl"
     file: "data/semantic-web-snapshots/dbpedia/Classical_logic.ttl"
-    hash_sha256: "414f9735acd30ece358ce2a7303dbb3f1139148edbddef7caf318307b94045b6"
-    size_bytes: 19936
-    fetched_at: "2026-01-28T03:42:54Z"
+    fetched_at: "2026-01-28T05:09:50Z"
     status: "success"
-    triples_count: 312
+    size_bytes: 19936
+    hash_sha256: "414f9735acd30ece358ce2a7303dbb3f1139148edbddef7caf318307b94045b6"
 
-  - source: "DBPedia Intuitionistic Logic"
+  - source: "DBPedia: Intuitionistic logic"
     type: "dbpedia"
     url: "https://dbpedia.org/data/Intuitionistic_logic.ttl"
     file: "data/semantic-web-snapshots/dbpedia/Intuitionistic_logic.ttl"
-    hash_sha256: "17f32a7c2e3291e1a170424e844e4a3a14a8308108c9d1b52c489197e17841b9"
-    size_bytes: 25881
-    fetched_at: "2026-01-28T03:42:54Z"
+    fetched_at: "2026-01-28T05:09:50Z"
     status: "success"
+    size_bytes: 25881
+    hash_sha256: "17f32a7c2e3291e1a170424e844e4a3a14a8308108c9d1b52c489197e17841b9"
+
+  - source: "DBPedia: Sequent calculus"
+    type: "dbpedia"
+    url: "https://dbpedia.org/data/Sequent_calculus.ttl"
+    file: "data/semantic-web-snapshots/dbpedia/Sequent_calculus.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 14047
+    hash_sha256: "254e72d66f58381f4279afaa5e36dfc1484b9b9f6dcbeec9502a6ee2d907d5ae"
+
+  - source: "DBPedia: Linear logic"
+    type: "dbpedia"
+    url: "https://dbpedia.org/data/Linear_logic.ttl"
+    file: "data/semantic-web-snapshots/dbpedia/Linear_logic.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 12749
+    hash_sha256: "17ff5bb030626ecb405ed6059434cf6b67a674027858e12788dd86692e8d2499"
+
+  - source: "DBPedia: Relevance logic"
+    type: "dbpedia"
+    url: "https://dbpedia.org/data/Relevance_logic.ttl"
+    file: "data/semantic-web-snapshots/dbpedia/Relevance_logic.ttl"
+    fetched_at: "2026-01-28T05:09:50Z"
+    status: "success"
+    size_bytes: 7876
+    hash_sha256: "28927ee807e18d654ed5d64caf345f7b6a0bb7734407a38b87507845e63de5f5"
 
 notes:
+  lk_lj_identifiers:
+    classical_logic_qid: "Q236975"
+    intuitionistic_logic_qid: "Q176786"
   ldj_status: |
-    NOT FOUND - Dual Intuitionistic Logic (LDJ) does not have a dedicated Wikidata
-    entity. The logic must be defined in the Catty ontology manually using categorical
-    specifications.
-  data_limitations: |
-    Wikidata provides general classification data but does not contain formal
-    specifications of sequent systems, structural rules (weakening, contraction,
-    exchange), or axiom schemas (LEM, LNC, etc.). These must be defined in the
-    Catty thesis ontology.
-  recommended_supplements: |
-    The Catty thesis should supplement semantic web data with:
-    - Manual formal specifications in ontology/logics.ttl
-    - Sequent rules in ontology/sequents.ttl
-    - Structural rules in ontology/structural-rules.ttl
+    No dedicated Wikidata item for "dual intuitionistic logic" as a logic system was found via
+    wbsearchentities at the time of this snapshot. A closely related item exists as a *scholarly
+    article* (Q124829676) and is included as a reference snapshot.
+  axioms_and_rules_note: |
+    Several axioms/rules relevant to Catty's LK/LJ/LL picture exist as separate Wikidata entities
+    (e.g. excluded middle, noncontradiction, cut rule, weakening). These are included to support
+    downstream linking, but they are not (yet) structured as "sequent calculus rules" inside the
+    logic entity pages.

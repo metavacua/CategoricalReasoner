@@ -1,0 +1,2444 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix wikibase: <http://wikiba.se/ontology#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix schema: <http://schema.org/> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix data: <https://www.wikidata.org/wiki/Special:EntityData/> .
+@prefix wds: <http://www.wikidata.org/entity/statement/> .
+@prefix wdref: <http://www.wikidata.org/reference/> .
+@prefix wdv: <http://www.wikidata.org/value/> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix wdtn: <http://www.wikidata.org/prop/direct-normalized/> .
+@prefix p: <http://www.wikidata.org/prop/> .
+@prefix ps: <http://www.wikidata.org/prop/statement/> .
+@prefix psv: <http://www.wikidata.org/prop/statement/value/> .
+@prefix psn: <http://www.wikidata.org/prop/statement/value-normalized/> .
+@prefix pq: <http://www.wikidata.org/prop/qualifier/> .
+@prefix pqv: <http://www.wikidata.org/prop/qualifier/value/> .
+@prefix pqn: <http://www.wikidata.org/prop/qualifier/value-normalized/> .
+@prefix pr: <http://www.wikidata.org/prop/reference/> .
+@prefix prv: <http://www.wikidata.org/prop/reference/value/> .
+@prefix prn: <http://www.wikidata.org/prop/reference/value-normalized/> .
+@prefix wdno: <http://www.wikidata.org/prop/novalue/> .
+
+data:Q468422 a schema:Dataset ;
+	schema:about wd:Q468422 ;
+	cc:license <http://creativecommons.org/publicdomain/zero/1.0/> ;
+	schema:softwareVersion "1.0.0" ;
+	schema:version "2422377004"^^xsd:integer ;
+	schema:dateModified "2025-10-27T04:13:05Z"^^xsd:dateTime ;
+	wikibase:statements "26"^^xsd:integer ;
+	wikibase:sitelinks "40"^^xsd:integer ;
+	wikibase:identifiers "14"^^xsd:integer .
+
+wd:Q468422 a wikibase:Item .
+
+<https://zh.wikipedia.org/wiki/%E6%8E%92%E4%B8%AD%E5%BE%8B> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "zh" ;
+	schema:isPartOf <https://zh.wikipedia.org/> ;
+	schema:name "排中律"@zh .
+
+<https://zh.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://pms.wikipedia.org/wiki/Prinsipi_d%C3%ABl_ters_bar%C3%A0_f%C3%B2ra> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "pms" ;
+	schema:isPartOf <https://pms.wikipedia.org/> ;
+	schema:name "Prinsipi dël ters barà fòra"@pms .
+
+<https://pms.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://ky.wikipedia.org/wiki/%D2%AE%D1%87%D2%AF%D0%BD%D1%87%D2%AF%D0%BB%D2%AF%D0%BA%D1%82%D2%AF_%D1%87%D0%B5%D1%82%D0%BA%D0%B5_%D0%BA%D0%B0%D0%B3%D1%83%D1%83_%D0%BF%D1%80%D0%B8%D0%BD%D1%86%D0%B8%D0%B1%D0%B8> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "ky" ;
+	schema:isPartOf <https://ky.wikipedia.org/> ;
+	schema:name "Үчүнчүлүктү четке кагуу принциби"@ky .
+
+<https://ky.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://pl.wikipedia.org/wiki/Prawo_wy%C5%82%C4%85czonego_%C5%9Brodka> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "pl" ;
+	schema:isPartOf <https://pl.wikipedia.org/> ;
+	schema:name "Prawo wyłączonego środka"@pl .
+
+<https://pl.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://fr.wikipedia.org/wiki/Principe_du_tiers_exclu> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "fr" ;
+	schema:isPartOf <https://fr.wikipedia.org/> ;
+	schema:name "Principe du tiers exclu"@fr .
+
+<https://fr.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://ko.wikipedia.org/wiki/%EB%B0%B0%EC%A4%91%EB%A5%A0> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "ko" ;
+	schema:isPartOf <https://ko.wikipedia.org/> ;
+	schema:name "배중률"@ko .
+
+<https://ko.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://es.wikipedia.org/wiki/Principio_del_tercero_excluido> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "es" ;
+	schema:isPartOf <https://es.wikipedia.org/> ;
+	schema:name "Principio del tercero excluido"@es .
+
+<https://es.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://hu.wikipedia.org/wiki/Kiz%C3%A1rt_harmadik_elve> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "hu" ;
+	schema:isPartOf <https://hu.wikipedia.org/> ;
+	schema:name "Kizárt harmadik elve"@hu .
+
+<https://hu.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://it.wikipedia.org/wiki/Tertium_non_datur> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "it" ;
+	schema:isPartOf <https://it.wikipedia.org/> ;
+	schema:name "Tertium non datur"@it .
+
+<https://it.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://de.wikipedia.org/wiki/Satz_vom_ausgeschlossenen_Dritten> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "de" ;
+	schema:isPartOf <https://de.wikipedia.org/> ;
+	schema:name "Satz vom ausgeschlossenen Dritten"@de .
+
+<https://de.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://ja.wikipedia.org/wiki/%E6%8E%92%E4%B8%AD%E5%BE%8B> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "ja" ;
+	schema:isPartOf <https://ja.wikipedia.org/> ;
+	schema:name "排中律"@ja .
+
+<https://ja.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://el.wikipedia.org/wiki/%CE%91%CF%81%CF%87%CE%AE_%CE%B1%CF%80%CE%BF%CE%BA%CE%BB%CE%B5%CE%B9%CF%8C%CE%BC%CE%B5%CE%BD%CE%BF%CF%85_%CE%BC%CE%AD%CF%83%CE%BF%CF%85> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "el" ;
+	schema:isPartOf <https://el.wikipedia.org/> ;
+	schema:name "Αρχή αποκλειόμενου μέσου"@el .
+
+<https://el.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://nl.wikipedia.org/wiki/Wet_van_de_uitgesloten_derde> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "nl" ;
+	schema:isPartOf <https://nl.wikipedia.org/> ;
+	schema:name "Wet van de uitgesloten derde"@nl .
+
+<https://nl.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://sv.wikipedia.org/wiki/Lagen_om_det_uteslutna_tredje> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "sv" ;
+	schema:isPartOf <https://sv.wikipedia.org/> ;
+	schema:name "Lagen om det uteslutna tredje"@sv .
+
+<https://sv.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://pt.wikipedia.org/wiki/Lei_do_terceiro_exclu%C3%ADdo> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "pt" ;
+	schema:isPartOf <https://pt.wikipedia.org/> ;
+	schema:name "Lei do terceiro excluído"@pt .
+
+<https://pt.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://is.wikipedia.org/wiki/L%C3%B6gm%C3%A1li%C3%B0_um_anna%C3%B0_tveggja> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "is" ;
+	schema:isPartOf <https://is.wikipedia.org/> ;
+	schema:name "Lögmálið um annað tveggja"@is .
+
+<https://is.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://eo.wikipedia.org/wiki/Le%C4%9Do_de_neekzisto_de_tria_eblo> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "eo" ;
+	schema:isPartOf <https://eo.wikipedia.org/> ;
+	schema:name "Leĝo de neekzisto de tria eblo"@eo .
+
+<https://eo.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://ru.wikipedia.org/wiki/%D0%97%D0%B0%D0%BA%D0%BE%D0%BD_%D0%B8%D1%81%D0%BA%D0%BB%D1%8E%D1%87%D1%91%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE_%D1%82%D1%80%D0%B5%D1%82%D1%8C%D0%B5%D0%B3%D0%BE> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "ru" ;
+	schema:isPartOf <https://ru.wikipedia.org/> ;
+	schema:name "Закон исключённого третьего"@ru .
+
+<https://ru.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://en.wikipedia.org/wiki/Law_of_excluded_middle> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "en" ;
+	schema:isPartOf <https://en.wikipedia.org/> ;
+	schema:name "Law of excluded middle"@en .
+
+<https://en.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://ca.wikipedia.org/wiki/Principi_del_tercer_excl%C3%B2s> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "ca" ;
+	schema:isPartOf <https://ca.wikipedia.org/> ;
+	schema:name "Principi del tercer exclòs"@ca .
+
+<https://ca.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://fi.wikipedia.org/wiki/Kolmannen_poissuljetun_laki> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "fi" ;
+	schema:isPartOf <https://fi.wikipedia.org/> ;
+	schema:name "Kolmannen poissuljetun laki"@fi .
+
+<https://fi.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://uk.wikipedia.org/wiki/%D0%97%D0%B0%D0%BA%D0%BE%D0%BD_%D0%B2%D0%B8%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%BE%D0%B3%D0%BE_%D1%82%D1%80%D0%B5%D1%82%D1%8C%D0%BE%D0%B3%D0%BE> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "uk" ;
+	schema:isPartOf <https://uk.wikipedia.org/> ;
+	schema:name "Закон виключеного третього"@uk .
+
+<https://uk.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://simple.wikipedia.org/wiki/Law_of_the_excluded_middle> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "en-simple" ;
+	schema:isPartOf <https://simple.wikipedia.org/> ;
+	schema:name "Law of the excluded middle"@en-simple .
+
+<https://simple.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://he.wikipedia.org/wiki/%D7%A2%D7%A7%D7%A8%D7%95%D7%9F_%D7%94%D7%A9%D7%9C%D7%99%D7%A9%D7%99_%D7%94%D7%A0%D7%9E%D7%A0%D7%A2> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "he" ;
+	schema:isPartOf <https://he.wikipedia.org/> ;
+	schema:name "עקרון השלישי הנמנע"@he .
+
+<https://he.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://eu.wikipedia.org/wiki/Hirugarrena_baztertzearen_printzipio> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "eu" ;
+	schema:isPartOf <https://eu.wikipedia.org/> ;
+	schema:name "Hirugarrena baztertzearen printzipio"@eu .
+
+<https://eu.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://da.wikipedia.org/wiki/Den_udelukkede_midte> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "da" ;
+	schema:isPartOf <https://da.wikipedia.org/> ;
+	schema:name "Den udelukkede midte"@da .
+
+<https://da.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://bg.wikipedia.org/wiki/%D0%97%D0%B0%D0%BA%D0%BE%D0%BD_%D0%B7%D0%B0_%D0%B8%D0%B7%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%BE%D1%82%D0%BE_%D1%82%D1%80%D0%B5%D1%82%D0%BE> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "bg" ;
+	schema:isPartOf <https://bg.wikipedia.org/> ;
+	schema:name "Закон за изключеното трето"@bg .
+
+<https://bg.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://hy.wikipedia.org/wiki/%D4%B5%D6%80%D6%80%D5%B8%D6%80%D5%A4%D5%AB_%D5%A2%D5%A1%D6%81%D5%A1%D5%BC%D5%B4%D5%A1%D5%B6_%D6%85%D6%80%D5%A5%D5%B6%D6%84> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "hy" ;
+	schema:isPartOf <https://hy.wikipedia.org/> ;
+	schema:name "Երրորդի բացառման օրենք"@hy .
+
+<https://hy.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://fa.wikipedia.org/wiki/%D8%A7%D8%B5%D9%84_%D8%B7%D8%B1%D8%AF_%D8%B4%D9%82_%D8%AB%D8%A7%D9%84%D8%AB> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "fa" ;
+	schema:isPartOf <https://fa.wikipedia.org/> ;
+	schema:name "اصل طرد شق ثالث"@fa .
+
+<https://fa.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://uz.wikipedia.org/wiki/Uchinchisi_istisno_qonuni> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "uz" ;
+	schema:isPartOf <https://uz.wikipedia.org/> ;
+	schema:name "Uchinchisi istisno qonuni"@uz .
+
+<https://uz.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://et.wikipedia.org/wiki/V%C3%A4listatud_kolmanda_seadus> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "et" ;
+	schema:isPartOf <https://et.wikipedia.org/> ;
+	schema:name "Välistatud kolmanda seadus"@et .
+
+<https://et.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://ckb.wikipedia.org/wiki/%DB%8C%D8%A7%D8%B3%D8%A7%DB%8C_%D9%86%D8%A7%D9%88%DB%95%DA%95%D8%A7%D8%B3%D8%AA%DB%8C_%D9%88%DB%95%D8%AF%DB%95%D8%B1%D9%86%D8%B1%D8%A7%D9%88> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "ckb" ;
+	schema:isPartOf <https://ckb.wikipedia.org/> ;
+	schema:name "یاسای ناوەڕاستی وەدەرنراو"@ckb .
+
+<https://ckb.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://no.wikipedia.org/wiki/Loven_om_det_utelukkede_tredje> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "nb" ;
+	schema:isPartOf <https://no.wikipedia.org/> ;
+	schema:name "Loven om det utelukkede tredje"@nb .
+
+<https://no.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://zh-yue.wikipedia.org/wiki/%E6%8E%92%E4%B8%AD%E5%BE%8B> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "yue" ;
+	schema:isPartOf <https://zh-yue.wikipedia.org/> ;
+	schema:name "排中律"@yue .
+
+<https://zh-yue.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://cs.wikipedia.org/wiki/Z%C3%A1kon_vylou%C4%8Den%C3%A9ho_t%C5%99et%C3%ADho> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "cs" ;
+	schema:isPartOf <https://cs.wikipedia.org/> ;
+	schema:name "Zákon vyloučeného třetího"@cs .
+
+<https://cs.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://tr.wikipedia.org/wiki/%C3%9C%C3%A7%C3%BCnc%C3%BC_h%C3%A2lin_imk%C3%A2ns%C4%B1zl%C4%B1%C4%9F%C4%B1> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "tr" ;
+	schema:isPartOf <https://tr.wikipedia.org/> ;
+	schema:name "Üçüncü hâlin imkânsızlığı"@tr .
+
+<https://tr.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://ar.wikipedia.org/wiki/%D9%85%D8%A8%D8%AF%D8%A3_%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB_%D8%A7%D9%84%D9%85%D8%B1%D9%81%D9%88%D8%B9> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "ar" ;
+	schema:isPartOf <https://ar.wikipedia.org/> ;
+	schema:name "مبدأ الثالث المرفوع"@ar .
+
+<https://ar.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://sk.wikipedia.org/wiki/Z%C3%A1kon_vyl%C3%BA%C4%8Denia_tretieho> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "sk" ;
+	schema:isPartOf <https://sk.wikipedia.org/> ;
+	schema:name "Zákon vylúčenia tretieho"@sk .
+
+<https://sk.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://kk.wikipedia.org/wiki/%D2%AE%D1%88%D1%96%D0%BD%D1%88%D1%96%D1%81%D1%96%D0%B7%D0%B4%D1%96%D0%BA_%D0%B7%D0%B0%D2%A3%D1%8B> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "kk" ;
+	schema:isPartOf <https://kk.wikipedia.org/> ;
+	schema:name "Үшіншісіздік заңы"@kk .
+
+<https://kk.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+<https://th.wikipedia.org/wiki/%E0%B8%81%E0%B8%8E%E0%B8%99%E0%B8%B4%E0%B8%A3%E0%B8%A1%E0%B8%B1%E0%B8%8A%E0%B8%8C%E0%B8%B4%E0%B8%A1> a schema:Article ;
+	schema:about wd:Q468422 ;
+	schema:inLanguage "th" ;
+	schema:isPartOf <https://th.wikipedia.org/> ;
+	schema:name "กฎนิรมัชฌิม"@th .
+
+<https://th.wikipedia.org/> wikibase:wikiGroup "wikipedia" .
+
+wd:Q468422 wdt:P646 "/m/04gs1" ;
+	wdt:P31 wd:Q17736,
+		wd:Q211364 ;
+	wdt:P3417 "Law-of-Excluded-Middle" ;
+	wdt:P227 "4179179-4" ;
+	wdtn:P227 <https://d-nb.info/gnd/4179179-4> ;
+	wdt:P268 "120453787" ;
+	wdtn:P268 <http://data.bnf.fr/ark:/12148/cb120453787#about> ;
+	wdt:P4746 "139728" ;
+	wdt:P269 "028665120" ;
+	wdtn:P269 <http://www.idref.fr/028665120/id> ;
+	wdt:P1417 "topic/law-of-excluded-middle" ;
+	wdt:P1889 wd:Q2110857,
+		wd:Q868437 ;
+	wdt:P989 <http://commons.wikimedia.org/wiki/Special:FilePath/Nl-Wet%20van%20de%20uitgesloten%20derde-article.ogg> ;
+	wdt:P6366 "137155000" ;
+	wdtn:P6366 <https://makg.org/entity/137155000> ;
+	wdt:P7993 "terzo-escluso-principio-del" ;
+	wdt:P2924 "2022161" ;
+	wdt:P10283 "C137155000" ;
+	wdt:P8313 "udelukkelsesprincippet_-_logisk_begreb" ;
+	wdt:P1343 wd:Q19219752 ;
+	wdt:P10565 "121184" ;
+	wdt:P6104 wd:Q8487137 ;
+	wdt:P6781 "Law_of_Excluded_Middle" ;
+	wdt:P2579 wd:Q236975,
+		wd:Q9471 ;
+	wdt:P7719 wd:Q6549544,
+		wd:Q737471 ;
+	wdt:P2577 wd:Q236975 ;
+	p:P646 wds:Q468422-6F24946A-C54B-407D-94CA-2AD2CF43CCA4 .
+
+wds:Q468422-6F24946A-C54B-407D-94CA-2AD2CF43CCA4 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P646 "/m/04gs1" ;
+	prov:wasDerivedFrom wdref:2b00cb481cddcac7623114367489b5c194901c4a .
+
+wd:Q468422 p:P31 wds:Q468422-8f9d1347-4521-e966-150e-eb462494b1b0 .
+
+wds:Q468422-8f9d1347-4521-e966-150e-eb462494b1b0 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P31 wd:Q17736 .
+
+wd:Q468422 p:P31 wds:Q468422-A23F8471-6D6C-47C5-9D43-25B81B6099E7 .
+
+wds:Q468422-A23F8471-6D6C-47C5-9D43-25B81B6099E7 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P31 wd:Q211364 .
+
+wd:Q468422 p:P3417 wds:Q468422-45134254-ED8A-43B6-9860-C65B9D0F6D15 .
+
+wds:Q468422-45134254-ED8A-43B6-9860-C65B9D0F6D15 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P3417 "Law-of-Excluded-Middle" ;
+	prov:wasDerivedFrom wdref:3b0a5bb3c1f955edce73740124f7d935698092ad .
+
+wd:Q468422 p:P227 wds:Q468422-b33fdf26-4dfe-dd7b-8938-747531448762 .
+
+wds:Q468422-b33fdf26-4dfe-dd7b-8938-747531448762 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P227 "4179179-4" ;
+	psn:P227 <https://d-nb.info/gnd/4179179-4> ;
+	prov:wasDerivedFrom wdref:4098a54e3d397f8807ef9b852928aff89529c76a .
+
+wd:Q468422 p:P268 wds:Q468422-b29f536b-4b7e-bc4d-f3e5-6b4b196431e6 .
+
+wds:Q468422-b29f536b-4b7e-bc4d-f3e5-6b4b196431e6 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P268 "120453787" ;
+	psn:P268 <http://data.bnf.fr/ark:/12148/cb120453787#about> ;
+	prov:wasDerivedFrom wdref:6508e13c5dec02b8984a53bca418336a502ad701 .
+
+wd:Q468422 p:P4746 wds:Q468422-B90A8798-82DF-4866-A7DE-887FADFAC7DA .
+
+wds:Q468422-B90A8798-82DF-4866-A7DE-887FADFAC7DA a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P4746 "139728" .
+
+wd:Q468422 p:P269 wds:Q468422-4B7283D9-5970-4BE0-AAB9-31257B41E206 .
+
+wds:Q468422-4B7283D9-5970-4BE0-AAB9-31257B41E206 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P269 "028665120" ;
+	psn:P269 <http://www.idref.fr/028665120/id> ;
+	prov:wasDerivedFrom wdref:d98e170512b9c7e317cab667472601fe093f1c8a .
+
+wd:Q468422 p:P1417 wds:Q468422-BFB5FEDD-B669-420F-95C3-55A0F583C467 .
+
+wds:Q468422-BFB5FEDD-B669-420F-95C3-55A0F583C467 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1417 "topic/law-of-excluded-middle" ;
+	pq:P1810 "law of excluded middle" .
+
+wd:Q468422 p:P1889 wds:Q468422-2bf9cce3-4c9c-5193-17a8-fffadd5ca696 .
+
+wds:Q468422-2bf9cce3-4c9c-5193-17a8-fffadd5ca696 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1889 wd:Q2110857 .
+
+wd:Q468422 p:P1889 wds:Q468422-39ab9b68-4826-4251-d1fc-16473fb8f205 .
+
+wds:Q468422-39ab9b68-4826-4251-d1fc-16473fb8f205 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1889 wd:Q868437 .
+
+wd:Q468422 p:P989 wds:Q468422-A30C3C31-6998-4F51-8C39-8ADD399C7BBF .
+
+wds:Q468422-A30C3C31-6998-4F51-8C39-8ADD399C7BBF a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P989 <http://commons.wikimedia.org/wiki/Special:FilePath/Nl-Wet%20van%20de%20uitgesloten%20derde-article.ogg> ;
+	pq:P407 wd:Q7411 ;
+	pq:P10135 "2010-01-01T00:00:00Z"^^xsd:dateTime ;
+	pqv:P10135 wdv:4f272fae38ee73a331afd0407cdc74b9 ;
+	prov:wasDerivedFrom wdref:c64b30da1c39104b31e115ae64a883fa5db0e7c0 .
+
+wd:Q468422 p:P6366 wds:Q468422-AAF1A741-3A51-4A76-8C7B-6EF8BF918143 .
+
+wds:Q468422-AAF1A741-3A51-4A76-8C7B-6EF8BF918143 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P6366 "137155000" ;
+	psn:P6366 <https://makg.org/entity/137155000> .
+
+wd:Q468422 p:P7993 wds:Q468422-DC34E1DD-DEA3-4AF1-B2DE-048595B8C84F .
+
+wds:Q468422-DC34E1DD-DEA3-4AF1-B2DE-048595B8C84F a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P7993 "terzo-escluso-principio-del" ;
+	pq:P1810 "terzo escluso, principio del (detto anche principio del medio escluso, o del mezzo escluso)" ;
+	pq:P577 "2009-01-01T00:00:00Z"^^xsd:dateTime ;
+	pqv:P577 wdv:d1f4b24996f09b84b57706b47906a6a0 .
+
+wd:Q468422 p:P2924 wds:Q468422-A45F4C76-1D37-4D67-970F-648D1E556F9B .
+
+wds:Q468422-A45F4C76-1D37-4D67-970F-648D1E556F9B a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2924 "2022161" ;
+	pq:P1810 "ИСКЛЮЧЁННОГО ТРЕТЬЕГО ЗАКОН" .
+
+wd:Q468422 p:P10283 wds:Q468422-FB1B9405-B6E1-4D0A-860C-EFA3C3CCF0B6 .
+
+wds:Q468422-FB1B9405-B6E1-4D0A-860C-EFA3C3CCF0B6 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P10283 "C137155000" ;
+	prov:wasDerivedFrom wdref:c13ba4d7902ead2693f79396bc25bd35d4d14030 .
+
+wd:Q468422 p:P8313 wds:Q468422-740426A6-D431-468E-B361-D2D1458D5C83 .
+
+wds:Q468422-740426A6-D431-468E-B361-D2D1458D5C83 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P8313 "udelukkelsesprincippet_-_logisk_begreb" .
+
+wd:Q468422 p:P1343 wds:Q468422-8BE83351-AC88-4E79-B508-D17FFABFFAAC .
+
+wds:Q468422-8BE83351-AC88-4E79-B508-D17FFABFFAAC a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P1343 wd:Q19219752 ;
+	pq:P805 wd:Q112808806 .
+
+wd:Q468422 p:P10565 wds:Q468422-C7B77A13-C5F9-48B8-957B-8D35DB3FF2EC .
+
+wds:Q468422-C7B77A13-C5F9-48B8-957B-8D35DB3FF2EC a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P10565 "121184" .
+
+wd:Q468422 p:P6104 wds:Q468422-EBACABDF-7886-454A-B247-605B0CF74F82 .
+
+wds:Q468422-EBACABDF-7886-454A-B247-605B0CF74F82 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P6104 wd:Q8487137 .
+
+wd:Q468422 p:P6781 wds:Q468422-ded0b369-43cb-099e-9d15-f1eba1e87338 .
+
+wds:Q468422-ded0b369-43cb-099e-9d15-f1eba1e87338 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P6781 "Law_of_Excluded_Middle" .
+
+wd:Q468422 p:P2579 wds:Q468422-d8a8c0b0-4f10-821e-999e-b9d664bb9d2c .
+
+wds:Q468422-d8a8c0b0-4f10-821e-999e-b9d664bb9d2c a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2579 wd:Q236975 .
+
+wd:Q468422 p:P2579 wds:Q468422-80c2ad7d-4ad8-55a2-527c-77f281b00c3e .
+
+wds:Q468422-80c2ad7d-4ad8-55a2-527c-77f281b00c3e a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2579 wd:Q9471 .
+
+wd:Q468422 p:P7719 wds:Q468422-93401b54-41a5-c69d-abb0-b80b22b33ed3 .
+
+wds:Q468422-93401b54-41a5-c69d-abb0-b80b22b33ed3 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P7719 wd:Q6549544 .
+
+wd:Q468422 p:P7719 wds:Q468422-e6360eaf-437c-2fb8-cafe-22f84bcaf95f .
+
+wds:Q468422-e6360eaf-437c-2fb8-cafe-22f84bcaf95f a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P7719 wd:Q737471 .
+
+wd:Q468422 p:P2577 wds:Q468422-829aeb7a-47c8-23ba-5b09-97093da64262 .
+
+wds:Q468422-829aeb7a-47c8-23ba-5b09-97093da64262 a wikibase:Statement,
+		wikibase:BestRank ;
+	wikibase:rank wikibase:NormalRank ;
+	ps:P2577 wd:Q236975 .
+
+wd:Q468422 rdfs:label "排中律"@zh-hans ;
+	skos:prefLabel "排中律"@zh-hans ;
+	schema:name "排中律"@zh-hans ;
+	rdfs:label "排中律"@zh-hant ;
+	skos:prefLabel "排中律"@zh-hant ;
+	schema:name "排中律"@zh-hant ;
+	rdfs:label "排中律"@zh-hk ;
+	skos:prefLabel "排中律"@zh-hk ;
+	schema:name "排中律"@zh-hk ;
+	rdfs:label "排中律"@zh-cn ;
+	skos:prefLabel "排中律"@zh-cn ;
+	schema:name "排中律"@zh-cn ;
+	rdfs:label "排中律"@zh-sg ;
+	skos:prefLabel "排中律"@zh-sg ;
+	schema:name "排中律"@zh-sg ;
+	rdfs:label "排中律"@zh-tw ;
+	skos:prefLabel "排中律"@zh-tw ;
+	schema:name "排中律"@zh-tw ;
+	rdfs:label "Prinsipi dël ters barà fòra"@pms ;
+	skos:prefLabel "Prinsipi dël ters barà fòra"@pms ;
+	schema:name "Prinsipi dël ters barà fòra"@pms ;
+	rdfs:label "Үчүнчүлүктү четке кагуу принциби"@ky ;
+	skos:prefLabel "Үчүнчүлүктү четке кагуу принциби"@ky ;
+	schema:name "Үчүнчүлүктү четке кагуу принциби"@ky ;
+	rdfs:label "Prawo wyłączonego środka"@pl ;
+	skos:prefLabel "Prawo wyłączonego środka"@pl ;
+	schema:name "Prawo wyłączonego środka"@pl ;
+	rdfs:label "principe du tiers exclu"@fr ;
+	skos:prefLabel "principe du tiers exclu"@fr ;
+	schema:name "principe du tiers exclu"@fr ;
+	rdfs:label "배중률"@ko ;
+	skos:prefLabel "배중률"@ko ;
+	schema:name "배중률"@ko ;
+	rdfs:label "עקרון השלישי הנמנע"@he ;
+	skos:prefLabel "עקרון השלישי הנמנע"@he ;
+	schema:name "עקרון השלישי הנמנע"@he ;
+	rdfs:label "principio del tercero excluido"@es ;
+	skos:prefLabel "principio del tercero excluido"@es ;
+	schema:name "principio del tercero excluido"@es ;
+	rdfs:label "kizárt harmadik elve"@hu ;
+	skos:prefLabel "kizárt harmadik elve"@hu ;
+	schema:name "kizárt harmadik elve"@hu ;
+	rdfs:label "principio del terzo escluso"@it ;
+	skos:prefLabel "principio del terzo escluso"@it ;
+	schema:name "principio del terzo escluso"@it ;
+	rdfs:label "Välistatud kolmanda reegel"@et ;
+	skos:prefLabel "Välistatud kolmanda reegel"@et ;
+	schema:name "Välistatud kolmanda reegel"@et ;
+	rdfs:label "Prinzip des ausgeschlossenen Dritten"@de ;
+	skos:prefLabel "Prinzip des ausgeschlossenen Dritten"@de ;
+	schema:name "Prinzip des ausgeschlossenen Dritten"@de ;
+	rdfs:label "排中律"@ja ;
+	skos:prefLabel "排中律"@ja ;
+	schema:name "排中律"@ja ;
+	rdfs:label "αρχή αποκλειόμενου μέσου"@el ;
+	skos:prefLabel "αρχή αποκλειόμενου μέσου"@el ;
+	schema:name "αρχή αποκλειόμενου μέσου"@el ;
+	rdfs:label "wet van de uitgesloten derde"@nl ;
+	skos:prefLabel "wet van de uitgesloten derde"@nl ;
+	schema:name "wet van de uitgesloten derde"@nl ;
+	rdfs:label "lagen om det uteslutna tredje"@sv ;
+	skos:prefLabel "lagen om det uteslutna tredje"@sv ;
+	schema:name "lagen om det uteslutna tredje"@sv ;
+	rdfs:label "Lei do terceiro excluído"@pt ;
+	skos:prefLabel "Lei do terceiro excluído"@pt ;
+	schema:name "Lei do terceiro excluído"@pt ;
+	rdfs:label "Lögmálið um annað tveggja"@is ;
+	skos:prefLabel "Lögmálið um annað tveggja"@is ;
+	schema:name "Lögmálið um annað tveggja"@is ;
+	rdfs:label "leĝo de neekzisto de tria eblo"@eo ;
+	skos:prefLabel "leĝo de neekzisto de tria eblo"@eo ;
+	schema:name "leĝo de neekzisto de tria eblo"@eo ;
+	rdfs:label "закон исключённого третьего"@ru ;
+	skos:prefLabel "закон исключённого третьего"@ru ;
+	schema:name "закон исключённого третьего"@ru ;
+	rdfs:label "principle of excluded middle"@en ;
+	skos:prefLabel "principle of excluded middle"@en ;
+	schema:name "principle of excluded middle"@en ;
+	rdfs:label "principi del tercer exclòs"@ca ;
+	skos:prefLabel "principi del tercer exclòs"@ca ;
+	schema:name "principi del tercer exclòs"@ca ;
+	rdfs:label "Kolmannen poissuljetun laki"@fi ;
+	skos:prefLabel "Kolmannen poissuljetun laki"@fi ;
+	schema:name "Kolmannen poissuljetun laki"@fi ;
+	rdfs:label "закон виключеного третього"@uk ;
+	skos:prefLabel "закон виключеного третього"@uk ;
+	schema:name "закон виключеного третього"@uk ;
+	rdfs:label "zákon o vyloučení třetího"@cs ;
+	skos:prefLabel "zákon o vyloučení třetího"@cs ;
+	schema:name "zákon o vyloučení třetího"@cs ;
+	rdfs:label "اصل طرد ثالث"@fa ;
+	skos:prefLabel "اصل طرد ثالث"@fa ;
+	schema:name "اصل طرد ثالث"@fa ;
+	rdfs:label "排中律"@zh ;
+	skos:prefLabel "排中律"@zh ;
+	schema:name "排中律"@zh ;
+	rdfs:label "Loven om den ekskluderte tredje"@nb ;
+	skos:prefLabel "Loven om den ekskluderte tredje"@nb ;
+	schema:name "Loven om den ekskluderte tredje"@nb ;
+	rdfs:label "Hirugarrena baztertzearen printzipio"@eu ;
+	skos:prefLabel "Hirugarrena baztertzearen printzipio"@eu ;
+	schema:name "Hirugarrena baztertzearen printzipio"@eu ;
+	rdfs:label "udelukkelsesprincippet"@da ;
+	skos:prefLabel "udelukkelsesprincippet"@da ;
+	schema:name "udelukkelsesprincippet"@da ;
+	rdfs:label "закон за исклучената средина"@mk ;
+	skos:prefLabel "закон за исклучената средина"@mk ;
+	schema:name "закон за исклучената средина"@mk ;
+	rdfs:label "გამორიცხული მესამის კანონი"@ka ;
+	skos:prefLabel "გამორიცხული მესამის კანონი"@ka ;
+	schema:name "გამორიცხული მესამის კანონი"@ka ;
+	rdfs:label "Закон за изключеното трето"@bg ;
+	skos:prefLabel "Закон за изключеното трето"@bg ;
+	schema:name "Закон за изключеното трето"@bg ;
+	rdfs:label "الثالث المرفوع"@ar ;
+	skos:prefLabel "الثالث المرفوع"@ar ;
+	schema:name "الثالث المرفوع"@ar ;
+	rdfs:label "Үшінші жоққа шығару заңы"@kk ;
+	skos:prefLabel "Үшінші жоққа шығару заңы"@kk ;
+	schema:name "Үшінші жоққа шығару заңы"@kk ;
+	rdfs:label "Երրորդի բացառման օրենք"@hy ;
+	skos:prefLabel "Երրորդի բացառման օրենք"@hy ;
+	schema:name "Երրորդի բացառման օրենք"@hy ;
+	rdfs:label "Uchinchisi istisno qonuni"@uz ;
+	skos:prefLabel "Uchinchisi istisno qonuni"@uz ;
+	schema:name "Uchinchisi istisno qonuni"@uz ;
+	rdfs:label "排中律"@yue ;
+	skos:prefLabel "排中律"@yue ;
+	schema:name "排中律"@yue ;
+	rdfs:label "یاسای ناوەڕاستی وەدەرنراو"@ckb ;
+	skos:prefLabel "یاسای ناوەڕاستی وەدەرنراو"@ckb ;
+	schema:name "یاسای ناوەڕاستی وەدەرنراو"@ckb ;
+	rdfs:label "načelo izključene sredine"@sl ;
+	skos:prefLabel "načelo izključene sredine"@sl ;
+	schema:name "načelo izključene sredine"@sl ;
+	rdfs:label "Üçüncü halin imkansızlığı"@tr ;
+	skos:prefLabel "Üçüncü halin imkansızlığı"@tr ;
+	schema:name "Üçüncü halin imkansızlığı"@tr ;
+	rdfs:label "Zákon vylúčenia tretieho"@sk ;
+	skos:prefLabel "Zákon vylúčenia tretieho"@sk ;
+	schema:name "Zákon vylúčenia tretieho"@sk ;
+	rdfs:label "прынцып выключанага сярэдняга"@be-tarask ;
+	skos:prefLabel "прынцып выключанага сярэдняга"@be-tarask ;
+	schema:name "прынцып выключанага сярэдняга"@be-tarask ;
+	rdfs:label "กฎนิรมัชฌิม"@th ;
+	skos:prefLabel "กฎนิรมัชฌิม"@th ;
+	schema:name "กฎนิรมัชฌิม"@th ;
+	schema:description "logical principle stating that for every proposition, either it or its negation is true"@en,
+		"logischer Elementarsatz"@de,
+		"Esakune bat egiazkoa edo faltsua dela eta beste aukerarik ez dagoela dioen printzipioa. Beraz, proposizio batez eta haren ezeztapenaz osatutako disjuntziozko proposizio konposatua tautologikoa da ( P ∨ ¬ P). Logika klasikoaren oinarrietako bat da."@eu,
+		"logisk prinsipp"@nb,
+		"חוק לוגי"@he,
+		"logiikan laki"@fi,
+		"مبدأ فلسفي فكري"@ar,
+		"zasada w logice klasycznej"@pl,
+		"principe de logique"@fr,
+		"logično načelo, ki pravi, da je za vsako trditev resnična bodisi ta trditev bodisi njena negacija"@sl,
+		"grundprincip i klassisk logik"@da,
+		"a logika alapelve"@hu,
+		"principio della logica"@it,
+		"بنەواشەیەکی لۆژیکی کە دەڵێ ھەر قەزیەیەک، یا خۆی دروستە یا نەرێکراوەکەی"@ckb,
+		"la logika principo, ke pri ajna propozicio, aŭ ĝi veras aŭ ĝia negacio veras"@eo,
+		"論理学において、任意の命題 P に対し「P であるか、または P でない」という命題は常に成り立つという原理"@ja,
+		"传统逻辑基本规律之一，即认定对于每个命题，要么其为真，要么其为假"@zh,
+		"principe van de logica"@nl,
+		"princip logiky"@cs,
+		"αρχή της λογικής"@el,
+		"principio de lógica"@es,
+		"princípio da lógica"@pt,
+		"принцип логіки"@uk ;
+	skos:altLabel "Zasada wyłączonego środka"@pl,
+		"Reguła wyłączonego środka"@pl,
+		"Aksjomat wyłączonego środka"@pl,
+		"Prawo wyłączonej sprzeczności"@pl,
+		"Tertium non datur"@pl,
+		"tiers exclus"@fr,
+		"tiers exclu"@fr,
+		"tertium non datur"@fr,
+		"חוק השלישי מן הנמנע"@he,
+		"חוק השלישי הנמנע"@he,
+		"כלל השלישי הנמנע"@he,
+		"השלישי מן הנמנע"@he,
+		"Principium tertium exclusum"@es,
+		"Principio de tercero excluido"@es,
+		"Ley del tercero excluido"@es,
+		"Tertium non datur"@es,
+		"terzo escluso"@it,
+		"tertium non datur"@it,
+		"Välistatud kolmanda seadus"@et,
+		"Tertium non datur"@et,
+		"tertium non datur"@de,
+		"Satz vom ausgeschlossenen Dritten"@de,
+		"Prinzip des zwischen zwei kontradiktorischen Gegensätzen stehenden ausgeschlossenen Mittleren"@de,
+		"排中原理"@ja,
+		"uitgesloten derde"@nl,
+		"wet van uitgesloten midden"@nl,
+		"tertium non datur"@nl,
+		"det uteslutna tredje"@sv,
+		"Princípio do terceiro excluído"@pt,
+		"Principium exclusi tertii"@pt,
+		"Terceiro excluso"@pt,
+		"Tertium non datur"@is,
+		"Leĝo de la Ekskludita Mezo"@eo,
+		"Tertium non datur"@eo,
+		"Leĝo pri elimino de tria"@eo,
+		"Исключённого третьего принцип"@ru,
+		"Исключённого третьего закон"@ru,
+		"Закон исключенного третьего"@ru,
+		"Tertium non datur"@ru,
+		"Закон исключения третьего"@ru,
+		"Исключенного третьего закон"@ru,
+		"Принцип исключённого третьего"@ru,
+		"Принцип исключенного третьего"@ru,
+		"Виключеного третього закон"@uk,
+		"Закон виключення третього"@uk,
+		"princip vyloučeného třetího"@cs,
+		"tertium non datur"@cs,
+		"zákon vyloučeného třetího"@cs,
+		"اصل طرد سوم"@fa,
+		"Tertium non datur"@nb,
+		"tertium non datur"@en,
+		"law of excluded middle"@en,
+		"axiom of excluded middle"@en,
+		"excluded middle"@en,
+		"principle of the excluded third"@en,
+		"law of the excluded third"@en,
+		"logika izključene sredine"@sl,
+		"den udelukkede midte"@da,
+		"det udelukkede tredjes princip"@da,
+		"прынцып выключанага трэцяга"@be-tarask .
+
+wd:P646 a wikibase:Property ;
+	rdfs:label "Freebase ID"@en ;
+	skos:prefLabel "Freebase ID"@en ;
+	schema:name "Freebase ID"@en ;
+	schema:description "identifier for a page in the Freebase database. Format: \"/m/0\" followed by 2 to 7 characters. For IDs starting with \"/g/\", use Google Knowledge Graph ID (P2671)"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P646 ;
+	wikibase:claim p:P646 ;
+	wikibase:statementProperty ps:P646 ;
+	wikibase:statementValue psv:P646 ;
+	wikibase:qualifier pq:P646 ;
+	wikibase:qualifierValue pqv:P646 ;
+	wikibase:reference pr:P646 ;
+	wikibase:referenceValue prv:P646 ;
+	wikibase:novalue wdno:P646 ;
+	wikibase:directClaimNormalized wdtn:P646 ;
+	wikibase:statementValueNormalized psn:P646 ;
+	wikibase:qualifierValueNormalized pqn:P646 ;
+	wikibase:referenceValueNormalized prn:P646 .
+
+p:P646 a owl:ObjectProperty .
+
+psv:P646 a owl:ObjectProperty .
+
+pqv:P646 a owl:ObjectProperty .
+
+prv:P646 a owl:ObjectProperty .
+
+wdt:P646 a owl:DatatypeProperty .
+
+ps:P646 a owl:DatatypeProperty .
+
+pq:P646 a owl:DatatypeProperty .
+
+pr:P646 a owl:DatatypeProperty .
+
+psn:P646 a owl:ObjectProperty .
+
+pqn:P646 a owl:ObjectProperty .
+
+prn:P646 a owl:ObjectProperty .
+
+wdtn:P646 a owl:ObjectProperty .
+
+wdno:P646 a owl:Class ;
+	owl:complementOf _:38db277a4b10d59fd38a3fd995cbe570 .
+
+_:38db277a4b10d59fd38a3fd995cbe570 a owl:Restriction ;
+	owl:onProperty wdt:P646 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q17736 a wikibase:Item ;
+	rdfs:label "axiom"@en ;
+	skos:prefLabel "axiom"@en ;
+	schema:name "axiom"@en ;
+	schema:description "statement of a theory that is taken to be true"@en .
+
+wd:P31 a wikibase:Property ;
+	rdfs:label "instance of"@en ;
+	skos:prefLabel "instance of"@en ;
+	schema:name "instance of"@en ;
+	schema:description "type to which this subject corresponds/belongs. Different from P279 (subclass of); for example: K2 is an instance of mountain; volcano is a subclass of mountain"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#WikibaseItem> ;
+	wikibase:directClaim wdt:P31 ;
+	wikibase:claim p:P31 ;
+	wikibase:statementProperty ps:P31 ;
+	wikibase:statementValue psv:P31 ;
+	wikibase:qualifier pq:P31 ;
+	wikibase:qualifierValue pqv:P31 ;
+	wikibase:reference pr:P31 ;
+	wikibase:referenceValue prv:P31 ;
+	wikibase:novalue wdno:P31 .
+
+p:P31 a owl:ObjectProperty .
+
+psv:P31 a owl:ObjectProperty .
+
+pqv:P31 a owl:ObjectProperty .
+
+prv:P31 a owl:ObjectProperty .
+
+wdt:P31 a owl:ObjectProperty .
+
+ps:P31 a owl:ObjectProperty .
+
+pq:P31 a owl:ObjectProperty .
+
+pr:P31 a owl:ObjectProperty .
+
+wdno:P31 a owl:Class ;
+	owl:complementOf _:0b8bd71b926a65ca3fa72e5d9103e4d6 .
+
+_:0b8bd71b926a65ca3fa72e5d9103e4d6 a owl:Restriction ;
+	owl:onProperty wdt:P31 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q211364 a wikibase:Item ;
+	rdfs:label "principle"@en ;
+	skos:prefLabel "principle"@en ;
+	schema:name "principle"@en ;
+	schema:description "guiding rule or inevitable consequence of something, such as the laws observed in nature"@en .
+
+wd:P3417 a wikibase:Property ;
+	rdfs:label "Quora topic ID"@en ;
+	skos:prefLabel "Quora topic ID"@en ;
+	schema:name "Quora topic ID"@en ;
+	schema:description "identifier for a topic on Quora (English language version)"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P3417 ;
+	wikibase:claim p:P3417 ;
+	wikibase:statementProperty ps:P3417 ;
+	wikibase:statementValue psv:P3417 ;
+	wikibase:qualifier pq:P3417 ;
+	wikibase:qualifierValue pqv:P3417 ;
+	wikibase:reference pr:P3417 ;
+	wikibase:referenceValue prv:P3417 ;
+	wikibase:novalue wdno:P3417 ;
+	wikibase:directClaimNormalized wdtn:P3417 ;
+	wikibase:statementValueNormalized psn:P3417 ;
+	wikibase:qualifierValueNormalized pqn:P3417 ;
+	wikibase:referenceValueNormalized prn:P3417 .
+
+p:P3417 a owl:ObjectProperty .
+
+psv:P3417 a owl:ObjectProperty .
+
+pqv:P3417 a owl:ObjectProperty .
+
+prv:P3417 a owl:ObjectProperty .
+
+wdt:P3417 a owl:DatatypeProperty .
+
+ps:P3417 a owl:DatatypeProperty .
+
+pq:P3417 a owl:DatatypeProperty .
+
+pr:P3417 a owl:DatatypeProperty .
+
+psn:P3417 a owl:ObjectProperty .
+
+pqn:P3417 a owl:ObjectProperty .
+
+prn:P3417 a owl:ObjectProperty .
+
+wdtn:P3417 a owl:ObjectProperty .
+
+wdno:P3417 a owl:Class ;
+	owl:complementOf _:54217a89695819ffcfec13afc576b468 .
+
+_:54217a89695819ffcfec13afc576b468 a owl:Restriction ;
+	owl:onProperty wdt:P3417 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P227 a wikibase:Property ;
+	rdfs:label "GND ID"@en ;
+	skos:prefLabel "GND ID"@en ;
+	schema:name "GND ID"@en ;
+	rdfs:label "GND"@mul ;
+	skos:prefLabel "GND"@mul ;
+	schema:name "GND"@mul ;
+	schema:description "identifier from the Gemeinsame Normdatei authority file of names, subjects, and organizations"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P227 ;
+	wikibase:claim p:P227 ;
+	wikibase:statementProperty ps:P227 ;
+	wikibase:statementValue psv:P227 ;
+	wikibase:qualifier pq:P227 ;
+	wikibase:qualifierValue pqv:P227 ;
+	wikibase:reference pr:P227 ;
+	wikibase:referenceValue prv:P227 ;
+	wikibase:novalue wdno:P227 ;
+	wikibase:directClaimNormalized wdtn:P227 ;
+	wikibase:statementValueNormalized psn:P227 ;
+	wikibase:qualifierValueNormalized pqn:P227 ;
+	wikibase:referenceValueNormalized prn:P227 .
+
+p:P227 a owl:ObjectProperty .
+
+psv:P227 a owl:ObjectProperty .
+
+pqv:P227 a owl:ObjectProperty .
+
+prv:P227 a owl:ObjectProperty .
+
+wdt:P227 a owl:DatatypeProperty .
+
+ps:P227 a owl:DatatypeProperty .
+
+pq:P227 a owl:DatatypeProperty .
+
+pr:P227 a owl:DatatypeProperty .
+
+psn:P227 a owl:ObjectProperty .
+
+pqn:P227 a owl:ObjectProperty .
+
+prn:P227 a owl:ObjectProperty .
+
+wdtn:P227 a owl:ObjectProperty .
+
+wdno:P227 a owl:Class ;
+	owl:complementOf _:286c7ee15bc3c86b8eb6b23547b34d68 .
+
+_:286c7ee15bc3c86b8eb6b23547b34d68 a owl:Restriction ;
+	owl:onProperty wdt:P227 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P268 a wikibase:Property ;
+	rdfs:label "Bibliothèque nationale de France ID"@en ;
+	skos:prefLabel "Bibliothèque nationale de France ID"@en ;
+	schema:name "Bibliothèque nationale de France ID"@en ;
+	schema:description "identifier for the subject issued by BNF (Bibliothèque nationale de France). Format: 8 digits followed by a check-digit or letter, do not include the initial 'cb'."@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P268 ;
+	wikibase:claim p:P268 ;
+	wikibase:statementProperty ps:P268 ;
+	wikibase:statementValue psv:P268 ;
+	wikibase:qualifier pq:P268 ;
+	wikibase:qualifierValue pqv:P268 ;
+	wikibase:reference pr:P268 ;
+	wikibase:referenceValue prv:P268 ;
+	wikibase:novalue wdno:P268 ;
+	wikibase:directClaimNormalized wdtn:P268 ;
+	wikibase:statementValueNormalized psn:P268 ;
+	wikibase:qualifierValueNormalized pqn:P268 ;
+	wikibase:referenceValueNormalized prn:P268 .
+
+p:P268 a owl:ObjectProperty .
+
+psv:P268 a owl:ObjectProperty .
+
+pqv:P268 a owl:ObjectProperty .
+
+prv:P268 a owl:ObjectProperty .
+
+wdt:P268 a owl:DatatypeProperty .
+
+ps:P268 a owl:DatatypeProperty .
+
+pq:P268 a owl:DatatypeProperty .
+
+pr:P268 a owl:DatatypeProperty .
+
+psn:P268 a owl:ObjectProperty .
+
+pqn:P268 a owl:ObjectProperty .
+
+prn:P268 a owl:ObjectProperty .
+
+wdtn:P268 a owl:ObjectProperty .
+
+wdno:P268 a owl:Class ;
+	owl:complementOf _:d3120d2b47ac0e3950d9219515d435cc .
+
+_:d3120d2b47ac0e3950d9219515d435cc a owl:Restriction ;
+	owl:onProperty wdt:P268 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P4746 a wikibase:Property ;
+	rdfs:label "Elhuyar ZTH ID"@en ;
+	skos:prefLabel "Elhuyar ZTH ID"@en ;
+	schema:name "Elhuyar ZTH ID"@en ;
+	schema:description "Elhuyar Science and Technology Dictionary has a wide range of terms in four languages (en, es, fr, eu) that can easily be linked to and from Wikidata"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P4746 ;
+	wikibase:claim p:P4746 ;
+	wikibase:statementProperty ps:P4746 ;
+	wikibase:statementValue psv:P4746 ;
+	wikibase:qualifier pq:P4746 ;
+	wikibase:qualifierValue pqv:P4746 ;
+	wikibase:reference pr:P4746 ;
+	wikibase:referenceValue prv:P4746 ;
+	wikibase:novalue wdno:P4746 ;
+	wikibase:directClaimNormalized wdtn:P4746 ;
+	wikibase:statementValueNormalized psn:P4746 ;
+	wikibase:qualifierValueNormalized pqn:P4746 ;
+	wikibase:referenceValueNormalized prn:P4746 .
+
+p:P4746 a owl:ObjectProperty .
+
+psv:P4746 a owl:ObjectProperty .
+
+pqv:P4746 a owl:ObjectProperty .
+
+prv:P4746 a owl:ObjectProperty .
+
+wdt:P4746 a owl:DatatypeProperty .
+
+ps:P4746 a owl:DatatypeProperty .
+
+pq:P4746 a owl:DatatypeProperty .
+
+pr:P4746 a owl:DatatypeProperty .
+
+psn:P4746 a owl:ObjectProperty .
+
+pqn:P4746 a owl:ObjectProperty .
+
+prn:P4746 a owl:ObjectProperty .
+
+wdtn:P4746 a owl:ObjectProperty .
+
+wdno:P4746 a owl:Class ;
+	owl:complementOf _:bb7f68ecb3e1370fa661a0df6b6a66ba .
+
+_:bb7f68ecb3e1370fa661a0df6b6a66ba a owl:Restriction ;
+	owl:onProperty wdt:P4746 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P269 a wikibase:Property ;
+	rdfs:label "IdRef ID"@en ;
+	skos:prefLabel "IdRef ID"@en ;
+	schema:name "IdRef ID"@en ;
+	rdfs:label "IdRef ID"@mul ;
+	skos:prefLabel "IdRef ID"@mul ;
+	schema:name "IdRef ID"@mul ;
+	schema:description "identifier for authority control in the French collaborative library catalog (see also P1025). Format: 8 digits followed by a digit or \"X\""@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P269 ;
+	wikibase:claim p:P269 ;
+	wikibase:statementProperty ps:P269 ;
+	wikibase:statementValue psv:P269 ;
+	wikibase:qualifier pq:P269 ;
+	wikibase:qualifierValue pqv:P269 ;
+	wikibase:reference pr:P269 ;
+	wikibase:referenceValue prv:P269 ;
+	wikibase:novalue wdno:P269 ;
+	wikibase:directClaimNormalized wdtn:P269 ;
+	wikibase:statementValueNormalized psn:P269 ;
+	wikibase:qualifierValueNormalized pqn:P269 ;
+	wikibase:referenceValueNormalized prn:P269 .
+
+p:P269 a owl:ObjectProperty .
+
+psv:P269 a owl:ObjectProperty .
+
+pqv:P269 a owl:ObjectProperty .
+
+prv:P269 a owl:ObjectProperty .
+
+wdt:P269 a owl:DatatypeProperty .
+
+ps:P269 a owl:DatatypeProperty .
+
+pq:P269 a owl:DatatypeProperty .
+
+pr:P269 a owl:DatatypeProperty .
+
+psn:P269 a owl:ObjectProperty .
+
+pqn:P269 a owl:ObjectProperty .
+
+prn:P269 a owl:ObjectProperty .
+
+wdtn:P269 a owl:ObjectProperty .
+
+wdno:P269 a owl:Class ;
+	owl:complementOf _:1402c30f0c43a923194197839d7dfd0e .
+
+_:1402c30f0c43a923194197839d7dfd0e a owl:Restriction ;
+	owl:onProperty wdt:P269 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P1417 a wikibase:Property ;
+	rdfs:label "Encyclopædia Britannica Online ID"@en ;
+	skos:prefLabel "Encyclopædia Britannica Online ID"@en ;
+	schema:name "Encyclopædia Britannica Online ID"@en ;
+	schema:description "identifier for an article in the online version of Encyclopædia Britannica"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P1417 ;
+	wikibase:claim p:P1417 ;
+	wikibase:statementProperty ps:P1417 ;
+	wikibase:statementValue psv:P1417 ;
+	wikibase:qualifier pq:P1417 ;
+	wikibase:qualifierValue pqv:P1417 ;
+	wikibase:reference pr:P1417 ;
+	wikibase:referenceValue prv:P1417 ;
+	wikibase:novalue wdno:P1417 ;
+	wikibase:directClaimNormalized wdtn:P1417 ;
+	wikibase:statementValueNormalized psn:P1417 ;
+	wikibase:qualifierValueNormalized pqn:P1417 ;
+	wikibase:referenceValueNormalized prn:P1417 .
+
+p:P1417 a owl:ObjectProperty .
+
+psv:P1417 a owl:ObjectProperty .
+
+pqv:P1417 a owl:ObjectProperty .
+
+prv:P1417 a owl:ObjectProperty .
+
+wdt:P1417 a owl:DatatypeProperty .
+
+ps:P1417 a owl:DatatypeProperty .
+
+pq:P1417 a owl:DatatypeProperty .
+
+pr:P1417 a owl:DatatypeProperty .
+
+psn:P1417 a owl:ObjectProperty .
+
+pqn:P1417 a owl:ObjectProperty .
+
+prn:P1417 a owl:ObjectProperty .
+
+wdtn:P1417 a owl:ObjectProperty .
+
+wdno:P1417 a owl:Class ;
+	owl:complementOf _:0cb1ab8817799c4db539b18975ce292a .
+
+_:0cb1ab8817799c4db539b18975ce292a a owl:Restriction ;
+	owl:onProperty wdt:P1417 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q2110857 a wikibase:Item ;
+	rdfs:label "principle of bivalence"@en ;
+	skos:prefLabel "principle of bivalence"@en ;
+	schema:name "principle of bivalence"@en ;
+	schema:description "classical logic of two values, either true and false"@en .
+
+wd:P1889 a wikibase:Property ;
+	rdfs:label "different from"@en ;
+	skos:prefLabel "different from"@en ;
+	schema:name "different from"@en ;
+	schema:description "item that is different from another item, with which it may be confused"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#WikibaseItem> ;
+	wikibase:directClaim wdt:P1889 ;
+	wikibase:claim p:P1889 ;
+	wikibase:statementProperty ps:P1889 ;
+	wikibase:statementValue psv:P1889 ;
+	wikibase:qualifier pq:P1889 ;
+	wikibase:qualifierValue pqv:P1889 ;
+	wikibase:reference pr:P1889 ;
+	wikibase:referenceValue prv:P1889 ;
+	wikibase:novalue wdno:P1889 .
+
+p:P1889 a owl:ObjectProperty .
+
+psv:P1889 a owl:ObjectProperty .
+
+pqv:P1889 a owl:ObjectProperty .
+
+prv:P1889 a owl:ObjectProperty .
+
+wdt:P1889 a owl:ObjectProperty .
+
+ps:P1889 a owl:ObjectProperty .
+
+pq:P1889 a owl:ObjectProperty .
+
+pr:P1889 a owl:ObjectProperty .
+
+wdno:P1889 a owl:Class ;
+	owl:complementOf _:4fcc9ce770ae6fe14cb8672fb35a8bc9 .
+
+_:4fcc9ce770ae6fe14cb8672fb35a8bc9 a owl:Restriction ;
+	owl:onProperty wdt:P1889 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q868437 a wikibase:Item ;
+	rdfs:label "law of noncontradiction"@en ;
+	skos:prefLabel "law of noncontradiction"@en ;
+	schema:name "law of noncontradiction"@en ;
+	schema:description "theorem of logic"@en .
+
+wd:P989 a wikibase:Property ;
+	rdfs:label "spoken text audio"@en ;
+	skos:prefLabel "spoken text audio"@en ;
+	schema:name "spoken text audio"@en ;
+	schema:description "audio file for the spoken work or Wikipedia article, including audio descriptions"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#CommonsMedia> ;
+	wikibase:directClaim wdt:P989 ;
+	wikibase:claim p:P989 ;
+	wikibase:statementProperty ps:P989 ;
+	wikibase:statementValue psv:P989 ;
+	wikibase:qualifier pq:P989 ;
+	wikibase:qualifierValue pqv:P989 ;
+	wikibase:reference pr:P989 ;
+	wikibase:referenceValue prv:P989 ;
+	wikibase:novalue wdno:P989 .
+
+p:P989 a owl:ObjectProperty .
+
+psv:P989 a owl:ObjectProperty .
+
+pqv:P989 a owl:ObjectProperty .
+
+prv:P989 a owl:ObjectProperty .
+
+wdt:P989 a owl:ObjectProperty .
+
+ps:P989 a owl:ObjectProperty .
+
+pq:P989 a owl:ObjectProperty .
+
+pr:P989 a owl:ObjectProperty .
+
+wdno:P989 a owl:Class ;
+	owl:complementOf _:65250a11edfdeae5c95e1f35120cc616 .
+
+_:65250a11edfdeae5c95e1f35120cc616 a owl:Restriction ;
+	owl:onProperty wdt:P989 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P6366 a wikibase:Property ;
+	rdfs:label "Microsoft Academic ID (discontinued)"@en ;
+	skos:prefLabel "Microsoft Academic ID (discontinued)"@en ;
+	schema:name "Microsoft Academic ID (discontinued)"@en ;
+	schema:description "identifier for an object or topic in the Microsoft Academic Graph (until 31 December 2021)"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P6366 ;
+	wikibase:claim p:P6366 ;
+	wikibase:statementProperty ps:P6366 ;
+	wikibase:statementValue psv:P6366 ;
+	wikibase:qualifier pq:P6366 ;
+	wikibase:qualifierValue pqv:P6366 ;
+	wikibase:reference pr:P6366 ;
+	wikibase:referenceValue prv:P6366 ;
+	wikibase:novalue wdno:P6366 ;
+	wikibase:directClaimNormalized wdtn:P6366 ;
+	wikibase:statementValueNormalized psn:P6366 ;
+	wikibase:qualifierValueNormalized pqn:P6366 ;
+	wikibase:referenceValueNormalized prn:P6366 .
+
+p:P6366 a owl:ObjectProperty .
+
+psv:P6366 a owl:ObjectProperty .
+
+pqv:P6366 a owl:ObjectProperty .
+
+prv:P6366 a owl:ObjectProperty .
+
+wdt:P6366 a owl:DatatypeProperty .
+
+ps:P6366 a owl:DatatypeProperty .
+
+pq:P6366 a owl:DatatypeProperty .
+
+pr:P6366 a owl:DatatypeProperty .
+
+psn:P6366 a owl:ObjectProperty .
+
+pqn:P6366 a owl:ObjectProperty .
+
+prn:P6366 a owl:ObjectProperty .
+
+wdtn:P6366 a owl:ObjectProperty .
+
+wdno:P6366 a owl:Class ;
+	owl:complementOf _:6f940be26025c3cdbbbed9534272bb72 .
+
+_:6f940be26025c3cdbbbed9534272bb72 a owl:Restriction ;
+	owl:onProperty wdt:P6366 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P7993 a wikibase:Property ;
+	rdfs:label "Treccani's Dizionario di Filosofia ID"@en ;
+	skos:prefLabel "Treccani's Dizionario di Filosofia ID"@en ;
+	schema:name "Treccani's Dizionario di Filosofia ID"@en ;
+	schema:description "identifier for an item in the Dizionario di Filosofia"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P7993 ;
+	wikibase:claim p:P7993 ;
+	wikibase:statementProperty ps:P7993 ;
+	wikibase:statementValue psv:P7993 ;
+	wikibase:qualifier pq:P7993 ;
+	wikibase:qualifierValue pqv:P7993 ;
+	wikibase:reference pr:P7993 ;
+	wikibase:referenceValue prv:P7993 ;
+	wikibase:novalue wdno:P7993 ;
+	wikibase:directClaimNormalized wdtn:P7993 ;
+	wikibase:statementValueNormalized psn:P7993 ;
+	wikibase:qualifierValueNormalized pqn:P7993 ;
+	wikibase:referenceValueNormalized prn:P7993 .
+
+p:P7993 a owl:ObjectProperty .
+
+psv:P7993 a owl:ObjectProperty .
+
+pqv:P7993 a owl:ObjectProperty .
+
+prv:P7993 a owl:ObjectProperty .
+
+wdt:P7993 a owl:DatatypeProperty .
+
+ps:P7993 a owl:DatatypeProperty .
+
+pq:P7993 a owl:DatatypeProperty .
+
+pr:P7993 a owl:DatatypeProperty .
+
+psn:P7993 a owl:ObjectProperty .
+
+pqn:P7993 a owl:ObjectProperty .
+
+prn:P7993 a owl:ObjectProperty .
+
+wdtn:P7993 a owl:ObjectProperty .
+
+wdno:P7993 a owl:Class ;
+	owl:complementOf _:e55a94a331715116ac1e66ce57b40cdb .
+
+_:e55a94a331715116ac1e66ce57b40cdb a owl:Restriction ;
+	owl:onProperty wdt:P7993 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P2924 a wikibase:Property ;
+	rdfs:label "Great Russian Encyclopedia Online ID (old version)"@en ;
+	skos:prefLabel "Great Russian Encyclopedia Online ID (old version)"@en ;
+	schema:name "Great Russian Encyclopedia Online ID (old version)"@en ;
+	schema:description "identifier for an entry on old.bigenc.ru, the official site of the Great Russian Encyclopedia Online 2014–2017 (current version of bigenc.ru is P11514)"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P2924 ;
+	wikibase:claim p:P2924 ;
+	wikibase:statementProperty ps:P2924 ;
+	wikibase:statementValue psv:P2924 ;
+	wikibase:qualifier pq:P2924 ;
+	wikibase:qualifierValue pqv:P2924 ;
+	wikibase:reference pr:P2924 ;
+	wikibase:referenceValue prv:P2924 ;
+	wikibase:novalue wdno:P2924 ;
+	wikibase:directClaimNormalized wdtn:P2924 ;
+	wikibase:statementValueNormalized psn:P2924 ;
+	wikibase:qualifierValueNormalized pqn:P2924 ;
+	wikibase:referenceValueNormalized prn:P2924 .
+
+p:P2924 a owl:ObjectProperty .
+
+psv:P2924 a owl:ObjectProperty .
+
+pqv:P2924 a owl:ObjectProperty .
+
+prv:P2924 a owl:ObjectProperty .
+
+wdt:P2924 a owl:DatatypeProperty .
+
+ps:P2924 a owl:DatatypeProperty .
+
+pq:P2924 a owl:DatatypeProperty .
+
+pr:P2924 a owl:DatatypeProperty .
+
+psn:P2924 a owl:ObjectProperty .
+
+pqn:P2924 a owl:ObjectProperty .
+
+prn:P2924 a owl:ObjectProperty .
+
+wdtn:P2924 a owl:ObjectProperty .
+
+wdno:P2924 a owl:Class ;
+	owl:complementOf _:6b3043e2d784bcf6151a060f4982b663 .
+
+_:6b3043e2d784bcf6151a060f4982b663 a owl:Restriction ;
+	owl:onProperty wdt:P2924 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P10283 a wikibase:Property ;
+	rdfs:label "OpenAlex ID"@en ;
+	skos:prefLabel "OpenAlex ID"@en ;
+	schema:name "OpenAlex ID"@en ;
+	schema:description "identifier for works, grants, authors, institutes, venues, concepts/subjects in OpenAlex"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P10283 ;
+	wikibase:claim p:P10283 ;
+	wikibase:statementProperty ps:P10283 ;
+	wikibase:statementValue psv:P10283 ;
+	wikibase:qualifier pq:P10283 ;
+	wikibase:qualifierValue pqv:P10283 ;
+	wikibase:reference pr:P10283 ;
+	wikibase:referenceValue prv:P10283 ;
+	wikibase:novalue wdno:P10283 ;
+	wikibase:directClaimNormalized wdtn:P10283 ;
+	wikibase:statementValueNormalized psn:P10283 ;
+	wikibase:qualifierValueNormalized pqn:P10283 ;
+	wikibase:referenceValueNormalized prn:P10283 .
+
+p:P10283 a owl:ObjectProperty .
+
+psv:P10283 a owl:ObjectProperty .
+
+pqv:P10283 a owl:ObjectProperty .
+
+prv:P10283 a owl:ObjectProperty .
+
+wdt:P10283 a owl:DatatypeProperty .
+
+ps:P10283 a owl:DatatypeProperty .
+
+pq:P10283 a owl:DatatypeProperty .
+
+pr:P10283 a owl:DatatypeProperty .
+
+psn:P10283 a owl:ObjectProperty .
+
+pqn:P10283 a owl:ObjectProperty .
+
+prn:P10283 a owl:ObjectProperty .
+
+wdtn:P10283 a owl:ObjectProperty .
+
+wdno:P10283 a owl:Class ;
+	owl:complementOf _:32a5275a7dbbfba13192c77c3ada4d3a .
+
+_:32a5275a7dbbfba13192c77c3ada4d3a a owl:Restriction ;
+	owl:onProperty wdt:P10283 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P8313 a wikibase:Property ;
+	rdfs:label "Lex ID"@en ;
+	skos:prefLabel "Lex ID"@en ;
+	schema:name "Lex ID"@en ;
+	schema:description "identifier of an article in the online encyclopedia.lex.dk"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P8313 ;
+	wikibase:claim p:P8313 ;
+	wikibase:statementProperty ps:P8313 ;
+	wikibase:statementValue psv:P8313 ;
+	wikibase:qualifier pq:P8313 ;
+	wikibase:qualifierValue pqv:P8313 ;
+	wikibase:reference pr:P8313 ;
+	wikibase:referenceValue prv:P8313 ;
+	wikibase:novalue wdno:P8313 ;
+	wikibase:directClaimNormalized wdtn:P8313 ;
+	wikibase:statementValueNormalized psn:P8313 ;
+	wikibase:qualifierValueNormalized pqn:P8313 ;
+	wikibase:referenceValueNormalized prn:P8313 .
+
+p:P8313 a owl:ObjectProperty .
+
+psv:P8313 a owl:ObjectProperty .
+
+pqv:P8313 a owl:ObjectProperty .
+
+prv:P8313 a owl:ObjectProperty .
+
+wdt:P8313 a owl:DatatypeProperty .
+
+ps:P8313 a owl:DatatypeProperty .
+
+pq:P8313 a owl:DatatypeProperty .
+
+pr:P8313 a owl:DatatypeProperty .
+
+psn:P8313 a owl:ObjectProperty .
+
+pqn:P8313 a owl:ObjectProperty .
+
+prn:P8313 a owl:ObjectProperty .
+
+wdtn:P8313 a owl:ObjectProperty .
+
+wdno:P8313 a owl:Class ;
+	owl:complementOf _:5ce4742f42f26afe436b747d2437666d .
+
+_:5ce4742f42f26afe436b747d2437666d a owl:Restriction ;
+	owl:onProperty wdt:P8313 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q19219752 a wikibase:Item ;
+	rdfs:label "Meyers Konversations-Lexikon, 4th edition (1885–1890)"@en ;
+	skos:prefLabel "Meyers Konversations-Lexikon, 4th edition (1885–1890)"@en ;
+	schema:name "Meyers Konversations-Lexikon, 4th edition (1885–1890)"@en ;
+	rdfs:label "Meyers Konversations-Lexikon, 4. Auflage (1885–1890)"@mul ;
+	skos:prefLabel "Meyers Konversations-Lexikon, 4. Auflage (1885–1890)"@mul ;
+	schema:name "Meyers Konversations-Lexikon, 4. Auflage (1885–1890)"@mul ;
+	schema:description "edition of a German language encyclopaedia"@en .
+
+wd:P1343 a wikibase:Property ;
+	rdfs:label "described by source"@en ;
+	skos:prefLabel "described by source"@en ;
+	schema:name "described by source"@en ;
+	schema:description "work where this item is described, in statistical contexts, a methodological note describing the data"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#WikibaseItem> ;
+	wikibase:directClaim wdt:P1343 ;
+	wikibase:claim p:P1343 ;
+	wikibase:statementProperty ps:P1343 ;
+	wikibase:statementValue psv:P1343 ;
+	wikibase:qualifier pq:P1343 ;
+	wikibase:qualifierValue pqv:P1343 ;
+	wikibase:reference pr:P1343 ;
+	wikibase:referenceValue prv:P1343 ;
+	wikibase:novalue wdno:P1343 .
+
+p:P1343 a owl:ObjectProperty .
+
+psv:P1343 a owl:ObjectProperty .
+
+pqv:P1343 a owl:ObjectProperty .
+
+prv:P1343 a owl:ObjectProperty .
+
+wdt:P1343 a owl:ObjectProperty .
+
+ps:P1343 a owl:ObjectProperty .
+
+pq:P1343 a owl:ObjectProperty .
+
+pr:P1343 a owl:ObjectProperty .
+
+wdno:P1343 a owl:Class ;
+	owl:complementOf _:9c5978c46703ed90be57b769a8622d59 .
+
+_:9c5978c46703ed90be57b769a8622d59 a owl:Restriction ;
+	owl:onProperty wdt:P1343 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P10565 a wikibase:Property ;
+	rdfs:label "Encyclopedia of China (Third Edition) ID"@en ;
+	skos:prefLabel "Encyclopedia of China (Third Edition) ID"@en ;
+	schema:name "Encyclopedia of China (Third Edition) ID"@en ;
+	schema:description "identifier for an article in the online version of Encyclopedia of China (third edition)"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P10565 ;
+	wikibase:claim p:P10565 ;
+	wikibase:statementProperty ps:P10565 ;
+	wikibase:statementValue psv:P10565 ;
+	wikibase:qualifier pq:P10565 ;
+	wikibase:qualifierValue pqv:P10565 ;
+	wikibase:reference pr:P10565 ;
+	wikibase:referenceValue prv:P10565 ;
+	wikibase:novalue wdno:P10565 ;
+	wikibase:directClaimNormalized wdtn:P10565 ;
+	wikibase:statementValueNormalized psn:P10565 ;
+	wikibase:qualifierValueNormalized pqn:P10565 ;
+	wikibase:referenceValueNormalized prn:P10565 .
+
+p:P10565 a owl:ObjectProperty .
+
+psv:P10565 a owl:ObjectProperty .
+
+pqv:P10565 a owl:ObjectProperty .
+
+prv:P10565 a owl:ObjectProperty .
+
+wdt:P10565 a owl:DatatypeProperty .
+
+ps:P10565 a owl:DatatypeProperty .
+
+pq:P10565 a owl:DatatypeProperty .
+
+pr:P10565 a owl:DatatypeProperty .
+
+psn:P10565 a owl:ObjectProperty .
+
+pqn:P10565 a owl:ObjectProperty .
+
+prn:P10565 a owl:ObjectProperty .
+
+wdtn:P10565 a owl:ObjectProperty .
+
+wdno:P10565 a owl:Class ;
+	owl:complementOf _:694b361957c9876d0bb1e09940ba210b .
+
+_:694b361957c9876d0bb1e09940ba210b a owl:Restriction ;
+	owl:onProperty wdt:P10565 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q8487137 a wikibase:Item ;
+	rdfs:label "WikiProject Mathematics"@en ;
+	skos:prefLabel "WikiProject Mathematics"@en ;
+	schema:name "WikiProject Mathematics"@en ;
+	schema:description "Wikimedia subject-area collaboration"@en .
+
+wd:P6104 a wikibase:Property ;
+	rdfs:label "maintained by WikiProject"@en ;
+	skos:prefLabel "maintained by WikiProject"@en ;
+	schema:name "maintained by WikiProject"@en ;
+	schema:description "WikiProject that maintains this property, item, or linked pages. If the WikiProject is hosted outside of Wikidata, identify the hosting project using the qualifier \"part of\" (P361)"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#WikibaseItem> ;
+	wikibase:directClaim wdt:P6104 ;
+	wikibase:claim p:P6104 ;
+	wikibase:statementProperty ps:P6104 ;
+	wikibase:statementValue psv:P6104 ;
+	wikibase:qualifier pq:P6104 ;
+	wikibase:qualifierValue pqv:P6104 ;
+	wikibase:reference pr:P6104 ;
+	wikibase:referenceValue prv:P6104 ;
+	wikibase:novalue wdno:P6104 .
+
+p:P6104 a owl:ObjectProperty .
+
+psv:P6104 a owl:ObjectProperty .
+
+pqv:P6104 a owl:ObjectProperty .
+
+prv:P6104 a owl:ObjectProperty .
+
+wdt:P6104 a owl:ObjectProperty .
+
+ps:P6104 a owl:ObjectProperty .
+
+pq:P6104 a owl:ObjectProperty .
+
+pr:P6104 a owl:ObjectProperty .
+
+wdno:P6104 a owl:Class ;
+	owl:complementOf _:8ed522f108b0fd974fa8303edd0ec44c .
+
+_:8ed522f108b0fd974fa8303edd0ec44c a owl:Restriction ;
+	owl:onProperty wdt:P6104 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P6781 a wikibase:Property ;
+	rdfs:label "ProofWiki ID"@en ;
+	skos:prefLabel "ProofWiki ID"@en ;
+	schema:name "ProofWiki ID"@en ;
+	schema:description "identifier for a ProofWiki article"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#ExternalId> ;
+	wikibase:directClaim wdt:P6781 ;
+	wikibase:claim p:P6781 ;
+	wikibase:statementProperty ps:P6781 ;
+	wikibase:statementValue psv:P6781 ;
+	wikibase:qualifier pq:P6781 ;
+	wikibase:qualifierValue pqv:P6781 ;
+	wikibase:reference pr:P6781 ;
+	wikibase:referenceValue prv:P6781 ;
+	wikibase:novalue wdno:P6781 ;
+	wikibase:directClaimNormalized wdtn:P6781 ;
+	wikibase:statementValueNormalized psn:P6781 ;
+	wikibase:qualifierValueNormalized pqn:P6781 ;
+	wikibase:referenceValueNormalized prn:P6781 .
+
+p:P6781 a owl:ObjectProperty .
+
+psv:P6781 a owl:ObjectProperty .
+
+pqv:P6781 a owl:ObjectProperty .
+
+prv:P6781 a owl:ObjectProperty .
+
+wdt:P6781 a owl:DatatypeProperty .
+
+ps:P6781 a owl:DatatypeProperty .
+
+pq:P6781 a owl:DatatypeProperty .
+
+pr:P6781 a owl:DatatypeProperty .
+
+psn:P6781 a owl:ObjectProperty .
+
+pqn:P6781 a owl:ObjectProperty .
+
+prn:P6781 a owl:ObjectProperty .
+
+wdtn:P6781 a owl:ObjectProperty .
+
+wdno:P6781 a owl:Class ;
+	owl:complementOf _:2944d5f001e47cac779fd38cb7f2db1c .
+
+_:2944d5f001e47cac779fd38cb7f2db1c a owl:Restriction ;
+	owl:onProperty wdt:P6781 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q236975 a wikibase:Item ;
+	rdfs:label "classical logic"@en ;
+	skos:prefLabel "classical logic"@en ;
+	schema:name "classical logic"@en ;
+	schema:description "class of formal logics"@en .
+
+wd:P2579 a wikibase:Property ;
+	rdfs:label "studied by"@en ;
+	skos:prefLabel "studied by"@en ;
+	schema:name "studied by"@en ;
+	schema:description "subject is studied by this science or domain"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#WikibaseItem> ;
+	wikibase:directClaim wdt:P2579 ;
+	wikibase:claim p:P2579 ;
+	wikibase:statementProperty ps:P2579 ;
+	wikibase:statementValue psv:P2579 ;
+	wikibase:qualifier pq:P2579 ;
+	wikibase:qualifierValue pqv:P2579 ;
+	wikibase:reference pr:P2579 ;
+	wikibase:referenceValue prv:P2579 ;
+	wikibase:novalue wdno:P2579 .
+
+p:P2579 a owl:ObjectProperty .
+
+psv:P2579 a owl:ObjectProperty .
+
+pqv:P2579 a owl:ObjectProperty .
+
+prv:P2579 a owl:ObjectProperty .
+
+wdt:P2579 a owl:ObjectProperty .
+
+ps:P2579 a owl:ObjectProperty .
+
+pq:P2579 a owl:ObjectProperty .
+
+pr:P2579 a owl:ObjectProperty .
+
+wdno:P2579 a owl:Class ;
+	owl:complementOf _:646b8b1e4925fe4fca2b57678b2ceb02 .
+
+_:646b8b1e4925fe4fca2b57678b2ceb02 a owl:Restriction ;
+	owl:onProperty wdt:P2579 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q9471 a wikibase:Item ;
+	rdfs:label "epistemology"@en ;
+	skos:prefLabel "epistemology"@en ;
+	schema:name "epistemology"@en ;
+	rdfs:label "epistemology"@mul ;
+	skos:prefLabel "epistemology"@mul ;
+	schema:name "epistemology"@mul ;
+	schema:description "branch of philosophy studying the nature and scope of knowledge"@en .
+
+wd:Q6549544 a wikibase:Item ;
+	rdfs:label "limited principle of omniscience"@en ;
+	skos:prefLabel "limited principle of omniscience"@en ;
+	schema:name "limited principle of omniscience"@en ;
+	schema:description "weakening of the law of excluded middle in constructive mathematics"@en .
+
+wd:P7719 a wikibase:Property ;
+	rdfs:label "generalization of"@en ;
+	skos:prefLabel "generalization of"@en ;
+	schema:name "generalization of"@en ;
+	schema:description "theory/notion/statement/algorithm which in some sense this theory/notion/statement/algorithm generalizes"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#WikibaseItem> ;
+	wikibase:directClaim wdt:P7719 ;
+	wikibase:claim p:P7719 ;
+	wikibase:statementProperty ps:P7719 ;
+	wikibase:statementValue psv:P7719 ;
+	wikibase:qualifier pq:P7719 ;
+	wikibase:qualifierValue pqv:P7719 ;
+	wikibase:reference pr:P7719 ;
+	wikibase:referenceValue prv:P7719 ;
+	wikibase:novalue wdno:P7719 .
+
+p:P7719 a owl:ObjectProperty .
+
+psv:P7719 a owl:ObjectProperty .
+
+pqv:P7719 a owl:ObjectProperty .
+
+prv:P7719 a owl:ObjectProperty .
+
+wdt:P7719 a owl:ObjectProperty .
+
+ps:P7719 a owl:ObjectProperty .
+
+pq:P7719 a owl:ObjectProperty .
+
+pr:P7719 a owl:ObjectProperty .
+
+wdno:P7719 a owl:Class ;
+	owl:complementOf _:b6a6fee9598d63811b3eba1cb88d20f7 .
+
+_:b6a6fee9598d63811b3eba1cb88d20f7 a owl:Restriction ;
+	owl:onProperty wdt:P7719 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q737471 a wikibase:Item ;
+	rdfs:label "double negative elimination"@en ;
+	skos:prefLabel "double negative elimination"@en ;
+	schema:name "double negative elimination"@en ;
+	schema:description "inference rule that allows to infer a formula without the relevant negations when they immediately follows in an original formula"@en .
+
+wd:P2577 a wikibase:Property ;
+	rdfs:label "admissible rule in"@en ;
+	skos:prefLabel "admissible rule in"@en ;
+	schema:name "admissible rule in"@en ;
+	schema:description "this logic inference rule is admissible in that logical system"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#WikibaseItem> ;
+	wikibase:directClaim wdt:P2577 ;
+	wikibase:claim p:P2577 ;
+	wikibase:statementProperty ps:P2577 ;
+	wikibase:statementValue psv:P2577 ;
+	wikibase:qualifier pq:P2577 ;
+	wikibase:qualifierValue pqv:P2577 ;
+	wikibase:reference pr:P2577 ;
+	wikibase:referenceValue prv:P2577 ;
+	wikibase:novalue wdno:P2577 .
+
+p:P2577 a owl:ObjectProperty .
+
+psv:P2577 a owl:ObjectProperty .
+
+pqv:P2577 a owl:ObjectProperty .
+
+prv:P2577 a owl:ObjectProperty .
+
+wdt:P2577 a owl:ObjectProperty .
+
+ps:P2577 a owl:ObjectProperty .
+
+pq:P2577 a owl:ObjectProperty .
+
+pr:P2577 a owl:ObjectProperty .
+
+wdno:P2577 a owl:Class ;
+	owl:complementOf _:98149c9dfc3f4714e67b40ad1f4f6591 .
+
+_:98149c9dfc3f4714e67b40ad1f4f6591 a owl:Restriction ;
+	owl:onProperty wdt:P2577 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q15241312 a wikibase:Item ;
+	rdfs:label "Freebase Data Dumps"@en ;
+	skos:prefLabel "Freebase Data Dumps"@en ;
+	schema:name "Freebase Data Dumps"@en ;
+	schema:description "dumps of the public part of Google's Knowledge Graph"@en .
+
+wd:P248 a wikibase:Property ;
+	rdfs:label "stated in"@en ;
+	skos:prefLabel "stated in"@en ;
+	schema:name "stated in"@en ;
+	schema:description "to be used in the references field to refer to the information document or database in which a claim is made; for qualifiers use P805; for the type of document in which a claim is made use P3865"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#WikibaseItem> ;
+	wikibase:directClaim wdt:P248 ;
+	wikibase:claim p:P248 ;
+	wikibase:statementProperty ps:P248 ;
+	wikibase:statementValue psv:P248 ;
+	wikibase:qualifier pq:P248 ;
+	wikibase:qualifierValue pqv:P248 ;
+	wikibase:reference pr:P248 ;
+	wikibase:referenceValue prv:P248 ;
+	wikibase:novalue wdno:P248 .
+
+p:P248 a owl:ObjectProperty .
+
+psv:P248 a owl:ObjectProperty .
+
+pqv:P248 a owl:ObjectProperty .
+
+prv:P248 a owl:ObjectProperty .
+
+wdt:P248 a owl:ObjectProperty .
+
+ps:P248 a owl:ObjectProperty .
+
+pq:P248 a owl:ObjectProperty .
+
+pr:P248 a owl:ObjectProperty .
+
+wdno:P248 a owl:Class ;
+	owl:complementOf _:a2b31078afaf5caae811f4ac846f5f35 .
+
+_:a2b31078afaf5caae811f4ac846f5f35 a owl:Restriction ;
+	owl:onProperty wdt:P248 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P577 a wikibase:Property ;
+	rdfs:label "publication date"@en ;
+	skos:prefLabel "publication date"@en ;
+	schema:name "publication date"@en ;
+	schema:description "date or point in time when a work or product was first published or released"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#Time> ;
+	wikibase:directClaim wdt:P577 ;
+	wikibase:claim p:P577 ;
+	wikibase:statementProperty ps:P577 ;
+	wikibase:statementValue psv:P577 ;
+	wikibase:qualifier pq:P577 ;
+	wikibase:qualifierValue pqv:P577 ;
+	wikibase:reference pr:P577 ;
+	wikibase:referenceValue prv:P577 ;
+	wikibase:novalue wdno:P577 .
+
+p:P577 a owl:ObjectProperty .
+
+psv:P577 a owl:ObjectProperty .
+
+pqv:P577 a owl:ObjectProperty .
+
+prv:P577 a owl:ObjectProperty .
+
+wdt:P577 a owl:DatatypeProperty .
+
+ps:P577 a owl:DatatypeProperty .
+
+pq:P577 a owl:DatatypeProperty .
+
+pr:P577 a owl:DatatypeProperty .
+
+wdno:P577 a owl:Class ;
+	owl:complementOf _:eca5fcd2c546d0e0c20e05f61e0aa797 .
+
+_:eca5fcd2c546d0e0c20e05f61e0aa797 a owl:Restriction ;
+	owl:onProperty wdt:P577 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q51711 a wikibase:Item ;
+	rdfs:label "Quora"@en ;
+	skos:prefLabel "Quora"@en ;
+	schema:name "Quora"@en ;
+	rdfs:label "Quora"@mul ;
+	skos:prefLabel "Quora"@mul ;
+	schema:name "Quora"@mul ;
+	schema:description "American question-and-answer website"@en .
+
+wd:P854 a wikibase:Property ;
+	rdfs:label "reference URL"@en ;
+	skos:prefLabel "reference URL"@en ;
+	schema:name "reference URL"@en ;
+	schema:description "should be used for Internet URLs as references. Use \"Wikimedia import URL\" (P4656) for imports from WMF sites"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#Url> ;
+	wikibase:directClaim wdt:P854 ;
+	wikibase:claim p:P854 ;
+	wikibase:statementProperty ps:P854 ;
+	wikibase:statementValue psv:P854 ;
+	wikibase:qualifier pq:P854 ;
+	wikibase:qualifierValue pqv:P854 ;
+	wikibase:reference pr:P854 ;
+	wikibase:referenceValue prv:P854 ;
+	wikibase:novalue wdno:P854 .
+
+p:P854 a owl:ObjectProperty .
+
+psv:P854 a owl:ObjectProperty .
+
+pqv:P854 a owl:ObjectProperty .
+
+prv:P854 a owl:ObjectProperty .
+
+wdt:P854 a owl:ObjectProperty .
+
+ps:P854 a owl:ObjectProperty .
+
+pq:P854 a owl:ObjectProperty .
+
+pr:P854 a owl:ObjectProperty .
+
+wdno:P854 a owl:Class ;
+	owl:complementOf _:7317e7e5a3edc1980ecfe7616bb5fa1d .
+
+_:7317e7e5a3edc1980ecfe7616bb5fa1d a owl:Restriction ;
+	owl:onProperty wdt:P854 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P813 a wikibase:Property ;
+	rdfs:label "retrieved"@en ;
+	skos:prefLabel "retrieved"@en ;
+	schema:name "retrieved"@en ;
+	schema:description "date or point in time that information was retrieved from a database or website (for use in online sources)"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#Time> ;
+	wikibase:directClaim wdt:P813 ;
+	wikibase:claim p:P813 ;
+	wikibase:statementProperty ps:P813 ;
+	wikibase:statementValue psv:P813 ;
+	wikibase:qualifier pq:P813 ;
+	wikibase:qualifierValue pqv:P813 ;
+	wikibase:reference pr:P813 ;
+	wikibase:referenceValue prv:P813 ;
+	wikibase:novalue wdno:P813 .
+
+p:P813 a owl:ObjectProperty .
+
+psv:P813 a owl:ObjectProperty .
+
+pqv:P813 a owl:ObjectProperty .
+
+prv:P813 a owl:ObjectProperty .
+
+wdt:P813 a owl:DatatypeProperty .
+
+ps:P813 a owl:DatatypeProperty .
+
+pq:P813 a owl:DatatypeProperty .
+
+pr:P813 a owl:DatatypeProperty .
+
+wdno:P813 a owl:Class ;
+	owl:complementOf _:a84dea0fd38ed74f926ea4bdef778770 .
+
+_:a84dea0fd38ed74f926ea4bdef778770 a owl:Restriction ;
+	owl:onProperty wdt:P813 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q36578 a wikibase:Item ;
+	rdfs:label "Integrated Authority File"@en ;
+	skos:prefLabel "Integrated Authority File"@en ;
+	schema:name "Integrated Authority File"@en ;
+	rdfs:label "Gemeinsame Normdatei"@mul ;
+	skos:prefLabel "Gemeinsame Normdatei"@mul ;
+	schema:name "Gemeinsame Normdatei"@mul ;
+	schema:description "German National Library authority file for personal names, subject headings and corporate bodies"@en .
+
+wd:Q47757534 a wikibase:Item ;
+	rdfs:label "IdRef"@en ;
+	skos:prefLabel "IdRef"@en ;
+	schema:name "IdRef"@en ;
+	rdfs:label "IdRef"@mul ;
+	skos:prefLabel "IdRef"@mul ;
+	schema:name "IdRef"@mul ;
+	schema:description "authority file control operated by SUDOC"@en .
+
+wd:P1810 a wikibase:Property ;
+	rdfs:label "subject named as"@en ;
+	skos:prefLabel "subject named as"@en ;
+	schema:name "subject named as"@en ;
+	schema:description "name by which a subject is recorded in a database, mentioned as a contributor of a work, or is referred to in a particular context"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#String> ;
+	wikibase:directClaim wdt:P1810 ;
+	wikibase:claim p:P1810 ;
+	wikibase:statementProperty ps:P1810 ;
+	wikibase:statementValue psv:P1810 ;
+	wikibase:qualifier pq:P1810 ;
+	wikibase:qualifierValue pqv:P1810 ;
+	wikibase:reference pr:P1810 ;
+	wikibase:referenceValue prv:P1810 ;
+	wikibase:novalue wdno:P1810 .
+
+p:P1810 a owl:ObjectProperty .
+
+psv:P1810 a owl:ObjectProperty .
+
+pqv:P1810 a owl:ObjectProperty .
+
+prv:P1810 a owl:ObjectProperty .
+
+wdt:P1810 a owl:DatatypeProperty .
+
+ps:P1810 a owl:DatatypeProperty .
+
+pq:P1810 a owl:DatatypeProperty .
+
+pr:P1810 a owl:DatatypeProperty .
+
+wdno:P1810 a owl:Class ;
+	owl:complementOf _:1d6e1ecf4f0164f6a3471dd66d38c9d8 .
+
+_:1d6e1ecf4f0164f6a3471dd66d38c9d8 a owl:Restriction ;
+	owl:onProperty wdt:P1810 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q7411 a wikibase:Item ;
+	rdfs:label "Dutch"@en ;
+	skos:prefLabel "Dutch"@en ;
+	schema:name "Dutch"@en ;
+	schema:description "West Germanic language"@en .
+
+wd:P407 a wikibase:Property ;
+	rdfs:label "language of work or name"@en ;
+	skos:prefLabel "language of work or name"@en ;
+	schema:name "language of work or name"@en ;
+	schema:description "language associated with this creative work (such as books, shows, songs, broadcasts or websites) or a name (for persons use \"native language\" (P103) and \"languages spoken, written or signed\" (P1412))"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#WikibaseItem> ;
+	wikibase:directClaim wdt:P407 ;
+	wikibase:claim p:P407 ;
+	wikibase:statementProperty ps:P407 ;
+	wikibase:statementValue psv:P407 ;
+	wikibase:qualifier pq:P407 ;
+	wikibase:qualifierValue pqv:P407 ;
+	wikibase:reference pr:P407 ;
+	wikibase:referenceValue prv:P407 ;
+	wikibase:novalue wdno:P407 .
+
+p:P407 a owl:ObjectProperty .
+
+psv:P407 a owl:ObjectProperty .
+
+pqv:P407 a owl:ObjectProperty .
+
+prv:P407 a owl:ObjectProperty .
+
+wdt:P407 a owl:ObjectProperty .
+
+ps:P407 a owl:ObjectProperty .
+
+pq:P407 a owl:ObjectProperty .
+
+pr:P407 a owl:ObjectProperty .
+
+wdno:P407 a owl:Class ;
+	owl:complementOf _:7ecb658fb35d6b90057eeb2a2a932c62 .
+
+_:7ecb658fb35d6b90057eeb2a2a932c62 a owl:Restriction ;
+	owl:onProperty wdt:P407 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P10135 a wikibase:Property ;
+	rdfs:label "recording date"@en ;
+	skos:prefLabel "recording date"@en ;
+	schema:name "recording date"@en ;
+	schema:description "the date when a recording was made"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#Time> ;
+	wikibase:directClaim wdt:P10135 ;
+	wikibase:claim p:P10135 ;
+	wikibase:statementProperty ps:P10135 ;
+	wikibase:statementValue psv:P10135 ;
+	wikibase:qualifier pq:P10135 ;
+	wikibase:qualifierValue pqv:P10135 ;
+	wikibase:reference pr:P10135 ;
+	wikibase:referenceValue prv:P10135 ;
+	wikibase:novalue wdno:P10135 .
+
+p:P10135 a owl:ObjectProperty .
+
+psv:P10135 a owl:ObjectProperty .
+
+pqv:P10135 a owl:ObjectProperty .
+
+prv:P10135 a owl:ObjectProperty .
+
+wdt:P10135 a owl:DatatypeProperty .
+
+ps:P10135 a owl:DatatypeProperty .
+
+pq:P10135 a owl:DatatypeProperty .
+
+pr:P10135 a owl:DatatypeProperty .
+
+wdno:P10135 a owl:Class ;
+	owl:complementOf _:f106f68fa24a466485cce8b0415ef99d .
+
+_:f106f68fa24a466485cce8b0415ef99d a owl:Restriction ;
+	owl:onProperty wdt:P10135 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q10000 a wikibase:Item ;
+	rdfs:label "Dutch Wikipedia"@en ;
+	skos:prefLabel "Dutch Wikipedia"@en ;
+	schema:name "Dutch Wikipedia"@en ;
+	schema:description "Dutch-language edition of Wikipedia, the free encyclopedia"@en .
+
+wd:P143 a wikibase:Property ;
+	rdfs:label "imported from Wikimedia project"@en ;
+	skos:prefLabel "imported from Wikimedia project"@en ;
+	schema:name "imported from Wikimedia project"@en ;
+	schema:description "source of this claim's value; used in references section by bots or humans importing data from Wikimedia projects"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#WikibaseItem> ;
+	wikibase:directClaim wdt:P143 ;
+	wikibase:claim p:P143 ;
+	wikibase:statementProperty ps:P143 ;
+	wikibase:statementValue psv:P143 ;
+	wikibase:qualifier pq:P143 ;
+	wikibase:qualifierValue pqv:P143 ;
+	wikibase:reference pr:P143 ;
+	wikibase:referenceValue prv:P143 ;
+	wikibase:novalue wdno:P143 .
+
+p:P143 a owl:ObjectProperty .
+
+psv:P143 a owl:ObjectProperty .
+
+pqv:P143 a owl:ObjectProperty .
+
+prv:P143 a owl:ObjectProperty .
+
+wdt:P143 a owl:ObjectProperty .
+
+ps:P143 a owl:ObjectProperty .
+
+pq:P143 a owl:ObjectProperty .
+
+pr:P143 a owl:ObjectProperty .
+
+wdno:P143 a owl:Class ;
+	owl:complementOf _:66a2156e9cbfe8d655274b862fca1b59 .
+
+_:66a2156e9cbfe8d655274b862fca1b59 a owl:Restriction ;
+	owl:onProperty wdt:P143 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:P4656 a wikibase:Property ;
+	rdfs:label "Wikimedia import URL"@en ;
+	skos:prefLabel "Wikimedia import URL"@en ;
+	schema:name "Wikimedia import URL"@en ;
+	schema:description "URL of source to indicate the page or revision of an import source from another Wikimedia project (except actual references, such as Wikisource source texts). Use instead of \"reference URL\" (P854). Permalinks are preferred."@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#Url> ;
+	wikibase:directClaim wdt:P4656 ;
+	wikibase:claim p:P4656 ;
+	wikibase:statementProperty ps:P4656 ;
+	wikibase:statementValue psv:P4656 ;
+	wikibase:qualifier pq:P4656 ;
+	wikibase:qualifierValue pqv:P4656 ;
+	wikibase:reference pr:P4656 ;
+	wikibase:referenceValue prv:P4656 ;
+	wikibase:novalue wdno:P4656 .
+
+p:P4656 a owl:ObjectProperty .
+
+psv:P4656 a owl:ObjectProperty .
+
+pqv:P4656 a owl:ObjectProperty .
+
+prv:P4656 a owl:ObjectProperty .
+
+wdt:P4656 a owl:ObjectProperty .
+
+ps:P4656 a owl:ObjectProperty .
+
+pq:P4656 a owl:ObjectProperty .
+
+pr:P4656 a owl:ObjectProperty .
+
+wdno:P4656 a owl:Class ;
+	owl:complementOf _:d0914856b623ca1dd09b1f31c8eea5fe .
+
+_:d0914856b623ca1dd09b1f31c8eea5fe a owl:Restriction ;
+	owl:onProperty wdt:P4656 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q107507571 a wikibase:Item ;
+	rdfs:label "OpenAlex"@en ;
+	skos:prefLabel "OpenAlex"@en ;
+	schema:name "OpenAlex"@en ;
+	rdfs:label "OpenAlex"@mul ;
+	skos:prefLabel "OpenAlex"@mul ;
+	schema:name "OpenAlex"@mul ;
+	schema:description "open catalog of scholarly papers, authors, institutions, venues, and concepts"@en .
+
+wd:Q112808806 a wikibase:Item ;
+	schema:description "encyclopedia article published in Meyers Konversations-Lexikon, 4th edition (1885–1890)"@en .
+
+wd:P805 a wikibase:Property ;
+	rdfs:label "statement is subject of"@en ;
+	skos:prefLabel "statement is subject of"@en ;
+	schema:name "statement is subject of"@en ;
+	schema:description "(qualifying) item that describes the relation identified in this statement"@en ;
+	wikibase:propertyType <http://wikiba.se/ontology#WikibaseItem> ;
+	wikibase:directClaim wdt:P805 ;
+	wikibase:claim p:P805 ;
+	wikibase:statementProperty ps:P805 ;
+	wikibase:statementValue psv:P805 ;
+	wikibase:qualifier pq:P805 ;
+	wikibase:qualifierValue pqv:P805 ;
+	wikibase:reference pr:P805 ;
+	wikibase:referenceValue prv:P805 ;
+	wikibase:novalue wdno:P805 .
+
+p:P805 a owl:ObjectProperty .
+
+psv:P805 a owl:ObjectProperty .
+
+pqv:P805 a owl:ObjectProperty .
+
+prv:P805 a owl:ObjectProperty .
+
+wdt:P805 a owl:ObjectProperty .
+
+ps:P805 a owl:ObjectProperty .
+
+pq:P805 a owl:ObjectProperty .
+
+pr:P805 a owl:ObjectProperty .
+
+wdno:P805 a owl:Class ;
+	owl:complementOf _:b0057da68fba9959eba43619c1638733 .
+
+_:b0057da68fba9959eba43619c1638733 a owl:Restriction ;
+	owl:onProperty wdt:P805 ;
+	owl:someValuesFrom owl:Thing .
+
+wd:Q12577663 owl:sameAs wd:Q468422 .
+
+wd:Q13383806 owl:sameAs wd:Q468422 .
+
+wd:Q25523434 owl:sameAs wd:Q468422 .
+
+wdv:f987783e1f9c9fa0cb0b774d330af52d a wikibase:TimeValue ;
+	wikibase:timeValue "2013-10-28T00:00:00Z"^^xsd:dateTime ;
+	wikibase:timePrecision "11"^^xsd:integer ;
+	wikibase:timeTimezone "0"^^xsd:integer ;
+	wikibase:timeCalendarModel <http://www.wikidata.org/entity/Q1985727> .
+
+wdv:1f514303b155c03e6c49c4d50bcff3e8 a wikibase:TimeValue ;
+	wikibase:timeValue "2018-01-13T00:00:00Z"^^xsd:dateTime ;
+	wikibase:timePrecision "11"^^xsd:integer ;
+	wikibase:timeTimezone "0"^^xsd:integer ;
+	wikibase:timeCalendarModel <http://www.wikidata.org/entity/Q1985727> .
+
+wdv:4f272fae38ee73a331afd0407cdc74b9 a wikibase:TimeValue ;
+	wikibase:timeValue "2010-01-01T00:00:00Z"^^xsd:dateTime ;
+	wikibase:timePrecision "9"^^xsd:integer ;
+	wikibase:timeTimezone "0"^^xsd:integer ;
+	wikibase:timeCalendarModel <http://www.wikidata.org/entity/Q1985727> .
+
+wdv:d1f4b24996f09b84b57706b47906a6a0 a wikibase:TimeValue ;
+	wikibase:timeValue "2009-01-01T00:00:00Z"^^xsd:dateTime ;
+	wikibase:timePrecision "9"^^xsd:integer ;
+	wikibase:timeTimezone "0"^^xsd:integer ;
+	wikibase:timeCalendarModel <http://www.wikidata.org/entity/Q1985727> .
+
+wdv:3b2ff2744ee9af4b07734336d1723792 a wikibase:TimeValue ;
+	wikibase:timeValue "2022-01-26T00:00:00Z"^^xsd:dateTime ;
+	wikibase:timePrecision "11"^^xsd:integer ;
+	wikibase:timeTimezone "0"^^xsd:integer ;
+	wikibase:timeCalendarModel <http://www.wikidata.org/entity/Q1985727> .
+
+wdref:2b00cb481cddcac7623114367489b5c194901c4a a wikibase:Reference ;
+	pr:P248 wd:Q15241312 ;
+	pr:P577 "2013-10-28T00:00:00Z"^^xsd:dateTime ;
+	prv:P577 wdv:f987783e1f9c9fa0cb0b774d330af52d .
+
+wdref:3b0a5bb3c1f955edce73740124f7d935698092ad a wikibase:Reference ;
+	pr:P248 wd:Q51711 .
+
+wdref:4098a54e3d397f8807ef9b852928aff89529c76a a wikibase:Reference ;
+	pr:P854 <http://d-nb.info/gnd/G> ;
+	pr:P813 "2018-01-13T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 wdv:1f514303b155c03e6c49c4d50bcff3e8 ;
+	pr:P227 "4179179-4" ;
+	prn:P227 <https://d-nb.info/gnd/4179179-4> ;
+	pr:P248 wd:Q36578 .
+
+wdref:6508e13c5dec02b8984a53bca418336a502ad701 a wikibase:Reference ;
+	pr:P248 wd:Q36578 ;
+	pr:P227 "4179179-4" ;
+	prn:P227 <https://d-nb.info/gnd/4179179-4> ;
+	pr:P813 "2018-01-13T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 wdv:1f514303b155c03e6c49c4d50bcff3e8 .
+
+wdref:d98e170512b9c7e317cab667472601fe093f1c8a a wikibase:Reference ;
+	pr:P248 wd:Q47757534 ;
+	pr:P813 "2018-01-13T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 wdv:1f514303b155c03e6c49c4d50bcff3e8 .
+
+wdref:c64b30da1c39104b31e115ae64a883fa5db0e7c0 a wikibase:Reference ;
+	pr:P143 wd:Q10000 ;
+	pr:P4656 <https://nl.wikipedia.org/w/index.php?title=Wet_van_de_uitgesloten_derde&oldid=50899995> .
+
+wdref:c13ba4d7902ead2693f79396bc25bd35d4d14030 a wikibase:Reference ;
+	pr:P248 wd:Q107507571 ;
+	pr:P813 "2022-01-26T00:00:00Z"^^xsd:dateTime ;
+	prv:P813 wdv:3b2ff2744ee9af4b07734336d1723792 ;
+	pr:P854 <https://docs.openalex.org/download-snapshot/snapshot-data-format> .

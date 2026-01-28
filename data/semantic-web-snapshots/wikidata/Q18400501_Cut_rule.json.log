@@ -1,0 +1,39 @@
+--2026-01-28 05:10:04--  https://www.wikidata.org/wiki/Special:EntityData/Q18400501.json
+Resolving www.wikidata.org (www.wikidata.org)... 208.80.153.224, 2620:0:861:ed1a::1
+Connecting to www.wikidata.org (www.wikidata.org)|208.80.153.224|:443... connected.
+HTTP request sent, awaiting response... 
+  HTTP/1.1 200 OK
+  date: Wed, 28 Jan 2026 05:10:04 GMT
+  server: mw-web.codfw.main-759dc94748-ztg4f
+  x-content-type-options: nosniff
+  accept-ch: 
+  access-control-allow-origin: *
+  content-security-policy: default-src 'self'; script-src 'none'; object-src 'none'
+  x-frame-options: DENY
+  last-modified: Tue, 30 Sep 2025 14:19:35 GMT
+  content-type: application/json; charset=UTF-8
+  age: 0
+  x-cache: cp2033 miss, cp2041 pass
+  x-cache-status: pass
+  server-timing: cache;desc="pass", host;desc="cp2041"
+  strict-transport-security: max-age=106384710; includeSubDomains; preload
+  report-to: { "group": "wm_nel", "max_age": 604800, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0" }] }
+  nel: { "report_to": "wm_nel", "max_age": 604800, "failure_fraction": 0.05, "success_fraction": 0.0}
+  set-cookie: WMF-Last-Access=28-Jan-2026;Path=/;HttpOnly;secure;Expires=Sun, 01 Mar 2026 00:00:00 GMT
+  set-cookie: WMF-Last-Access-Global=28-Jan-2026;Path=/;Domain=.wikidata.org;HttpOnly;secure;Expires=Sun, 01 Mar 2026 00:00:00 GMT
+  x-client-ip: 34.173.33.88
+  cache-control: private, s-maxage=0, max-age=0, must-revalidate, no-transform
+  vary: Accept-Encoding,User-Agent
+  set-cookie: GeoIP=US:IA:Council_Bluffs:41.26:-95.85:v4; Path=/; secure; Domain=.wikidata.org
+  set-cookie: NetworkProbeLimit=0.001;Path=/;Secure;SameSite=None;Max-Age=3600
+  set-cookie: WMF-Uniq=tt13s55gPkHTiupQe913hQL2AAAAAFvd7-aynLHnVFeJ_mn4_AeTSbc4eFkTCD9S;Domain=.wikidata.org;Path=/;HttpOnly;secure;SameSite=None;Expires=Thu, 28 Jan 2027 00:00:00 GMT
+  transfer-encoding: chunked
+  x-request-id: 5e6d0d09-4c37-42fc-8e87-a98530a9eb5c
+  x-analytics: 
+Length: unspecified [application/json]
+Saving to: ‘/home/engine/project/data/semantic-web-snapshots/wikidata/Q18400501_Cut_rule.json’
+
+     0K ......                                                 1.15G=0s
+
+2026-01-28 05:10:04 (1.15 GB/s) - ‘/home/engine/project/data/semantic-web-snapshots/wikidata/Q18400501_Cut_rule.json’ saved [6280]
+

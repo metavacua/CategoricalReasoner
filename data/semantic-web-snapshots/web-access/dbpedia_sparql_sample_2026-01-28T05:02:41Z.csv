@@ -1,0 +1,6 @@
+"s","p","o"
+"http://dbpedia.org/resource/Intuitionistic_logic","http://www.w3.org/1999/02/22-rdf-syntax-ns#type","http://www.w3.org/2002/07/owl#Thing"
+"http://dbpedia.org/resource/Intuitionistic_logic","http://www.w3.org/1999/02/22-rdf-syntax-ns#type","http://www.w3.org/2002/07/owl#Thing"
+"http://dbpedia.org/resource/Classical_logic","http://www.w3.org/1999/02/22-rdf-syntax-ns#type","http://www.w3.org/2002/07/owl#Thing"
+"http://dbpedia.org/resource/Classical_logic","http://www.w3.org/1999/02/22-rdf-syntax-ns#type","http://www.w3.org/2002/07/owl#Thing"
+"http://dbpedia.org/resource/Intuitionistic_logic","http://www.w3.org/2002/07/owl#sameAs","http://rdf.freebase.com/ns/m.016p04"

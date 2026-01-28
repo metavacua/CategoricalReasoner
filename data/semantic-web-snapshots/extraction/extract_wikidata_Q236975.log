@@ -1,0 +1,55 @@
+
+Extracting Wikidata data from: data/semantic-web-snapshots/wikidata/Q236975_Classical_logic.json
+======================================================================
+Wikidata Entity: Q236975
+======================================================================
+
+Label (en): classical logic
+Description (en): class of formal logics
+
+Claims (22 properties):
+  P10283 (OpenAlex ID): 1 value(s)
+  P1051 (PSB ID): 1 value(s)
+  P11093 (property P11093): 1 value(s)
+  P1424 (topic's main category): 1 value(s)
+  P1482 (stack exchange tag): 1 value(s)
+  P1552 (described by source): 7 value(s)
+  P156 (followed by): 2 value(s)
+  P227 (GND ID): 1 value(s)
+  P2579 (seen in): 3 value(s)
+  P279 (subclass of): 1 value(s)
+  P3123 (philosophy portal ID): 1 value(s)
+  P3235 (swedish protected areas ID): 1 value(s)
+  P3417 (Quora topic ID): 1 value(s)
+  P361 (part of): 1 value(s)
+  P373 (commons category): 1 value(s)
+  P4215 (dlshub topic ID): 1 value(s)
+  P6366 (researchgate ID): 1 value(s)
+  P646 (freebase ID): 1 value(s)
+  P8408 (kbpedia ID): 1 value(s)
+  P910 (topic's main category): 1 value(s)
+  P9545 (Biodiversity Heritage Library work ID): 1 value(s)
+  P9621 (trecID): 1 value(s)
+
+======================================================================
+Catty-Relevant Data:
+======================================================================
+{
+  "wikidata_id": "Q236975",
+  "label": "classical logic",
+  "description": "class of formal logics",
+  "related_logics": [
+    {
+      "type": "subclass_of",
+      "wikidata_id": "Q17488292"
+    },
+    {
+      "type": "part_of",
+      "wikidata_id": "Q8078"
+    }
+  ],
+  "external_references": {
+    "freebase": "/m/0fhpt",
+    "openalex": "C32241873"
+  }
+}
