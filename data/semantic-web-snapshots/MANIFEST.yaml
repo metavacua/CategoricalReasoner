@@ -1,0 +1,67 @@
+# Semantic Web Data Manifest for Catty Thesis
+# Generated: 2026-01-28T03:42:53Z
+# This manifest provides reproducibility metadata for all fetched RDF data
+
+timestamp: "2026-01-28T03:42:53Z"
+pipeline_version: "1.0.0"
+description: "RDF data fetched from Wikidata and DBPedia for LK, LJ, LDJ logics"
+
+sources:
+  - source: "Wikidata Classical Logic (LK)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q236975.json"
+    file: "data/semantic-web-snapshots/wikidata/LK_Q236975.json"
+    hash_sha256: "f0ea43930225fcc37caee789cdce4a62b8d62591a4d664e98a970619b79ebb52"
+    size_bytes: 25438
+    fetched_at: "2026-01-28T03:42:53Z"
+    status: "success"
+    wikidata_id: "Q236975"
+    label: "classical logic"
+    description: "class of formal logics"
+
+  - source: "Wikidata Intuitionistic Logic (LJ)"
+    type: "wikidata"
+    url: "https://www.wikidata.org/wiki/Special:EntityData/Q176786.json"
+    file: "data/semantic-web-snapshots/wikidata/LJ_Q176786.json"
+    hash_sha256: "64eb5dc74c522353cbc87602e0b5e1184132e20b0b685e57357f30e4994a0263"
+    size_bytes: 17968
+    fetched_at: "2026-01-28T03:42:53Z"
+    status: "success"
+    wikidata_id: "Q176786"
+    label: "intuitionistic logic"
+    description: "various systems of symbolic logic"
+
+  - source: "DBPedia Classical Logic"
+    type: "dbpedia"
+    url: "https://dbpedia.org/data/Classical_logic.ttl"
+    file: "data/semantic-web-snapshots/dbpedia/Classical_logic.ttl"
+    hash_sha256: "414f9735acd30ece358ce2a7303dbb3f1139148edbddef7caf318307b94045b6"
+    size_bytes: 19936
+    fetched_at: "2026-01-28T03:42:54Z"
+    status: "success"
+    triples_count: 312
+
+  - source: "DBPedia Intuitionistic Logic"
+    type: "dbpedia"
+    url: "https://dbpedia.org/data/Intuitionistic_logic.ttl"
+    file: "data/semantic-web-snapshots/dbpedia/Intuitionistic_logic.ttl"
+    hash_sha256: "17f32a7c2e3291e1a170424e844e4a3a14a8308108c9d1b52c489197e17841b9"
+    size_bytes: 25881
+    fetched_at: "2026-01-28T03:42:54Z"
+    status: "success"
+
+notes:
+  ldj_status: |
+    NOT FOUND - Dual Intuitionistic Logic (LDJ) does not have a dedicated Wikidata
+    entity. The logic must be defined in the Catty ontology manually using categorical
+    specifications.
+  data_limitations: |
+    Wikidata provides general classification data but does not contain formal
+    specifications of sequent systems, structural rules (weakening, contraction,
+    exchange), or axiom schemas (LEM, LNC, etc.). These must be defined in the
+    Catty thesis ontology.
+  recommended_supplements: |
+    The Catty thesis should supplement semantic web data with:
+    - Manual formal specifications in ontology/logics.ttl
+    - Sequent rules in ontology/sequents.ttl
+    - Structural rules in ontology/structural-rules.ttl

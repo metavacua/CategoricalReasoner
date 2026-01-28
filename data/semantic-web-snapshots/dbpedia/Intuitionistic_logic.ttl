@@ -1,0 +1,432 @@
+@prefix foaf:	<http://xmlns.com/foaf/0.1/> .
+@prefix wikipedia-en:	<http://en.wikipedia.org/wiki/> .
+@prefix dbr:	<http://dbpedia.org/resource/> .
+wikipedia-en:Intuitionistic_logic	foaf:primaryTopic	dbr:Intuitionistic_logic .
+@prefix dbo:	<http://dbpedia.org/ontology/> .
+dbr:Algebraic_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Propositional_calculus	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Interior_algebra	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Three-valued_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Linear_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Continuation-passing_style	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Algebraic_semantics_(mathematical_logic)>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Lindenbaum\u2013Tarski_algebra>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Non-classical_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Heyting_algebra	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Dependent_type	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Intuitionistic_type_theory	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Lambda-mu_calculus	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Calculus_of_constructions	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Constructive_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic ;
+	dbo:wikiPageRedirects	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/\u0141ukasiewicz\u2013Moisil_algebra>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Sequent_calculus	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Game_semantics	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Susanne_Bobzien	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Significs	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Giorgi_Japaridze	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Infinitesimal	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:List_of_academic_fields	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Andrey_Kolmogorov	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Hypothetical_syllogism	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Type_theory	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:History_of_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Classifying_space	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Law_of_thought	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Dialectica_interpretation	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Constructivism_(philosophy_of_mathematics)>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Sequent	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Max_Euwe	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Involution_(mathematics)>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Absorption_law	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Boolean-valued_model	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Call-with-current-continuation	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Drinker_paradox	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Neil_Tennant_(philosopher)>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Friedman_translation	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Negation	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Dutch_philosophy	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Ivan_Orlov_(philosopher)>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Monoidal_t-norm_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Grothendieck\u0027s_relative_point_of_view>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Benedict_Freedman	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Tautology_(logic)>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Boolean_algebra	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:List_of_mathematical_logic_topics	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Interpretation_(logic)>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/False_(logic)>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Modal_companion	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Tagged_union	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Alexander_Zinoviev	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Philosophy_of_mathematics	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Proof_theory	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Category_theory	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Kurt_G\u00F6del>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Index_of_philosophy_articles_(I\u2013Q)>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Sheaf_(mathematics)>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Timeline_of_category_theory_and_related_mathematics	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:List_of_pioneers_in_computer_science	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Oskar_Becker	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Continuum_hypothesis	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Saul_Kripke	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Philosophy_of_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Law_of_trichotomy	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:First-order_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Constructive_set_theory	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Logical_connective	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Hilbert_system	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Natural_deduction	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Principle_of_explosion	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Dialetheism	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Anti-realism	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Proof_calculus	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Carlo_Dalla_Pozza	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:List_of_Hilbert_systems	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Victoria,_Lady_Welby>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Double_negation	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Second_Conference_on_the_Epistemology_of_the_Exact_Sciences	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Law_of_excluded_middle	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Logical_intuition	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Second-order_propositional_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Mathematics	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Haskell_Curry	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Fuzzy_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Outline_of_academic_disciplines	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Distributive_lattice	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Timeline_of_Polish_science_and_technology	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Mathematical_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:List_of_Dutch_discoveries	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Infinite-valued_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Finite_set	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Is_Logic_Empirical%3F>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Many-valued_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Brouwer_fixed-point_theorem	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Cut-elimination_theorem	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Set_theory	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Intuition	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Hausdorff_space	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Existence_theorem	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Vacuous_truth	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Joan_Moschovakis	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+@prefix dbp:	<http://dbpedia.org/property/> .
+dbr:Joan_Moschovakis	dbp:knownFor	dbr:Intuitionistic_logic ;
+	dbo:knownFor	dbr:Intuitionistic_logic .
+dbr:Categorical_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Field_of_sets	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Anne_Sjerp_Troelstra	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Arend_Heyting	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic ;
+	dbp:knownFor	dbr:Intuitionistic_logic ;
+	dbo:knownFor	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Monad_(category_theory)>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Contraposition	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Intuitionist_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic ;
+	dbo:wikiPageRedirects	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/B,_C,_K,_W_system>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Constructivist_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic ;
+	dbo:wikiPageRedirects	dbr:Intuitionistic_logic .
+dbr:Intuitionistic_Logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic ;
+	dbo:wikiPageRedirects	dbr:Intuitionistic_logic .
+dbr:Intuitionistic_Prop_Calc	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic ;
+	dbo:wikiPageRedirects	dbr:Intuitionistic_logic .
+dbr:Semantics_for_intuitionistic_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic ;
+	dbo:wikiPageRedirects	dbr:Intuitionistic_logic .
+dbr:Semantics_of_intuitionistic_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic ;
+	dbo:wikiPageRedirects	dbr:Intuitionistic_logic .
+dbr:Deductive_reasoning	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Outline_of_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Artificial_intuition	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Steiner\u2013Lehmus_theorem>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Leon_Henkin	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Edmund_Husserl	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Truth	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Dialogical_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Material_conditional	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Discrete_mathematics	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Possibility_theory	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Outline_of_formal_science	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Peirce\u0027s_law>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Dependence_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Literal_(mathematical_logic)>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Bunched_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Minimal_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Substructural_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Dick_de_Jongh	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Intuitionistic_propositional_calculus	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic ;
+	dbo:wikiPageRedirects	dbr:Intuitionistic_logic .
+dbr:Truth_value	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Glossary_of_areas_of_mathematics	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Stanis\u0142aw_Ja\u015Bkowski>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Combinatory_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Contradiction	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Brouwer\u2013Heyting\u2013Kolmogorov_interpretation>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+dbr:Intuitionistic_logic	rdf:type	owl:Thing ;
+	owl:sameAs	<http://es.dbpedia.org/resource/L\u00F3gica_intuicionista> ,
+		<http://zh.dbpedia.org/resource/\u76F4\u89C9\u4E3B\u4E49\u903B\u8F91> ,
+		<http://rdf.freebase.com/ns/m.016p04> ,
+		dbr:Intuitionistic_logic .
+@prefix wikidata:	<http://www.wikidata.org/entity/> .
+dbr:Intuitionistic_logic	owl:sameAs	wikidata:Q176786 .
+@prefix dbpedia-global:	<https://global.dbpedia.org/id/> .
+dbr:Intuitionistic_logic	owl:sameAs	dbpedia-global:iLhk ,
+		<http://ml.dbpedia.org/resource/\u0D05\u0D28\u0D4D\u0D24\u0D03\u0D2A\u0D4D\u0D30\u0D1C\u0D4D\u0D1E> .
+@prefix dbpedia-pl:	<http://pl.dbpedia.org/resource/> .
+dbr:Intuitionistic_logic	owl:sameAs	dbpedia-pl:Logika_intuicjonistyczna .
+@prefix yago-res:	<http://yago-knowledge.org/resource/> .
+dbr:Intuitionistic_logic	owl:sameAs	yago-res:Intuitionistic_logic .
+@prefix dbpedia-sv:	<http://sv.dbpedia.org/resource/> .
+dbr:Intuitionistic_logic	owl:sameAs	dbpedia-sv:Intuitionistisk_logik ,
+		<http://ru.dbpedia.org/resource/\u0418\u043D\u0442\u0443\u0438\u0446\u0438\u043E\u043D\u0438\u0441\u0442\u0441\u043A\u0430\u044F_\u043B\u043E\u0433\u0438\u043A\u0430> ,
+		<http://d-nb.info/gnd/4162199-2> ,
+		<http://pt.dbpedia.org/resource/L\u00F3gica_intuicionista> ,
+		<http://mk.dbpedia.org/resource/\u0418\u043D\u0442\u0443\u0438\u0446\u0438\u0458\u0430_(\u0444\u0438\u043B\u043E\u0441\u043E\u0444\u0438\u0458\u0430)> .
+@prefix dbpedia-et:	<http://et.dbpedia.org/resource/> .
+dbr:Intuitionistic_logic	owl:sameAs	dbpedia-et:Intuitsionistlik_loogika ,
+		<http://cs.dbpedia.org/resource/Intuicionistick\u00E1_logika> .
+@prefix dbpedia-de:	<http://de.dbpedia.org/resource/> .
+dbr:Intuitionistic_logic	owl:sameAs	dbpedia-de:Intuitionismus ,
+		<http://ko.dbpedia.org/resource/\uC9C1\uAD00_\uB17C\uB9AC> ,
+		<http://uk.dbpedia.org/resource/\u0406\u043D\u0442\u0443\u0457\u0446\u0456\u043E\u043D\u0456\u0441\u0442\u0441\u044C\u043A\u0430_\u043B\u043E\u0433\u0456\u043A\u0430> .
+@prefix dbpedia-pms:	<http://pms.dbpedia.org/resource/> .
+dbr:Intuitionistic_logic	owl:sameAs	dbpedia-pms:Antuissionism .
+@prefix dbpedia-tr:	<http://tr.dbpedia.org/resource/> .
+dbr:Intuitionistic_logic	owl:sameAs	dbpedia-tr:Sezgicilik ,
+		<http://hy.dbpedia.org/resource/\u053F\u0578\u0576\u057D\u057F\u0580\u0578\u0582\u056F\u057F\u056B\u057E_\u057F\u0580\u0561\u0574\u0561\u0562\u0561\u0576\u0578\u0582\u0569\u0575\u0578\u0582\u0576> .
+@prefix dbpedia-fr:	<http://fr.dbpedia.org/resource/> .
+dbr:Intuitionistic_logic	owl:sameAs	dbpedia-fr:Logique_intuitionniste ,
+		<http://fa.dbpedia.org/resource/\u0645\u0646\u0637\u0642_\u0634\u0647\u0648\u062F\u06CC> .
+@prefix dbpedia-it:	<http://it.dbpedia.org/resource/> .
+dbr:Intuitionistic_logic	owl:sameAs	dbpedia-it:Logica_intuizionista ,
+		<http://ja.dbpedia.org/resource/\u76F4\u89B3\u4E3B\u7FA9\u8AD6\u7406> .
+@prefix dbpedia-eo:	<http://eo.dbpedia.org/resource/> .
+dbr:Intuitionistic_logic	owl:sameAs	dbpedia-eo:Intuicia_logiko .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+dbr:Intuitionistic_logic	rdfs:label	"\u0418\u043D\u0442\u0443\u0438\u0446\u0438\u043E\u043D\u0438\u0441\u0442\u0441\u043A\u0430\u044F \u043B\u043E\u0433\u0438\u043A\u0430"@ru ,
+		"Logique intuitionniste"@fr ,
+		"\u0406\u043D\u0442\u0443\u0457\u0446\u0456\u043E\u043D\u0456\u0441\u0442\u0441\u044C\u043A\u0430 \u043B\u043E\u0433\u0456\u043A\u0430"@uk ,
+		"Logica intuizionista"@it ,
+		"Logika intuicjonistyczna"@pl ,
+		"L\u00F3gica intuicionista"@pt ,
+		"\u76F4\u89C9\u4E3B\u4E49\u903B\u8F91"@zh ,
+		"Intuicionistick\u00E1 logika"@cs ,
+		"L\u00F3gica intuicionista"@es ,
+		"Intuitionistic logic"@en ,
+		"\uC9C1\uAD00 \uB17C\uB9AC"@ko ,
+		"Intuitionismus"@de ,
+		"Intuicia logiko"@eo ,
+		"\u76F4\u89B3\u4E3B\u7FA9\u8AD6\u7406"@ja ,
+		"Intuitionistisk logik"@sv .
+@prefix dct:	<http://purl.org/dc/terms/> .
+@prefix dbc:	<http://dbpedia.org/resource/Category:> .
+dbr:Intuitionistic_logic	dct:subject	dbc:Intuitionism ,
+		dbc:Systems_of_formal_logic ,
+		dbc:Logic_in_computer_science ,
+		dbc:Non-classical_logic ,
+		<http://dbpedia.org/resource/Category:Constructivism_(mathematics)> ;
+	foaf:depiction	<http://commons.wikimedia.org/wiki/Special:FilePath/Rieger-Nishimura.svg> .
+@prefix prov:	<http://www.w3.org/ns/prov#> .
+dbr:Intuitionistic_logic	prov:wasDerivedFrom	<http://en.wikipedia.org/wiki/Intuitionistic_logic?oldid=1311882414&ns=0> ;
+	foaf:isPrimaryTopicOf	wikipedia-en:Intuitionistic_logic ;
+	dbo:wikiPageWikiLink	dbr:Intuitionistic_type_theory ,
+		dbc:Logic_in_computer_science ,
+		dbc:Non-classical_logic ,
+		dbr:Hilbert-style_deduction_system ,
+		dbr:Law_of_the_excluded_middle ,
+		dbr:BHK_interpretation ,
+		dbr:Paraconsistent_logic ,
+		dbr:Robert_Lee_Constable ,
+		dbr:Linear_logic ,
+		dbr:Computability_logic ,
+		dbr:Semantic_theory_of_truth ,
+		<http://dbpedia.org/resource/Category:Constructivism_(mathematics)> ,
+		dbr:Relevance_theory ,
+		<http://dbpedia.org/resource/Interpretation_(logic)> ,
+		dbr:Intermediate_logic ,
+		dbr:Dialectica_interpretation ,
+		dbr:Kripke_frame ,
+		dbr:Normal_modal_logic ,
+		dbr:Inhabited_set ,
+		dbr:Many-valued_logic ,
+		<http://dbpedia.org/resource/Boolean_algebra_(structure)> ,
+		dbr:Theory_of_justification ,
+		dbr:Join_and_meet ,
+		dbr:Boolean-valued_semantics ,
+		dbr:Existence_property ,
+		dbr:Grenoble ,
+		dbr:Propositional_formula ,
+		dbr:Simply-typed_lambda_calculus ,
+		dbr:Logical_connective ,
+		dbr:Dirk_van_Dalen ,
+		dbr:Stephen_Cole_Kleene ,
+		dbr:Smooth_infinitesimal_analysis ,
+		<http://dbpedia.org/resource/Quantifier_(logic)> ,
+		dbr:Functionally_complete ,
+		<http://dbpedia.org/resource/Jan_\u0141ukasiewicz> ,
+		<http://dbpedia.org/resource/Agda_(programming_language)> ,
+		<http://dbpedia.org/resource/Duality_(mathematics)> ,
+		<http://dbpedia.org/resource/Brouwer\u2013Hilbert_controversy> ,
+		<http://dbpedia.org/resource/Tautology_(logic)> ,
+		<http://dbpedia.org/resource/File:Rieger-Nishimura.svg> ,
+		<http://dbpedia.org/resource/G\u00F6del\u2013Gentzen_negative_translation> ,
+		dbr:Four_color_theorem ,
+		dbr:Logical_disjunction ,
+		dbr:David_Hilbert ,
+		dbr:Logical_conjunction ,
+		dbr:Modus_ponens ,
+		dbr:Material_conditional ,
+		dbr:Evidence ,
+		dbr:Disjunctive_syllogism ,
+		dbr:Truth_value ,
+		dbc:Intuitionism ,
+		<http://dbpedia.org/resource/Complement_(set_theory)> ,
+		dbr:Sheffer_stroke ,
+		dbr:Peirce_arrow ,
+		dbr:Logical_negation ,
+		dbr:Gerhard_Gentzen ,
+		dbr:Embedding ,
+		dbr:Proof_by_contradiction ,
+		dbr:Heyting_algebra ,
+		dbr:Realizability ,
+		dbr:Syntax ,
+		<http://dbpedia.org/resource/De_Morgan\u0027s_laws> ,
+		dbr:Admissible_rule ,
+		dbr:Constructive_proof ,
+		dbr:Intermediate_logics ,
+		dbr:Proof-theoretic ,
+		<http://dbpedia.org/resource/Constructivism_(mathematics)> ,
+		dbr:Infinite-valued_logic ,
+		<http://dbpedia.org/resource/Curry\u2013Howard_isomorphism> ,
+		<http://dbpedia.org/resource/Valuation_(logic)> ,
+		dbr:Arend_Heyting ,
+		dbr:Valery_Glivenko ,
+		dbr:Giorgi_Japaridze ,
+		dbr:Luitzen_Egbertus_Jan_Brouwer ,
+		dbr:Sole_sufficient_operator ,
+		dbr:Currying ,
+		dbr:Disjoint_sets ,
+		dbr:Kripke_semantics ,
+		dbr:University_of_Amsterdam ,
+		<http://dbpedia.org/resource/Interior_(topology)> ,
+		dbr:Symbolic_logic ,
+		<http://dbpedia.org/resource/Conditional_(computer_programming)> ,
+		dbr:Propositional_calculus ,
+		dbr:Modal_logic ,
+		dbr:Mathematical_constructivism ,
+		dbr:Saul_Kripke ,
+		dbr:First-order_logic ,
+		dbr:Finite-valued_logic ,
+		dbr:Classical_logic ,
+		dbr:Propositional_logic ,
+		dbr:Minimal_logic ,
+		dbr:Double_negation_elimination ,
+		dbr:Law_of_non-contradiction ,
+		dbr:Modal_companion ,
+		dbr:Boolean_algebra ,
+		dbr:Coq ,
+		dbr:Walter_Carnielli ,
+		dbr:Boolean_function ,
+		dbr:Game_semantics ,
+		<http://dbpedia.org/resource/Peirce\u0027s_law> ,
+		dbc:Systems_of_formal_logic ,
+		<http://dbpedia.org/resource/Generalization_(logic)> ,
+		dbr:Intuitionism ,
+		dbr:Brouwer-Heyting-Kolmogorov ,
+		dbr:Law_of_bivalence ,
+		dbr:Proof_assistants ,
+		<http://dbpedia.org/resource/Curry\u2013Howard_correspondence> ,
+		<http://dbpedia.org/resource/Kurt_G\u00F6del> ,
+		dbr:Stanford_Encyclopedia_of_Philosophy ;
+	dbo:description	"felsefe ak\u0131m\u0131"@tr ,
+		"logique formelle constructive"@fr ,
+		"l\u00F3gica simb\u00F3lica que fundamenta intuicionismo"@pt ,
+		"various systems of symbolic logic"@en ,
+		"logica dell'intuizionismo matematico e di altre forme di costruttivismo matematico"@it .
+@prefix dbt:	<http://dbpedia.org/resource/Template:> .
+dbr:Intuitionistic_logic	dbp:wikiPageUsesTemplate	dbt:Cite_book ,
+		dbt:Refbegin ,
+		dbt:Refend ,
+		dbt:Short_description ,
+		dbt:Reflist ,
+		dbt:Cite_journal ,
+		dbt:Harvnb ,
+		dbt:Cols ,
+		dbt:Main ,
+		dbt:Section_link ,
+		dbt:Snd ,
+		dbt:Portal ,
+		dbt:Blockquote ,
+		dbt:Colend ,
+		dbt:Citation ,
+		dbt:Cite_web ,
+		dbt:Sfn ,
+		dbt:Cite_conference ,
+		dbt:Cite_SEP ,
+		dbt:Authority_control ,
+		dbt:Non-classical_logic ;
+	dbo:wikiPageExternalLink	<https://www.princeton.edu/~hhalvors/restricted/kripke_intuitionism.pdf> .
+@prefix ns24:	<https://www.oxfordhandbooks.com/view/10.1093/oxfordhb/9780195325928.001.0001/> .
+dbr:Intuitionistic_logic	dbo:wikiPageExternalLink	ns24:oxfordhb-9780195325928 ,
+		ns24:oxfordhb-9780195325928-e-10 ,
+		<http://www.illc.uva.nl/j50/contribs/troelstra/troelstra.pdf> ,
+		<https://dx.doi.org/10.1016/j.jal.2004.07.016> ,
+		<http://teachinglogic.liglab.fr/INT1/index.php> ,
+		<http://ftp.cs.toronto.edu/pub/bonner/papers/hypotheticals/naclp89.ps> ,
+		<http://www.cs.le.ac.uk/people/nb118/Publications/ESSLLI\u002705.pdf> ,
+		<https://web.archive.org/web/20120404002639/http:/www.phil.uu.nl/~dvdalen/articles/Blackwell(Dalen).pdf> ,
+		<http://plato.stanford.edu/entries/logic-intuitionistic/> ;
+	dbo:thumbnail	<http://commons.wikimedia.org/wiki/Special:FilePath/Rieger-Nishimura.svg?width=300> .
+<http://dbpedia.org/resource/Sergei_N._Artemov>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Curry\u2013Howard_correspondence>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:T-norm_fuzzy_logics	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Disjunctive_syllogism	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Structural_synthesis_of_programs	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Intuitionism	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Proof_by_contradiction	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:List_of_mathematical_proofs	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Index_of_logic_articles	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:No-cloning_theorem	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:List_of_PSPACE-complete_problems	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Proof_complexity	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Stephen_Cole_Kleene	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Kripke_semantics	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Paraconsistent_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:William_Alvin_Howard	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Constructive_analysis	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Computability_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Institution_(computer_science)>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Universal_set	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Simply_typed_lambda_calculus	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Intermediate_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Metamath	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Hypersequent	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Philosophical_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Andrzej_Grzegorczyk	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Definitions_of_mathematics	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/G\u00F6del\u0027s_completeness_theorem>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:SKI_combinator_calculus	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Craig_interpolation	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Admissible_rule	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Prenex_normal_form	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:History_of_topos_theory	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Inhabited_set	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Intuition_and_decision-making	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Type_inhabitation	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Principle_of_bivalence	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/De_Morgan\u0027s_laws>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Relevance	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:MINLOG	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Outline_of_philosophy	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Monoidal_category	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Abstract_algebraic_logic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Heyting_arithmetic	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Logics_for_computability	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:System_F	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Ordinal_analysis	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Focused_proof	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Double-negation_translation	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Markov\u0027s_principle>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Rule_of_replacement	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+<http://dbpedia.org/resource/Fitch\u0027s_paradox_of_knowability>	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .
+dbr:Harrop_formula	dbo:wikiPageWikiLink	dbr:Intuitionistic_logic .

@@ -1,0 +1,334 @@
+@prefix foaf:	<http://xmlns.com/foaf/0.1/> .
+@prefix wikipedia-en:	<http://en.wikipedia.org/wiki/> .
+@prefix dbr:	<http://dbpedia.org/resource/> .
+wikipedia-en:Classical_logic	foaf:primaryTopic	dbr:Classical_logic .
+@prefix dbo:	<http://dbpedia.org/ontology/> .
+dbr:Strict_conditional	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:William_of_Soissons	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Linear_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Continuation-passing_style	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Handbook_of_Automated_Reasoning	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Lindenbaum\u2013Tarski_algebra>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Non-classical_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Heyting_algebra	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Lambda-mu_calculus	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Sequent_calculus	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Game_semantics	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Susanne_Bobzien	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Euclidean_geometry	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Hypothetical_syllogism	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Relevance_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Wason_selection_task	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Indian_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Type_theory	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Buddhist_logico-epistemology	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Hilbert\u2013Bernays_paradox>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Implicational_propositional_calculus	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Law_of_thought	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Constructivism_(philosophy_of_mathematics)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Consistency	dbo:wikiPageWikiLink	dbr:Classical_logic .
+@prefix ns4:	<http://dbpedia.org/resource/Logic:> .
+ns4:_The_Laws_of_Truth	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Involution_(mathematics)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Heyting_field	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Absorption_law	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Call-with-current-continuation	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Drinker_paradox	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Church\u0027s_thesis_(constructive_mathematics)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Paradoxes_of_material_implication	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Schr\u00F6dinger_logic>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Friedman_translation	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Negation	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Classical	dbo:wikiPageWikiLink	dbr:Classical_logic ;
+	dbo:wikiPageDisambiguates	dbr:Classical_logic .
+<http://dbpedia.org/resource/Ivan_Orlov_(philosopher)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Monoidal_t-norm_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:CARINE	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Free_choice_inference	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Rationality	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Interpretation_(logic)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Dempster\u2013Shafer_theory>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/False_(logic)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Proof_theory	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Kurt_G\u00F6del>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Department_of_Mathematical_Logic_(Bulgarian_Academy_of_Sciences)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Continuum_hypothesis	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Logical_equivalence	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Philosophy_of_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Russell\u0027s_paradox>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Currying	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Psychologism	dbo:wikiPageWikiLink	dbr:Classical_logic .
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl:	<http://www.w3.org/2002/07/owl#> .
+dbr:Classical_logic	rdf:type	owl:Thing ;
+	owl:sameAs	<https://global.dbpedia.org/id/2Ecwz> ,
+		<http://ca.dbpedia.org/resource/L\u00F2gica_cl\u00E0ssica> ,
+		<http://ja.dbpedia.org/resource/\u53E4\u5178\u8AD6\u7406> .
+@prefix dbpedia-de:	<http://de.dbpedia.org/resource/> .
+dbr:Classical_logic	owl:sameAs	dbpedia-de:Klassische_Logik .
+@prefix dbpedia-tl:	<http://tl.dbpedia.org/resource/> .
+dbr:Classical_logic	owl:sameAs	dbpedia-tl:Klasikong_lohika .
+@prefix dbpedia-eo:	<http://eo.dbpedia.org/resource/> .
+dbr:Classical_logic	owl:sameAs	dbpedia-eo:Klasika_logiko .
+@prefix dbpedia-nl:	<http://nl.dbpedia.org/resource/> .
+dbr:Classical_logic	owl:sameAs	dbpedia-nl:Klassieke_logica ,
+		<http://d-nb.info/gnd/4333219-5> ,
+		dbr:Classical_logic ,
+		<http://zh.dbpedia.org/resource/\u7ECF\u5178\u903B\u8F91> ,
+		<http://fa.dbpedia.org/resource/\u0645\u0646\u0637\u0642_\u06A9\u0644\u0627\u0633\u06CC\u06A9> ,
+		<http://ru.dbpedia.org/resource/\u041A\u043B\u0430\u0441\u0441\u0438\u0447\u0435\u0441\u043A\u0430\u044F_\u043B\u043E\u0433\u0438\u043A\u0430> ,
+		<http://sk.dbpedia.org/resource/Klasick\u00E1_logika> .
+@prefix dbpedia-et:	<http://et.dbpedia.org/resource/> .
+dbr:Classical_logic	owl:sameAs	dbpedia-et:Klassikaline_loogika ,
+		<http://rdf.freebase.com/ns/m.0fhpt> ,
+		<http://es.dbpedia.org/resource/L\u00F3gica_cl\u00E1sica> ,
+		<http://uk.dbpedia.org/resource/\u041A\u043B\u0430\u0441\u0438\u0447\u043D\u0430_\u043B\u043E\u0433\u0456\u043A\u0430> ,
+		<http://ko.dbpedia.org/resource/\uACE0\uC804_\uB17C\uB9AC> .
+@prefix wikidata:	<http://www.wikidata.org/entity/> .
+dbr:Classical_logic	owl:sameAs	wikidata:Q236975 .
+@prefix dbpedia-sv:	<http://sv.dbpedia.org/resource/> .
+dbr:Classical_logic	owl:sameAs	dbpedia-sv:Klassisk_logik .
+@prefix dbpedia-it:	<http://it.dbpedia.org/resource/> .
+dbr:Classical_logic	owl:sameAs	dbpedia-it:Logica_classica .
+@prefix dbpedia-fr:	<http://fr.dbpedia.org/resource/> .
+dbr:Classical_logic	owl:sameAs	dbpedia-fr:Logique_classique ,
+		<http://pt.dbpedia.org/resource/L\u00F3gica_cl\u00E1ssica> ,
+		<http://mk.dbpedia.org/resource/\u041A\u043B\u0430\u0441\u0438\u0447\u043D\u0430_\u043B\u043E\u0433\u0438\u043A\u0430> .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+dbr:Classical_logic	rdfs:label	"L\u00F2gica cl\u00E0ssica"@ca ,
+		"\u041A\u043B\u0430\u0441\u0438\u0447\u043D\u0430 \u043B\u043E\u0433\u0456\u043A\u0430"@uk ,
+		"\u53E4\u5178\u8AD6\u7406"@ja ,
+		"Klasika logiko"@eo ,
+		"L\u00F3gica cl\u00E1sica"@es ,
+		"\uACE0\uC804 \uB17C\uB9AC"@ko ,
+		"Klassische Logik"@de ,
+		"\u7ECF\u5178\u903B\u8F91"@zh ,
+		"Classical logic"@en ,
+		"\u041A\u043B\u0430\u0441\u0441\u0438\u0447\u0435\u0441\u043A\u0430\u044F \u043B\u043E\u0433\u0438\u043A\u0430"@ru ,
+		"Logica classica"@it ,
+		"Logique classique"@fr ,
+		"Klassisk logik"@sv ,
+		"L\u00F3gica cl\u00E1ssica"@pt ,
+		"Klassieke logica"@nl .
+@prefix dct:	<http://purl.org/dc/terms/> .
+@prefix dbc:	<http://dbpedia.org/resource/Category:> .
+dbr:Classical_logic	dct:subject	dbc:History_of_logic ,
+		dbc:Classical_logic ,
+		dbc:Logic ;
+	foaf:depiction	<http://commons.wikimedia.org/wiki/Special:FilePath/Begriffsschrift_Titel.png> .
+@prefix prov:	<http://www.w3.org/ns/prov#> .
+dbr:Classical_logic	prov:wasDerivedFrom	<http://en.wikipedia.org/wiki/Classical_logic?oldid=1310196240&ns=0> ;
+	foaf:isPrimaryTopicOf	wikipedia-en:Classical_logic ;
+	dbo:wikiPageWikiLink	<http://dbpedia.org/resource/Quantifier_(logic)> ,
+		dbr:William_Stanley_Jevons ,
+		dbr:Non-classical_logic ,
+		dbr:Arithmetic ,
+		dbr:Logical_operator ,
+		dbr:Semantics ,
+		dbr:Ludwig_Wittgenstein ,
+		dbr:Set_theory ,
+		<http://dbpedia.org/resource/Jan_\u0141ukasiewicz> ,
+		dbr:Deductive_logic ,
+		dbr:Existential_import ,
+		dbr:David_Hilbert ,
+		<http://dbpedia.org/resource/Boolean_algebra_(structure)> ,
+		dbr:De_Morgan_duality ,
+		dbc:History_of_logic ,
+		dbr:Law_of_excluded_middle ,
+		<http://dbpedia.org/resource/A._N._Whitehead> ,
+		dbr:Willard_Van_Orman_Quine ,
+		dbr:Geometry ,
+		dbr:Augustus_De_Morgan ,
+		dbr:Foundations_of_mathematics ,
+		dbr:Bernard_Bolzano ,
+		dbr:Principle_of_explosion ,
+		dbr:Leibniz ,
+		dbr:Gottlob_Frege ,
+		dbc:Logic ,
+		dbr:Principle_of_bivalence ,
+		dbr:Charles_Sanders_Peirce ,
+		dbr:Propositional_calculus ,
+		dbr:Algebraic_logic ,
+		dbr:John_Venn ,
+		dbr:Hugh_MacColl ,
+		dbr:Higher-order_logic ,
+		dbr:Calculus_ratiocinator ,
+		dbr:Propositional_logic ,
+		dbr:Boolean_logic ,
+		dbr:Logicism ,
+		<http://dbpedia.org/resource/Ernst_Schr\u00F6der_(mathematician)> ,
+		dbr:Mathematical_logic ,
+		dbr:Term_logic ,
+		dbr:Problem_of_multiple_generality ,
+		dbr:Giuseppe_Peano ,
+		dbr:Classical_antiquity ,
+		dbr:Analytic_philosophy ,
+		dbr:Aristotle ,
+		dbr:Tractatus_Logico_Philosophicus ,
+		dbr:Two-element_Boolean_algebra ,
+		dbr:Bertrand_Russell ,
+		dbr:Begriffsschrift ,
+		dbr:Monotonicity_of_entailment ,
+		dbr:First-order_logic ,
+		dbr:Idempotency_of_entailment ,
+		dbr:Commutativity_of_conjunction ,
+		dbr:Law_of_noncontradiction ,
+		dbc:Classical_logic ,
+		dbr:Double_negation_elimination ,
+		dbr:Stoic_logic ,
+		dbr:Boolean-valued_semantics ,
+		<http://dbpedia.org/resource/File:Begriffsschrift_Titel.png> ,
+		dbr:George_Boole ;
+	dbo:description	"sistema formal"@es ,
+		"branca della logica formale"@it ,
+		"matematiksel mant\u0131kta 19. y\u00FCzy\u0131l\u0131n sonundan itibaren geli\u015Ftirilen ilk dil ve matematiksel ak\u0131l y\u00FCr\u00FCtme bi\u00E7imlendirmesi"@tr ,
+		"premi\u00E8re formalisation du langage et du raisonnement math\u00E9matique d\u00E9velopp\u00E9e \u00E0 partir de la fin du XIXe si\u00E8cle en logique math\u00E9matique"@fr ,
+		"class of formal logics"@en ,
+		"\u5F62\u5F0F\u8AD6\u7406\u306E\u90E8\u985E"@ja ,
+		"variante m\u00E1is com\u00FAn de l\u00F3xica dedutiva"@gl ,
+		"logische Systeme"@de .
+@prefix dbp:	<http://dbpedia.org/property/> .
+@prefix dbt:	<http://dbpedia.org/resource/Template:> .
+dbr:Classical_logic	dbp:wikiPageUsesTemplate	dbt:Classical_logic ,
+		dbt:Short_description ,
+		dbt:Reflist ,
+		dbt:Commons-inline ,
+		dbt:Portal_bar ,
+		dbt:Main ,
+		dbt:Authority_control ,
+		dbt:ISBN ,
+		dbt:Mathematical_logic ;
+	dbo:thumbnail	<http://commons.wikimedia.org/wiki/Special:FilePath/Begriffsschrift_Titel.png?width=300> .
+dbr:Ian_Rumfitt	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Logical_connective	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Quantifier_(logic)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Hermann_Weyl	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Natural_deduction	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Principle_of_explosion	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Alan_Ross_Anderson	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Fuzzy_concept	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Dialetheism	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Truth-bearer	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Carlo_Dalla_Pozza	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:List_of_Hilbert_systems	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Double_negation	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Higher-order_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Jean_Nicod	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Free_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Truth_function	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Satisfiability	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:The_Missing_Shade_of_Blue	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Second-order_propositional_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/No\u2013no_paradox>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Fuzzy_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Fred_Sommers	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Alexander_Fiske-Harrison	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Quantum_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Is_Logic_Empirical%3F>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Many-valued_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:CADE_ATP_System_Competition	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Cut-elimination_theorem	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Set_theory	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Rule_of_inference	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Logical_disjunction	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Vacuous_truth	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Ice_(Dukaj_novel)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Paraconsistent_mathematics	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/B,_C,_K,_W_system>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Supervaluationism	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Deductive_reasoning	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Outline_of_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Argumentation_scheme	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Steiner\u2013Lehmus_theorem>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Knower_paradox	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Index_of_philosophy_articles_(A\u2013C)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Material_conditional	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Empty_product	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Remote_sensing_(geology)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Complete_theory	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Pluralism_(philosophy)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Classical_mathematics	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Modal_algebra	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Literal_(mathematical_logic)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Conditioned_disjunction	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Deviant_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Bunched_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Commutativity_of_conjunction	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Minimal_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Material_nonimplication	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Substructural_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/\u0141o\u015B\u2013Vaught_test>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Pseudo-order	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Crisp_logic	dbo:wikiPageWikiLink	dbr:Classical_logic ;
+	dbo:wikiPageRedirects	dbr:Classical_logic .
+dbr:Truth_value	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Bertrand_Russell	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Simpson\u0027s_paradox>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Glossary_of_areas_of_mathematics	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Jan_\u0141ukasiewicz>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Isaac_Watts	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Contradiction	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Modus_ponens	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Counterfactual_conditional	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Intuitionistic_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Curry\u2013Howard_correspondence>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Disjunctive_syllogism	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Import\u2013export_(logic)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Mizar_system	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Proof_by_contradiction	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Vagueness	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Nicholas_Rescher	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Index_of_logic_articles	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Glossary_of_mathematical_symbols	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Nuel_Belnap	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Apartness_relation	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Trivialism	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Modus_tollens	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Lambda_calculus	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Reason_maintenance	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/HOL_(proof_assistant)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Paraconsistent_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Quasi-set_theory	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Constructive_analysis	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Smooth_infinitesimal_analysis	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Cirquent_calculus	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Computability_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Intermediate_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Philosophical_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Gottlob_Frege	dbp:notableIdeas	dbr:Classical_logic .
+dbr:Presuppositional_apologetics	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Psychology_of_reasoning	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Shield_of_the_Trinity	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:SKI_combinator_calculus	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Admissible_rule	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Calculus_of_structures	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Prenex_normal_form	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Inhabited_set	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/Vampire_(theorem_prover)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:The_Law_of_Non-Contradiction	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Object_of_the_mind	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Fatalism	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Principle_of_bivalence	dbo:wikiPageWikiLink	dbr:Classical_logic .
+<http://dbpedia.org/resource/De_Morgan\u0027s_laws>	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Conditional_sentence	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Bar_induction	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Propositional_proof_system	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:An_Introduction_to_the_Philosophy_of_Mathematics	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Gottlob_Frege__Gottlob_Frege__1	dbo:notableIdea	dbr:Classical_logic .
+dbr:MINLOG	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Consequentia_mirabilis	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Dialectic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Outline_of_philosophy	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Quantum_economics	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Branching_quantifier	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Method_of_analytic_tableaux	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Double-negation_translation	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Principle_of_distributivity	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Standard_logic	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:Preface_paradox	dbo:wikiPageWikiLink	dbr:Classical_logic .
+dbr:History_of_classical_logic	dbo:wikiPageWikiLink	dbr:Classical_logic ;
+	dbo:wikiPageRedirects	dbr:Classical_logic .
+dbr:Classical_logics	dbo:wikiPageWikiLink	dbr:Classical_logic ;
+	dbo:wikiPageRedirects	dbr:Classical_logic .
+<http://dbpedia.org/resource/Annihilation_(disambiguation)>	dbo:wikiPageWikiLink	dbr:Classical_logic .
