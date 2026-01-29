@@ -50,3 +50,11 @@ results/
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Isabelle Formal Libraries
+*.thy.session
+*.bin/
+output/
+heaps/
+browser_info/
+

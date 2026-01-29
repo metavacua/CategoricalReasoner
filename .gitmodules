@@ -1,0 +1,10 @@
+[submodule "formal-libraries/ulo"]
+	path = formal-libraries/ulo
+	url = https://gl.mathhub.info/ulo/ulo
+[submodule "formal-libraries/isabelle-distribution"]
+	path = formal-libraries/isabelle-distribution
+	url = https://gl.mathhub.info/Isabelle/Distribution
+
+[submodule "formal-libraries/isabelle-afp"]
+	path = formal-libraries/isabelle-afp
+	url = https://gl.mathhub.info/Isabelle/AFP

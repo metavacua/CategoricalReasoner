@@ -96,6 +96,16 @@ The `ontology/` directory contains:
 - **SHACL Validation**: Constraints for lattice order and morphism validity
 - **SPARQL Examples**: 15+ queries for exploring the ontology
 
+## Formal Libraries
+
+This project integrates external formal libraries to facilitate subsequent code generation and formal verification. These are located in `formal-libraries/`.
+
+- **ULO** (Universal Logic Ontology): Upper ontology for logic.
+- **Isabelle Distribution**: Standard library for Isabelle/HOL.
+- **Isabelle AFP**: Selected subset of the Archive of Formal Proofs (Category Theory, Logics).
+
+See [FORMAL_LIBRARIES.md](FORMAL_LIBRARIES.md) for details on licenses, fair use, and integration strategy.
+
 ## Build (PDF)
 
 Requirements: a LaTeX distribution (e.g. TeX Live) and `make`.
