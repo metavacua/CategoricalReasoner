@@ -1,0 +1,26 @@
+# Purpose: Retrieve formal documentation practices
+# SDLC Phase: Documentation
+# Expected result structure: docType, docTypeName, purpose, timing, format
+# Endpoint target: https://query.wikidata.org/sparql
+# Resource constraints: 30s timeout
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?docType ?docTypeName ?purpose ?timing ?format
+WHERE {
+  VALUES ?docType { wd:Q622550 wd:Q207857 wd:Q2126296 } # Javadoc, API, Specification
+  ?docType rdfs:label ?docTypeName .
+  FILTER(LANG(?docTypeName) = "en")
+  
+  OPTIONAL { 
+    ?docType schema:description ?purpose .
+    FILTER(LANG(?purpose) = "en")
+  }
+  
+  BIND("Continuous" AS ?timing)
+  BIND("HTML, Markdown, PDF" AS ?format)
+}
+LIMIT 10
