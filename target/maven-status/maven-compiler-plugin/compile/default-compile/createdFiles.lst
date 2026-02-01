@@ -1,0 +1,8 @@
+org/catty/sparql/federation/SelectQueryResult.class
+org/catty/sparql/federation/SelectQueryFederation.class
+org/catty/sparql/federation/impl/JenaSelectQueryFederation.class
+org/catty/sparql/federation/SdlcSpecificationGenerator.class
+org/catty/sparql/federation/SelectQueryExecutor.class
+org/catty/sparql/federation/impl/JenaSelectQueryExecutor.class
+org/catty/sparql/federation/SelectQueryResult$Builder.class
+org/catty/sparql/federation/discovery/WikidataEndpointDiscovery.class
