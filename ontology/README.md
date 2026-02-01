@@ -1,8 +1,22 @@
 # Catty Ontology: Categorical Semantic Model
 
-This directory contains the RDF/OWL schemas and knowledge graph data for Catty's category-theoretic model of formal logics.
+## ⚠️ IMPORTANT DISCLAIMER
 
-## Overview
+**These files are EXAMPLES and PLACEHOLDERS ONLY.**
+
+This directory contains example/reference RDF/OWL schemas and knowledge graph data. These files do **not** represent the authoritative ontologies for this project.
+
+**Authoritative ontologies** are consumed from external sources:
+- SPARQL endpoints (DBPedia, Wikidata)
+- Linked data services
+- Generalized Knowledge Graph (GGG)
+- Static RDF/OWL files from external repositories
+
+The Catty project architecture consumes external semantic web data via Jena; it does **not** author local ontologies.
+
+---
+
+## Overview (Example Content)
 
 Catty models logics as objects in a category with morphisms representing extension and interpretation relationships. The ontology provides:
 
@@ -11,6 +25,8 @@ Catty models logics as objects in a category with morphisms representing extensi
 3. **Morphism Catalog**: Categorical relationships between logics (Extension, Interpretation, Adjunction).
 4. **Logic Category Structure**: The categorical structure emerging from rule and axiom configurations.
 5. **Curry-Howard Model**: The categorical equivalence between logic and type theory.
+
+**Note**: These are illustrative examples of how semantic web data might be structured. They are not used in the actual system, which consumes external ontologies.
 
 ## File Structure
 

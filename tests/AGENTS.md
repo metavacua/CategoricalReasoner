@@ -8,6 +8,7 @@ The `tests/` directory contains automated tests for validation, consistency chec
 - **Coverage**: All critical validation paths, error conditions, edge cases, and integration scenarios must have tests.
 - **Integration**: Tests integrate with `.catty/validation/validate.py` and use same acceptance criteria as operational specifications.
 - **Reporting**: Results in structured format for CI/CD. Exit codes indicate pass/fail status.
+- **Technology Note**: Current tests use Python for thesis validation (temporary CI/CD). Long-term tests for code generation and transformation should use Java (JUnit).
 
 ## Validation
 Run tests with `python -m pytest tests/` or `python -m unittest discover tests/`. All tests must pass before deployment.

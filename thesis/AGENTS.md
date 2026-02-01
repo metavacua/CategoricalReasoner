@@ -9,7 +9,7 @@ The `thesis/` directory contains LaTeX source code for the Catty thesis: chapter
 - **IDs**: Globally unique across corpus. Patterns: `thm-*`, `def-*`, `lem-*`, `ex-*`, `sec-*`, `subsec-*`.
 - **Structure**: Chapters follow pattern `sec-[lowercase-hyphenated]`. Mathematical content uses proper notation: `\vdash`, `\land`, `\lor`, `\to`, `\rightarrow`, `\otimes`.
 - **Content**: Theorems require statements and proofs. Definitions require terms and meanings. Examples instantiate abstract concepts.
-- **RDF Integration**: Thesis IDs correspond to RDF resources. Citations have provenance links in ontology.
+- **Architecture Note**: Thesis is TeX primary artifact. RDF is secondary/metadata-only (provenance extraction optional, not bidirectional). No RDF content in thesis.
 
 ## Validation
 Run `python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/` to verify structure, citations, and ID uniqueness.

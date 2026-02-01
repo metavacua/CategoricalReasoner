@@ -13,6 +13,70 @@ Catty organizes logics as a **parametric category** where:
 - **Structure**: A two-dimensional lattice (horizontal: sequent restrictions; vertical: structural rules) formalized as a categorical structure
 - **Curry-Howard**: A categorical equivalence between logics (as categories), types, proofs, and programs
 
+## Architecture Overview
+
+Catty is a Java-centric system that consumes semantic web data from external sources and generates LaTeX thesis content with RDF metadata/provenance. The architecture is:
+
+1. **External RDF consumption**: Semantic web ontologies and knowledge graphs are discovered and accessed via SPARQL endpoints, linked data services, and the Generalized Knowledge Graph (GGG)
+2. **Jena Model loading**: Apache Jena loads external RDF into Model objects, with OntModel providing OWL 2 DL profile support
+3. **OpenLlet reasoning**: OpenLlet reasoner performs consistency checking, classification, and inference over loaded ontologies
+4. **TeX as primary artifact**: The thesis is the core deliverable; RDF is used only for metadata and provenance tracking extracted from TeX content
+
+The system does **not** author local RDF schemas or instantiate ontology classes. All ontology data comes from external sources.
+
+## Technology Stack
+
+**Primary**: Java ecosystem
+- **Apache Jena**: RDF/OWL processing and SPARQL query execution
+- **OpenLlet**: OWL 2 DL reasoning (consistency checking, classification, inference)
+- **JavaPoet**: Code generation for validation and transformation logic
+- **JUnit**: Unit testing and validation framework
+- **Maven**: Build and dependency management
+
+**Auxiliary**: Python scripts for CI/CD orchestration
+- Python scripts support the Java-primary architecture by handling auxiliary tasks
+- Examples: extracting citation metadata, running validation orchestration, transformation helpers
+- **Normative rule**: Do not propose custom implementations of existing Java library functionality
+
+**Rationale**: Java libraries provide proof-theoretic guarantees (OWL 2 DL compliance), mature validation infrastructure, and avoid DIY reimplementation of complex semantic web technologies.
+
+## Semantic Web Data Pipeline
+
+The data flow for consuming external semantic web data:
+
+1. **Discovery and Access**
+   - SPARQL endpoints (e.g., DBPedia, Wikidata)
+   - Linked data dereferencing
+   - Generalized Knowledge Graph (GGG) queries
+   - Static RDF/OWL files from external repositories
+
+2. **Loading and Transformation** (Apache Jena)
+   - Jena Model reads RDF/XML, Turtle, JSON-LD formats
+   - OntModel with OWL 2 DL profile enables ontology-specific operations
+   - Prefix management and namespace resolution
+   - Conversion to Java objects via Jena's API
+
+3. **Reasoning** (OpenLlet)
+   - Consistency checking: Verify ontology is satisfiable
+   - Classification: Automatically infer class hierarchy
+   - Inference: Deduce implicit statements from axioms
+   - Rule-based reasoning for custom constraints
+
+4. **Code Generation and Validation** (JavaPoet + JUnit)
+   - Generate Java validation code based on ontology constraints
+   - Generate JUnit tests for data integrity
+   - Compile and run validation as part of CI/CD
+
+## Development Direction
+
+**Architectural principle**: Default to Java ecosystem for all core functionality. Python is acceptable for CI/CD helper scripts only.
+
+**Guidelines**:
+- When implementing validation, transformation, or reasoning: Use Jena, OpenLlet, or JavaPoet
+- When adding utility scripts: Prefer Java unless Python provides clear benefits for CI/CD integration
+- Do not propose custom implementations of existing Java library functionality
+- All ontology data comes from external sources; local RDF schemas are not authored
+
 ## License
 
 This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. See the `LICENSE` file for details.
@@ -23,55 +87,36 @@ This project is evaluated against the **SWTI** (Nature Scientific Reports 2022) 
 
 ### Knowledge Processing & Evaluation
 
-- **Validation**: Ontologies are validated using RDFS and SHACL (see `scripts/validate_rdf.py` and `tests/test_consistency.py`).
-- **Benchmarks**: Reproducible SPARQL benchmarks are available in `benchmarks/queries/` and can be run with `benchmarks/run.py`.
-- **Reasoning**: We use SHACL for consistency checking and categorical transformations as a multi-step processing workflow.
+- **Thesis Validation**: LaTeX structure, citation registry, and ID uniqueness validated via Python scripts (temporary CI/CD helpers). Long-term validation will use Java (Jena SHACL support, JUnit).
+- **Benchmarks**: SPARQL query performance tests run against external SPARQL endpoints and linked data sources. See `benchmarks/` for details.
+- **Reasoning**: OpenLlet provides OWL 2 DL reasoning over external ontologies loaded via Jena.
 
 ### Deployment & Access
 
-The ontology is deployed along with the thesis:
-- **RDF/OWL Access**: Available at `https://metavacua.github.io/CategoricalReasoner/ontology/`
-- **SPARQL Benchmarks**: Available at `https://metavacua.github.io/CategoricalReasoner/benchmarks/queries/`
-
-#### Local SPARQL Endpoint
-
-You can run a local SPARQL endpoint (Blazegraph) using Docker Compose:
-
-```sh
-cd deployment
-docker-compose up -d
-```
-
-Access the Blazegraph workbench at `http://localhost:9999/blazegraph/`. You can then upload the files from the `ontology/` directory to query them.
+The thesis and supporting materials are deployed to GitHub Pages:
+- **Thesis (HTML/PDF)**: Available at `https://metavacua.github.io/CategoricalReasoner/`
+- **Benchmarks**: SPARQL query examples available at `https://metavacua.github.io/CategoricalReasoner/benchmarks/queries/`
 
 ## Project Structure
 
 ```
-├── thesis/                      # LaTeX thesis source
-├── ontology/                    # RDF/OWL schemas and knowledge graphs
-│   ├── catty-categorical-schema.jsonld     # Core categorical schema
-│   ├── logics-as-objects.jsonld            # Logics as categorical objects
-│   ├── morphism-catalog.jsonld              # Morphisms between logics
-│   ├── two-d-lattice-category.jsonld        # 2D lattice as category
-│   ├── curry-howard-categorical-model.jsonld # Curry-Howard equivalence
-│   ├── catty-complete-example.jsonld         # Complete working example
-│   ├── catty-shapes.ttl                    # SHACL validation constraints
-│   ├── ontological-inventory.md            # Resource inventory
-│   ├── README.md                           # Ontology documentation
-│   └── queries/
-│       └── sparql-examples.md              # SPARQL query examples
-│
+├── thesis/                      # LaTeX thesis source (primary artifact)
 ├── .catty/                      # Operational model (task/artifact system)
 │   ├── operations.yaml          # Main operational model
 │   ├── phases.yaml              # Dependency graph
-│   ├── validation/              # Validation framework
-│   └── *.md                     # Documentation
-│
-├── scripts/                     # Utility scripts
-├── .github/workflows/           # CI/CD workflows
-├── OPERATIONS_MODEL.md          # Operational model overview
+│   └── validation/              # Validation framework
+├── schema/                      # Validation schemas and constraints
+│   ├── thesis-structure.schema.yaml    # LaTeX structure schema
+│   ├── tex-rdf-mapping.yaml             # TeX → RDF provenance mapping
+│   └── validators/                     # Python validation scripts (temporary)
+├── bibliography/                # Citation registry (citations.yaml)
+├── benchmarks/                  # SPARQL query performance tests
+├── scripts/                     # Python utility scripts (auxiliary CI/CD)
+├── tests/                       # Test suite (thesis validation, future Java tests)
 └── README.md                    # This file
 ```
+
+**Note**: The `ontology/` directory contains example/reference materials and is not part of the core architecture. Ontologies are consumed from external sources (SPARQL endpoints, linked data).
 
 ## Key Deliverables
 
@@ -87,14 +132,16 @@ The thesis includes a comprehensive audit (Chapter 1) of:
 6. **Reusable Ontologies** - Inventory of 11+ resources with license compatibility
 7. **Integration Roadmap** - How to import and extend external resources
 
-### Ontology Files
+### External Ontology Consumption
 
-The `ontology/` directory contains:
+The project consumes semantic web ontologies and knowledge graphs from external sources:
 
-- **Complete RDF/OWL Schema**: Category theory primitives, logic-specific classes
-- **Knowledge Graph Data**: 10+ logics with categorical properties and morphisms
-- **SHACL Validation**: Constraints for lattice order and morphism validity
-- **SPARQL Examples**: 15+ queries for exploring the ontology
+- **SPARQL Endpoints**: DBPedia, Wikidata, and other public endpoints
+- **Linked Data**: Ontologies and datasets accessible via HTTP content negotiation
+- **Generalized Knowledge Graph (GGG)**: Large-scale integrated knowledge graphs
+- **Static Repositories**: Curated RDF/OWL files from external projects
+
+These external sources are loaded via Jena, reasoned over with OpenLlet, and used to generate thesis content and validation code.
 
 ## Build (PDF)
 
@@ -122,16 +169,13 @@ The workflow builds `main.pdf`, converts the expanded LaTeX source to `index.htm
 
 ## Operational Model
 
-This project includes a **formal operational model** that defines the complete task/artifact system. See `OPERATIONS_MODEL.md` for an overview, or explore `.catty/` directory for:
+This project includes a **formal operational model** that defines the complete task/artifact system for thesis generation and code generation. Explore `.catty/` directory for:
 
-- **Task specifications**: Unambiguous, executable instructions for creating all project artifacts
+- **Task specifications**: Unambiguous, executable instructions for creating thesis artifacts
 - **Dependency graph**: Complete task sequencing and parallelization opportunities
-- **Validation framework**: Automated validation with SHACL shapes and testable acceptance criteria
+- **Validation framework**: Automated validation with testable acceptance criteria
 - **Comprehensive documentation**: README, quick start guide, task execution guide, dependency graphs
 
-**Quick validation:**
-```sh
-python .catty/validation/validate.py --artifact catty-categorical-schema
-```
+The operational model describes thesis generation and external RDF consumption, not local ontology authoring.
 
 See `.catty/README.md` for complete documentation.

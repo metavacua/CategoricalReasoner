@@ -1,7 +1,9 @@
-# AGENTS.md - Ontology Development
+# AGENTS.md - Ontology Development (Examples Only)
 
 ## Scope
-The `ontology/` directory contains RDF/OWL schemas and knowledge graph data for Catty's categorical logic model: JSON-LD schema definitions, instance data, morphisms, and SHACL shapes.
+The `ontology/` directory contains **EXAMPLE and REFERENCE MATERIALS ONLY**. These files illustrate how RDF/OWL schemas and knowledge graph data might be structured for Catty's categorical logic model.
+
+**IMPORTANT**: Do not use these files as authoritative sources. The actual architecture consumes external ontologies from SPARQL endpoints and linked data sources (DBPedia, Wikidata, GGG).
 
 ## Core Constraints
 - **Formats**: JSON-LD and Turtle RDF only. All files must parse without errors.
@@ -12,7 +14,15 @@ The `ontology/` directory contains RDF/OWL schemas and knowledge graph data for 
 - **Namespaces**: Use `catty:` prefix (http://catty.org/ontology/) for all custom entities.
 
 ## Validation
-Execute `python .catty/validation/validate.py --artifact <ontology-id>` or run SHACL validation directly with pyshacl.
+These are example files only. No validation is required for the actual project, which uses external ontologies.
+
+## Development Constraints
+**DO NOT** create or modify files in this directory. All ontology development should:
+1. Consume from external sources (SPARQL endpoints, linked data)
+2. Use Jena to load and process external RDF
+3. Use OpenLlet for reasoning
+4. Not author local RDF schemas
 
 ## See Also
-- `schema/AGENTS.md` - ID and citation constraints for linked data
+- `benchmarks/README.md` - SPARQL benchmarks against external endpoints
+- `schema/README.md` - Validation schemas (note: does not use local ontology)

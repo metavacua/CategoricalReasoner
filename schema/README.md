@@ -8,23 +8,23 @@ This directory contains the prescriptive, machine-readable infrastructure for th
 
 1. **Constraint-based design**: Remove degrees of freedom to force valid output
 2. **Prescriptive schema**: Define ALL allowed structures; reject anything outside schema
-3. **Bidirectional validation**: TeX ↔ RDF must be consistent
+3. **TeX as primary artifact**: Thesis is LaTeX; RDF is metadata/provenance only (unidirectional: TeX → RDF)
 4. **Citation integrity**: All citations must be pre-registered; LLMs cannot invent new citations
 5. **Automated validation**: CI/CD rejects invalid combinations
+6. **Technology Note**: Current validation uses Python for pragmatic CI/CD orchestration. Long-term validation infrastructure should use Java (Jena SHACL support, JUnit).
 
 ## Directory Structure
 
 ```
 schema/
 ├── thesis-structure.schema.yaml      # YAML schema for thesis structure
-├── tex-rdf-mapping.yaml             # Bidirectional TeX ↔ RDF mapping
+├── tex-rdf-mapping.yaml             # TeX → RDF provenance metadata mapping
 ├── LLM_CONSTRAINTS.md                # Explicit LLM instructions
 ├── README.md                        # This file
 └── validators/
     ├── validate_tex_structure.py       # TeX structure validator
     ├── validate_citations.py          # Citation validator
-    ├── validate_rdf.py               # RDF/SHACL validator
-    └── validate_consistency.py       # Bidirectional consistency validator
+    └── validate_consistency.py       # TeX structure and citation consistency validator
 ```
 
 ## Core Components
@@ -53,24 +53,15 @@ Defines all valid thesis structures:
 
 ### 2. Citation Infrastructure
 
-Located in `../bibliography/` and `../ontology/`:
+Located in `../bibliography/`:
 
 **Citation Registry** (`bibliography/citations.yaml`):
-- Master registry of all approved citations
+- Master registry of all approved citations (single source of truth)
 - Prevents LLM invention of citations
 - 13 pre-registered foundational references
 - Each entry has: author, title, year, type, external identifiers
 
-**RDF Citation Model** (`ontology/citations.jsonld`):
-- RDF instantiation of all citations
-- Uses BIBO ontology (bibo:Article, bibo:Book)
-- Links to Wikidata, DBpedia, external resources
-- Every YAML entry must have corresponding RDF resource
-
-**Citation Provenance Model** (`ontology/citation-usage.jsonld`):
-- Tracks which theorems, definitions cite which sources
-- Properties: `dct:references`, `dct:isReferencedBy`, `prov:wasDerivedFrom`
-- Validator ensures every `\cite{key}` has RDF provenance link
+**Validation**: All citation keys used in TeX must exist in this registry. Compilation fails otherwise.
 
 ### 3. TeX Citation Macros
 
@@ -84,41 +75,28 @@ Located in `../thesis/macros/citations.tex`:
 
 **Validation**: All citation keys must exist in registry; compilation fails otherwise.
 
-### 4. TeX ↔ RDF Bidirectional Mapping (`tex-rdf-mapping.yaml`)
+### 4. TeX → RDF Provenance Metadata Extraction (`tex-rdf-mapping.yaml`)
 
-Defines how TeX elements map to RDF classes and properties:
+Defines how TeX elements are extracted as provenance metadata:
 
 ```yaml
 mappings:
   theorem:
-    rdf_class: "catty:Theorem"
+    metadata_type: "provenance"
     tex_macro: "\\theorem{id}{title}"
     properties:
       id: "dct:identifier"
       title: "dct:title"
-      statement: "catty:hasStatement"
-      proof: "catty:hasProof"
 ```
 
-**Bidirectional validation**:
-- Forward: TeX element → corresponding RDF resource
-- Reverse: RDF resource → referenced in TeX
-- Properties must match exactly
+**Unidirectional extraction**:
+- Direction: TeX element → provenance metadata (e.g., citation usage tracking)
+- RDF generation is one-way: extract metadata from TeX, do not validate against local schema
+- Do not author local RDF schemas; generate provenance metadata only
 
-### 5. SHACL Constraint Shapes (`../ontology/catty-thesis-shapes.shacl`)
+### 5. Automated Validators
 
-Enforces RDF constraints:
-
-- **TheoremShape**: requires statement, proof, identifier; validates proof exists
-- **DefinitionShape**: requires term, meaning, identifier
-- **CitationShape**: requires creator, title, year, identifier; validates external links
-- **ProvenanceLinkShape**: validates all `dct:references` point to registered citations
-- **UniquenessShape**: validates all IDs are globally unique
-- **ExternalLinkShape**: validates Wikidata Q-IDs, DOIs, URLs resolve
-
-### 6. Automated Validators
-
-All validators in `schema/validators/`:
+All validators in `schema/validators/` are **temporary CI/CD helpers**. Long-term validation infrastructure should use Java libraries (Jena SHACL support, JUnit).
 
 #### `validate_tex_structure.py`
 
@@ -136,67 +114,44 @@ python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
 
 #### `validate_citations.py`
 
-Validates citations across TeX and RDF:
+Validates citations:
 - Check every `\cite{key}` in TeX has corresponding entry in `citations.yaml`
-- Check every entry in `citations.yaml` has corresponding RDF resource
-- Check every RDF citation has required metadata
 - Check external links (DOI, Wikidata, arXiv, URLs) are resolvable
-- Check every TeX citation has corresponding RDF provenance link
 
 **Usage**:
 ```bash
 python schema/validators/validate_citations.py \
   --tex-dir thesis/chapters/ \
   --bibliography bibliography/citations.yaml \
-  --ontology ontology/citations.jsonld \
   --check-external
-```
-
-#### `validate_rdf.py`
-
-Uses pyshacl to validate RDF against SHACL shapes:
-- Load all RDF files in `ontology/`
-- Validate against shapes in `catty-thesis-shapes.shacl`
-- Check thesis-specific constraints (ID uniqueness, external link validity)
-
-**Usage**:
-```bash
-python schema/validators/validate_rdf.py \
-  --ontology ontology/ \
-  --shapes ontology/catty-thesis-shapes.shacl
 ```
 
 #### `validate_consistency.py`
 
-Validates TeX ↔ RDF ↔ External consistency:
+Validates TeX structure and citation consistency:
 - Parse TeX structure
-- Load RDF graph
-- For each TeX element: verify corresponding RDF resource exists
-- For each RDF resource: verify referenced in TeX
-- For each citation: verify appears in both TeX and RDF
+- Validate all citations are registered
+- Validate all IDs are unique
 
 **Usage**:
 ```bash
 python schema/validators/validate_consistency.py \
   --tex-dir thesis/chapters/ \
-  --ontology ontology/ \
-  --bibliography bibliography/citations.yaml \
-  --mapping schema/tex-rdf-mapping.yaml
+  --bibliography bibliography/citations.yaml
 ```
 
-### 7. CI/CD Integration
+### 6. CI/CD Integration
 
 Workflow: `.github/workflows/thesis-validation.yml`
 
 Runs on every PR:
 1. Validate TeX structure
 2. Validate citations
-3. Validate RDF
-4. Validate consistency
-5. Comment on PR with results
-6. Only allow merge if all validations pass
+3. Validate consistency
+4. Comment on PR with results
+5. Only allow merge if all validations pass
 
-### 8. LLM Constraint Documentation
+### 7. LLM Constraint Documentation
 
 Located in `LLM_CONSTRAINTS.md`:
 
@@ -207,7 +162,7 @@ Located in `LLM_CONSTRAINTS.md`:
 - Every theorem must have exactly one proof block
 - Every definition must have term and meaning
 - All IDs must be unique globally
-- Do not create new RDF classes
+- Do not author local RDF schemas; generate provenance metadata only
 - Your output will be validated; validation failures are fatal
 
 ## Validation Workflow
@@ -222,20 +177,12 @@ python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
 python schema/validators/validate_citations.py \
   --tex-dir thesis/chapters/ \
   --bibliography bibliography/citations.yaml \
-  --ontology ontology/citations.jsonld \
   --check-external
-
-# Validate RDF
-python schema/validators/validate_rdf.py \
-  --ontology ontology/ \
-  --shapes ontology/catty-thesis-shapes.shacl
 
 # Validate consistency
 python schema/validators/validate_consistency.py \
   --tex-dir thesis/chapters/ \
-  --ontology ontology/ \
-  --bibliography bibliography/citations.yaml \
-  --mapping schema/tex-rdf-mapping.yaml
+  --bibliography bibliography/citations.yaml
 ```
 
 All validators must exit with status 0 (success).
@@ -341,7 +288,7 @@ To add a new citation:
    python schema/validators/validate_citations.py \
      --tex-dir thesis/chapters/ \
      --bibliography bibliography/citations.yaml \
-     --ontology ontology/citations.jsonld
+     --check-external
    ```
 
 ## Error Messages and Fixes
@@ -377,48 +324,15 @@ ERROR: thesis/chapters/categorical-semantic-audit.tex:42
 
 **Fix**: Use pre-registered key or add citation to registry (see above).
 
-```
-ERROR: ontology/citations.jsonld:0
-  Citation 'girard1987linear' exists in YAML but not in RDF
-```
-
-**Fix**: Add RDF resource to `ontology/citations.jsonld`.
-
-### RDF/SHACL Validation Errors
-
-```
-✗ RDF graph does not conform to SHACL shapes
-
-Violation: catty:TheoremShape
-  sh:resultMessage: Theorem must have exactly one statement
-  sh:focusNode: http://catty.org/theorem/thm-weakening
-```
-
-**Fix**: Add `catty:hasStatement` property to theorem RDF resource.
-
-### Consistency Validation Errors
-
-```
-ERROR: thesis/chapters/categorical-semantic-audit.tex:10
-  TeX element 'thm-weakening' has no corresponding RDF resource
-```
-
-**Fix**: Add RDF resource with identifier `thm-weakening` to ontology files.
-
-```
-WARNING: ontology/:0
-  RDF resource 'def-linear-logic' not referenced in TeX (may be supplementary)
-```
-
-**Note**: This is expected for many elements (sections, examples, etc.) that don't require RDF resources. Warnings are informational and don't cause validation to fail. Only ERROR-level issues prevent validation from passing.
-
 ## Installation
 
 Install required Python packages:
 
 ```bash
-pip install pyyaml rdflib pyshacl
+pip install pyyaml rdflib
 ```
+
+Note: Current validation uses Python for pragmatic CI/CD orchestration. Long-term validation infrastructure should use Java (Jena SHACL support, JUnit).
 
 ## CI/CD
 
@@ -427,8 +341,8 @@ The GitHub Actions workflow (`.github/workflows/thesis-validation.yml`) automati
 **Workflow steps**:
 1. Checkout code
 2. Set up Python 3.10
-3. Install dependencies (pyyaml, rdflib, pyshacl)
-4. Run all 4 validators
+3. Install dependencies (pyyaml, rdflib)
+4. Run all 3 validators
 5. Comment results on PR
 6. Allow merge only if all pass
 
@@ -443,7 +357,7 @@ This infrastructure enforces:
 
 1. **Constraint-based design**: Removes degrees of freedom to force valid output
 2. **Prescriptive schema**: Defines ALL allowed structures; rejects anything outside
-3. **Bidirectional validation**: TeX ↔ RDF must be consistent
+3. **TeX as primary artifact**: Thesis is LaTeX; RDF is metadata/provenance only (unidirectional: TeX → RDF)
 4. **Citation integrity**: All citations pre-registered; no LLM invention
 5. **Automated enforcement**: CI/CD rejects invalid combinations
 
@@ -454,8 +368,4 @@ This infrastructure enforces:
 ## References
 
 - JSON Schema: https://json-schema.org/
-- RDF 1.1: https://www.w3.org/TR/rdf11-primer/
-- OWL 2: https://www.w3.org/TR/owl2-overview/
-- SHACL: https://www.w3.org/TR/shacl/
-- BIBO Ontology: http://purl.org/ontology/bibo/
 - Dublin Core: https://www.dublincore.org/
