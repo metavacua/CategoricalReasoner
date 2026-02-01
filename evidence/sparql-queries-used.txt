@@ -1,0 +1,38 @@
+This directory contains reproducible SPARQL queries used to extract raw evidence.
+
+All queries were executed against public SPARQL endpoints using SPARQL 1.1.
+
+## Wikidata
+Endpoint: https://query.wikidata.org/sparql
+Query file: evidence/queries/wikidata-lk-raw.construct.sparql
+Command (Turtle):
+
+  curl -G 'https://query.wikidata.org/sparql' \
+    --data-urlencode query@evidence/queries/wikidata-lk-raw.construct.sparql \
+    -H 'Accept: text/turtle' \
+    -H 'User-Agent: catty-thesis-bot/0.1 (research; https://github.com/metavacua/CategoricalReasoner)' \
+    --compressed \
+    > evidence/wikidata-lk-raw.ttl
+
+## DBpedia
+Endpoint: https://dbpedia.org/sparql
+Query file: evidence/queries/dbpedia-lk-raw.construct.sparql
+Command (Turtle):
+
+  curl -G 'https://dbpedia.org/sparql' \
+    --data-urlencode query@evidence/queries/dbpedia-lk-raw.construct.sparql \
+    -H 'Accept: text/turtle' \
+    -H 'User-Agent: catty-thesis-bot/0.1 (research; https://github.com/metavacua/CategoricalReasoner)' \
+    --compressed \
+    > evidence/dbpedia-lk-raw.ttl
+
+## Endpoint discovery (Wikidata property P5305)
+Endpoint: https://query.wikidata.org/sparql
+Query file: evidence/queries/wikidata-discover-endpoints.select.sparql
+Command (CSV):
+
+  curl -G 'https://query.wikidata.org/sparql' \
+    --data-urlencode query@evidence/queries/wikidata-discover-endpoints.select.sparql \
+    -H 'Accept: text/csv' \
+    -H 'User-Agent: catty-thesis-bot/0.1' \
+    --compressed
