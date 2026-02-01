@@ -17,8 +17,10 @@ This is **not** a build configuration or CI/CD file. It is the **operational exe
 - **Unambiguous task execution**: Coding agents can read a task and know exactly what to produce
 - **Automated validation**: Every artifact has testable acceptance criteria
 - **Dependency resolution**: Clear artifact dependencies enable correct task sequencing
-- **Quality assurance**: SHACL shapes and JSON schemas enforce structural constraints
+- **Quality assurance**: JSON schemas and validation criteria enforce structural constraints
 - **Reproducibility**: Task specifications are operational (what to do), not aspirational (what to achieve)
+
+The operations.yaml describes task orchestration for thesis generation and external RDF consumption, not local ontology authoring. RDF artifacts are metadata/provenance extracted from TeX content, not authored schemas.
 
 ## Directory Structure
 
@@ -28,13 +30,6 @@ This is **not** a build configuration or CI/CD file. It is the **operational exe
 ├── phases.yaml              # Dependency graph and phase sequencing
 ├── validation/
 │   ├── validate.py          # Unified validation script
-│   ├── shapes/              # SHACL shape files for RDF validation
-│   │   ├── categorical-schema.shacl
-│   │   ├── logics-as-objects.shacl
-│   │   ├── morphism-catalog.shacl
-│   │   ├── two-d-lattice-category.shacl
-│   │   ├── curry-howard-model.shacl
-│   │   └── complete-example.shacl
 │   └── thesis-structure.json  # JSON Schema for thesis structure
 └── README.md                # This file
 ```
@@ -48,8 +43,8 @@ The **main operational model** containing:
 - **Part 1: Artifact Registry**: Every artifact with complete specifications
   - `artifact_id`: Unique identifier
   - `path`: Location in repository
-  - `format`: File format (JSON-LD, RDF/Turtle, LaTeX, Markdown, Python)
-  - `schema`: SHACL shape or JSON schema for validation
+  - `format`: File format (LaTeX, Markdown, Python, JSON)
+  - `schema`: JSON schema for validation
   - `content_spec`: Structured list of required content (not prose)
   - `produces_from`: Which task(s) create this artifact
   - `consumed_by`: Which task(s) use this artifact as input
@@ -96,8 +91,9 @@ The **main operational model** containing:
 Directory containing validation tools:
 
 - **validate.py**: Python script for automated validation
-- **shapes/**: SHACL shape files for RDF/OWL validation
 - **thesis-structure.json**: JSON Schema for LaTeX thesis structure validation
+
+Note: Long-term validation infrastructure should use Java libraries (Jena SHACL support, JUnit).
 
 ## Usage
 
@@ -117,15 +113,15 @@ Directory containing validation tools:
 **Example:**
 
 ```bash
-# Task: build-categorical-schema
+# Task: write-audit-chapter
 # 1. Check dependencies: none (Phase 0 task)
-# 2. Read artifact spec: catty-categorical-schema
-#    - path: ontology/catty-categorical-schema.jsonld
-#    - format: JSON-LD
-#    - content_spec: [list of required classes and properties]
-# 3. Execute task: create JSON-LD with required content
+# 2. Read artifact spec: categorical-semantic-audit
+#    - path: thesis/chapters/categorical-semantic-audit.tex
+#    - format: LaTeX
+#    - content_spec: [list of required sections and content]
+# 3. Execute task: create LaTeX chapter with required content
 # 4. Validate:
-python .catty/validation/validate.py --artifact catty-categorical-schema
+python .catty/validation/validate.py --artifact categorical-semantic-audit
 ```
 
 ### For Humans
@@ -159,7 +155,7 @@ python .catty/validation/validate.py --task <task_id>
 
 1. Add entry to `artifacts:` section in `operations.yaml`
 2. Define: `artifact_id`, `path`, `format`, `content_spec`, `validation`
-3. Create SHACL shape or JSON schema if needed (in `validation/shapes/`)
+3. Create JSON schema if needed (in `validation/`)
 4. Add to `produces:` list of relevant task
 
 **To add a new task:**
@@ -175,33 +171,12 @@ python .catty/validation/validate.py --task <task_id>
 
 | Artifact Type | Validation Method | Tools Used |
 |--------------|-------------------|------------|
-| JSON-LD | JSON syntax + RDF parsing + SHACL | `json`, `rdflib`, `pyshacl` |
-| RDF/Turtle | Turtle syntax + SHACL | `rdflib`, `pyshacl` |
 | LaTeX | Syntax + structure + compilation | `pdflatex`, regex |
 | Markdown | Syntax + content checks | regex, line counting |
 | Python | Syntax + imports + entry point | `compile()`, AST |
+| JSON/YAML | Syntax + schema validation | `jsonschema`, `pyyaml` |
 
-### SHACL Validation
-
-SHACL (Shapes Constraint Language) shapes define structural constraints for RDF artifacts:
-
-- **Property constraints**: `sh:minCount`, `sh:maxCount`, `sh:datatype`, `sh:class`
-- **Value constraints**: `sh:minInclusive`, `sh:maxInclusive`, `sh:pattern`
-- **SPARQL constraints**: Custom validation logic (transitivity, uniqueness, etc.)
-
-**Example SHACL shape:**
-
-```turtle
-catty:LogicShape
-    a sh:NodeShape ;
-    sh:targetClass catty:Logic ;
-    sh:property [
-        sh:path rdfs:label ;
-        sh:minCount 1 ;
-        sh:datatype xsd:string ;
-        sh:message "Logic must have at least one rdfs:label" ;
-    ] .
-```
+Note: Current validation uses Python for pragmatic CI/CD orchestration. Long-term validation infrastructure should use Java (Jena SHACL support, JUnit).
 
 ### Running Validation
 
@@ -214,31 +189,31 @@ python .catty/validation/validate.py --artifact logics-as-objects
 **Validate all artifacts from a task:**
 
 ```bash
-python .catty/validation/validate.py --task task:build-logics-as-objects
+python .catty/validation/validate.py --task task:write-audit-chapter
 ```
 
 **Expected output:**
 
 ```
 ======================================================================
-Validating artifact: logics-as-objects
-Path: /path/to/ontology/logics-as-objects.jsonld
-Format: JSON-LD
+Validating artifact: categorical-semantic-audit
+Path: /path/to/thesis/chapters/categorical-semantic-audit.tex
+Format: LaTeX
 ======================================================================
 
-✓ Valid JSON syntax
-✓ Contains @context
-✓ Contains catty prefix
-✓ Parses as RDF graph (42 triples)
+✓ Valid LaTeX syntax
+✓ Contains required sections
+✓ All citations reference bibliography/citations.yaml
+✓ All IDs follow pattern (sec-*)
 
 Checking content specifications:
-  ✓ JSON-LD @context referencing catty-categorical-schema...
-  ✓ Logic instances: LM, LK, LJ, LDJ, LL, ALL, RLL (minimum 7)...
-  ✓ Each logic has: rdf:type catty:Logic...
+  ✓ Section: Category Theory Foundation...
+  ✓ Section: Logics as Categorical Objects...
+  ✓ Section: Morphism Catalog...
+  ✓ Section: Two-Dimensional Lattice...
+  ✓ Section: Curry-Howard Model...
 
-✓ SHACL validation passed
-
-✓ Validation PASSED for logics-as-objects
+✓ Validation PASSED for categorical-semantic-audit
 ```
 
 ## Acceptance Criteria
@@ -246,10 +221,10 @@ Checking content specifications:
 All acceptance criteria in `operations.yaml` are **testable boolean conditions**, not subjective assessments.
 
 **Good (testable):**
-- "file ontology/logics-as-objects.jsonld exists"
-- "at least 7 logic instances defined (LM, LK, LJ, LDJ, LL, ALL, RLL)"
-- "each logic has rdf:type catty:Logic"
-- "validates against .catty/validation/shapes/logics-as-objects.shacl"
+- "file thesis/chapters/categorical-semantic-audit.tex exists"
+- "at least 5 sections defined"
+- "all citations reference bibliography/citations.yaml"
+- "validates against thesis-structure.schema.yaml"
 
 **Bad (subjective):**
 - "produce a high-quality white paper"
@@ -263,23 +238,21 @@ Task descriptions in `operations.yaml` are **operational** (step-by-step instruc
 **Good (operational):**
 ```yaml
 description: |
-  Create logic instances as categorical objects in JSON-LD format.
-  Reference @context from catty-categorical-schema.jsonld.
-  Define minimum 7 logic instances: LM, LK, LJ, LDJ, LL, ALL, RLL.
-  Each logic instance must have:
-  - rdf:type: catty:Logic
-  - rdfs:label: human-readable name (e.g., "Classical Logic")
-  - dct:description: detailed description
-  [... detailed property list ...]
-  Output: ontology/logics-as-objects.jsonld.
+  Write audit chapter in LaTeX format.
+  Use thesis-structure.schema.yaml for structure.
+  Include sections: Category Theory Foundation, Logics as Categorical Objects,
+  Morphism Catalog, Two-Dimensional Lattice, Curry-Howard Model.
+  Each section must have: identifier, title, content.
+  Use only citations from bibliography/citations.yaml.
+  Output: thesis/chapters/categorical-semantic-audit.tex.
 ```
 
 **Bad (aspirational):**
 ```yaml
 description: |
-  Create a comprehensive model of logics as categorical objects.
+  Create a comprehensive audit chapter.
   Ensure high quality and completeness.
-  Follow best practices for RDF ontology design.
+  Follow best practices for academic writing.
 ```
 
 ## Dependency Resolution
@@ -294,16 +267,13 @@ The operational model enables automatic dependency resolution:
 **Example dependency chain:**
 
 ```
+task:write-conclusions-chapter
+  depends_on: [categorical-semantic-audit, main-thesis-chapters]
+    ↓
 task:write-audit-chapter
-  depends_on: [logics-as-objects, morphism-catalog, ...]
+  depends_on: [citation-registry]
     ↓
-task:build-morphism-catalog
-  depends_on: [catty-categorical-schema, logics-as-objects]
-    ↓
-task:build-logics-as-objects
-  depends_on: [catty-categorical-schema]
-    ↓
-task:build-categorical-schema
+task:init-citation-registry
   depends_on: []  # Phase 0 foundation task
 ```
 
@@ -315,30 +285,22 @@ task:build-categorical-schema
 - **Duration**: ~30 minutes
 - **Parallelizable**: Yes
 
-### Phase 1: Core Ontology
+### Phase 1: Thesis Content
 - **Subphases**:
-  - 1a: Schema Foundation (`build-categorical-schema`)
-  - 1b: Logic and Morphism Definitions (`build-logics-as-objects`, `build-morphism-catalog`)
-  - 1c: Advanced Structures (`build-two-d-lattice`, `build-curry-howard-model`)
-  - 1d: Examples and Validation (`build-complete-example`, `build-shacl-shapes`, `build-sparql-examples`, `write-ontology-documentation`)
-- **Outputs**: All ontology JSON-LD files, SHACL shapes, SPARQL queries, documentation
+  - 1a: Citation Registry (`init-citation-registry`)
+  - 1b: Core Chapters (`write-introduction`, `write-audit-chapter`)
+  - 1c: Advanced Chapters (`write-categorical-chapters`, `write-conclusions`)
+  - 1d: Compilation (`build-thesis-pdf`)
+- **Outputs**: All thesis chapters, compiled PDF, citation registry
 - **Duration**: ~220 minutes
-- **Parallelizable**: Partial (within subphases)
-
-### Phase 2: Thesis
-- **Subphases**:
-  - 2a: Thesis Structure (`init-thesis-structure`)
-  - 2b: Chapter Writing (`write-introduction`, `write-audit-chapter`, `write-conclusions`)
-  - 2c: PDF Compilation (`build-thesis-pdf`)
-- **Outputs**: LaTeX chapters, compiled PDF
-- **Duration**: ~130 minutes
 - **Parallelizable**: Partial (chapters can be written in parallel)
 
-### Phase 3: Validation Framework
+### Phase 2: Validation and Testing
 - **Subphases**:
-  - 3a: Framework Construction (`build-validation-framework`)
-  - 3b: Artifact Validation (`validate-ontology`, `validate-thesis`)
-- **Outputs**: Validation scripts, SHACL shapes, validation reports
+  - 2a: Validation Framework (`build-validation-framework`)
+  - 2b: Thesis Validation (`validate-thesis`)
+  - 2c: Test Suite (`run-tests`)
+- **Outputs**: Validation scripts, test reports
 - **Duration**: ~90 minutes
 - **Parallelizable**: Partial (validation tasks can run in parallel)
 

@@ -9,7 +9,7 @@ The `bibliography/` directory contains the master citation registry (`citations.
 - **Required Fields**: `title`, `author`, `year`, `type` (book/article/conference/incollection/thesis/report).
 - **External Links**: Include `doi`, `url`, `wikidata` (QID), `dbpedia`, `arxiv` where available. Links must be resolvable.
 - **TeX Integration**: Citation macros defined in `thesis/macros/citations.tex`. Keys are case-sensitive.
-- **RDF Integration**: Create RDF representations in `ontology/citations.jsonld` with provenance links.
+- **Architecture Note**: Bibliography is citation registry only, not connected to local `/ontology/` RDF files (which contain examples only). No RDF authoring required.
 
 ## Validation
 Validate YAML syntax: `python -c "import yaml; yaml.safe_load(open('citations.yaml'))"`. Verify all citation keys used in thesis exist in registry.
