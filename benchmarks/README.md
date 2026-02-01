@@ -172,7 +172,7 @@ Benchmarks can be integrated into CI/CD workflows to detect performance regressi
 
 - name: Check performance
   run: |
-    if python scripts/check-performance.py --threshold 10% results.json; then
+    if python scripts/check-performance.py --threshold '10%' results.json; then
       echo "Performance check passed"
     else
       echo "Performance regression detected!"
