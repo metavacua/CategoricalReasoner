@@ -7,6 +7,7 @@ The `schema/` directory contains validation schemas, LLM constraints, and TeX â†
 - **Citations**: Use ONLY keys from `bibliography/citations.yaml`. Macros: `\cite{}`, `\citepage{}`, `\citefigure{}`, `\definedfrom{}`, `\provedfrom{}`. Forbidden: invent new keys or use unregistered sources.
 - **ID Uniqueness**: All IDs globally unique. Patterns: `thm-[lowercase-hyphenated]`, `def-*`, `lem-*`, `ex-*`, `sec-*`, `subsec-*`.
 - **Provenance Only**: Do not author local RDF schemas or instantiate ontology classes. Generate provenance metadata only (e.g., citation usage tracking).
+- **Wikidata QIDs**: Do not guess or hallucinate `wd:Q...` identifiers. Use `schema/WIKIDATA_DISCOVERY.md` to find authoritative IDs.
 - **Validation**: TeX structure validated against `thesis-structure.schema.yaml`, citations against registry.
 
 ## Validation

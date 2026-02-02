@@ -1,0 +1,240 @@
+{
+  "Classical logic": [
+    {
+      "qid": "Q236975",
+      "label": "classical logic",
+      "description": "class of formal logics"
+    },
+    {
+      "qid": "Q58147358",
+      "label": "Classical Logical Versus Quantum Conceptual Thought: Examples in Economics, Decision Theory and Concept Theory",
+      "description": "article"
+    },
+    {
+      "qid": "Q128126958",
+      "label": "Classical logic, continuation semantics and abstract machines",
+      "description": "scholarly article"
+    }
+  ],
+  "Intuitionistic logic": [
+    {
+      "qid": "Q176786",
+      "label": "intuitionistic logic",
+      "description": "various systems of symbolic logic"
+    },
+    {
+      "qid": "Q114742507",
+      "label": "Intuitionistic Logics  of Confirmation and Discouragement",
+      "description": "scientific article published in 2022"
+    },
+    {
+      "qid": "Q130863233",
+      "label": "Intuitionistic Logic and Kripke Semantics",
+      "description": "scientific article published on 05 February 2016"
+    }
+  ],
+  "Linear logic": [
+    {
+      "qid": "Q841728",
+      "label": "linear logic",
+      "description": "system of resource-aware logic"
+    },
+    {
+      "qid": "Q28470256",
+      "label": "Linear logic",
+      "description": "Journal article that introduces linear logic"
+    },
+    {
+      "qid": "Q130877120",
+      "label": "Linear logic",
+      "description": "scientific article published on 01 October 2010"
+    }
+  ],
+  "Category theory": [
+    {
+      "qid": "Q217413",
+      "label": "category theory",
+      "description": "branch of mathematics studying categories, functors, and natural transformations"
+    },
+    {
+      "qid": "Q105699359",
+      "label": "Category Theory",
+      "description": "conference series"
+    },
+    {
+      "qid": "Q105698545",
+      "label": "Category Theory and Computer Science",
+      "description": "conference series"
+    }
+  ],
+  "Category (mathematics)": [],
+  "Functor": [
+    {
+      "qid": "Q864475",
+      "label": "functor",
+      "description": "in category theory, a mapping between categories that preserves their structure (identity morphisms, composition of morphisms)"
+    },
+    {
+      "qid": "Q2120608",
+      "label": "function word",
+      "description": "words with little/ambiguous lexical meaning that express grammatical relationships or specify the speaker\u2019s attitude/mood of the speaker; e.g. articles, pronouns, adpositions, conjunctions, auxiliary verbs, interjections, particles"
+    },
+    {
+      "qid": "Q2072111",
+      "label": "function object",
+      "description": "programming construct allowing an object to be invoked or called as if it were an ordinary function, usually with the same syntax"
+    }
+  ],
+  "Natural transformation": [
+    {
+      "qid": "Q1442189",
+      "label": "natural transformation",
+      "description": "transformation between two functors studied in category theory"
+    },
+    {
+      "qid": "Q39943924",
+      "label": "Natural transformation in Campylobacter species",
+      "description": "scientific article published on February 1990"
+    },
+    {
+      "qid": "Q42656308",
+      "label": "Natural transformation competence in Helicobacter pylori is mediated by the basic components of a type IV secretion system",
+      "description": "scientific article published on July 2001"
+    }
+  ],
+  "Adjoint functors": [
+    {
+      "qid": "Q357858",
+      "label": "adjoint functor",
+      "description": "relationship that two functors may have"
+    },
+    {
+      "qid": "Q56566365",
+      "label": "Adjoint functors",
+      "description": "scientific article"
+    },
+    {
+      "qid": "Q105542153",
+      "label": "Adjoint functors and an extension of the Green correspondence for group representations",
+      "description": "scientific article published in March 1994"
+    }
+  ],
+  "Curry-Howard correspondence": [
+    {
+      "qid": "Q975734",
+      "label": "Curry\u2013Howard correspondence",
+      "description": "the direct relationship between computer programs and mathematical proofs"
+    }
+  ],
+  "Lambek calculus": [],
+  "Logic": [
+    {
+      "qid": "Q8078",
+      "label": "logic",
+      "description": "study of correct reasoning"
+    },
+    {
+      "qid": "Q29066314",
+      "label": "Yzomandias",
+      "description": "Czech rapper"
+    },
+    {
+      "qid": "Q1166618",
+      "label": "mathematical logic",
+      "description": "subfield of mathematics"
+    }
+  ],
+  "Programming language": [
+    {
+      "qid": "Q9143",
+      "label": "programming language",
+      "description": "language for communicating instructions to a machine"
+    },
+    {
+      "qid": "Q4117406",
+      "label": "implementation of a programming language",
+      "description": "software package for processing and executing computer programs in some language"
+    },
+    {
+      "qid": "Q510878",
+      "label": "language binding",
+      "description": "software library that adapts a particular library for use in a different programming language from what it is written in"
+    }
+  ],
+  "Software development": [
+    {
+      "qid": "Q638608",
+      "label": "software development",
+      "description": "creation and maintaining of programs and applications"
+    },
+    {
+      "qid": "Q1058914",
+      "label": "software company",
+      "description": "company that develops software"
+    },
+    {
+      "qid": "Q183888",
+      "label": "software developer",
+      "description": "person or company concerned with facets of the software development process"
+    }
+  ],
+  "Sequent calculus": [
+    {
+      "qid": "Q1771121",
+      "label": "sequent calculus",
+      "description": "style of formal logical argumentation"
+    },
+    {
+      "qid": "Q130840885",
+      "label": "Sequent calculus as a compiler intermediate language",
+      "description": "scientific article published on 29 August 2016"
+    },
+    {
+      "qid": "Q129859894",
+      "label": "Sequent calculus for classical logic probabilized",
+      "description": "scholarly article published on 7 May 2018"
+    }
+  ],
+  "Cartesian closed category": [
+    {
+      "qid": "Q1725874",
+      "label": "cartesian closed category",
+      "description": "Type of category in category theory"
+    }
+  ],
+  "Monad (category theory)": [],
+  "Type theory": [
+    {
+      "qid": "Q1056428",
+      "label": "type theory",
+      "description": "concept in mathematical logic and computer science"
+    },
+    {
+      "qid": "Q85811377",
+      "label": "Type theory with records",
+      "description": "No description"
+    },
+    {
+      "qid": "Q5871008",
+      "label": "history of type theory",
+      "description": "aspect of history"
+    }
+  ],
+  "Homotopy type theory": [
+    {
+      "qid": "Q5891840",
+      "label": "homotopy type theory",
+      "description": "variant of type theory incorporating the univalence axiom of Voevodsky"
+    },
+    {
+      "qid": "Q99732336",
+      "label": "Homotopy Type Theory: Univalent Foundations of Mathematics",
+      "description": "book about homotopy type theory"
+    },
+    {
+      "qid": "Q63368493",
+      "label": "Homotopy Type Theory: Programming and Verification",
+      "description": "research project"
+    }
+  ]
+}

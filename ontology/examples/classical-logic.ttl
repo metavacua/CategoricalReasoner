@@ -14,7 +14,7 @@ catty:ClassicalLogic a catty:Logic, owl:NamedIndividual ;
     rdfs:comment "Gentzen's classical sequent calculus with full structural rules. Includes Law of Excluded Middle (LEM) and Double Negation Elimination (DNE)."@en ;
     
     # External references
-    owl:sameAs wd:Q192960 ;  # Wikidata: Classical logic
+    owl:sameAs wd:Q236975 ;  # Wikidata: Classical logic
     skos:exactMatch dbr:Classical_logic ;
     dcterms:source <https://ncatlab.org/nlab/show/classical+logic> ;
     dcterms:bibliographicCitation "Gentzen, G. (1934). Untersuchungen über das logische Schließen. Mathematische Zeitschrift 39: 176-210." ;

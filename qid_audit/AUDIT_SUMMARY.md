@@ -2,28 +2,39 @@
 
 ## Overview
 A comprehensive batch audit of all Wikidata QID references (`wd:Q[0-9]+`) in the Catty repository was conducted. 
-Total Unique QIDs Discovered: 10
-Total Mismatches Found: 10 (100% failure rate)
+- **Total Unique QIDs Discovered**: 10
+- **Total Mismatches Found**: 10 (100% failure rate)
+- **Status**: FIXED
 
-## Key Findings
-Every single QID audited in the repository points to a Wikidata entity that contradicts its documented usage in the code.
+## Key Findings & Resolution
+Every single QID audited in the repository pointed to a Wikidata entity that contradicted its documented usage (e.g., "Category Theory" -> "Hospital").
 
-1. **Systematic Misalignment**: There is no partial correctness. The QIDs appear to be completely arbitrary or sourced from a different dataset, yet are prefixed with `wd:` (Wikidata) and documented as if they were correct.
-   
-2. **Specific Examples**:
-   - `Q16917`: Used as **Category (mathematics)**, but is actually **Hospital**.
-   - `Q846544`: Used as **Adjoint functors**, but is actually **disaster film**.
-   - `Q1149560`: Used as **Linear logic**, but is actually **right fielder** (baseball).
-   - `Q211231`: Used as **Intuitionistic logic**, but is actually a **football tournament season**.
+**Root Cause**: The QIDs were likely "hallucinated" by LLM coding agents which guessed IDs instead of looking them up.
 
-3. **Contextual Contradiction**: Code comments explicitly identify these IDs as specific mathematical concepts (e.g., `# Wikidata: Classical logic`), but the IDs resolve to completely unrelated entities (e.g., humans, films, awards).
+**Remediation Applied**: 
+All incorrect QIDs have been replaced with manually verified authoritative QIDs from Wikidata.
 
-## Recommendations
-- **Immediate Remediation**: All QIDs in the repository must be treated as invalid.
-- **Root Cause Analysis**: Investigate the source of these QIDs. They do not appear to be simple typos (e.g., off by one). They might be from a test Wikibase or generated via a faulty script.
-- **Replacement**: A full sweep is required to lookup the correct Wikidata QIDs for the intended concepts (e.g., lookup "Category theory" -> `Q219388`, "Functor" -> `Q864483`, etc.) and replace the invalid ones.
+| Concept | Old (Bad) QID | New (Verified) QID |
+|:--- |:--- |:--- |
+| Classical logic | `Q192960` (Baibars) | `Q236975` |
+| Intuitionistic logic | `Q211231` (Football) | `Q176786` |
+| Linear logic | `Q1149560` (Right fielder) | `Q841728` |
+| Category (math) | `Q16917` (Hospital) | `Q719395` |
+| Functor | `Q1370384` (Musician) | `Q864475` |
+| Natural trans. | `Q568825` (Crypto) | `Q1442189` |
+| Adjoint functors | `Q846544` (Disaster film) | `Q357858` |
+| Logic | `Q8462` (Timur) | `Q8078` |
+
+## Future Prevention
+A new guide has been created to prevent recurrence:
+**`schema/WIKIDATA_DISCOVERY.md`**
+
+This guide provides:
+1. A **Core Domain Registry** of verified QIDs for Category Theory and Logic.
+2. **Python/SPARQL patterns** for agents to dynamically discover QIDs instead of guessing.
 
 ## Audit Artifacts
-- `qid_audit/discovered_qids.json`: Detailed locations of all QID usages.
-- `qid_audit/wikidata_results.json`: Raw metadata retrieved from Wikidata.
-- `qid_audit/mismatch_report.json`: Semantic analysis of the discrepancies.
+- `qid_audit/discovered_qids.json`: Original locations of bad QIDs.
+- `qid_audit/wikidata_results.json`: Evidence of the mismatches.
+- `qid_audit/mismatch_report.json`: Detailed semantic analysis.
+- `qid_audit/corrected_qids.json`: Mapping of applied fixes.

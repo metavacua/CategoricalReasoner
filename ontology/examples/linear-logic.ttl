@@ -14,7 +14,7 @@ catty:LinearLogic a catty:Logic, owl:NamedIndividual ;
     rdfs:comment "Girard's resource-sensitive logic. No weakening or contraction (W=0, C=0). Exchange present (E=1). Quantum-safe: embodies no-cloning and no-erasure theorems."@en ;
     
     # External references
-    owl:sameAs wd:Q1149560 ;  # Wikidata: Linear logic
+    owl:sameAs wd:Q841728 ;  # Wikidata: Linear logic
     skos:exactMatch dbr:Linear_logic ;
     dcterms:source <https://ncatlab.org/nlab/show/linear+logic> ;
     dcterms:bibliographicCitation "Girard, J.-Y. (1987). Linear Logic. Theoretical Computer Science 50(1): 1-102." ;
