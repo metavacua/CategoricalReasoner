@@ -93,7 +93,7 @@ dbr:Sequent_calculus a dbo:ScientificDiscipline ;
 
 | Relationship | Support Level | Details |
 |--------------|---------------|---------|
-| Logics as categorical objects | **Good** | Each logic is a named item (e.g., LK = Q3525872, LJ = Q176786) |
+| Logics as categorical objects | **Good** | Each logic is a named item (e.g., the sequent calculus, LK = Q1771121, LJ = Q176786) |
 | Morphisms between logics | **Partial** | Embeddings can be modeled via `P1552` (maps to) |
 | Sequent restrictions | **Reference Only** | Described in descriptions, not RDF structure |
 | Structural rules | **Reference Only** | Described in descriptions |
