@@ -1,0 +1,276 @@
+{
+  "head": {
+    "vars": [
+      "qid",
+      "qidLabel",
+      "description",
+      "instanceOf",
+      "instanceOfLabel"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "instanceOf": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q618779"
+        },
+        "instanceOfLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "award"
+        },
+        "qid": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q7680564"
+        },
+        "qidLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Tamaiaz Award"
+        }
+      },
+      {
+        "instanceOf": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q201658"
+        },
+        "instanceOfLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "film genre"
+        },
+        "qid": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q846544"
+        },
+        "description": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "film genre"
+        },
+        "qidLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "disaster film"
+        }
+      },
+      {
+        "instanceOf": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q59825918"
+        },
+        "instanceOfLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "film theme"
+        },
+        "qid": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q846544"
+        },
+        "description": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "film genre"
+        },
+        "qidLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "disaster film"
+        }
+      },
+      {
+        "instanceOf": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q27020041"
+        },
+        "instanceOfLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "sports season"
+        },
+        "qid": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q211231"
+        },
+        "description": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "football tournament season"
+        },
+        "qidLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "2012\u201313 Frauen DFB-Pokal"
+        }
+      },
+      {
+        "instanceOf": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q19845322"
+        },
+        "instanceOfLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "cryptographic attack"
+        },
+        "qid": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q568825"
+        },
+        "description": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Type of cryptographic attack"
+        },
+        "qidLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Davies' attack"
+        }
+      },
+      {
+        "instanceOf": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q5"
+        },
+        "instanceOfLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "human"
+        },
+        "qid": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q192960"
+        },
+        "description": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "4th Sultan of Egypt from 1260 to 1277"
+        },
+        "qidLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Baibars"
+        }
+      },
+      {
+        "instanceOf": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q5"
+        },
+        "instanceOfLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "human"
+        },
+        "qid": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q8462"
+        },
+        "description": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "the founder of the Timurid Empire (1370\u20131405)"
+        },
+        "qidLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Timur"
+        }
+      },
+      {
+        "instanceOf": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q5"
+        },
+        "instanceOfLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "human"
+        },
+        "qid": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1370384"
+        },
+        "description": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Cuban musician (1906\u20131940)"
+        },
+        "qidLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Alejandro Garc\u00eda Caturla"
+        }
+      },
+      {
+        "instanceOf": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q5398426"
+        },
+        "instanceOfLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "television series"
+        },
+        "qid": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q847878"
+        },
+        "description": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Australian television series"
+        },
+        "qidLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "Don't Blame Me"
+        }
+      },
+      {
+        "instanceOf": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1151733"
+        },
+        "instanceOfLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "baseball position"
+        },
+        "qid": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q1149560"
+        },
+        "description": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "the outfielder in baseball or softball who plays defense in right field"
+        },
+        "qidLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "right fielder"
+        }
+      },
+      {
+        "qid": {
+          "type": "uri",
+          "value": "http://www.wikidata.org/entity/Q16917"
+        },
+        "description": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "health care facility"
+        },
+        "qidLabel": {
+          "xml:lang": "en",
+          "type": "literal",
+          "value": "hospital"
+        }
+      }
+    ]
+  }
+}

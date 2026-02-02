@@ -1,0 +1,115 @@
+{
+  "total_unique_qids": 10,
+  "discovered_qids": [
+    {
+      "qid": "Q8462",
+      "occurrences": [
+        {
+          "file": "ontology/ontological-inventory.md",
+          "line": 113,
+          "context": "?logic wdt:P31 wd:Q8462 .  # instance of logic"
+        }
+      ]
+    },
+    {
+      "qid": "Q7680564",
+      "occurrences": [
+        {
+          "file": "ontology/ontological-inventory.md",
+          "line": 128,
+          "context": "wd:Q7680564 a wdt:Q8462 ;  # LJ"
+        },
+        {
+          "file": "ontology/ontological-inventory.md",
+          "line": 135,
+          "context": "wdt:P1552 wd:Q7680564 ;  # maps to intuitionistic logic (translation)"
+        }
+      ]
+    },
+    {
+      "qid": "Q16917",
+      "occurrences": [
+        {
+          "file": "ontology/ontological-inventory.md",
+          "line": 130,
+          "context": "wdt:P361 wd:Q16917 ;  # part of category theory (example mapping)"
+        },
+        {
+          "file": "thesis/chapters/categorical-semantic-audit.tex",
+          "line": 42,
+          "context": "\\item \\texttt{Q16917}: Category (mathematics) \\texttt{wd:Q16917}"
+        }
+      ]
+    },
+    {
+      "qid": "Q847878",
+      "occurrences": [
+        {
+          "file": "ontology/ontological-inventory.md",
+          "line": 133,
+          "context": "wd:Q847878 a wdt:Q8462 ;  # Linear Logic"
+        }
+      ]
+    },
+    {
+      "qid": "Q192960",
+      "occurrences": [
+        {
+          "file": "ontology/examples/classical-logic.ttl",
+          "line": 17,
+          "context": "owl:sameAs wd:Q192960 ;  # Wikidata: Classical logic"
+        }
+      ]
+    },
+    {
+      "qid": "Q211231",
+      "occurrences": [
+        {
+          "file": "ontology/examples/intuitionistic-logic.ttl",
+          "line": 17,
+          "context": "owl:sameAs wd:Q211231 ;  # Wikidata: Intuitionistic logic"
+        }
+      ]
+    },
+    {
+      "qid": "Q1149560",
+      "occurrences": [
+        {
+          "file": "ontology/examples/linear-logic.ttl",
+          "line": 17,
+          "context": "owl:sameAs wd:Q1149560 ;  # Wikidata: Linear logic"
+        }
+      ]
+    },
+    {
+      "qid": "Q1370384",
+      "occurrences": [
+        {
+          "file": "thesis/chapters/categorical-semantic-audit.tex",
+          "line": 43,
+          "context": "\\item \\texttt{Q1370384}: Functor \\texttt{wd:Q1370384}"
+        }
+      ]
+    },
+    {
+      "qid": "Q568825",
+      "occurrences": [
+        {
+          "file": "thesis/chapters/categorical-semantic-audit.tex",
+          "line": 44,
+          "context": "\\item \\texttt{Q568825}: Natural transformation \\texttt{wd:Q568825}"
+        }
+      ]
+    },
+    {
+      "qid": "Q846544",
+      "occurrences": [
+        {
+          "file": "thesis/chapters/categorical-semantic-audit.tex",
+          "line": 45,
+          "context": "\\item \\texttt{Q846544}: Adjoint functors \\texttt{wd:Q846544}"
+        }
+      ]
+    }
+  ]
+}

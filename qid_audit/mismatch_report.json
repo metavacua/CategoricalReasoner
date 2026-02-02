@@ -1,0 +1,138 @@
+{
+  "total_qids_audited": 10,
+  "mismatches_found": 10,
+  "mismatches": [
+    {
+      "qid": "Q8462",
+      "wikidata_label": "Timur",
+      "wikidata_description": "the founder of the Timurid Empire (1370\u20131405)",
+      "wikidata_instance_of": "human",
+      "repository_usage_hints": "?logic wdt P31 . instance of logic",
+      "occurrences": [
+        "ontology/ontological-inventory.md:113"
+      ],
+      "mismatch_type": "Semantic Contradiction",
+      "severity": "High",
+      "recommendation": "Replace Q8462 (Timur) with correct Wikidata entity for '?logic wdt P31 . instance of logic'."
+    },
+    {
+      "qid": "Q7680564",
+      "wikidata_label": "Tamaiaz Award",
+      "wikidata_description": "N/A",
+      "wikidata_instance_of": "award",
+      "repository_usage_hints": "wdt P1552 maps to intuitionistic logic (translation) | a wdt Q8462 LJ",
+      "occurrences": [
+        "ontology/ontological-inventory.md:128",
+        "ontology/ontological-inventory.md:135"
+      ],
+      "mismatch_type": "Semantic Contradiction",
+      "severity": "High",
+      "recommendation": "Replace Q7680564 (Tamaiaz Award) with correct Wikidata entity for 'wdt P1552 maps to intuitionistic logic (translation) | a wdt Q8462 LJ'."
+    },
+    {
+      "qid": "Q16917",
+      "wikidata_label": "hospital",
+      "wikidata_description": "health care facility",
+      "wikidata_instance_of": "",
+      "repository_usage_hints": "item texttt Category (mathematics) texttt | wdt P361 part of category theory (example mapping)",
+      "occurrences": [
+        "ontology/ontological-inventory.md:130",
+        "thesis/chapters/categorical-semantic-audit.tex:42"
+      ],
+      "mismatch_type": "Semantic Contradiction",
+      "severity": "High",
+      "recommendation": "Replace Q16917 (hospital) with correct Wikidata entity for 'item texttt Category (mathematics) texttt | wdt P361 part of category theory (example mapping)'."
+    },
+    {
+      "qid": "Q847878",
+      "wikidata_label": "Don't Blame Me",
+      "wikidata_description": "Australian television series",
+      "wikidata_instance_of": "television series",
+      "repository_usage_hints": "a wdt Q8462 Linear Logic",
+      "occurrences": [
+        "ontology/ontological-inventory.md:133"
+      ],
+      "mismatch_type": "Semantic Contradiction",
+      "severity": "High",
+      "recommendation": "Replace Q847878 (Don't Blame Me) with correct Wikidata entity for 'a wdt Q8462 Linear Logic'."
+    },
+    {
+      "qid": "Q192960",
+      "wikidata_label": "Baibars",
+      "wikidata_description": "4th Sultan of Egypt from 1260 to 1277",
+      "wikidata_instance_of": "human",
+      "repository_usage_hints": "owl sameAs Wikidata Classical logic",
+      "occurrences": [
+        "ontology/examples/classical-logic.ttl:17"
+      ],
+      "mismatch_type": "Semantic Contradiction",
+      "severity": "High",
+      "recommendation": "Replace Q192960 (Baibars) with correct Wikidata entity for 'owl sameAs Wikidata Classical logic'."
+    },
+    {
+      "qid": "Q211231",
+      "wikidata_label": "2012\u201313 Frauen DFB-Pokal",
+      "wikidata_description": "football tournament season",
+      "wikidata_instance_of": "sports season",
+      "repository_usage_hints": "owl sameAs Wikidata Intuitionistic logic",
+      "occurrences": [
+        "ontology/examples/intuitionistic-logic.ttl:17"
+      ],
+      "mismatch_type": "Semantic Contradiction",
+      "severity": "High",
+      "recommendation": "Replace Q211231 (2012\u201313 Frauen DFB-Pokal) with correct Wikidata entity for 'owl sameAs Wikidata Intuitionistic logic'."
+    },
+    {
+      "qid": "Q1149560",
+      "wikidata_label": "right fielder",
+      "wikidata_description": "the outfielder in baseball or softball who plays defense in right field",
+      "wikidata_instance_of": "baseball position",
+      "repository_usage_hints": "owl sameAs Wikidata Linear logic",
+      "occurrences": [
+        "ontology/examples/linear-logic.ttl:17"
+      ],
+      "mismatch_type": "Semantic Contradiction",
+      "severity": "High",
+      "recommendation": "Replace Q1149560 (right fielder) with correct Wikidata entity for 'owl sameAs Wikidata Linear logic'."
+    },
+    {
+      "qid": "Q1370384",
+      "wikidata_label": "Alejandro Garc\u00eda Caturla",
+      "wikidata_description": "Cuban musician (1906\u20131940)",
+      "wikidata_instance_of": "human",
+      "repository_usage_hints": "item texttt Functor texttt",
+      "occurrences": [
+        "thesis/chapters/categorical-semantic-audit.tex:43"
+      ],
+      "mismatch_type": "Semantic Contradiction",
+      "severity": "High",
+      "recommendation": "Replace Q1370384 (Alejandro Garc\u00eda Caturla) with correct Wikidata entity for 'item texttt Functor texttt'."
+    },
+    {
+      "qid": "Q568825",
+      "wikidata_label": "Davies' attack",
+      "wikidata_description": "Type of cryptographic attack",
+      "wikidata_instance_of": "cryptographic attack",
+      "repository_usage_hints": "item texttt Natural transformation texttt",
+      "occurrences": [
+        "thesis/chapters/categorical-semantic-audit.tex:44"
+      ],
+      "mismatch_type": "Semantic Contradiction",
+      "severity": "High",
+      "recommendation": "Replace Q568825 (Davies' attack) with correct Wikidata entity for 'item texttt Natural transformation texttt'."
+    },
+    {
+      "qid": "Q846544",
+      "wikidata_label": "disaster film",
+      "wikidata_description": "film genre",
+      "wikidata_instance_of": "film theme, film genre",
+      "repository_usage_hints": "item texttt Adjoint functors texttt",
+      "occurrences": [
+        "thesis/chapters/categorical-semantic-audit.tex:45"
+      ],
+      "mismatch_type": "Semantic Contradiction",
+      "severity": "High",
+      "recommendation": "Replace Q846544 (disaster film) with correct Wikidata entity for 'item texttt Adjoint functors texttt'."
+    }
+  ]
+}
