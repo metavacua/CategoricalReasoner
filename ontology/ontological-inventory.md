@@ -87,7 +87,7 @@ dbr:Sequent_calculus a dbo:ScientificDiscipline ;
 | Adjoint Functors | Q357858 | P1552, P279 |
 | Monoid | Q207448 | P279, P1552 |
 | Group | Q83478 | P279, P1552 |
-| Isomorphism | Q1442189 | P1552 (inverse element via P154) |
+| Isomorphism | Q189112 | P1552 (inverse element via P154) |
 
 ### Logic-Categorical Relationships Supported
 
