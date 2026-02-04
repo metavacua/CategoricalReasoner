@@ -1,0 +1,28 @@
+\chapter*{The Literate Programming Paradigm}
+\addcontentsline{toc}{chapter}{The Literate Programming Paradigm}
+
+The \catty\ framework is built on the principles of literate programming, where the documentation and implementation are inextricably linked. The primary technology stack for validation and transformation is centered on the Java ecosystem, while Python serves as an auxiliary orchestrator for CI/CD.
+
+\section*{JavaDoc-First Implementation}
+The implementation follows a \textit{JavaDoc-first} approach. Every component, especially those involving RDF transformation and SHACL validation, must be documented before and during implementation. This ensures that the technical specification is always in sync with the code.
+
+\section*{JUnit-First Validation}
+Consistency and correctness are enforced through a \textit{JUnit-first} methodology. Complex transformations between categorical structures and their logical counterparts are verified by an extensive suite of automated tests. 
+
+\section*{Technology Stack}
+The core logic of the \catty\ framework leverages the following Java libraries:
+\begin{itemize}
+    \item \textbf{Apache Jena}: For RDF processing, SPARQL execution, and triple-store management.
+    \item \textbf{OpenLlet}: An OWL 2 DL reasoner used for consistency checking of the core ontologies.
+    \item \textbf{JavaPoet}: Used for generating Java source code from formal categorical specifications.
+    \item \textbf{JUnit}: The primary framework for unit testing and automated validation.
+\end{itemize}
+
+\section*{Python Auxiliary Layer}
+Python scripts, primarily located in \code{.catty/validation/}, are used for higher-level orchestration. These scripts:
+\begin{itemize}
+    \item Coordinate the execution of Java-based validation tools.
+    \item Perform structural checks on LaTeX documents.
+    \item Validate citation registry compliance.
+    \item Integrate with CI/CD pipelines to provide unified pass/fail reports.
+\end{itemize}

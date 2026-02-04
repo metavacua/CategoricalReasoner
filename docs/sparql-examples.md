@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This file has been consolidated into the "Architecture of Catty" TeX document and is marked for future removal.
+
 # SPARQL Queries for Catty Ontology
 
 This directory contains example SPARQL queries for querying the Catty categorical ontology.

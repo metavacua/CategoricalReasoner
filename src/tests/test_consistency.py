@@ -14,7 +14,9 @@ except ImportError:
 def test_consistency():
     # Load all ontology files
     data_graph = Graph()
-    ontology_dir = "ontology"
+    # Find ontology directory relative to this script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    ontology_dir = os.path.join(os.path.dirname(script_dir), "ontology")
     for filename in os.listdir(ontology_dir):
         if filename.endswith(".jsonld"):
             data_graph.parse(os.path.join(ontology_dir, filename), format="json-ld")
