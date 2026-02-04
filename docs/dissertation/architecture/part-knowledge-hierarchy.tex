@@ -30,10 +30,10 @@ SELECT ?label ?description WHERE {
 }
 \end{lstlisting}
 
-If a QID is unknown, discover it using a more efficient label-based query:
+If a QID is unknown, discover it using a more efficient label-based query. Note that Wikidata labels for mathematical concepts are typically lowercase:
 \begin{lstlisting}[language=SPARQL]
 SELECT DISTINCT ?item ?label ?description WHERE {
-  ?item rdfs:label "Natural transformation"@en .
+  ?item rdfs:label "natural transformation"@en .
   ?item schema:description ?description .
   FILTER(LANG(?description) = "en")
 }

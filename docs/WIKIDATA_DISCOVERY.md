@@ -22,17 +22,19 @@ SELECT ?label ?description WHERE {
 ```
 
 ### 2. Discovery (If you have a Label)
-To find the QID for "Natural transformation", use an efficient label-based query:
+To find the QID for "natural transformation", use an efficient label-based query. 
+
+**Note**: Wikidata labels for mathematical concepts are typically lowercase. Using the correct case is required for `rdfs:label` matches.
 
 ```sparql
 SELECT DISTINCT ?item ?label ?description WHERE {
-  ?item rdfs:label "Natural transformation"@en .
+  ?item rdfs:label "natural transformation"@en .
   ?item schema:description ?description .
   FILTER(LANG(?description) = "en")
 }
 LIMIT 5
 ```
-*Note: Using the Wikidata Search API (`wbsearchentities`) is even more efficient for name resolution.*
+*Note: Using the Wikidata Search API (`wbsearchentities`) or the `mwapi` service is even more efficient and handles case-insensitivity better.*
 
 ### 3. Recommended Python Pattern (No Dependencies)
 Use this standard pattern to look up QIDs in your scripts:
