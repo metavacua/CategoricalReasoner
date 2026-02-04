@@ -1,7 +1,7 @@
 # AGENTS.md - Scripts and Utilities
 
 ## Scope
-The `scripts/` directory contains Python utilities for validation, automation, and RDF processing.
+The `src/scripts/` directory contains Python utilities for validation, automation, and RDF processing.
 
 ## Core Constraints
 - **Python Version**: ≥3.8 with type hints and docstrings for all functions.

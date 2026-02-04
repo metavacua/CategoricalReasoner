@@ -209,7 +209,7 @@ validation:
   consistency:
     - "No circular references (proof referencing theorem that references same proof)"
     - "All ID patterns must be globally unique"
-    - "All citation keys must exist in bibliography/citations.yaml"
+    - "All citation keys must exist in docs/dissertation/bibliography/citations.yaml"
     - "All external links (DOI, Wikidata, URLs) must be resolvable"
 
 # Citation property mappings
@@ -229,10 +229,10 @@ citation_properties:
 
 # Prefix definitions for RDF URIs
 prefixes:
-  catty: "http://catty.org/ontology/"
+  catty: "http://catty.org/src/ontology/"
   dct: "http://purl.org/dc/terms/"
   prov: "http://www.w3.org/ns/prov#"
-  bibo: "http://purl.org/ontology/bibo/"
+  bibo: "http://purl.org/src/ontology/bibo/"
   rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   rdfs: "http://www.w3.org/2000/01/rdf-schema#"
   owl: "http://www.w3.org/2002/07/owl#"

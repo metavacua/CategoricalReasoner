@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The `bibliography/` directory contains the master citation registry (`citations.yaml`) for the Catty thesis. This registry is the single source of truth for all citations used in the thesis.
+The `docs/dissertation/bibliography/` directory contains the master citation registry (`citations.yaml`) for the Catty thesis. This registry is the single source of truth for all citations used in the thesis.
 
 ## Citation Registry
 
@@ -90,9 +90,9 @@ All citations used in TeX must exist in `citations.yaml`. Validation enforces:
 
 **Run validation**:
 ```bash
-python schema/validators/validate_citations.py \
+python src/schema/validators/validate_citations.py \
   --tex-dir thesis/chapters/ \
-  --bibliography bibliography/citations.yaml \
+  --bibliography docs/dissertation/bibliography/citations.yaml \
   --check-external
 ```
 
@@ -100,7 +100,7 @@ python schema/validators/validate_citations.py \
 
 ### Step 1: Add to Registry
 
-Add a new entry to `bibliography/citations.yaml`:
+Add a new entry to `docs/dissertation/bibliography/citations.yaml`:
 
 ```yaml
 newauthor2020paper:
@@ -130,8 +130,8 @@ Ensure external identifiers are resolvable:
 
 ```bash
 # Validate all citations
-python schema/validators/validate_citations.py \
-  --bibliography bibliography/citations.yaml \
+python src/schema/validators/validate_citations.py \
+  --bibliography docs/dissertation/bibliography/citations.yaml \
   --check-external
 ```
 
@@ -145,7 +145,7 @@ This work builds on \cite{newauthor2020paper}.
 
 ## Architecture Note
 
-**Important**: The `bibliography/` directory is **not** connected to local `/ontology/` RDF files. The ontology directory contains example/reference materials only. Citation management is centralized in `citations.yaml`.
+**Important**: The `docs/dissertation/bibliography/` directory is **not** connected to local `/src/ontology/` RDF files. The ontology directory contains example/reference materials only. Citation management is centralized in `citations.yaml`.
 
 No RDF files are required for citation management. All citation validation happens via:
 1. TeX macro validation (structure)
@@ -164,15 +164,15 @@ Citation registry uses YAML for simplicity and human readability. Future enhance
 ### Validate Syntax
 
 ```bash
-python -c "import yaml; yaml.safe_load(open('bibliography/citations.yaml'))"
+python -c "import yaml; yaml.safe_load(open('docs/dissertation/bibliography/citations.yaml'))"
 ```
 
 ### Validate Citations in Thesis
 
 ```bash
-python schema/validators/validate_citations.py \
+python src/schema/validators/validate_citations.py \
   --tex-dir thesis/chapters/ \
-  --bibliography bibliography/citations.yaml \
+  --bibliography docs/dissertation/bibliography/citations.yaml \
   --check-external
 ```
 
@@ -180,13 +180,13 @@ python schema/validators/validate_citations.py \
 
 ```bash
 # (Future enhancement) List citations in registry not used in TeX
-python scripts/check-unused-citations.py \
-  --bibliography bibliography/citations.yaml \
+python src/scripts/check-unused-citations.py \
+  --bibliography docs/dissertation/bibliography/citations.yaml \
   --tex-dir thesis/chapters/
 ```
 
 ## See Also
 
-- `schema/README.md` - Validation schemas and constraints
-- `schema/AGENTS.md` - Citation usage constraints for LLMs
+- `src/schema/README.md` - Validation schemas and constraints
+- `src/schema/AGENTS.md` - Citation usage constraints for LLMs
 - `thesis/macros/citations.tex` - TeX citation macro definitions

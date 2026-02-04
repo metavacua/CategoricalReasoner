@@ -19,12 +19,12 @@ metadata:
       format: "JSON-LD"
       standards: ["RDF 1.1", "OWL 2", "JSON-LD 1.1"]
       ontology_files:
-        - "ontology/catty-categorical-schema.jsonld"
-        - "ontology/logics-as-objects.jsonld"
-        - "ontology/morphism-catalog.jsonld"
-        - "ontology/two-d-lattice-category.jsonld"
-        - "ontology/curry-howard-categorical-model.jsonld"
-        - "ontology/catty-complete-example.jsonld"
+        - "src/ontology/catty-categorical-schema.jsonld"
+        - "src/ontology/logics-as-objects.jsonld"
+        - "src/ontology/morphism-catalog.jsonld"
+        - "src/ontology/two-d-lattice-category.jsonld"
+        - "src/ontology/curry-howard-categorical-model.jsonld"
+        - "src/ontology/catty-complete-example.jsonld"
       linked_open_data:
         wikidata:
           usage: "owl:sameAs links to logic and category theory entities"
@@ -41,7 +41,7 @@ metadata:
     shacl_validation:
       standard: "SHACL (Shapes Constraint Language) W3C Recommendation"
       shapes:
-        ontology_validation: "ontology/catty-shapes.ttl"
+        ontology_validation: "src/ontology/catty-shapes.ttl"
         operational_validation: ".catty/validation/shapes/*.shacl"
       library: "pyshacl (Python)"
       purpose: "Validate RDF graphs against structural constraints"
@@ -56,7 +56,7 @@ metadata:
     
     sparql_queries:
       standard: "SPARQL 1.1 Query Language"
-      documentation: "ontology/queries/sparql-examples.md"
+      documentation: "src/ontology/queries/sparql-examples.md"
       query_count: "15+ example queries"
       categories:
         - "Basic queries (list logics, morphisms, rules)"
@@ -95,8 +95,8 @@ artifacts:
     format: "directory-tree"
     content_spec:
       - "thesis/ directory with main.tex, preamble.tex, chapters/, Makefile"
-      - "ontology/ directory with *.jsonld, *.ttl, shapes/, queries/"
-      - "scripts/ directory for utility scripts"
+      - "src/ontology/ directory with *.jsonld, *.ttl, shapes/, queries/"
+      - "src/scripts/ directory for utility scripts"
       - ".github/workflows/ for CI/CD"
       - ".catty/ for operational model"
       - "README.md, LICENSE, .gitignore at root"
@@ -106,7 +106,7 @@ artifacts:
       type: "filesystem"
       criteria:
         - "path thesis/ exists and is directory"
-        - "path ontology/ exists and is directory"
+        - "path src/ontology/ exists and is directory"
         - "path .catty/ exists and is directory"
         - "file README.md exists"
         - "file LICENSE exists"
@@ -114,7 +114,7 @@ artifacts:
 
   catty-categorical-schema:
     artifact_id: "catty-categorical-schema"
-    path: "ontology/catty-categorical-schema.jsonld"
+    path: "src/ontology/catty-categorical-schema.jsonld"
     format: "JSON-LD"
     schema: ".catty/validation/shapes/categorical-schema.shacl"
     content_spec:
@@ -141,7 +141,7 @@ artifacts:
 
   logics-as-objects:
     artifact_id: "logics-as-objects"
-    path: "ontology/logics-as-objects.jsonld"
+    path: "src/ontology/logics-as-objects.jsonld"
     format: "JSON-LD"
     schema: ".catty/validation/shapes/logics-as-objects.shacl"
     content_spec:
@@ -170,7 +170,7 @@ artifacts:
 
   morphism-catalog:
     artifact_id: "morphism-catalog"
-    path: "ontology/morphism-catalog.jsonld"
+    path: "src/ontology/morphism-catalog.jsonld"
     format: "JSON-LD"
     schema: ".catty/validation/shapes/morphism-catalog.shacl"
     content_spec:
@@ -198,7 +198,7 @@ artifacts:
 
   two-d-lattice-category:
     artifact_id: "two-d-lattice-category"
-    path: "ontology/two-d-lattice-category.jsonld"
+    path: "src/ontology/two-d-lattice-category.jsonld"
     format: "JSON-LD"
     schema: ".catty/validation/shapes/two-d-lattice-category.shacl"
     content_spec:
@@ -228,7 +228,7 @@ artifacts:
 
   curry-howard-categorical-model:
     artifact_id: "curry-howard-categorical-model"
-    path: "ontology/curry-howard-categorical-model.jsonld"
+    path: "src/ontology/curry-howard-categorical-model.jsonld"
     format: "JSON-LD"
     schema: ".catty/validation/shapes/curry-howard-model.shacl"
     content_spec:
@@ -255,7 +255,7 @@ artifacts:
 
   catty-complete-example:
     artifact_id: "catty-complete-example"
-    path: "ontology/catty-complete-example.jsonld"
+    path: "src/ontology/catty-complete-example.jsonld"
     format: "JSON-LD"
     schema: ".catty/validation/shapes/complete-example.shacl"
     content_spec:
@@ -283,7 +283,7 @@ artifacts:
 
   catty-shapes:
     artifact_id: "catty-shapes"
-    path: "ontology/catty-shapes.ttl"
+    path: "src/ontology/catty-shapes.ttl"
     format: "RDF/Turtle (SHACL)"
     content_spec:
       - "SHACL shapes for all major classes (Logic, LogicMorphism, Functor, Category, Object)"
@@ -306,7 +306,7 @@ artifacts:
 
   ontological-inventory:
     artifact_id: "ontological-inventory"
-    path: "ontology/ontological-inventory.md"
+    path: "src/ontology/ontological-inventory.md"
     format: "Markdown"
     content_spec:
       - "Comprehensive inventory of minimum 11 external categorical resources"
@@ -328,7 +328,7 @@ artifacts:
 
   sparql-examples:
     artifact_id: "sparql-examples"
-    path: "ontology/queries/sparql-examples.md"
+    path: "src/ontology/queries/sparql-examples.md"
     format: "Markdown with SPARQL code blocks"
     content_spec:
       - "Minimum 15 SPARQL query examples"
@@ -353,7 +353,7 @@ artifacts:
 
   ontology-readme:
     artifact_id: "ontology-readme"
-    path: "ontology/README.md"
+    path: "src/ontology/README.md"
     format: "Markdown"
     content_spec:
       - "Overview of ontology structure (schema, logics, morphisms, lattice, curry-howard)"
@@ -763,8 +763,8 @@ tasks:
     depends_on: []
     description: |
       Create complete repository directory structure.
-      Create directories: thesis/, thesis/chapters/, ontology/, ontology/queries/, 
-      ontology/shapes/, scripts/, .github/workflows/, .catty/, .catty/validation/, 
+      Create directories: thesis/, thesis/chapters/, src/ontology/, src/ontology/queries/, 
+      src/ontology/shapes/, src/scripts/, .github/workflows/, .catty/, .catty/validation/, 
       .catty/validation/shapes/.
       Create files: README.md (project overview), LICENSE (AGPL-3.0), 
       .gitignore (LaTeX artifacts, Python cache, PDF/HTML output).
@@ -772,8 +772,8 @@ tasks:
     acceptance_criteria:
       - "directory thesis/ exists"
       - "directory thesis/chapters/ exists"
-      - "directory ontology/ exists"
-      - "directory ontology/queries/ exists"
+      - "directory src/ontology/ exists"
+      - "directory src/ontology/queries/ exists"
       - "directory .catty/ exists"
       - "directory .catty/validation/ exists"
       - "directory .catty/validation/shapes/ exists"
@@ -798,9 +798,9 @@ tasks:
       Create license compatibility summary table (all must be AGPL-compatible).
       Create 4-phase integration roadmap: Direct Import (Wikidata, DBPedia),
       Transform (OpenMath, OMDoc), Extract (Lean, Coq, Isabelle), Cross-Reference (nLab, ProofWiki).
-      Output: ontology/ontological-inventory.md (minimum 500 lines).
+      Output: src/ontology/ontological-inventory.md (minimum 500 lines).
     acceptance_criteria:
-      - "file ontology/ontological-inventory.md exists"
+      - "file src/ontology/ontological-inventory.md exists"
       - "contains at least 11 resource entries"
       - "each entry has: Name, URI, Constructs, License, Compatibility, Example, Limitations"
       - "includes license compatibility table"
@@ -834,9 +834,9 @@ tasks:
       Define properties: domain, codomain, source, target, composition, identity,
       hasLogicalSignature, hasLogicalAxiom, hasStructuralRule.
       All classes must have: rdfs:label, rdfs:comment, dct:description.
-      Output: ontology/catty-categorical-schema.jsonld.
+      Output: src/ontology/catty-categorical-schema.jsonld.
     acceptance_criteria:
-      - "file ontology/catty-categorical-schema.jsonld exists"
+      - "file src/ontology/catty-categorical-schema.jsonld exists"
       - "valid JSON-LD syntax (parse without error)"
       - "contains @context with prefixes: catty, rdf, rdfs, owl, skos, dct, xsd"
       - "defines classes: Category, Object, Morphism, Logic, Functor, NaturalTransformation"
@@ -877,9 +877,9 @@ tasks:
       - LL: linear logic (no LEM, no LNC, has Exchange only)
       - ALL: affine linear logic (no LEM, no LNC, has Exchange and Weakening)
       - RLL: relevant linear logic (no LEM, no LNC, has Exchange and Contraction)
-      Output: ontology/logics-as-objects.jsonld.
+      Output: src/ontology/logics-as-objects.jsonld.
     acceptance_criteria:
-      - "file ontology/logics-as-objects.jsonld exists"
+      - "file src/ontology/logics-as-objects.jsonld exists"
       - "valid JSON-LD syntax"
       - "at least 7 logic instances defined (LM, LK, LJ, LDJ, LL, ALL, RLL)"
       - "each logic has rdf:type catty:Logic"
@@ -911,9 +911,9 @@ tasks:
         ALL→LK (add Contraction and axioms), RLL→LK (add Weakening and axioms)
       - Interpretations: LK→LJ (double negation translation)
       - Adjoint functors: LK ↔ LJ (adjoint pair)
-      Output: ontology/morphism-catalog.jsonld.
+      Output: src/ontology/morphism-catalog.jsonld.
     acceptance_criteria:
-      - "file ontology/morphism-catalog.jsonld exists"
+      - "file src/ontology/morphism-catalog.jsonld exists"
       - "valid JSON-LD syntax"
       - "at least 10 morphism instances defined"
       - "each morphism has rdf:type catty:LogicMorphism or subclass"
@@ -946,9 +946,9 @@ tasks:
       Define sublattices: IntuitionisticSublattice, SubstructuralSublattice.
       Define categorical properties: completeness, distributivity.
       Example node: LK at (0, 10) (unrestricted, all structural rules).
-      Output: ontology/two-d-lattice-category.jsonld.
+      Output: src/ontology/two-d-lattice-category.jsonld.
     acceptance_criteria:
-      - "file ontology/two-d-lattice-category.jsonld exists"
+      - "file src/ontology/two-d-lattice-category.jsonld exists"
       - "valid JSON-LD syntax"
       - "at least 10 lattice nodes defined"
       - "each node has catty:latticeX (integer 0-2) and catty:latticeY (integer 0-10)"
@@ -988,9 +988,9 @@ tasks:
       - LL ↔ *-Autonomous Category
       Define natural transformations: ProofToProgram, ProgramToProof.
       Extend to full logic lattice with multiple type systems.
-      Output: ontology/curry-howard-categorical-model.jsonld.
+      Output: src/ontology/curry-howard-categorical-model.jsonld.
     acceptance_criteria:
-      - "file ontology/curry-howard-categorical-model.jsonld exists"
+      - "file src/ontology/curry-howard-categorical-model.jsonld exists"
       - "valid JSON-LD syntax"
       - "at least 4 CurryHowardEquivalence instances defined"
       - "each equivalence has catty:logicSource and catty:typeTheoryTarget"
@@ -1018,9 +1018,9 @@ tasks:
       Include external links: owl:sameAs to Wikidata, dct:source to references.
       Demonstrate complete categorical structure: objects, morphisms, composition,
       identity morphisms.
-      Output: ontology/catty-complete-example.jsonld.
+      Output: src/ontology/catty-complete-example.jsonld.
     acceptance_criteria:
-      - "file ontology/catty-complete-example.jsonld exists"
+      - "file src/ontology/catty-complete-example.jsonld exists"
       - "valid JSON-LD syntax"
       - "at least 6 logic instances (LK, LJ, LL, ALL, RLL, LDJ)"
       - "all structural rules defined"
@@ -1052,9 +1052,9 @@ tasks:
       - Lattice coordinate validation: latticeX in [0,2], latticeY in [0,10]
       - Lattice morphism order: domain node ≤ codomain node in lattice
       - Valid lattice positions: no duplicate coordinates
-      Output: ontology/catty-shapes.ttl.
+      Output: src/ontology/catty-shapes.ttl.
     acceptance_criteria:
-      - "file ontology/catty-shapes.ttl exists"
+      - "file src/ontology/catty-shapes.ttl exists"
       - "valid Turtle syntax (parse without error)"
       - "contains SHACL NodeShapes for Logic, LogicMorphism, Functor"
       - "uses sh:NodeShape, sh:property, sh:datatype, sh:minCount, sh:maxCount"
@@ -1097,9 +1097,9 @@ tasks:
       - Expected output format
       Include examples for multiple frameworks: Jena ARQ, RDF4J, rdflib (Python),
       Apache Jena (Java).
-      Output: ontology/queries/sparql-examples.md.
+      Output: src/ontology/queries/sparql-examples.md.
     acceptance_criteria:
-      - "file ontology/queries/sparql-examples.md exists"
+      - "file src/ontology/queries/sparql-examples.md exists"
       - "valid Markdown syntax"
       - "at least 15 SPARQL queries in code blocks"
       - "queries use correct SPARQL syntax (PREFIX, SELECT, WHERE)"
@@ -1151,9 +1151,9 @@ tasks:
          - Links to all ontology files
          - Links to external resources
          - Links to thesis chapters
-      Output: ontology/README.md (minimum 350 lines).
+      Output: src/ontology/README.md (minimum 350 lines).
     acceptance_criteria:
-      - "file ontology/README.md exists"
+      - "file src/ontology/README.md exists"
       - "valid Markdown syntax"
       - "contains sections: Overview, Structure, JSON-LD Context, Categorical Model, Integration, Usage, Reference"
       - "includes code examples (RDF loading, SPARQL queries, Python/Java)"

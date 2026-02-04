@@ -1,7 +1,7 @@
 # AGENTS.md - Ontology Development (Examples Only)
 
 ## Scope
-The `ontology/` directory contains **EXAMPLE and REFERENCE MATERIALS ONLY**. These files illustrate how RDF/OWL schemas and knowledge graph data might be structured for Catty's categorical logic model.
+The `src/ontology/` directory contains **EXAMPLE and REFERENCE MATERIALS ONLY**. These files illustrate how RDF/OWL schemas and knowledge graph data might be structured for Catty's categorical logic model.
 
 **IMPORTANT**: Do not use these files as authoritative sources. The actual architecture consumes external ontologies from SPARQL endpoints and linked data sources (DBPedia, Wikidata, GGG).
 
@@ -11,7 +11,7 @@ The `ontology/` directory contains **EXAMPLE and REFERENCE MATERIALS ONLY**. The
 - **SHACL Validation**: All RDF artifacts must validate against `catty-shapes.ttl` and `catty-thesis-shapes.shacl`.
 - **External References**: Link to Wikidata (`owl:sameAs`), DBpedia (`skos:exactMatch`), and DBLP where applicable. External identifiers must be resolvable.
 - **Categorical Consistency**: Logic instances require signatures and axioms. Morphisms require source, target, and type definitions. All categorical constructions must have functorial mappings.
-- **Namespaces**: Use `catty:` prefix (http://catty.org/ontology/) for all custom entities.
+- **Namespaces**: Use `catty:` prefix (http://catty.org/src/ontology/) for all custom entities.
 
 ## Validation
 These are example files only. No validation is required for the actual project, which uses external ontologies.
@@ -24,5 +24,5 @@ These are example files only. No validation is required for the actual project, 
 4. Not author local RDF schemas
 
 ## See Also
-- `benchmarks/README.md` - SPARQL benchmarks against external endpoints
-- `schema/README.md` - Validation schemas (note: does not use local ontology)
+- `src/benchmarks/README.md` - SPARQL benchmarks against external endpoints
+- `src/schema/README.md` - Validation schemas (note: does not use local ontology)

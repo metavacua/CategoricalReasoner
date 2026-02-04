@@ -6,7 +6,7 @@ This repository implements the Catty thesis: categorical foundations for logics 
 ## Core Constraints
 - **Formats**: Read/write `*.md`, `*.tex`, `*.yaml`, `*.py`. Create directories only when specified.
 - **Languages**: LaTeX, Python ≥3.8 (auxiliary CI/CD only), Java (primary ecosystem for validation and transformation).
-- **Citations**: Use ONLY keys from `bibliography/citations.yaml`. Forbidden: invent new citation keys.
+- **Citations**: Use ONLY keys from `docs/dissertation/bibliography/citations.yaml`. Forbidden: invent new citation keys.
 - **IDs**: Globally unique across corpus. Patterns: `thm-*`, `def-*`, `lem-*`, `ex-*`, `sec-*`, `subsec-*`.
 - **Validation**: All artifacts must pass automated validation via `.catty/validation/validate.py`. Acceptance criteria are boolean tests only.
 - **Execution**: Load operations from `.catty/operations.yaml`, verify dependencies via `.catty/phases.yaml`, execute task descriptions, validate outputs.
@@ -18,4 +18,4 @@ Run `python .catty/validation/validate.py --artifact <id>` or `--task <id>` to v
 
 ## See Also
 - `.catty/AGENTS.md` - Operational model constraints
-- `schema/AGENTS.md` - Citation and ID constraints
+- `src/schema/AGENTS.md` - Citation and ID constraints

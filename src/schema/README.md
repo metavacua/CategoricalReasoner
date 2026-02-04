@@ -16,7 +16,7 @@ This directory contains the prescriptive, machine-readable infrastructure for th
 ## Directory Structure
 
 ```
-schema/
+src/schema/
 ├── thesis-structure.schema.yaml      # YAML schema for thesis structure
 ├── tex-rdf-mapping.yaml             # TeX → RDF provenance metadata mapping
 ├── LLM_CONSTRAINTS.md                # Explicit LLM instructions
@@ -53,9 +53,9 @@ Defines all valid thesis structures:
 
 ### 2. Citation Infrastructure
 
-Located in `../bibliography/`:
+Located in `../docs/dissertation/bibliography/`:
 
-**Citation Registry** (`bibliography/citations.yaml`):
+**Citation Registry** (`docs/dissertation/bibliography/citations.yaml`):
 - Master registry of all approved citations (single source of truth)
 - Prevents LLM invention of citations
 - 13 pre-registered foundational references
@@ -96,7 +96,7 @@ mappings:
 
 ### 5. Automated Validators
 
-All validators in `schema/validators/` are **temporary CI/CD helpers**. Long-term validation infrastructure should use Java libraries (Jena SHACL support, JUnit).
+All validators in `src/schema/validators/` are **temporary CI/CD helpers**. Long-term validation infrastructure should use Java libraries (Jena SHACL support, JUnit).
 
 #### `validate_tex_structure.py`
 
@@ -109,7 +109,7 @@ Validates TeX files against `thesis-structure.schema.yaml`:
 
 **Usage**:
 ```bash
-python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
+python src/schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
 ```
 
 #### `validate_citations.py`
@@ -120,9 +120,9 @@ Validates citations:
 
 **Usage**:
 ```bash
-python schema/validators/validate_citations.py \
+python src/schema/validators/validate_citations.py \
   --tex-dir thesis/chapters/ \
-  --bibliography bibliography/citations.yaml \
+  --bibliography docs/dissertation/bibliography/citations.yaml \
   --check-external
 ```
 
@@ -135,9 +135,9 @@ Validates TeX structure and citation consistency:
 
 **Usage**:
 ```bash
-python schema/validators/validate_consistency.py \
+python src/schema/validators/validate_consistency.py \
   --tex-dir thesis/chapters/ \
-  --bibliography bibliography/citations.yaml
+  --bibliography docs/dissertation/bibliography/citations.yaml
 ```
 
 ### 6. CI/CD Integration
@@ -156,7 +156,7 @@ Runs on every PR:
 Located in `LLM_CONSTRAINTS.md`:
 
 **Explicit instructions for LLMs**:
-- You may only cite sources from `bibliography/citations.yaml`
+- You may only cite sources from `docs/dissertation/bibliography/citations.yaml`
 - To cite: use `\cite{key}` where key exists in registry
 - To add new citation: STOP and report missing citation
 - Every theorem must have exactly one proof block
@@ -171,18 +171,18 @@ Located in `LLM_CONSTRAINTS.md`:
 
 ```bash
 # Validate TeX structure
-python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
+python src/schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
 
 # Validate citations
-python schema/validators/validate_citations.py \
+python src/schema/validators/validate_citations.py \
   --tex-dir thesis/chapters/ \
-  --bibliography bibliography/citations.yaml \
+  --bibliography docs/dissertation/bibliography/citations.yaml \
   --check-external
 
 # Validate consistency
-python schema/validators/validate_consistency.py \
+python src/schema/validators/validate_consistency.py \
   --tex-dir thesis/chapters/ \
-  --bibliography bibliography/citations.yaml
+  --bibliography docs/dissertation/bibliography/citations.yaml
 ```
 
 All validators must exit with status 0 (success).
@@ -260,7 +260,7 @@ We define linear logic following \cite{girard2020new}.
 
 To add a new citation:
 
-1. **Add to YAML registry** (`bibliography/citations.yaml`):
+1. **Add to YAML registry** (`docs/dissertation/bibliography/citations.yaml`):
    ```yaml
    authornew2020paper:
      author: "First Last"
@@ -271,7 +271,7 @@ To add a new citation:
      notes: "Description"
    ```
 
-2. **Add to RDF model** (`ontology/citations.jsonld`):
+2. **Add to RDF model** (`src/ontology/citations.jsonld`):
    ```jsonld
    {
      "@id": "http://metavacua.github.io/catty/citations/authornew2020paper",
@@ -285,9 +285,9 @@ To add a new citation:
 
 3. **Run validation** to ensure consistency:
    ```bash
-   python schema/validators/validate_citations.py \
+   python src/schema/validators/validate_citations.py \
      --tex-dir thesis/chapters/ \
-     --bibliography bibliography/citations.yaml \
+     --bibliography docs/dissertation/bibliography/citations.yaml \
      --check-external
    ```
 
@@ -319,7 +319,7 @@ ERROR: Duplicate ID 'thm-weakening' (first defined at thesis/chapters/intro.tex:
 
 ```
 ERROR: thesis/chapters/categorical-semantic-audit.tex:42
-  Citation 'girard2020new' not found in bibliography/citations.yaml
+  Citation 'girard2020new' not found in docs/dissertation/bibliography/citations.yaml
 ```
 
 **Fix**: Use pre-registered key or add citation to registry (see above).

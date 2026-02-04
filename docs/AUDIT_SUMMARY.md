@@ -3,7 +3,7 @@
 ## Deliverables Completed
 
 ### 1. Category Theory Schema ✓
-**File**: `ontology/catty-categorical-schema.jsonld`
+**File**: `src/ontology/catty-categorical-schema.jsonld`
 - Core categorical classes: Category, Object, Morphism, Composition
 - Functor, Natural Transformation, Adjoint Functors
 - Logic-specific classes: Logic, LogicalTheory, LogicalSignature, LogicalAxiom, TheoreticalAxiom
@@ -12,7 +12,7 @@
 - Curry-Howard classes: CurryHowardEquivalence, LogicAsCategory, TypeTheoryAsCategory
 
 ### 2. Logics-as-Objects Model ✓
-**File**: `ontology/logics-as-objects.jsonld`
+**File**: `src/ontology/logics-as-objects.jsonld`
 - 10+ formal logics modeled as categorical objects:
   - LM (initial common sublogic for LJ and LDJ)
   - LK (terminal classical logic)
@@ -24,7 +24,7 @@
 - External links: owl:sameAs to Wikidata, dct:source to Wikipedia
 
 ### 3. Morphism Catalog ✓
-**File**: `ontology/morphism-catalog.jsonld`
+**File**: `src/ontology/morphism-catalog.jsonld`
 - 12+ morphisms between logics:
   - Extensions (LM → LJ, LM → LDJ, LJ → LK, LDJ → LK, LL → ALL → LK, LL → RLL → LK)
   - Interpretations (LK → LJ via double negation translation)
@@ -32,7 +32,7 @@
 - Each morphism documented with domain, codomain, description, source
 
 ### 4. Two-Dimensional Lattice as Category ✓
-**File**: `ontology/two-d-lattice-category.jsonld`
+**File**: `src/ontology/two-d-lattice-category.jsonld`
 - Lattice formalized as a poset category
 - Two axes: SequentRestrictionAxis (horizontal), StructuralRuleAxis (vertical)
 - 10 lattice nodes with coordinates (x,y)
@@ -42,7 +42,7 @@
 - Categorical properties: completeness, distributivity
 
 ### 5. Curry-Howard Categorical Model ✓
-**File**: `ontology/curry-howard-categorical-model.jsonld`
+**File**: `src/ontology/curry-howard-categorical-model.jsonld`
 - Equivalence of categories: LogicAsCategory ↔ TypeTheoryAsCategory
 - Curry-Howard functor and inverse functor defined
 - Type theory instances: STLC, System F, Linear Types, Affine Types
@@ -51,7 +51,7 @@
 - Extended to full logic lattice
 
 ### 6. Reusable Categorical Ontologies Inventory ✓
-**File**: `ontology/ontological-inventory.md`
+**File**: `src/ontology/ontological-inventory.md`
 - Comprehensive inventory of 11+ external resources:
   1. DBPedia Category Theory Schema
   2. Wikidata Mathematical Ontology
@@ -75,7 +75,7 @@
 - Integration roadmap (4 phases)
 
 ### 7. Integration Roadmap ✓
-**Documented in**: `ontology/ontological-inventory.md`
+**Documented in**: `src/ontology/ontological-inventory.md`
 
 #### Phase 1: Direct Import (Immediate)
 - Wikidata (CC0): Import logic items with owl:sameAs links
@@ -96,7 +96,7 @@
 ## Additional Deliverables
 
 ### Complete Working Example ✓
-**File**: `ontology/catty-complete-example.jsonld`
+**File**: `src/ontology/catty-complete-example.jsonld`
 - Self-contained example with 6 logics (LK, LJ, LL, ALL, RLL, LDJ)
 - All structural rules (Weakening, Contraction, Exchange)
 - 10 morphisms showing lattice order
@@ -105,7 +105,7 @@
 - Fully documented with descriptions and external links
 
 ### SHACL Validation Constraints ✓
-**File**: `ontology/catty-shapes.ttl`
+**File**: `src/ontology/catty-shapes.ttl`
 - Shapes for all major classes (Logic, LogicMorphism, Functor, etc.)
 - Property constraints (minCount, maxCount, datatype)
 - SPARQL-based constraints:
@@ -115,7 +115,7 @@
 - Enables validation of Catty ontology integrity
 
 ### SPARQL Query Examples ✓
-**File**: `ontology/queries/sparql-examples.md`
+**File**: `src/ontology/queries/sparql-examples.md`
 - 15+ example queries for:
   - Basic queries (all logics, structural rules)
   - Morphism queries (from logic, lattice order)
@@ -127,7 +127,7 @@
 - Examples for Jena ARQ, RDF4J, rdflib (Python), Apache Jena (Java)
 
 ### Comprehensive Documentation ✓
-**File**: `ontology/README.md`
+**File**: `src/ontology/README.md`
 - Overview of ontology structure
 - JSON-LD context documentation
 - Categorical model explanation
@@ -158,16 +158,16 @@
 
 | File | Lines | Purpose |
 |------|-------|---------|
-| `ontology/catty-categorical-schema.jsonld` | ~250 | Core RDF/OWL schema |
-| `ontology/logics-as-objects.jsonld` | ~180 | Logic instances |
-| `ontology/morphism-catalog.jsonld` | ~230 | Morphism instances |
-| `ontology/two-d-lattice-category.jsonld` | ~350 | Lattice category |
-| `ontology/curry-howard-categorical-model.jsonld` | ~340 | Curry-Howard model |
-| `ontology/catty-complete-example.jsonld` | ~420 | Complete example |
-| `ontology/catty-shapes.ttl` | ~200 | SHACL constraints |
-| `ontology/ontological-inventory.md` | ~700 | Resource inventory |
-| `ontology/README.md` | ~280 | Ontology docs |
-| `ontology/queries/sparql-examples.md` | ~300 | SPARQL queries |
+| `src/ontology/catty-categorical-schema.jsonld` | ~250 | Core RDF/OWL schema |
+| `src/ontology/logics-as-objects.jsonld` | ~180 | Logic instances |
+| `src/ontology/morphism-catalog.jsonld` | ~230 | Morphism instances |
+| `src/ontology/two-d-lattice-category.jsonld` | ~350 | Lattice category |
+| `src/ontology/curry-howard-categorical-model.jsonld` | ~340 | Curry-Howard model |
+| `src/ontology/catty-complete-example.jsonld` | ~420 | Complete example |
+| `src/ontology/catty-shapes.ttl` | ~200 | SHACL constraints |
+| `src/ontology/ontological-inventory.md` | ~700 | Resource inventory |
+| `src/ontology/README.md` | ~280 | Ontology docs |
+| `src/ontology/queries/sparql-examples.md` | ~300 | SPARQL queries |
 | `thesis/chapters/categorical-semantic-audit.tex` | 362 | Thesis chapter |
 
 **Total**: ~3,600 lines of documentation, schemas, and examples
@@ -193,8 +193,8 @@
 ## Next Steps for Development
 
 1. **Load ontology** into a triplestore (e.g., Apache Jena Fuseki, RDF4J)
-2. **Run SPARQL queries** from `ontology/queries/sparql-examples.md`
-3. **Validate with SHACL** using `ontology/catty-shapes.ttl`
+2. **Run SPARQL queries** from `src/ontology/queries/sparql-examples.md`
+3. **Validate with SHACL** using `src/ontology/catty-shapes.ttl`
 4. **Import from Wikidata** using owl:sameAs links
 5. **Develop parsers** for Lean/Coq/Isabelle exports
 6. **Create additional logics** and morphisms as needed

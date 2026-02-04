@@ -22,7 +22,7 @@ def run_benchmarks():
     owlrl.DeductiveClosure(owlrl.RDFS_Semantics).expand(g)
     print(f"After expansion: {len(g)} triples.")
 
-    query_dir = "benchmarks/queries"
+    query_dir = "src/benchmarks/queries"
     results_dir = "results"
     os.makedirs(results_dir, exist_ok=True)
     

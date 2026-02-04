@@ -99,12 +99,12 @@ description: |
   - LL: linear logic (no LEM, no LNC, has Exchange only)
   - ALL: affine linear logic (no LEM, no LNC, has Exchange and Weakening)
   - RLL: relevant linear logic (no LEM, no LNC, has Exchange and Contraction)
-  Output: ontology/logics-as-objects.jsonld.
+  Output: src/ontology/logics-as-objects.jsonld.
 ```
 
 **How to execute:**
 
-1. Create a new file at `ontology/logics-as-objects.jsonld`
+1. Create a new file at `src/ontology/logics-as-objects.jsonld`
 2. Add JSON-LD `@context` referencing `catty-categorical-schema.jsonld`
 3. Define 7 logic instances (LM, LK, LJ, LDJ, LL, ALL, RLL)
 4. For each logic, add all required properties (see list above)
@@ -138,7 +138,7 @@ Test each acceptance criterion (boolean checks):
 criteria = task['acceptance_criteria']
 
 # Example criteria:
-# - "file ontology/logics-as-objects.jsonld exists"
+# - "file src/ontology/logics-as-objects.jsonld exists"
 # - "valid JSON-LD syntax"
 # - "at least 7 logic instances defined (LM, LK, LJ, LDJ, LL, ALL, RLL)"
 # - "each logic has rdf:type catty:Logic"
@@ -172,7 +172,7 @@ Expected output if successful:
 ```
 ======================================================================
 Validating artifact: logics-as-objects
-Path: /path/to/ontology/logics-as-objects.jsonld
+Path: /path/to/src/ontology/logics-as-objects.jsonld
 Format: JSON-LD
 ======================================================================
 
@@ -215,7 +215,7 @@ No dependencies (Phase 0 task). Proceed.
 
 ```python
 artifact = operations['artifacts']['catty-categorical-schema']
-# path: "ontology/catty-categorical-schema.jsonld"
+# path: "src/ontology/catty-categorical-schema.jsonld"
 # format: "JSON-LD"
 # schema: ".catty/validation/shapes/categorical-schema.shacl"
 # content_spec:
@@ -227,7 +227,7 @@ artifact = operations['artifacts']['catty-categorical-schema']
 
 **4. Execute description:**
 
-Create `ontology/catty-categorical-schema.jsonld`:
+Create `src/ontology/catty-categorical-schema.jsonld`:
 
 ```json
 {
@@ -277,7 +277,7 @@ Create `ontology/catty-categorical-schema.jsonld`:
 **6. Run acceptance criteria:**
 
 ```
-✓ file ontology/catty-categorical-schema.jsonld exists
+✓ file src/ontology/catty-categorical-schema.jsonld exists
 ✓ valid JSON-LD syntax (parse without error)
 ✓ contains @context with required prefixes
 ✓ defines all required classes (Category, Object, Morphism, Logic, Functor)

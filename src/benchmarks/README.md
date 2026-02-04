@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The `benchmarks/` directory contains SPARQL query performance tests and evaluation scripts for measuring the performance of semantic web data access and processing.
+The `src/benchmarks/` directory contains SPARQL query performance tests and evaluation scripts for measuring the performance of semantic web data access and processing.
 
 ## Data Sources
 
@@ -37,7 +37,7 @@ Contains SPARQL query files with descriptive names and optimized prefixes.
 
 **Query Format**:
 ```sparql
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <http://catty.org/src/ontology/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 # Query description
@@ -61,16 +61,16 @@ Benchmark execution script that runs all queries without manual intervention.
 **Usage**:
 ```bash
 # Run all benchmarks
-python benchmarks/run.py
+python src/benchmarks/run.py
 
 # Run specific benchmark
-python benchmarks/run.py --query benchmarks/queries/category-theory.sparql
+python src/benchmarks/run.py --query src/benchmarks/queries/category-theory.sparql
 
 # Run against specific endpoint
-python benchmarks/run.py --endpoint https://dbpedia.org/sparql
+python src/benchmarks/run.py --endpoint https://dbpedia.org/sparql
 
 # Verbose output
-python benchmarks/run.py --verbose
+python src/benchmarks/run.py --verbose
 ```
 
 ## Benchmark Categories
@@ -116,16 +116,16 @@ Compares performance across different SPARQL endpoints.
 
 ```bash
 # Run all benchmarks
-python benchmarks/run.py
+python src/benchmarks/run.py
 
 # Run with verbose output
-python benchmarks/run.py -v
+python src/benchmarks/run.py -v
 
 # Run specific query file
-python benchmarks/run.py --query category-theory.sparql
+python src/benchmarks/run.py --query category-theory.sparql
 
 # Save results to file
-python benchmarks/run.py --output benchmark-results.json
+python src/benchmarks/run.py --output benchmark-results.json
 ```
 
 ### Expected Output
@@ -168,11 +168,11 @@ Benchmarks can be integrated into CI/CD workflows to detect performance regressi
 ```yaml
 # Example GitHub Actions workflow
 - name: Run benchmarks
-  run: python benchmarks/run.py --output results.json
+  run: python src/benchmarks/run.py --output results.json
 
 - name: Check performance
   run: |
-    if python scripts/check-performance.py --threshold '10%' results.json; then
+    if python src/scripts/check-performance.py --threshold '10%' results.json; then
       echo "Performance check passed"
     else
       echo "Performance regression detected!"
@@ -186,6 +186,6 @@ Benchmarks currently use Python for pragmatic reasons (easy SPARQL query executi
 
 ## See Also
 
-- `scripts/README.md` - Utility scripts and tools
+- `src/scripts/README.md` - Utility scripts and tools
 - `.catty/README.md` - Operational model and validation
 - Schema README files - Understanding how data is structured
