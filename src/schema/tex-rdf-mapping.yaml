@@ -229,7 +229,7 @@ citation_properties:
 
 # Prefix definitions for RDF URIs
 prefixes:
-  catty: "http://catty.org/src/ontology/"
+  catty: "http://example.org/src/ontology/"
   dct: "http://purl.org/dc/terms/"
   prov: "http://www.w3.org/ns/prov#"
   bibo: "http://purl.org/src/ontology/bibo/"
