@@ -1,181 +1,83 @@
 # Catty
 
-Catty is a thesis on the categorical modeling of formal logics, where logics are objects in a category with morphisms representing sequent restrictions and structural rules. The thesis includes a comprehensive audit of RDF/OWL schemas and knowledge graphs that support this category-theoretic framework.
+An algorithmic thesis exploring categorical foundations for formal logics and their morphisms.
 
-Deployed thesis (after running the Deploy workflow): https://metavacua.github.io/CategoricalReasoner/
+## Abstract
 
-## Overview
+Catty develops algorithms and implementations for modeling formal logics as categorical structures. The project provides computational tools for representing logics as objects in categories, with morphisms capturing sequent restrictions and structural rules. The repository delivers executable algorithms that operate on semantic web data consumed from external sources.
 
-Catty organizes logics as a **parametric category** where:
-- **Objects**: Formal logics (LM, LK, LJ, LDJ, linear logic, etc.)
-- **Morphisms**: Relationships between logics via extension, interpretation, and structural rule configuration
-- **Functors**: Maps between proof systems
-- **Structure**: A two-dimensional lattice (horizontal: sequent restrictions; vertical: structural rules) formalized as a categorical structure
-- **Curry-Howard**: A categorical equivalence between logics (as categories), types, proofs, and programs
+## About This Project
 
-## Architecture Overview
+### What is an Algorithmic Thesis?
 
-Catty is a Java-centric system that consumes semantic web data from external sources and generates LaTeX thesis content with RDF metadata/provenance. The architecture is:
+An algorithmic thesis is a software repository that embodies research contributions through executable algorithms, not static documents. The primary deliverables are working implementations, validation frameworks, and computational tools that realize theoretical concepts in code.
 
-1. **External RDF consumption**: Semantic web ontologies and knowledge graphs are discovered and accessed via SPARQL endpoints, linked data services, and the Generalized Knowledge Graph (GGG)
-2. **Jena Model loading**: Apache Jena loads external RDF into Model objects, with OntModel providing OWL 2 DL profile support
-3. **OpenLlet reasoning**: OpenLlet reasoner performs consistency checking, classification, and inference over loaded ontologies
-4. **TeX as primary artifact**: The thesis is the core deliverable; RDF is used only for metadata and provenance tracking extracted from TeX content
+### What Catty Delivers
 
-The system does **not** author local RDF schemas or instantiate ontology classes. All ontology data comes from external sources.
+This repository provides algorithms and implementations for:
 
-## Technology Stack
+- **Categorical logic modeling**: Computational representations of formal logics (LM, LK, LJ, LDJ, linear logic) as objects in categories
+- **Morphism algorithms**: Tools for defining and reasoning about relationships between logics via extension and interpretation
+- **Semantic web integration**: Consumption and reasoning over external RDF/OWL ontologies and knowledge graphs
+- **Validation frameworks**: Automated testing infrastructure for verifying categorical structures and consistency
 
-**Primary**: Java ecosystem
-- **Apache Jena**: RDF/OWL processing and SPARQL query execution
-- **OpenLlet**: OWL 2 DL reasoning (consistency checking, classification, inference)
-- **JavaPoet**: Code generation for validation and transformation logic
-- **JUnit**: Unit testing and validation framework
-- **Maven**: Build and dependency management
+The project implements a Java-centric architecture with proven semantic web technologies, supported by auxiliary Python scripts for CI/CD orchestration.
 
-**Auxiliary**: Python scripts for CI/CD orchestration
-- Python scripts support the Java-primary architecture by handling auxiliary tasks
-- Examples: extracting citation metadata, running validation orchestration, transformation helpers
-- **Normative rule**: Do not propose custom implementations of existing Java library functionality
+### Supporting Documentation
 
-**Rationale**: Java libraries provide proof-theoretic guarantees (OWL 2 DL compliance), mature validation infrastructure, and avoid DIY reimplementation of complex semantic web technologies.
-
-## Semantic Web Data Pipeline
-
-The data flow for consuming external semantic web data:
-
-1. **Discovery and Access**
-   - SPARQL endpoints (e.g., DBPedia, Wikidata)
-   - Linked data dereferencing
-   - Generalized Knowledge Graph (GGG) queries
-   - Static RDF/OWL files from external repositories
-
-2. **Loading and Transformation** (Apache Jena)
-   - Jena Model reads RDF/XML, Turtle, JSON-LD formats
-   - OntModel with OWL 2 DL profile enables ontology-specific operations
-   - Prefix management and namespace resolution
-   - Conversion to Java objects via Jena's API
-
-3. **Reasoning** (OpenLlet)
-   - Consistency checking: Verify ontology is satisfiable
-   - Classification: Automatically infer class hierarchy
-   - Inference: Deduce implicit statements from axioms
-   - Rule-based reasoning for custom constraints
-
-4. **Code Generation and Validation** (JavaPoet + JUnit)
-   - Generate Java validation code based on ontology constraints
-   - Generate JUnit tests for data integrity
-   - Compile and run validation as part of CI/CD
-
-## Development Direction
-
-**Architectural principle**: Default to Java ecosystem for all core functionality. Python is acceptable for CI/CD helper scripts only.
-
-**Guidelines**:
-- When implementing validation, transformation, or reasoning: Use Jena, OpenLlet, or JavaPoet
-- When adding utility scripts: Prefer Java unless Python provides clear benefits for CI/CD integration
-- Do not propose custom implementations of existing Java library functionality
-- All ontology data comes from external sources; local RDF schemas are not authored
-
-## License
-
-This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. See the `LICENSE` file for details.
-
-## Semantic Web Technology Index (SWTI)
-
-This project is evaluated against the **SWTI** (Nature Scientific Reports 2022) criteria. We aim for a high level of compliance in data standards, evaluation, and accessibility.
-
-### Knowledge Processing & Evaluation
-
-- **Thesis Validation**: LaTeX structure, citation registry, and ID uniqueness validated via Python scripts (temporary CI/CD helpers). Long-term validation will use Java (Jena SHACL support, JUnit).
-- **Benchmarks**: SPARQL query performance tests run against external SPARQL endpoints and linked data sources. See `benchmarks/` for details.
-- **Reasoning**: OpenLlet provides OWL 2 DL reasoning over external ontologies loaded via Jena.
-
-### Deployment & Access
-
-The thesis and supporting materials are deployed to GitHub Pages:
-- **Thesis (HTML/PDF)**: Available at `https://metavacua.github.io/CategoricalReasoner/`
-- **Benchmarks**: SPARQL query examples available at `https://metavacua.github.io/CategoricalReasoner/benchmarks/queries/`
+The `thesis/` directory contains LaTeX whitepapers that document the research and development process. These files explain theoretical foundations, design decisions, and algorithmic approaches. They are supporting documentation for the algorithmic contributions, not the primary deliverables themselves.
 
 ## Project Structure
 
 ```
-├── thesis/                      # LaTeX thesis source (primary artifact)
-├── .catty/                      # Operational model (task/artifact system)
-│   ├── operations.yaml          # Main operational model
-│   ├── phases.yaml              # Dependency graph
-│   └── validation/              # Validation framework
+├── thesis/                      # LaTeX whitepapers documenting research and development
+├── benchmarks/                  # Performance tests and evaluation
+├── ontology/                    # Reference materials and examples
 ├── schema/                      # Validation schemas and constraints
-│   ├── thesis-structure.schema.yaml    # LaTeX structure schema
-│   ├── tex-rdf-mapping.yaml             # TeX → RDF provenance mapping
-│   └── validators/                     # Python validation scripts (temporary)
-├── bibliography/                # Citation registry (citations.yaml)
-├── benchmarks/                  # SPARQL query performance tests
-├── scripts/                     # Python utility scripts (auxiliary CI/CD)
-├── tests/                       # Test suite (thesis validation, future Java tests)
+├── bibliography/                # Citation registry
+├── scripts/                     # Utility scripts
+├── tests/                       # Test suites
+├── .catty/                      # Operational model and validation framework
 └── README.md                    # This file
 ```
 
-**Note**: The `ontology/` directory contains example/reference materials and is not part of the core architecture. Ontologies are consumed from external sources (SPARQL endpoints, linked data).
+Each directory contains its own README with detailed information about that component's purpose, structure, and usage.
 
-## Key Deliverables
+## Technology Stack
 
-### Categorical Semantic Audit
+**Primary ecosystem: Java**
+- Semantic web processing and reasoning
+- Code generation for validation and transformation
+- Unit testing and validation frameworks
 
-The thesis includes a comprehensive audit (Chapter 1) of:
+**Auxiliary: Python**
+- CI/CD orchestration and helper scripts
+- Utility functions supporting the Java architecture
 
-1. **Category Theory Foundation** - RDF/OWL representations from DBPedia, Wikidata
-2. **Logics as Categorical Objects** - Modeling LK, LJ, LDJ, linear logic as objects
-3. **Morphism Catalog** - Sequents restriction morphisms, structural rule morphisms
-4. **Two-Dimensional Lattice** - Formalized as a poset category
-5. **Curry-Howard Model** - Equivalence of logic and type theory categories
-6. **Reusable Ontologies** - Inventory of 11+ resources with license compatibility
-7. **Integration Roadmap** - How to import and extend external resources
+See individual directory READMEs for specific technology details and build instructions.
 
-### External Ontology Consumption
+## Semantic Web Data
 
-The project consumes semantic web ontologies and knowledge graphs from external sources:
+This project consumes semantic web data from external sources rather than authoring local RDF schemas. External ontologies and knowledge graphs are accessed via SPARQL endpoints, linked data services, and the Generalized Knowledge Graph (GGG).
 
-- **SPARQL Endpoints**: DBPedia, Wikidata, and other public endpoints
-- **Linked Data**: Ontologies and datasets accessible via HTTP content negotiation
-- **Generalized Knowledge Graph (GGG)**: Large-scale integrated knowledge graphs
-- **Static Repositories**: Curated RDF/OWL files from external projects
+See the `ontology/` and `benchmarks/` directories for information about consumed data sources and integration approaches.
 
-These external sources are loaded via Jena, reasoned over with OpenLlet, and used to generate thesis content and validation code.
+## Development and Contribution
 
-## Build (PDF)
-
-Requirements: a LaTeX distribution (e.g. TeX Live) and `make`.
-
-```sh
-cd thesis
-make
-```
-
-The output PDF is `thesis/main.pdf`.
-
-## Deploy (HTML to GitHub Pages)
-
-This repository includes a manual GitHub Actions workflow:
-
-1. GitHub UI → **Actions**
-2. Select **Deploy**
-3. **Run workflow**
-
-If this is the first deployment, ensure GitHub Pages is set to deploy from Actions:
-**Settings → Pages → Build and deployment → Source: GitHub Actions**.
-
-The workflow builds `main.pdf`, converts the expanded LaTeX source to `index.html` using Pandoc, and deploys the resulting site to GitHub Pages.
+For information about contributing to this project, see `CONTRIBUTING.md`.
 
 ## Operational Model
 
-This project includes a **formal operational model** that defines the complete task/artifact system for thesis generation and code generation. Explore `.catty/` directory for:
-
-- **Task specifications**: Unambiguous, executable instructions for creating thesis artifacts
-- **Dependency graph**: Complete task sequencing and parallelization opportunities
-- **Validation framework**: Automated validation with testable acceptance criteria
-- **Comprehensive documentation**: README, quick start guide, task execution guide, dependency graphs
-
-The operational model describes thesis generation and external RDF consumption, not local ontology authoring.
+The `.catty/` directory contains a formal operational model defining tasks, artifacts, dependencies, and validation criteria. This system governs the generation of algorithms, validation code, and documentation.
 
 See `.catty/README.md` for complete documentation.
+
+## License
+
+This project is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0). See the `LICENSE` file for details.
+
+## Special Files
+
+- `AGENTS.md` - Machine-readable specifications for automated agents
+- `CONTRIBUTING.md` - Contribution guidelines and workflows
+- `LICENSE` - Full license text
