@@ -3,6 +3,14 @@
 
 The \catty\ framework is built on the principles of literate programming, where the documentation and implementation are inextricably linked. The primary technology stack for validation and transformation is centered on the Java ecosystem, while Python serves as an auxiliary orchestrator for CI/CD.
 
+\section*{Tangle and Weave}
+The \catty\ framework implements literate programming through the processes of \textit{tangling} and \textit{weaving}, as pioneered by Donald Knuth.
+\begin{itemize}
+    \item \textbf{Tangle}: The extraction of executable logic and code from the literate specification. In \catty, this includes the generation of Java classes via JavaPoet and the derivation of SHACL shapes from categorical models.
+    \item \textbf{Weave}: The generation of human-readable documentation from the same specification. This produces the LaTeX-based thesis and the integrated Javadoc.
+\end{itemize}
+The Planning Agent is responsible for the bidirectional extraction process, maintaining integrity between the "tangled" logic and the "woven" documentation, ensuring that changes in one are reflected in the other.
+
 \section*{JavaDoc-First Implementation}
 The implementation follows a \textit{JavaDoc-first} approach. Every component, especially those involving RDF transformation and SHACL validation, must be documented before and during implementation. This ensures that the technical specification is always in sync with the code.
 

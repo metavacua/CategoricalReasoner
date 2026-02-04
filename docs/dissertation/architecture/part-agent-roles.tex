@@ -19,6 +19,14 @@ Agents are bound by strict operational constraints to maintain the integrity of 
     \item \textbf{Deterministic Execution}: Tasks must be executed exactly as described in the operational instructions, without creative interpretation.
 \end{itemize}
 
+\section*{Runtime Specification}
+The \catty\ framework utilizes a Java-based runtime specification to enforce model constraints and task execution protocols through the following mechanisms:
+\begin{itemize}
+    \item \textbf{Custom Annotations}: Use of \code{@TaskDescription} and \code{@ModelConstraint} to declaratively define agent expectations and domain boundaries.
+    \item \textbf{Reflection API}: Dynamic inspection of annotated components at runtime to ensure compliance with the operational model.
+    \item \textbf{Generics}: Type-safe agent templates that ensure data passed between planning, coding, and validation agents adheres to the required categorical schemas.
+\end{itemize}
+
 \section*{Error Handling and Recovery}
 When an agent encounters a validation failure or an unexpected state, it must follow a structured recovery protocol:
 \begin{enumerate}
