@@ -58,7 +58,7 @@ See individual directory READMEs for specific technology details and build instr
 
 ## Semantic Web Data
 
-This project consumes semantic web data from external sources rather than authoring local RDF schemas. External ontologies and knowledge graphs are accessed via SPARQL endpoints, linked data services, and the Generalized Knowledge Graph (GGG).
+This project consumes semantic web data from external sources rather than authoring local RDF schemas. External ontologies and knowledge graphs are accessed via SPARQL endpoints, linked data services, and the Giant Global Graph (GGG; https://en.wikipedia.org/wiki/Giant_Global_Graph).
 
 See the `ontology/` and `benchmarks/` directories for information about consumed data sources and integration approaches.
 
