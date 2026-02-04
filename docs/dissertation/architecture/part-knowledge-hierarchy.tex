@@ -21,22 +21,20 @@ LLMs often produce plausible-looking but incorrect Wikidata QIDs. For example, c
 \textbf{Mandatory Rule}: Never guess a QID. All QIDs must be verified against the live Wikidata endpoint before use in the repository.
 
 \subsection*{Verification and Discovery}
-If a QID is suspected, it must be verified via SPARQL:
-\begin{lstlisting}[language=SQL]
+To verify a QID, use a SPARQL query. Note: When executing, extract ONLY the SPARQL code, excluding any LaTeX environment markers:
+\begin{lstlisting}[language=SPARQL]
 SELECT ?label ?description WHERE {
-  wd:Q123 rdfs:label ?label .
-  wd:Q123 schema:description ?description .
+  wd:Q193138 rdfs:label ?label .
+  wd:Q193138 schema:description ?description .
   FILTER(LANG(?label) = "en")
 }
 \end{lstlisting}
 
-If a QID is unknown, it must be discovered using the Wikidata Search API or a label-based SPARQL query:
-\begin{lstlisting}[language=SQL]
+If a QID is unknown, discover it using a more efficient label-based query:
+\begin{lstlisting}[language=SPARQL]
 SELECT DISTINCT ?item ?label ?description WHERE {
-  ?item rdfs:label ?label .
+  ?item rdfs:label "Natural transformation"@en .
   ?item schema:description ?description .
-  FILTER(STR(?label) = "Natural transformation")
-  FILTER(LANG(?label) = "en")
   FILTER(LANG(?description) = "en")
 }
 LIMIT 5

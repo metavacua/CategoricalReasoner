@@ -1,4 +1,4 @@
-PREFIX catty: <http://catty.org/ontology/>
+PREFIX catty: <https://github.com/metavacua/CategoricalReasoner/ontology/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?logic ?label ?signature ?axiom
