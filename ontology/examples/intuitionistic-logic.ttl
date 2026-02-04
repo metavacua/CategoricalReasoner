@@ -14,7 +14,7 @@ catty:IntuitionisticLogic a catty:Logic, owl:NamedIndividual ;
     rdfs:comment "Heyting's intuitionistic logic. Restricted succedent (single formula). Lacks Law of Excluded Middle (LEM) and Double Negation Elimination (DNE)."@en ;
     
     # External references
-    owl:sameAs wd:Q211231 ;  # Wikidata: Intuitionistic logic
+    owl:sameAs wd:Q176786 ;  # Wikidata: Intuitionistic logic
     skos:exactMatch dbr:Intuitionistic_logic ;
     dcterms:source <https://ncatlab.org/nlab/show/intuitionistic+logic> ;
     dcterms:bibliographicCitation "Heyting, A. (1930). Die formalen Regeln der intuitionistischen Logik. Sitzungsberichte der Preussischen Akademie der Wissenschaften." ;

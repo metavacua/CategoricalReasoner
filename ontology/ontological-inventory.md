@@ -74,26 +74,26 @@ dbr:Sequent_calculus a dbo:ScientificDiscipline ;
 - **Name**: Wikidata Mathematics and Logic
 - **Primary URI**: http://www.wikidata.org/
 - **SPARQL Endpoint**: https://query.wikidata.org/sparql
-- **Category Theory Item**: Q16917
-- **Logic Item**: Q8462
+- **Category Theory Item**: Q719395
+- **Logic Item**: Q8078
 
 ### Categorical Constructs Defined
 
 | Concept | Wikidata QID | Properties |
 |---------|--------------|------------|
-| Category (mathematics) | Q16917 | P155 (domain), P156 (codomain) |
-| Functor | Q1370384 | P1552 (maps to), P279 (subclass) |
-| Natural Transformation | Q568825 | P1552, P279 |
-| Adjoint Functors | Q846544 | P1552, P279 |
+| Category (mathematics) | Q719395 | P155 (domain), P156 (codomain) |
+| Functor | Q864475 | P1552 (maps to), P279 (subclass) |
+| Natural Transformation | Q1442189 | P1552, P279 |
+| Adjoint Functors | Q357858 | P1552, P279 |
 | Monoid | Q207448 | P279, P1552 |
 | Group | Q83478 | P279, P1552 |
-| Isomorphism | Q568825 | P1552 (inverse element via P154) |
+| Isomorphism | Q189112 | P1552 (inverse element via P154) |
 
 ### Logic-Categorical Relationships Supported
 
 | Relationship | Support Level | Details |
 |--------------|---------------|---------|
-| Logics as categorical objects | **Good** | Each logic is a named item (e.g., LK = Q3525872, LJ = Q7680564) |
+| Logics as categorical objects | **Good** | Each logic is a named item (e.g., the sequent calculus, LK = Q1771121, LJ = Q176786) |
 | Morphisms between logics | **Partial** | Embeddings can be modeled via `P1552` (maps to) |
 | Sequent restrictions | **Reference Only** | Described in descriptions, not RDF structure |
 | Structural rules | **Reference Only** | Described in descriptions |
@@ -110,7 +110,7 @@ dbr:Sequent_calculus a dbo:ScientificDiscipline ;
 ```sparql
 SELECT ?logic ?logicLabel ?sequentForm
 WHERE {
-  ?logic wdt:P31 wd:Q8462 .  # instance of logic
+  ?logic wdt:P31 wd:Q8078 .  # instance of logic
   ?logic rdfs:label ?logicLabel .
   FILTER(LANG(?logicLabel) = "en")
   OPTIONAL { ?logic wdt:P361 ?sequentForm . }
@@ -125,14 +125,14 @@ LIMIT 20
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix schema: <http://schema.org/> .
 
-wd:Q7680564 a wdt:Q8462 ;  # LJ
+wd:Q176786 a wdt:Q8078 ;  # LJ
     rdfs:label "intuitionistic logic"@en ;
-    wdt:P361 wd:Q16917 ;  # part of category theory (example mapping)
+    wdt:P361 wd:Q719395 ;  # part of category theory (example mapping)
     schema:description "Intuitionistic sequent calculus"@en .
 
-wd:Q847878 a wdt:Q8462 ;  # Linear Logic
+wd:Q841728 a wdt:Q8078 ;  # Linear Logic
     rdfs:label "linear logic"@en ;
-    wdt:P1552 wd:Q7680564 ;  # maps to intuitionistic logic (translation)
+    wdt:P1552 wd:Q176786 ;  # maps to intuitionistic logic (translation)
     schema:description "Substructural logic without weakening/contraction"@en .
 ```
 
