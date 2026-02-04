@@ -12,6 +12,8 @@ This repository implements the Catty thesis: categorical foundations for logics 
 - **Execution**: Load operations from `.catty/operations.yaml`, verify dependencies via `.catty/phases.yaml`, execute task descriptions, validate outputs.
 - **Technology Stack**: Core validation and transformation uses Java ecosystem (Jena, OpenLlet, JavaPoet, JUnit). Python scripts are auxiliary for CI/CD orchestration only.
 - **Semantic Web Data**: Consumed from external sources. Do not author local RDF schemas or instantiate ontology classes.
+- **SPARQL Execution**: All documented queries must be actually ran against external endpoints. Evidence must be returned as valid TTL. No faking or internal generation of results.
+- **Extraction Protocol**: Follow the discovery and verification patterns for external QIDs and URIs. Document all difficulties and issues encountered during extraction.
 
 ## Validation
 Run `python .catty/validation/validate.py --artifact <id>` or `--task <id>` to verify compliance. All criteria must evaluate true.
