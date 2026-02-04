@@ -40,15 +40,15 @@ This document identifies incongruities between the operational model (`.catty/op
 **Issue:** The diff shows removal of semantic web validation scripts, but operational model still references them.
 
 **Removed Files:**
-- ❌ `scripts/validate_rdf.py` (removed in diff)
-- ❌ `tests/test_consistency.py` (removed in diff)
-- ❌ `benchmarks/run.py` (removed in diff)
-- ❌ `benchmarks/queries/*.rq` (removed in diff)
+- ❌ `src/scripts/validate_rdf.py` (removed in diff)
+- ❌ `src/tests/test_consistency.py` (removed in diff)
+- ❌ `src/benchmarks/run.py` (removed in diff)
+- ❌ `src/benchmarks/queries/*.rq` (removed in diff)
 
 **Current Reality:**
 - Validation is now handled by `.catty/validation/validate.py`
 - SHACL shapes moved to `.catty/validation/shapes/`
-- SPARQL examples exist at `ontology/queries/sparql-examples.md` (documentation, not executable queries)
+- SPARQL examples exist at `src/ontology/queries/sparql-examples.md` (documentation, not executable queries)
 
 **Operational Model References:**
 - ✅ Correctly references `.catty/validation/validate.py`
@@ -104,11 +104,11 @@ task:build-thesis-pdf:
 
 ### 5. Ontology Directory Structure
 
-**Issue:** Operations model references `ontology/shapes/` but SHACL shapes are actually in `ontology/` root.
+**Issue:** Operations model references `src/ontology/shapes/` but SHACL shapes are actually in `src/ontology/` root.
 
 **Current Reality:**
 ```
-ontology/
+src/ontology/
 ├── catty-shapes.ttl          ← SHACL shapes are here
 ├── catty-categorical-schema.jsonld
 ├── queries/
@@ -117,7 +117,7 @@ ontology/
 ```
 
 **Operational Model References:**
-- Path for `catty-shapes`: `ontology/catty-shapes.ttl` ✅ Correct
+- Path for `catty-shapes`: `src/ontology/catty-shapes.ttl` ✅ Correct
 - Path for validation shapes: `.catty/validation/shapes/*.shacl` ✅ Correct (different set)
 
 **Status:** ✅ No issue - both locations exist for different purposes.
@@ -136,12 +136,12 @@ ontology/
 
 2. **SHACL Validation:**
    - Two sets of shapes:
-     - `ontology/catty-shapes.ttl` (ontology-specific)
+     - `src/ontology/catty-shapes.ttl` (ontology-specific)
      - `.catty/validation/shapes/*.shacl` (operational model validation)
    - Validation via `pyshacl` library
 
 3. **SPARQL Queries:**
-   - Documentation: `ontology/queries/sparql-examples.md`
+   - Documentation: `src/ontology/queries/sparql-examples.md`
    - 15+ example queries for exploration
    - Not executable benchmarks (removed)
 
@@ -369,12 +369,12 @@ semantic_web_technologies:
     format: "JSON-LD"
     standard: "RDF 1.1, OWL 2"
     files:
-      - "ontology/catty-categorical-schema.jsonld"
-      - "ontology/logics-as-objects.jsonld"
-      - "ontology/morphism-catalog.jsonld"
-      - "ontology/two-d-lattice-category.jsonld"
-      - "ontology/curry-howard-categorical-model.jsonld"
-      - "ontology/catty-complete-example.jsonld"
+      - "src/ontology/catty-categorical-schema.jsonld"
+      - "src/ontology/logics-as-objects.jsonld"
+      - "src/ontology/morphism-catalog.jsonld"
+      - "src/ontology/two-d-lattice-category.jsonld"
+      - "src/ontology/curry-howard-categorical-model.jsonld"
+      - "src/ontology/catty-complete-example.jsonld"
     external_links:
       - "Wikidata entities (owl:sameAs)"
       - "DBpedia resources (dct:source)"
@@ -383,14 +383,14 @@ semantic_web_technologies:
   shacl_validation:
     standard: "SHACL (Shapes Constraint Language)"
     shapes:
-      ontology_shapes: "ontology/catty-shapes.ttl"
+      ontology_shapes: "src/ontology/catty-shapes.ttl"
       validation_shapes: ".catty/validation/shapes/*.shacl"
     library: "pyshacl (Python)"
     usage: "Validate RDF graphs against structural constraints"
     
   sparql_queries:
     standard: "SPARQL 1.1"
-    documentation: "ontology/queries/sparql-examples.md"
+    documentation: "src/ontology/queries/sparql-examples.md"
     count: "15+ example queries"
     purpose: "Documentation and exploration (not executable benchmarks)"
     frameworks: ["Apache Jena ARQ", "RDF4J", "rdflib (Python)"]
@@ -486,9 +486,9 @@ Catty uses standard semantic web technologies:
 
 - **RDF/OWL**: JSON-LD format for all ontologies
 - **SHACL**: Two sets of validation shapes:
-  - `ontology/catty-shapes.ttl`: Ontology-specific constraints
+  - `src/ontology/catty-shapes.ttl`: Ontology-specific constraints
   - `.catty/validation/shapes/*.shacl`: Operational model validation
-- **SPARQL**: Example queries in `ontology/queries/sparql-examples.md` (documentation)
+- **SPARQL**: Example queries in `src/ontology/queries/sparql-examples.md` (documentation)
 - **Linked Open Data**: Links to Wikidata, DBpedia, nLab
 
 **Note**: Executable SPARQL benchmark queries and triplestore deployment were removed
@@ -530,8 +530,8 @@ Add GitHub Pages section and clarify semantic web tech stack.
 ## Note on CI/CD Checks
 
 The finish tool may attempt to run old validation scripts that were removed:
-- `tests/test_consistency.py` - Removed (replaced by `.catty/validation/validate.py`)
-- `benchmarks/run.py` - Removed (SPARQL examples now documentation-only)
+- `src/tests/test_consistency.py` - Removed (replaced by `.catty/validation/validate.py`)
+- `src/benchmarks/run.py` - Removed (SPARQL examples now documentation-only)
 
 These removals are intentional and documented in:
 - AUDIT_SUMMARY.md
@@ -558,7 +558,7 @@ against the operational model specifications, providing more comprehensive and s
    These are now replaced by the comprehensive `.catty/` operational model.
 
 4. **Dual SHACL Shapes**: Project has two sets of SHACL shapes for different purposes:
-   - `ontology/catty-shapes.ttl`: Validates the categorical ontology itself
+   - `src/ontology/catty-shapes.ttl`: Validates the categorical ontology itself
    - `.catty/validation/shapes/*.shacl`: Validates artifacts conform to operational specs
 
 ---

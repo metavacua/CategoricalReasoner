@@ -8,7 +8,7 @@ This document provides explicit instructions for LLMs generating thesis content 
 
 ### You MAY ONLY Cite Pre-Registered Sources
 
-**ABSOLUTE RULE:** You may only use `\cite{key}` where `key` exists in `bibliography/citations.yaml`.
+**ABSOLUTE RULE:** You may only use `\cite{key}` where `key` exists in `docs/dissertation/bibliography/citations.yaml`.
 
 ### Citation Registry
 
@@ -46,7 +46,7 @@ Instead, report the missing citation:
 
 ```
 MISSING CITATION: I need to cite [paper title] by [author] ([year]).
-Please add this to bibliography/citations.yaml with key [suggested-key].
+Please add this to docs/dissertation/bibliography/citations.yaml with key [suggested-key].
 ```
 
 Do not proceed until the citation is added to the registry.
@@ -147,8 +147,8 @@ Please check existing IDs and choose a unique identifier.
 ### Do NOT Create New RDF Classes
 
 You may only instantiate existing RDF classes defined in:
-- `ontology/catty-categorical-schema.jsonld`
-- `ontology/citation-usage.jsonld`
+- `src/ontology/catty-categorical-schema.jsonld`
+- `src/ontology/citation-usage.jsonld`
 
 Do not define new `owl:Class` or `owl:ObjectProperty` resources.
 
@@ -199,7 +199,7 @@ If validation fails, you will receive specific error messages like:
 
 ```
 ERROR: thesis/chapters/categorical-semantic-audit.tex:42
-  Citation 'girard1987linear' not found in bibliography/citations.yaml
+  Citation 'girard1987linear' not found in docs/dissertation/bibliography/citations.yaml
 ```
 
 Fix the error by:
@@ -227,7 +227,7 @@ Fix the error by:
 - Include all required fields
 - Match ID patterns correctly
 - Create bidirectional TeX ↔ RDF links
-- Follow the schema in `schema/thesis-structure.schema.yaml`
+- Follow the schema in `src/schema/thesis-structure.schema.yaml`
 
 ## Example Valid Thesis Fragment
 
@@ -272,7 +272,7 @@ This is required to complete [specific section].
 
 ## Summary
 
-- **Only cite pre-registered sources** (from `bibliography/citations.yaml`)
+- **Only cite pre-registered sources** (from `docs/dissertation/bibliography/citations.yaml`)
 - **All IDs must be unique** and follow correct patterns
 - **TeX ↔ RDF must be consistent** (bidirectional)
 - **Your output will be validated** - failures are fatal

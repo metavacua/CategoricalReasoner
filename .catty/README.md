@@ -203,7 +203,7 @@ Format: LaTeX
 
 ✓ Valid LaTeX syntax
 ✓ Contains required sections
-✓ All citations reference bibliography/citations.yaml
+✓ All citations reference docs/dissertation/bibliography/citations.yaml
 ✓ All IDs follow pattern (sec-*)
 
 Checking content specifications:
@@ -223,7 +223,7 @@ All acceptance criteria in `operations.yaml` are **testable boolean conditions**
 **Good (testable):**
 - "file thesis/chapters/categorical-semantic-audit.tex exists"
 - "at least 5 sections defined"
-- "all citations reference bibliography/citations.yaml"
+- "all citations reference docs/dissertation/bibliography/citations.yaml"
 - "validates against thesis-structure.schema.yaml"
 
 **Bad (subjective):**
@@ -243,7 +243,7 @@ description: |
   Include sections: Category Theory Foundation, Logics as Categorical Objects,
   Morphism Catalog, Two-Dimensional Lattice, Curry-Howard Model.
   Each section must have: identifier, title, content.
-  Use only citations from bibliography/citations.yaml.
+  Use only citations from docs/dissertation/bibliography/citations.yaml.
   Output: thesis/chapters/categorical-semantic-audit.tex.
 ```
 
@@ -321,7 +321,7 @@ See `phases.yaml` for detailed critical path analysis and parallelization opport
 ### Adding a New Artifact
 
 1. Choose unique `artifact_id` (e.g., `modal-logic-extension`)
-2. Define `path` (e.g., `ontology/modal-logic-extension.jsonld`)
+2. Define `path` (e.g., `src/ontology/modal-logic-extension.jsonld`)
 3. Specify `format` (e.g., `JSON-LD`)
 4. List `content_spec` (structured requirements, not prose)
 5. Reference `schema` (SHACL shape or JSON schema)

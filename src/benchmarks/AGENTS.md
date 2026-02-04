@@ -1,7 +1,7 @@
 # AGENTS.md - Benchmarks and Evaluation
 
 ## Scope
-The `benchmarks/` directory contains SPARQL queries and evaluation scripts for measuring semantic web data access performance against external sources.
+The `src/benchmarks/` directory contains SPARQL queries and evaluation scripts for measuring semantic web data access performance against external sources.
 
 ## Core Constraints
 - **Queries**: SPARQL files (`.sparql`) with descriptive names, optimized prefixes, and documented expected results.
@@ -10,8 +10,8 @@ The `benchmarks/` directory contains SPARQL queries and evaluation scripts for m
 - **Data Sources**: Benchmarks run against external SPARQL endpoints (DBPedia, Wikidata) and static datasets, not local ontology files (which are examples only).
 
 ## Validation
-Run `python benchmarks/run.py` to execute all benchmarks. Verify query syntax, expected results, and performance thresholds.
+Run `python src/benchmarks/run.py` to execute all benchmarks. Verify query syntax, expected results, and performance thresholds.
 
 ## See Also
-- `scripts/AGENTS.md` - Script development guidelines
+- `src/scripts/AGENTS.md` - Script development guidelines
 - `.catty/AGENTS.md` - Validation framework and acceptance criteria

@@ -31,12 +31,12 @@ The `thesis/` directory contains LaTeX whitepapers that document the research an
 
 ```
 ├── thesis/                      # LaTeX whitepapers documenting research and development
-├── benchmarks/                  # Performance tests and evaluation
-├── ontology/                    # Reference materials and examples
-├── schema/                      # Validation schemas and constraints
-├── bibliography/                # Citation registry
-├── scripts/                     # Utility scripts
-├── tests/                       # Test suites
+├── src/benchmarks/                  # Performance tests and evaluation
+├── src/ontology/                    # Reference materials and examples
+├── src/schema/                      # Validation schemas and constraints
+├── docs/dissertation/bibliography/                # Citation registry
+├── src/scripts/                     # Utility scripts
+├── src/tests/                       # Test suites
 ├── .catty/                      # Operational model and validation framework
 └── README.md                    # This file
 ```
@@ -60,7 +60,7 @@ See individual directory READMEs for specific technology details and build instr
 
 This project consumes semantic web data from external sources rather than authoring local RDF schemas. External ontologies and knowledge graphs are accessed via SPARQL endpoints, linked data services, and the Giant Global Graph (GGG; https://en.wikipedia.org/wiki/Giant_Global_Graph).
 
-See the `ontology/` and `benchmarks/` directories for information about consumed data sources and integration approaches.
+See the `src/ontology/` and `src/benchmarks/` directories for information about consumed data sources and integration approaches.
 
 ## Development and Contribution
 

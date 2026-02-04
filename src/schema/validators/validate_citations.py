@@ -190,7 +190,7 @@ class CitationValidator:
                         self.errors.append(ValidationError(
                             file=str(tex_dir),
                             line=cite_line,
-                            message=f"Citation '{key}' not found in bibliography/citations.yaml",
+                            message=f"Citation '{key}' not found in docs/dissertation/bibliography/citations.yaml",
                             severity="ERROR"
                         ))
                         break
@@ -208,7 +208,7 @@ class CitationValidator:
         if missing_rdf:
             for key in sorted(missing_rdf):
                 self.errors.append(ValidationError(
-                    file="ontology/citations.jsonld", line=0,
+                    file="src/ontology/citations.jsonld", line=0,
                     message=f"Citation '{key}' exists in YAML but not in RDF",
                     severity="ERROR"
                 ))
@@ -220,7 +220,7 @@ class CitationValidator:
         if extra_rdf:
             for key in sorted(extra_rdf):
                 self.errors.append(ValidationError(
-                    file="bibliography/citations.yaml", line=0,
+                    file="docs/dissertation/bibliography/citations.yaml", line=0,
                     message=f"Citation '{key}' exists in RDF but not in YAML",
                     severity="ERROR"
                 ))
@@ -240,7 +240,7 @@ class CitationValidator:
             if citation.doi:
                 if not self.check_url(f"https://doi.org/{citation.doi}"):
                     self.errors.append(ValidationError(
-                        file="bibliography/citations.yaml", line=0,
+                        file="docs/dissertation/bibliography/citations.yaml", line=0,
                         message=f"DOI for '{key}' ({citation.doi}) is not resolvable",
                         severity="ERROR"
                     ))
@@ -249,7 +249,7 @@ class CitationValidator:
             if citation.url and not citation.url.startswith('https://arxiv.org'):
                 if not self.check_url(citation.url):
                     self.errors.append(ValidationError(
-                        file="bibliography/citations.yaml", line=0,
+                        file="docs/dissertation/bibliography/citations.yaml", line=0,
                         message=f"URL for '{key}' ({citation.url}) is not resolvable",
                         severity="ERROR"
                     ))
@@ -258,7 +258,7 @@ class CitationValidator:
             if citation.arxiv:
                 if not self.check_url(f"https://arxiv.org/abs/{citation.arxiv}"):
                     self.errors.append(ValidationError(
-                        file="bibliography/citations.yaml", line=0,
+                        file="docs/dissertation/bibliography/citations.yaml", line=0,
                         message=f"arXiv ID for '{key}' ({citation.arxiv}) is not resolvable",
                         severity="ERROR"
                     ))
@@ -267,7 +267,7 @@ class CitationValidator:
             if citation.wikidata:
                 if not self.check_url(f"https://www.wikidata.org/wiki/{citation.wikidata}"):
                     self.errors.append(ValidationError(
-                        file="bibliography/citations.yaml", line=0,
+                        file="docs/dissertation/bibliography/citations.yaml", line=0,
                         message=f"Wikidata ID for '{key}' ({citation.wikidata}) is not resolvable",
                         severity="ERROR"
                     ))
@@ -290,21 +290,21 @@ class CitationValidator:
             # Check required fields
             if not citation.author:
                 self.errors.append(ValidationError(
-                    file="bibliography/citations.yaml", line=0,
+                    file="docs/dissertation/bibliography/citations.yaml", line=0,
                     message=f"Citation '{key}' missing author",
                     severity="ERROR"
                 ))
 
             if not citation.title:
                 self.errors.append(ValidationError(
-                    file="bibliography/citations.yaml", line=0,
+                    file="docs/dissertation/bibliography/citations.yaml", line=0,
                     message=f"Citation '{key}' missing title",
                     severity="ERROR"
                 ))
 
             if not citation.year:
                 self.errors.append(ValidationError(
-                    file="bibliography/citations.yaml", line=0,
+                    file="docs/dissertation/bibliography/citations.yaml", line=0,
                     message=f"Citation '{key}' missing year",
                     severity="ERROR"
                 ))
@@ -313,7 +313,7 @@ class CitationValidator:
             if not any([citation.doi, citation.arxiv, citation.url,
                        citation.wikidata, citation.dbpedia, citation.local_ontology]):
                 self.errors.append(ValidationError(
-                    file="bibliography/citations.yaml", line=0,
+                    file="docs/dissertation/bibliography/citations.yaml", line=0,
                     message=f"Citation '{key}' missing external identifier (DOI, arXiv, URL, Wikidata, DBpedia, or local_ontology)",
                     severity="ERROR"
                 ))
@@ -322,7 +322,7 @@ class CitationValidator:
             valid_types = ['journal', 'book', 'conference', 'preprint', 'website', 'other', 'chapter']
             if citation.citation_type not in valid_types:
                 self.errors.append(ValidationError(
-                    file="bibliography/citations.yaml", line=0,
+                    file="docs/dissertation/bibliography/citations.yaml", line=0,
                     message=f"Citation '{key}' has invalid type '{citation.citation_type}'",
                     severity="ERROR"
                 ))
@@ -379,13 +379,13 @@ def main():
     parser.add_argument(
         '--bibliography',
         type=Path,
-        default=Path('bibliography/citations.yaml'),
+        default=Path('docs/dissertation/bibliography/citations.yaml'),
         help='Path to citation registry YAML file'
     )
     parser.add_argument(
         '--ontology',
         type=Path,
-        default=Path('ontology/citations.jsonld'),
+        default=Path('src/ontology/citations.jsonld'),
         help='Path to RDF citations file'
     )
     parser.add_argument(

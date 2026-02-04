@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The `scripts/` directory contains Python utility scripts for CI/CD orchestration, RDF processing, and transformation tasks. These scripts support the Java-primary architecture by handling auxiliary tasks.
+The `src/scripts/` directory contains Python utility scripts for CI/CD orchestration, RDF processing, and transformation tasks. These scripts support the Java-primary architecture by handling auxiliary tasks.
 
 ## Architecture Context
 
@@ -31,7 +31,7 @@ Validates RDF/Turtle files for syntax and structure.
 
 **Usage**:
 ```bash
-python scripts/validate_rdf.py --file path/to/file.ttl
+python src/scripts/validate_rdf.py --file path/to/file.ttl
 ```
 
 ### `update.py`
@@ -42,7 +42,7 @@ Utility script for updating project metadata and configurations.
 
 **Usage**:
 ```bash
-python scripts/update.py [options]
+python src/scripts/update.py [options]
 ```
 
 ## Script Development Guidelines
@@ -86,5 +86,5 @@ As the project matures, the following Python scripts may be replaced with Java e
 ## See Also
 
 - `.catty/README.md` - Operational model and validation framework
-- `schema/README.md` - Validation schemas and constraints
-- `tests/README.md` - Test suite documentation
+- `src/schema/README.md` - Validation schemas and constraints
+- `src/tests/README.md` - Test suite documentation

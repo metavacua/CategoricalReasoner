@@ -35,11 +35,11 @@ python .catty/validation/validate.py --list-artifacts
 Output:
 ```
 Available artifacts:
-  - catty-categorical-schema: ontology/catty-categorical-schema.jsonld
-  - logics-as-objects: ontology/logics-as-objects.jsonld
-  - morphism-catalog: ontology/morphism-catalog.jsonld
-  - two-d-lattice-category: ontology/two-d-lattice-category.jsonld
-  - curry-howard-categorical-model: ontology/curry-howard-categorical-model.jsonld
+  - catty-categorical-schema: src/ontology/catty-categorical-schema.jsonld
+  - logics-as-objects: src/ontology/logics-as-objects.jsonld
+  - morphism-catalog: src/ontology/morphism-catalog.jsonld
+  - two-d-lattice-category: src/ontology/two-d-lattice-category.jsonld
+  - curry-howard-categorical-model: src/ontology/curry-howard-categorical-model.jsonld
   ...
 ```
 
@@ -80,7 +80,7 @@ Output:
 ```
 ======================================================================
 Validating artifact: catty-categorical-schema
-Path: ontology/catty-categorical-schema.jsonld
+Path: src/ontology/catty-categorical-schema.jsonld
 Format: JSON-LD
 ======================================================================
 
@@ -152,7 +152,7 @@ Phase 0 has two foundation tasks that can run in parallel:
 
 ### Task 2: Conduct Semantic Web Audit
 
-**Already done** (file: `ontology/ontological-inventory.md`)
+**Already done** (file: `src/ontology/ontological-inventory.md`)
 
 Validate:
 
@@ -171,7 +171,7 @@ python .catty/validation/validate.py --artifact ontological-inventory
 **Action:**
 
 1. Read task description from `operations.yaml`
-2. Create `ontology/catty-categorical-schema.jsonld` with required classes
+2. Create `src/ontology/catty-categorical-schema.jsonld` with required classes
 3. Validate:
 
 ```bash
@@ -186,9 +186,9 @@ python .catty/validation/validate.py --artifact catty-categorical-schema
 
 **Action:**
 
-1. Verify `ontology/catty-categorical-schema.jsonld` exists
+1. Verify `src/ontology/catty-categorical-schema.jsonld` exists
 2. Read task description
-3. Create `ontology/logics-as-objects.jsonld` with 7+ logic instances
+3. Create `src/ontology/logics-as-objects.jsonld` with 7+ logic instances
 4. Validate:
 
 ```bash
@@ -204,7 +204,7 @@ python .catty/validation/validate.py --artifact logics-as-objects
 **Action:**
 
 1. Verify dependencies exist
-2. Create `ontology/morphism-catalog.jsonld` with 10+ morphisms
+2. Create `src/ontology/morphism-catalog.jsonld` with 10+ morphisms
 3. Validate:
 
 ```bash
@@ -228,7 +228,7 @@ This validates all ontology artifacts at once.
 Every task has **testable boolean acceptance criteria**. Examples:
 
 ✅ **Testable:**
-- "file ontology/logics-as-objects.jsonld exists"
+- "file src/ontology/logics-as-objects.jsonld exists"
 - "valid JSON-LD syntax (parse without error)"
 - "at least 7 logic instances defined"
 - "each logic has rdf:type catty:Logic"
@@ -255,7 +255,7 @@ description: |
   - rdfs:label: human-readable name
   - catty:hasWeakeningLHS: boolean
   [... explicit property list ...]
-  Output: ontology/logics-as-objects.jsonld
+  Output: src/ontology/logics-as-objects.jsonld
 ```
 
 ❌ **Aspirational:**
@@ -271,7 +271,7 @@ description: |
 ```
 Catty/
 ├── .catty/                  ← Operational model (this directory)
-├── ontology/                ← RDF/OWL ontology files
+├── src/ontology/                ← RDF/OWL ontology files
 │   ├── catty-categorical-schema.jsonld
 │   ├── logics-as-objects.jsonld
 │   ├── morphism-catalog.jsonld
@@ -291,7 +291,7 @@ Catty/
 │   │   ├── categorical-semantic-audit.tex
 │   │   └── conclusions.tex
 │   └── Makefile
-├── scripts/                 ← Utility scripts
+├── src/scripts/                 ← Utility scripts
 ├── README.md                ← Project overview
 └── LICENSE                  ← AGPL-3.0
 ```

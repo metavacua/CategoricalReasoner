@@ -20,18 +20,18 @@ This document summarizes all deliverables for the Catty operational model skelet
 
 #### Foundation Artifacts (Phase 0)
 - `repository-structure`: Directory tree structure
-- `ontological-inventory`: External resource inventory (ontology/ontological-inventory.md)
+- `ontological-inventory`: External resource inventory (src/ontology/ontological-inventory.md)
 
 #### Core Ontology Artifacts (Phase 1)
-- `catty-categorical-schema`: Core RDF/OWL schema (ontology/catty-categorical-schema.jsonld)
-- `logics-as-objects`: Logic instances (ontology/logics-as-objects.jsonld)
-- `morphism-catalog`: Morphisms between logics (ontology/morphism-catalog.jsonld)
-- `two-d-lattice-category`: 2D lattice structure (ontology/two-d-lattice-category.jsonld)
-- `curry-howard-categorical-model`: Curry-Howard equivalence (ontology/curry-howard-categorical-model.jsonld)
-- `catty-complete-example`: Complete example (ontology/catty-complete-example.jsonld)
-- `catty-shapes`: SHACL validation (ontology/catty-shapes.ttl)
-- `sparql-examples`: SPARQL queries (ontology/queries/sparql-examples.md)
-- `ontology-readme`: Ontology documentation (ontology/README.md)
+- `catty-categorical-schema`: Core RDF/OWL schema (src/ontology/catty-categorical-schema.jsonld)
+- `logics-as-objects`: Logic instances (src/ontology/logics-as-objects.jsonld)
+- `morphism-catalog`: Morphisms between logics (src/ontology/morphism-catalog.jsonld)
+- `two-d-lattice-category`: 2D lattice structure (src/ontology/two-d-lattice-category.jsonld)
+- `curry-howard-categorical-model`: Curry-Howard equivalence (src/ontology/curry-howard-categorical-model.jsonld)
+- `catty-complete-example`: Complete example (src/ontology/catty-complete-example.jsonld)
+- `catty-shapes`: SHACL validation (src/ontology/catty-shapes.ttl)
+- `sparql-examples`: SPARQL queries (src/ontology/queries/sparql-examples.md)
+- `ontology-readme`: Ontology documentation (src/ontology/README.md)
 
 #### Thesis Artifacts (Phase 2)
 - `thesis-main`: Main LaTeX file (thesis/main.tex)

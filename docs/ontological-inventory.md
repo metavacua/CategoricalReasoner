@@ -10,7 +10,7 @@ This inventory documents concrete, publicly accessible RDF/OWL schemas and knowl
 
 ### Identification
 - **Name**: DBPedia Category and Logic Ontology
-- **Primary URI**: http://dbpedia.org/ontology/
+- **Primary URI**: http://dbpedia.org/src/ontology/
 - **Category Theory Base**: http://dbpedia.org/page/Category_(mathematics)
 - **Logic Base**: http://dbpedia.org/page/Sequent_calculus
 
@@ -48,7 +48,7 @@ DBPedia provides RDF representations of the following categorical concepts:
 ### Example Usage
 
 ```turtle
-@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix dbo: <http://dbpedia.org/src/ontology/> .
 @prefix dbr: <http://dbpedia.org/resource/> .
 
 dbr:Category_(mathematics) a dbo:Concept ;
@@ -417,7 +417,7 @@ Record Category := {
 
 ```turtle
 @prefix coq: <http://coq.inria.fr/library/> .
-@prefix catty: <https://metavacua.github.io/CategoricalReasoner/ontology/> .
+@prefix catty: <https://metavacua.github.io/CategoricalReasoner/src/ontology/> .
 
 coq:Category a owl:Class ;
     rdfs:label "Category (Coq)" ;
@@ -486,7 +486,7 @@ end CategoryTheory
 
 ```turtle
 @prefix lean: <http://leanprover.org/library/> .
-@prefix catty: <https://metavacua.github.io/CategoricalReasoner/ontology/> .
+@prefix catty: <https://metavacua.github.io/CategoricalReasoner/src/ontology/> .
 
 lean:CategoryTheory.Category a owl:Class ;
     rdfs:label "Category (Lean)" ;

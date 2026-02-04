@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The `tests/` directory contains the test suite for validation, consistency checking, and integration verification. Tests ensure that all artifacts meet quality standards and constraints.
+The `src/tests/` directory contains the test suite for validation, consistency checking, and integration verification. Tests ensure that all artifacts meet quality standards and constraints.
 
 ## Architecture
 
@@ -29,7 +29,7 @@ Main test file for validating thesis consistency.
    - All IDs are globally unique (no duplicates)
 
 2. **Citation Tests**
-   - All `\cite{key}` references exist in `bibliography/citations.yaml`
+   - All `\cite{key}` references exist in `docs/dissertation/bibliography/citations.yaml`
    - Citation keys match format `[author][year][keyword]`
    - External links (DOI, URL, Wikidata, arXiv) are resolvable
 
@@ -41,21 +41,21 @@ Main test file for validating thesis consistency.
 **Running Tests**:
 ```bash
 # Run all tests
-python -m pytest tests/
+python -m pytest src/tests/
 
 # Run specific test file
-python -m pytest tests/test_consistency.py
+python -m pytest src/tests/test_consistency.py
 
 # Run with verbose output
-python -m pytest tests/ -v
+python -m pytest src/tests/ -v
 
 # Run specific test
-python -m pytest tests/ -k test_citation_uniqueness
+python -m pytest src/tests/ -k test_citation_uniqueness
 ```
 
 **Running with unittest**:
 ```bash
-python -m unittest discover tests/
+python -m unittest discover src/tests/
 ```
 
 ## Test Structure
@@ -156,7 +156,7 @@ Tests run automatically on every pull request:
 ```yaml
 - name: Run tests
   run: |
-    python -m pytest tests/ -v --tb=short
+    python -m pytest src/tests/ -v --tb=short
 
 - name: Generate coverage report
   run: |
@@ -189,7 +189,7 @@ All tests must pass before merging:
 
 ### Test Data Management
 
-- Store test data in `tests/fixtures/` directory
+- Store test data in `src/tests/fixtures/` directory
 - Use small, representative datasets
 - Document expected test data structure
 - Keep test data versioned with code
@@ -214,10 +214,10 @@ def test_external_link_resolution(mock_get):
 
 ```bash
 # Run specific test function
-python -m pytest tests/test_consistency.py::TestCitations::test_citation_keys_exist -v
+python -m pytest src/tests/test_consistency.py::TestCitations::test_citation_keys_exist -v
 
 # Run with debugging
-python -m pytest tests/ --pdb
+python -m pytest src/tests/ --pdb
 ```
 
 ### Common Failure Modes
@@ -259,6 +259,6 @@ python -m pytest tests/ --pdb
 ## See Also
 
 - `.catty/README.md` - Validation framework and acceptance criteria
-- `schema/README.md` - Validation schemas and constraints
-- `scripts/README.md` - Utility scripts for validation
-- `schema/validators/` - Validation scripts that tests verify
+- `src/schema/README.md` - Validation schemas and constraints
+- `src/scripts/README.md` - Utility scripts for validation
+- `src/schema/validators/` - Validation scripts that tests verify

@@ -336,7 +336,7 @@ class ConsistencyValidator:
                             severity="VIOLATION",
                             file=elem.file,
                             line=elem.line_number,
-                            message=f"Citation '{cite_key}' not found in bibliography/citations.yaml",
+                            message=f"Citation '{cite_key}' not found in docs/dissertation/bibliography/citations.yaml",
                             constraint="Citation Registry"
                         ))
                         violations += 1
@@ -505,13 +505,13 @@ def main():
     parser.add_argument(
         '--bibliography',
         type=Path,
-        default=Path('bibliography/citations.yaml'),
+        default=Path('docs/dissertation/bibliography/citations.yaml'),
         help='Path to citation registry YAML file'
     )
     parser.add_argument(
         '--mapping',
         type=Path,
-        default=Path('schema/tex-rdf-mapping.yaml'),
+        default=Path('src/schema/tex-rdf-mapping.yaml'),
         help='Path to TeX-RDF mapping file'
     )
 

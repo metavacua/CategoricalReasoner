@@ -69,7 +69,7 @@ make clean
 
 ### Structure Validation
 
-Thesis structure must validate against `schema/thesis-structure.schema.yaml`:
+Thesis structure must validate against `src/schema/thesis-structure.schema.yaml`:
 
 - All chapters must have unique IDs matching pattern `sec-[lowercase-hyphenated]`
 - All theorems must have IDs matching pattern `thm-[lowercase-hyphenated]`
@@ -79,12 +79,12 @@ Thesis structure must validate against `schema/thesis-structure.schema.yaml`:
 
 **Run validation**:
 ```bash
-python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
+python src/schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
 ```
 
 ### Citation Usage
 
-All citations must use keys from `bibliography/citations.yaml`:
+All citations must use keys from `docs/dissertation/bibliography/citations.yaml`:
 
 ```latex
 % Good
@@ -103,9 +103,9 @@ This result follows from \cite{unregistered2020paper}.
 
 **Validate citations**:
 ```bash
-python schema/validators/validate_citations.py \
+python src/schema/validators/validate_citations.py \
   --tex-dir thesis/chapters/ \
-  --bibliography bibliography/citations.yaml
+  --bibliography docs/dissertation/bibliography/citations.yaml
 ```
 
 ### Mathematical Notation
@@ -227,17 +227,17 @@ Run all validators before committing changes:
 
 ```bash
 # Validate structure
-python schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
+python src/schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
 
 # Validate citations
-python schema/validators/validate_citations.py \
+python src/schema/validators/validate_citations.py \
   --tex-dir thesis/chapters/ \
-  --bibliography bibliography/citations.yaml
+  --bibliography docs/dissertation/bibliography/citations.yaml
 
 # Validate consistency
-python schema/validators/validate_consistency.py \
+python src/schema/validators/validate_consistency.py \
   --tex-dir thesis/chapters/ \
-  --bibliography bibliography/citations.yaml
+  --bibliography docs/dissertation/bibliography/citations.yaml
 ```
 
 ## Common Issues and Solutions
@@ -258,7 +258,7 @@ python schema/validators/validate_consistency.py \
 **Error**: `Invalid theorem ID 'thm.Example'`
 **Fix**: Use lowercase hyphenated IDs: `thm-example`
 
-**Error**: `Citation 'key' not found in bibliography/citations.yaml`
+**Error**: `Citation 'key' not found in docs/dissertation/bibliography/citations.yaml`
 **Fix**: Use pre-registered citation key or add to registry
 
 **Error**: `Duplicate ID 'thm-example'`
@@ -266,7 +266,7 @@ python schema/validators/validate_consistency.py \
 
 ## See Also
 
-- `schema/README.md` - Validation schemas and constraints
-- `bibliography/README.md` - Citation registry documentation
-- `schema/AGENTS.md` - LaTeX structure and citation constraints for LLMs
+- `src/schema/README.md` - Validation schemas and constraints
+- `docs/dissertation/bibliography/README.md` - Citation registry documentation
+- `src/schema/AGENTS.md` - LaTeX structure and citation constraints for LLMs
 - `.catty/README.md` - Operational model for thesis generation

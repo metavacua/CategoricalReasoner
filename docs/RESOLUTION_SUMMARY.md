@@ -62,14 +62,14 @@ Added `semantic_web_technologies` section to metadata:
 #### SHACL Validation
 - **Standard**: W3C SHACL Recommendation
 - **Two shape sets**:
-  - `ontology/catty-shapes.ttl`: Ontology validation
+  - `src/ontology/catty-shapes.ttl`: Ontology validation
   - `.catty/validation/shapes/*.shacl`: Operational validation
 - **Library**: pyshacl (Python)
 - **Shape count**: 6 files
 
 #### SPARQL Queries
 - **Standard**: SPARQL 1.1 Query Language
-- **Documentation**: `ontology/queries/sparql-examples.md`
+- **Documentation**: `src/ontology/queries/sparql-examples.md`
 - **Query count**: 15+ examples
 - **Clarification**: Documentation only (executable benchmarks removed)
 
@@ -173,9 +173,9 @@ Format: YAML (GitHub Actions)
 | Path | Documented | Exists | Status |
 |------|------------|--------|--------|
 | `.github/workflows/deploy.yml` | ✅ Yes | ✅ Yes | ✅ Aligned |
-| `ontology/*.jsonld` | ✅ Yes | ✅ Yes (6 files) | ✅ Aligned |
-| `ontology/catty-shapes.ttl` | ✅ Yes | ✅ Yes | ✅ Aligned |
-| `ontology/queries/sparql-examples.md` | ✅ Yes | ✅ Yes | ✅ Aligned |
+| `src/ontology/*.jsonld` | ✅ Yes | ✅ Yes (6 files) | ✅ Aligned |
+| `src/ontology/catty-shapes.ttl` | ✅ Yes | ✅ Yes | ✅ Aligned |
+| `src/ontology/queries/sparql-examples.md` | ✅ Yes | ✅ Yes | ✅ Aligned |
 | `.catty/validation/shapes/*.shacl` | ✅ Yes | ✅ Yes (6 files) | ✅ Aligned |
 
 ## Remaining Notes (Not Errors)
@@ -190,7 +190,7 @@ Format: YAML (GitHub Actions)
 
 ### 2. SPARQL Examples are Documentation
 
-**Note**: `ontology/queries/sparql-examples.md` contains documentation, not executable queries.
+**Note**: `src/ontology/queries/sparql-examples.md` contains documentation, not executable queries.
 
 **Action**: Clarified in `semantic_web_technologies` metadata section.
 

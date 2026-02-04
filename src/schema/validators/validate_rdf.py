@@ -315,7 +315,7 @@ def main():
     parser.add_argument(
         '--shapes',
         type=Path,
-        default=Path('ontology/catty-thesis-shapes.shacl'),
+        default=Path('src/ontology/catty-thesis-shapes.shacl'),
         help='Path to SHACL shapes file'
     )
 

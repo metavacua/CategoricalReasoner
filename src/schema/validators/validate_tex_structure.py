@@ -294,7 +294,7 @@ def main():
     parser.add_argument(
         '--schema',
         type=str,
-        default='schema/thesis-structure.schema.yaml',
+        default='src/schema/thesis-structure.schema.yaml',
         help='Path to thesis structure schema'
     )
 

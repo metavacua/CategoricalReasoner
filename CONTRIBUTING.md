@@ -14,7 +14,7 @@ This project follows the **Semantic Web Technology Index (SWTI)** criteria from 
 
 - **S1 (Standard Models)**: All knowledge representation must use RDF/OWL standards (JSON-LD or Turtle).
 - **S2 (External Data)**: Link entities to external Linked Open Data sources (DBpedia, Wikidata) using `owl:sameAs` or `skos:exactMatch`.
-- **S4 (Evaluation)**: Include reproducible evaluation queries in `benchmarks/queries/`.
+- **S4 (Evaluation)**: Include reproducible evaluation queries in `src/benchmarks/queries/`.
 - **S6 (Reasoning)**: Ensure the ontology is consistent and passes SHACL validation.
 
 ## Local checks
@@ -34,9 +34,9 @@ make
 Validate the RDF and run benchmarks locally (requires `rdflib` and `pyshacl`):
 
 ```sh
-python scripts/validate_rdf.py
-python benchmarks/run.py
-python tests/test_consistency.py
+python src/scripts/validate_rdf.py
+python src/benchmarks/run.py
+python src/tests/test_consistency.py
 ```
 
 ## Style
