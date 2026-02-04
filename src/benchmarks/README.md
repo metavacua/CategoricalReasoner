@@ -37,7 +37,7 @@ Contains SPARQL query files with descriptive names and optimized prefixes.
 
 **Query Format**:
 ```sparql
-PREFIX catty: <http://catty.org/src/ontology/>
+PREFIX catty: <http://example.org/src/ontology/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 # Query description
