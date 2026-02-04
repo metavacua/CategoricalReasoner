@@ -11,7 +11,7 @@ The `src/ontology/` directory contains **EXAMPLE and REFERENCE MATERIALS ONLY**.
 - **SHACL Validation**: All RDF artifacts must validate against `catty-shapes.ttl` and `catty-thesis-shapes.shacl`.
 - **External References**: Link to Wikidata (`owl:sameAs`), DBpedia (`skos:exactMatch`), and DBLP where applicable. External identifiers must be resolvable.
 - **Categorical Consistency**: Logic instances require signatures and axioms. Morphisms require source, target, and type definitions. All categorical constructions must have functorial mappings.
-- **Namespaces**: Use `catty:` prefix (http://catty.org/src/ontology/) for all custom entities.
+- **Namespaces**: Use `catty:` prefix (http://example.org/src/ontology/) for all custom entities.
 
 ## Validation
 These are example files only. No validation is required for the actual project, which uses external ontologies.
