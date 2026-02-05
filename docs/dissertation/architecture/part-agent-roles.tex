@@ -1,0 +1,39 @@
+\chapter*{Agent Roles and Responsibilities}
+\addcontentsline{toc}{chapter}{Agent Roles and Responsibilities}
+
+The \catty\ framework defines clear roles and responsibilities for autonomous agents, ensuring that complex tasks are executed with high fidelity to the formal specification.
+
+\section*{Core Agent Types}
+\begin{itemize}
+    \item \textbf{Planning Agent}: Responsible for analyzing \code{.catty/phases.yaml} and \code{.catty/operations.yaml} to determine the optimal execution sequence and resolve dependencies.
+    \item \textbf{Coding Agent}: Executes the operational instructions found in task descriptions to produce artifacts (LaTeX, JSON-LD, Python).
+    \item \textbf{Validation Agent}: Executes the \code{.catty/validation/validate.py} script and interprets SHACL/JSON Schema reports to verify artifact compliance.
+\end{itemize}
+
+\section*{Operational Constraints}
+Agents are bound by strict operational constraints to maintain the integrity of the thesis:
+\begin{itemize}
+    \item \textbf{Format Fidelity}: Must adhere to the specified file formats (JSON-LD, RDF, TeX, YAML).
+    \item \textbf{ID Uniqueness}: Must ensure all identifiers (\code{thm-*}, \code{def-*}, \code{sec-*}) are globally unique.
+    \item \textbf{Citation Compliance}: Must only use pre-registered citation keys from the central registry.
+    \item \textbf{Deterministic Execution}: Tasks must be executed exactly as described in the operational instructions, without creative interpretation.
+\end{itemize}
+
+\section*{Runtime Specification}
+The \catty\ framework utilizes a Java-based runtime specification to enforce model constraints and task execution protocols through the following mechanisms:
+\begin{itemize}
+    \item \textbf{Custom Annotations}: Use of \code{@TaskDescription} and \code{@ModelConstraint} to declaratively define agent expectations and domain boundaries.
+    \item \textbf{Reflection API}: Dynamic inspection of annotated components at runtime to ensure compliance with the operational model.
+    \item \textbf{Generics}: Type-safe agent templates that ensure data passed between planning, coding, and validation agents adheres to the required categorical schemas.
+\end{itemize}
+
+\section*{Error Handling and Recovery}
+When an agent encounters a validation failure or an unexpected state, it must follow a structured recovery protocol:
+\begin{enumerate}
+    \item \textbf{Analyze}: Read the error report from the validation agent (e.g., SHACL violation message).
+    \item \textbf{Locate}: Identify the specific line and property in the artifact causing the failure.
+    \item \textbf{Remediate}: Update the artifact to satisfy the formal constraint.
+    \item \textbf{Verify}: Re-run the validation suite until all criteria evaluate to true.
+\end{enumerate}
+
+In the event of an irreconcilable conflict (e.g., a missing required citation), the agent must halt execution and report the constraint violation to the oversight system.

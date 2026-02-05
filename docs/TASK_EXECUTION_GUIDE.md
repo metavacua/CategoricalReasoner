@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This file has been consolidated into the "Architecture of Catty" TeX document and is marked for future removal.
+
 # Task Execution Guide for Coding Agents
 
 ## Overview

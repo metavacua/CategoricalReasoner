@@ -1,0 +1,59 @@
+\chapter*{Knowledge Hierarchy}
+\addcontentsline{toc}{chapter}{Knowledge Hierarchy}
+
+The \catty\ framework adopts a strict hierarchy for knowledge sourcing to ensure semantic integrity and avoid the common pitfalls of LLM-based content generation.
+
+\section*{Sourcing Priority Chain}
+Knowledge is consumed and validated according to the following priority chain. We prioritize in each step open source and open science alternatives over any closed source or proprietary sources:
+\begin{enumerate}
+    \item \textbf{Canonical systems}: Primary expressions, representations, and code.
+    \item \textbf{International standards}: ISO/IEC, IETF, and other formal global specifications.
+    \item \textbf{Community standards}: De facto standards and community-driven specifications (e.g., Wikidata, DBPedia).
+    \item \textbf{Original Research}: Specific innovations and novel contributions of the Catty thesis.
+\end{enumerate}
+
+\section*{Wikidata Discovery Protocol}
+To prevent the corruption of the semantic knowledge graph with hallucinated identifiers, agents must follow the dynamic discovery protocol.
+
+\subsection*{The Problem: Hallucinated QIDs}
+LLMs often produce plausible-looking but incorrect Wikidata QIDs. For example, claiming "Classical Logic" is \code{Q192960} (which actually refers to Baibars). 
+
+\textbf{Mandatory Rule}: Never guess a QID. All QIDs must be verified against the live Wikidata endpoint before use in the repository.
+
+\subsection*{Verification and Discovery}
+To verify a QID, use a SPARQL query. Note: When executing, extract ONLY the SPARQL code, excluding any LaTeX environment markers:
+\begin{lstlisting}[language=SPARQL]
+SELECT ?label ?description WHERE {
+  wd:Q193138 rdfs:label ?label .
+  wd:Q193138 schema:description ?description .
+  FILTER(LANG(?label) = "en")
+}
+\end{lstlisting}
+
+If a QID is unknown, discover it using a more efficient label-based query. Note that Wikidata labels for mathematical concepts are typically lowercase:
+\begin{lstlisting}[language=SPARQL]
+SELECT DISTINCT ?item ?label ?description WHERE {
+  ?item rdfs:label "natural transformation"@en .
+  ?item schema:description ?description .
+  FILTER(LANG(?description) = "en")
+}
+LIMIT 5
+\end{lstlisting}
+
+\section*{Core Domain Registry}
+The following verified identifiers constitute the core of the \catty\ domain model:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}lll@{}}
+\toprule
+Concept & QID & Description \\ \midrule
+Category Theory & \code{wd:Q217413} & Branch of mathematics \\
+Category & \code{wd:Q719395} & Algebraic structure \\
+Functor & \code{wd:Q864475} & Mapping between categories \\
+Logic & \code{wd:Q8078} & Study of correct reasoning \\
+Sequent Calculus & \code{wd:Q1771121} & Formal argumentation style \\
+\bottomrule
+\end{tabular}
+\caption{Core Wikidata Identifiers}
+\end{table}

@@ -109,24 +109,36 @@ Compares performance across different SPARQL endpoints.
 ### Prerequisites
 
 - Python ≥3.8
+- `requests` and `rdflib` libraries
 - Network access to external endpoints (for remote benchmarks)
-- Optional: Local SPARQL endpoint (e.g., Blazegraph) for local testing
 
 ### Execution
 
 ```bash
-# Run all benchmarks
+# Run all benchmarks against local ontology
 python src/benchmarks/run.py
 
-# Run with verbose output
-python src/benchmarks/run.py -v
+# Run against Wikidata
+python src/benchmarks/run.py --endpoint https://query.wikidata.org/sparql --query wikidata-logics.rq
 
-# Run specific query file
-python src/benchmarks/run.py --query category-theory.sparql
-
-# Save results to file
-python src/benchmarks/run.py --output benchmark-results.json
+# Run against DBPedia
+python src/benchmarks/run.py --endpoint https://dbpedia.org/sparql --query dbpedia-category-theory.rq
 ```
+
+### Challenges and Lessons Learned
+
+1. **User-Agent Filtering**: Public endpoints like Wikidata require a descriptive `User-Agent` header. Failing to provide one often results in 403 Forbidden or 429 Too Many Requests errors.
+2. **Query Timeouts**: Complex queries against large graphs (Wikidata/DBPedia) can easily timeout. It is recommended to use `LIMIT`, efficient property paths, and to avoid large cross-joins.
+3. **Format Negotiation**: When using `CONSTRUCT` queries, explicitly requesting `text/turtle` ensures the results are returned in a compact, human-readable semantic format.
+4. **Data Integrity**: External data often contains noise. Validation of extracted triples against local SHACL shapes is crucial for maintaining knowledge graph quality.
+
+## Recommendations for Semantic Web RAG
+
+1. **Hybrid Retrieval**: Combine SPARQL for structured fact retrieval with Vector Search for unstructured text context.
+2. **Graph-Aware Prompting**: Use the extracted TTL (Turtle) as context for LLMs, as its hierarchical nature is well-suited for representing relationships compared to flat JSON.
+3. **Dynamic Discovery**: Implement the "Discovery Pattern" (as seen in `docs/WIKIDATA_DISCOVERY.md`) to resolve ambiguous labels to authoritative URIs before performing RAG.
+4. **Agentic Validation**: Coding agents should automatically run and validate queries against endpoints during the generation process to detect and fix "SPARQL hallucinations".
+
 
 ### Expected Output
 

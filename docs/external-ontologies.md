@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This file has been consolidated into the "Architecture of Catty" TeX document and is marked for future removal.
+
 # External Ontologies and Resources
 
 This document catalogs external RDF/OWL ontologies and semantic resources that can be integrated with or referenced by the Catty categorical framework.

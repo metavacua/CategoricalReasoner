@@ -1,0 +1,15 @@
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+# Extract logic-related entities from Wikidata
+CONSTRUCT {
+  ?logic rdfs:label ?label ;
+         wdt:P31 wd:Q8078 . # instance of logic
+}
+WHERE {
+  ?logic wdt:P31 wd:Q8078 .
+  ?logic rdfs:label ?label .
+  FILTER(LANG(?label) = "en")
+}
+LIMIT 10

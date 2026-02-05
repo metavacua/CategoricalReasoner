@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This file has been consolidated into the "Architecture of Catty" TeX document and is marked for future removal.
+
 # Wikidata Discovery Guide for Agents
 
 ## The Problem: Hallucinated QIDs
@@ -9,29 +12,30 @@ LLMs often "hallucinate" Wikidata QIDs (e.g., guessing that "Classical Logic" is
 Agents must query Wikidata to find the authoritative QID for a concept.
 
 ### 1. Verification (If you have a QID)
-If you think "Classical Logic" is `Q123`, check it:
+If you think "Natural transformation" is `Q193138`, check it:
 ```sparql
 SELECT ?label ?description WHERE {
-  wd:Q123 rdfs:label ?label .
-  wd:Q123 schema:description ?description .
+  wd:Q193138 rdfs:label ?label .
+  wd:Q193138 schema:description ?description .
   FILTER(LANG(?label) = "en")
 }
 ```
 
 ### 2. Discovery (If you have a Label)
-To find the QID for "Natural transformation":
+To find the QID for "natural transformation", use an efficient label-based query. 
+
+**Note**: Wikidata labels for mathematical concepts are typically lowercase. Using the correct case is required for `rdfs:label` matches.
 
 ```sparql
 SELECT DISTINCT ?item ?label ?description WHERE {
-  ?item rdfs:label ?label .
+  ?item rdfs:label "natural transformation"@en .
+  BIND("natural transformation"@en AS ?label)
   ?item schema:description ?description .
-  FILTER(STR(?label) = "Natural transformation")
-  FILTER(LANG(?label) = "en")
   FILTER(LANG(?description) = "en")
 }
 LIMIT 5
 ```
-*Note: This simple query can be slow. Using the Wikidata Search API (`wbsearchentities`) is often more efficient for name resolution.*
+*Note: Using the Wikidata Search API (`wbsearchentities`) or the `mwapi` service is even more efficient and handles case-insensitivity better.*
 
 ### 3. Recommended Python Pattern (No Dependencies)
 Use this standard pattern to look up QIDs in your scripts:

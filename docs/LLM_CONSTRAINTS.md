@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This file has been consolidated into the "Architecture of Catty" TeX document and is marked for future removal.
+
 # LLM Constraints for Catty Thesis Generation
 
 ## Overview
@@ -158,7 +161,7 @@ Every TeX element with an ID must have a corresponding RDF resource with the sam
 
 For example:
 - TeX: `\begin{theorem}[thm-weakening]{Weakening}`
-- RDF: `<http://catty.org/theorem/thm-weakening> dct:identifier "thm-weakening"`
+- RDF: `<https://github.com/metavacua/CategoricalReasoner/ontology/theorem/thm-weakening> dct:identifier "thm-weakening"`
 
 ### Bidirectional Consistency
 

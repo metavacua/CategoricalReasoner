@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This file has been consolidated into the "Architecture of Catty" TeX document and is marked for future removal.
+
 # Ontological Inventory: Categorical Resources for Catty
 
 ## Executive Summary
@@ -417,7 +420,7 @@ Record Category := {
 
 ```turtle
 @prefix coq: <http://coq.inria.fr/library/> .
-@prefix catty: <https://metavacua.github.io/CategoricalReasoner/src/ontology/> .
+@prefix catty: <https://github.com/metavacua/CategoricalReasoner/ontology/> .
 
 coq:Category a owl:Class ;
     rdfs:label "Category (Coq)" ;
@@ -486,7 +489,7 @@ end CategoryTheory
 
 ```turtle
 @prefix lean: <http://leanprover.org/library/> .
-@prefix catty: <https://metavacua.github.io/CategoricalReasoner/src/ontology/> .
+@prefix catty: <https://github.com/metavacua/CategoricalReasoner/ontology/> .
 
 lean:CategoryTheory.Category a owl:Class ;
     rdfs:label "Category (Lean)" ;
