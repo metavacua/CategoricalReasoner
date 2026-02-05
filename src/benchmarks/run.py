@@ -42,7 +42,12 @@ def run_benchmarks(endpoint=None, query_file=None, output_dir="results", verbose
                 if verbose:
                     print(f"Querying {endpoint}...")
                 
-                response = requests.post(endpoint, data={"query": query_str}, headers=headers)
+                response = requests.post(
+                    endpoint,
+                    data={"query": query_str},
+                    headers=headers,
+                    timeout=60
+                )
                 response.raise_for_status()
                 
                 duration = time.time() - start_time
