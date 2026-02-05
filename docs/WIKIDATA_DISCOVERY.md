@@ -29,6 +29,7 @@ To find the QID for "natural transformation", use an efficient label-based query
 ```sparql
 SELECT DISTINCT ?item ?label ?description WHERE {
   ?item rdfs:label "natural transformation"@en .
+  BIND("natural transformation"@en AS ?label)
   ?item schema:description ?description .
   FILTER(LANG(?description) = "en")
 }
