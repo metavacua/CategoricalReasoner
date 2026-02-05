@@ -24,6 +24,21 @@ def run_benchmarks(endpoint=None, query_file=None, output_dir="results", verbose
     
     for q_path in queries:
         q_file = os.path.basename(q_path)
+    
+    # Load local graph once if needed
+    g = None
+    if not endpoint:
+        g = Graph()
+        ontology_dir = "src/ontology"
+        for filename in os.listdir(ontology_dir):
+            path = os.path.join(ontology_dir, filename)
+            if filename.endswith(".jsonld"):
+                g.parse(path, format="json-ld")
+            elif filename.endswith(".ttl"):
+                g.parse(path, format="turtle")
+
+    for q_path in queries:
+        q_file = os.path.basename(q_path)
         print(f"Running query: {q_file}")
         with open(q_path, "r") as f:
             query_str = f.read()
@@ -42,12 +57,7 @@ def run_benchmarks(endpoint=None, query_file=None, output_dir="results", verbose
                 if verbose:
                     print(f"Querying {endpoint}...")
                 
-                response = requests.post(
-                    endpoint,
-                    data={"query": query_str},
-                    headers=headers,
-                    timeout=60
-                )
+                response = requests.post(endpoint, data={"query": query_str}, headers=headers)
                 response.raise_for_status()
                 
                 duration = time.time() - start_time
@@ -72,15 +82,6 @@ def run_benchmarks(endpoint=None, query_file=None, output_dir="results", verbose
                     print(f"   Results saved to {output_path}")
             else:
                 # Local query
-                g = Graph()
-                ontology_dir = "src/ontology"
-                for filename in os.listdir(ontology_dir):
-                    path = os.path.join(ontology_dir, filename)
-                    if filename.endswith(".jsonld"):
-                        g.parse(path, format="json-ld")
-                    elif filename.endswith(".ttl"):
-                        g.parse(path, format="turtle")
-                
                 results = g.query(query_str)
                 duration = time.time() - start_time
                 
