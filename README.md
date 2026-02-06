@@ -81,3 +81,49 @@ This project is licensed under the GNU Affero General Public License v3.0 (AGPL-
 - `AGENTS.md` - Machine-readable specifications for automated agents
 - `CONTRIBUTING.md` - Contribution guidelines and workflows
 - `LICENSE` - Full license text
+
+## RO-Crate HelloWorld Example
+
+This repository includes a minimal RO-Crate HelloWorld demonstrating Java + Jena SPARQL integration with reproducible builds. Key files:
+
+- `pom.xml` - Maven build configuration with reproducible settings
+- `src/main/java/org/metavacua/catty/RoCrateHelloWorld.java` - Main application
+- `ro-crate-metadata.json` - RO-Crate 1.1 metadata
+- `Dockerfile` - Multi-stage container build
+- `run.sh` - Automated build and run script
+
+### Getting Started
+
+**Quick start:**
+```bash
+./run.sh
+```
+
+This builds the JAR, executes a SPARQL query against Wikidata, and generates provenanced results.
+
+**Container build:**
+```bash
+docker build -t catty-rocrate:0.0.0 .
+docker run --rm -v "$PWD":/app catty-rocrate:0.0.0
+```
+
+### Reproducibility Documentation
+
+The RO-Crate HelloWorld example has been enhanced with comprehensive reproducibility improvements:
+
+- **[QUICKSTART.md](QUICKSTART.md)** - User-friendly getting started guide
+- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Executive overview of improvements
+- **[REPRODUCIBILITY_SUMMARY.md](REPRODUCIBILITY_SUMMARY.md)** - Quick reference guide
+- **[REPRODUCIBILITY_IMPROVEMENTS.md](REPRODUCIBILITY_IMPROVEMENTS.md)** - Detailed implementation documentation
+- **[IMPROVEMENTS_CHECKLIST.md](IMPROVEMENTS_CHECKLIST.md)** - Verification checklist
+
+Key improvements include:
+- ✅ Reproducible Maven builds (fixed timestamps, deterministic JARs)
+- ✅ Modern Jena HTTP builder pattern for SPARQL execution
+- ✅ W3C RDF language tags for literal normalization
+- ✅ RO-Crate 1.1 compliant license modeling (SPDX)
+- ✅ Multi-stage Docker builds with security hardening
+- ✅ Comprehensive provenance tracking in generated artifacts
+- ✅ Industry-standard OCI metadata labels
+
+All code review issues have been addressed. See the documentation files for complete details.

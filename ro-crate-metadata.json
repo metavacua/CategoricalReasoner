@@ -50,12 +50,24 @@
         },
         {
           "@id": "CHANGES_SUMMARY.md"
+        },
+        {
+          "@id": "REPRODUCIBILITY_IMPROVEMENTS.md"
+        },
+        {
+          "@id": "REPRODUCIBILITY_SUMMARY.md"
+        },
+        {
+          "@id": "IMPROVEMENTS_CHECKLIST.md"
+        },
+        {
+          "@id": "QUICKSTART.md"
         }
       ],
       "license": {
-        "@id": "https://www.wikidata.org/entity/Q341",
-        "@type": "SoftwareSourceCode",
-        "name": "free software"
+        "@id": "https://spdx.org/licenses/AGPL-3.0-only.html",
+        "@type": "CreativeWork",
+        "name": "GNU Affero General Public License v3.0"
       },
       "creator": [
         {
@@ -84,9 +96,9 @@
     },
     {
       "@id": "rocrate-helloworld.jar",
-      "@type": "SoftwareSourceCode",
+      "@type": "File",
       "name": "Catty RO-Crate HelloWorld JAR",
-      "description": "Minimal Java program that queries Wikidata for software package entity information",
+      "description": "Built executable JAR artifact from compiled Java sources. Queries Wikidata for software package entity information and outputs Turtle RDF.",
       "encodingFormat": "application/java-archive",
       "fileFormat": "JAR",
       "programmingLanguage": {
@@ -101,9 +113,9 @@
         }
       ],
       "license": {
-        "@id": "https://www.wikidata.org/entity/Q341",
-        "@type": "SoftwareSourceCode",
-        "name": "free software"
+        "@id": "https://spdx.org/licenses/AGPL-3.0-only.html",
+        "@type": "CreativeWork",
+        "name": "GNU Affero General Public License v3.0"
       },
       "version": "0.0.0",
       "dependencies": [
@@ -111,7 +123,10 @@
           "@id": "https://jena.apache.org/",
           "name": "Apache Jena ARQ"
         }
-      ]
+      ],
+      "isBasedOn": {
+        "@id": "src/main/java/org/metavacua/catty/RoCrateHelloWorld.java"
+      }
     },
     {
       "@id": "Dockerfile",
@@ -151,7 +166,7 @@
       "@id": "wikidata-rocrate-results.ttl",
       "@type": "File",
       "name": "Wikidata Query Results (Turtle)",
-      "description": "Turtle RDF produced by RoCrateHelloWorld from executing wikidata-rocrate-query.rq against the Wikidata SPARQL endpoint. Contains retrieved entity data including URI, label, and description.",
+      "description": "Turtle RDF produced by RoCrateHelloWorld from executing wikidata-rocrate-query.rq against the Wikidata SPARQL endpoint. Contains retrieved entity data including URI, label, and description. Includes provenance comments with generation timestamp, query hash, and execution time.",
       "encodingFormat": "text/turtle",
       "fileFormat": "Turtle"
     },
@@ -176,6 +191,38 @@
       "@type": "File",
       "name": "RO-Crate Improvements Summary",
       "description": "Summary of all improvements made to address code review feedback. Documents changes to strengthen evidence of actual execution and resolve internal inconsistencies.",
+      "encodingFormat": "text/markdown",
+      "fileFormat": "Markdown"
+    },
+    {
+      "@id": "REPRODUCIBILITY_IMPROVEMENTS.md",
+      "@type": "File",
+      "name": "Reproducibility and Canonical Artifacts Improvements",
+      "description": "Comprehensive documentation of improvements made to achieve reproducible builds, canonical artifacts, and adherence to industry standards. Covers Maven, Java/Jena, RO-Crate modeling, Docker containerization, and directory structure improvements.",
+      "encodingFormat": "text/markdown",
+      "fileFormat": "Markdown"
+    },
+    {
+      "@id": "REPRODUCIBILITY_SUMMARY.md",
+      "@type": "File",
+      "name": "Summary of Reproducibility Improvements",
+      "description": "Concise summary of all changes made to address reproducibility and canonical artifacts issues. Provides quick reference for files modified, standards compliance, verification steps, and issue resolution status.",
+      "encodingFormat": "text/markdown",
+      "fileFormat": "Markdown"
+    },
+    {
+      "@id": "IMPROVEMENTS_CHECKLIST.md",
+      "@type": "File",
+      "name": "Reproducibility Implementation Checklist",
+      "description": "Verification checklist confirming all improvements from code review have been implemented. Covers Maven build, Java/Jena execution, RO-Crate modeling, Docker containerization, and directory structure issues with completion status tracking.",
+      "encodingFormat": "text/markdown",
+      "fileFormat": "Markdown"
+    },
+    {
+      "@id": "QUICKSTART.md",
+      "@type": "File",
+      "name": "Quick Start Guide",
+      "description": "User-friendly guide for getting started with the improved Catty RO-Crate HelloWorld project. Covers quick start options, understanding outputs, verification steps, troubleshooting, and next steps for exploring reproducible builds and RO-Crate features.",
       "encodingFormat": "text/markdown",
       "fileFormat": "Markdown"
     }

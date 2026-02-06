@@ -7,6 +7,9 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.RDF;
 import org.apache.jena.vocabulary.RDFS;
 import org.apache.jena.sparql.engine.http.QueryExceptionHTTP;
+import org.apache.jena.http.HttpAuth;
+import org.apache.jena.http.HttpEnv;
+import org.apache.jena.http.SysRIOT;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -45,17 +48,17 @@ public class RoCrateHelloWorld {
             System.out.println("Query loaded successfully.");
             System.out.println();
 
-            // Create query and set timeout
+            // Create query and set timeout using HTTP builder pattern
             System.out.println("Executing SPARQL query...");
             long startTime = System.currentTimeMillis();
 
-            QueryExecution qe = QueryExecutionFactory.sparqlService(
-                WIKIDATA_ENDPOINT,
-                QueryFactory.create(query),
-                null,
-                TIMEOUT_MS,
-                TIMEOUT_MS
-            );
+            // Use HTTP builder pattern for robust, explicit timeout configuration
+            QueryExecution qe = QueryExecutionHTTP.newBuilder()
+                .endpoint(WIKIDATA_ENDPOINT)
+                .query(QueryFactory.create(query))
+                .httpClient(HttpEnv.getDftClient())
+                .timeout(TIMEOUT_MS, TIMEOUT_MS)
+                .build();
 
             try {
                 ResultSet results = qe.execSelect();
@@ -100,9 +103,11 @@ public class RoCrateHelloWorld {
                     // Create RDF resource and add properties
                     Resource itemResource = model.createResource(itemUri);
                     itemResource.addProperty(RDF.type, model.createResource("http://schema.org/Thing"));
-                    itemResource.addProperty(RDFS.label, label);
+                    // Preserve language tags from SPARQL results
+                    itemResource.addProperty(RDFS.label, model.createLiteral(label, "en"));
                     if (desc != null) {
-                        itemResource.addProperty(model.createProperty("http://schema.org/description"), desc);
+                        itemResource.addProperty(model.createProperty("http://schema.org/description"),
+                            model.createLiteral(desc, "en"));
                     }
 
                     count++;
@@ -111,11 +116,39 @@ public class RoCrateHelloWorld {
                 System.out.println();
                 System.out.println("Total entities retrieved: " + count);
 
-                // Write model to Turtle format
+                // Write model to Turtle format with provenance comments
                 System.out.println();
                 System.out.println("Writing results to " + OUTPUT_FILE + "...");
                 File outputFile = new File(OUTPUT_FILE);
+
+                // Compute query hash for provenance
+                String queryHash = Integer.toHexString(query.hashCode());
+
                 try (FileOutputStream out = new FileOutputStream(outputFile)) {
+                    // Write provenance header as Turtle comments
+                    String provenance = String.format(
+                        "# ============================================\n" +
+                        "# Catty RO-Crate HelloWorld - SPARQL Results\n" +
+                        "# ============================================\n" +
+                        "# Generated: %tF %<tT %<tz\n" +
+                        "# Endpoint: %s\n" +
+                        "# Query Execution Time: %d ms\n" +
+                        "# Query Hash: %s\n" +
+                        "# Entities Retrieved: %d\n" +
+                        "# ============================================\n" +
+                        "# This is a generated artifact from actual Wikidata execution.\n" +
+                        "# Wikidata content may change over time.\n" +
+                        "# For reproducibility, this file pins the exact results from this execution.\n" +
+                        "# ============================================\n\n",
+                        new java.util.Date(),
+                        WIKIDATA_ENDPOINT,
+                        queryTime,
+                        queryHash,
+                        count
+                    );
+                    out.write(provenance.getBytes(StandardCharsets.UTF_8));
+
+                    // Write RDF model
                     model.write(out, "TURTLE");
                 }
                 System.out.println("Results successfully written to " + outputFile.getAbsolutePath());

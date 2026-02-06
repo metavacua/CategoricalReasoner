@@ -46,6 +46,9 @@ ENV/
 # Benchmark results
 results/
 
+# Generated SPARQL results (optional - can be committed as example output)
+# wikidata-rocrate-results.ttl
+
 # Python
 __pycache__/
 *.py[cod]
@@ -65,7 +68,7 @@ buildNumber.properties
 
 # Java
 *.class
-*.jar
+# Don't ignore rocrate-helloworld.jar at crate root - it's part of RO-Crate distribution
 *.war
 *.ear
 hs_err_pid*
