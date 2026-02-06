@@ -21,7 +21,7 @@
       "@id": "./",
       "@type": "Dataset",
       "name": "Catty RO-Crate HelloWorld",
-      "description": "Minimal reproducible Research Object Crate demonstrating Java + Jena SPARQL integration with real Wikidata data retrieval",
+      "description": "Minimal reproducible Research Object Crate demonstrating Java + Jena SPARQL integration with real Wikidata entity retrieval",
       "version": "0.0.0",
       "hasPart": [
         {
@@ -35,9 +35,6 @@
         },
         {
           "@id": "src/main/resources/wikidata-rocrate-query.rq"
-        },
-        {
-          "@id": "README-ROCRATE.md"
         },
         {
           "@id": "pom.xml"
@@ -73,7 +70,7 @@
       "@id": "rocrate-helloworld.jar",
       "@type": "SoftwareSourceCode",
       "name": "Catty RO-Crate HelloWorld JAR",
-      "description": "Minimal Java program that queries Wikidata for Research Object Crate information",
+      "description": "Minimal Java program that queries Wikidata for software package entity information",
       "encodingFormat": "application/java-archive",
       "fileFormat": "JAR",
       "programmingLanguage": {
@@ -108,7 +105,7 @@
       "@id": "src/main/java/org/metavacua/catty/RoCrateHelloWorld.java",
       "@type": "SoftwareSourceCode",
       "name": "RO-Crate HelloWorld Java Source",
-      "description": "Main Java class implementing SPARQL query to Wikidata",
+      "description": "Main Java class implementing SPARQL query to Wikidata for software package entity retrieval",
       "encodingFormat": "text/x-java-source",
       "programmingLanguage": {
         "@id": "https://www.wikidata.org/entity/Q251"
@@ -118,17 +115,9 @@
       "@id": "src/main/resources/wikidata-rocrate-query.rq",
       "@type": "File",
       "name": "Wikidata SPARQL Query",
-      "description": "SPARQL query that searches Wikidata for Research Object Crate entities",
+      "description": "SPARQL query that searches Wikidata for software package entities",
       "encodingFormat": "application/sparql-query",
       "fileFormat": "SPARQL"
-    },
-    {
-      "@id": "README-ROCRATE.md",
-      "@type": "File",
-      "name": "RO-Crate README",
-      "description": "Documentation for building and running the RO-Crate HelloWorld",
-      "encodingFormat": "text/markdown",
-      "fileFormat": "Markdown"
     },
     {
       "@id": "pom.xml",
