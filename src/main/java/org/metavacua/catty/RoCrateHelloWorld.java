@@ -25,14 +25,29 @@ public class RoCrateHelloWorld {
     private static final String OUTPUT_FILE = "wikidata-rocrate-results.ttl";
 
     public static void main(String[] args) {
+        // Parse QID from command line argument
+        if (args.length < 1) {
+            System.err.println("Usage: java -jar rocrate-helloworld.jar <QID>");
+            System.err.println("Example: java -jar rocrate-helloworld.jar Q1995545");
+            System.err.println("\nWhere <QID> is a Wikidata entity identifier (e.g., Q1995545 for 'software package')");
+            System.exit(1);
+        }
+
+        String qid = args[0];
+        if (!qid.matches("^Q\\d+$")) {
+            System.err.println("ERROR: Invalid QID format. Expected format: Q<digits> (e.g., Q1995545)");
+            System.exit(1);
+        }
+
         try {
             System.out.println("=== Catty: RO-Crate SPARQL Query Execution ===");
             System.out.println("Endpoint: " + WIKIDATA_ENDPOINT);
+            System.out.println("QID: " + qid);
             System.out.println("Timeout: " + TIMEOUT_MS + "ms");
             System.out.println();
 
-            // Load SPARQL query from resources
-            System.out.println("Loading SPARQL query...");
+            // Load SPARQL query template from resources
+            System.out.println("Loading SPARQL query template...");
             InputStream queryStream = RoCrateHelloWorld.class
                 .getResourceAsStream("/wikidata-rocrate-query.rq");
             if (queryStream == null) {
@@ -40,10 +55,13 @@ public class RoCrateHelloWorld {
                 System.exit(1);
             }
 
-            String query = new BufferedReader(
+            String queryTemplate = new BufferedReader(
                 new InputStreamReader(queryStream, StandardCharsets.UTF_8))
                 .lines()
                 .collect(Collectors.joining("\n"));
+
+            // Substitute the QID into the query
+            String query = queryTemplate.replace("{{QID}}", qid);
 
             System.out.println("Query loaded successfully.");
             System.out.println();

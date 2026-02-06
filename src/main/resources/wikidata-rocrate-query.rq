@@ -4,8 +4,8 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX schema: <http://schema.org/>
 
 SELECT DISTINCT ?item ?itemLabel ?itemDescription WHERE {
-  # Query for a known concept: "software package"
-  VALUES ?item { wd:Q1995545 }  # software package (verified QID)
+  # Query for the specified QID (will be substituted at runtime)
+  VALUES ?item { wd:{{QID}} }
 
   # Get English labels
   ?item rdfs:label ?itemLabel.

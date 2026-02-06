@@ -46,8 +46,10 @@ echo
 
 echo "Step 2: Running SPARQL Query against Wikidata..."
 echo "------------------------------------------------"
-# Run the Java application
-java -jar rocrate-helloworld.jar
+# Run the Java application with QID argument (default to Q1995545 if not provided)
+QID=${1:-"Q1995545"}
+echo "Querying QID: $QID"
+java -jar rocrate-helloworld.jar "$QID"
 echo
 echo "✓ Application execution completed"
 echo

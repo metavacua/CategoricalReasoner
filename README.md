@@ -88,36 +88,52 @@ This repository includes a minimal RO-Crate HelloWorld demonstrating Java + Jena
 
 - `pom.xml` - Maven build configuration with reproducible settings
 - `src/main/java/org/metavacua/catty/RoCrateHelloWorld.java` - Main application
-- `ro-crate-metadata.json` - RO-Crate 1.1 metadata
+- `ro-crate-metadata.json` - RO-Crate 1.1 metadata (auto-generated from template)
+- `ro-crate-metadata.json.template` - Template for RO-Crate metadata generation
 - `Dockerfile` - Multi-stage container build
 - `run.sh` - Automated build and run script
 
 ### Getting Started
 
-**Quick start:**
+**Quick start (default QID):**
 ```bash
 ./run.sh
 ```
 
-This builds the JAR, executes a SPARQL query against Wikidata, and generates provenanced results.
+**Query a specific QID:**
+```bash
+./run.sh Q1995545  # software package
+./run.sh Q80       # software
+./run.sh Q5        # human
+```
+
+This builds the JAR, executes a SPARQL query against Wikidata for the specified QID, and generates provenanced results.
+
+**Direct Java execution:**
+```bash
+mvn clean package -DskipTests
+java -jar rocrate-helloworld.jar Q1995545
+```
 
 **Container build:**
 ```bash
 docker build -t catty-rocrate:0.0.0 .
-docker run --rm -v "$PWD":/app catty-rocrate:0.0.0
+docker run --rm -v "$PWD":/app catty-rocrate:0.0.0 Q1995545
 ```
 
-### Reproducibility Documentation
+### LLM-Assisted Semantic Mapping
 
-The RO-Crate HelloWorld example has been enhanced with comprehensive reproducibility improvements:
+The RO-Crate HelloWorld supports arbitrary QID input to enable LLM-assisted semantic mapping validation during development:
 
-- **[QUICKSTART.md](QUICKSTART.md)** - User-friendly getting started guide
-- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Executive overview of improvements
-- **[REPRODUCIBILITY_SUMMARY.md](REPRODUCIBILITY_SUMMARY.md)** - Quick reference guide
-- **[REPRODUCIBILITY_IMPROVEMENTS.md](REPRODUCIBILITY_IMPROVEMENTS.md)** - Detailed implementation documentation
-- **[IMPROVEMENTS_CHECKLIST.md](IMPROVEMENTS_CHECKLIST.md)** - Verification checklist
+1. **Propose a mapping**: An LLM suggests a QID for a concept (e.g., "software package" → Q1995545)
+2. **Validate the mapping**: Run the tool with the proposed QID to retrieve actual Wikidata entity data
+3. **Verify semantics**: Compare retrieved labels and descriptions with the intended concept
+4. **Iterate if needed**: Try alternative QIDs until the correct semantic match is found
 
-Key improvements include:
+This workflow allows LLMs to actively validate their semantic hypotheses against live Wikidata data, reducing errors in downstream development steps.
+
+### Key Features
+
 - ✅ Reproducible Maven builds (fixed timestamps, deterministic JARs)
 - ✅ Modern Jena HTTP builder pattern for SPARQL execution
 - ✅ W3C RDF language tags for literal normalization
@@ -125,5 +141,64 @@ Key improvements include:
 - ✅ Multi-stage Docker builds with security hardening
 - ✅ Comprehensive provenance tracking in generated artifacts
 - ✅ Industry-standard OCI metadata labels
+- ✅ Arbitrary QID input for semantic mapping validation
+- ✅ Auto-generated RO-Crate metadata from Maven templates
 
-All code review issues have been addressed. See the documentation files for complete details.
+### Generated Files
+
+1. **rocrate-helloworld.jar** (at crate root)
+   - Main executable artifact
+   - Reproducibly built (fixed timestamp)
+   - Part of RO-Crate distribution
+
+2. **wikidata-rocrate-results.ttl**
+   - SPARQL query results in Turtle format
+   - Includes provenance header with:
+     - Generation timestamp
+     - Query endpoint and QID
+     - Query execution time
+     - Query hash
+     - Entity count
+   - Language-tagged literals (`@en`)
+
+3. **ro-crate-metadata.json**
+   - Auto-generated from template during Maven build
+   - Contains complete RO-Crate 1.1 metadata
+   - Version and other properties substituted from POM
+
+### Troubleshooting
+
+**Maven build fails:**
+```bash
+# Check Maven version
+mvn -version
+
+# Clean and retry
+mvn clean package -DskipTests
+
+# Check Java version
+java -version
+```
+
+**SPARQL query fails:**
+```bash
+# Check internet connection
+ping -c 3 query.wikidata.org
+
+# Check endpoint availability
+curl -I https://query.wikidata.org/sparql
+
+# Try a different QID (some QIDs may not exist or have incomplete data)
+```
+
+**Invalid QID format:**
+The tool validates QID format before querying. Valid format: `Q<digits>` (e.g., Q1995545).
+
+**Docker build fails:**
+```bash
+# Check Docker version
+docker --version
+
+# Verify build context
+docker build --no-cache -t catty-rocrate:0.0.0 .
+```
