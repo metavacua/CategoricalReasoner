@@ -44,24 +44,6 @@
         },
         {
           "@id": "run.sh"
-        },
-        {
-          "@id": "PROVENANCE.md"
-        },
-        {
-          "@id": "CHANGES_SUMMARY.md"
-        },
-        {
-          "@id": "REPRODUCIBILITY_IMPROVEMENTS.md"
-        },
-        {
-          "@id": "REPRODUCIBILITY_SUMMARY.md"
-        },
-        {
-          "@id": "IMPROVEMENTS_CHECKLIST.md"
-        },
-        {
-          "@id": "QUICKSTART.md"
         }
       ],
       "license": {
@@ -177,54 +159,6 @@
       "description": "Shell script that builds the JAR with Maven and executes the SPARQL query against Wikidata. Provides automated end-to-end execution with verification of outputs.",
       "encodingFormat": "application/x-sh",
       "fileFormat": "Shell script"
-    },
-    {
-      "@id": "PROVENANCE.md",
-      "@type": "File",
-      "name": "RO-Crate Provenance Documentation",
-      "description": "Documentation of query execution details, tool versions, build information, and reproducibility steps. Provides evidence of actual execution against the Wikidata SPARQL endpoint.",
-      "encodingFormat": "text/markdown",
-      "fileFormat": "Markdown"
-    },
-    {
-      "@id": "CHANGES_SUMMARY.md",
-      "@type": "File",
-      "name": "RO-Crate Improvements Summary",
-      "description": "Summary of all improvements made to address code review feedback. Documents changes to strengthen evidence of actual execution and resolve internal inconsistencies.",
-      "encodingFormat": "text/markdown",
-      "fileFormat": "Markdown"
-    },
-    {
-      "@id": "REPRODUCIBILITY_IMPROVEMENTS.md",
-      "@type": "File",
-      "name": "Reproducibility and Canonical Artifacts Improvements",
-      "description": "Comprehensive documentation of improvements made to achieve reproducible builds, canonical artifacts, and adherence to industry standards. Covers Maven, Java/Jena, RO-Crate modeling, Docker containerization, and directory structure improvements.",
-      "encodingFormat": "text/markdown",
-      "fileFormat": "Markdown"
-    },
-    {
-      "@id": "REPRODUCIBILITY_SUMMARY.md",
-      "@type": "File",
-      "name": "Summary of Reproducibility Improvements",
-      "description": "Concise summary of all changes made to address reproducibility and canonical artifacts issues. Provides quick reference for files modified, standards compliance, verification steps, and issue resolution status.",
-      "encodingFormat": "text/markdown",
-      "fileFormat": "Markdown"
-    },
-    {
-      "@id": "IMPROVEMENTS_CHECKLIST.md",
-      "@type": "File",
-      "name": "Reproducibility Implementation Checklist",
-      "description": "Verification checklist confirming all improvements from code review have been implemented. Covers Maven build, Java/Jena execution, RO-Crate modeling, Docker containerization, and directory structure issues with completion status tracking.",
-      "encodingFormat": "text/markdown",
-      "fileFormat": "Markdown"
-    },
-    {
-      "@id": "QUICKSTART.md",
-      "@type": "File",
-      "name": "Quick Start Guide",
-      "description": "User-friendly guide for getting started with the improved Catty RO-Crate HelloWorld project. Covers quick start options, understanding outputs, verification steps, troubleshooting, and next steps for exploring reproducible builds and RO-Crate features.",
-      "encodingFormat": "text/markdown",
-      "fileFormat": "Markdown"
     }
   ]
 }
