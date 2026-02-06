@@ -1,0 +1,164 @@
+{
+  "@context": [
+    "https://w3id.org/ro/crate/1.1/context",
+    {
+      "catty": "https://github.com/metavacua/CategoricalReasoner/",
+      "schema": "http://schema.org/",
+      "wd": "http://www.wikidata.org/entity/",
+      "pav": "http://purl.org/pav/",
+      "dct": "http://purl.org/dc/terms/"
+    }
+  ],
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      }
+    },
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "name": "Catty RO-Crate HelloWorld",
+      "description": "Minimal reproducible Research Object Crate demonstrating Java + Jena SPARQL integration with real Wikidata entity retrieval",
+      "version": "0.0.0",
+      "hasPart": [
+        {
+          "@id": "rocrate-helloworld.jar"
+        },
+        {
+          "@id": "Dockerfile"
+        },
+        {
+          "@id": "src/main/java/org/metavacua/catty/RoCrateHelloWorld.java"
+        },
+        {
+          "@id": "src/main/resources/wikidata-rocrate-query.rq"
+        },
+        {
+          "@id": "pom.xml"
+        },
+        {
+          "@id": "wikidata-rocrate-results.ttl"
+        },
+        {
+          "@id": "run.sh"
+        }
+      ],
+      "license": {
+        "@id": "https://spdx.org/licenses/AGPL-3.0-only.html",
+        "@type": "CreativeWork",
+        "name": "GNU Affero General Public License v3.0"
+      },
+      "creator": [
+        {
+          "@id": "https://github.com/metavacua",
+          "@type": "Organization",
+          "name": "MetaVacua"
+        }
+      ],
+      "citation": [
+        {
+          "@id": "https://www.researchobject.org/ro-crate-1.1"
+        }
+      ],
+      "mentions": [
+        {
+          "@id": "https://query.wikidata.org/sparql"
+        }
+      ],
+      "programmingLanguage": {
+        "@id": "https://www.wikidata.org/entity/Q251"
+      },
+      "runtimePlatform": "Java Virtual Machine (JVM) 17",
+      "mainEntityOfPage": {
+        "@id": "https://www.researchobject.org/ro-crate-1.1"
+      }
+    },
+    {
+      "@id": "rocrate-helloworld.jar",
+      "@type": "File",
+      "name": "Catty RO-Crate HelloWorld JAR",
+      "description": "Built executable JAR artifact from compiled Java sources. Queries Wikidata for software package entity information and outputs Turtle RDF.",
+      "encodingFormat": "application/java-archive",
+      "fileFormat": "JAR",
+      "programmingLanguage": {
+        "@id": "https://www.wikidata.org/entity/Q251"
+      },
+      "runtimePlatform": "Java Virtual Machine (JVM) 17",
+      "author": [
+        {
+          "@id": "https://github.com/metavacua",
+          "@type": "Organization",
+          "name": "MetaVacua"
+        }
+      ],
+      "license": {
+        "@id": "https://spdx.org/licenses/AGPL-3.0-only.html",
+        "@type": "CreativeWork",
+        "name": "GNU Affero General Public License v3.0"
+      },
+      "version": "0.0.0",
+      "dependencies": [
+        {
+          "@id": "https://jena.apache.org/",
+          "name": "Apache Jena ARQ"
+        }
+      ],
+      "isBasedOn": {
+        "@id": "src/main/java/org/metavacua/catty/RoCrateHelloWorld.java"
+      }
+    },
+    {
+      "@id": "Dockerfile",
+      "@type": "File",
+      "name": "Docker container definition for Catty RO-Crate HelloWorld",
+      "description": "Dockerfile that builds containerized executable for RO-Crate",
+      "encodingFormat": "text/plain",
+      "fileFormat": "Dockerfile"
+    },
+    {
+      "@id": "src/main/java/org/metavacua/catty/RoCrateHelloWorld.java",
+      "@type": "SoftwareSourceCode",
+      "name": "RO-Crate HelloWorld Java Source",
+      "description": "Main Java class implementing SPARQL query to Wikidata for software package entity retrieval",
+      "encodingFormat": "text/x-java-source",
+      "programmingLanguage": {
+        "@id": "https://www.wikidata.org/entity/Q251"
+      }
+    },
+    {
+      "@id": "src/main/resources/wikidata-rocrate-query.rq",
+      "@type": "File",
+      "name": "Wikidata SPARQL Query",
+      "description": "SPARQL query that searches Wikidata for software package entities",
+      "encodingFormat": "application/sparql-query",
+      "fileFormat": "SPARQL"
+    },
+    {
+      "@id": "pom.xml",
+      "@type": "File",
+      "name": "Maven Build Configuration",
+      "description": "Maven POM file defining project structure and dependencies",
+      "encodingFormat": "text/xml",
+      "fileFormat": "POM"
+    },
+    {
+      "@id": "wikidata-rocrate-results.ttl",
+      "@type": "File",
+      "name": "Wikidata Query Results (Turtle)",
+      "description": "Turtle RDF produced by RoCrateHelloWorld from executing wikidata-rocrate-query.rq against the Wikidata SPARQL endpoint. Contains retrieved entity data including URI, label, and description. Includes provenance comments with generation timestamp, query hash, and execution time.",
+      "encodingFormat": "text/turtle",
+      "fileFormat": "Turtle"
+    },
+    {
+      "@id": "run.sh",
+      "@type": "File",
+      "name": "Reproducible Build and Run Script",
+      "description": "Shell script that builds the JAR with Maven and executes the SPARQL query against Wikidata. Provides automated end-to-end execution with verification of outputs.",
+      "encodingFormat": "application/x-sh",
+      "fileFormat": "Shell script"
+    }
+  ]
+}

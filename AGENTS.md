@@ -18,6 +18,12 @@ This repository implements the Catty thesis: categorical foundations for logics 
 - **SPARQL Syntax**: SPARQL queries must NOT be wrapped in LaTeX environments (like `lstlisting`) when being processed or saved for execution.
 - **Query Quality**: Well-formed queries must return error-free non-empty results. Empty result sets or timeouts (over 60s) are considered failures.
 - **Extraction Protocol**: Follow the discovery and verification patterns for external QIDs and URIs. Document all difficulties and issues encountered during extraction.
+- **QID Validation Protocol**: When proposing semantic mappings to Wikidata QIDs, agents must actively validate by:
+  1. Executing queries against live Wikidata endpoint using the RO-Crate HelloWorld tool
+  2. Retrieving actual entity data (labels, descriptions) to verify semantic correctness
+  3. Iterating on QID proposals if initial mappings are semantically incorrect
+  4. Documenting the validation process and any discrepancies found
+  5. Never presupposing correct QIDs - always verify against actual Wikidata data
 
 ## Validation
 Run `python .catty/validation/validate.py --artifact <id>` or `--task <id>` to verify compliance. All criteria must evaluate true.
