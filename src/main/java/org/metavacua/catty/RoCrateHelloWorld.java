@@ -51,7 +51,10 @@ public class RoCrateHelloWorld {
 
             QueryExecution qe = QueryExecutionFactory.sparqlService(
                 WIKIDATA_ENDPOINT,
-                QueryFactory.create(query)
+                QueryFactory.create(query),
+                null,
+                TIMEOUT_MS,
+                TIMEOUT_MS
             );
 
             try {
