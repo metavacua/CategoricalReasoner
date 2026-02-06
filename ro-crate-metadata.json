@@ -40,7 +40,11 @@
           "@id": "pom.xml"
         }
       ],
-      "license": "https://spdx.org/licenses/AGPL-3.0",
+      "license": {
+        "@id": "https://www.wikidata.org/entity/Q341",
+        "@type": "SoftwareSourceCode",
+        "name": "free software"
+      },
       "creator": [
         {
           "@id": "https://github.com/metavacua",
@@ -84,7 +88,11 @@
           "name": "MetaVacua"
         }
       ],
-      "license": "https://spdx.org/licenses/AGPL-3.0",
+      "license": {
+        "@id": "https://www.wikidata.org/entity/Q341",
+        "@type": "SoftwareSourceCode",
+        "name": "free software"
+      },
       "version": "0.0.0",
       "dependencies": [
         {
