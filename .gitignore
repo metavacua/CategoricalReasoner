@@ -50,3 +50,20 @@ results/
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+.mvn/
+mvn.cmd
+.settings/
+.classpath
+.project
+
+# RO-Crate metadata (generated artifact)
+ro-crate-metadata.json
+dependency-reduced-pom.xml

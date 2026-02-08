@@ -1,0 +1,11 @@
+PREFIX schema: <http://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT DISTINCT ?item ?itemLabel ?description
+WHERE {
+  ?item rdf:type schema:CreativeWork .
+  ?item schema:name ?itemLabel .
+  OPTIONAL { ?item schema:description ?description }
+  FILTER(CONTAINS(LCASE(STR(?itemLabel)), "research object crate"))
+}
+LIMIT 100
