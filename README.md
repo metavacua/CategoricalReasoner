@@ -12,6 +12,10 @@ Catty develops algorithms and implementations for modeling formal logics as cate
 
 An algorithmic thesis is a software repository that embodies research contributions through executable algorithms, not static documents. The primary deliverables are working implementations, validation frameworks, and computational tools that realize theoretical concepts in code.
 
+Catty is not under any instutition, is not homework or any such instrument, is not subject to a thesis defense committee, or similar organizational commitments; it is a thesis in the sense of being held to formal standards for dissertation work at the level of the formation and operation of the instrument itself with voluntarily adopted academic standards for citations and scholarship. It is under the auspice of the Invisible College; the Invisible College is contemporaneously a socialogical concept related to the informal conduct of scholarship outside of established institutions, and it has direct roots into the common practice of science in the 19th and 20th century; it is in the tradition of Ruthford and Tesla.
+
+The adoption of the structure of "algorithmic thesis" is not a dilution of the thesis but a deliberate restriction on it. Unlike a typical academic thesis that would be held to grading standards and the internal politics of an arbitrary tenured committee, this thesis must conform to academic and industrial standards, and the governing bodies that it must survive are the International standards bodies, private peers and entities, interdisciplinary communities, and the web of academic institutions that may or may not elect to participate in its development or judgement. If and when a committee or committees are formed to judge it then they too will be beholden to the highest intersectional standards, norms, and canonical methods of judgement.
+
 ### What Catty Delivers
 
 This repository provides algorithms and implementations for:
