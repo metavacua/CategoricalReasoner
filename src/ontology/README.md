@@ -1,122 +1,54 @@
-# Catty Ontology: Categorical Semantic Model
+# Catty Ontology Directory
 
 ## ⚠️ IMPORTANT DISCLAIMER
 
-**These files are EXAMPLES and PLACEHOLDERS ONLY.**
+**This directory contains REFERENCE MATERIALS ONLY.**
 
-This directory contains example/reference RDF/OWL schemas and knowledge graph data. These files do **not** represent the authoritative ontologies for this project.
+This project **does not author local ontologies**. All semantic web data is consumed from external sources via SPARQL endpoints and linked data services.
 
-**Authoritative ontologies** are consumed from external sources:
-- SPARQL endpoints (DBPedia, Wikidata)
-- Linked data services
-- Generalized Knowledge Graph (GGG)
-- Static RDF/OWL files from external repositories
+## Purpose
 
-The Catty project architecture consumes external semantic web data via Jena; it does **not** author local ontologies.
+This directory contains:
+- Example SPARQL queries against external endpoints
+- Reference documentation for external ontology consumption
+- SHACL shapes for validation (if applicable to external data)
 
----
+## External Data Sources
 
-## Overview (Example Content)
+The Catty project consumes semantic web data from:
 
-Catty models logics as objects in a category with morphisms representing extension and interpretation relationships. The ontology provides:
+| Source | URL | Usage |
+|--------|-----|-------|
+| Wikidata | https://www.wikidata.org | Entity linking, QID resolution |
+| DBpedia | https://dbpedia.org/sparql | Linked data queries |
+| GGG | Giant Global Graph | General knowledge graph |
 
-1. **Categorical Schema**: Core classes for category theory and formal logic (Logical Signature, Axioms, LHS/RHS Structural Rules, etc.)
-2. **Logics-as-Objects**: Formal logics (LM, LK, LJ, LDJ, LL, etc.) represented as categorical objects with logical signatures and axioms.
-3. **Morphism Catalog**: Categorical relationships between logics (Extension, Interpretation, Adjunction).
-4. **Logic Category Structure**: The categorical structure emerging from rule and axiom configurations.
-5. **Curry-Howard Model**: The categorical equivalence between logic and type theory.
+## Technology Stack
 
-**Note**: These are illustrative examples of how semantic web data might be structured. They are not used in the actual system, which consumes external ontologies.
+**Primary: Java**
+- Apache Jena for RDF processing
+- OpenLlet for reasoning
+- JUnit for testing
 
-## File Structure
+## Prohibited Activities
 
-### Core Schema
+❌ **DO NOT**:
+- Create new JSON-LD files defining local ontologies
+- Author RDF schemas or OWL ontologies
+- Instantiate local ontology classes
+- Reference `http://catty.org/` (invalid domain)
 
-- **`catty-categorical-schema.jsonld`**: The complete RDF/OWL schema defining:
-  - Category theory primitives (Category, Object, Morphism, Functor, Natural Transformation)
-  - Logic-specific classes (Logic, LogicalTheory, LogicalSignature, LogicalAxiom, TheoreticalAxiom)
-  - LHS/RHS Structural rules (Weakening, Contraction, Exchange)
-  - Morphism types (Extension, Interpretation)
-  - Curry-Howard equivalence classes
+✅ **DO**:
+- Query external SPARQL endpoints
+- Process external RDF data with Jena
+- Document external data consumption patterns
+- Verify external QIDs and URIs
 
-### Knowledge Graph Data
+## License
 
-- **`logics-as-objects.jsonld`**: Instance data for logics as categorical objects:
-  - LM (initial common sublogic for LJ and LDJ)
-  - LK (terminal classical logic)
-  - LJ (intuitionistic logic)
-  - LDJ (dual intuitionistic logic)
-  - LL (linear logic)
-  - ALL (affine linear logic)
-  - RLL (relevant linear logic)
-
-- **`morphism-catalog.jsonld`**: Morphisms between logics:
-  - Extensions (LM → LJ, LM → LDJ, LJ → LK, LDJ → LK, LL → ALL → LK, LL → RLL → LK)
-  - Interpretations (LK → LJ via double negation)
-  - Adjoint functor pairs (LK ↔ LJ)
-
-- **`two-d-lattice-category.jsonld`**: The structural organization of the logic category based on rule configurations.
-
-- **`curry-howard-categorical-model.jsonld`**: The Curry-Howard correspondence:
-  - Equivalence of categories (Logic ↔ Type Theory)
-  - Curry-Howard functor and its inverse
-  - Categorical semantics (CCCs, *-autonomous categories)
-
-## Categorical Model
-
-### Objects (Logics)
-
-Logics are characterized by their logical signature and axioms. LK is the terminal logic in this framework.
-
-```
-       LM (Initial Base)
-      /  \
-     LJ   LDJ
-      \  /
-       LK (Terminal)
-```
-
-### Substructural Extensions
-
-LL is the resource-sensitive core. Adding structural rules leads to LK.
-
-```
-       LL
-      /  \
-    ALL  RLL
-      \  /
-       LK
-```
-
-### Morphisms
-
-A morphism A → B represents that B extends A (Extension) or that A is interpretable in B (Interpretation). Extending a logic by adding an axiom (LEM, LNC, Explosion) or a structural rule (Weakening, Contraction, Exchange) is modeled as a categorical morphism.
-
-The presence of specific axioms is structurally linked to the configuration of structural rules:
-- **Full structural rules (LK)** allow for full classical principles.
-- **Resource-sensitive rules (LL)** correspond to the absence of certain axioms (No Cloning/No Erasure).
-- **LHS/RHS restrictions** (Single-conclusion vs Multi-conclusion) directly relate to the validity of LEM and LNC.
-
-- **LL → ALL**: Adds weakening (allows erasure, maintains 'no cloning').
-- **LL → RLL**: Adds contraction (allows cloning, maintains 'no erasure').
-- **ALL/RLL → LK**: Adding the remaining structural rules and classical axioms results in Classical Logic.
-- **LJ/LDJ → LK**: Extension to the terminal classical system by adding the missing classical axiom (LEM or LNC).
-
-### License
-
-This ontology is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. External resources referenced have varying licenses:
-
-- **Wikidata**: CC0 (public domain) - Fully compatible
-- **DBPedia**: CC BY-SA 3.0 - Compatible with attribution
-- **OpenMath**: BSD 3-Clause - Fully compatible
-- **nLab**: CC BY-SA 3.0 - Compatible with attribution
-- **Lean MathLib**: Apache 2.0 - Fully compatible
-- **Coq**: CeCILL-B (BSD-compatible) - Fully compatible
+This directory is part of the Catty project, licensed under AGPL-3.0.
 
 ## References
 
-- Curry, H. B., & Howard, W. A. (1980). "Formulae-as-Types Notion of Control"
-- Gentzen, G. (1935). "Untersuchungen über das logische Schließen"
-- Girard, J.-Y. (1987). "Linear Logic"
-- Lambek, J., & Scott, P. J. (1986). "Introduction to Higher Order Categorical Logic"
-- nLab: https://ncatlab.org/nlab/
+- `docs/external-ontologies.md` - External ontology documentation
+- `docs/sparql-examples.md` - SPARQL query examples

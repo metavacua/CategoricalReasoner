@@ -1,7 +1,7 @@
 metadata:
   version: "1.0"
   last_updated: "2025-01-05T00:00:00Z"
-  purpose: "Approved citation registry for Catty thesis - LLMs may only cite these sources"
+  purpose: "Citation registry for Catty thesis. Citations are verified via Crossref, Wikidata, or other authoritative sources. New verified citations may be added via normal PR workflow."
 
 citations:
   girard1987linear:

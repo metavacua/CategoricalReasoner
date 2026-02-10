@@ -1,28 +1,23 @@
-# AGENTS.md - Ontology Development (Examples Only)
+# AGENTS.md - Ontology Directory
 
 ## Scope
-The `src/ontology/` directory contains **EXAMPLE and REFERENCE MATERIALS ONLY**. These files illustrate how RDF/OWL schemas and knowledge graph data might be structured for Catty's categorical logic model.
-
-**IMPORTANT**: Do not use these files as authoritative sources. The actual architecture consumes external ontologies from SPARQL endpoints and linked data sources (DBPedia, Wikidata, GGG).
+The `src/ontology/` directory contains **REFERENCE MATERIALS ONLY**. No local ontology authorship is permitted.
 
 ## Core Constraints
-- **Formats**: JSON-LD and Turtle RDF only. All files must parse without errors.
-- **Schema Compliance**: Instance data must conform to `catty-categorical-schema.jsonld` classes and properties.
-- **SHACL Validation**: All RDF artifacts must validate against `catty-shapes.ttl` and `catty-thesis-shapes.shacl`.
-- **External References**: Link to Wikidata (`owl:sameAs`), DBpedia (`skos:exactMatch`), and DBLP where applicable. External identifiers must be resolvable.
-- **Categorical Consistency**: Logic instances require signatures and axioms. Morphisms require source, target, and type definitions. All categorical constructions must have functorial mappings.
-- **Namespaces**: Use `catty:` prefix (https://github.com/metavacua/CategoricalReasoner/ontology/) for all custom entities. Do not use `catty.org`.
+- **No Local Ontology Development**: This project consumes semantic web data from external sources (SPARQL endpoints, Wikidata, DBpedia, GGG), NOT from local RDF files.
+- **Reference Only**: Any remaining files in this directory are for reference and example purposes only.
+- **Prohibited**: Creating JSON-LD, TTL, or any RDF schema files that define local ontologies.
+
+## External Data Consumption
+The Catty project consumes external ontologies via:
+- SPARQL endpoints (Wikidata Query Service, DBpedia)
+- Linked data services
+- Giant Global Graph (GGG)
+- Jena-based loading and reasoning
 
 ## Validation
-These are example files only. No validation is required for the actual project, which uses external ontologies.
-
-## Development Constraints
-**DO NOT** create or modify files in this directory. All ontology development should:
-1. Consume from external sources (SPARQL endpoints, linked data)
-2. Use Jena to load and process external RDF
-3. Use OpenLlet for reasoning
-4. Not author local RDF schemas
+No local validation required. The Java-based infrastructure uses Jena for external RDF consumption.
 
 ## See Also
-- `src/benchmarks/README.md` - SPARQL benchmarks against external endpoints
-- `src/schema/README.md` - Validation schemas (note: does not use local ontology)
+- `docs/external-ontologies.md` - Documentation on consumed external ontologies
+- `docs/sparql-examples.md` - SPARQL query examples against external endpoints
