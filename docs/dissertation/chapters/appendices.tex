@@ -8,7 +8,121 @@ The master list of approved citations for the Catty framework.
 Full specification for the Catty Domain-Specific Language.
 
 \section*{SPARQL Query Reference}
-Reference for exploring the categorical knowledge graph.
+
+\subsection*{External SPARQL Queries (Executable)}
+
+This section documents SPARQL queries that have been manually tested against external SPARQL endpoints using curl. All results are actual endpoint outputs with zero LLM generation.
+
+\subsubsection*{Q1: Wikidata QID Verification}
+
+\textbf{Purpose}: Verify that a QID matches its intended concept.
+
+\textbf{Endpoint}: \code{https://query.wikidata.org/sparql}
+
+\textbf{Query}:
+\begin{lstlisting}[language=SPARQL,breaklines=true]
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?label ?description WHERE {
+  wd:Q193138 rdfs:label ?label .
+  wd:Q193138 schema:description ?description .
+  FILTER(LANG(?label) = "en")
+}
+\end{lstlisting}
+
+\textbf{Result}: Q193138 = ``Les Mars'' (French commune)
+
+\textbf{Analysis}: This demonstrates the QID hallucination problem. Q193138 is NOT ``natural transformation'', validating the warning against guessing QIDs.
+
+\textbf{Status}: VALID -- Execution time: 0.754s, Result count: 1 item
+
+\subsubsection*{Q2: Wikidata Label Discovery}
+
+\textbf{Purpose}: Find the correct QID for a concept by label.
+
+\textbf{Endpoint}: \code{https://query.wikidata.org/sparql}
+
+\textbf{Query}:
+\begin{lstlisting}[language=SPARQL,breaklines=true]
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT DISTINCT ?item ?label ?description WHERE {
+  ?item rdfs:label "natural transformation"@en .
+  BIND("natural transformation"@en AS ?label)
+  ?item schema:description ?description .
+  FILTER(LANG(?description) = "en")
+}
+LIMIT 5
+\end{lstlisting}
+
+\textbf{Result}: Q1442189 = ``natural transformation'' (transformation between two functors studied in category theory)
+
+\textbf{Analysis}: Successfully discovers the correct QID for ``natural transformation'', matching the verified QID in the Core Domain Registry.
+
+\textbf{Status}: VALID -- Execution time: 0.367s, Result count: 1 binding
+
+\subsubsection*{Q3: Wikidata Logics Query}
+
+\textbf{Purpose}: Find all logics in Wikidata that are instances of ``logic'' (Q8078).
+
+\textbf{Endpoint}: \code{https://query.wikidata.org/sparql}
+
+\textbf{Query}:
+\begin{lstlisting}[language=SPARQL,breaklines=true]
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?logic ?logicLabel ?sequentForm
+WHERE {
+  ?logic wdt:P31 wd:Q8078 .  # instance of logic
+  ?logic rdfs:label ?logicLabel .
+  FILTER(LANG(?logicLabel) = "en")
+  OPTIONAL { ?logic wdt:P361 ?sequentForm . }
+}
+LIMIT 20
+\end{lstlisting}
+
+\textbf{Results}: 5 logic instances found:
+\begin{itemize}
+    \item Q7782444 -- ``Theory of obligationes''
+    \item Q28171908 -- ``Jaina seven-valued logic''
+    \item Q65122115 -- ``game semantics''
+    \item Q107417121 -- ``strict logic''
+    \item Q113995870 -- ``elimination method''
+\end{itemize}
+
+\textbf{Analysis}: Successfully retrieves logics from Wikidata. The OPTIONAL clause for sequentForm returned no results, indicating Wikidata lacks sequent form information.
+
+\textbf{Status}: VALID -- Execution time: 0.939s, Result count: 5 bindings
+
+\subsection*{Local Catty Ontology Queries (Non-Executable)}
+
+The following 13 queries are documented in \code{docs/sparql-examples.md} but target a local Catty categorical ontology that does not exist as an external SPARQL endpoint. They are classified as \textbf{NOT EXECUTABLE} and serve as specification documents for future ontology deployment.
+
+\subsubsection*{Query Categories}
+
+\begin{enumerate}
+    \item \textbf{Basic Queries}: \code{all-logics.rq}, \code{structural-rules.rq}
+    \item \textbf{Morphism Queries}: \code{morphisms-from-logic.rq}, \code{lattice-order.rq}
+    \item \textbf{Adjoint Queries}: \code{adjoint-relationships.rq}
+    \item \textbf{Curry-Howard Queries}: \code{curry-howard-mapping.rq}, \code{curry-howard-functor.rq}
+    \item \textbf{Lattice Queries}: \code{extension-hierarchy.rq}, \code{lattice-neighbors.rq}
+    \item \textbf{Validation Queries}: \code{orphan-logics.rq}, \code{terminal-logics.rq}
+    \item \textbf{Complex Queries}: \code{find-all-paths-in-lattice.rq}, \code{validate-curry-howard-correspondence.rq}
+\end{enumerate}
+
+These queries require the following Catty-specific vocabulary:
+\begin{itemize}
+    \item Classes: \code{catty:Logic}, \code{catty:Extension}, \code{catty:AdjointFunctors}
+    \item Properties: \code{catty:hasLogicalSignature}, \code{catty:domain}, \code{catty:codomain}
+    \item Individuals: \code{catty:LL}, \code{catty:LJ}, \code{catty:LK}
+\end{itemize}
+
+Full query listings are preserved in \code{docs/sparql-examples.md} as reference specifications.
 
 \section*{SHACL Shape Reference}
 Validation constraints for the formal ontology.

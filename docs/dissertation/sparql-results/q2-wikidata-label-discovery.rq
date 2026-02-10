@@ -1,0 +1,10 @@
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT DISTINCT ?item ?label ?description WHERE {
+  ?item rdfs:label "natural transformation"@en .
+  BIND("natural transformation"@en AS ?label)
+  ?item schema:description ?description .
+  FILTER(LANG(?description) = "en")
+}
+LIMIT 5

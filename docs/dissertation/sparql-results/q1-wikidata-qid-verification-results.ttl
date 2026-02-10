@@ -1,0 +1,276 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   282    0     0  100   282      0   1219 --:--:-- --:--:-- --:--:--  1215<?xml version='1.0' encoding='UTF-8'?>
+<sparql xmlns='http://www.w3.org/2005/sparql-results#'>
+	<head>
+		<variable name='label'/>
+		<variable name='description'/>
+	</head>
+	<results>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='it'>comune francese</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='ace'>komune di Peurancih</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='br'>kumun Bro-C'hall</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='ca'>municipi francès</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='es'>comuna francesa</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='hu'>település Franciaországban</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='is'>sveitarfélag í Frakklandi</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='lld'>chemun de la Franzia</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='oc'>una comuna francesa</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='pt'>comuna francesa</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='ru'>коммуна во Франции</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='tr'>Fransa'da komün</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='vec'>comun fransexo</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='zh-hans'>法国市镇</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='zh-hant'>法國市鎮</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='nb'>kommune i Nouvelle-Aquitaine i Frankrike</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='pl'>gmina we Francji</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='ar'>بلدية في كروز، فرنسا</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<liter100  7852    0  7570  100   282  10448    389 --:--:-- --:--:-- --:--:-- 10830
+al xml:lang='cs'>obec v departementu Creuse ve Francii</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='de'>französische Gemeinde im Département Creuse</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='en'>commune in Creuse, France</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='eo'>komunumo en la departemento Creuse de  Francio</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='fr'>commune française du département de la Creuse</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='gsw'>französeschi Gmaind im Département Creuse</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='ku'>komuna departmena Creuse, Nouvelle-Aquitaine, Fransa</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='nl'>gemeente in Creuse, Frankrijk</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='sk'>obec v departemente Creuse vo Francúzsku</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='sq'>komunë në departamentin Creuse, Francë</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='sv'>fransk kommun i departementet Creuse</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='uk'>муніципалітет у департаменті Крез, Франція</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='zh'>法国克勒兹省市镇</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='zh-cn'>法国克勒兹省市镇</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+		<result>
+			<binding name='description'>
+				<literal xml:lang='kk'>Франциядағы коммуна</literal>
+			</binding>
+			<binding name='label'>
+				<literal xml:lang='en'>Les Mars</literal>
+			</binding>
+		</result>
+	</results>
+</sparql>

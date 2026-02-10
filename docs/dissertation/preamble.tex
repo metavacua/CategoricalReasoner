@@ -8,9 +8,21 @@
 
 % Minimal helpers
 \newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\catty}{\textsc{Catty}}
 
 \lstset{
-  basicstyle=\ttfamily,
+  basicstyle=\ttfamily\small,
   breaklines=true,
   columns=fullflexible,
+  frame=single,
+  captionpos=b,
+}
+
+% SPARQL language definition for listings
+\lstdefinelanguage{SPARQL}{
+  morekeywords={PREFIX,SELECT,CONSTRUCT,ASK,DESCRIBE,WHERE,FILTER,OPTIONAL,UNION,GRAPH,LIMIT,OFFSET,ORDER,BY,DISTINCT,BIND,GROUP,HAVING,AS},
+  sensitive=true,
+  morecomment=[l]{\#},
+  morestring=[b]",
+  morestring=[b]',
 }

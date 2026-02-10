@@ -57,3 +57,63 @@ Sequent Calculus & \code{wd:Q1771121} & Formal argumentation style \\
 \end{tabular}
 \caption{Core Wikidata Identifiers}
 \end{table}
+
+\section*{SPARQL Query Testing Methodology}
+
+To ensure integrity and reproducibility, all SPARQL queries documented in this thesis must be manually tested against live endpoints. The testing protocol follows strict validation criteria to prevent LLM-generated artifacts.
+
+\subsection*{Testing Protocol}
+
+All SPARQL queries are executed using \code{curl} with the following constraints:
+
+\begin{enumerate}
+    \item \textbf{Actual Endpoint Execution}: All queries must be executed against live SPARQL endpoints (Wikidata, DBPedia, etc.) using HTTP POST requests.
+    \item \textbf{Zero LLM Generation}: Result files (JSON, XML, TTL) must be actual endpoint outputs, with zero tolerance for LLM-generated content.
+    \item \textbf{Timeout Threshold}: Queries must complete within 60 seconds.
+    \item \textbf{Non-Empty Results}: Valid queries must return at least one binding.
+    \item \textbf{Reproducibility}: All curl commands and result files are preserved for verification.
+\end{enumerate}
+
+\subsection*{Query Classification}
+
+Queries are classified according to their executability status:
+
+\begin{itemize}
+    \item \textbf{VALID}: Executes successfully against external endpoint, returns well-formed results in under 60s
+    \item \textbf{INVALID-SYNTAX}: Contains SPARQL syntax errors or endpoint errors
+    \item \textbf{INVALID-TIMEOUT}: Execution exceeds 60-second threshold
+    \item \textbf{INVALID-EMPTY}: Returns valid format but zero results
+    \item \textbf{NOT EXECUTABLE}: Requires local ontology not available as external endpoint
+\end{itemize}
+
+\subsection*{Tested Queries}
+
+Three external Wikidata queries have been manually tested and validated:
+
+\begin{table}[h]
+\centering
+\begin{tabular}{@{}llll@{}}
+\toprule
+Query & Purpose & Execution Time & Status \\ \midrule
+Q1 & QID Verification & 0.754s & VALID \\
+Q2 & Label Discovery & 0.367s & VALID \\
+Q3 & Logic Instances & 0.939s & VALID \\
+\bottomrule
+\end{tabular}
+\caption{Tested External SPARQL Queries}
+\end{table}
+
+All query results are preserved in \code{docs/dissertation/sparql-results/} with complete curl output and timing information. Full query listings and results are provided in Appendix A.
+
+\subsection*{Local Catty Ontology Queries}
+
+The 13 SPARQL queries in \code{docs/sparql-examples.md} target a local Catty categorical ontology that does not exist as an external SPARQL endpoint. These queries are classified as \textbf{NOT EXECUTABLE} and serve as specification documents for future ontology deployment. They define the intended structure of the Catty ontology including:
+
+\begin{itemize}
+    \item Logic instances (\code{catty:Logic})
+    \item Morphisms between logics (\code{catty:Extension})
+    \item Adjoint functor relationships (\code{catty:AdjointFunctors})
+    \item Curry-Howard correspondences (\code{catty:correspondsToLogic})
+\end{itemize}
+
+These queries are preserved as reference examples in the thesis appendices.

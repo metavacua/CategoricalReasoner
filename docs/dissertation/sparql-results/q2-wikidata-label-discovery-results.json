@@ -1,0 +1,26 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   846  100   523  100   323   1526    942 --:--:-- --:--:-- --:--:--  2473
+{
+  "head" : {
+    "vars" : [ "item", "label", "description" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "label" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "natural transformation"
+      },
+      "item" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q1442189"
+      },
+      "description" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "transformation between two functors studied in category theory"
+      }
+    } ]
+  }
+}
