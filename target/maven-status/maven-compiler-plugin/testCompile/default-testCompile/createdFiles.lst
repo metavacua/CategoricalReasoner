@@ -1,0 +1,4 @@
+org/catty/sparql/federation/SdlcDefinitionQueryTest.class
+org/catty/sparql/federation/SelectQueryFederationTest.class
+org/catty/sparql/federation/WikidataEndpointDiscoveryTest.class
+org/catty/sparql/federation/SelectQueryExecutorTest.class

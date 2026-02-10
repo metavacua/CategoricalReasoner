@@ -1,0 +1,26 @@
+# Purpose: Retrieve formal definitions of TDD, unit testing, etc.
+# SDLC Phase: Testing
+# Expected result structure: methodologyName, practiceDescription, lifecycleIntegration, artifactTypes
+# Endpoint target: https://query.wikidata.org/sparql
+# Resource constraints: 30s timeout
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?methodology ?methodologyName ?practiceDescription ?lifecycleIntegration ?artifactTypes
+WHERE {
+  VALUES ?methodology { wd:Q1635358 wd:Q1759600 wd:Q192934 wd:Q858163 } # TDD, unit test, integration test, acceptance test
+  ?methodology rdfs:label ?methodologyName .
+  FILTER(LANG(?methodologyName) = "en")
+  
+  OPTIONAL { 
+    ?methodology schema:description ?practiceDescription .
+    FILTER(LANG(?practiceDescription) = "en")
+  }
+  
+  BIND("Testing Phase" AS ?lifecycleIntegration)
+  BIND("Test Suite, Test Report" AS ?artifactTypes)
+}
+LIMIT 10

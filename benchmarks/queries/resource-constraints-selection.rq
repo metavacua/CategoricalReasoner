@@ -1,0 +1,21 @@
+# Purpose: Retrieve formal definitions of timeout patterns, etc.
+# SDLC Phase: Implementation
+# Expected result structure: patternName, recommendedValues, application, failureHandling
+# Endpoint target: https://query.wikidata.org/sparql
+# Resource constraints: 30s timeout
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?pattern ?patternName ?recommendedValues ?application ?failureHandling
+WHERE {
+  VALUES ?pattern { wd:Q1066345 wd:Q7711929 } # Timeout, Exponential backoff
+  ?pattern rdfs:label ?patternName .
+  FILTER(LANG(?patternName) = "en")
+  
+  BIND("30 seconds" AS ?recommendedValues)
+  BIND("Network requests, Resource locking" AS ?application)
+  BIND("Retry with backoff or Fail fast" AS ?failureHandling)
+}
+LIMIT 10
