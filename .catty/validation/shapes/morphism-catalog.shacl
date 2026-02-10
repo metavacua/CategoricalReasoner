@@ -1,0 +1,69 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix catty: <https://metavacua.github.io/CategoricalReasoner/ontology#> .
+
+# SHACL Shapes for Morphism Catalog Validation
+
+# Logic Morphism Shape
+catty:LogicMorphismShape
+    a sh:NodeShape ;
+    sh:targetClass catty:LogicMorphism ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "LogicMorphism must have rdfs:label" ;
+    ] ;
+    sh:property [
+        sh:path dct:description ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "LogicMorphism must have dct:description" ;
+    ] ;
+    sh:property [
+        sh:path catty:domain ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class catty:Logic ;
+        sh:message "LogicMorphism must have exactly one domain of type catty:Logic" ;
+    ] ;
+    sh:property [
+        sh:path catty:codomain ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class catty:Logic ;
+        sh:message "LogicMorphism must have exactly one codomain of type catty:Logic" ;
+    ] .
+
+# Extension Morphism Shape
+catty:ExtensionShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Extension ;
+    sh:property [
+        sh:path catty:domain ;
+        sh:minCount 1 ;
+        sh:class catty:Logic ;
+    ] ;
+    sh:property [
+        sh:path catty:codomain ;
+        sh:minCount 1 ;
+        sh:class catty:Logic ;
+    ] .
+
+# Interpretation Morphism Shape
+catty:InterpretationShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Interpretation ;
+    sh:property [
+        sh:path catty:domain ;
+        sh:minCount 1 ;
+        sh:class catty:Logic ;
+    ] ;
+    sh:property [
+        sh:path catty:codomain ;
+        sh:minCount 1 ;
+        sh:class catty:Logic ;
+    ] .
