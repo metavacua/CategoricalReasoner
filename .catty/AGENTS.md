@@ -1,15 +1,21 @@
-# AGENTS.md - Catty Operational Model
+# DEPRECATED
 
-## Scope
-The `.catty/` directory contains machine-readable operational specifications: `operations.yaml` (artifact/task registry), `phases.yaml` (dependency graph), and `validation/validate.py` (unified validation framework).
+The `.catty/` operational model is **DEPRECATED** and **NON-FUNCTIONAL**.
 
-## Core Constraints
-- **Task Execution**: Parse `operations.yaml` for artifact specs and task definitions. Resolve dependencies via `phases.yaml` before execution. Follow operational descriptions verbatim.
-- **Validation**: Execute `python validation/validate.py --artifact <id>` or `--task <id>`. Validation covers: file existence, syntax parsing, required content presence, schema compliance, acceptance criteria.
-- **Artifact Types**: LaTeX (syntax + compilation), Markdown (structure), Python (syntax + imports), JSON/YAML (syntax + schema validation).
-- **Dependencies**: Check `depends_on` lists before task execution. Execute prerequisite tasks for missing artifacts.
-- **Acceptance Criteria**: All criteria are boolean tests (e.g., "file exists", "validates against schema"). No subjective quality assessments.
-- **Technology Note**: Current validation uses Python for pragmatic CI/CD orchestration. Long-term validation infrastructure should use Java (Jena SHACL support, JUnit).
+## Status
 
-## Validation
-Run `python validation/validate.py --all` for batch validation. Fix reported errors and re-validate until all constraints pass.
+The YAML-based operational model (operations.yaml, phases.yaml) has been removed as it did not match repository reality. The Python validation scripts are abandoned and non-functional.
+
+## Current Approach
+
+- Repository governance is via standard documentation (README.md, AGENTS.md)
+- Validation is handled via Java-based tooling (Jena, JUnit)
+- Task execution follows standard PR workflows
+
+## Remaining Files
+
+- `validation/` - May contain deprecated Python scripts (non-functional)
+
+## Historical Context
+
+This directory previously contained an experimental machine-readable operational model. It has been superseded by standard documentation practices.
