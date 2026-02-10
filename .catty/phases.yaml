@@ -1,0 +1,614 @@
+# Catty Dependency Graph and Phase Sequencing
+# Version: 1.0.0
+# Purpose: Explicit task sequencing and parallel execution opportunities
+
+metadata:
+  version: "1.0.0"
+  project: "Catty"
+  description: "Task dependency graph with phase-based execution sequencing"
+  created: "2025-01-02"
+
+# ==============================================================================
+# DEPENDENCY GRAPH BY PHASE
+# ==============================================================================
+
+phases:
+  # ----------------------------------------------------------------------------
+  # Phase 0: Foundation (no external dependencies)
+  # ----------------------------------------------------------------------------
+  phase_0:
+    name: "Foundation"
+    description: "Initialize repository structure and conduct external resource audit"
+    parallelizable: true
+    tasks:
+      - task_id: "task:init-repository-structure"
+        produces: ["repository-structure"]
+        depends_on: []
+        estimated_duration: "10 minutes"
+        
+      - task_id: "task:conduct-semantic-web-audit"
+        produces: ["ontological-inventory"]
+        depends_on: []
+        estimated_duration: "30 minutes"
+    
+    completion_criteria:
+      - "Repository directory structure exists"
+      - "ontological-inventory.md contains 11+ resources"
+    
+    outputs:
+      - "repository-structure"
+      - "ontological-inventory"
+
+  # ----------------------------------------------------------------------------
+  # Phase 1: Core Ontology (depends on Phase 0)
+  # ----------------------------------------------------------------------------
+  phase_1:
+    name: "Core Ontology"
+    description: "Build RDF/OWL schemas, logic instances, morphisms, lattice, Curry-Howard model"
+    parallelizable: true
+    dependencies: ["phase_0"]
+    
+    subphase_1a:
+      name: "Schema Foundation"
+      description: "Core categorical schema (foundation for all other ontology artifacts)"
+      parallelizable: false
+      tasks:
+        - task_id: "task:build-categorical-schema"
+          produces: ["catty-categorical-schema"]
+          depends_on: []
+          estimated_duration: "20 minutes"
+      outputs:
+        - "catty-categorical-schema"
+    
+    subphase_1b:
+      name: "Logic and Morphism Definitions"
+      description: "Define logics as objects and morphisms between them (can run in parallel after schema)"
+      parallelizable: true
+      dependencies: ["subphase_1a"]
+      tasks:
+        - task_id: "task:build-logics-as-objects"
+          produces: ["logics-as-objects"]
+          depends_on: ["catty-categorical-schema"]
+          estimated_duration: "25 minutes"
+          
+        - task_id: "task:build-morphism-catalog"
+          produces: ["morphism-catalog"]
+          depends_on: ["catty-categorical-schema", "logics-as-objects"]
+          estimated_duration: "20 minutes"
+          blocking: false  # Can start after logics-as-objects
+      outputs:
+        - "logics-as-objects"
+        - "morphism-catalog"
+    
+    subphase_1c:
+      name: "Advanced Structures"
+      description: "Lattice and Curry-Howard model (depend on logics and morphisms)"
+      parallelizable: true
+      dependencies: ["subphase_1b"]
+      tasks:
+        - task_id: "task:build-two-d-lattice"
+          produces: ["two-d-lattice-category"]
+          depends_on: ["catty-categorical-schema", "logics-as-objects", "morphism-catalog"]
+          estimated_duration: "30 minutes"
+          
+        - task_id: "task:build-curry-howard-model"
+          produces: ["curry-howard-categorical-model"]
+          depends_on: ["catty-categorical-schema", "logics-as-objects", "two-d-lattice-category"]
+          estimated_duration: "25 minutes"
+          blocking: false  # Can start after two-d-lattice
+      outputs:
+        - "two-d-lattice-category"
+        - "curry-howard-categorical-model"
+    
+    subphase_1d:
+      name: "Examples and Validation"
+      description: "Complete example, SHACL shapes, queries, documentation (depend on all ontology artifacts)"
+      parallelizable: true
+      dependencies: ["subphase_1c"]
+      tasks:
+        - task_id: "task:build-complete-example"
+          produces: ["catty-complete-example"]
+          depends_on: ["catty-categorical-schema", "logics-as-objects", "morphism-catalog", "two-d-lattice-category", "curry-howard-categorical-model"]
+          estimated_duration: "30 minutes"
+          
+        - task_id: "task:build-shacl-shapes"
+          produces: ["catty-shapes"]
+          depends_on: ["catty-categorical-schema"]
+          estimated_duration: "25 minutes"
+          
+        - task_id: "task:build-sparql-examples"
+          produces: ["sparql-examples"]
+          depends_on: ["logics-as-objects", "morphism-catalog", "two-d-lattice-category", "curry-howard-categorical-model"]
+          estimated_duration: "30 minutes"
+          
+        - task_id: "task:write-ontology-documentation"
+          produces: ["ontology-readme"]
+          depends_on: ["catty-categorical-schema", "logics-as-objects", "morphism-catalog", "two-d-lattice-category", "curry-howard-categorical-model", "catty-complete-example", "catty-shapes", "sparql-examples"]
+          estimated_duration: "40 minutes"
+      outputs:
+        - "catty-complete-example"
+        - "catty-shapes"
+        - "sparql-examples"
+        - "ontology-readme"
+    
+    completion_criteria:
+      - "All ontology JSON-LD files parse as valid JSON-LD"
+      - "catty-shapes.ttl parses as valid Turtle"
+      - "At least 7 logic instances defined"
+      - "At least 10 morphism instances defined"
+      - "Lattice structure with 10+ nodes"
+      - "Curry-Howard equivalences for 4+ type systems"
+      - "15+ SPARQL query examples"
+      - "Comprehensive ontology documentation"
+    
+    outputs:
+      - "catty-categorical-schema"
+      - "logics-as-objects"
+      - "morphism-catalog"
+      - "two-d-lattice-category"
+      - "curry-howard-categorical-model"
+      - "catty-complete-example"
+      - "catty-shapes"
+      - "sparql-examples"
+      - "ontology-readme"
+
+  # ----------------------------------------------------------------------------
+  # Phase 2: Thesis (depends on Phase 1 ontology artifacts)
+  # ----------------------------------------------------------------------------
+  phase_2:
+    name: "Thesis"
+    description: "Write LaTeX thesis chapters and compile PDF"
+    parallelizable: true
+    dependencies: ["phase_1"]
+    
+    subphase_2a:
+      name: "Thesis Structure"
+      description: "Initialize LaTeX structure (independent of content)"
+      parallelizable: false
+      tasks:
+        - task_id: "task:init-thesis-structure"
+          produces: ["thesis-main", "thesis-preamble"]
+          depends_on: []
+          estimated_duration: "15 minutes"
+      outputs:
+        - "thesis-main"
+        - "thesis-preamble"
+    
+    subphase_2b:
+      name: "Chapter Writing"
+      description: "Write thesis chapters (can run in parallel after structure)"
+      parallelizable: true
+      dependencies: ["subphase_2a", "phase_1"]
+      tasks:
+        - task_id: "task:write-introduction"
+          produces: ["introduction-chapter"]
+          depends_on: ["init-thesis-structure"]
+          estimated_duration: "30 minutes"
+          
+        - task_id: "task:write-audit-chapter"
+          produces: ["audit-chapter"]
+          depends_on: ["catty-categorical-schema", "logics-as-objects", "morphism-catalog", "two-d-lattice-category", "curry-howard-categorical-model", "catty-complete-example", "ontological-inventory", "sparql-examples"]
+          estimated_duration: "60 minutes"
+          
+        - task_id: "task:write-conclusions"
+          produces: ["conclusions-chapter"]
+          depends_on: ["write-audit-chapter"]
+          estimated_duration: "30 minutes"
+          blocking: false  # Can start after audit chapter
+      outputs:
+        - "introduction-chapter"
+        - "audit-chapter"
+        - "conclusions-chapter"
+    
+    subphase_2c:
+      name: "PDF Compilation"
+      description: "Compile thesis to PDF (requires all chapters)"
+      parallelizable: false
+      dependencies: ["subphase_2b"]
+      tasks:
+        - task_id: "task:build-thesis-pdf"
+          produces: ["thesis-pdf"]
+          depends_on: ["thesis-main", "thesis-preamble", "introduction-chapter", "audit-chapter", "conclusions-chapter"]
+          estimated_duration: "10 minutes"
+      outputs:
+        - "thesis-pdf"
+    
+    completion_criteria:
+      - "All LaTeX chapter files parse without syntax errors"
+      - "Audit chapter has 7+ sections, 300+ lines"
+      - "Introduction has 3+ sections, 60+ lines"
+      - "Conclusions has 3+ sections, 90+ lines"
+      - "Thesis compiles to PDF successfully"
+      - "PDF contains all chapters"
+    
+    outputs:
+      - "thesis-main"
+      - "thesis-preamble"
+      - "introduction-chapter"
+      - "audit-chapter"
+      - "conclusions-chapter"
+      - "thesis-pdf"
+
+  # ----------------------------------------------------------------------------
+  # Phase 3: Validation Framework (depends on Phase 1 and Phase 2)
+  # ----------------------------------------------------------------------------
+  phase_3:
+    name: "Validation Framework"
+    description: "Build validation tools and validate all artifacts"
+    parallelizable: false
+    dependencies: ["phase_1", "phase_2"]
+    
+    subphase_3a:
+      name: "Framework Construction"
+      description: "Build validation scripts and schemas"
+      parallelizable: false
+      dependencies: ["phase_1"]
+      tasks:
+        - task_id: "task:build-validation-framework"
+          produces: ["validation-script", "categorical-schema-shape", "logics-as-objects-shape", "morphism-catalog-shape", "two-d-lattice-shape", "curry-howard-model-shape", "complete-example-shape", "thesis-structure-schema"]
+          depends_on: ["catty-categorical-schema"]
+          estimated_duration: "60 minutes"
+      outputs:
+        - "validation-script"
+        - "categorical-schema-shape"
+        - "logics-as-objects-shape"
+        - "morphism-catalog-shape"
+        - "two-d-lattice-shape"
+        - "curry-howard-model-shape"
+        - "complete-example-shape"
+        - "thesis-structure-schema"
+    
+    subphase_3b:
+      name: "Artifact Validation"
+      description: "Validate all ontology and thesis artifacts"
+      parallelizable: true
+      dependencies: ["subphase_3a"]
+      tasks:
+        - task_id: "task:validate-ontology"
+          produces: []
+          depends_on: ["build-validation-framework", "catty-categorical-schema", "logics-as-objects", "morphism-catalog", "two-d-lattice-category", "curry-howard-categorical-model", "catty-complete-example", "catty-shapes"]
+          estimated_duration: "20 minutes"
+          
+        - task_id: "task:validate-thesis"
+          produces: []
+          depends_on: ["build-validation-framework", "audit-chapter", "introduction-chapter", "conclusions-chapter"]
+          estimated_duration: "15 minutes"
+      outputs: []
+    
+    completion_criteria:
+      - "Validation script executes successfully"
+      - "All SHACL shapes parse as valid Turtle"
+      - "All ontology artifacts pass SHACL validation"
+      - "All thesis chapters pass structure validation"
+      - "Thesis compiles without errors"
+    
+    outputs:
+      - "validation-script"
+      - "categorical-schema-shape"
+      - "logics-as-objects-shape"
+      - "morphism-catalog-shape"
+      - "two-d-lattice-shape"
+      - "curry-howard-model-shape"
+      - "complete-example-shape"
+      - "thesis-structure-schema"
+
+# ==============================================================================
+# EXECUTION ORDER
+# ==============================================================================
+
+execution_order:
+  description: "Recommended task execution order with parallelization opportunities"
+  
+  sequence:
+    - step: 1
+      phase: "phase_0"
+      parallel_tasks:
+        - "task:init-repository-structure"
+        - "task:conduct-semantic-web-audit"
+      blocking: true
+      
+    - step: 2
+      phase: "phase_1.subphase_1a"
+      sequential_tasks:
+        - "task:build-categorical-schema"
+      blocking: true
+      
+    - step: 3
+      phase: "phase_1.subphase_1b"
+      sequential_tasks:
+        - "task:build-logics-as-objects"
+        - "task:build-morphism-catalog"
+      blocking: true
+      note: "morphism-catalog depends on logics-as-objects, so must run sequentially"
+      
+    - step: 4
+      phase: "phase_1.subphase_1c"
+      sequential_tasks:
+        - "task:build-two-d-lattice"
+        - "task:build-curry-howard-model"
+      blocking: true
+      note: "curry-howard depends on two-d-lattice, so must run sequentially"
+      
+    - step: 5
+      phase: "phase_1.subphase_1d"
+      parallel_tasks:
+        - "task:build-complete-example"
+        - "task:build-shacl-shapes"
+        - "task:build-sparql-examples"
+      blocking: false
+      note: "These can run in parallel as they have different dependencies"
+      
+    - step: 6
+      phase: "phase_1.subphase_1d"
+      sequential_tasks:
+        - "task:write-ontology-documentation"
+      blocking: true
+      note: "Must run after all other Phase 1 tasks complete"
+      
+    - step: 7
+      phase: "phase_2.subphase_2a"
+      sequential_tasks:
+        - "task:init-thesis-structure"
+      blocking: true
+      
+    - step: 8
+      phase: "phase_2.subphase_2b"
+      parallel_tasks:
+        - "task:write-introduction"
+        - "task:write-audit-chapter"
+      blocking: false
+      note: "Can start in parallel with thesis structure"
+      
+    - step: 9
+      phase: "phase_2.subphase_2b"
+      sequential_tasks:
+        - "task:write-conclusions"
+      blocking: true
+      note: "Depends on audit chapter"
+      
+    - step: 10
+      phase: "phase_2.subphase_2c"
+      sequential_tasks:
+        - "task:build-thesis-pdf"
+      blocking: true
+      
+    - step: 11
+      phase: "phase_3.subphase_3a"
+      sequential_tasks:
+        - "task:build-validation-framework"
+      blocking: true
+      
+    - step: 12
+      phase: "phase_3.subphase_3b"
+      parallel_tasks:
+        - "task:validate-ontology"
+        - "task:validate-thesis"
+      blocking: true
+
+# ==============================================================================
+# DEPENDENCY MATRIX
+# ==============================================================================
+
+dependency_matrix:
+  description: "Complete dependency matrix showing which tasks depend on which artifacts"
+  
+  tasks:
+    "task:init-repository-structure":
+      depends_on_tasks: []
+      depends_on_artifacts: []
+      produces_artifacts: ["repository-structure"]
+      
+    "task:conduct-semantic-web-audit":
+      depends_on_tasks: []
+      depends_on_artifacts: []
+      produces_artifacts: ["ontological-inventory"]
+      
+    "task:build-categorical-schema":
+      depends_on_tasks: []
+      depends_on_artifacts: []
+      produces_artifacts: ["catty-categorical-schema"]
+      
+    "task:build-logics-as-objects":
+      depends_on_tasks: ["task:build-categorical-schema"]
+      depends_on_artifacts: ["catty-categorical-schema"]
+      produces_artifacts: ["logics-as-objects"]
+      
+    "task:build-morphism-catalog":
+      depends_on_tasks: ["task:build-categorical-schema", "task:build-logics-as-objects"]
+      depends_on_artifacts: ["catty-categorical-schema", "logics-as-objects"]
+      produces_artifacts: ["morphism-catalog"]
+      
+    "task:build-two-d-lattice":
+      depends_on_tasks: ["task:build-categorical-schema", "task:build-logics-as-objects", "task:build-morphism-catalog"]
+      depends_on_artifacts: ["catty-categorical-schema", "logics-as-objects", "morphism-catalog"]
+      produces_artifacts: ["two-d-lattice-category"]
+      
+    "task:build-curry-howard-model":
+      depends_on_tasks: ["task:build-categorical-schema", "task:build-logics-as-objects", "task:build-two-d-lattice"]
+      depends_on_artifacts: ["catty-categorical-schema", "logics-as-objects", "two-d-lattice-category"]
+      produces_artifacts: ["curry-howard-categorical-model"]
+      
+    "task:build-complete-example":
+      depends_on_tasks: ["task:build-categorical-schema", "task:build-logics-as-objects", "task:build-morphism-catalog", "task:build-two-d-lattice", "task:build-curry-howard-model"]
+      depends_on_artifacts: ["catty-categorical-schema", "logics-as-objects", "morphism-catalog", "two-d-lattice-category", "curry-howard-categorical-model"]
+      produces_artifacts: ["catty-complete-example"]
+      
+    "task:build-shacl-shapes":
+      depends_on_tasks: ["task:build-categorical-schema"]
+      depends_on_artifacts: ["catty-categorical-schema"]
+      produces_artifacts: ["catty-shapes"]
+      
+    "task:build-sparql-examples":
+      depends_on_tasks: ["task:build-logics-as-objects", "task:build-morphism-catalog", "task:build-two-d-lattice", "task:build-curry-howard-model"]
+      depends_on_artifacts: ["logics-as-objects", "morphism-catalog", "two-d-lattice-category", "curry-howard-categorical-model"]
+      produces_artifacts: ["sparql-examples"]
+      
+    "task:write-ontology-documentation":
+      depends_on_tasks: ["task:build-categorical-schema", "task:build-logics-as-objects", "task:build-morphism-catalog", "task:build-two-d-lattice", "task:build-curry-howard-model", "task:build-complete-example", "task:build-shacl-shapes", "task:build-sparql-examples"]
+      depends_on_artifacts: ["catty-categorical-schema", "logics-as-objects", "morphism-catalog", "two-d-lattice-category", "curry-howard-categorical-model", "catty-complete-example", "catty-shapes", "sparql-examples"]
+      produces_artifacts: ["ontology-readme"]
+      
+    "task:init-thesis-structure":
+      depends_on_tasks: []
+      depends_on_artifacts: []
+      produces_artifacts: ["thesis-main", "thesis-preamble"]
+      
+    "task:write-introduction":
+      depends_on_tasks: ["task:init-thesis-structure"]
+      depends_on_artifacts: ["init-thesis-structure"]
+      produces_artifacts: ["introduction-chapter"]
+      
+    "task:write-audit-chapter":
+      depends_on_tasks: ["task:build-categorical-schema", "task:build-logics-as-objects", "task:build-morphism-catalog", "task:build-two-d-lattice", "task:build-curry-howard-model", "task:build-complete-example", "task:conduct-semantic-web-audit", "task:build-sparql-examples"]
+      depends_on_artifacts: ["catty-categorical-schema", "logics-as-objects", "morphism-catalog", "two-d-lattice-category", "curry-howard-categorical-model", "catty-complete-example", "ontological-inventory", "sparql-examples"]
+      produces_artifacts: ["audit-chapter"]
+      
+    "task:write-conclusions":
+      depends_on_tasks: ["task:write-audit-chapter"]
+      depends_on_artifacts: ["write-audit-chapter"]
+      produces_artifacts: ["conclusions-chapter"]
+      
+    "task:build-thesis-pdf":
+      depends_on_tasks: ["task:init-thesis-structure", "task:write-introduction", "task:write-audit-chapter", "task:write-conclusions"]
+      depends_on_artifacts: ["thesis-main", "thesis-preamble", "introduction-chapter", "audit-chapter", "conclusions-chapter"]
+      produces_artifacts: ["thesis-pdf"]
+      
+    "task:build-validation-framework":
+      depends_on_tasks: ["task:build-categorical-schema"]
+      depends_on_artifacts: ["catty-categorical-schema"]
+      produces_artifacts: ["validation-script", "categorical-schema-shape", "logics-as-objects-shape", "morphism-catalog-shape", "two-d-lattice-shape", "curry-howard-model-shape", "complete-example-shape", "thesis-structure-schema"]
+      
+    "task:validate-ontology":
+      depends_on_tasks: ["task:build-validation-framework", "task:build-categorical-schema", "task:build-logics-as-objects", "task:build-morphism-catalog", "task:build-two-d-lattice", "task:build-curry-howard-model", "task:build-complete-example", "task:build-shacl-shapes"]
+      depends_on_artifacts: ["build-validation-framework", "catty-categorical-schema", "logics-as-objects", "morphism-catalog", "two-d-lattice-category", "curry-howard-categorical-model", "catty-complete-example", "catty-shapes"]
+      produces_artifacts: []
+      
+    "task:validate-thesis":
+      depends_on_tasks: ["task:build-validation-framework", "task:write-audit-chapter", "task:write-introduction", "task:write-conclusions"]
+      depends_on_artifacts: ["build-validation-framework", "audit-chapter", "introduction-chapter", "conclusions-chapter"]
+      produces_artifacts: []
+
+# ==============================================================================
+# CRITICAL PATH
+# ==============================================================================
+
+critical_path:
+  description: "Longest path through dependency graph (determines minimum project duration)"
+  
+  path:
+    - step: 1
+      task: "task:conduct-semantic-web-audit"
+      duration: "30 minutes"
+      cumulative: "30 minutes"
+      
+    - step: 2
+      task: "task:build-categorical-schema"
+      duration: "20 minutes"
+      cumulative: "50 minutes"
+      
+    - step: 3
+      task: "task:build-logics-as-objects"
+      duration: "25 minutes"
+      cumulative: "75 minutes"
+      
+    - step: 4
+      task: "task:build-morphism-catalog"
+      duration: "20 minutes"
+      cumulative: "95 minutes"
+      
+    - step: 5
+      task: "task:build-two-d-lattice"
+      duration: "30 minutes"
+      cumulative: "125 minutes"
+      
+    - step: 6
+      task: "task:build-curry-howard-model"
+      duration: "25 minutes"
+      cumulative: "150 minutes"
+      
+    - step: 7
+      task: "task:build-complete-example"
+      duration: "30 minutes"
+      cumulative: "180 minutes"
+      
+    - step: 8
+      task: "task:write-ontology-documentation"
+      duration: "40 minutes"
+      cumulative: "220 minutes"
+      
+    - step: 9
+      task: "task:write-audit-chapter"
+      duration: "60 minutes"
+      cumulative: "280 minutes"
+      
+    - step: 10
+      task: "task:write-conclusions"
+      duration: "30 minutes"
+      cumulative: "310 minutes"
+      
+    - step: 11
+      task: "task:build-thesis-pdf"
+      duration: "10 minutes"
+      cumulative: "320 minutes"
+      
+    - step: 12
+      task: "task:build-validation-framework"
+      duration: "60 minutes"
+      cumulative: "380 minutes"
+      
+    - step: 13
+      task: "task:validate-ontology"
+      duration: "20 minutes"
+      cumulative: "400 minutes"
+  
+  total_duration: "400 minutes (6.7 hours)"
+  note: "This is the minimum duration if all parallelizable tasks run concurrently"
+
+# ==============================================================================
+# PARALLELIZATION OPPORTUNITIES
+# ==============================================================================
+
+parallelization_opportunities:
+  description: "Tasks that can run in parallel to reduce total project duration"
+  
+  parallel_groups:
+    group_1:
+      phase: "phase_0"
+      tasks:
+        - "task:init-repository-structure"
+        - "task:conduct-semantic-web-audit"
+      time_saved: "Can run simultaneously, saves 30 minutes"
+      
+    group_2:
+      phase: "phase_1.subphase_1d"
+      tasks:
+        - "task:build-complete-example"
+        - "task:build-shacl-shapes"
+        - "task:build-sparql-examples"
+      time_saved: "Can run simultaneously after Phase 1 core, saves up to 60 minutes"
+      
+    group_3:
+      phase: "phase_2.subphase_2b"
+      tasks:
+        - "task:write-introduction"
+        - "task:write-audit-chapter"
+      time_saved: "Can run simultaneously, saves 30 minutes"
+      
+    group_4:
+      phase: "phase_3.subphase_3b"
+      tasks:
+        - "task:validate-ontology"
+        - "task:validate-thesis"
+      time_saved: "Can run simultaneously, saves 20 minutes"
+  
+  max_time_savings: "140 minutes (2.3 hours)"
+  optimized_duration: "260 minutes (4.3 hours)"
+
+# ==============================================================================
+# CHANGELOG
+# ==============================================================================
+
+changelog:
+  - version: "1.0.0"
+    date: "2025-01-02"
+    changes: "Initial dependency graph and phase sequencing for Catty operational model"
