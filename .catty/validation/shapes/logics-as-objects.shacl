@@ -1,0 +1,50 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix catty: <https://metavacua.github.io/CategoricalReasoner/ontology#> .
+
+# SHACL Shapes for Logics-as-Objects Validation
+
+# Logic Instance Shape
+catty:LogicInstanceShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Logic ;
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Logic instance must have rdfs:label" ;
+    ] ;
+    sh:property [
+        sh:path dct:description ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Logic instance must have dct:description" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasWeakeningLHS ;
+        sh:maxCount 1 ;
+        sh:message "Logic instance should have at most one hasWeakeningLHS value" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasWeakeningRHS ;
+        sh:maxCount 1 ;
+        sh:message "Logic instance should have at most one hasWeakeningRHS value" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasContractionLHS ;
+        sh:maxCount 1 ;
+        sh:message "Logic instance should have at most one hasContractionLHS value" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasContractionRHS ;
+        sh:maxCount 1 ;
+        sh:message "Logic instance should have at most one hasContractionRHS value" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasExchange ;
+        sh:maxCount 1 ;
+        sh:message "Logic instance should have at most one hasExchange value" ;
+    ] .
