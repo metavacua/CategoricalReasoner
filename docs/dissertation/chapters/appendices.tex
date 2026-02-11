@@ -99,30 +99,53 @@ LIMIT 20
 
 \textbf{Status}: VALID -- Execution time: 0.939s, Result count: 5 bindings
 
-\subsection*{Local Catty Ontology Queries (Non-Executable)}
+\subsection*{Queries Requiring Refactoring to External Standards}
 
-The following 13 queries are documented in \code{docs/sparql-examples.md} but target a local Catty categorical ontology that does not exist as an external SPARQL endpoint. They are classified as \textbf{NOT EXECUTABLE} and serve as specification documents for future ontology deployment.
+The following 13 queries in \code{docs/sparql-examples.md} use \textbf{custom vocabulary that must be replaced} with W3C/OMG/ISO standards to comply with AGENTS.md constraints on consuming external semantic web data rather than authoring new ontologies.
 
-\subsubsection*{Query Categories}
+\subsubsection*{Query Refactoring Requirements}
 
 \begin{enumerate}
     \item \textbf{Basic Queries}: \code{all-logics.rq}, \code{structural-rules.rq}
+    \begin{itemize}
+        \item Replace \code{catty:Logic} with \code{owl:Ontology} (W3C OWL 2)
+        \item Replace \code{catty:hasLogicalAxiom} with \code{owl:Axiom} (W3C OWL 2)
+    \end{itemize}
+    
     \item \textbf{Morphism Queries}: \code{morphisms-from-logic.rq}, \code{lattice-order.rq}
+    \begin{itemize}
+        \item Replace \code{catty:domain/codomain} with \code{theory:domain/codomain} (ISO Common Logic/COLORE)
+        \item Replace \code{catty:Extension} with COLORE Category Theory morphism structures
+    \end{itemize}
+    
     \item \textbf{Adjoint Queries}: \code{adjoint-relationships.rq}
+    \begin{itemize}
+        \item Replace \code{catty:AdjointFunctors} with COLORE Category Theory adjunction formalization
+    \end{itemize}
+    
     \item \textbf{Curry-Howard Queries}: \code{curry-howard-mapping.rq}, \code{curry-howard-functor.rq}
+    \begin{itemize}
+        \item Replace \code{catty:CurryHowardFunctor} with \code{dol:LogicTranslation} (OMG DOL)
+        \item Replace \code{catty:correspondsToLogic} with DOL logic mapping predicates
+    \end{itemize}
+    
     \item \textbf{Lattice Queries}: \code{extension-hierarchy.rq}, \code{lattice-neighbors.rq}
+    \begin{itemize}
+        \item Refactor to use COLORE partial order structures from Common Logic
+    \end{itemize}
+    
     \item \textbf{Validation Queries}: \code{orphan-logics.rq}, \code{terminal-logics.rq}
+    \begin{itemize}
+        \item Refactor to validate against OWL 2 ontology completeness constraints
+    \end{itemize}
+    
     \item \textbf{Complex Queries}: \code{find-all-paths-in-lattice.rq}, \code{validate-curry-howard-correspondence.rq}
+    \begin{itemize}
+        \item Refactor to use DOL logic translation validation and COLORE morphism composition
+    \end{itemize}
 \end{enumerate}
 
-These queries require the following Catty-specific vocabulary:
-\begin{itemize}
-    \item Classes: \code{catty:Logic}, \code{catty:Extension}, \code{catty:AdjointFunctors}
-    \item Properties: \code{catty:hasLogicalSignature}, \code{catty:domain}, \code{catty:codomain}
-    \item Individuals: \code{catty:LL}, \code{catty:LJ}, \code{catty:LK}
-\end{itemize}
-
-Full query listings are preserved in \code{docs/sparql-examples.md} as reference specifications.
+\textbf{Action Required}: All queries must be refactored to import and consume from W3C OWL 2, OMG DOL, and ISO COLORE repositories rather than defining new \code{catty:} vocabulary.
 
 \section*{SHACL Shape Reference}
 Validation constraints for the formal ontology.

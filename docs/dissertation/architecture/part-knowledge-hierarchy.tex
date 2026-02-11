@@ -105,15 +105,15 @@ Q3 & Logic Instances & 0.939s & VALID \\
 
 All query results are preserved in \code{docs/dissertation/sparql-results/} with complete curl output and timing information. Full query listings and results are provided in Appendix A.
 
-\subsection*{Local Catty Ontology Queries}
+\subsection*{Queries Requiring External Standard Integration}
 
-The 13 SPARQL queries in \code{docs/sparql-examples.md} target a local Catty categorical ontology that does not exist as an external SPARQL endpoint. These queries are classified as \textbf{NOT EXECUTABLE} and serve as specification documents for future ontology deployment. They define the intended structure of the Catty ontology including:
+The 13 SPARQL queries in \code{docs/sparql-examples.md} reference vocabulary that must be \textbf{replaced with existing W3C/OMG/ISO standards} rather than authored locally. These queries are classified as \textbf{PENDING REFACTORING} to consume from:
 
 \begin{itemize}
-    \item Logic instances (\code{catty:Logic})
-    \item Morphisms between logics (\code{catty:Extension})
-    \item Adjoint functor relationships (\code{catty:AdjointFunctors})
-    \item Curry-Howard correspondences (\code{catty:correspondsToLogic})
+    \item \textbf{Logic \& Axioms}: W3C OWL 2 (\code{owl:Ontology}, \code{owl:Axiom}) instead of \code{catty:Logic}
+    \item \textbf{Category Theory}: ISO Common Logic/COLORE (\code{theory:domain}, \code{theory:morphism}) instead of \code{catty:Extension}
+    \item \textbf{Logic Translations}: OMG DOL (\code{dol:LogicTranslation}) instead of \code{catty:CurryHowardFunctor}
+    \item \textbf{Functors}: COLORE Category Theory module instead of \code{catty:AdjointFunctors}
 \end{itemize}
 
-These queries are preserved as reference examples in the thesis appendices.
+These queries will be refactored to import and consume from external standards per AGENTS.md constraints on code reuse.

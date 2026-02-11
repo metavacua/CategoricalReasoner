@@ -1,149 +1,154 @@
-# Analysis: Local Catty Ontology Queries (Non-Executable)
+# Analysis: Queries Requiring Refactoring to External Standards
 
 ## Summary
 
-The 13 SPARQL queries documented in `docs/sparql-examples.md` **cannot be executed** against external SPARQL endpoints because they target a **local Catty categorical ontology** that does not exist as a publicly accessible RDF datasource.
+The 13 SPARQL queries in `docs/sparql-examples.md` **violate AGENTS.md constraints** by using custom `catty:` vocabulary instead of consuming from existing W3C/OMG/ISO standards.
 
-## Classification: NOT EXECUTABLE
+## Classification: PENDING REFACTORING
 
-**Reason**: Requires local ontology deployment
+**Reason**: Uses custom vocabulary that duplicates existing international standards
 
-**Status**: SPECIFICATION / EXAMPLE queries for future implementation
+**Action Required**: Refactor to import and consume from W3C OWL 2, OMG DOL, and ISO COLORE
 
-## Technical Analysis
+## Violation Analysis
 
-### Prefix Dependencies
+### Violation of Code Reuse Principle
 
-All queries in `sparql-examples.md` use the prefix:
+All queries use the prefix:
 
 ```sparql
 PREFIX catty: <https://github.com/metavacua/CategoricalReasoner/ontology/>
 ```
 
-This prefix points to the **MetaVacua CategoricalReasoner** repository, which:
+**This violates AGENTS.md sourcing priority**: W3C Standards → ISO/IEC Standards → Community Standards → Original Research
 
-1. **Is a GitHub repository**, not a SPARQL endpoint
-2. **Does not host an RDF ontology** at the specified URI
-3. **Is intended for future ontology development**, not current deployment
+**Correct approach**: Replace `catty:` with existing standard prefixes:
+- `owl:` for W3C OWL 2 vocabulary
+- `dol:` for OMG DOL logic translations
+- `colore:` / `theory:` for ISO Common Logic/COLORE category theory
 
-### Required RDF Files (Not Yet Created)
+### Redundant Vocabulary (Already Exists in External Standards)
 
-According to the `sparql-examples.md` documentation, these queries expect the following RDF files:
+The queries define vocabulary that **duplicates existing W3C/OMG/ISO standards**:
 
-1. `catty-categorical-schema.jsonld` - Core categorical structures (Category, Functor, Natural Transformation)
-2. `logics-as-objects.jsonld` - Individual logic instances (LJ, LK, LL, etc.)
-3. `morphism-catalog.jsonld` - Morphisms between logics (extensions, embeddings, translations)
+**Custom Vocabulary** → **Existing Standard**:
+- `catty:Logic` → `owl:Ontology` (W3C OWL 2)
+- `catty:hasLogicalAxiom` → `owl:Axiom` (W3C OWL 2)
+- `catty:domain` → `theory:domain` (ISO Common Logic/COLORE)
+- `catty:codomain` → `theory:codomain` (ISO Common Logic/COLORE)
+- `catty:Extension` → COLORE Category Theory morphism structures
+- `catty:AdjointFunctors` → COLORE Category Theory adjunction formalization
+- `catty:CurryHowardFunctor` → `dol:LogicTranslation` (OMG DOL)
+- `catty:correspondsToLogic` → DOL logic mapping predicates
 
-**Current status**: These files are **referenced but do not exist** as RDF data sources.
+**Evidence of Redundancy**:
+1. **W3C OWL 2 Structural Specification**: Defines `Axiom` as a class and provides functional-style syntax for logic → RDF mappings
+2. **ISO/IEC 24707 (Common Logic)**: Formalizes morphism, domain, codomain, and composition
+3. **COLORE Repository**: Contains dedicated Category Theory module with formal definitions
+4. **OMG DOL Standard**: Explicitly handles logic translations (Curry-Howard correspondences)
 
-### Required RDF Classes and Properties
+### Interoperability Obstruction
 
-The queries reference the following Catty-specific vocabulary that does not exist in external ontologies:
+By using `catty:` namespace instead of standard prefixes, these queries:
+1. **Cannot interoperate** with existing semantic web tools expecting OWL 2 / DOL / COLORE vocabulary
+2. **Require custom parsers** instead of leveraging "off-the-shelf" RDF/OWL reasoners
+3. **Create vendor lock-in** to Catty-specific implementations
+4. **Violate open standards principles** stated in AGENTS.md sourcing hierarchy
 
-**Classes**:
-- `catty:Logic`
-- `catty:Extension`
-- `catty:AdjointFunctors`
-- `catty:TypeTheory`
-- `catty:CurryHowardFunctor`
-
-**Properties**:
-- `catty:hasLogicalSignature`
-- `catty:hasLogicalAxiom`
-- `catty:hasStructuralRule`
-- `catty:domain`
-- `catty:codomain`
-- `catty:correspondsToLogic`
-- `catty:objectMapping`
-
-**Individuals**:
-- `catty:LL` (Linear Logic)
-- `catty:LJ` (Intuitionistic Logic)
-- `catty:LK` (Classical Logic)
-
-None of these vocabulary terms exist in Wikidata, DBPedia, or other external SPARQL endpoints.
-
-## Query-by-Query Analysis
+## Query-by-Query Refactoring Requirements
 
 ### 1. all-logics.rq
 **Type**: Basic query
 **Purpose**: List all logics with their logical signatures and axioms
-**Required**: Local `catty:Logic` class with instances
-**Executable**: NO - requires local ontology
+**Current Vocabulary**: `catty:Logic`, `catty:hasLogicalSignature`, `catty:hasLogicalAxiom`
+**Required Refactoring**: Replace with W3C OWL 2 (`owl:Ontology`, `owl:Axiom`)
+**Status**: PENDING REFACTORING
 
 ### 2. structural-rules.rq
 **Type**: Basic query
-**Purpose**: Get all structural rules for Linear Logic (LL)
-**Required**: Local `catty:LL` individual with `catty:hasStructuralRule` property
-**Executable**: NO - requires local ontology
+**Purpose**: Get all structural rules for Linear Logic
+**Current Vocabulary**: `catty:LL`, `catty:hasStructuralRule`
+**Required Refactoring**: Model as OWL 2 ontology with axioms representing structural rules
+**Status**: PENDING REFACTORING
 
 ### 3. morphisms-from-logic.rq
 **Type**: Morphism query
-**Purpose**: Find all morphisms from Intuitionistic Logic (LJ)
-**Required**: Local `catty:LJ` individual with morphisms
-**Executable**: NO - requires local ontology
+**Purpose**: Find all morphisms from Intuitionistic Logic
+**Current Vocabulary**: `catty:LJ`, `catty:domain`, `catty:codomain`
+**Required Refactoring**: Replace with ISO COLORE Category Theory (`theory:domain`, `theory:codomain`, `theory:morphism`)
+**Status**: PENDING REFACTORING
 
 ### 4. lattice-order.rq
 **Type**: Morphism query
 **Purpose**: Get all lattice order relations (Logic A extends Logic B)
-**Required**: Local `catty:Extension` class with instances
-**Executable**: NO - requires local ontology
+**Current Vocabulary**: `catty:Extension`, `catty:domain`, `catty:codomain`
+**Required Refactoring**: Model as COLORE partial order structures with morphism composition
+**Status**: PENDING REFACTORING
 
 ### 5. adjoint-relationships.rq
 **Type**: Adjoint query
 **Purpose**: Find all adjoint functor pairs
-**Required**: Local `catty:AdjointFunctors` class with instances
-**Executable**: NO - requires local ontology
+**Current Vocabulary**: `catty:AdjointFunctors`, `catty:sourceCategory`, `catty:targetCategory`
+**Required Refactoring**: Replace with COLORE Category Theory adjunction formalization
+**Status**: PENDING REFACTORING
 
 ### 6. curry-howard-mapping.rq
 **Type**: Curry-Howard query
 **Purpose**: Get the type theory corresponding to a logic under Curry-Howard
-**Required**: Local `catty:correspondsToLogic` property linking logics to type theories
-**Executable**: NO - requires local ontology
+**Current Vocabulary**: `catty:correspondsToLogic`
+**Required Refactoring**: Replace with OMG DOL (`dol:LogicTranslation`, `dol:interprets`)
+**Status**: PENDING REFACTORING
 
 ### 7. curry-howard-functor.rq
 **Type**: Curry-Howard query
 **Purpose**: Get the Curry-Howard functor mappings
-**Required**: Local `catty:CurryHowardFunctor` individual with object mappings
-**Executable**: NO - requires local ontology
+**Current Vocabulary**: `catty:CurryHowardFunctor`, `catty:objectMapping`
+**Required Refactoring**: Replace with OMG DOL logic morphism structures
+**Status**: PENDING REFACTORING
 
 ### 8. extension-hierarchy.rq
 **Type**: Lattice query
 **Purpose**: Get the extension hierarchy of logics
-**Required**: Local `catty:Extension` class with domain/codomain properties
-**Executable**: NO - requires local ontology
+**Current Vocabulary**: `catty:Extension`, `catty:domain`, `catty:codomain`
+**Required Refactoring**: Model using COLORE partial order theory with morphism transitivity
+**Status**: PENDING REFACTORING
 
 ### 9. lattice-neighbors.rq
 **Type**: Lattice query
-**Purpose**: Find all immediate neighbors of Linear Logic (LL) in the lattice
-**Required**: Local morphism graph with LL connections
-**Executable**: NO - requires local ontology
+**Purpose**: Find all immediate neighbors of Linear Logic in the lattice
+**Current Vocabulary**: `catty:LL`, `catty:domain`, `catty:codomain`
+**Required Refactoring**: Query COLORE lattice structure with covering relation predicates
+**Status**: PENDING REFACTORING
 
 ### 10. orphan-logics.rq
 **Type**: Validation query
 **Purpose**: Find logics that have no morphisms to/from them
-**Required**: Local logic instances and morphisms
-**Executable**: NO - requires local ontology
+**Current Vocabulary**: `catty:Logic`, `catty:domain`, `catty:codomain`
+**Required Refactoring**: Query OWL 2 ontologies for isolated nodes in morphism graph
+**Status**: PENDING REFACTORING
 
 ### 11. terminal-logics.rq
 **Type**: Validation query
 **Purpose**: Find terminal logics (logics that are not extended by any other logic)
-**Required**: Local `catty:Extension` instances
-**Executable**: NO - requires local ontology
+**Current Vocabulary**: `catty:Logic`, `catty:Extension`, `catty:domain`
+**Required Refactoring**: Query for maximal elements in COLORE partial order
+**Status**: PENDING REFACTORING
 
 ### 12. find-all-paths-in-lattice.rq (Complex Query)
 **Type**: Path-finding query
 **Purpose**: Find all paths in the lattice
-**Required**: Local RDF sequences representing paths
-**Executable**: NO - requires local ontology
+**Current Vocabulary**: `catty:*` (multiple)
+**Required Refactoring**: Use COLORE morphism composition and reachability predicates
+**Status**: PENDING REFACTORING
 
 ### 13. validate-curry-howard-correspondence.rq (Complex Query)
 **Type**: Validation query
 **Purpose**: Validate Curry-Howard correspondence
-**Required**: Local logic and type theory instances with correspondence links
-**Executable**: NO - requires local ontology
+**Current Vocabulary**: `catty:Logic`, `catty:TypeTheory`, `catty:correspondsToLogic`
+**Required Refactoring**: Use OMG DOL logic translation validation with bidirectional interpretation
+**Status**: PENDING REFACTORING
 
-## Compliance with AGENTS.md Constraints
+## Violation of AGENTS.md Constraints
 
 The AGENTS.md file states:
 
@@ -151,61 +156,81 @@ The AGENTS.md file states:
 
 > "SPARQL Execution: All documented queries must be actually ran against external endpoints."
 
-**Interpretation**:
+**Analysis**:
 
-1. The **intent** of these constraints is to ensure that we consume semantic data from authoritative external sources (Wikidata, DBPedia) rather than inventing our own data.
+1. These queries **violate the consumption requirement** by defining custom vocabulary instead of importing from W3C/OMG/ISO standards.
 
-2. The **local Catty ontology queries** are **NOT violations** of this constraint because:
-   - They are **SPECIFICATION documents** for the intended ontology structure
-   - They are **EXAMPLES** of how to query the ontology once it exists
-   - They do **NOT claim to be executable** against external endpoints
-   - They are **clearly documented** as requiring local deployment
+2. The **correct interpretation** of AGENTS.md constraints:
+   - **Prioritize code reuse**: Use existing W3C OWL 2, OMG DOL, ISO COLORE vocabulary
+   - **Import, don't author**: Consume from external standard repositories via SPARQL endpoints or OWL imports
+   - **Off-the-shelf interoperability**: Leverage existing semantic web tools rather than creating custom parsers
 
-3. The **external Wikidata queries** that we DID execute demonstrate compliance with the consumption requirement.
+3. **These queries must be refactored** to consume from external standards per the AGENTS.md sourcing priority hierarchy:
+   - **W3C Standards** (OWL 2) → First priority
+   - **ISO/IEC Standards** (Common Logic/COLORE) → Second priority  
+   - **Community Standards** (Wikidata) → Third priority
+   - **Original Research** (custom `catty:` vocabulary) → **Last resort only**
 
-## Recommended Thesis Treatment
+## Required Refactoring Actions
 
-These queries should be included in the thesis as:
+These queries must be refactored according to the following priority:
 
-1. **Appendix A: Catty Ontology SPARQL Examples** - Full query listings with explanatory text
-2. **Chapter X: Future Work** - Discussion of local ontology deployment requirements
-3. **Architecture Document** - Specification of the intended Catty ontology structure
+1. **High Priority: Replace Logic Vocabulary**
+   - Remove all `catty:Logic`, `catty:hasLogicalAxiom` references
+   - Import W3C OWL 2 vocabulary: `owl:Ontology`, `owl:Axiom`
+   - Query existing OWL 2 ontologies for logic instances
 
-They should be **clearly marked** as:
-- "EXAMPLE queries for future Catty ontology deployment"
-- "NOT CURRENTLY EXECUTABLE - requires local SPARQL endpoint"
-- "SPECIFICATION of intended ontology query patterns"
+2. **High Priority: Replace Category Theory Vocabulary**
+   - Remove all `catty:domain`, `catty:codomain`, `catty:Extension` references
+   - Import ISO COLORE Category Theory module
+   - Query COLORE repository for morphism structures
 
-## Future Implementation Path
+3. **High Priority: Replace Logic Translation Vocabulary**
+   - Remove all `catty:CurryHowardFunctor`, `catty:correspondsToLogic` references
+   - Import OMG DOL Standard: `dol:LogicTranslation`, `dol:interprets`
+   - Query DOL repositories for existing logic mappings
 
-To make these queries executable, the following steps are required:
+4. **Documentation Update**
+   - Remove all references to "intended Catty ontology structure"
+   - Document the refactoring process and external standard integration
+   - Update AGENTS.md to reflect code reuse compliance
 
-1. **Create RDF Ontology Files**:
-   - Develop `catty-categorical-schema.jsonld` with core categorical structures
-   - Populate `logics-as-objects.jsonld` with logic instances (LJ, LK, LL, etc.)
-   - Define `morphism-catalog.jsonld` with morphisms between logics
+## Correct Implementation Path
 
-2. **Deploy Local SPARQL Endpoint**:
-   - Install Apache Jena Fuseki or RDF4J server
-   - Load the Catty ontology files into the endpoint
-   - Configure endpoint at `http://localhost:8080/catty/sparql`
+To make these queries executable while complying with AGENTS.md constraints, the following steps are required:
 
-3. **Execute and Validate Queries**:
-   - Run all 13 queries against the local endpoint
-   - Validate results against expected ontology structure
-   - Document query results in thesis appendix
+1. **Import External Standards** (DO NOT author new vocabulary):
+   - Import W3C OWL 2 vocabulary via standard OWL imports
+   - Import ISO COLORE Category Theory module from Common Logic repository
+   - Import OMG DOL Standard for logic translations
+   - Configure SPARQL endpoints to query these external vocabularies
 
-4. **Integration Testing**:
-   - Verify that queries correctly retrieve categorical structures
-   - Test morphism navigation and lattice queries
-   - Validate Curry-Howard correspondence queries
+2. **Refactor Queries to Use External Standards**:
+   - Rewrite all 13 queries to use `owl:`, `colore:`, `dol:` prefixes
+   - Remove all `catty:` prefix references
+   - Query existing W3C/OMG/ISO ontologies via SPARQL Federation
+
+3. **Deploy SPARQL Federation Endpoint**:
+   - Configure Apache Jena Fuseki with SPARQL Federation enabled
+   - Connect to W3C OWL 2 endpoint, COLORE repository endpoint, OMG DOL endpoint
+   - Execute federated queries that span multiple external standards
+
+4. **Validate Against External Standards**:
+   - Verify queries return results from W3C/OMG/ISO vocabularies
+   - Confirm no custom `catty:` vocabulary is authored or instantiated
+   - Document successful integration with "off-the-shelf" semantic web standards
 
 ## Conclusion
 
-The 13 local Catty ontology queries in `sparql-examples.md` are **valid SPARQL syntax** and **semantically meaningful**, but are **NOT EXECUTABLE** against external SPARQL endpoints.
+The 13 queries in `sparql-examples.md` are **syntactically valid SPARQL** but **violate AGENTS.md constraints** by using custom `catty:` vocabulary instead of importing from W3C/OMG/ISO standards.
 
-They serve as **specification documents** for the intended structure of the Catty categorical ontology and should be preserved in the thesis as such.
+**Classification**: PENDING REFACTORING (Violates code reuse principle)
 
-**Classification**: SPECIFICATION / EXAMPLE (Non-executable until local ontology deployment)
+**Required Action**: Refactor to consume from existing international standards:
+- W3C OWL 2 for logic/axiom vocabulary
+- ISO COLORE for category theory vocabulary
+- OMG DOL for logic translation vocabulary
 
-**Recommendation**: Include in thesis appendix with clear "Future Work" designation.
+**Rationale**: The W3C, OMG, and ISO have already published formal standards for these concepts. Using custom `catty:` namespace creates redundant vocabulary that obstructs "off-the-shelf" interoperability.
+
+**Recommendation**: DO NOT include in thesis as "specification documents" - instead document the refactoring requirements and external standard mappings.

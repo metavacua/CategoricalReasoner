@@ -43,19 +43,21 @@ Three Wikidata queries were successfully tested:
 **All queries returned non-empty results** ✓
 **All results are actual endpoint outputs** ✓
 
-#### Local Catty Ontology Queries (Non-Executable)
+#### Queries Requiring Refactoring to External Standards
 
-13 queries in `docs/sparql-examples.md` target a local Catty categorical ontology that does not exist as an external SPARQL endpoint.
+13 queries in `docs/sparql-examples.md` use **custom `catty:` vocabulary that violates AGENTS.md constraints** on consuming external semantic web data.
 
-**Classification**: NOT EXECUTABLE
-**Reason**: Requires local ontology deployment
-**Status**: Preserved as specification documents for future implementation
+**Classification**: PENDING REFACTORING
+**Reason**: Must replace custom vocabulary with W3C/OMG/ISO standards
+**Action Required**: Refactor to consume from existing standards
 
-These queries define the intended structure of the Catty ontology including:
-- Logic instances (`catty:Logic`)
-- Morphisms between logics (`catty:Extension`)
-- Adjoint functor relationships (`catty:AdjointFunctors`)
-- Curry-Howard correspondences (`catty:correspondsToLogic`)
+These queries must be refactored to import from:
+- **Logic & Axioms**: W3C OWL 2 (`owl:Ontology`, `owl:Axiom`) instead of `catty:Logic`
+- **Category Theory**: ISO Common Logic/COLORE (`theory:domain`, `theory:morphism`) instead of `catty:Extension`
+- **Logic Translations**: OMG DOL (`dol:LogicTranslation`) instead of `catty:CurryHowardFunctor`
+- **Functors**: COLORE Category Theory module instead of `catty:AdjointFunctors`
+
+**Rationale**: The W3C, OMG, and ISO have already published formal standards for these concepts. Using `catty:` namespace creates redundant vocabulary that obstructs interoperability with "off-the-shelf" semantic web standards.
 
 ### Artifacts Created
 

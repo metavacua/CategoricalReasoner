@@ -27,20 +27,26 @@ All three external Wikidata queries from the documentation were successfully exe
 
 **All results are actual endpoint outputs** - verified by curl timing and no LLM generation.
 
-### Local Catty Ontology Queries (NOT EXECUTABLE)
+### Queries Requiring Refactoring to External Standards (PENDING REFACTORING)
 
-The queries documented in `docs/sparql-examples.md` target a **local Catty ontology** that:
+The queries in `docs/sparql-examples.md` use **custom `catty:` vocabulary that violates AGENTS.md constraints**:
 
-1. Uses the prefix `catty: <https://github.com/metavacua/CategoricalReasoner/ontology/>`
-2. References local RDF classes like `catty:Logic`, `catty:Extension`, `catty:AdjointFunctors`
-3. **Cannot be executed against external SPARQL endpoints** because the Catty ontology is not hosted
-4. Are **EXAMPLES for future use** once the local ontology is developed
+1. **Violates code reuse principle**: Uses `catty:Logic` instead of W3C OWL 2 `owl:Ontology`
+2. **Violates external standards priority**: Defines `catty:domain/codomain` instead of ISO Common Logic/COLORE
+3. **Creates redundant vocabulary**: `catty:CurryHowardFunctor` duplicates OMG DOL `dol:LogicTranslation`
+4. **Obstructs interoperability**: Custom namespace prevents "off-the-shelf" integration with existing semantic web standards
 
-**Classification**: NOT EXECUTABLE (requires local ontology deployment)
+**Classification**: PENDING REFACTORING (must replace custom vocabulary with W3C/OMG/ISO standards)
 
-**Count**: 13 queries in sparql-examples.md
+**Count**: 13 queries requiring refactoring
 
-These queries are documented and preserved in the thesis as **reference examples** for the intended Catty ontology structure, but are marked as non-executable in the current implementation.
+**Required Actions**:
+- Replace `catty:Logic` → W3C OWL 2 (`owl:Ontology`, `owl:Axiom`)
+- Replace `catty:Extension` → ISO COLORE Category Theory morphisms
+- Replace `catty:CurryHowardFunctor` → OMG DOL (`dol:LogicTranslation`)
+- Replace `catty:domain/codomain` → ISO COLORE (`theory:domain/codomain`)
+
+These queries must be refactored to **import and consume** from existing international standards per AGENTS.md priority hierarchy (W3C → ISO/IEC → Community Standards → Original Research).
 
 ## Detailed Query Results
 
