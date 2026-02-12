@@ -1,134 +1,236 @@
-# Bibliography Directory
+# Citation Registry
 
 ## Purpose
 
-The `docs/dissertation/bibliography/` directory contains the master citation registry (`citations.yaml`) for the Catty thesis. This registry is the single source of truth for all citations used in the thesis.
+This directory implements the **ARATU (Agentic Retrieval-Augmented Tool Use)** tool registry for mathematical knowledge sources. The registry serves as the **grounding interface** between human epistemic exposure and agent reasoning context.
 
-## Citation Registry
+**Core architectural principle:** The citation registry is not primarily a bibliographic aid for human readers. It is a **typed knowledge graph** enabling automated agents to query, validate, and integrate mathematical sources into formal categorical constructions. The LaTeX output is a **view** of this graph—human-auditable but secondary to machine-actionable structure.
 
-### `citations.yaml`
+**Epistemic hierarchy:** This system implements a progression from **idiosyncratic** (individual) to **canonical** (universally necessary) representation:
 
-The authoritative source for all citations used in the thesis.
+1. **Canonical:** Java Record model—immutable, validated, unique representation
+2. **Normalized:** RO-Crate 1.1 JSON-LD—single source of truth, no redundancy
+3. **Standardized:** BibLaTeX 3.0, schema.org, OAIS—external specifications
+4. **Conventional:** Citation key format, field ordering—coordination norms
+5. **Ad hoc:** **Eliminated**—no provisional structures, no TODOs
 
-TODO: almost all references of interest involve multiple authors, and the current format does not allow for multiple author entries.
+---
 
-**Structure**:
+## Canonical Model (Java 17 Records)
+
+The authoritative representation is the Java Record model in `src/main/java/org/catty/citation/`. These types enforce **total structure** at construction—no nulls, no empty collections, no stringly-typed data.
+
+### Core Records
+
+```java
+public record Citation(
+    CitationKey key,                    // [familyName][year][disambiguator]
+    NonEmptyList<Person> authors,       // At least one; structured names
+    InternationalizedString title,      // With optional BCP-47 language tag
+    PublicationDate date,               // EDTF/ISO8601-2 parsed
+    WorkType type,                      // Enum: ARTICLE, BOOK, etc.
+    Optional<Doi> doi,                  // Validated 10.xxxx/... format
+    Optional<Qid> wikidata,             // Q123456 format
+    Optional<ArxivId> arxiv,            // 2001.12345 format
+    FormalizationStatus status,         // UNVERIFIED, AXIOMATIZED, PROVEN, DISCHARGED
+    Optional<AgentContext> agentContext, // LLM-facing structured notes
+    List<CitationKey> dependsOn         // Graph dependencies for ARATU traversal
+) {}
+```
+
+```java
+public record Person(
+    String familyName,                  // Required
+    Optional<String> givenName,
+    Optional<String> particle,          // von, van, de, etc.
+    Optional<String> suffix             // Jr., Sr., III, etc.
+) {}
+```
+
+**Validation:** Compact constructors enforce invariants. No object can exist in an invalid state.
+
+**Immutability:** All fields are final; defensive copies in constructors.
+
+---
+
+## Normalized Storage (RO-Crate 1.1)
+
+The file `ro-crate-metadata.json` is the **single source of truth** for the citation registry. It is generated from the Java canonical model via `ro-crate-java` (edu.kit.datamanager:ro-crate-java:2.1.0) during the Maven `compile` phase.
+
+**Generation:**
+```bash
+mvn compile
+# Triggers: org.catty.citation.RoCrateGenerator
+# Output: docs/dissertation/bibliography/ro-crate-metadata.json
+```
+
+**Structure:**
+- `@context`: `https://w3id.org/ro/crate/1.1/context`
+- Root entity: `Dataset` with `hasPart` linking to citations
+- Citations: `schema:ScholarlyArticle` with structured properties
+- ARATU extensions: `additionalProperty` for `formalizationStatus`, `agentContext`
+- Identifiers: DOI and Wikidata QID as URI `@id` values
+
+**Why RO-Crate:**
+- **Normalized:** Single JSON-LD file, no redundancy, entity references by URI
+- **Federation-ready:** `@id` uses global identifiers (DOI, QID)
+- **OAIS-aligned:** Research Object packaging for long-term preservation
+- **SPARQL-queriable:** JSON-LD expands to RDF triples
+
+---
+
+## Standardized Output (BibLaTeX 3.0)
+
+BibLaTeX is a **view** of the normalized RO-Crate data, not a source. Generated during Maven `process-resources` phase.
+
+**Generation:**
+```bash
+mvn process-resources
+# Triggers: org.catty.citation.BiblatexExporter
+# Output: docs/dissertation/references.bib
+```
+
+**Validation:**
+```bash
+biber --validate-datamodel docs/dissertation/references.bib
+```
+
+**Mapping:**
+- `schema:ScholarlyArticle` → `@article`
+- `schema:Book` → `@book`
+- `schema:Thesis` → `@phdthesis` or `@mastersthesis`
+- `Person` → BibLaTeX name list format: "Family, Given" or "Family, Particle, Given"
+
+**Note:** BibLaTeX's heuristic name parsing is **not used**. Names are **total** in the Java model and **deterministically formatted** in the export.
+
+---
+
+## ARATU Integration
+
+### For LLM Coding Agents
+
+Citations are **tool schemas** in the ARATU paradigm. Agents query the registry before generating formalizations:
+
+1. **In-Context Retrieval:** Load `ro-crate-metadata.json` as semantic artifact at context window start
+2. **SPARQL Query:** Traverse `dependsOn` for dependency resolution
+3. **JIT External RAG:** Verify DOI/QID against live endpoints (Crossref, Wikidata)
+4. **Tool Invocation:** Retrieve `agentContext` for mathematical grounding
+
+### SPARQL Federation
+
+```sparql
+PREFIX schema: <http://schema.org/>
+PREFIX catty: <http://catty.org/ontology/>
+
+SELECT ?citation ?status ?context
+WHERE {
+  ?citation a schema:ScholarlyArticle ;
+            catty:formalizationStatus ?status ;
+            catty:agentContext ?context .
+  FILTER (?status = "axiomatized" || ?status = "proven")
+}
+```
+
+**Endpoints:**
+- Wikidata Query Service: `https://query.wikidata.org/sparql`
+- Crossref SPARQL: `https://sparql.crossref.org/`
+- Local RO-Crate: Apache Jena in-memory model
+
+---
+
+## Adding Citations
+
+### Method 1: Java Record (Preferred)
+
+Add to `src/main/java/org/catty/citation/CitationRepository.java`:
+
+```java
+Citation.of(
+    "newauthor2024categorical",           // key
+    List.of(Person.of("Author", "New")),    // authors
+    "Categorical Approaches to Logic",      // title
+    "2024",                                 // date
+    WorkType.ARTICLE,                       // type
+    "10.1000/xyz123",                       // doi (optional)
+    "Q987654",                              // wikidata (optional)
+    null,                                   // arxiv (optional)
+    FormalizationStatus.UNVERIFIED,           // status
+    "Encountered in survey; TODO: assess relevance to linear logic.", // agentContext
+    List.of()                               // dependsOn
+);
+```
+
+Run `mvn compile` to regenerate RO-Crate and BibLaTeX.
+
+### Method 2: CI/CD (GitHub Actions)
+
+For automated agent submissions:
+
 ```yaml
-citation-key:
-  author: "Author Name"
-  title: "Paper or Book Title"
-  year: 2020
-  type: "book"  # or article, conference, incollection, thesis, report
-  doi: "10.xxxx/..."  # optional
-  url: "https://..."  # optional
-  wikidata: "Q123456"  # optional (Wikidata QID)
-  arxiv: "2001.12345"  # optional
-  notes: "Additional notes or comments"
+# .github/workflows/aratu-citation.yml
+workflow_dispatch:
+  inputs:
+    citation_yaml:  # Validated against Java model
 ```
 
-**Key Format**: `[author][year][keyword]` - lowercase, hyphenated, globally unique
-- Example: `girard1987linear`, `kripke1965semantical`
+The workflow:
+1. Parses input into Java Record (validation enforced)
+2. Appends to `CitationRepository.java`
+3. Runs `mvn compile` (RO-Crate generation)
+4. Commits changes if validation passes
 
-**Required Fields**:
-- `author`: Author name(s)
-- `title`: Full title of the work
-- `year`: Publication year
-- `type`: One of: book, article, conference, incollection, thesis, report
+---
 
-**Optional Fields**:
-- `doi`: Digital Object Identifier
-- `url": Permanent URL to the work
-- `wikidata`: Wikidata QID (e.g., "Q123456")
-- `arxiv`: arXiv identifier (e.g., "2001.12345")
-- `notes`: Additional context or comments
+## Citation Key Format
 
-## Current Citations
-This is not a closed set; there are many entries not yet recorded in this, and there are a few recorded here that have not been read or reviewed by the author at this time (Feb 2026); the primary references read and reviewed by the author are G. Sambin, J. Trafford, and I. Urbas. 
+**Convention:** `[familyName][year][disambiguator]`
 
-The registry contains pre-registered foundational references:
+- Lowercase alphanumeric
+- Disambiguator: `a`, `b`, `c`... for same-author-same-year collisions
+- Deterministic: Generated from first author's family name + year
 
-| Key | Author | Title | Year |
-|-----|---------|-------|------|
-| `girard1987linear` | J.-Y. Girard | Linear Logic | 1987 |
-| `kripke1965semantical` | S.A. Kripke | Semantical Analysis of Intuitionistic Logic I | 1965 |
-| `sambin2003basic` | G. Sambin | Basic Logic: Reflection, Symmetry, Visibility | 2003 |
-| `urbas1996LDJ` | I. Urbas | Dual Intuitionistic Logic | 1996 |
-| `trafford2016CoLJ` | J. Trafford | Structuring Co-Constructive Logic for Proofs and Refutations | 2016 |
-| `lawvere1963functorial` | F.W. Lawvere | Functorial Semantics of Algebraic Theories | 1963 |
-| `maclane1971categories` | S. Mac Lane | Categories for the Working Mathematician | 1971 |
-| `lambek1988category` | J. Lambek | Categories and Categorical Grammars | 1988 |
-| `restall2000substructural` | G. Restall | Substructural Logics | 2000 |
-| `pierce1991category` | B.C. Pierce | Basic Category Theory for Computer Scientists | 1991 |
-| `curyhoward1934` | H.B. Curry | Functionality in Combinatory Logic | 1934 |
-| `howard1969formulae` | W.A. Howard | The Formulae-as-Types Notion of Construction | 1969 |
-| `negri2011proof` | S. Negri | Proof Analysis: A Contribution to Hilbert's Problem | 2011 |
+**Examples:**
+- `girard1987linear` → J.-Y. Girard, 1987, "Linear Logic"
+- `trafford2016a` → J. Trafford, 2016, first of multiple works
 
-## Integration with Thesis
+**Collision handling:** If `trafford2016a` exists, next is `trafford2016b`.
 
-### TeX Citation Macros
+---
 
-Citations in thesis chapters use macros defined in `thesis/macros/citations.tex`:
+## Formalization Status
 
-- `\cite{key}` - Simple citation
-- `\citepage{key}{page}` - Citation with page number
-- `\citefigure{key}{figure}` - Citation with figure/table reference
-- `\definedfrom{term}{key}` - Definition cites source
-- `\provedfrom{theorem}{key}` - Theorem cites proof source
+| Status | Meaning | Agent Usage |
+|--------|---------|-------------|
+| `UNVERIFIED` | Recorded, not assessed | Cite for bibliography completeness only |
+| `AXIOMATIZED` | Core definitions in Catty ontology | Safe for theorem statements |
+| `PROVEN` | Theorem proved in proof assistant | Safe for proof dependencies |
+| `DISCHARGED` | Fully verified | Safe for all uses |
+| `DEPRECATED` | Superseded | Retained for historical provenance |
+| `REFUTED` | Constructively demonstrated to be false | Resolution methods for first order logical reasoning and refutation complete |
 
-**Example**:
-```latex
-Linear logic was introduced by \cite{girard1987linear}.
+---
 
-As shown in \citepage{girard1987linear}{42}, the multiplicative
-connective satisfies certain properties.
-```
+## Dependencies
 
-### Validation
+- **Java 17+** (Records, pattern matching, `Optional` stream methods)
+- **Maven 3.9+** (build lifecycle)
+- **edu.kit.datamanager:ro-crate-java:2.1.0** (RO-Crate generation)
+- **io.github.xmlobjects:edtf-model:2.0.0** (EDTF date parsing)
+- **org.apache.jena:jena-arq:4.9.0** (SPARQL processing)
+- **BibLaTeX 3.0** (TeX output validation)
 
-TODO: Tex, SPARQL, and Java validation infrastructure particularly translated into GitHub features like actions, workflows, or hooks.
+---
 
-## Adding New Citations
+## Environment
 
-### Step 1: Add to Registry
+- `RO_CRATE_OUTPUT`: Override default `docs/dissertation/bibliography` path
+- `BIBLATEX_OUTPUT`: Override default `docs/dissertation/references.bib` path
+- `SPARQL_TIMEOUT_MS`: Query timeout (default: 30000)
 
-Add a new entry to `docs/dissertation/bibliography/citations.yaml`:
-
-```yaml
-newauthor2020paper:
-  author: "First Last"
-  title: "Paper Title"
-  year: 2020
-  type: "journal"
-  doi: "10.xxxx/..."
-  url: "https://..."
-  wikidata: "Q123456"
-  notes: "Description of why this citation is included"
-```
-
-### Step 2: Validate Key Format
-
-Ensure the key follows `[author][year][keyword]` pattern:
-- Lowercase only
-- Hyphenated
-- Globally unique (no duplicates)
-
-**Good**: `smith2020quantum`, `johnsondoe2019distributed`
-**Bad**: `Smith2020Quantum` (uppercase), `my-paper` (no year)
-
-### Step 3: Validate External Links
-
-TODO.
-
-### Step 4: Use in Thesis
-
-Reference the citation in TeX chapters:
-
-```latex
-This work builds on \cite{newauthor2020paper}.
-```
+---
 
 ## See Also
 
-- `src/schema/README.md` - Validation schemas and constraints
-- `src/schema/AGENTS.md` - Citation usage constraints for LLMs
-- `thesis/macros/citations.tex` - TeX citation macro definitions
+- `src/main/java/org/catty/citation/` — Canonical Java Record model
+- RO-Crate specification: https://w3id.org/ro/crate/1.1
+- OAIS Reference Model: ISO 14721:2012
