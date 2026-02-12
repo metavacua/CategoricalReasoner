@@ -10,6 +10,8 @@ The `docs/dissertation/bibliography/` directory contains the master citation reg
 
 The authoritative source for all citations used in the thesis.
 
+TODO: almost all references of interest involve multiple authors, and the current format does not allow for multiple author entries.
+
 **Structure**:
 ```yaml
 citation-key:
@@ -41,6 +43,7 @@ citation-key:
 - `notes`: Additional context or comments
 
 ## Current Citations
+This is not a closed set; there are many entries not yet recorded in this, and there are a few recorded here that have not been read or reviewed by the author at this time (Feb 2026); the primary references read and reviewed by the author are G. Sambin, J. Trafford, and I. Urbas. 
 
 The registry contains pre-registered foundational references:
 
@@ -49,10 +52,10 @@ The registry contains pre-registered foundational references:
 | `girard1987linear` | J.-Y. Girard | Linear Logic | 1987 |
 | `kripke1965semantical` | S.A. Kripke | Semantical Analysis of Intuitionistic Logic I | 1965 |
 | `sambin2003basic` | G. Sambin | Basic Logic: Reflection, Symmetry, Visibility | 2003 |
-| `urbas1993structural` | J. Urbas | On the Structural Rules of Linear Logic | 1993 |
-| `trafford2018category` | J. Trafford | A Category Theory Approach to Conceptual Modelling | 2018 |
+| `urbas1996LDJ` | I. Urbas | Dual Intuitionistic Logic | 1996 |
+| `trafford2016CoLJ` | J. Trafford | Structuring Co-Constructive Logic for Proofs and Refutations | 2016 |
 | `lawvere1963functorial` | F.W. Lawvere | Functorial Semantics of Algebraic Theories | 1963 |
-| `mac lane1971categories` | S. Mac Lane | Categories for the Working Mathematician | 1971 |
+| `maclane1971categories` | S. Mac Lane | Categories for the Working Mathematician | 1971 |
 | `lambek1988category` | J. Lambek | Categories and Categorical Grammars | 1988 |
 | `restall2000substructural` | G. Restall | Substructural Logics | 2000 |
 | `pierce1991category` | B.C. Pierce | Basic Category Theory for Computer Scientists | 1991 |
@@ -82,19 +85,7 @@ connective satisfies certain properties.
 
 ### Validation
 
-All citations used in TeX must exist in `citations.yaml`. Validation enforces:
-
-1. **TeX citations**: Every `\cite{key}` in TeX files must have a corresponding entry in the registry
-2. **External links**: DOI, URL, Wikidata, and arXiv identifiers (if present) must be resolvable
-3. **Key format**: All citation keys must match the pattern `[author][year][keyword]`
-
-**Run validation**:
-```bash
-python src/schema/validators/validate_citations.py \
-  --tex-dir thesis/chapters/ \
-  --bibliography docs/dissertation/bibliography/citations.yaml \
-  --check-external
-```
+TODO: Tex, SPARQL, and Java validation infrastructure particularly translated into GitHub features like actions, workflows, or hooks.
 
 ## Adding New Citations
 
@@ -126,14 +117,7 @@ Ensure the key follows `[author][year][keyword]` pattern:
 
 ### Step 3: Validate External Links
 
-Ensure external identifiers are resolvable:
-
-```bash
-# Validate all citations
-python src/schema/validators/validate_citations.py \
-  --bibliography docs/dissertation/bibliography/citations.yaml \
-  --check-external
-```
+TODO.
 
 ### Step 4: Use in Thesis
 
@@ -141,48 +125,6 @@ Reference the citation in TeX chapters:
 
 ```latex
 This work builds on \cite{newauthor2020paper}.
-```
-
-## Architecture Note
-
-**Important**: The `docs/dissertation/bibliography/` directory is **not** connected to local `/src/ontology/` RDF files. The ontology directory contains example/reference materials only. Citation management is centralized in `citations.yaml`.
-
-No RDF files are required for citation management. All citation validation happens via:
-1. TeX macro validation (structure)
-2. YAML registry validation (key existence, format)
-3. External link validation (resolvability)
-
-## Technology Note
-
-Citation registry uses YAML for simplicity and human readability. Future enhancements could include:
-- Integration with external bibliography managers (Zotero, Mendeley)
-- Automatic metadata retrieval from DOI/Wikidata
-- BibTeX export for compatibility with LaTeX bibliography tools
-
-## Validation Commands
-
-### Validate Syntax
-
-```bash
-python -c "import yaml; yaml.safe_load(open('docs/dissertation/bibliography/citations.yaml'))"
-```
-
-### Validate Citations in Thesis
-
-```bash
-python src/schema/validators/validate_citations.py \
-  --tex-dir thesis/chapters/ \
-  --bibliography docs/dissertation/bibliography/citations.yaml \
-  --check-external
-```
-
-### Check for Unused Citations
-
-```bash
-# (Future enhancement) List citations in registry not used in TeX
-python src/scripts/check-unused-citations.py \
-  --bibliography docs/dissertation/bibliography/citations.yaml \
-  --tex-dir thesis/chapters/
 ```
 
 ## See Also
