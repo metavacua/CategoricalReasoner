@@ -11,7 +11,7 @@ citations:
     type: "journal"
     doi: "10.1016/0304-3975(87)90045-4"
     url: "https://doi.org/10.1016/0304-3975(87)90045-4"
-    wikidata: "Q739867"
+    wikidata: null
     arxiv: null
     dbpedia: null
     local_ontology: false
@@ -25,7 +25,7 @@ citations:
     doi: null
     arxiv: null
     url: "https://www.jstor.org/stable/2269533"
-    wikidata: "Q1020794"
+    wikidata: null
     dbpedia: null
     local_ontology: false
     notes: "Kripke semantics for intuitionistic logic"
@@ -128,7 +128,7 @@ citations:
     type: "book"
     doi: "10.1007/978-1-4757-4721-8"
     url: "https://link.springer.com/book/10.1007/978-1-4757-4721-8"
-    wikidata: "Q265095"
+    wikidata: null
     dbpedia: null
     local_ontology: false
     notes: "Standard textbook on category theory"
@@ -190,7 +190,7 @@ citations:
     doi: null
     arxiv: null
     url: "https://www.sciencedirect.com/science/article/pi/S0049237X08711797"
-    wikidata: "Q521559"
+    wikidata: null
     dbpedia: null
     local_ontology: false
     notes: "Formalization of Curry-Howard correspondence"
