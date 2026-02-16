@@ -18,7 +18,7 @@ This directory implements the **ARATU (Agentic Retrieval-Augmented Tool Use)** t
 
 ## Canonical Model (Java 17 Records)
 
-The authoritative representation is the Java Record model in `src/main/java/org/catty/citation/`. These types enforce **total structure** at construction—no nulls, no empty collections, no stringly-typed data.
+The authoritative representation is the Java Record model in `src/main/java/org/metavacua/categoricalreasoner/citation/`. These types enforce **total structure** at construction—no nulls, no empty collections, no stringly-typed data.
 
 ### Core Records
 
@@ -60,7 +60,7 @@ The file `ro-crate-metadata.json` is the **single source of truth** for the cita
 **Generation:**
 ```bash
 mvn compile
-# Triggers: org.catty.citation.RoCrateGenerator
+# Triggers: org.metavacua.categoricalreasoner.citation.RoCrateGenerator
 # Output: docs/dissertation/bibliography/ro-crate-metadata.json
 ```
 
@@ -86,7 +86,7 @@ BibLaTeX is a **view** of the normalized RO-Crate data, not a source. Generated 
 **Generation:**
 ```bash
 mvn process-resources
-# Triggers: org.catty.citation.BiblatexExporter
+# Triggers: org.metavacua.categoricalreasoner.citation.BiblatexExporter
 # Output: docs/dissertation/references.bib
 ```
 
@@ -142,7 +142,7 @@ WHERE {
 
 ### Method 1: Java Record (Preferred)
 
-Add to `src/main/java/org/catty/citation/CitationRepository.java`:
+Add to `src/main/java/org/metavacua/categoricalreasoner/citation/CitationRepository.java`:
 
 ```java
 Citation.of(
@@ -231,6 +231,6 @@ The workflow:
 
 ## See Also
 
-- `src/main/java/org/catty/citation/` — Canonical Java Record model
+- `src/main/java/org/metavacua/categoricalreasoner/citation/` — Canonical Java Record model
 - RO-Crate specification: https://w3id.org/ro/crate/1.1
 - OAIS Reference Model: ISO 14721:2012

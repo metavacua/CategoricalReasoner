@@ -64,7 +64,7 @@ Located in `../docs/dissertation/bibliography/`:
 
 ### 3. TeX Citation Macros
 
-Located in `../thesis/macros/citations.tex`:
+Located in `../docs/dissertation/macros/citations.tex`:
 
 - `\cite{key}` - simple citation
 - `\citepage{key}{page}` - citation with page number
@@ -108,7 +108,7 @@ Validates TeX files against `thesis-structure.schema.yaml`:
 
 **Usage**:
 ```bash
-python src/schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
+python src/schema/validators/validate_tex_structure.py --tex-dir docs/dissertation/chapters/
 ```
 
 #### `validate_citations.py`
@@ -120,7 +120,7 @@ Validates citations:
 **Usage**:
 ```bash
 python src/schema/validators/validate_citations.py \
-  --tex-dir thesis/chapters/ \
+  --tex-dir docs/dissertation/chapters/ \
   --bibliography docs/dissertation/bibliography/citations.yaml \
   --check-external
 ```
@@ -135,7 +135,7 @@ Validates TeX structure and citation consistency:
 **Usage**:
 ```bash
 python src/schema/validators/validate_consistency.py \
-  --tex-dir thesis/chapters/ \
+  --tex-dir docs/dissertation/chapters/ \
   --bibliography docs/dissertation/bibliography/citations.yaml
 ```
 
@@ -156,17 +156,17 @@ Runs on every PR:
 
 ```bash
 # Validate TeX structure
-python src/schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
+python src/schema/validators/validate_tex_structure.py --tex-dir docs/dissertation/chapters/
 
 # Validate citations
 python src/schema/validators/validate_citations.py \
-  --tex-dir thesis/chapters/ \
+  --tex-dir docs/dissertation/chapters/ \
   --bibliography docs/dissertation/bibliography/citations.yaml \
   --check-external
 
 # Validate consistency
 python src/schema/validators/validate_consistency.py \
-  --tex-dir thesis/chapters/ \
+  --tex-dir docs/dissertation/chapters/ \
   --bibliography docs/dissertation/bibliography/citations.yaml
 ```
 
@@ -259,7 +259,7 @@ To add a new citation:
 2. **Run validation** to ensure consistency:
    ```bash
    python src/schema/validators/validate_citations.py \
-     --tex-dir thesis/chapters/ \
+     --tex-dir docs/dissertation/chapters/ \
      --bibliography docs/dissertation/bibliography/citations.yaml \
      --check-external
    ```
@@ -269,21 +269,21 @@ To add a new citation:
 ### TeX Structure Validation Errors
 
 ```
-ERROR: thesis/chapters/categorical-semantic-audit.tex:42
+ERROR: docs/dissertation/chapters/categorical-semantic-audit.tex:42
   Invalid theorem ID 'thm.Weakening': must match pattern ^thm-[a-z0-9-]+$
 ```
 
 **Fix**: Change ID to `thm-weakening` (lowercase, hyphens only).
 
 ```
-ERROR: thesis/chapters/categorical-semantic-audit.tex:15
+ERROR: docs/dissertation/chapters/categorical-semantic-audit.tex:15
   Theorem thm-weakening missing title
 ```
 
 **Fix**: Add title to theorem: `\begin{theorem}[thm-weakening]{Weakening}`.
 
 ```
-ERROR: Duplicate ID 'thm-weakening' (first defined at thesis/chapters/intro.tex:10)
+ERROR: Duplicate ID 'thm-weakening' (first defined at docs/dissertation/chapters/intro.tex:10)
 ```
 
 **Fix**: Use unique ID; change to `thm-weakening-ll` or similar.
@@ -291,7 +291,7 @@ ERROR: Duplicate ID 'thm-weakening' (first defined at thesis/chapters/intro.tex:
 ### Citation Validation Errors
 
 ```
-ERROR: thesis/chapters/categorical-semantic-audit.tex:42
+ERROR: docs/dissertation/chapters/categorical-semantic-audit.tex:42
   Citation 'girard2020new' not found in docs/dissertation/bibliography/citations.yaml
 ```
 

@@ -8,7 +8,7 @@ The `docs/dissertation/bibliography/` directory contains the master citation reg
 - **Key Format**: `[author][year][keyword]` - lowercase, hyphenated, globally unique (e.g., `girard1987linear`).
 - **Required Fields**: `title`, `author`, `year`, `type` (book/article/conference/incollection/thesis/report).
 - **External Links**: Include `doi`, `url`, `wikidata` (QID), `dbpedia`, `arxiv` where available. Links must be resolvable.
-- **TeX Integration**: Citation macros defined in `thesis/macros/citations.tex`. Keys are case-sensitive.
+- **TeX Integration**: Citation macros defined in `docs/dissertation/macros/citations.tex`. Keys are case-sensitive.
 - **Architecture Note**: Bibliography is citation registry only. No local RDF authoring required.
 
 ## Validation
