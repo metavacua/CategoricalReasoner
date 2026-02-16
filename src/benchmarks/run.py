@@ -29,10 +29,12 @@ def run_benchmarks(endpoint=None, query_file=None, output_dir="results", verbose
     g = None
     if not endpoint:
         g = Graph()
-        ontology_dir = "src/ontology"
-        if os.path.exists(ontology_dir):
-            for filename in os.listdir(ontology_dir):
-                path = os.path.join(ontology_dir, filename)
+        # Note: Local RDF files should be placed in docs/dissertation/bibliography/
+        # This project consumes semantic web data from external sources, not local ontologies
+        bibliography_dir = "docs/dissertation/bibliography"
+        if os.path.exists(bibliography_dir):
+            for filename in os.listdir(bibliography_dir):
+                path = os.path.join(bibliography_dir, filename)
                 if filename.endswith(".jsonld"):
                     g.parse(path, format="json-ld")
                 elif filename.endswith(".ttl"):

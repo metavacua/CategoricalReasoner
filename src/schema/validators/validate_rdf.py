@@ -309,13 +309,13 @@ def main():
     parser.add_argument(
         '--ontology',
         type=Path,
-        default=Path('ontology'),
-        help='Directory containing RDF ontology files'
+        default=Path('docs/dissertation/bibliography'),
+        help='Directory containing RDF files'
     )
     parser.add_argument(
         '--shapes',
         type=Path,
-        default=Path('src/ontology/catty-thesis-shapes.shacl'),
+        default=Path('docs/dissertation/bibliography/catty-thesis-shapes.shacl'),
         help='Path to SHACL shapes file'
     )
 

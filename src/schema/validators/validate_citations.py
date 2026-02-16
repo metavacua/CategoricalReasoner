@@ -373,7 +373,7 @@ def main():
     parser.add_argument(
         '--tex-dir',
         type=Path,
-        default=Path('thesis/chapters'),
+        default=Path('docs/dissertation/chapters'),
         help='Directory containing TeX files'
     )
     parser.add_argument(
@@ -385,7 +385,7 @@ def main():
     parser.add_argument(
         '--ontology',
         type=Path,
-        default=Path('src/ontology/citations.jsonld'),
+        default=Path('docs/dissertation/bibliography/citations.jsonld'),
         help='Path to RDF citations file'
     )
     parser.add_argument(
