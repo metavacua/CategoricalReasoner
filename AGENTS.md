@@ -1,7 +1,7 @@
 # AGENTS.md - Catty Thesis Repository
 
 ## Scope
-This repository implements the Catty thesis: categorical foundations for logics and their morphisms. Agents must generate LaTeX thesis content and validation artifacts following formal constraints in `.catty/operations.yaml`. Semantic web data is consumed from external sources (SPARQL endpoints, linked data, GGG) via Jena, not authored locally.
+This repository implements the Catty thesis: categorical foundations for logics and their morphisms. Agents must generate LaTeX thesis content and validation artifacts. Semantic web data is consumed from external sources (SPARQL endpoints, linked data, GGG) via Jena, not authored locally.
 
 ## Core Constraints
 - **Formats**: Read/write `*.md`, `*.tex`, `*.yaml`, `*.py`. Create directories only when specified.
@@ -9,8 +9,8 @@ This repository implements the Catty thesis: categorical foundations for logics 
 - **Reports**: Reports must be returned as `.tex` files (multi-part for non-trivial) or semantic HTML. `SEMANTIC_WEB_RAG_REPORT.md` is strictly forbidden and must be converted to TeX.
 - **Citations**: Use ONLY keys from `docs/dissertation/bibliography/citations.yaml`. Forbidden: invent new citation keys.
 - **IDs**: Globally unique across corpus. Patterns: `thm-*`, `def-*`, `lem-*`, `ex-*`, `sec-*`, `subsec-*`.
-- **Validation**: All artifacts must pass automated validation via `.catty/validation/validate.py`. Acceptance criteria are boolean tests only.
-- **Execution**: Load operations from `.catty/operations.yaml`, verify dependencies via `.catty/phases.yaml`, execute task descriptions, validate outputs.
+- **Validation**: All artifacts must pass automated validation. Acceptance criteria are boolean tests only.
+- **Execution**: Execute task descriptions and validate outputs.
 - **Technology Stack**: Core validation and transformation uses Java ecosystem (Jena, OpenLlet, JavaPoet, JUnit). Python scripts are auxiliary for CI/CD orchestration only.
 - **Semantic Web Data**: Consumed from external sources. Do not author local RDF schemas or instantiate ontology classes.
 - **Domain Restriction**: Do not use `http://catty.org/`. The only associated webpage is the MetaVacua GitHub repository (`https://github.com/metavacua/CategoricalReasoner`). Any script or artifact using `catty.org` is invalid.
@@ -20,8 +20,7 @@ This repository implements the Catty thesis: categorical foundations for logics 
 - **Extraction Protocol**: Follow the discovery and verification patterns for external QIDs and URIs. Document all difficulties and issues encountered during extraction.
 
 ## Validation
-Run `python .catty/validation/validate.py --artifact <id>` or `--task <id>` to verify compliance. All criteria must evaluate true.
+All artifacts must pass validation criteria. All criteria must evaluate true.
 
 ## See Also
-- `.catty/AGENTS.md` - Operational model constraints
 - `src/schema/AGENTS.md` - Citation and ID constraints

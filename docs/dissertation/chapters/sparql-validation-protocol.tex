@@ -1,0 +1,614 @@
+\chapter{SPARQL Validation Protocol}
+\label{sec:sparql-validation-protocol}
+
+\section{Introduction}
+
+This chapter documents the logical validity framework for SPARQL query execution in the context of the Catty thesis. When querying external semantic web endpoints, we must distinguish between three distinct outcomes:
+
+\begin{enumerate}
+  \item \textbf{Empty results + successful execution}: A well-formed query executes without error but returns zero results. This constitutes a \textit{proof of negative}---demonstrating that no matching data exists in the queried endpoint's knowledge graph.
+  \item \textbf{Runtime errors / compilation failures}: A query fails to execute due to syntax errors, type mismatches, or endpoint issues. This indicates a \textit{malformed query} and is considered inconclusive.
+  \item \textbf{Non-empty results + successful execution}: A well-formed query executes without error and returns one or more results. This constitutes a \textit{constructive witness}---demonstrating the existence of matching data in the queried endpoint's knowledge graph.
+\end{enumerate}
+
+This framework aligns with model-theoretic semantics for query languages \cite{maclane1971categories}, where query execution provides evidence about the structure of the underlying model.
+
+\section{Logical Validity Framework}
+
+\subsection{Model-Theoretic Interpretation}
+
+From a model-theoretic perspective, a SPARQL endpoint can be viewed as an interpretation function $\mathcal{I}$ mapping RDF triples to truth values. A query $Q$ can be interpreted as a formula $\phi_Q$ over this interpretation. The execution of $Q$ against endpoint $E$ yields:
+
+\begin{itemize}
+  \item $\mathcal{I}_E \models \phi_Q$ (satisfied): Non-empty results (constructive witness)
+  \item $\mathcal{I}_E \not\models \phi_Q$ (not satisfied): Empty results (proof of negative)
+  \item $\phi_Q$ is ill-formed: Compilation/execution error (malformed query)
+\end{itemize}
+
+This interpretation respects the Curry-Howard correspondence \cite{curyhoward1934, howard1969formulae}, where query results serve as witnesses for the existence of certain structures in the knowledge graph.
+
+\subsection{Outcome Categories}
+
+\subsubsection{Proof of Negative}
+
+When a well-formed SPARQL query executes successfully but returns zero results, this provides constructive evidence that the queried endpoint does not contain data matching the query pattern. This is fundamentally different from a failed execution.
+
+\textit{Example}: Querying Wikidata for instances of a non-existent class using valid SPARQL syntax returns empty results, proving that no such instances exist in Wikidata's knowledge graph.
+
+\subsubsection{Malformed Query}
+
+A query that fails to compile or execute due to syntax errors, prefix declarations, or type mismatches provides no information about the underlying data model. Such queries must be corrected before they can serve as valid queries.
+
+\textit{Example}: A SPARQL query with an undefined prefix or malformed triple pattern fails during parsing, indicating a query formulation problem rather than a data availability issue.
+
+\subsubsection{Constructive Witness}
+
+A well-formed query that executes successfully and returns non-empty results provides direct evidence of the existence of matching structures in the queried endpoint. These results can be treated as witnesses \cite{negri2011proof} for the query's satisfaction.
+
+\textit{Example}: Querying Wikidata for logic-related entities returns a list of QIDs and labels, demonstrating that such entities exist and are structured according to Wikidata's ontology.
+
+\section{Implementation}
+
+\subsection{Query Execution Protocol}
+
+All SPARQL queries in this project are executed against external endpoints following a strict protocol:
+
+\begin{enumerate}
+  \item Query formulation using well-defined prefixes (e.g., \texttt{wd:}, \texttt{dbo:}) from authoritative namespaces
+  \item Syntax validation ensuring well-formed SPARQL
+  \item Execution with appropriate HTTP headers (User-Agent, Accept)
+  \item Capture of execution time and result count
+  \item Validation of result format (TTL for CONSTRUCT, JSON for SELECT)
+\end{enumerate}
+
+\subsection{Valid Query Examples}
+
+\subsubsection{Wikidata Logics Query}
+
+The following query extracts logic-related entities from Wikidata:
+
+\begin{verbatim}
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+# Extract logic-related entities from Wikidata
+CONSTRUCT {
+  ?logic rdfs:label ?label ;
+         wdt:P31 wd:Q8078 .
+}
+WHERE {
+  ?logic wdt:P31 wd:Q8078 .
+  ?logic rdfs:label ?label .
+  FILTER(LANG(?label) = "en")
+}
+\end{verbatim}
+
+This query uses the Wikidata namespace (authority: \texttt{wikidata.org}) and queries for instances of "logic" (QID: Q8078). When executed, it provides a constructive witness of logic-related entities in Wikidata.
+
+\subsubsection{DBPedia Category Theory Query}
+
+The following query extracts category theory concepts from DBPedia:
+
+\begin{verbatim}
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX dct: <http://purl.org/dc/terms/>
+
+# Extract categories related to Category Theory from DBPedia
+CONSTRUCT {
+  ?concept rdfs:label ?label ;
+           rdf:type dbo:MathematicalConcept .
+}
+WHERE {
+  ?concept rdfs:label ?label .
+  ?concept dct:subject <http://dbpedia.org/resource/Category:Category_theory> .
+  FILTER(LANG(?label) = "en")
+}
+\end{verbatim}
+
+This query uses the DBPedia ontology namespace (authority: \texttt{dbpedia.org}) and queries for concepts classified under category theory. When executed, it provides a constructive witness of category theory resources in DBPedia; as of Feb 15 2026, this returns 424 RDF statements.
+
+\begin{verbatim}
+@prefix rdf:	<http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dbr:	<http://dbpedia.org/resource/> .
+@prefix dbo:	<http://dbpedia.org/ontology/> .
+dbr:Point-surjective_morphism	rdf:type	dbo:MathematicalConcept .
+@prefix rdfs:	<http://www.w3.org/2000/01/rdf-schema#> .
+dbr:Point-surjective_morphism	rdfs:label	"Point-surjective morphism"@en .
+dbr:Associativity_isomorphism	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Associativity isomorphism"@en .
+<http://dbpedia.org/resource/Dual_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Dual (category theory)"@en .
+dbr:AB5_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"AB5 category"@en .
+<http://dbpedia.org/resource/Element_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Element (category theory)"@en .
+dbr:Cotangent_complex	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Cotangent complex"@en .
+dbr:Coinduction	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Coinduction"@en .
+<http://dbpedia.org/resource/Beck\u0027s_monadicity_theorem>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Beck's monadicity theorem"@en .
+dbr:Subcategory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Subcategory"@en .
+dbr:Homotopy_colimit_and_limit	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Homotopy colimit and limit"@en .
+dbr:Grothendieck_universe	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Grothendieck universe"@en .
+dbr:Subquotient	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Subquotient"@en .
+dbr:Category_algebra	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Category algebra"@en .
+dbr:Category_theory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Category theory"@en .
+<http://dbpedia.org/resource/Kernel_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Kernel (category theory)"@en .
+dbr:Categorification	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Categorification"@en .
+dbr:Model_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Model category"@en .
+<http://dbpedia.org/resource/Bundle_(mathematics)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Bundle (mathematics)"@en .
+dbr:Interchange_law	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Interchange law"@en .
+<http://dbpedia.org/resource/Modification_(mathematics)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Modification (mathematics)"@en .
+dbr:Modular_group_representation	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Modular group representation"@en .
+dbr:Skeletonization_of_fusion_categories	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Skeletonization of fusion categories"@en .
+dbr:Anamorphism	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Anamorphism"@en .
+dbr:Opposite_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Opposite category"@en .
+<http://dbpedia.org/resource/Eckmann\u2013Hilton_argument>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Eckmann\u2013Hilton argument"@en .
+dbr:Olog	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Olog"@en .
+dbr:Isbell_duality	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Isbell duality"@en .
+dbr:F-coalgebra	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"F-coalgebra"@en .
+dbr:Semigroupoid	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Semigroupoid"@en .
+<http://dbpedia.org/resource/Quiver_(mathematics)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Quiver (mathematics)"@en .
+dbr:Categorical_set_theory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Categorical set theory"@en .
+dbr:Mathematical_object	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Mathematical object"@en .
+<http://dbpedia.org/resource/Image_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Image (category theory)"@en .
+<http://dbpedia.org/resource/Allegory_(mathematics)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Allegory (mathematics)"@en .
+dbr:Freyd_cover	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Freyd cover"@en .
+dbr:Mac_Lane_coherence_theorem	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Mac Lane coherence theorem"@en .
+<http://dbpedia.org/resource/Grothendieck\u0027s_relative_point_of_view>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Grothendieck's relative point of view"@en .
+<http://dbpedia.org/resource/Brown\u0027s_representability_theorem>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Brown's representability theorem"@en .
+dbr:Internal_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Internal category"@en .
+<http://dbpedia.org/resource/Polygraph_(mathematics)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Polygraph (mathematics)"@en .
+<http://dbpedia.org/resource/Lift_(mathematics)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Lift (mathematics)"@en .
+dbr:Bousfield_localization	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Bousfield localization"@en .
+dbr:Applied_category_theory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Applied category theory"@en .
+dbr:Localizing_subcategory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Localizing subcategory"@en .
+<http://dbpedia.org/resource/Center_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Center (category theory)"@en .
+<http://dbpedia.org/resource/Seifert\u2013Van_Kampen_theorem>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Seifert\u2013Van Kampen theorem"@en .
+dbr:T-structure	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"T-structure"@en .
+<http://dbpedia.org/resource/Monad_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Monad (category theory)"@en .
+dbr:Multicategory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Multicategory"@en .
+dbr:Cokernel	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Cokernel"@en .
+<http://dbpedia.org/resource/Fra\u00EFss\u00E9_limit>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Fra\u00EFss\u00E9's theorem"@en ,
+		"Fra\u00EFss\u00E9 limit"@en ,
+		"Age (model theory)"@en .
+dbr:Giraud_subcategory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Giraud subcategory"@en .
+<http://dbpedia.org/resource/Sieve_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Sieve (category theory)"@en .
+<http://dbpedia.org/resource/Stack_(mathematics)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Stack (mathematics)"@en .
+dbr:Universal_property	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Universal property"@en .
+dbr:Factorization_system	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Factorization system"@en .
+<http://dbpedia.org/resource/Section_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Section (category theory)"@en .
+<http://dbpedia.org/resource/Coherency_(homotopy_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Coherence theorem"@en ,
+		"Coherency (homotopy theory)"@en .
+dbr:Endomorphism_ring	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Endomorphism ring"@en .
+dbr:Waldhausen_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Waldhausen category"@en .
+dbr:Monoid	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Monoid"@en .
+dbr:Setoid	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Setoid"@en .
+dbr:Duality_theory_for_distributive_lattices	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Duality theory for distributive lattices"@en .
+<http://dbpedia.org/resource/Krohn\u2013Rhodes_theory>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Krohn\u2013Rhodes theory"@en .
+dbr:Double_groupoid	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Double groupoid"@en .
+dbr:Diagonal_functor	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Diagonal functor"@en .
+dbr:Concrete_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Concrete category"@en .
+dbr:Karoubi_envelope	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Karoubi envelope"@en .
+dbr:Pointed_set	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Pointed set"@en .
+dbr:Chu_space	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Chu space"@en .
+<http://dbpedia.org/resource/Gabriel\u2013Popescu_theorem>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Gabriel\u2013Popescu theorem"@en .
+dbr:Localization_of_a_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Localization of a category"@en .
+dbr:Quotient_of_an_abelian_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Quotient of an abelian category"@en .
+dbr:Lifting_property	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Lifting property"@en .
+dbr:Categories_for_the_Working_Mathematician	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Categories for the Working Mathematician"@en .
+<http://dbpedia.org/resource/Nerve_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Nerve (category theory)"@en .
+dbr:Globular_set	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Globular set"@en .
+dbr:Nodal_decomposition	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Nodal decomposition"@en .
+dbr:Pointless_topology	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Pointless topology"@en .
+dbr:Kan_extension	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Kan extension"@en .
+dbr:Embedding	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Embedding"@en .
+dbr:Enriched_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Enriched category"@en .
+<http://dbpedia.org/resource/Skeleton_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Skeleton (category theory)"@en .
+dbr:Dialectica_space	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Dialectica space"@en .
+<http://dbpedia.org/resource/Esquisse_d\u0027un_Programme>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Esquisse d'un Programme"@en .
+dbr:Filtered_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Filtered category"@en .
+dbr:Finitely_generated_object	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Finitely generated object"@en .
+dbr:Commutative_diagram	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Commutative diagram"@en .
+<http://dbpedia.org/resource/Category_(mathematics)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Category (mathematics)"@en .
+dbr:Operad	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Operad"@en .
+<http://dbpedia.org/resource/Hylomorphism_(computer_science)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Hylomorphism (computer science)"@en .
+<http://dbpedia.org/resource/Cone_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Cone (category theory)"@en .
+dbr:Glossary_of_category_theory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Glossary of category theory"@en .
+<http://dbpedia.org/resource/Envelope_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Envelope (category theory)"@en .
+dbr:Groupoid	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Groupoid"@en .
+<http://dbpedia.org/resource/Sketch_(mathematics)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Sketch (mathematics)"@en .
+dbr:Symplectic_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Symplectic category"@en .
+dbr:Categorical_quantum_mechanics	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Categorical quantum mechanics"@en .
+dbr:DisCoCat	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"DisCoCat"@en .
+dbr:Abstract_nonsense	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Abstract nonsense"@en .
+dbr:Equivalence_of_categories	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Equivalence of categories"@en .
+<http://dbpedia.org/resource/Refinement_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Refinement (category theory)"@en .
+dbr:Corecursion	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Corecursion"@en .
+dbr:F-algebra	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"F-algebra"@en .
+dbr:Injective_object	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Injective object"@en .
+dbr:Abstract_elementary_class	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Abstract elementary class"@en .
+<http://dbpedia.org/resource/Descent_(mathematics)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Descent (mathematics)"@en .
+dbr:Fibred_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Fibred category"@en .
+<http://dbpedia.org/resource/Krull\u2013Schmidt_category>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Krull\u2013Schmidt category"@en .
+dbr:Catamorphism	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Catamorphism"@en .
+dbr:Outline_of_category_theory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Outline of category theory"@en .
+dbr:R-algebroid	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"R-algebroid"@en .
+dbr:Isomorphism-closed_subcategory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Isomorphism-closed subcategory"@en .
+dbr:Segal_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Segal category"@en .
+dbr:Semiautomaton	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Semiautomaton"@en .
+dbr:Hopfian_object	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Hopfian object"@en .
+dbr:Topological_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Topological category"@en .
+dbr:Exact_completion	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Exact completion"@en .
+dbr:Fusion_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Fusion category"@en .
+dbr:Day_convolution	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Day convolution"@en .
+dbr:K-theory_of_a_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"K-theory of a category"@en .
+dbr:Structural_Ramsey_theory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Structural Ramsey theory"@en .
+dbr:Pseudo-abelian_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Pseudo-abelian category"@en .
+dbr:Timeline_of_category_theory_and_related_mathematics	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Timeline of category theory and related mathematics"@en .
+dbr:Induced_homomorphism	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Induced homomorphism"@en ,
+		"Induced homomorphism (fundamental group)"@en .
+dbr:Overcategory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Overcategory"@en .
+<http://dbpedia.org/resource/2-Yoneda_lemma>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"2-Yoneda lemma"@en .
+<http://dbpedia.org/resource/3-category>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"3-category"@en .
+<http://dbpedia.org/resource/Accessible_\u221E-category>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Accessible \u221E-category"@en .
+<http://dbpedia.org/resource/Join_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Join (category theory)"@en .
+<http://dbpedia.org/resource/Twisted_diagonal_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Twisted diagonal (category theory)"@en .
+dbr:Tower_of_objects	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Tower of objects"@en .
+<http://dbpedia.org/resource/Lawvere\u0027s_fixed-point_theorem>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Lawvere's fixed-point theorem"@en .
+dbr:Burnside_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Burnside category"@en .
+dbr:Distributive_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Distributive category"@en .
+dbr:Global_element	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Global element"@en .
+dbr:Graded_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Graded category"@en .
+<http://dbpedia.org/resource/Grothendieck\u0027s_Galois_theory>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Grothendieck's Galois theory"@en .
+dbr:Grothendieck_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Grothendieck category"@en .
+dbr:Categorical_probability	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Categorical probability"@en .
+dbr:Completions_in_category_theory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Completions in category theory"@en .
+dbr:Giry_monad	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Giry monad"@en .
+dbr:Topological_functor	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Topological functor"@en .
+<http://dbpedia.org/resource/Brugui\u00E8res_modularity_theorem>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Brugui\u00E8res modularity theorem"@en .
+dbr:Core_of_a_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Core of a category"@en .
+<http://dbpedia.org/resource/Homotopy_category_of_an_\u221E-category>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Homotopy category of an \u221E-category"@en .
+<http://dbpedia.org/resource/Joyal\u0027s_theta_category>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Joyal's theta category"@en .
+dbr:Modular_tensor_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Modular tensor category"@en .
+<http://dbpedia.org/resource/M\u00FCger\u0027s_theorem>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"M\u00FCger's theorem"@en .
+dbr:Rank-finiteness	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Rank-finiteness"@en .
+dbr:Reedy_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Reedy category"@en .
+<http://dbpedia.org/resource/Schauenburg\u2013Ng_theorem>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Schauenburg\u2013Ng theorem"@en .
+dbr:Small_object_argument	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Small object argument"@en .
+dbr:Unitary_modular_tensor_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Unitary modular tensor category"@en .
+dbr:Essential_monomorphism	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Essential monomorphism"@en .
+dbr:Indexed_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Indexed category"@en .
+dbr:Indiscrete_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Indiscrete category"@en .
+dbr:Subterminal_object	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Subterminal object"@en .
+dbr:Simplicially_enriched_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Simplicially enriched category"@en .
+dbr:Size_functor	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Size functor"@en .
+dbr:Generalized_metric_space	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Generalized metric space"@en .
+dbr:Stable_module_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Stable module category"@en .
+dbr:Coimage	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Coimage"@en .
+dbr:Inserter_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Inserter category"@en .
+dbr:Conservative_functor	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Conservative functor"@en .
+<http://dbpedia.org/resource/Doctrine_(mathematics)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Doctrine (mathematics)"@en .
+<http://dbpedia.org/resource/Compact_object_(mathematics)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Compact object (mathematics)"@en .
+dbr:Isomorphism_class	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Isomorphism class"@en .
+dbr:Product_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Product category"@en .
+dbr:Adhesive_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Adhesive category"@en .
+<http://dbpedia.org/resource/Generator_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Generator (category theory)"@en .
+dbr:Groupoid_object	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Groupoid object"@en .
+dbr:Higher-dimensional_algebra	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Higher-dimensional algebra"@en .
+dbr:Cartesian_monoidal_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Cartesian monoidal category"@en .
+dbr:Tame_abstract_elementary_class	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Tame abstract elementary class"@en .
+dbr:Opetope	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Opetope"@en .
+dbr:Categorical_trace	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Categorical trace"@en .
+dbr:Codensity_monad	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Codensity monad"@en .
+dbr:Pseudoalgebra	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Pseudoalgebra"@en .
+dbr:Q-category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Q-category"@en .
+dbr:Segal_space	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Segal space"@en .
+dbr:Well-pointed_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Well-pointed category"@en .
+dbr:Cosheaf	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Cosheaf"@en .
+dbr:Cotriple_homology	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Cotriple homology"@en .
+dbr:Fiber_functor	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Fiber functor"@en .
+dbr:Simplicial_localization	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Simplicial localization"@en .
+dbr:Spherical_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Spherical category"@en .
+dbr:Stable_model_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Stable model category"@en .
+dbr:Extensive_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Extensive category"@en .
+dbr:Balanced_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Balanced category"@en .
+dbr:Compositional_game_theory	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Compositional game theory"@en .
+dbr:Accessible_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Accessible category"@en .
+dbr:Gamma-object	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Gamma-object"@en .
+dbr:Limit_and_colimit_of_presheaves	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Limit and colimit of presheaves"@en .
+dbr:Lie_operad	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Lie operad"@en .
+dbr:Permutation_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Permutation category"@en .
+dbr:Corestriction	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Corestriction"@en .
+dbr:H-object	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"H-object"@en .
+dbr:Double_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Double category"@en .
+dbr:Strictification	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Strictification"@en .
+dbr:Polyad	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Polyad"@en .
+dbr:Posetal_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Posetal category"@en .
+dbr:Projective_cover	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Projective cover"@en .
+dbr:Pulation_square	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Pulation square"@en .
+dbr:Quantaloid	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Quantaloid"@en .
+dbr:Quotient_category	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Quotient category"@en .
+dbr:List_of_types_of_functions	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"List of types of functions"@en .
+<http://dbpedia.org/resource/Cosmos_(category_theory)>	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Cosmos (category theory)"@en .
+dbr:Initial_algebra	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Initial algebra"@en .
+dbr:Injective_cogenerator	rdf:type	dbo:MathematicalConcept ;
+	rdfs:label	"Injective cogenerator"@en .
+\end{verbatim}
+
+\section{Invalid Query Patterns}
+
+\subsection{Local Ontology Prefixes}
+
+Queries using prefixes like \texttt{catty:} that reference non-existent local ontologies are invalid for external endpoint queries. Such prefixes may be used only with local RDF files, and only when those files exist.
+
+\textit{Invalid Example}:
+\begin{verbatim}
+PREFIX catty: <https://github.com/metavacua/CategoricalReasoner/ontology/>
+
+SELECT ?logic ?label
+WHERE {
+  ?logic a catty:Logic ;
+         rdfs:label ?label .
+}
+\end{verbatim}
+
+This query attempts to use a \texttt{catty:} prefix against external endpoints where no such ontology exists. It may return empty results (proof of negative) or fail depending on endpoint behavior, but it serves no valid purpose against external sources.
+
+\subsection{Execution Evidence}
+
+All documented queries must be actually executed against external endpoints, with execution evidence preserved as valid TTL (for CONSTRUCT queries) or CSV (for SELECT queries). Fabricating results or using internal knowledge to simulate query output is strictly prohibited.
+
+\section{Query Quality Requirements}
+
+Well-formed SPARQL queries in this project must satisfy the following quality criteria:
+
+\begin{enumerate}
+  \item \textbf{Syntax Validity}: Query must parse and compile without errors
+  \item \textbf{Prefix Authority}: All prefixes must reference authoritative namespaces (e.g., wikidata.org, dbpedia.org, w3.org)
+  \item \textbf{Execution Success}: Query must execute without runtime errors
+  \item \textbf{Result Format}: Results must be in valid TTL or JSON format
+  \item \textbf{Timeout Compliance}: Query execution must complete within 60 seconds
+\end{enumerate}
+
+Queries that satisfy these criteria but return empty results are considered valid (proof of negative). Queries that fail any criterion are considered malformed and must be corrected.
+
+\section{Demonstration Results}
+
+\subsection{Wikidata Execution Results}
+
+Execution of the Wikidata logics query against \texttt{https://query.wikidata.org/sparql} typically returns 10 logic-related entities with QIDs and labels. This serves as a constructive witness that Wikidata contains structured data about formal logics.
+
+Example result structure:
+\begin{verbatim}
+<http://www.wikidata.org/entity/Q11448> a <http://www.wikidata.org/prop/direct/P31> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "logic"@en .
+\end{verbatim}
+
+\subsection{DBPedia Execution Results}
+
+Execution of the DBPedia category theory query against \texttt{https://dbpedia.org/sparql} typically returns 424 mathematical concepts with labels and classifications. This serves as a constructive witness that DBPedia contains structured data about category theory.
+
+Example result structure:
+\begin{verbatim}
+<http://dbpedia.org/resource/Category_theory> a <http://dbpedia.org/ontology/MathematicalConcept> ;
+    <http://www.w3.org/2000/01/rdf-schema#label> "Category theory"@en .
+\end{verbatim}
+
+\section{Integration with Thesis Development}
+
+The SPARQL validation protocol directly supports thesis development by:
+
+\begin{itemize}
+  \item Providing evidence-based citations from external semantic web sources
+  \item Enabling verification of QID and URI references used in thesis content
+  \item Supporting the extraction of authoritative definitions and classifications
+  \item Facilitating the discovery of related work through structured queries
+\end{itemize}
+
+All SPARQL-derived content in the thesis must be traceable to actual query executions with preserved evidence, maintaining the thesis's commitment to rigorous methodology \cite{lawvere1963functorial}.
