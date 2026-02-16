@@ -19,7 +19,6 @@ This directory contains the prescriptive, machine-readable infrastructure for th
 src/schema/
 ├── thesis-structure.schema.yaml      # YAML schema for thesis structure
 ├── tex-rdf-mapping.yaml             # TeX → RDF provenance metadata mapping
-├── LLM_CONSTRAINTS.md                # Explicit LLM instructions
 ├── README.md                        # This file
 └── validators/
     ├── validate_tex_structure.py       # TeX structure validator
@@ -151,20 +150,6 @@ Runs on every PR:
 4. Comment on PR with results
 5. Only allow merge if all validations pass
 
-### 7. LLM Constraint Documentation
-
-Located in `LLM_CONSTRAINTS.md`:
-
-**Explicit instructions for LLMs**:
-- You may only cite sources from `docs/dissertation/bibliography/citations.yaml`
-- To cite: use `\cite{key}` where key exists in registry
-- To add new citation: STOP and report missing citation
-- Every theorem must have exactly one proof block
-- Every definition must have term and meaning
-- All IDs must be unique globally
-- Do not author local RDF schemas; generate provenance metadata only
-- Your output will be validated; validation failures are fatal
-
 ## Validation Workflow
 
 ### Full Validation (All Must Pass)
@@ -271,19 +256,7 @@ To add a new citation:
      notes: "Description"
    ```
 
-2. **Add to RDF model** (`src/ontology/citations.jsonld`):
-   ```jsonld
-   {
-     "@id": "http://metavacua.github.io/catty/citations/authornew2020paper",
-     "@type": "bibo:Article",
-     "dct:creator": "First Last",
-     "dct:title": "Paper Title",
-     "dct:issued": "2020",
-     "dct:identifier": "authornew2020paper"
-   }
-   ```
-
-3. **Run validation** to ensure consistency:
+2. **Run validation** to ensure consistency:
    ```bash
    python src/schema/validators/validate_citations.py \
      --tex-dir thesis/chapters/ \
@@ -360,8 +333,6 @@ This infrastructure enforces:
 3. **TeX as primary artifact**: Thesis is LaTeX; RDF is metadata/provenance only (unidirectional: TeX → RDF)
 4. **Citation integrity**: All citations pre-registered; no LLM invention
 5. **Automated enforcement**: CI/CD rejects invalid combinations
-
-**For LLMs**: See `LLM_CONSTRAINTS.md` for explicit instructions.
 
 **For developers**: All validators must pass before merging.
 

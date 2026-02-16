@@ -1,8 +1,9 @@
 # =============================================================================
-# TeX ↔ RDF Bidirectional Mapping
+# TeX ↔ RDF Provenance Metadata Mapping
 # =============================================================================
 # Purpose: Define how TeX elements map to RDF classes and properties
-# This ensures bidirectional consistency between TeX content and RDF resources
+# This defines provenance metadata extraction from TeX (unidirectional: TeX → RDF)
+# Note: Local RDF authoring is not done in this project
 # =============================================================================
 
 # Version and metadata
@@ -190,24 +191,17 @@ mappings:
     citations: "dct:references"
     id_pattern: "^txt-[a-z0-9-]+$"
 
-# Bidirectional validation rules
+# Provenance extraction rules (TeX → RDF only)
 validation:
-  # Forward validation: TeX → RDF
+  # Forward validation: TeX → RDF (extraction only)
   forward:
-    - "Every TeX element with given ID must produce corresponding RDF resource"
-    - "All required properties must be present in RDF"
-    - "Citation keys must match between TeX and RDF"
+    - "Every TeX element with given ID can produce corresponding RDF resource"
+    - "All required properties can be present in RDF"
+    - "Citation keys can match between TeX and RDF"
     - "ID patterns must match defined regex"
-
-  # Reverse validation: RDF → TeX
-  reverse:
-    - "Every RDF resource with identifier must be cited in TeX (or marked supplementary)"
-    - "Properties in RDF must match TeX element properties"
-    - "Citation links in RDF must correspond to \\cite{} in TeX"
 
   # Consistency checks
   consistency:
-    - "No circular references (proof referencing theorem that references same proof)"
     - "All ID patterns must be globally unique"
     - "All citation keys must exist in docs/dissertation/bibliography/citations.yaml"
     - "All external links (DOI, Wikidata, URLs) must be resolvable"
@@ -229,10 +223,10 @@ citation_properties:
 
 # Prefix definitions for RDF URIs
 prefixes:
-  catty: "http://example.org/src/ontology/"
+  catty: "https://github.com/metavacua/CategoricalReasoner/ontology/"
   dct: "http://purl.org/dc/terms/"
   prov: "http://www.w3.org/ns/prov#"
-  bibo: "http://purl.org/src/ontology/bibo/"
+  bibo: "http://purl.org/ontology/bibo/"
   rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   rdfs: "http://www.w3.org/2000/01/rdf-schema#"
   owl: "http://www.w3.org/2002/07/owl#"
