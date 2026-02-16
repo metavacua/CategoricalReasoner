@@ -10,7 +10,7 @@ Catty develops algorithms and implementations for modeling formal logics as cate
 
 ### What is an Algorithmic Thesis?
 
-An algorithmic thesis is a software repository that embodies research contributions through executable algorithms, not static documents. The primary deliverables are working implementations, validation frameworks, and computational tools that realize theoretical concepts in code.
+An algorithmic thesis is a software repository that embodies research contributions through executable algorithms, not static documents. The primary deliverables are working implementations and computational tools that realize theoretical concepts in code; Java and SPARQL are the validation framework through well-formed executable code and queries; compilation to Java provides adequate compile time guarentees without DIY ad-hoc validation infrastructure; well-formed SPARQL queries provide the operational and computational semantics that can be checked through the SPARQL to Java records construction via the Java compiler.
 
 Catty is not under any instutition, is not homework or any such instrument, is not subject to a thesis defense committee, or similar organizational commitments; it is a thesis in the sense of being held to formal standards for dissertation work at the level of the formation and operation of the instrument itself with voluntarily adopted academic standards for citations and scholarship. It is under the auspice of the Invisible College; the Invisible College is contemporaneously a socialogical concept related to the informal conduct of scholarship outside of established institutions, and it has direct roots into the common practice of science in the 19th and 20th century; it is in the tradition of Rutherford and Tesla.
 
@@ -23,7 +23,6 @@ This repository provides algorithms and implementations for:
 - **Categorical logic modeling**: Computational representations of formal logics (LM, LK, LJ, LDJ, linear logic) as objects in categories
 - **Morphism algorithms**: Tools for defining and reasoning about relationships between logics via extension and interpretation
 - **Semantic web integration**: Consumption and reasoning over external RDF/OWL ontologies and knowledge graphs
-- **Validation frameworks**: Automated testing infrastructure for verifying categorical structures and consistency
 
 The project implements a Java-centric architecture with proven semantic web technologies, supported by auxiliary Python scripts for CI/CD orchestration.
 
