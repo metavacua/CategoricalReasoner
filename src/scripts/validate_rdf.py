@@ -23,8 +23,10 @@ def validate_rdf(directory):
     return success
 
 if __name__ == "__main__":
-    ontology_dir = "ontology"
-    if validate_rdf(ontology_dir):
+    # Note: This project consumes semantic web data from external sources, not local ontologies
+    # Local RDF files should be placed in docs/dissertation/bibliography/
+    bibliography_dir = "docs/dissertation/bibliography"
+    if validate_rdf(bibliography_dir):
         sys.exit(0)
     else:
         sys.exit(1)

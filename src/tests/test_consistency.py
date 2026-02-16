@@ -12,19 +12,21 @@ except ImportError:
     sys.exit(0) 
 
 def test_consistency():
-    # Load all ontology files
+    # Load all RDF files
     data_graph = Graph()
-    # Find ontology directory relative to this script
+    # Find bibliography directory relative to this script
+    # Note: This project consumes semantic web data from external sources, not local ontologies
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    ontology_dir = os.path.join(os.path.dirname(script_dir), "ontology")
-    for filename in os.listdir(ontology_dir):
+    bibliography_dir = os.path.join(os.path.dirname(script_dir), "..", "..", "docs", "dissertation", "bibliography")
+    bibliography_dir = os.path.abspath(bibliography_dir)
+    for filename in os.listdir(bibliography_dir):
         if filename.endswith(".jsonld"):
-            data_graph.parse(os.path.join(ontology_dir, filename), format="json-ld")
+            data_graph.parse(os.path.join(bibliography_dir, filename), format="json-ld")
         elif filename.endswith(".ttl") and filename != "catty-shapes.ttl":
-            data_graph.parse(os.path.join(ontology_dir, filename), format="turtle")
-    
+            data_graph.parse(os.path.join(bibliography_dir, filename), format="turtle")
+
     # Load shapes
-    shacl_path = os.path.join(ontology_dir, "catty-shapes.ttl")
+    shacl_path = os.path.join(bibliography_dir, "catty-shapes.ttl")
     shapes_graph = Graph()
     shapes_graph.parse(shacl_path, format="turtle")
 
