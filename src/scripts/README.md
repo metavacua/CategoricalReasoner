@@ -74,7 +74,7 @@ All scripts must:
 
 ### Integration
 
-Scripts must integrate with `.catty/validation/validate.py` output format for CI/CD compatibility.
+Scripts should follow standard CLI conventions and exit codes for CI/CD compatibility.
 
 ## Future Replacements
 
@@ -85,6 +85,6 @@ As the project matures, the following Python scripts may be replaced with Java e
 
 ## See Also
 
-- `.catty/README.md` - Operational model and validation framework
+- `src/scripts/AGENTS.md` - Script development constraints
 - `src/schema/README.md` - Validation schemas and constraints
 - `src/tests/README.md` - Test suite documentation

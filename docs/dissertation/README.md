@@ -269,4 +269,4 @@ python src/schema/validators/validate_consistency.py \
 - `src/schema/README.md` - Validation schemas and constraints
 - `docs/dissertation/bibliography/README.md` - Citation registry documentation
 - `src/schema/AGENTS.md` - LaTeX structure and citation constraints for LLMs
-- `.catty/README.md` - Operational model for thesis generation
+- `docs/dissertation/AGENTS.md` - Thesis development constraints

@@ -14,7 +14,7 @@ The `src/schema/` directory contains validation schemas, LLM constraints, and Te
 - **Validation**: TeX structure validated against `thesis-structure.schema.yaml`, citations against registry.
 
 ## Validation
-Run schema validators: `python src/schema/validators/validate_tex_structure.py`, `validate_citations.py`, `validate_consistency.py`.
+Run schema validators as needed: `python src/schema/validators/validate_tex_structure.py` (if available).
 
 Note: Current validation uses Python for pragmatic CI/CD orchestration. Long-term validation infrastructure should use Java (Jena SHACL support, JUnit).
 

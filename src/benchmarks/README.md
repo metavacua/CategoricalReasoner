@@ -137,7 +137,7 @@ python src/benchmarks/run.py --endpoint https://dbpedia.org/sparql --query dbped
 
 1. **Hybrid Retrieval**: Combine SPARQL for structured fact retrieval with Vector Search for unstructured text context.
 2. **Graph-Aware Prompting**: Use the extracted TTL (Turtle) as context for LLMs, as its hierarchical nature is well-suited for representing relationships compared to flat JSON.
-3. **Dynamic Discovery**: Implement the "Discovery Pattern" (as seen in `docs/WIKIDATA_DISCOVERY.md`) to resolve ambiguous labels to authoritative URIs before performing RAG.
+3. **Dynamic Discovery**: Implement discovery patterns to resolve ambiguous labels to authoritative URIs before performing RAG.
 4. **Agentic Validation**: Coding agents should automatically run and validate queries against endpoints during the generation process to detect and fix "SPARQL hallucinations".
 
 

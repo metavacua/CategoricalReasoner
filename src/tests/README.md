@@ -258,7 +258,7 @@ python -m pytest src/tests/ --pdb
 
 ## See Also
 
-- `.catty/README.md` - Validation framework and acceptance criteria
+- `src/tests/AGENTS.md` - Testing framework constraints
 - `src/schema/README.md` - Validation schemas and constraints
 - `src/scripts/README.md` - Utility scripts for validation
 - `src/schema/validators/` - Validation scripts that tests verify
