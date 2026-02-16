@@ -1,16 +1,15 @@
 % =============================================================================
 % Catty Thesis Citation Macros
 % =============================================================================
-% Purpose: Enforce structured, machine-readable citation format in TeX
+% Purpose: Provide structured, machine-readable citation format in TeX
 %
-% LLM INSTRUCTION: You may only use \cite{key} where key exists in
-% bibliography/citations.yaml. Do not invent new keys.
-% If you need to cite a source not in the registry, stop and
-% report the missing citation.
+% NOTE: Citation validation system is under development.
+% Java/RO-Crate implementation is required for citation key validation.
+% See docs/dissertation/bibliography/README.md for implementation requirements.
 % =============================================================================
 
-% Base citation macro - key must exist in registry
-% Usage: \cite{key} where key is from bibliography/citations.yaml
+% Base citation macro - key validation pending Java/RO-Crate implementation
+% Usage: \cite{key}
 \newcommand{\cite}[1]{%
   \textbf{[}#1\textbf{]}%
 }
@@ -64,8 +63,9 @@
 
 % Check if citation key exists (for pre-compile validation)
 % This is a no-op in LaTeX but is parsed by the citation validator
+% NOTE: Validator is temporarily disabled pending Java/RO-Crate implementation
 \newcommand{\validatecite}[1]{%
-  % Validator: check if #1 exists in bibliography/citations.yaml
+  % Validator: check if #1 exists (disabled pending implementation)
 }
 
 % =============================================================================

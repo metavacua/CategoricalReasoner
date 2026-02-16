@@ -84,15 +84,7 @@ python src/schema/validators/validate_tex_structure.py --tex-dir docs/dissertati
 
 ### Citation Usage
 
-All citations must use keys from `docs/dissertation/bibliography/citations.yaml`:
-
-```latex
-% Good
-This result follows from \cite{girard1987linear}.
-
-% Bad - citation not in registry
-This result follows from \cite{unregistered2020paper}.
-```
+Citation system is under development. Direct citation key validation is not currently enforced. See `docs/dissertation/bibliography/README.md` for Java/RO-Crate system requirements.
 
 **Citation macros**:
 - `\cite{key}` - Simple citation
@@ -101,12 +93,7 @@ This result follows from \cite{unregistered2020paper}.
 - `\definedfrom{term}{key}` - Definition cites source
 - `\provedfrom{theorem}{key}` - Theorem cites proof source
 
-**Validate citations**:
-```bash
-python src/schema/validators/validate_citations.py \
-  --tex-dir docs/dissertation/chapters/ \
-  --bibliography docs/dissertation/bibliography/citations.yaml
-```
+**Note**: Citation validators are temporarily disabled pending Java/RO-Crate implementation.
 
 ### Mathematical Notation
 
@@ -228,17 +215,9 @@ Run all validators before committing changes:
 ```bash
 # Validate structure
 python src/schema/validators/validate_tex_structure.py --tex-dir docs/dissertation/chapters/
-
-# Validate citations
-python src/schema/validators/validate_citations.py \
-  --tex-dir docs/dissertation/chapters/ \
-  --bibliography docs/dissertation/bibliography/citations.yaml
-
-# Validate consistency
-python src/schema/validators/validate_consistency.py \
-  --tex-dir docs/dissertation/chapters/ \
-  --bibliography docs/dissertation/bibliography/citations.yaml
 ```
+
+**Note**: Citation and consistency validators are temporarily disabled pending Java/RO-Crate implementation. See `docs/dissertation/bibliography/README.md` for details.
 
 ## Common Issues and Solutions
 
@@ -258,11 +237,10 @@ python src/schema/validators/validate_consistency.py \
 **Error**: `Invalid theorem ID 'thm.Example'`
 **Fix**: Use lowercase hyphenated IDs: `thm-example`
 
-**Error**: `Citation 'key' not found in docs/dissertation/bibliography/citations.yaml`
-**Fix**: Use pre-registered citation key or add to registry
-
 **Error**: `Duplicate ID 'thm-example'`
 **Fix**: Use unique IDs across all chapters
+
+**Note**: Citation validation is temporarily disabled. See `docs/dissertation/bibliography/README.md` for Java/RO-Crate implementation requirements.
 
 ## See Also
 

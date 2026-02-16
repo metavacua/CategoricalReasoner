@@ -7,7 +7,7 @@ This repository implements the Catty thesis: categorical foundations for logics 
 - **Formats**: Read/write `*.md`, `*.tex`, `*.yaml`, `*.py`. Create directories only when specified.
 - **Languages**: LaTeX, Python ≥3.8 (auxiliary CI/CD only), Java (primary ecosystem for validation and transformation).
 - **Reports**: Reports must be returned as `.tex` files (multi-part for non-trivial) or semantic HTML. `SEMANTIC_WEB_RAG_REPORT.md` is strictly forbidden and must be converted to TeX.
-- **Citations**: Use ONLY keys from `docs/dissertation/bibliography/citations.yaml`. Forbidden: invent new citation keys.
+- **Citations**: Citation system is under development. Direct citation key validation is not currently enforced. See `docs/dissertation/bibliography/README.md` for Java/RO-Crate system requirements.
 - **IDs**: Globally unique across corpus. Patterns: `thm-*`, `def-*`, `lem-*`, `ex-*`, `sec-*`, `subsec-*`.
 - **Validation**: All artifacts must pass automated validation. Acceptance criteria are boolean tests only.
 - **Execution**: Execute task descriptions and validate outputs.

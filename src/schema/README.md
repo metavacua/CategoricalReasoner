@@ -9,7 +9,7 @@ This directory contains the prescriptive, machine-readable infrastructure for th
 1. **Constraint-based design**: Remove degrees of freedom to force valid output
 2. **Prescriptive schema**: Define ALL allowed structures; reject anything outside schema
 3. **TeX as primary artifact**: Thesis is LaTeX; RDF is metadata/provenance only (unidirectional: TeX → RDF)
-4. **Citation integrity**: All citations must be pre-registered; LLMs cannot invent new citations
+4. **Citation integrity**: Citation system is under development; Java/RO-Crate implementation required
 5. **Automated validation**: CI/CD rejects invalid combinations
 6. **Technology Note**: Current validation uses Python for pragmatic CI/CD orchestration. Long-term validation infrastructure should use Java (Jena SHACL support, JUnit).
 
@@ -50,19 +50,7 @@ Defines all valid thesis structures:
 - Proofs: `steps`, `conclusion`
 - Examples: `description`, `instantiation`
 
-### 2. Citation Infrastructure
-
-Located in `../docs/dissertation/bibliography/`:
-
-**Citation Registry** (`docs/dissertation/bibliography/citations.yaml`):
-- Master registry of all approved citations (single source of truth)
-- Prevents LLM invention of citations
-- 13 pre-registered foundational references
-- Each entry has: author, title, year, type, external identifiers
-
-**Validation**: All citation keys used in TeX must exist in this registry. Compilation fails otherwise.
-
-### 3. TeX Citation Macros
+### 2. TeX Citation Macros
 
 Located in `../docs/dissertation/macros/citations.tex`:
 
@@ -72,7 +60,7 @@ Located in `../docs/dissertation/macros/citations.tex`:
 - `\definedfrom{term}{key}` - definition cites source
 - `\provedfrom{theorem}{key}` - theorem cites proof source
 
-**Validation**: All citation keys must exist in registry; compilation fails otherwise.
+**Note**: Citation validation is temporarily disabled pending Java/RO-Crate implementation. See `docs/dissertation/bibliography/README.md` for details.
 
 ### 4. TeX → RDF Provenance Metadata Extraction (`tex-rdf-mapping.yaml`)
 
@@ -104,40 +92,22 @@ Validates TeX files against `thesis-structure.schema.yaml`:
 - Extract structure (chapters, sections, theorems, definitions)
 - Validate nesting follows schema
 - Validate all IDs are unique and match patterns
-- Validate all citations reference registry entries
+- Validate all citations reference registry entries (disabled pending implementation)
 
 **Usage**:
 ```bash
 python src/schema/validators/validate_tex_structure.py --tex-dir docs/dissertation/chapters/
 ```
 
-#### `validate_citations.py`
+#### `validate_citations.py` (TEMPORARILY DISABLED)
 
-Validates citations:
-- Check every `\cite{key}` in TeX has corresponding entry in `citations.yaml`
-- Check external links (DOI, Wikidata, arXiv, URLs) are resolvable
+Validates citations - temporarily disabled pending Java/RO-Crate implementation.
+See `docs/dissertation/bibliography/README.md` for implementation requirements.
 
-**Usage**:
-```bash
-python src/schema/validators/validate_citations.py \
-  --tex-dir docs/dissertation/chapters/ \
-  --bibliography docs/dissertation/bibliography/citations.yaml \
-  --check-external
-```
+#### `validate_consistency.py` (TEMPORARILY DISABLED)
 
-#### `validate_consistency.py`
-
-Validates TeX structure and citation consistency:
-- Parse TeX structure
-- Validate all citations are registered
-- Validate all IDs are unique
-
-**Usage**:
-```bash
-python src/schema/validators/validate_consistency.py \
-  --tex-dir docs/dissertation/chapters/ \
-  --bibliography docs/dissertation/bibliography/citations.yaml
-```
+Validates TeX structure and citation consistency - temporarily disabled pending Java/RO-Crate implementation.
+See `docs/dissertation/bibliography/README.md` for implementation requirements.
 
 ### 6. CI/CD Integration
 
@@ -145,10 +115,10 @@ Workflow: `.github/workflows/thesis-validation.yml`
 
 Runs on every PR:
 1. Validate TeX structure
-2. Validate citations
-3. Validate consistency
-4. Comment on PR with results
-5. Only allow merge if all validations pass
+2. Comment on PR with results
+3. Only allow merge if all validations pass
+
+Note: Citation and consistency validators are temporarily disabled.
 
 ## Validation Workflow
 
@@ -157,18 +127,10 @@ Runs on every PR:
 ```bash
 # Validate TeX structure
 python src/schema/validators/validate_tex_structure.py --tex-dir docs/dissertation/chapters/
-
-# Validate citations
-python src/schema/validators/validate_citations.py \
-  --tex-dir docs/dissertation/chapters/ \
-  --bibliography docs/dissertation/bibliography/citations.yaml \
-  --check-external
-
-# Validate consistency
-python src/schema/validators/validate_consistency.py \
-  --tex-dir docs/dissertation/chapters/ \
-  --bibliography docs/dissertation/bibliography/citations.yaml
 ```
+
+Note: Citation and consistency validators are temporarily disabled pending Java/RO-Crate implementation.
+See `docs/dissertation/bibliography/README.md` for implementation requirements.
 
 All validators must exit with status 0 (success).
 
@@ -217,52 +179,9 @@ We define linear logic following \cite{girard2020new}.
 ```
 
 **Why this fails**:
-1. `girard2020new` not in citation registry (fails `validate_citations.py`)
-2. ID `def-linear` doesn't match pattern `def-[lowercase-hyphenated]` (fails `validate_tex_structure.py`)
-3. Theorem has no proof reference (fails `validate_tex_structure.py`)
-
-## Citation Registry
-
-### Available Citations (Version 1.0)
-
-| Key | Author | Title | Year |
-|-----|---------|-------|------|
-| `girard1987linear` | J.-Y. Girard | Linear Logic | 1987 |
-| `kripke1965semantical` | S.A. Kripke | Semantical Analysis of Intuitionistic Logic I | 1965 |
-| `sambin2003basic` | G. Sambin | Basic Logic: Reflection, Symmetry, Visibility | 2003 |
-| `urbas1993structural` | J. Urbas | On the Structural Rules of Linear Logic | 1993 |
-| `trafford2018category` | J. Trafford | A Category Theory Approach to Conceptual Modelling | 2018 |
-| `lawvere1963functorial` | F.W. Lawvere | Functorial Semantics of Algebraic Theories | 1963 |
-| `mac lane1971categories` | S. Mac Lane | Categories for the Working Mathematician | 1971 |
-| `lambek1988category` | J. Lambek | Categories and Categorical Grammars | 1988 |
-| `restall2000substructural` | G. Restall | Substructural Logics | 2000 |
-| `pierce1991category` | B.C. Pierce | Basic Category Theory for Computer Scientists | 1991 |
-| `curyhoward1934` | H.B. Curry | Functionality in Combinatory Logic | 1934 |
-| `howard1969formulae` | W.A. Howard | The Formulae-as-Types Notion of Construction | 1969 |
-| `negri2011proof` | S. Negri | Proof Analysis: A Contribution to Hilbert's Problem | 2011 |
-
-### Adding New Citations
-
-To add a new citation:
-
-1. **Add to YAML registry** (`docs/dissertation/bibliography/citations.yaml`):
-   ```yaml
-   authornew2020paper:
-     author: "First Last"
-     title: "Paper Title"
-     year: 2020
-     type: "journal"
-     doi: "10.xxxx/..."
-     notes: "Description"
-   ```
-
-2. **Run validation** to ensure consistency:
-   ```bash
-   python src/schema/validators/validate_citations.py \
-     --tex-dir docs/dissertation/chapters/ \
-     --bibliography docs/dissertation/bibliography/citations.yaml \
-     --check-external
-   ```
+1. ID `def-linear` doesn't match pattern `def-[lowercase-hyphenated]` (fails `validate_tex_structure.py`)
+2. Theorem has no proof reference (fails `validate_tex_structure.py`)
+3. Citation validation is temporarily disabled pending Java/RO-Crate implementation
 
 ## Error Messages and Fixes
 
@@ -288,14 +207,7 @@ ERROR: Duplicate ID 'thm-weakening' (first defined at docs/dissertation/chapters
 
 **Fix**: Use unique ID; change to `thm-weakening-ll` or similar.
 
-### Citation Validation Errors
-
-```
-ERROR: docs/dissertation/chapters/categorical-semantic-audit.tex:42
-  Citation 'girard2020new' not found in docs/dissertation/bibliography/citations.yaml
-```
-
-**Fix**: Use pre-registered key or add citation to registry (see above).
+Note: Citation validation is temporarily disabled. See `docs/dissertation/bibliography/README.md` for Java/RO-Crate implementation requirements.
 
 ## Installation
 
@@ -331,10 +243,10 @@ This infrastructure enforces:
 1. **Constraint-based design**: Removes degrees of freedom to force valid output
 2. **Prescriptive schema**: Defines ALL allowed structures; rejects anything outside
 3. **TeX as primary artifact**: Thesis is LaTeX; RDF is metadata/provenance only (unidirectional: TeX → RDF)
-4. **Citation integrity**: All citations pre-registered; no LLM invention
+4. **Citation integrity**: Citation system under development; Java/RO-Crate implementation required
 5. **Automated enforcement**: CI/CD rejects invalid combinations
 
-**For developers**: All validators must pass before merging.
+**For developers**: All validators must pass before merging. Note: Citation and consistency validators are temporarily disabled.
 
 ## References
 

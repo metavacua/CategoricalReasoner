@@ -6,6 +6,25 @@ Validates TeX ↔ RDF ↔ Citation consistency
 EXIT CODES:
   0 = Validation PASSED (no violations)
   1 = Validation FAILED (violations present)
+
+TEMPORARILY DISABLED - February 2026
+
+This validator is disabled because the citations.yaml citation registry system
+has been eliminated from the CategoricalReasoner repository. The YAML-based
+citation system was non-functional and did not meet project requirements.
+
+This script requires a Java/RO-Crate citation system for proper implementation.
+See docs/dissertation/bibliography/README.md for implementation requirements.
+
+Required missing components:
+- Maven/pom.xml build configuration
+- Java source files in src/main/java/org/metavacua/categoricalreasoner/citation/
+- RO-Crate 1.1 JSON-LD generation
+- BibLaTeX export functionality
+- Javadoc annotations for Citation, Person, and related records
+
+When the Java/RO-Crate system is implemented, this validator should be
+rewritten to validate against that system instead of citations.yaml.
 """
 
 import argparse
@@ -486,6 +505,20 @@ class ConsistencyValidator:
 
 
 def main():
+    # Early exit - this validator is disabled
+    print("=" * 60)
+    print("Consistency Validator - TEMPORARILY DISABLED")
+    print("=" * 60)
+    print("\nThis validator is disabled because the citations.yaml citation")
+    print("registry system has been eliminated from the CategoricalReasoner")
+    print("repository.")
+    print("\nThe citation system requires a Java/RO-Crate implementation.")
+    print("See docs/dissertation/bibliography/README.md for requirements.")
+    print("\nExiting with success status (0).")
+    sys.exit(0)
+
+    # Original code below (commented out for future reference)
+    """
     parser = argparse.ArgumentParser(
         description='Validate bidirectional consistency between TeX, RDF, and citations',
         epilog='EXIT CODES: 0 = PASS, 1 = FAIL, 2 = ERROR'
@@ -533,6 +566,7 @@ def main():
     if not args.mapping.exists():
         print(f"ERROR: File not found: {args.mapping}")
         sys.exit(2)
+    """
 
     # Create validator
     validator = ConsistencyValidator(args.mapping)

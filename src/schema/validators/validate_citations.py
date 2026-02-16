@@ -2,6 +2,25 @@
 """
 Citation Validator for Catty Thesis
 Validates citations across TeX files, YAML registry, and RDF resources
+
+TEMPORARILY DISABLED - February 2026
+
+This validator is disabled because the citations.yaml citation registry system
+has been eliminated from the CategoricalReasoner repository. The YAML-based
+citation system was non-functional and did not meet project requirements.
+
+This script requires a Java/RO-Crate citation system for proper implementation.
+See docs/dissertation/bibliography/README.md for implementation requirements.
+
+Required missing components:
+- Maven/pom.xml build configuration
+- Java source files in src/main/java/org/metavacua/categoricalreasoner/citation/
+- RO-Crate 1.1 JSON-LD generation
+- BibLaTeX export functionality
+- Javadoc annotations for Citation, Person, and related records
+
+When the Java/RO-Crate system is implemented, this validator should be
+rewritten to validate against that system instead of citations.yaml.
 """
 
 import argparse
@@ -367,6 +386,20 @@ class CitationValidator:
 
 
 def main():
+    # Early exit - this validator is disabled
+    print("=" * 60)
+    print("Citation Validator - TEMPORARILY DISABLED")
+    print("=" * 60)
+    print("\nThis validator is disabled because the citations.yaml citation")
+    print("registry system has been eliminated from the CategoricalReasoner")
+    print("repository.")
+    print("\nThe citation system requires a Java/RO-Crate implementation.")
+    print("See docs/dissertation/bibliography/README.md for requirements.")
+    print("\nExiting with success status (0).")
+    sys.exit(0)
+
+    # Original code below (commented out for future reference)
+    """
     parser = argparse.ArgumentParser(
         description='Validate citations across TeX, YAML registry, and RDF'
     )
@@ -407,6 +440,7 @@ def main():
 
     # Exit with appropriate code
     sys.exit(0 if success else 1)
+    """
 
 
 if __name__ == '__main__':

@@ -28,10 +28,11 @@ Main test file for validating thesis consistency.
    - All example IDs follow pattern `ex-[lowercase-hyphenated]`
    - All IDs are globally unique (no duplicates)
 
-2. **Citation Tests**
-   - All `\cite{key}` references exist in `docs/dissertation/bibliography/citations.yaml`
+2. **Citation Tests** (TEMPORARILY DISABLED)
+   - All `\cite{key}` references exist in citation registry
    - Citation keys match format `[author][year][keyword]`
    - External links (DOI, URL, Wikidata, arXiv) are resolvable
+   - Note: Citation validation is temporarily disabled pending Java/RO-Crate implementation. See `docs/dissertation/bibliography/README.md` for details.
 
 3. **Content Tests**
    - Theorems have required fields (statement, proof)
@@ -100,16 +101,17 @@ class TestCitations(unittest.TestCase):
    - Required fields (theorems: statement, proof; definitions: term, meaning)
    - Proper nesting and structure
 
-2. **Citation Registry**
+2. **Citation Registry** (TEMPORARILY DISABLED)
    - All TeX citations reference registry entries
    - Registry entries have required fields (author, title, year, type)
    - Citation keys follow correct format
    - External links (if present) are resolvable
+   - Note: Citation validation is temporarily disabled pending Java/RO-Crate implementation. See `docs/dissertation/bibliography/README.md` for details.
 
 3. **Integration**
    - Cross-reference validation (chapters reference each other correctly)
-   - Citation usage tracking (who cites what)
-   - Consistency between TeX and registry
+   - Citation usage tracking (who cites what) - disabled pending implementation
+   - Consistency between TeX and registry - disabled pending implementation
 
 ### Coverage Metrics
 

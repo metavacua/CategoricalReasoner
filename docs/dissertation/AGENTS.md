@@ -5,7 +5,7 @@ The `docs/dissertation/` directory contains LaTeX source code for the Catty thes
 
 ## Core Constraints
 - **Compilation**: `pdflatex` and `biber` required. All files must compile without errors. Cross-references must resolve.
-- **Citations**: Use ONLY registered keys from `docs/dissertation/bibliography/citations.yaml`. Macros: `\cite{}`, `\citepage{}`, `\definedfrom{}`, `\provedfrom{}`.
+- **Citations**: Citation system is under development. Direct citation key validation is not currently enforced. See `docs/dissertation/bibliography/README.md` for Java/RO-Crate system requirements. Macros: `\cite{}`, `\citepage{}`, `\definedfrom{}`, `\provedfrom{}`.
 - **IDs**: Globally unique across corpus. Patterns: `thm-*`, `def-*`, `lem-*`, `ex-*`, `sec-*`, `subsec-*`.
 - **Structure**: Chapters follow pattern `sec-[lowercase-hyphenated]`. Mathematical content uses proper notation: `\vdash`, `\land`, `\lor`, `\to`, `\rightarrow`, `\otimes`.
 - **Content**: Theorems require statements and proofs. Definitions require terms and meanings. Examples instantiate abstract concepts.

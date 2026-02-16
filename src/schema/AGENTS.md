@@ -4,7 +4,7 @@
 The `src/schema/` directory contains validation schemas, LLM constraints, and TeX → RDF provenance metadata mappings for thesis generation.
 
 ## Core Constraints
-- **Citations**: Use ONLY keys from `docs/dissertation/bibliography/citations.yaml`. Macros: `\cite{}`, `\citepage{}`, `\citefigure{}`, `\definedfrom{}`, `\provedfrom{}`. Forbidden: invent new keys or use unregistered sources.
+- **Citations**: Citation system is under development. Direct citation key validation is not currently enforced. See `docs/dissertation/bibliography/README.md` for Java/RO-Crate system requirements. Macros: `\cite{}`, `\citepage{}`, `\citefigure{}`, `\definedfrom{}`, `\provedfrom{}`.
 - **ID Uniqueness**: All IDs globally unique. Patterns: `thm-[lowercase-hyphenated]`, `def-*`, `lem-*`, `ex-*`, `sec-*`, `subsec-*`.
 - **Domain Restriction**: Do not use `http://catty.org/`. The only associated webpage is the MetaVacua GitHub repository (`https://github.com/metavacua/CategoricalReasoner`).
 - **Provenance Only**: Do not author local RDF schemas or instantiate ontology classes. Generate provenance metadata only (e.g., citation usage tracking).
@@ -15,6 +15,8 @@ The `src/schema/` directory contains validation schemas, LLM constraints, and Te
 
 ## Validation
 Run schema validators as needed: `python src/schema/validators/validate_tex_structure.py` (if available).
+
+Note: Citation and consistency validators are temporarily disabled pending Java/RO-Crate implementation. See `docs/dissertation/bibliography/README.md` for details.
 
 Note: Current validation uses Python for pragmatic CI/CD orchestration. Long-term validation infrastructure should use Java (Jena SHACL support, JUnit).
 

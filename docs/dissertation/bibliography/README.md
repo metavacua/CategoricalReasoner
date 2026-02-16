@@ -1,123 +1,273 @@
-# Citation Registry
+# Citation Registry - Implementation Requirements
+
+## Status: IMPLEMENTATION REQUIRED
+
+**February 2026**: The YAML-based citation registry (`citations.yaml`) has been eliminated from the CategoricalReasoner repository. The citation system described below is **NOT IMPLEMENTED** - it is a design specification that needs to be built.
 
 ## Purpose
 
-This directory implements the **ARATU (Agentic Retrieval-Augmented Tool Use)** tool registry for mathematical knowledge sources. The registry serves as the **grounding interface** between human epistemic exposure and agent reasoning context.
+The `docs/dissertation/bibliography/` directory should contain the citation registry system for all thesis artifacts. When implemented, this will be the **ARATU (Agentic Retrieval-Augmented Tool Use)** tool registry for mathematical knowledge sources.
 
-**Core architectural principle:** The citation registry is not primarily a bibliographic aid for human readers. It is a **typed knowledge graph** enabling automated agents to query, validate, and integrate mathematical sources into formal categorical constructions. The LaTeX output is a **view** of this graph—human-auditable but secondary to machine-actionable structure.
-
-**Epistemic hierarchy:** This system implements a progression from **idiosyncratic** (individual) to **canonical** (universally necessary) representation:
-
-1. **Canonical:** Java Record model—immutable, validated, unique representation
-2. **Normalized:** RO-Crate 1.1 JSON-LD—single source of truth, no redundancy
-3. **Standardized:** BibLaTeX 3.0, schema.org, OAIS—external specifications
-4. **Conventional:** Citation key format, field ordering—coordination norms
-5. **Ad hoc:** **Eliminated**—no provisional structures, no TODOs
+**Core architectural principle:** The citation registry is not primarily a bibliographic aid for human readers. It should be a **typed knowledge graph** enabling automated agents to query, validate, and integrate mathematical sources into formal categorical constructions. The LaTeX output is a **view** of this graph—human-auditable but secondary to machine-actionable structure.
 
 ---
 
-## Canonical Model (Java 17 Records)
+## Missing Implementation Components
 
-The authoritative representation is the Java Record model in `src/main/java/org/metavacua/categoricalreasoner/citation/`. These types enforce **total structure** at construction—no nulls, no empty collections, no stringly-typed data.
+The following components are **NOT PRESENT** in the repository and must be implemented:
 
-### Core Records
+### 1. Maven Build Configuration (Missing)
 
+**File**: `pom.xml` (at repository root)
+
+**Required dependencies**:
+```xml
+<dependencies>
+  <!-- RO-Crate 1.1 support -->
+  <dependency>
+    <groupId>edu.kit.datamanager</groupId>
+    <artifactId>ro-crate-java</artifactId>
+    <version>2.1.0</version>
+  </dependency>
+
+  <!-- EDTF date parsing -->
+  <dependency>
+    <groupId>io.github.xmlobjects</groupId>
+    <artifactId>edtf-model</artifactId>
+    <version>2.0.0</version>
+  </dependency>
+
+  <!-- SPARQL processing -->
+  <dependency>
+    <groupId>org.apache.jena</groupId>
+    <artifactId>jena-arq</artifactId>
+    <version>4.9.0</version>
+  </dependency>
+
+  <!-- Testing -->
+  <dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter</artifactId>
+    <version>5.10.0</version>
+    <scope>test</scope>
+  </dependency>
+</dependencies>
+```
+
+**Missing build plugins**:
+- `maven-compiler-plugin` (Java 21+ required)
+- `maven-resources-plugin` (for BibLaTeX export generation)
+
+### 2. Java Source Files (Missing)
+
+**Directory**: `src/main/java/org/metavacua/categoricalreasoner/citation/`
+
+**Required Java Records**:
+
+#### `Citation.java`
 ```java
+package org.metavacua.categoricalreasoner.citation;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Canonical citation record with total structure validation.
+ * Javadoc annotations required for RO-Crate generation.
+ *
+ * @param key                    Citation key format: [familyName][year][disambiguator]
+ * @param authors                At least one author; structured names
+ * @param title                  Internationalized title with optional BCP-47 language tag
+ * @param date                   EDTF/ISO8601-2 parsed date
+ * @param type                   Publication type enum
+ * @param doi                    Optional validated DOI (10.xxxx/... format)
+ * @param wikidata               Optional Wikidata QID (Q123456 format)
+ * @param arxiv                  Optional arXiv ID (2001.12345 format)
+ * @param status                 Formalization status tracking
+ * @param agentContext           LLM-facing structured notes
+ * @param dependsOn             Graph dependencies for ARATU traversal
+ */
 public record Citation(
-    CitationKey key,                    // [familyName][year][disambiguator]
-    NonEmptyList<Person> authors,       // At least one; structured names
-    InternationalizedString title,      // With optional BCP-47 language tag
-    PublicationDate date,               // EDTF/ISO8601-2 parsed
-    WorkType type,                      // Enum: ARTICLE, BOOK, etc.
-    Optional<Doi> doi,                  // Validated 10.xxxx/... format
-    Optional<Qid> wikidata,             // Q123456 format
-    Optional<ArxivId> arxiv,            // 2001.12345 format
-    FormalizationStatus status,         // UNVERIFIED, AXIOMATIZED, PROVEN, DISCHARGED
-    Optional<AgentContext> agentContext, // LLM-facing structured notes
-    List<CitationKey> dependsOn         // Graph dependencies for ARATU traversal
-) {}
+    CitationKey key,
+    List<Person> authors,
+    InternationalizedString title,
+    PublicationDate date,
+    WorkType type,
+    Optional<Doi> doi,
+    Optional<Qid> wikidata,
+    Optional<ArxivId> arxiv,
+    FormalizationStatus status,
+    Optional<AgentContext> agentContext,
+    List<CitationKey> dependsOn
+) {
+    /**
+     * Compact constructor enforcing invariants.
+     * @throws IllegalArgumentException if authors list is empty
+     */
+    public Citation {
+        if (authors == null || authors.isEmpty()) {
+            throw new IllegalArgumentException("Citation must have at least one author");
+        }
+        // All other validation enforced by record component types
+    }
+}
 ```
+
+#### `Person.java`
+```java
+package org.metavacua.categoricalreasoner.citation;
+
+import java.util.Optional;
+
+/**
+ * Structured person record for citation authors.
+ * All fields are immutable; defensive copies in constructors.
+ *
+ * @param familyName  Required family name
+ * @param givenName   Optional given name(s)
+ * @param particle    Optional particle (von, van, de, etc.)
+ * @param suffix      Optional suffix (Jr., Sr., III, etc.)
+ *
+ * @see <a href="https://schema.org/Person">schema.org Person specification</a>
+ */
+public record Person(
+    String familyName,
+    Optional<String> givenName,
+    Optional<String> particle,
+    Optional<String> suffix
+) {
+    /**
+     * Compact constructor enforcing invariants.
+     * @throws IllegalArgumentException if familyName is null or blank
+     */
+    public Person {
+        if (familyName == null || familyName.isBlank()) {
+            throw new IllegalArgumentException("Family name is required");
+        }
+        // Normalize whitespace
+        familyName = familyName.trim();
+    }
+}
+```
+
+**Additional required records** (to be implemented):
+- `CitationKey.java` - Value object with validation
+- `InternationalizedString.java` - Title with BCP-47 language tag
+- `PublicationDate.java` - EDTF/ISO8601-2 parsed date
+- `WorkType.java` - Enum: ARTICLE, BOOK, CONFERENCE, INCOLLECTION, THESIS, REPORT
+- `Doi.java`, `Qid.java`, `ArxivId.java` - Typed identifier value objects
+- `FormalizationStatus.java` - Enum: UNVERIFIED, AXIOMATIZED, PROVEN, DISCHARGED, DEPRECATED, REFUTED
+- `AgentContext.java` - LLM-facing structured notes
+
+### 3. Citation Repository (Missing)
+
+**File**: `src/main/java/org/metavacua/categoricalreasoner/citation/CitationRepository.java`
 
 ```java
-public record Person(
-    String familyName,                  // Required
-    Optional<String> givenName,
-    Optional<String> particle,          // von, van, de, etc.
-    Optional<String> suffix             // Jr., Sr., III, etc.
-) {}
+package org.metavacua.categoricalreasoner.citation;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Repository for citation records.
+ * Generates RO-Crate metadata during compilation.
+ */
+public final class CitationRepository {
+
+    private static final List<Citation> CITATIONS = List.of(
+        // Citations to be added here when implemented
+    );
+
+    private CitationRepository() {
+        // Utility class
+    }
+
+    public static List<Citation> getAll() {
+        return List.copyOf(CITATIONS);
+    }
+
+    public static Optional<Citation> findByKey(CitationKey key) {
+        return CITATIONS.stream()
+            .filter(c -> c.key().equals(key))
+            .findFirst();
+    }
+}
 ```
 
-**Validation:** Compact constructors enforce invariants. No object can exist in an invalid state.
+### 4. RO-Crate Generator (Missing)
 
-**Immutability:** All fields are final; defensive copies in constructors.
+**File**: `src/main/java/org/metavacua/categoricalreasoner/citation/RoCrateGenerator.java`
 
----
+**Required functionality**:
+- Load all citations from `CitationRepository`
+- Generate RO-Crate 1.1 JSON-LD structure
+- Output to `docs/dissertation/bibliography/ro-crate-metadata.json`
+- Integrate with Maven `compile` phase
 
-## Normalized Storage (RO-Crate 1.1)
-
-The file `ro-crate-metadata.json` is the **single source of truth** for the citation registry. It is generated from the Java canonical model via `ro-crate-java` (edu.kit.datamanager:ro-crate-java:2.1.0) during the Maven `compile` phase.
-
-**Generation:**
-```bash
-mvn compile
-# Triggers: org.metavacua.categoricalreasoner.citation.RoCrateGenerator
-# Output: docs/dissertation/bibliography/ro-crate-metadata.json
+**RO-Crate structure**:
+```json
+{
+  "@context": "https://w3id.org/ro/crate/1.1/context",
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "CreativeWork",
+      "conformsTo": "https://w3id.org/ro/crate/1.1",
+      "about": {"@id": "./"}
+    },
+    {
+      "@id": "./",
+      "@type": "Dataset",
+      "hasPart": [
+        {"@id": "#girard1987linear"},
+        {"@id": "#kripke1965semantical"}
+      ]
+    },
+    {
+      "@id": "#girard1987linear",
+      "@type": "ScholarlyArticle",
+      "name": "Linear Logic",
+      "author": [{"@type": "Person", "familyName": "Girard"}],
+      "datePublished": "1987"
+    }
+  ]
+}
 ```
 
-**Structure:**
-- `@context`: `https://w3id.org/ro/crate/1.1/context`
-- Root entity: `Dataset` with `hasPart` linking to citations
-- Citations: `schema:ScholarlyArticle` with structured properties
-- ARATU extensions: `additionalProperty` for `formalizationStatus`, `agentContext`
-- Identifiers: DOI and Wikidata QID as URI `@id` values
+### 5. BibLaTeX Exporter (Missing)
 
-**Why RO-Crate:**
-- **Normalized:** Single JSON-LD file, no redundancy, entity references by URI
-- **Federation-ready:** `@id` uses global identifiers (DOI, QID)
-- **OAIS-aligned:** Research Object packaging for long-term preservation
-- **SPARQL-queriable:** JSON-LD expands to RDF triples
+**File**: `src/main/java/org/metavacua/categoricalreasoner/citation/BiblatexExporter.java`
 
----
+**Required functionality**:
+- Load RO-Crate metadata
+- Generate BibLaTeX 3.0 format
+- Output to `docs/dissertation/references.bib`
+- Integrate with Maven `process-resources` phase
 
-## Standardized Output (BibLaTeX 3.0)
-
-BibLaTeX is a **view** of the normalized RO-Crate data, not a source. Generated during Maven `process-resources` phase.
-
-**Generation:**
-```bash
-mvn process-resources
-# Triggers: org.metavacua.categoricalreasoner.citation.BiblatexExporter
-# Output: docs/dissertation/references.bib
+**BibLaTeX output example**:
+```bibtex
+@article{girard1987linear,
+  author = {Girard, Jean-Yves},
+  title = {Linear Logic},
+  journal = {Theoretical Computer Science},
+  year = {1987},
+  volume = {50},
+  number = {1},
+  pages = {1--102}
+}
 ```
 
-**Validation:**
-```bash
-biber --validate-datamodel docs/dissertation/references.bib
-```
+### 6. SPARQL Federation Support (Missing)
 
-**Mapping:**
-- `schema:ScholarlyArticle` → `@article`
-- `schema:Book` → `@book`
-- `schema:Thesis` → `@phdthesis` or `@mastersthesis`
-- `Person` → BibLaTeX name list format: "Family, Given" or "Family, Particle, Given"
+**File**: `src/main/java/org/metavacua/categoricalreasoner/citation/SparqlQueryService.java`
 
-**Note:** BibLaTeX's heuristic name parsing is **not used**. Names are **total** in the Java model and **deterministically formatted** in the export.
+**Required endpoints**:
+- Wikidata Query Service: `https://query.wikidata.org/sparql`
+- Crossref SPARQL: `https://sparql.crossref.org/`
+- Local RO-Crate: Apache Jena in-memory model
 
----
-
-## ARATU Integration
-
-### For LLM Coding Agents
-
-Citations are **tool schemas** in the ARATU paradigm. Agents query the registry before generating formalizations:
-
-1. **In-Context Retrieval:** Load `ro-crate-metadata.json` as semantic artifact at context window start
-2. **SPARQL Query:** Traverse `dependsOn` for dependency resolution
-3. **JIT External RAG:** Verify DOI/QID against live endpoints (Crossref, Wikidata)
-4. **Tool Invocation:** Retrieve `agentContext` for mathematical grounding
-
-### SPARQL Federation
-
+**Example SPARQL query**:
 ```sparql
 PREFIX schema: <http://schema.org/>
 PREFIX ex: <https://github.com/metavacua/CategoricalReasoner/ontology/>
@@ -131,19 +281,58 @@ WHERE {
 }
 ```
 
-**Endpoints:**
-- Wikidata Query Service: `https://query.wikidata.org/sparql`
-- Crossref SPARQL: `https://sparql.crossref.org/`
-- Local RO-Crate: Apache Jena in-memory model
+---
+
+## OpenJDK 21+ Setup Issues (February 2026)
+
+As of February 2026, there are known issues with OpenJDK 21+ setup in certain environments:
+
+1. **Maven plugin compatibility**: Some older Maven plugins may not be compatible with Java 21
+2. **Build tool updates**: Ensure Maven 3.9+ is installed
+3. **IDE support**: Verify IDE supports Java 21 features (records, pattern matching, `Optional` stream methods)
+
+**Workaround**: If OpenJDK 21+ setup fails, consider using:
+- Eclipse Temurin 21 from Adoptium
+- Corretto 21 from Amazon
+- Building with SDKMAN! for version management
 
 ---
 
-## Adding Citations
+## Current State
 
-### Method 1: Java Record (Preferred)
+### What Exists
+- TeX citation macros in `docs/dissertation/macros/citations.tex` (functional but unvalidated)
+- Validation scripts `validate_citations.py` and `validate_consistency.py` (disabled pending Java implementation)
 
-Add to `src/main/java/org/metavacua/categoricalreasoner/citation/CitationRepository.java`:
+### What's Missing
+- **ALL Java source files** in `src/main/java/org/metavacua/categoricalreasoner/citation/`
+- Maven `pom.xml` configuration
+- RO-Crate 1.1 JSON-LD output
+- BibLaTeX export functionality
+- SPARQL federation support
 
+---
+
+## Implementation Roadmap
+
+1. **Create Maven `pom.xml`** with required dependencies and plugins
+2. **Implement Java record types** with Javadoc annotations
+3. **Create `CitationRepository`** with sample citations
+4. **Implement `RoCrateGenerator`** for JSON-LD export
+5. **Implement `BiblatexExporter`** for TeX bibliography
+6. **Implement `SparqlQueryService`** for federation support
+7. **Update validation scripts** to use Java/RO-Crate system
+8. **Test CI/CD integration**
+
+---
+
+## For Developers
+
+### Adding Citations (When Implemented)
+
+Once the Java/RO-Crate system is implemented:
+
+1. **Add to Java `CitationRepository.java`**:
 ```java
 Citation.of(
     "newauthor2024categorical",           // key
@@ -160,77 +349,53 @@ Citation.of(
 );
 ```
 
-Run `mvn compile` to regenerate RO-Crate and BibLaTeX.
-
-### Method 2: CI/CD (GitHub Actions)
-
-For automated agent submissions:
-
-```yaml
-# .github/workflows/aratu-citation.yml
-workflow_dispatch:
-  inputs:
-    citation_yaml:  # Validated against Java model
+2. **Run Maven build**:
+```bash
+mvn clean compile process-resources
 ```
 
-The workflow:
-1. Parses input into Java Record (validation enforced)
-2. Appends to `CitationRepository.java`
-3. Runs `mvn compile` (RO-Crate generation)
-4. Commits changes if validation passes
+This regenerates:
+- `ro-crate-metadata.json`
+- `references.bib`
+
+3. **Use citation in TeX**:
+```latex
+This result follows from \cite{newauthor2024categorical}.
+```
 
 ---
 
-## Citation Key Format
+## Validation Status
 
-**Convention:** `[familyName][year][disambiguator]`
+### Currently Disabled
 
-- Lowercase alphanumeric
-- Disambiguator: `a`, `b`, `c`... for same-author-same-year collisions
-- Deterministic: Generated from first author's family name + year
+- `validate_citations.py` - TEMPORARILY DISABLED
+- `validate_consistency.py` - TEMPORARILY DISABLED
 
-**Examples:**
-- `girard1987linear` → J.-Y. Girard, 1987, "Linear Logic"
-- `trafford2016a` → J. Trafford, 2016, first of multiple works
+These scripts exit with success status (0) and print a message directing developers to this README.
 
-**Collision handling:** If `trafford2016a` exists, next is `trafford2016b`.
+### Future Validation
 
----
+When Java/RO-Crate system is implemented:
 
-## Formalization Status
+```bash
+# Validate RO-Crate structure
+mvn verify
 
-| Status | Meaning | Agent Usage |
-|--------|---------|-------------|
-| `UNVERIFIED` | Recorded, not assessed | Cite for bibliography completeness only |
-| `AXIOMATIZED` | Core definitions in project ontology | Safe for theorem statements |
-| `PROVEN` | Theorem proved in proof assistant | Safe for proof dependencies |
-| `DISCHARGED` | Fully verified | Safe for all uses |
-| `DEPRECATED` | Superseded | Retained for historical provenance |
-| `REFUTED` | Constructively demonstrated to be false | Resolution methods for first order logical reasoning and refutation complete |
+# Validate BibLaTeX format
+biber --validate-datamodel docs/dissertation/references.bib
 
----
-
-## Dependencies
-
-- **Java 17+** (Records, pattern matching, `Optional` stream methods)
-- **Maven 3.9+** (build lifecycle)
-- **edu.kit.datamanager:ro-crate-java:2.1.0** (RO-Crate generation)
-- **io.github.xmlobjects:edtf-model:2.0.0** (EDTF date parsing)
-- **org.apache.jena:jena-arq:4.9.0** (SPARQL processing)
-- **BibLaTeX 3.0** (TeX output validation)
-
----
-
-## Environment
-
-- `RO_CRATE_OUTPUT`: Override default `docs/dissertation/bibliography` path
-- `BIBLATEX_OUTPUT`: Override default `docs/dissertation/references.bib` path
-- `SPARQL_TIMEOUT_MS`: Query timeout (default: 30000)
+# Test SPARQL queries
+mvn test -Dtest=SparqlQueryServiceTest
+```
 
 ---
 
 ## See Also
 
-- `src/main/java/org/metavacua/categoricalreasoner/citation/` — Canonical Java Record model
+- `docs/dissertation/macros/citations.tex` - LaTeX citation macros
+- `src/schema/validators/validate_citations.py` - Disabled validator (see file header)
+- `src/schema/validators/validate_consistency.py` - Disabled validator (see file header)
 - RO-Crate specification: https://w3id.org/ro/crate/1.1
 - OAIS Reference Model: ISO 14721:2012
+- schema.org: https://schema.org/

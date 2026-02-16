@@ -3,9 +3,9 @@
 
 \section*{Executive Summary}
 
-This report documents the verification of all Wikidata QIDs that were previously referenced in a now-deleted \texttt{src/ontology/} directory. All API calls were made to \url{https://www.wikidata.org/wiki/Special:EntityData/} on \today.
+This report documents verification of all Wikidata QIDs that were previously referenced in a now-deleted \texttt{src/ontology/} directory. All API calls were made to \url{https://www.wikidata.org/wiki/Special:EntityData/} on \today.
 
-\textbf{CRITICAL FINDING:} All QIDs in the ontology files were fabricated or incorrect. No valid Wikidata QIDs were used for the claimed logical entities.
+\textbf{CRITICAL FINDING:} All QIDs in ontology files were fabricated or incorrect. No valid Wikidata QIDs were used for claimed logical entities.
 
 \section*{Verification Methodology}
 
@@ -14,7 +14,7 @@ Each QID was verified via direct API call to Wikidata:
 curl -s "https://www.wikidata.org/wiki/Special:EntityData/{QID}.json"
 \end{verbatim}
 
-Responses were parsed to extract the English label (\texttt{entities.QID.labels.en.value}).
+Responses were parsed to extract English label (\texttt{entities.QID.labels.en.value}).
 
 \section*{Detailed Verification Results}
 
@@ -68,7 +68,7 @@ Classical Logic & Q236975 & ``classical logic'' & CORRECT \\
 \bottomrule
 \end{tabular}
 
-\section*{From citations.yaml}
+\section*{From citations.yaml (DELETED)}
 
 \begin{tabular}{llll}
 \toprule
@@ -82,6 +82,8 @@ Curry's Combinatory Logic & Q7262930 & ``Pycnoptychia'' (moth) & WRONG \\
 Negri's Proof Analysis & Q7268376 & ``quadratically closed field'' & WRONG \\
 \bottomrule
 \end{tabular}
+
+\textbf{NOTE:} The \texttt{citations.yaml} file was deleted in February 2026 as part of eliminating the non-functional YAML-based citation system. This data is preserved here for historical reference only.
 
 \section*{Complete QID Lookup Table}
 
@@ -171,6 +173,7 @@ Q847878 (Claimed: Linear Logic, Actual: TV Series):
         \item Q7262930 (Curry) $\to$ null
         \item Q7268376 (Negri) $\to$ null
     \end{itemize}
+    \item \textbf{February 2026:} Deleted \texttt{citations.yaml} entirely as part of eliminating the non-functional YAML-based citation system
     \item Created this verification report
     \item Extracted conceptual content to LaTeX chapters:
     \begin{itemize}
@@ -182,10 +185,11 @@ Q847878 (Claimed: Linear Logic, Actual: TV Series):
 \section*{Recommendations}
 
 \begin{enumerate}
-    \item Do not use any QIDs from the deleted ontology files
+    \item Do not use any QIDs from deleted ontology files
     \item For future work, verify all QIDs via API before inclusion
-    \item Use the correct QIDs identified in the lookup table above
-    \item Consider creating a validated citation registry with verified QIDs
+    \item Use correct QIDs identified in lookup table above
+    \item Implement Java/RO-Crate citation system (see \texttt{docs/dissertation/bibliography/README.md}) with proper QID validation
+    \item Only include verified QIDs in the Java citation records
 \end{enumerate}
 
 \section*{Verification Log Signature}
