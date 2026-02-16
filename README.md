@@ -29,20 +29,23 @@ The project implements a Java-centric architecture with proven semantic web tech
 
 ### Supporting Documentation
 
-The `thesis/` directory contains LaTeX whitepapers that document the research and development process. These files explain theoretical foundations, design decisions, and algorithmic approaches. They are supporting documentation for the algorithmic contributions, not the primary deliverables themselves.
+The `docs/dissertation/` directory contains LaTeX source for the thesis and supporting documentation. These files explain theoretical foundations, design decisions, and algorithmic approaches. They are supporting documentation for the algorithmic contributions, not the primary deliverables themselves.
 
 ## Project Structure
 
 ```
-├── thesis/                      # LaTeX whitepapers documenting research and development
-├── src/benchmarks/                  # Performance tests and evaluation
-├── src/ontology/                    # Reference materials and examples
-├── src/schema/                      # Validation schemas and constraints
-├── docs/dissertation/bibliography/                # Citation registry
-├── src/scripts/                     # Utility scripts
-├── src/tests/                       # Test suites
-├── .catty/                      # Operational model and validation framework
-└── README.md                    # This file
+├── docs/dissertation/         # LaTeX thesis and documentation
+│   ├── chapters/              # Thesis chapter files
+│   ├── architecture/          # Architecture documentation (TeX)
+│   ├── bibliography/          # Citation registry
+│   └── macros/               # LaTeX macros
+├── src/
+│   ├── benchmarks/            # SPARQL queries and evaluation
+│   ├── schema/                # Validation schemas and constraints
+│   ├── scripts/               # Utility Python scripts
+│   └── tests/                # Test suites
+├── AGENTS.md                 # Agent specifications
+└── README.md                 # This file
 ```
 
 Each directory contains its own README with detailed information about that component's purpose, structure, and usage.
@@ -64,17 +67,11 @@ See individual directory READMEs for specific technology details and build instr
 
 This project consumes semantic web data from external sources rather than authoring local RDF schemas. External ontologies and knowledge graphs are accessed via SPARQL endpoints, linked data services, and the Giant Global Graph (GGG; https://en.wikipedia.org/wiki/Giant_Global_Graph).
 
-See the `src/ontology/` and `src/benchmarks/` directories for information about consumed data sources and integration approaches.
+See the `src/benchmarks/` directory for information about consumed data sources and integration approaches.
 
 ## Development and Contribution
 
 For information about contributing to this project, see `CONTRIBUTING.md`.
-
-## Operational Model
-
-The `.catty/` directory contains a formal operational model defining tasks, artifacts, dependencies, and validation criteria. This system governs the generation of algorithms, validation code, and documentation.
-
-See `.catty/README.md` for complete documentation.
 
 ## License
 

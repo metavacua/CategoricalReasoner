@@ -8,8 +8,8 @@ The `docs/dissertation/bibliography/` directory contains the master citation reg
 - **Key Format**: `[author][year][keyword]` - lowercase, hyphenated, globally unique (e.g., `girard1987linear`).
 - **Required Fields**: `title`, `author`, `year`, `type` (book/article/conference/incollection/thesis/report).
 - **External Links**: Include `doi`, `url`, `wikidata` (QID), `dbpedia`, `arxiv` where available. Links must be resolvable.
-- **TeX Integration**: Citation macros defined in `thesis/macros/citations.tex`. Keys are case-sensitive.
-- **Architecture Note**: Bibliography is citation registry only, not connected to local `/src/ontology/` RDF files (which contain examples only). No RDF authoring required.
+- **TeX Integration**: Citation macros defined in `docs/dissertation/macros/citations.tex`. Keys are case-sensitive.
+- **Architecture Note**: Bibliography is citation registry only. No local RDF authoring required.
 
 ## Validation
 Validate YAML syntax: `python -c "import yaml; yaml.safe_load(open('citations.yaml'))"`. Verify all citation keys used in thesis exist in registry.

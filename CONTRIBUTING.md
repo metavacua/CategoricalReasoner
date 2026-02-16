@@ -6,7 +6,7 @@ Contributions are welcome via pull requests.
 
 - Keep changes small and focused.
 - Do not commit generated build artifacts (PDF/HTML/aux files).
-- Thesis source lives under `thesis/` and chapters under `thesis/chapters/`.
+- Thesis source lives under `docs/dissertation/` and chapters under `docs/dissertation/chapters/`.
 
 ## Semantic Web Standards (SWTI)
 
@@ -24,7 +24,7 @@ This project follows the **Semantic Web Technology Index (SWTI)** criteria from 
 Before opening a PR, ensure the LaTeX build works:
 
 ```sh
-cd thesis
+cd docs/dissertation
 make clean
 make
 ```

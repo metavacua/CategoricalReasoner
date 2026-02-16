@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The `thesis/` directory contains LaTeX source code for the Catty thesis. This is the primary artifact of the project: a formal academic work on categorical foundations for logics and their morphisms.
+The `docs/dissertation/` directory contains LaTeX source code for the Catty thesis. This is the primary artifact of the project: a formal academic work on categorical foundations for logics and their morphisms.
 
 ## Structure
 
@@ -44,7 +44,7 @@ Contains LaTeX macro definitions:
 ### Building PDF
 
 ```bash
-cd thesis
+cd docs/dissertation
 make
 ```
 
@@ -56,12 +56,12 @@ pdflatex main.tex
 pdflatex main.tex
 ```
 
-The output PDF is `thesis/main.pdf`.
+The output PDF is `docs/dissertation/main.pdf`.
 
 ### Cleaning Build Artifacts
 
 ```bash
-cd thesis
+cd docs/dissertation
 make clean
 ```
 
@@ -79,7 +79,7 @@ Thesis structure must validate against `src/schema/thesis-structure.schema.yaml`
 
 **Run validation**:
 ```bash
-python src/schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
+python src/schema/validators/validate_tex_structure.py --tex-dir docs/dissertation/chapters/
 ```
 
 ### Citation Usage
@@ -104,7 +104,7 @@ This result follows from \cite{unregistered2020paper}.
 **Validate citations**:
 ```bash
 python src/schema/validators/validate_citations.py \
-  --tex-dir thesis/chapters/ \
+  --tex-dir docs/dissertation/chapters/ \
   --bibliography docs/dissertation/bibliography/citations.yaml
 ```
 
@@ -227,16 +227,16 @@ Run all validators before committing changes:
 
 ```bash
 # Validate structure
-python src/schema/validators/validate_tex_structure.py --tex-dir thesis/chapters/
+python src/schema/validators/validate_tex_structure.py --tex-dir docs/dissertation/chapters/
 
 # Validate citations
 python src/schema/validators/validate_citations.py \
-  --tex-dir thesis/chapters/ \
+  --tex-dir docs/dissertation/chapters/ \
   --bibliography docs/dissertation/bibliography/citations.yaml
 
 # Validate consistency
 python src/schema/validators/validate_consistency.py \
-  --tex-dir thesis/chapters/ \
+  --tex-dir docs/dissertation/chapters/ \
   --bibliography docs/dissertation/bibliography/citations.yaml
 ```
 
@@ -269,4 +269,4 @@ python src/schema/validators/validate_consistency.py \
 - `src/schema/README.md` - Validation schemas and constraints
 - `docs/dissertation/bibliography/README.md` - Citation registry documentation
 - `src/schema/AGENTS.md` - LaTeX structure and citation constraints for LLMs
-- `.catty/README.md` - Operational model for thesis generation
+- `docs/dissertation/AGENTS.md` - Thesis development constraints
