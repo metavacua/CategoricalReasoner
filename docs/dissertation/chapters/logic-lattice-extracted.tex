@@ -7,7 +7,7 @@ This chapter presents the lattice of logical systems organized by structural rul
 
 \section*{The Logic Lattice Structure}
 
-\subsection*{LM (Minimal Logic)}
+\subsection*{LM (Monotonic Logic)}
 
 LM is the minimal common sublogic for LJ and LDJ with the following characteristics:
 \begin{itemize}
@@ -22,20 +22,22 @@ LM is the minimal common sublogic for LJ and LDJ with the following characterist
 
 LJ extends LM with:
 \begin{itemize}
+    \item Double Negation Introduction: $\Gamma, A \vdash \neg \neg A$
     \item Law of Non-Contradiction (LNC): $\neg(A \wedge \neg A)$
     \item Principle of Explosion (Ex Falso Quodlibet): $\bot \vdash A$
-    \item Single-conclusion sequents (RHS restriction)
+    \item Single-conclusion sequents (RHS restriction relative to LK, and LHS liberation relative to LM)
     \item Full structural rules: weakening, contraction, exchange on both sides
 \end{itemize}
 
-Wikidata reference: Q176786 (intuitionistic logic) --- \textbf{VERIFIED CORRECT}
+Wikidata reference: Q176786 (intuitionistic logic)
 
 \subsection*{LDJ (Dual Intuitionistic Logic)}
 
 LDJ extends LM with:
 \begin{itemize}
-    \item Law of Excluded Middle (LEM): $A \vee \neg A$
-    \item Single-antecedent sequents (LHS restriction)
+    \item Double Negation Elimination: $\neg \neg A \vdash A, \Delta$
+    \item Law of Excluded Middle (LEM): $\vdash A \vee \neg A$
+    \item Single-antecedent sequents (LHS restriction relative to LK, RHS liberation relative to LM)
     \item Full structural rules
 \end{itemize}
 
@@ -46,12 +48,13 @@ LK is the terminal logic in the lattice, validating:
     \item Law of Excluded Middle (LEM): $A \vee \neg A$
     \item Law of Non-Contradiction (LNC): $\neg(A \wedge \neg A)$
     \item Principle of Explosion: $\bot \vdash A$
-    \item Double Negation Elimination (DNE): $\neg\neg A \vdash A$
+    \item Double Negation Elimination (DNE): $\Gamma, \neg\neg A \vdash A, \Delta$
+    \item Double Negation Introduction: $\Gamma, A \vdash \neg \neg A$
     \item Multi-conclusion sequents (no restrictions)
     \item Full structural rules on both sides
 \end{itemize}
 
-Wikidata reference: Q236975 (classical logic) --- \textbf{VERIFIED CORRECT}
+Wikidata reference: Q236975 (classical logic)
 
 \subsection*{LL (Linear Logic)}
 
@@ -64,7 +67,7 @@ Linear Logic is resource-sensitive:
     \item Embodies quantum-safe principles (no-cloning, no-erasure theorems)
 \end{itemize}
 
-Wikidata reference: Q841728 (linear logic) --- \textbf{VERIFIED CORRECT}
+Wikidata reference: Q841728 (linear logic)
 
 \subsection*{ALL (Affine Linear Logic)}
 
@@ -91,10 +94,10 @@ RLL extends LL with:
 Morphisms in the logic category represent relationships between logics:
 
 \begin{itemize}
-    \item \textbf{LM $\to$ LJ}: Extension by adding LNC and Explosion, restricting RHS
-    \item \textbf{LM $\to$ LDJ}: Extension by adding LEM, restricting LHS
-    \item \textbf{LJ $\to$ LK}: Add LEM, remove RHS restriction
-    \item \textbf{LDJ $\to$ LK}: Add LNC, remove LHS restriction
+    \item \textbf{LM $\to$ LJ}: Extension by adding LNC and Explosion, liberating LHS
+    \item \textbf{LM $\to$ LDJ}: Extension by adding LEM, liberating RHS
+    \item \textbf{LJ $\to$ LK}: Add LEM, liberating RHS restriction
+    \item \textbf{LDJ $\to$ LK}: Add LNC, liberating LHS restriction
     \item \textbf{LL $\to$ ALL}: Add weakening (allows erasure)
     \item \textbf{LL $\to$ RLL}: Add contraction (allows cloning)
     \item \textbf{ALL $\to$ LK}: Add contraction and classical axioms
@@ -108,6 +111,41 @@ Morphisms in the logic category represent relationships between logics:
     \item[Contraction] Allows duplication of formulas. Absence implies ``no cloning'' principle.
     \item[Exchange] Allows reordering of formulas. Absence implies order-sensitive (non-commutative) logic.
 \end{description}
+
+@misc{zizzi2010quantummetalanguagelogicqubits,
+      title={From Quantum Metalanguage to the Logic of Qubits}, 
+      author={Paola Zizzi},
+      year={2010},
+      eprint={1003.5976},
+      archivePrefix={arXiv},
+      primaryClass={quant-ph},
+      url={https://arxiv.org/abs/1003.5976}, 
+}
+
+@article{Zang_2025,
+   title={No-Go Theorems for Universal Entanglement Purification},
+   volume={134},
+   ISSN={1079-7114},
+   url={http://dx.doi.org/10.1103/PhysRevLett.134.190803},
+   DOI={10.1103/physrevlett.134.190803},
+   number={19},
+   journal={Physical Review Letters},
+   publisher={American Physical Society (APS)},
+   author={Zang, Allen and Chen, Xinan and Chitambar, Eric and Suchara, Martin and Zhong, Tian},
+   year={2025},
+   month=may }
+   
+Exchange can be mapped to the no-go theorem for partial swapping of quantum information.
+
+@misc{chakrabarty2007impossibilitypartialswappingquantum,
+      title={Impossibility of partial swapping of Quantum Information}, 
+      author={Indranil Chakrabarty},
+      year={2007},
+      eprint={quant-ph/0612123},
+      archivePrefix={arXiv},
+      primaryClass={quant-ph},
+      url={https://arxiv.org/abs/quant-ph/0612123}, 
+}
 
 \section*{Logical Axioms}
 
@@ -137,15 +175,3 @@ The logic lattice forms a category with commutative diagrams:
     & \text{LK} &
 \end{tikzcd}
 \end{center}
-
-\section*{Source Information}
-
-This content was extracted from the deleted ontology files:
-\begin{itemize}
-    \item \texttt{src/ontology/logics-as-objects.jsonld}
-    \item \texttt{src/ontology/catty-complete-example.jsonld}
-    \item \texttt{src/ontology/morphism-catalog.jsonld}
-    \item \texttt{src/ontology/two-d-lattice-category.jsonld}
-\end{itemize}
-
-All content has been verified against standard logical literature and validated Wikidata QIDs where applicable.
