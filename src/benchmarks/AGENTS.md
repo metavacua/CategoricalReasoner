@@ -16,4 +16,3 @@ Run `python src/benchmarks/run.py` to execute all benchmarks. Verify query synta
 
 ## See Also
 - `src/scripts/AGENTS.md` - Script development guidelines
-- `.catty/AGENTS.md` - Validation framework and acceptance criteria

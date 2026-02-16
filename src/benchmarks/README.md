@@ -37,14 +37,15 @@ Contains SPARQL query files with descriptive names and optimized prefixes.
 
 **Query Format**:
 ```sparql
-PREFIX catty: <http://example.org/src/ontology/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
 
 # Query description
 SELECT DISTINCT ?logic ?label
 WHERE {
-  ?logic a catty:Logic ;
-         rdfs:label ?label .
+  ?logic wdt:P31 wd:Q8078 .
+  ?logic rdfs:label ?label .
+  FILTER(LANG(?label) = "en")
 }
 ```
 
@@ -199,5 +200,4 @@ Benchmarks currently use Python for pragmatic reasons (easy SPARQL query executi
 ## See Also
 
 - `src/scripts/README.md` - Utility scripts and tools
-- `.catty/README.md` - Operational model and validation
 - Schema README files - Understanding how data is structured

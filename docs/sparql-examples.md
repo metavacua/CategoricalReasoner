@@ -1,7 +1,9 @@
 > [!IMPORTANT]
 > This file has been consolidated into the "Architecture of Catty" TeX document and is marked for future removal.
+>
+> **DEPRECATION NOTICE**: All SPARQL examples in this file use the `catty:` prefix which references a non-existent ontology. These queries are invalid and will not work against any endpoint. For valid SPARQL query examples using external endpoints (Wikidata, DBPedia), see `src/benchmarks/queries/` and the corresponding documentation in `docs/dissertation/chapters/sparql-validation-protocol.tex`.
 
-# SPARQL Queries for Catty Ontology
+# SPARQL Queries for Catty Ontology (DEPRECATED)
 
 This directory contains example SPARQL queries for querying the Catty categorical ontology.
 

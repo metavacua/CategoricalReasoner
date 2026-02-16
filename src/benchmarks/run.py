@@ -30,12 +30,13 @@ def run_benchmarks(endpoint=None, query_file=None, output_dir="results", verbose
     if not endpoint:
         g = Graph()
         ontology_dir = "src/ontology"
-        for filename in os.listdir(ontology_dir):
-            path = os.path.join(ontology_dir, filename)
-            if filename.endswith(".jsonld"):
-                g.parse(path, format="json-ld")
-            elif filename.endswith(".ttl"):
-                g.parse(path, format="turtle")
+        if os.path.exists(ontology_dir):
+            for filename in os.listdir(ontology_dir):
+                path = os.path.join(ontology_dir, filename)
+                if filename.endswith(".jsonld"):
+                    g.parse(path, format="json-ld")
+                elif filename.endswith(".ttl"):
+                    g.parse(path, format="turtle")
 
     for q_path in queries:
         q_file = os.path.basename(q_path)
