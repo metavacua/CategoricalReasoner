@@ -1,0 +1,15 @@
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/Person.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/CitationKey.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/FormalizationStatus.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/ArxivId.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/RoCrateGenerator.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/AgentContext.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/Qid.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/WorkType.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/SparqlQueryService.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/PublicationDate.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/BiblatexExporter.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/CitationRepository.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/Citation.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/InternationalizedString.java
+/home/engine/project/src/main/java/org/metavacua/categoricalreasoner/citation/Doi.java
