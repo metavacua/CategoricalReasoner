@@ -30,9 +30,6 @@ public record AgentContext(
             throw new IllegalArgumentException("Relevance cannot be null or blank");
         }
 
-        // Normalize whitespace
-        relevance = relevance.trim();
-
         // Wrap nulls in Optional and trim
         category = Optional.ofNullable(category).map(String::trim).filter(s -> !s.isBlank());
         notes = Optional.ofNullable(notes).map(String::trim).filter(s -> !s.isBlank());
