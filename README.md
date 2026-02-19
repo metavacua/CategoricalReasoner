@@ -38,6 +38,9 @@ The `docs/dissertation/` directory contains LaTeX source for the thesis and supp
 │   ├── architecture/          # Architecture documentation (TeX)
 │   ├── bibliography/          # Citation registry
 │   └── macros/               # LaTeX macros
+├── docs/structural-rules/     # Structural rules documentation
+│   ├── part/                  # Weakening part documentation
+│   └── README.md              # Top-level README for structural rules
 ├── src/
 │   ├── benchmarks/            # SPARQL queries and evaluation
 │   ├── schema/                # Validation schemas and constraints
