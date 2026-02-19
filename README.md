@@ -33,11 +33,21 @@ The `docs/dissertation/` directory contains LaTeX source for the thesis and supp
 ## Project Structure
 
 ```
-├── docs/dissertation/         # LaTeX thesis and documentation
-│   ├── chapters/              # Thesis chapter files
-│   ├── architecture/          # Architecture documentation (TeX)
-│   ├── bibliography/          # Citation registry
-│   └── macros/               # LaTeX macros
+├── docs/
+│   ├── dissertation/         # LaTeX thesis and documentation
+│   │   ├── chapters/              # Thesis chapter files
+│   │   ├── architecture/          # Architecture documentation (TeX)
+│   │   ├── bibliography/          # Citation registry
+│   │   └── macros/               # LaTeX macros
+│   └── structural-rules/     # Monograph on Structural Rules
+│       ├── Makefile            # Build instructions
+│       ├── README.md           # Project overview
+│       ├── main.tex            # Main document
+│       ├── preamble.tex        # LaTeX preamble
+│       └── parts/              # Individual chapters/sections
+│           ├── part-contraction.tex
+│           ├── part-exchange.tex
+│           └── part-weakening.tex
 ├── src/
 │   ├── benchmarks/            # SPARQL queries and evaluation
 │   ├── schema/                # Validation schemas and constraints
