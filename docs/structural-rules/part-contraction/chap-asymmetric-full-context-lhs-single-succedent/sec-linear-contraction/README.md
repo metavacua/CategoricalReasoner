@@ -1,0 +1,12 @@
+# Section: Linear Contraction
+
+## Scope
+This section covers contraction controlled via exponential modality in linear logic.
+
+## Content
+- Contraction restricted to formulas marked with $\oc A$
+- Resource-sensitive duplication
+- Distinction between linear and non-linear contexts
+
+## Validation
+All artifacts must pass automated validation against the thesis structure schema.
