@@ -3,6 +3,82 @@
 ## Scope
 This directory contains the hierarchical structure for the Weakening (Part I) of the Structural Rules monograph.
 
+## TeX Assembly Algorithm
+
+This section describes the procedural algorithm for assembling the TeX Part from the chapter, section, and subsection files.
+
+### Assembly Algorithm (Pseudocode)
+
+```
+FUNCTION AssembleWeakeningPart(output_file):
+    # Initialize the main document
+    INITIALIZE latex_document with preamble
+    
+    # Process each chapter in order
+    FOR each chapter_dir IN ["chap-symmetric-full-context-lhs-rhs",
+                             "chap-asymmetric-full-context-lhs-single-succedent",
+                             "chap-asymmetric-single-antecedent-full-context-rhs",
+                             "chap-symmetric-single-antecedent-single-succedent"]:
+        
+        chapter_file = READ chapter_dir + "/chapter.tex"  # If exists
+        chapter_title = EXTRACT_TITLE(chapter_file)
+        
+        ADD "\chapter{" + chapter_title + "}" TO latex_document
+        
+        # Process sections within chapter
+        FOR each section_dir IN ["sec-full-weakening",
+                                 "sec-linear-weakening",
+                                 "sec-affine-weakening",
+                                 "sec-relevant-weakening"]:
+            
+            section_file = READ chapter_dir + "/" + section_dir + "/section.tex"  # If exists
+            section_title = EXTRACT_TITLE(section_file)
+            
+            ADD "\section{" + section_title + "}" TO latex_document
+            ADD section_content TO latex_document
+            
+            # Process subsections within section (if any)
+            FOR each subsection_dir IN LIST_SUBDIRS(chapter_dir + "/" + section_dir):
+                subsection_file = READ subsection_dir + "/subsection.tex"
+                subsection_title = EXTRACT_TITLE(subsection_file)
+                
+                ADD "\subsection{" + subsection_title + "}" TO latex_document
+                ADD subsection_content TO latex_document
+    
+    # Add bibliography and indices
+    ADD bibliography TO latex_document
+    
+    # Write final document
+    WRITE latex_document TO output_file
+    
+    RETURN output_file
+```
+
+### File Resolution Order
+
+1. **Part-level files**: `parts/part-weakening.tex` provides structure and `\input{}` directives
+2. **Chapter files**: `chap-*/chapter.tex` or direct content
+3. **Section files**: `chap-*/sec-*/section.tex`
+4. **Subsection files**: `chap-*/sec-*/subsec-*/subsection.tex`
+
+### Compilation Process
+
+```
+1. pdflatex main.tex        # First pass (generates .aux)
+2. biber references.bib     # Process bibliography  
+3. pdflatex main.tex        # Second pass (resolves cross-references)
+4. pdflatex main.tex        # Third pass (final)
+```
+
+### Key TeX Commands Used
+
+- `\part{Weakening}` - Part declaration
+- `\chapter{...}` - Chapter declarations
+- `\section{...}` - Section declarations  
+- `\subsection{...}` - Subsection declarations
+- `\input{path}` - Include external TeX files
+- `\label{...}` and `\ref{...}` - Cross-referencing
+
 ## Core Constraints
 - **Formats**: Read/write `*.md`, `*.tex`. Create subdirectories as needed.
 - **IDs**: All IDs globally unique following patterns: `sec-*`, `subsec-*`.
@@ -39,8 +115,10 @@ This corresponds to **Minimal Logic** (*Minimalkalkül*) by Ingebrigt Johansson 
 
 This part covers:
 1. **Symmetric Full Context (Classical LK)**: Both LHS and RHS can be freely extended
-2. **Asymmetric Full Context LHS / Single Succedent (Intuitionistic LJ)**: LHS unrestricted, RHS restricted to single formula
-3. **Asymmetric Single Antecedent / Full Context RHS (Dual Intuitionistic LDJ)**: LHS restricted to single formula, RHS unrestricted
+2. **Asymmetric Full Context LHS / Single Succedent (Intuitionistic LJ)**: LHS unrestricted, RHS restricted to at most one formula
+   - Note: RHS "at most one" relates to $\bot$ (bottom) and explosion principle
+3. **Asymmetric Single Antecedent / Full Context RHS (Dual Intuitionistic LDJ)**: LHS restricted to at most one formula, RHS unrestricted
+   - Note: LHS "at most one" relates to $\top$ (top) and dual logic to Minimalkalkül
 4. **Symmetric Single Antecedent and Single Succedent (Minimal Logic)**: Both restricted with asymmetric weakening rule
 
 Each chapter contains four sections:

@@ -12,6 +12,16 @@ This chapter examines asymmetric weakening where the left-hand side (antecedent)
 
 The admission of Exchange, its explicit inclusion, its modalization, or its operationalization are independent of the weakening dimensions studied here.
 
+## LHS Restriction: At Most One Formula
+
+The LHS in LDJ is restricted to **at most one formula**, not exactly one formula. This is intimately related to:
+
+1. **Left Weakening and Top ($\top$)**: In LDJ, left weakening is not available as a primitive rule, but the treatment of $\top$ (true/top) on the LHS provides a form of weakening-like behavior. The existence of a form of weakening on the left is part of the logic's characterization.
+
+2. **The At-Most-One Restriction**: The restriction to at most one formula on the LHS (rather than exactly one) allows for the empty antecedent case, which is semantically connected to $\top$.
+
+3. **Dual Logic to Minimalkalkül**: There exists a dual logic to Minimalkalkül which has a similar relation to non-implication as Minimalkalkül has to implication. Like Minimalkalkül on the RHS, this dual logic has exactly one formula on the LHS.
+
 ## Content
 
 This chapter covers:
