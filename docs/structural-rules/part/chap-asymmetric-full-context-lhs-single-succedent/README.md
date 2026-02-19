@@ -3,6 +3,15 @@
 ## Scope
 This chapter examines asymmetric weakening where the left-hand side (antecedent) context can be freely extended, but the right-hand side (succedent) is restricted to a single formula. This corresponds to intuitionistic logic (LJ) presentation.
 
+## Exchange and Contraction Independence
+
+**Important**: This chapter is ambivalent to whether Exchange or Contraction hold. We consider:
+- The case where Exchange holds (commutative logic)
+- The case where Exchange is stripped to non-commutative "order logic"
+- The case where Contraction holds or is rejected
+
+The admission of Exchange, its explicit inclusion, its modalization, or its operationalization are independent of the weakening dimensions studied here.
+
 ## Content
 
 This chapter covers:

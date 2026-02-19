@@ -7,6 +7,15 @@ This chapter covers asymmetric weakening corresponding to dual intuitionistic lo
 - **IDs**: All IDs globally unique following patterns: `sec-*`, `subsec-*`.
 - **Content**: Each section should be a page to a few pages of text minimum.
 
+## Exchange and Contraction Independence
+
+**IMPORTANT**: This chapter is ambivalent to whether Exchange or Contraction hold. We consider:
+- The case where Exchange holds (commutative logic)
+- The case where Exchange is stripped to non-commutative "order logic"
+- The case where Contraction holds or is rejected
+
+The admission of Exchange, its explicit inclusion, its modalization, or its operationalization are independent of the weakening dimensions studied here.
+
 ## Section Content Requirements
 
 ### Full Weakening (sec-full-weakening)

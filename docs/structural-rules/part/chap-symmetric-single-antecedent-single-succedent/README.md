@@ -5,25 +5,40 @@ This chapter examines symmetric weakening where both the left-hand side (anteced
 
 ## Special Consideration: Minimal Logic (Minimalkalkül)
 
-Minimal logic can be characterized in two equivalent ways:
+The key insight is that in the minimal logic setting with single formula contexts, weakening on one side EXCLUDES weakening on the other side. This is NOT symmetric—weakening rules are mutually exclusive:
 
-### Variant A: At Most One Formula
-Both LHS and RHS inherit the "at most one formula" restriction from LJ and LDJ:
-- Left side: At most one formula in the antecedent
-- Right side: At most one formula in the succedent
+### Asymmetric Weakening Rule
+- **If LHS can be weakened**, then RHS CANNOT be weakened
+- **If RHS can be weakened**, then LHS CANNOT be weakened
+- This prevents the derivation of the empty sequent
 
-### Variant B: Non-Empty Context Requirement
-A further restriction that at least one side must be non-empty:
-- Left side: At most one formula in the antecedent (may be empty)
-- Right side: At most one formula in the succedent (may be empty)
-- **Constraint**: At least one of LHS or RHS must contain a non-empty formula
+### Why This Matters
+If we naively allow weakening arbitrarily on both sides, we would derive the empty sequent, meaning the empty sequent is derivable in all extensions including LJ and LK. Instead, specific structural restrictions ensure that at least one formula is valid on LHS or RHS.
 
-This second variant captures the minimal logic character more precisely, excluding the degenerate case where both sides are empty.
+### Variant A: At Most One Formula with Asymmetric Weakening
+- LHS: At most one formula
+- RHS: At most one formula
+- Weakening: Either LHS or RHS (never both)
+
+### Variant B: Non-Empty Context (More Precise)
+- LHS: 0 or 1 formula
+- RHS: 0 or 1 formula
+- Constraint: At least one of LHS or RHS must contain a non-empty formula
+- Weakening: Either LHS or RHS (never both)
+
+## Exchange and Contraction Independence
+
+**Important**: This chapter is ambivalent to whether Exchange or Contraction hold. We consider:
+- The case where Exchange holds (commutative logic)
+- The case where Exchange is stripped to non-commutative "order logic"
+- The case where Contraction holds or is rejected
+
+The admission of Exchange, its explicit inclusion, its modalization, or its operationalization are independent of the weakening dimensions studied here.
 
 ## Content
 
 This chapter covers:
-- **Full Weakening**: Both LHS and RHS restricted to single formulas
+- **Full Weakening**: Both LHS and RHS restricted to single formulas with asymmetric weakening rule
 - **Linear Weakening**: Resource-sensitive weakening in linear logic with restrictions
 - **Affine Weakening**: Affine logic variant with single formula contexts
 - **Relevant Weakening**: Relevant logic variant with single formula contexts
@@ -31,9 +46,9 @@ This chapter covers:
 ## Sequent Calculus Representation
 
 In restricted sequent calculi (Minimal Logic):
-- Left side: $\Gamma$ where $|\Gamma| \leq 1$ (at most one formula, may be empty)
-- Right side: $\Delta$ where $|\Delta| \leq 1$ (at most one formula, may be empty)
-- With constraint: $\Gamma \neq \emptyset$ or $\Delta \neq \emptyset$ (in Variant B)
+- LHS: $\Gamma$ where $|\Gamma| \leq 1$
+- RHS: $\Delta$ where $|\Delta| \leq 1$
+- **Asymmetric weakening**: Either $\Gamma$ can be weakened OR $\Delta$ can be weakened, never both
 
 ## Minimal Logic Character
 This most restrictive form corresponds to minimal logic (*Minimalkalkül*)—the kernel of constructive logics where no structural rules beyond exchange are assumed. Johansson introduced minimal logic as a subsystem of intuitionistic logic that rejects the principle of *ex falso quodlibet* (false implies anything).

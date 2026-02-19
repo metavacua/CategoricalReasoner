@@ -3,6 +3,15 @@
 ## Scope
 This chapter examines symmetric weakening where both the left-hand side (antecedent) and right-hand side (succedent) contexts can be freely extended with arbitrary formulas. This represents the classical approach to weakening where context is unrestricted on both sides of the sequent.
 
+## Exchange and Contraction Independence
+
+**Important**: This chapter is ambivalent to whether Exchange or Contraction hold. We consider:
+- The case where Exchange holds (commutative logic)
+- The case where Exchange is stripped to non-commutative "order logic"
+- The case where Contraction holds or is rejected
+
+The admission of Exchange, its explicit inclusion, its modalization, or its operationalization are independent of the weakening dimensions studied here.
+
 ## Content
 
 This chapter covers:

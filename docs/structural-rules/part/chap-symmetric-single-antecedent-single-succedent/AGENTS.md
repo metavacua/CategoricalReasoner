@@ -7,28 +7,44 @@ This chapter covers symmetric weakening where both the left-hand side (anteceden
 - **IDs**: All IDs globally unique following patterns: `sec-*`, `subsec-*`.
 - **Content**: Each section should be a page to a few pages of text minimum.
 
-## Special Consideration: Minimal Logic (Minimalkalkül)
+## Special Consideration: Asymmetric Weakening Rule
 
-This chapter requires special handling due to the dual characterization of minimal logic:
+**CRITICAL**: This is NOT symmetric. The key insight is that weakening on one side EXCLUDES weakening on the other side:
 
-### Variant A: At Most One Formula
-Both LHS and RHS inherit the "at most one formula" restriction from LJ and LDJ:
-- Left side (antecedent): At most one formula
-- Right side (succedent): At most one formula
+### The Asymmetric Rule
+- **If LHS can be weakened**, then RHS CANNOT be weakened
+- **If RHS can be weakened**, then LHS CANNOT be weakened
+- This prevents the derivation of the empty sequent
 
-### Variant B: Non-Empty Context Requirement (More Precise)
-A further restriction that at least one side must be non-empty:
-- Left side: At most one formula (may be empty)
-- Right side: At most one formula (may be empty)
-- **Constraint**: At least one of LHS or RHS must contain a non-empty formula
+### Why This Matters
+If we naively allow weakening arbitrarily on both sides, we would derive the empty sequent, meaning the empty sequent is derivable in all extensions including LJ and LK. Instead, specific structural restrictions ensure that at least one formula is valid on LHS or RHS.
 
-This distinction is critical for accurately representing Johansson's *Minimalkalkül*.
+### Variant A: At Most One Formula with Asymmetric Weakening
+- LHS: At most one formula
+- RHS: At most one formula
+- Weakening: Either LHS or RHS (never both)
+
+### Variant B: Non-Empty Context (More Precise)
+- LHS: 0 or 1 formula
+- RHS: 0 or 1 formula
+- Constraint: At least one of LHS or RHS must contain a non-empty formula
+- Weakening: Either LHS or RHS (never both)
+
+## Exchange and Contraction Independence
+
+**IMPORTANT**: This chapter is ambivalent to whether Exchange or Contraction hold. We consider:
+- The case where Exchange holds (commutative logic)
+- The case where Exchange is stripped to non-commutative "order logic"
+- The case where Contraction holds or is rejected
+
+The admission of Exchange, its explicit inclusion, its modalization, or its operationalization are independent of the weakening dimensions studied here.
 
 ## Section Content Requirements
 
 ### Full Weakening (sec-full-weakening)
 - Most restrictive weakening form in sequent calculus
-- Both LHS and RHS restricted to single formulas (Variant A) or with non-empty constraint (Variant B)
+- Both LHS and RHS restricted to single formulas
+- **Asymmetric weakening rule**: Either LHS OR RHS can be weakened, never both
 - Minimal logic (*Minimalkalkül*) characterization
 - Connection to constructive foundations
 - Rejection of *ex falso quodlibet* (false implies anything)
@@ -37,12 +53,13 @@ This distinction is critical for accurately representing Johansson's *Minimalkal
 ### Linear Weakening (sec-linear-weakening)
 - Linear logic with single formula contexts
 - Exponential modality required for any weakening
+- Asymmetric weakening constraint applies
 - Resource consciousness at maximum restriction
 - Connection to minimal linear logic
 
 ### Affine Weakening (sec-affine-weakening)
 - Affine logic with single formula contexts
-- Weakening admitted, contraction rejected
+- Weakening admitted (asymmetrically), contraction rejected
 - Minimal substructural logic
 - Connection to minimal affine reasoning
 
@@ -54,6 +71,8 @@ This distinction is critical for accurately representing Johansson's *Minimalkal
 
 ## Key Distinction
 This represents the minimal kernel of logical systems—no structural rules beyond exchange. All other logics can be characterized by which structural rules they add back. Johansson's *Minimalkalkül* (1936) is the foundation for understanding this minimal framework.
+
+The asymmetric weakening rule is critical: allowing weakening on both sides would collapse to classical logic's empty sequent derivability.
 
 ## Historical Reference
 Johansson, I. (1936). "Der Minimalkalkül, ein reduzierter intuitionistischer Formalismus." *Compositio Mathematica*, 4, 119–136.
