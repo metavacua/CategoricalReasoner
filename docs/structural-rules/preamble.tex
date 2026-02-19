@@ -1,0 +1,31 @@
+% Packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage[hidelinks]{hyperref}
+\usepackage{booktabs}
+
+% TikZ libraries for diagrams
+\usetikzlibrary{arrows.meta, positioning, calc}
+
+% Minimal helpers
+\newcommand{\code}[1]{\texttt{#1}}
+
+% Sequent notation
+\newcommand{\sequent}[2]{#1 \vdash #2}
+\newcommand{\Sequent}{\vdash}
+
+% Structural rule notation
+\newcommand{\weakening}{\textsf{W}}
+\newcommand{\contraction}{\textsf{C}}
+\newcommand{\exchange}{\textsf{E}}
+
+% Inference rules
+\newcommand{\infrule}[3]{\dfrac{#1}{#2}\;\;{\scriptsize \textsc{#3}}}
+
+\lstset{
+  basicstyle=\ttfamily,
+  breaklines=true,
+  columns=fullflexible,
+}
