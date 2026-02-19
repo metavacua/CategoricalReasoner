@@ -1,27 +1,75 @@
-# README.md - Structural Rules / Part / Chapter / Section / Subsection
+# README.md - Structural Rules / Part / Chapter / Section
 
 ## Scope
-This directory contains the hierarchical structure for the Weakening part of the Structural Rules monograph. The directory structure follows: `part/chapter/section/subsection`.
+This directory contains the hierarchical structure for the Weakening part of the Structural Rules monograph. The directory structure follows: `part/chapter/section`.
 
 ## Directory Structure
 
 ```
 part/
-  ├── chapter/
-  │   ├── section/
-  │   │   ├── subsection/
-  │   │   └── README.md
-  │   └── README.md
+  ├── chap-symmetric-full-context-lhs-rhs/
+  │   ├── sec-full-weakening/
+  │   ├── sec-linear-weakening/
+  │   ├── sec-affine-weakening/
+  │   ├── sec-relevant-weakening/
+  │   ├── README.md
+  │   └── AGENTS.md
+  ├── chap-asymmetric-full-context-lhs-single-succedent/
+  │   ├── sec-full-weakening/
+  │   ├── sec-linear-weakening/
+  │   ├── sec-affine-weakening/
+  │   ├── sec-relevant-weakening/
+  │   ├── README.md
+  │   └── AGENTS.md
+  ├── chap-asymmetric-single-antecedent-full-context-rhs/
+  │   ├── sec-full-weakening/
+  │   ├── sec-linear-weakening/
+  │   ├── sec-affine-weakening/
+  │   ├── sec-relevant-weakening/
+  │   ├── README.md
+  │   └── AGENTS.md
+  ├── chap-symmetric-single-antecedent-single-succedent/
+  │   ├── sec-full-weakening/
+  │   ├── sec-linear-weakening/
+  │   ├── sec-affine-weakening/
+  │   ├── sec-relevant-weakening/
+  │   ├── README.md
+  │   └── AGENTS.md
   ├── README.md
   └── AGENTS.md
 ```
 
+## Chapters
+
+### 1. Symmetric Weakening with Full Context on LHS and RHS
+- Classical (LK) presentation
+- Both LHS and RHS can be freely extended
+
+### 2. Asymmetric Weakening with Full Context on LHS and Single Succedent
+- Intuitionistic (LJ) presentation
+- LHS unrestricted, RHS restricted to single formula
+
+### 3. Asymmetric Weakening with Single Antecedent and Full Context on RHS
+- Dual intuitionistic (LDJ) presentation
+- LHS restricted to single formula, RHS unrestricted
+
+### 4. Symmetric Weakening with Single Antecedent and Single Succedent
+- Minimal logic presentation
+- Both LHS and RHS restricted to single formulas
+
+## Sections (in each chapter)
+- Full Weakening
+- Linear Weakening
+- Affine Weakening
+- Relevant Weakening
+
 ## Content
 
-This directory is part of the Weakening (Part I) section of the Structural Rules monograph, examining:
+This directory covers:
 - Weakening in intuitionistic logic (LJ)
 - Weakening in dual intuitionistic logic (LDJ)
-- Additive vs multiplicative weakening
+- Classical weakening (LK)
+- Linear logic weakening
 - Sub-intuitionistic and sub-dual-intuitionistic logics
 - Connection to logical explosion and LFI
 - Paola Zizzi's work on absence of weakening and no erasure
