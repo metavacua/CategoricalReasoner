@@ -1,0 +1,49 @@
+% Part II: Contraction
+% ID: part-contraction
+
+\part{Contraction}
+
+\chapter*{Introduction to Contraction}
+\label{sec-contraction-intro}
+\phantomsection
+\addcontentsline{toc}{chapter}{Introduction to Contraction}
+
+Contraction is a structural rule that permits the identification of duplicate formulas within a sequent context. In its classical form, contraction allows the inference from $\Gamma, A, A \vdash C$ to $\Gamma, A \vdash C$, thereby enabling the reuse of premises.
+
+This part examines contraction as the dual of weakening: while weakening creates resources, contraction consumes them through identification. The interplay between weakening and contraction characterizes classical logic, while their restriction leads to substructural logics.
+
+\section*{Additive Contraction}
+\label{sec-contraction-additive}
+% TODO: \input{sec-contraction-additive-formal}
+
+Additive contraction operates in contexts where duplicate formulas are implicitly merged. In additive sequent calculi, contraction reflects the implicit assumption that premises can be used multiple times without explicit accounting.
+
+\section*{Multiplicative Contraction}
+\label{sec-contraction-multiplicative}
+% TODO: \input{sec-contraction-multiplicative-formal}
+
+Multiplicative contraction, in contrast, operates in contexts where duplicates must be explicitly managed. In linear logic, contraction is available only for formulas marked with the exponential modality $\oc A$, indicating that the formula may be ``copied'' as needed.
+
+\section*{Contraction-Free Logics}
+\label{sec-contraction-free}
+% TODO: \input{sec-contraction-free}
+
+Logics that reject contraction include:
+\begin{itemize}
+    \item \textbf{Linear logic}: Resources cannot be duplicated freely
+    \item \textbf{Affine logic}: Weakening admitted, contraction rejected
+    \item \textbf{Relevant logic}: Both weakening and contraction rejected
+\end{itemize}
+
+\section*{Categorical Semantics}
+\label{sec-contraction-categorical}
+% TODO: \input{sec-contraction-semantics}
+
+Categorically, contraction corresponds to the existence of \emph{diagonal maps}. In a Cartesian closed category, the natural transformation $\delta_A : A \to A \times A$ witnesses contraction, providing the computational interpretation of ``copying'' or ``duplication.''
+
+% Subsection inputs (to be created as separate files)
+% \input{sec-contraction-history}
+% \input{sec-contraction-additive-formal}
+% \input{sec-contraction-multiplicative-formal}
+% \input{sec-contraction-semantics}
+% \input{sec-contraction-computational}
