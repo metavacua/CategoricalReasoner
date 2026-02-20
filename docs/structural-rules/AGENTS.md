@@ -13,6 +13,7 @@ structural-rules/
 ├── README.md                    # Monograph overview
 ├── main.tex                     # Main document entry point
 ├── preamble.tex                 # Shared LaTeX preamble
+├── thm-preamble.tex             # Minimal preamble for standalone theorems
 ├── Makefile                     # Build configuration
 │
 ├── part-weakening/              # Part I: Weakening
@@ -23,96 +24,29 @@ structural-rules/
 │   ├── chap-symmetric-full-context-lhs-rhs/           # Chapter 1: Classical LK
 │   │   ├── README.md
 │   │   ├── sec-full-weakening/
+│   │   │   ├── subsec-lhs-rules/       # LHS structural rules
+│   │   │   ├── subsec-rhs-rules/       # RHS structural rules
+│   │   │   ├── thm/                    # Theorem/proof documents
+│   │   │   └── README.md
 │   │   ├── sec-linear-weakening/
 │   │   ├── sec-affine-weakening/
 │   │   └── sec-relevant-weakening/
 │   │
 │   ├── chap-asymmetric-full-context-lhs-single-succedent/  # Chapter 2: Intuitionistic LJ
-│   │   ├── README.md
-│   │   ├── sec-full-weakening/
-│   │   ├── sec-linear-weakening/
-│   │   ├── sec-affine-weakening/
-│   │   └── sec-relevant-weakening/
-│   │
 │   ├── chap-asymmetric-single-antecedent-full-context-rhs/ # Chapter 3: Dual LJ
-│   │   ├── README.md
-│   │   ├── sec-full-weakening/
-│   │   ├── sec-linear-weakening/
-│   │   ├── sec-affine-weakening/
-│   │   └── sec-relevant-weakening/
-│   │
-│   └── chap-symmetric-single-antecedent-single-succedent/  # Chapter 4: Minimal Logic
-│       ├── README.md
-│       ├── sec-full-weakening/
-│       ├── sec-linear-weakening/
-│       ├── sec-affine-weakening/
-│       └── sec-relevant-weakening/
+│   └── chap-symmetric-single-antecedent-single-succedent/  # Chapter 4: Related to Minimal Logic
 │
 ├── part-contraction/            # Part II: Contraction
 │   ├── AGENTS.md
 │   ├── README.md
 │   ├── part-contraction.tex
-│   │
-│   ├── chap-symmetric-full-context-lhs-rhs/
-│   │   ├── README.md
-│   │   ├── sec-full-contraction/
-│   │   ├── sec-linear-contraction/
-│   │   ├── sec-affine-contraction/
-│   │   └── sec-relevant-contraction/
-│   │
-│   ├── chap-asymmetric-full-context-lhs-single-succedent/
-│   │   ├── README.md
-│   │   ├── sec-full-contraction/
-│   │   ├── sec-linear-contraction/
-│   │   ├── sec-affine-contraction/
-│   │   └── sec-relevant-contraction/
-│   │
-│   ├── chap-asymmetric-single-antecedent-full-context-rhs/
-│   │   ├── README.md
-│   │   ├── sec-full-contraction/
-│   │   ├── sec-linear-contraction/
-│   │   ├── sec-affine-contraction/
-│   │   └── sec-relevant-contraction/
-│   │
-│   └── chap-symmetric-single-antecedent-single-succedent/
-│       ├── README.md
-│       ├── sec-full-contraction/
-│       ├── sec-linear-contraction/
-│       ├── sec-affine-contraction/
-│       └── sec-relevant-contraction/
+│   └── (parallel chapter structure)
 │
 └── part-exchange/               # Part III: Exchange
     ├── AGENTS.md
     ├── README.md
     ├── part-exchange.tex
-    │
-    ├── chap-symmetric-full-context-lhs-rhs/
-    │   ├── README.md
-    │   ├── sec-full-exchange/
-    │   ├── sec-linear-exchange/
-    │   ├── sec-affine-exchange/
-    │   └── sec-relevant-exchange/
-    │
-    ├── chap-asymmetric-full-context-lhs-single-succedent/
-    │   ├── README.md
-    │   ├── sec-full-exchange/
-    │   ├── sec-linear-exchange/
-    │   ├── sec-affine-exchange/
-    │   └── sec-relevant-exchange/
-    │
-    ├── chap-asymmetric-single-antecedent-full-context-rhs/
-    │   ├── README.md
-    │   ├── sec-full-exchange/
-    │   ├── sec-linear-exchange/
-    │   ├── sec-affine-exchange/
-    │   └── sec-relevant-exchange/
-    │
-    └── chap-symmetric-single-antecedent-single-succedent/
-        ├── README.md
-        ├── sec-full-exchange/
-        ├── sec-linear-exchange/
-        ├── sec-affine-exchange/
-        └── sec-relevant-exchange/
+    └── (parallel chapter structure)
 ```
 
 ## TeX Hierarchy Mapping
@@ -121,9 +55,49 @@ structural-rules/
 |-----------------|-------------|-------|-------------|
 | `part-*/` | `\part{}` | 0 | Major division (Weakening, Contraction, Exchange) |
 | `chap-*/` | `\chapter{}` | 1 | Major subdivision (Context configurations) |
-| `sec-*/` | `\section{}` | 2 | Content section (Rule variants) |
-| `subsec-*/` | `\subsection{}` | 3 | Subsection (Not yet populated) |
-| `subsubsec-*/` | `\subsubsection{}` | 4 | Subsubsection (Not yet populated) |
+| `sec-*/` | `\section{}` | 2 | Content section (Rule variants: full, linear, affine, relevant) |
+| `subsec-*/` | `\subsection{}` | 3 | Subsection (LHS rules, RHS rules) |
+| `thm/` | N/A | - | Standalone theorem/proof documents |
+
+## Subsection Structure
+
+Each section contains two subsections:
+
+### `subsec-lhs-rules/`
+Covers left-hand side (antecedent) structural rules:
+- Left weakening rules
+- Left contraction rules
+- Left exchange rules
+- Focused variants ($\fweakeningL$, $\fcontractionL$, $\fexchangeL$)
+
+### `subsec-rhs-rules/`
+Covers right-hand side (succedent) structural rules:
+- Right weakening rules
+- Right contraction rules
+- Right exchange rules
+- Focused variants ($\fweakeningR$, $\fcontractionR$, $\fexchangeR$)
+
+### `thm/` Directory
+Contains standalone theorem and proof documents:
+- `thm-{id}.tex` - Theorem statements
+- `proof-{id}.tex` - Proof documents
+- `thm-proof-{id}.tex` - Combined theorem with proof
+
+Each theorem document is self-contained with minimal preamble for standalone compilation.
+
+## Focused Sequent Calculi
+
+This monograph uses focused sequent calculi following Andreoli (1992) and Liang & Miller (2009):
+
+### Notation
+
+| Notation | Meaning |
+|----------|---------|
+| `\Gamma \Uparrow \Theta \vdash \Delta` | Asynchronous phase (decomposing invertible formulas) |
+| `\Gamma; \Omega \focal A` | Synchronous/focused phase (focused on non-invertible formula) |
+| `\fweakeningL`, `\fweakeningR` | Focused weakening on left/right |
+| `\fcontractionL`, `\fcontractionR` | Focused contraction on left/right |
+| `\fexchangeL`, `\fexchangeR` | Focused exchange on left/right |
 
 ## Chapter Naming Convention
 
@@ -144,7 +118,7 @@ Where:
 | `chap-symmetric-full-context-lhs-rhs` | Symmetric Full Context | Classical (LK) |
 | `chap-asymmetric-full-context-lhs-single-succedent` | Asymmetric LHS/RHS | Intuitionistic (LJ) |
 | `chap-asymmetric-single-antecedent-full-context-rhs` | Asymmetric RHS/LHS | Dual-Intuitionistic (LDJ) |
-| `chap-symmetric-single-antecedent-single-succedent` | Symmetric Single | Minimal Logic |
+| `chap-symmetric-single-antecedent-single-succedent` | Symmetric Single | Related to Minimal Logic |
 
 ## Section Naming Convention
 
@@ -161,30 +135,49 @@ Where `{variant}` is:
 
 And `{rule}` is one of: `weakening`, `contraction`, `exchange`
 
+## Theorem Document Convention
+
+Theorem files in `thm/` directories:
+- Use `\input{../../../../../thm-preamble}` for minimal preamble
+- Include `\thmid{id}` for theorem identification
+- Self-contained for standalone compilation
+- Can be included in larger documents
+
+## Build System
+
+### Targets
+- `make all` - Build main monograph PDF
+- `make theorems` - Build all standalone theorem PDFs
+- `make theorem-ID` - Build specific theorem by ID
+- `make list-theorems` - List available theorems
+- `make html` - Generate HTML version
+- `make test` - Run validation tests
+- `make clean` - Remove auxiliary files
+
+### Compilation
+```bash
+make              # Build main PDF
+make theorems     # Build all theorem PDFs
+make html         # Generate HTML (requires pandoc or tex4ht)
+```
+
 ## Shared Content References (DAG Linking)
 
-To minimize repetitive content, the following shared concepts are referenced rather than duplicated:
+To minimize repetitive content:
 
 ### Common Constraints (referenced from `AGENTS.md`)
 - **Formats**: `*.md`, `*.tex` only
 - **ID Patterns**: `sec-*`, `subsec-*`, `def-*`, `thm-*`, `lem-*`, `ex-*`
 - **TeX File Size**: Minimum 1 page, maximum ~10 pages per subsection
 
-### Chapter Structure Template
-Each chapter directory contains:
-- `README.md` - Chapter overview with links to corresponding chapters in other parts
-- Section subdirectories with `README.md` files
-
 ### Cross-Part References
-
-When documenting a structural rule variant, reference corresponding chapters:
 
 | This Chapter | Weakening (I) | Contraction (II) | Exchange (III) |
 |--------------|---------------|------------------|----------------|
-| `chap-symmetric-full-context-lhs-rhs` | `../../part-weakening/chap-symmetric-full-context-lhs-rhs/` | `../../part-contraction/chap-symmetric-full-context-lhs-rhs/` | `../../part-exchange/chap-symmetric-full-context-lhs-rhs/` |
-| `chap-asymmetric-full-context-lhs-single-succedent` | `../../part-weakening/chap-asymmetric-full-context-lhs-single-succedent/` | `../../part-contraction/chap-asymmetric-full-context-lhs-single-succedent/` | `../../part-exchange/chap-asymmetric-full-context-lhs-single-succedent/` |
-| `chap-asymmetric-single-antecedent-full-context-rhs` | `../../part-weakening/chap-asymmetric-single-antecedent-full-context-rhs/` | `../../part-contraction/chap-asymmetric-single-antecedent-full-context-rhs/` | `../../part-exchange/chap-asymmetric-single-antecedent-full-context-rhs/` |
-| `chap-symmetric-single-antecedent-single-succedent` | `../../part-weakening/chap-symmetric-single-antecedent-single-succedent/` | `../../part-contraction/chap-symmetric-single-antecedent-single-succedent/` | `../../part-exchange/chap-symmetric-single-antecedent-single-succedent/` |
+| `chap-symmetric-full-context-lhs-rhs` | `../../part-weakening/...` | `../../part-contraction/...` | `../../part-exchange/...` |
+| `chap-asymmetric-full-context-lhs-single-succedent` | `../../part-weakening/...` | `../../part-contraction/...` | `../../part-exchange/...` |
+| `chap-asymmetric-single-antecedent-full-context-rhs` | `../../part-weakening/...` | `../../part-contraction/...` | `../../part-exchange/...` |
+| `chap-symmetric-single-antecedent-single-succedent` | `../../part-weakening/...` | `../../part-contraction/...` | `../../part-exchange/...` |
 
 ## Assembly Algorithm
 
@@ -202,15 +195,7 @@ FUNCTION AssembleMonograph(output_file):
     RETURN output_file
 ```
 
-Each part file is responsible for assembling its chapters, and each chapter structure is assembled similarly.
-
-## Build Process
-
-```bash
-make        # Build PDF
-make clean  # Remove auxiliary files
-make view   # Build and open PDF
-```
+Each part file assembles its chapters, and each chapter assembles its sections and theorems.
 
 ## Core Constraints
 
@@ -223,6 +208,11 @@ make view   # Build and open PDF
 ## Validation
 
 All artifacts must pass automated validation against the thesis structure schema. All criteria must evaluate true.
+
+Run validation:
+```bash
+make test
+```
 
 ## See Also
 

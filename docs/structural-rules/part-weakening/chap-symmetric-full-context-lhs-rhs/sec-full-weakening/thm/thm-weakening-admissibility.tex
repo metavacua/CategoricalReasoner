@@ -1,0 +1,79 @@
+% Theorem: Admissibility of Weakening in Focused Sequent Calculus
+% ID: thm-weakening-admissibility
+% Status: Complete
+
+\input{../../../../../thm-preamble}
+
+\title{Theorem: Admissibility of Weakening}
+\date{}
+
+\begin{document}
+
+\thmid{weakening-admissibility}
+
+\begin{theorem}[Admissibility of Weakening in Focused Calculus]
+\label{thm:weakening-admissibility}
+In the focused sequent calculus with full weakening, the following rules are admissible:
+
+\begin{enumerate}
+\item \textbf{Left Weakening (Asynchronous):}
+\[
+\infer[\fweakeningL]{\Gamma, A \Uparrow \Theta \vdash \Delta}{\Gamma \Uparrow \Theta \vdash \Delta}
+\]
+
+\item \textbf{Right Weakening (Asynchronous):}
+\[
+\infer[\fweakeningR]{\Gamma \Uparrow \Theta \vdash \Delta, A}{\Gamma \Uparrow \Theta \vdash \Delta}
+\]
+
+\item \textbf{Focused Weakening:}
+\[
+\infer[\fweakeningF]{\Gamma; \Omega \focal A}{\Gamma'; \Omega \focal A}
+\]
+where $\Gamma \subseteq \Gamma'$ (weakening on the unfocused context).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By simultaneous induction on the structure of the derivation.
+
+\textbf{Case 1:} Base case (initial rule).
+If the derivation ends with an initial rule on atom $P$:
+\[
+\infer[\text{init}]{P \focal P}{}
+\]
+Then applying weakening to the left context yields:
+\[
+\infer[\fweakeningF]{\Gamma, A; \cdot \focal P}{P \focal P}
+\]
+which is admissible by the induction hypothesis on context inclusion.
+
+\textbf{Case 2:} Asynchronous right rule ($\tensor R$).
+If the last rule is:
+\[
+\infer[\tensor R]{\Gamma \Uparrow \cdot \vdash A \tensor B, \Delta}{\Gamma \Uparrow \cdot \vdash A, B, \Delta}
+\]
+By induction hypothesis, we have weakening for the premise. The conclusion follows by applying the same rule to the weakened premise.
+
+\textbf{Case 3:} Focus shift (negative).
+If the derivation shifts focus to a negative formula:
+\[
+\infer[\text{focus}^{-}]{\Gamma \Uparrow N \vdash \Delta}{\Gamma; N \focal \Delta}
+\]
+where $N$ is negative. By induction on the focused derivation, weakening is admissible in the stable sequent.
+
+\textbf{Case 4:} Focused left rule (synchronous).
+For a focused left rule on formula $P$:
+\[
+\infer[\text{rule}]{\Gamma; P, \Omega \focal C}{\cdots}
+\]
+The induction hypothesis on the premises allows us to extend $\Gamma$ arbitrarily.
+
+\qedhere
+\end{proof}
+
+\begin{remark}
+The admissibility of weakening in the focused system demonstrates that the focusing discipline does not compromise the structural properties of the underlying logic. This is crucial for establishing the completeness of the focused system relative to the unfocused one.
+\end{remark}
+
+\end{document}

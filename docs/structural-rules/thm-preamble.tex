@@ -1,0 +1,87 @@
+% Minimal preamble for standalone theorem/proof documents
+% This preamble is designed for compiling individual theorems
+
+\documentclass[12pt]{article}
+
+% Essential packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+% Theorem environments
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% Proof environment
+\usepackage{proof}
+
+% Sequent notation
+\newcommand{\sequent}[2]{#1 \vdash #2}
+\newcommand{\Sequent}{\vdash}
+
+% Focused sequent calculus notation
+\newcommand{\uparrow}{\mathbin{\uparrow}}
+\newcommand{\downarrow}{\mathbin{\downarrow}}
+\newcommand{\foc}[2]{#1 \mathbin{\Downarrow} #2}  % Focused sequent
+\newcommand\focal{
+  \mathchoice{\mathbin{\Downarrow}}{\mathbin{\Downarrow}}{\mathbin{\scriptstyle\Downarrow}}{\mathbin{\scriptstyle\Downarrow}}
+}
+\newcommand{\async}[2]{#1 \uparrow #2}  % Asynchronous phase
+\newcommand{\sync}[2]{#1 \downarrow #2}  % Synchronous phase
+
+% Structural rules
+\newcommand{\weakening}{\textsf{W}}
+\newcommand{\contraction}{\textsf{C}}
+\newcommand{\exchange}{\textsf{E}}
+
+% Focused structural rules
+\newcommand{\fweakening}{\textsf{W}^{\downarrow}}
+\newcommand{\fcontraction}{\textsf{C}^{\downarrow}}
+\newcommand{\fexchange}{\textsf{E}^{\downarrow}}
+
+% Inference rules
+\newcommand{\infrule}[3]{\dfrac{#1}{#2}\;\;{\scriptsize \textsc{#3}}}
+\newcommand{\infers}[3]{\infer[{[#3]}]{#2}{#1}}
+
+% Contexts
+\newcommand{\GammaF}{\Gamma^{+}}  % Focused context
+\newcommand{\DeltaF}{\Delta^{+}}  % Focused succedent
+\newcommand{\GammaA}{\Gamma^{-}}  % Unfocused (ambient) context
+\newcommand{\DeltaA}{\Delta^{-}}  % Unfocused succedent
+
+% Formula polarity
+\newcommand{\pos}{^{+}}  % Positive polarity
+\newcommand{\neg}{^{-}}  % Negative polarity
+
+% For export to other documents
+\ifdefined\THEOREMSTANDALONE
+  \usepackage[active,tightpage]{preview}
+  \PreviewEnvironment{equation*}
+  \PreviewEnvironment{align*}
+  \PreviewEnvironment{theorem}
+  \PreviewEnvironment{proof}
+\fi
+
+% ID tracking for theorem validation
+\newcommand{\thmid}[1]{\label{thm:#1}\gdef\CurrentThmID{#1}}
+\newcommand{\getthmid}{\CurrentThmID}
+
+% Document info (to be overridden per theorem)
+\title{Theorem Document}
+\author{Structural Rules Monograph}
+\date{\today}
+
+\begin{document}
+
+\ifdefined\THEOREMSTANDALONE
+  \maketitle
+\fi
+
+% Content begins here

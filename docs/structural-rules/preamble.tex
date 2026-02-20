@@ -1,10 +1,14 @@
-% Packages
+% Main preamble for Structural Rules Monograph
+% Comprehensive support for focused sequent calculi
+
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{tikz}
 \usepackage{listings}
 \usepackage[hidelinks]{hyperref}
 \usepackage{booktabs}
+\usepackage{proof}  % For inference rules
 
 % TikZ libraries for diagrams
 \usetikzlibrary{arrows.meta, positioning, calc}
@@ -12,20 +16,122 @@
 % Minimal helpers
 \newcommand{\code}[1]{\texttt{#1}}
 
-% Sequent notation
+% =============================================================================
+% Theorem Environments
+% =============================================================================
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+
+% =============================================================================
+% Basic Sequent Notation
+% =============================================================================
 \newcommand{\sequent}[2]{#1 \vdash #2}
 \newcommand{\Sequent}{\vdash}
 
-% Structural rule notation
+% =============================================================================
+% Focused Sequent Calculus Notation
+% =============================================================================
+% Following Andreoli (1992) and Liang & Miller (2009)
+
+% Phases
+\newcommand{\async}[2]{#1 \mathbin{\Uparrow} #2}   % Asynchronous phase (uparrow)
+\newcommand{\sync}[2]{#1 \mathbin{\Downarrow} #2}   % Synchronous phase (downarrow)
+\newcommand\focal{
+  \mathchoice{\mathbin{\Downarrow}}{\mathbin{\Downarrow}}{\mathbin{\scriptstyle\Downarrow}}{\mathbin{\scriptstyle\Downarrow}}
+}
+
+% Stable sequents (focused)
+\newcommand{\stable}[3]{#1; #2 \focal #3}        % Stable: \Gamma; \Omega \focal P
+\newcommand\Stable[2]{#1 \focal #2}              % Short form
+
+% Contexts with focus markers
+\newcommand{\GammaF}{\Gamma^{+}}                 % Focused (active) context
+\newcommand{\GammaA}{\Gamma^{-}}                 % Unfocused (ambient) context
+\newcommand{\DeltaF}{\Delta^{+}}                 % Focused succedent
+\newcommand{\DeltaA}{\Delta^{-}}                 % Unfocused succedent
+
+% Formula stores (for async phase)
+\newcommand{\store}[2]{\langle #1 \rangle_{#2}}  % Stored formula
+\newcommand{\leftstore}{L}                       % Left store
+\newcommand{\rightstore}{R}                      % Right store
+
+% =============================================================================
+% Structural Rules (Traditional)
+% =============================================================================
 \newcommand{\weakening}{\textsf{W}}
 \newcommand{\contraction}{\textsf{C}}
-\newcommand{\exchange}{\textsf{E}}
+\newcommand{\exchange}{\textsc{E}}
 
-% Inference rules
+% =============================================================================
+% Focused Structural Rules
+% =============================================================================
+\newcommand{\fweakeningL}{\textsf{W}_{L}^{\uparrow}}    % Left weakening in async phase
+\newcommand{\fweakeningR}{\textsf{W}_{R}^{\uparrow}}    % Right weakening in async phase
+\newcommand{\fweakeningF}{\textsf{W}^{\downarrow}}      % Weakening in sync phase
+
+\newcommand{\fcontractionL}{\textsf{C}_{L}^{\uparrow}}  % Left contraction in async phase
+\newcommand{\fcontractionR}{\textsf{C}_{R}^{\uparrow}}  % Right contraction in async phase
+\newcommand{\fcontractionF}{\textsf{C}^{\downarrow}}    % Contraction in sync phase
+
+\newcommand{\fexchangeL}{\textsc{E}_{L}^{\uparrow}}     % Left exchange in async phase
+\newcommand{\fexchangeR}{\textsc{E}_{R}^{\uparrow}}     % Right exchange in async phase
+\newcommand{\fexchangeF}{\textsc{E}^{\downarrow}}       % Exchange in sync phase
+
+% =============================================================================
+% Inference Rules
+% =============================================================================
 \newcommand{\infrule}[3]{\dfrac{#1}{#2}\;\;{\scriptsize \textsc{#3}}}
+\newcommand{\infers}[3]{\infer[{[#3]}]{#2}{#1}}
+\newcommand{\inferl}[2]{\infer{#2}{#1}}  % Label-free inference
 
+% Focused rule annotations
+\newcommand{\ruleasync}{\textsuperscript{\scriptsize\textsc{a}}}
+\newcommand{\rulesync}{\textsuperscript{\scriptsize\textsc{s}}}
+\newcommand{\rulestore}{\textsuperscript{\scriptsize\textsc{st}}}
+
+% =============================================================================
+% Formula Notation
+% =============================================================================
+\newcommand{\lolli}{\multimap}          % Linear implication
+\newcommand{\tensor}{\otimes}           % Tensor (multiplicative conjunction)
+\newcommand{\parr}{\bindnasrepma}       % Par (multiplicative disjunction)
+\newcommand{\with}{\&}                  % With (additive conjunction)
+\newcommand{\oplus}{\oplus}             % Oplus (additive disjunction)
+\newcommand{\bang}{!}                   % Bang (of course modality)
+\newcommand{\whynot}{?}                 % Why not (why not modality)
+
+% Positive and negative atoms
+\newcommand{\pos}[1]{#1^{+}}            % Positive atom
+\newcommand{\neg}[1]{#1^{-}}            % Negative atom
+
+% =============================================================================
+% Listings Configuration
+% =============================================================================
 \lstset{
   basicstyle=\ttfamily,
   breaklines=true,
   columns=fullflexible,
 }
+
+% =============================================================================
+% ID and Reference Macros
+% =============================================================================
+\newcommand{\thmref}[1]{Theorem~\ref{thm:#1}}
+\newcommand{\lemref}[1]{Lemma~\ref{lem:#1}}
+\newcommand{\defref}[1]{Definition~\ref{def:#1}}
+
+% =============================================================================
+% Document Metadata
+% =============================================================================
+\title{Structural Rules: A Categorical Investigation\\[0.5em]
+\large Focused Sequent Calculi and Structural Proof Theory}
+\author{Ian Douglas Lawrence Norman McLean}
+\date{\today}
