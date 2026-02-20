@@ -72,7 +72,7 @@ The "Symmetric Weakening with Single Antecedent and Single Succedent" chapter re
 
 If we naively allow weakening arbitrarily on both sides, we would derive the empty sequent, meaning the empty sequent is derivable in all extensions including LJ and LK. Instead, specific structural restrictions ensure that at least one formula is valid on LHS or RHS.
 
-This corresponds to **Minimal Logic** (*Minimalkalkül*) by Ingebrigt Johansson (1936).
+This structure is related to **Minimal Logic** (*Minimalkalkül*) by Ingebrigt Johansson (1936), though distinct from it.
 
 ## Weakening Content Requirements
 
@@ -82,7 +82,7 @@ This part covers:
    - Note: RHS "at most one" relates to $\bot$ (bottom) and explosion principle
 3. **Asymmetric Single Antecedent / Full Context RHS (Dual Intuitionistic LDJ)**: LHS restricted to at most one formula, RHS unrestricted
    - Note: LHS "at most one" relates to $\top$ (top) and dual logic to Minimalkalkül
-4. **Symmetric Single Antecedent and Single Succedent (Minimal Logic)**: Both restricted with asymmetric weakening rule
+4. **Symmetric Single Antecedent and Single Succedent** (related to Minimal Logic): Both restricted with asymmetric weakening rule
 
 Each chapter contains four sections:
 - **Full Weakening**: Classical weakening allowing arbitrary formula introduction

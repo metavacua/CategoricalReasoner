@@ -1,7 +1,7 @@
 # Chapter: Symmetric Weakening with Single Antecedent and Single Succedent
 
 ## Scope
-This chapter examines weakening in minimal logic where both the LHS and RHS are restricted to single formulas. This represents Johansson's Minimal Logic (*Minimalkalkül*).
+This chapter examines weakening in a sequent calculus structure related to Minimal Logic (Minimalkalkül), where both the LHS and RHS are restricted to single formulas. This structure is distinct from but structurally analogous to Johansson's Minimal Logic (1936).
 
 ## Content
 

@@ -55,8 +55,9 @@ See `../AGENTS.md` for chapter naming convention and cross-part reference mappin
 - LHS restricted to single formula, RHS unrestricted
 
 ### 4. Symmetric Weakening with Single Antecedent and Single Succedent
-- Minimal logic presentation
+- Related to Minimal Logic (Minimalkalkül) by Ingebrigt Johansson (1936)
 - Both LHS and RHS restricted to single formulas
+- Distinct from but structurally analogous to Minimal Logic
 
 ## Sections (in each chapter)
 - Full Weakening

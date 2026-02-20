@@ -1,7 +1,7 @@
 # Chapter: Symmetric Exchange with Single Antecedent and Single Succedent
 
 ## Scope
-This chapter examines exchange in minimal logic where both the LHS and RHS are restricted to single formulas.
+This chapter examines exchange in a sequent calculus structure related to Minimal Logic (Minimalkalkül), where both the LHS and RHS are restricted to single formulas. This structure is distinct from but structurally analogous to Johansson's Minimal Logic (1936).
 
 ## Content
 

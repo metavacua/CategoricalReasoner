@@ -51,8 +51,9 @@ part-contraction/
 - LHS restricted to single formula, RHS has contraction
 
 ### 4. Symmetric Contraction with Single Antecedent and Single Succedent
-- Minimal logic presentation
+- Related to Minimal Logic (Minimalkalkül) by Ingebrigt Johansson (1936)
 - Both LHS and RHS restricted to single formulas
+- Distinct from but structurally analogous to Minimal Logic
 
 ## Sections (in each chapter)
 - Full Contraction
