@@ -26,7 +26,7 @@ structural-rules/
 │   │   ├── sec-full-weakening/
 │   │   │   ├── subsec-lhs-rules/       # LHS structural rules
 │   │   │   ├── subsec-rhs-rules/       # RHS structural rules
-│   │   │   ├── thm/                    # Theorem/proof documents
+│   │   │   ├── theorems/               # Theorem/proof documents
 │   │   │   └── README.md
 │   │   ├── sec-linear-weakening/
 │   │   ├── sec-affine-weakening/
@@ -214,7 +214,51 @@ Run validation:
 make test
 ```
 
+## External Knowledge Integration
+
+### SPARQL Research Tool
+
+Located at `../../src/utils/sparql_categorical_research.py`
+
+This tool queries Wikidata, DBpedia, and other SPARQL endpoints for categorical definitions, theorems, and axioms.
+
+**Usage:**
+```bash
+python3 ../../src/utils/sparql_categorical_research.py
+```
+
+**Features:**
+- Queries multiple endpoints: Wikidata, DBpedia, FactGrid, ISIDORE
+- Implements rate limiting (respects endpoint policies)
+- Follows Wikidata User Agent Policy
+- Verifies data consistency across sources
+- Exports results to TeX fragments
+
+**Query Categories:**
+1. Category Theory Concepts
+2. Logic Theorems
+3. Structural Rules (Weakening, Contraction, Exchange)
+4. Formal Logic
+5. Proof Theory
+
+**Endpoints:**
+| Endpoint | URL | Description |
+|----------|-----|-------------|
+| Wikidata | https://query.wikidata.org/sparql | Primary knowledge graph |
+| DBpedia | https://dbpedia.org/sparql | Structured Wikipedia content |
+| FactGrid | https://database.factgrid.de/sparql | Historical research data |
+| ISIDORE | https://isidore.science/sparql | Scientific publications |
+
+### Research Workflow
+
+1. Run research tool to query external knowledge bases
+2. Review `categorical_research_results.json` for findings
+3. Curate and verify exported `research_import.tex`
+4. Include relevant theorems and definitions in monograph
+5. Add citations to bibliography
+
 ## See Also
 
 - `../dissertation/` - Main thesis directory
 - `../dissertation/bibliography/` - Shared bibliography
+- `../../src/utils/README.md` - Research tool documentation
