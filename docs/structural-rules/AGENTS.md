@@ -216,46 +216,52 @@ make test
 
 ## External Knowledge Integration
 
-### SPARQL Research Tool
+### SPARQL Research
 
-Located at `../../src/utils/sparql_categorical_research.py`
+Research conducted by querying Wikidata and DBpedia SPARQL endpoints for categorical definitions, theorems, and axioms.
 
-This tool queries Wikidata, DBpedia, and other SPARQL endpoints for categorical definitions, theorems, and axioms.
+**Research Report:** `RESEARCH_FINDINGS.md`
 
-**Usage:**
+**Raw Data:**
+- `research-dbpedia-category-theory.json` - DBpedia category theory concepts
+- `wikidata-logics-results.json` - Wikidata logic systems
+
+**Query Method:**
 ```bash
-python3 ../../src/utils/sparql_categorical_research.py
+# Example: Query Wikidata for logic systems
+curl -A "CategoricalReasoner/1.0 (https://github.com/metavacua/CategoricalReasoner; research)" \
+  'https://query.wikidata.org/sparql?query=SELECT%20%3Flogic%20%3FlogicLabel%20WHERE%20%7B%20%3Flogic%20wdt%3AP31%20wd%3AQ8078%20.%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%20%7D%20%7D%20LIMIT%2020' \
+  -H "Accept: application/sparql-results+json"
 ```
 
-**Features:**
-- Queries multiple endpoints: Wikidata, DBpedia, FactGrid, ISIDORE
-- Implements rate limiting (respects endpoint policies)
-- Follows Wikidata User Agent Policy
-- Verifies data consistency across sources
-- Exports results to TeX fragments
+**Endpoints Used:**
+| Endpoint | URL | Query |
+|----------|-----|-------|
+| Wikidata | https://query.wikidata.org/sparql | Logic systems (Q8078) |
+| DBpedia | https://dbpedia.org/sparql | Category theory concepts |
 
-**Query Categories:**
-1. Category Theory Concepts
-2. Logic Theorems
-3. Structural Rules (Weakening, Contraction, Exchange)
-4. Formal Logic
-5. Proof Theory
+**Key Findings:**
 
-**Endpoints:**
-| Endpoint | URL | Description |
-|----------|-----|-------------|
-| Wikidata | https://query.wikidata.org/sparql | Primary knowledge graph |
-| DBpedia | https://dbpedia.org/sparql | Structured Wikipedia content |
-| FactGrid | https://database.factgrid.de/sparql | Historical research data |
-| ISIDORE | https://isidore.science/sparql | Scientific publications |
+**Category Theory Concepts (DBpedia):**
+- Beck's monadicity theorem (relevant to algebraic semantics)
+- Associativity isomorphism (structural composition)
+- Dual (category theory) - related to symmetry
+- Subcategory (subsystem relationships)
 
-### Research Workflow
+**Logic Systems (Wikidata):**
+- Game semantics (operational semantics)
+- Strict logic (substructural variant)
+- Jaina seven-valued logic
 
-1. Run research tool to query external knowledge bases
-2. Review `categorical_research_results.json` for findings
-3. Curate and verify exported `research_import.tex`
-4. Include relevant theorems and definitions in monograph
-5. Add citations to bibliography
+**Rate Limiting:**
+- Wikidata: 1 second between requests
+- User-Agent: `CategoricalReasoner/1.0 (https://github.com/metavacua/CategoricalReasoner; research)`
+
+**Integration Workflow:**
+1. Review `RESEARCH_FINDINGS.md` for relevant concepts
+2. Cross-reference with monograph sections
+3. Add citations to `../dissertation/bibliography/`
+4. Integrate theorems into appropriate `theorems/` directories
 
 ## See Also
 

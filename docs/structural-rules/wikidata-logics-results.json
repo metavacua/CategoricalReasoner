@@ -1,0 +1,67 @@
+{
+  "head" : {
+    "vars" : [ "logic", "logicLabel" ]
+  },
+  "results" : {
+    "bindings" : [ {
+      "logic" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q7782444"
+      },
+      "logicLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Theory of obligationes"
+      }
+    }, {
+      "logic" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q25518081"
+      },
+      "logicLabel" : {
+        "type" : "literal",
+        "value" : "Q25518081"
+      }
+    }, {
+      "logic" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q28171908"
+      },
+      "logicLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "Jaina seven-valued logic"
+      }
+    }, {
+      "logic" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q65122115"
+      },
+      "logicLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "game semantics"
+      }
+    }, {
+      "logic" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q107417121"
+      },
+      "logicLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "strict logic"
+      }
+    }, {
+      "logic" : {
+        "type" : "uri",
+        "value" : "http://www.wikidata.org/entity/Q113995870"
+      },
+      "logicLabel" : {
+        "xml:lang" : "en",
+        "type" : "literal",
+        "value" : "elimination method"
+      }
+    } ]
+  }
+}
