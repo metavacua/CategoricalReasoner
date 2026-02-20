@@ -46,7 +46,7 @@ check-tools:
 	@echo -e "$(GREEN)✓ LaTeX toolchain available$(NC)"
 
 # Main monograph PDF
-$(PDF): $(TEX) preamble.tex thm-preamble.tex $(wildcard part-*/*.tex) $(wildcard part-*/*/*/thm/*.tex)
+$(PDF): $(TEX) preamble.tex thm-preamble.tex $(wildcard part-*/*.tex) $(wildcard part-*/*/*/theorems/*.tex)
 	@echo "Building main monograph..."
 	$(LATEX) $(LATEX_FLAGS) $(TEX) || { \
 	    echo -e "$(RED)✗ First pass failed$(NC)" >&2; \
@@ -74,7 +74,7 @@ theorems: check-tools $(THM_PDFS)
 
 # Pattern rule for building individual theorems
 .PRECIOUS: %.pdf
-part-%/chap-%/sec-%/thm/%.pdf: part-%/chap-%/sec-%/thm/%.tex thm-preamble.tex
+part-%/chap-%/sec-%/theorems/%.pdf: part-%/chap-%/sec-%/theorems/%.tex thm-preamble.tex
 	@echo "Building theorem: $@"
 	@cd $(dir $<) && { \
 	    $(LATEX) $(LATEX_FLAGS) $(notdir $<) || { \
@@ -110,7 +110,7 @@ theorem-%: check-tools
 # List all available theorems
 list-theorems:
 	@echo "Available theorem files:"
-	@THEMS=$$(find . -path "*/thm/*.tex" -name "thm-*.tex" 2>/dev/null | sed 's|^\./||' | sort); \
+	@THEMS=$$(find . -path "*/theorems/*.tex" -name "thm-*.tex" 2>/dev/null | sed 's|^\./||' | sort); \
 	if [ -z "$$THEMS" ]; then \
 	    echo "  (none found)"; \
 	else \
@@ -227,9 +227,9 @@ clean:
 	    *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.lof *.log *.lot \
 	    *.nav *.out *.run.xml *.snm *.synctex.gz *.toc *.vrb \
 	    $(PDF)
-	@find . -path "*/thm/*.aux" -delete 2>/dev/null || true
-	@find . -path "*/thm/*.log" -delete 2>/dev/null || true
-	@find . -path "*/thm/*.pdf" -delete 2>/dev/null || true
+	@find . -path "*/theorems/*.aux" -delete 2>/dev/null || true
+	@find . -path "*/theorems/*.log" -delete 2>/dev/null || true
+	@find . -path "*/theorems/*.pdf" -delete 2>/dev/null || true
 	@echo -e "$(GREEN)✓ Clean complete$(NC)"
 
 clean-all: clean
