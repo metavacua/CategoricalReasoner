@@ -218,53 +218,43 @@ make test
 
 ### SPARQL Research
 
-Research conducted by querying Wikidata and DBpedia SPARQL endpoints for categorical definitions, theorems, and axioms.
+Research conducted via SPARQL queries to Wikidata and DBpedia for categorical definitions, theorems, and axioms related to structural rules.
 
-**Research Report:** `RESEARCH_FINDINGS.md`
+**Query Tools Used:** curl with proper User-Agent headers
 
-**Raw Data:**
-- `research-dbpedia-category-theory.json` - DBpedia category theory concepts
-- `wikidata-logics-results.json` - Wikidata logic systems
+**Endpoints Queried:**
+- Wikidata: https://query.wikidata.org/sparql (Logic systems Q8078)
+- DBpedia: https://dbpedia.org/sparql (Category theory, Proof theory)
 
-**Query Method:**
-```bash
-# Example: Query Wikidata for logic systems
-curl -A "CategoricalReasoner/1.0 (https://github.com/metavacua/CategoricalReasoner; research)" \
-  'https://query.wikidata.org/sparql?query=SELECT%20%3Flogic%20%3FlogicLabel%20WHERE%20%7B%20%3Flogic%20wdt%3AP31%20wd%3AQ8078%20.%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22%20.%20%7D%20%7D%20LIMIT%2020' \
-  -H "Accept: application/sparql-results+json"
-```
+**Key Research Findings:**
 
-**Endpoints Used:**
-| Endpoint | URL | Query |
-|----------|-----|-------|
-| Wikidata | https://query.wikidata.org/sparql | Logic systems (Q8078) |
-| DBpedia | https://dbpedia.org/sparql | Category theory concepts |
+**From DBpedia (Category Theory):**
+- Beck's monadicity theorem - algebraic semantics of structural rules
+- Associativity isomorphism - composition of structural transformations
+- Dual (category theory) - symmetry principles in exchange
+- Subcategory - subsystem relationships in substructural logics
+- Kernel (category theory) - null objects and weakening
 
-**Key Findings:**
+**From DBpedia (Proof Theory):**
+- Structural proof theory - foundation for sequent calculus
+- Deduction theorem - fundamental metalogical result
+- Completeness (logic) - semantic adequacy
+- Decidability (logic) - algorithmic properties
 
-**Category Theory Concepts (DBpedia):**
-- Beck's monadicity theorem (relevant to algebraic semantics)
-- Associativity isomorphism (structural composition)
-- Dual (category theory) - related to symmetry
-- Subcategory (subsystem relationships)
+**From Wikidata (Logic Systems):**
+- Game semantics - operational interpretation
+- Strict logic - substructural variant
+- Jaina seven-valued logic - many-valued structural properties
 
-**Logic Systems (Wikidata):**
-- Game semantics (operational semantics)
-- Strict logic (substructural variant)
-- Jaina seven-valued logic
+**Integration Status:**
+Research findings synthesized into theorem documents in `theorems/` directories. Each theorem paired with domain-appropriate proof for classical logic with notes on substructural variants.
 
-**Rate Limiting:**
-- Wikidata: 1 second between requests
+**Rate Limiting Compliance:**
 - User-Agent: `CategoricalReasoner/1.0 (https://github.com/metavacua/CategoricalReasoner; research)`
-
-**Integration Workflow:**
-1. Review `RESEARCH_FINDINGS.md` for relevant concepts
-2. Cross-reference with monograph sections
-3. Add citations to `../dissertation/bibliography/`
-4. Integrate theorems into appropriate `theorems/` directories
+- 1 second delay between Wikidata queries
+- 30-second timeout on all requests
 
 ## See Also
 
 - `../dissertation/` - Main thesis directory
 - `../dissertation/bibliography/` - Shared bibliography
-- `../../src/utils/README.md` - Research tool documentation

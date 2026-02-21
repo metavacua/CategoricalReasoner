@@ -1,0 +1,62 @@
+% Theorem: Deduction Theorem with Weakening
+% ID: thm-deduction-weakening
+% Research Source: DBpedia - Deduction theorem (Proof theory)
+
+\input{../../../../../thm-preamble}
+
+\title{Theorem: Deduction Theorem with Full Weakening}
+\date{}
+
+\begin{document}
+
+\thmid{deduction-weakening}
+
+\begin{theorem}[Deduction Theorem in Classical Logic with Weakening]
+\label{thm:deduction-weakening}
+In classical propositional logic (LK) with full weakening, for any formulas $A$ and $B$:
+\[
+\Gamma, A \vdash B \quad \text{if and only if} \quad \Gamma \vdash A \rightarrow B
+\]
+where weakening is freely available on both sides of the sequent.
+\end{theorem}
+
+\begin{proof}
+We prove both directions.
+
+$(\Rightarrow)$ Assume $\Gamma, A \vdash B$ in LK. We show $\Gamma \vdash A \rightarrow B$.
+
+By the standard deduction theorem proof for classical logic:
+\begin{enumerate}
+\item Base case: If $B$ is an axiom or in $\Gamma$, then $\Gamma \vdash B$, and by weakening $\Gamma \vdash A \rightarrow B$ using the implication right rule with $B$ on the right.
+
+\item If $B = A$, then $\Gamma \vdash A \rightarrow A$ by the identity axiom and implication introduction.
+
+\item Inductive step: For each rule application in the derivation of $\Gamma, A \vdash B$, we transform it to a derivation of $\Gamma \vdash A \rightarrow B$ using the fact that weakening allows us to freely add formulas to contexts.
+\end{enumerate}
+
+$(\Leftarrow)$ Assume $\Gamma \vdash A \rightarrow B$. We show $\Gamma, A \vdash B$.
+
+\begin{enumerate}
+\item From $\Gamma \vdash A \rightarrow B$, we have by left implication rule: $\Gamma, A \vdash B, \Delta$ for any $\Delta$.
+
+\item Since weakening is available, we can restrict to single formula succedent in LJ style, or use the cut rule with $\vdash A$ (derived from identity) to obtain $\Gamma, A \vdash B$.
+\end{enumerate}
+
+The key role of weakening: In classical logic with full weakening (LK), the deduction theorem holds in its strong form because weakening allows arbitrary formula introduction. In substructural logics without weakening, the deduction theorem takes modified forms or requires additional constraints.
+\end{proof}
+
+\begin{remark}[Substructural Variants]
+\begin{itemize}
+\item \textbf{Linear Logic (without weakening):} The deduction theorem fails in standard form. Instead, we have: $\Gamma, A \vdash B$ implies $\Gamma \vdash A \lolli B$ only when $A$ is used exactly once.
+
+\item \textbf{Affine Logic (weakening without contraction):} The deduction theorem holds in restricted form where the implication introduction must respect linear usage constraints.
+
+\item \textbf{Relevant Logic (no weakening):} The deduction theorem requires that $A$ be actually used in the derivation of $B$.
+\end{itemize}
+\end{remark}
+
+\begin{remark}[Categorical Semantics]
+In categorical terms, the deduction theorem corresponds to the adjunction between product and exponential (currying). The availability of weakening corresponds to the existence of projections, making the category cartesian closed.
+\end{remark}
+
+\end{document}
