@@ -1,0 +1,90 @@
+/* Catty Thesis Styles */
+
+/* Custom theorem styling */
+.theorem {
+  border-left: 4px solid #2c3e50;
+  padding-left: 1em;
+  margin: 1.5em 0;
+}
+
+.definition {
+  border-left: 4px solid #27ae60;
+  padding-left: 1em;
+  margin: 1.5em 0;
+}
+
+.lemma {
+  border-left: 4px solid #8e44ad;
+  padding-left: 1em;
+  margin: 1.5em 0;
+}
+
+/* Proof styling */
+.proof {
+  font-style: italic;
+  margin: 1em 0;
+}
+
+.proof::after {
+  content: "∎";
+  float: right;
+}
+
+/* Abstract styling */
+.abstract {
+  font-size: 0.95em;
+  line-height: 1.6;
+  margin: 2em 0;
+  padding: 1em;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+}
+
+/* MSC classification */
+.msc-codes {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 1em;
+}
+
+/* Table styling */
+table {
+  margin: 1.5em 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 0.5em;
+  text-align: left;
+}
+
+th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+/* Code blocks */
+pre {
+  background-color: #f8f9fa;
+  padding: 1em;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+code {
+  font-family: 'Fira Code', 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+/* Print styles */
+@media print {
+  .abstract {
+    break-inside: avoid;
+  }
+  
+  .theorem, .definition, .lemma {
+    break-inside: avoid;
+  }
+}

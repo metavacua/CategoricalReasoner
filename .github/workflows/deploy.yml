@@ -1,6 +1,8 @@
-name: Deploy
+name: Build and Deploy
 
 on:
+  push:
+    branches: [main, master]
   workflow_dispatch:
 
 permissions:
@@ -23,48 +25,40 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Install LaTeX + Pandoc
+      - name: Setup Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Install TeX Live
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
-            make \
-            pandoc \
             texlive-latex-base \
             texlive-latex-recommended \
             texlive-latex-extra \
             texlive-pictures \
             texlive-fonts-recommended \
-            texlive-extra-utils
+            texlive-science \
+            texlive-fonts-extra
 
-      - name: Build PDF
+      - name: Render with Quarto
         run: |
-          cd thesis
-          make clean
-          make
+          cd docs
+          quarto render
 
-      - name: Convert TeX to HTML (Pandoc)
+      - name: Copy Additional Assets
         run: |
-          mkdir -p site
-          cd thesis
-          latexpand main.tex > ../site/main.expanded.tex
-          pandoc -f latex -t html -s ../site/main.expanded.tex -o ../site/index.html
-          cp main.pdf ../site/main.pdf
-          rm ../site/main.expanded.tex
-
-      - name: Copy Ontologies and Queries to Site
-        run: |
-          mkdir -p site/ontology
-          cp ontology/*.jsonld site/ontology/
-          cp ontology/*.ttl site/ontology/
-          mkdir -p site/benchmarks/queries
-          cp benchmarks/queries/*.rq site/benchmarks/queries/
-          # Create a basic landing page for ontologies
-          echo "<html><body><h1>Catty Ontologies</h1><ul>" > site/ontology/index.html
-          for f in site/ontology/*.jsonld site/ontology/*.ttl; do
-            filename=$(basename $f)
-            echo "<li><a href='$filename'>$filename</a></li>" >> site/ontology/index.html
-          done
-          echo "</ul></body></html>" >> site/ontology/index.html
+          mkdir -p docs/_book/ontology
+          mkdir -p docs/_book/benchmarks/queries
+          
+          # Copy ontologies if they exist
+          if [ -d "ontology" ]; then
+            cp -r ontology/* docs/_book/ontology/ 2>/dev/null || true
+          fi
+          
+          # Copy benchmarks if they exist
+          if [ -d "benchmarks/queries" ]; then
+            cp -r benchmarks/queries/* docs/_book/benchmarks/queries/ 2>/dev/null || true
+          fi
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -72,7 +66,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: docs/_book
 
       - name: Deploy to GitHub Pages
         id: deployment

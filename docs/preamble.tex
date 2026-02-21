@@ -1,0 +1,143 @@
+% =============================================================================
+% AMS Theorem Environments
+% =============================================================================
+
+% Theorem styles
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{axiom}{Axiom}[chapter]
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{convention}[theorem]{Convention}
+
+% Proof environment (already defined in amsthm, but customize here if needed)
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+% =============================================================================
+% Core AMS and Math Packages
+% =============================================================================
+
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{amssymb}
+
+% =============================================================================
+% Proof Theory and Logic
+% =============================================================================
+
+% Proof trees (ebproof is more modern, bussproofs is classic)
+\usepackage{ebproof}
+% Alternative: \usepackage{bussproofs}
+
+% Sequent calculus notation
+\usepackage{turnstile}
+
+% Denotational semantics symbols
+\usepackage{stmaryrd}
+
+% =============================================================================
+% Category Theory
+% =============================================================================
+
+% Commutative diagrams
+\usepackage{tikz-cd}
+
+% =============================================================================
+% Additional Math Support
+% =============================================================================
+
+% Extended math symbols
+\usepackage{mathrsfs}
+
+% Better fractions
+\usepackage{xfrac}
+
+% =============================================================================
+% Document Formatting
+% =============================================================================
+
+% Better tables
+\usepackage{booktabs}
+\usepackage{array}
+
+% Code listings
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  columns=fullflexible,
+  frame=single,
+  backgroundcolor=\color{gray!10},
+}
+
+% Hyperlinks
+\usepackage[hidelinks]{hyperref}
+
+% Colors
+\usepackage{xcolor}
+
+% =============================================================================
+% Custom Commands
+% =============================================================================
+
+% Common logical connectives
+\newcommand{\limp}{\rightarrow}           % Implication
+\newcommand{\liff}{\leftrightarrow}       % Biconditional
+\newcommand{\landop}{\wedge}              % Conjunction
+\newcommand{\lorop}{\vee}                 % Disjunction
+\newcommand{\lnotop}{\neg}                % Negation
+
+% Sequent calculus
+\newcommand{\seq}{\vdash}                 % Turnstile
+\newcommand{\dseq}{\Vdash}                # Double turnstile
+\newcommand{\lseq}{\dashv}                % Left turnstile
+
+% Linear logic
+\newcommand{\loll}{\multimap}             % Lollipop (linear implication)
+\newcommand{\tensor}{\otimes}             % Tensor product
+\newcommand{\parr}{\par}                  % Par (multiplicative disjunction)
+\newcommand{\with}{\&}                    % With (additive conjunction)
+\newcommand{\oplus}{\oplus}               % Oplus (additive disjunction)
+\newcommand{\bang}{!}                     % Of course (exponential)
+\newcommand{\whynot}{?}                   % Why not (exponential)
+
+% Category theory
+\newcommand{\cat}[1]{\mathbf{#1}}          % Category name
+\newcommand{\op}{\mathrm{op}}             % Opposite category
+\newcommand{\homf}{\mathrm{Hom}}          % Hom functor
+\newcommand{\nat}{\Rightarrow}            % Natural transformation
+
+% Common categories
+\newcommand{\Set}{\cat{Set}}
+\newcommand{\Cat}{\cat{Cat}}
+\newcommand{\Pos}{\cat{Pos}}
+\newcommand{\Mon}{\cat{Mon}}
+\newcommand{\Grp}{\cat{Grp}}
+
+% Code
+\newcommand{\code}[1]{\texttt{#1}}
+
+% =============================================================================
+% QED Symbol Placement
+% =============================================================================
+
+% Ensure QED symbol appears at end of proofs, even with equations
+\renewenvironment{proof}[1][\proofname]{%
+  \par\pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist\item[\hskip\labelsep\textit{#1}.]%
+  \ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
