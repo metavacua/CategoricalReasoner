@@ -81,12 +81,10 @@ Cross-references use Quarto/Pandoc syntax:
 ## Core Constraints
 
 - **Compilation**: Quarto required (`quarto render`). All files should compile without errors. Cross-references should resolve.
-- **Citations**: Citation system is under development. Direct citation key validation is not currently enforced. See `bibliography/README.md` for Java/RO-Crate system requirements.
 - **Content Requirements**:
   - Theorems require statements and proofs
   - Definitions require terms and precise meanings
   - Examples instantiate abstract concepts
-- **Architecture Note**: Thesis is Markdown/Quarto primary artifact. RDF is secondary/metadata-only (provenance extraction optional, not bidirectional).
 
 ## MSC2020 Classification
 
