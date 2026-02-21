@@ -31,13 +31,9 @@ preserve or restrict logical properties.
 ## Proofs as Witnesses {#subsec-proofs-witnesses}
 
 Catty goes beyond descriptive documentation by providing **computational witnesses**. 
-The existence of logical structures is proven through:
+This is planned to be implemented via translation to valid Java bytecodes with the compiler as the validator.
 
-- Executable Domain-Specific Languages (DSLs)
-- Commutative diagrams
-- Formal ontologies
-
-In this framework, syntactic minimality is shown to enable greater semantic power.
+In this framework, syntactic minimality is shown to enable greater semantic power; syntactically minimal logics admit more models, and this reflected in the variations of extensions with the initial logic having the greatest number and the terminal logic having the least.
 
 ## Structure of the Reference {#subsec-structure}
 
@@ -47,10 +43,8 @@ and formalization of the logic category:
 | Theme | Description |
 |-------|-------------|
 | **Genesis** | Foundational influences ranging from Linear Logic to Paraconsistent Reasoning |
-| **Architecture** | The geometry of the 2D lattice and its coordinate logic-space |
+| **Architecture** | The geometry of the lattice and its parameter space of logics; it is related to Post's lattices by the functional incompleteness theorem of proper subclassical logics|
 | **Morphisms** | Formal relationships of extension and interpretation |
 | **Universes** | Logics as substrates for computation, including links to Rust and systems programming |
-| **Witness** | The implementation of the Catty DSL and executable categorical reasoning |
-| **Formalization** | Machine-readable RDF/OWL ontologies and knowledge graphs |
-| **Integration** | Connections to the broader semantic web and proof assistants like Isabelle |
+| **Witness** | The implementation of Catty in standard programming languages and executable categorical reasoning; development towards a library, API, or SDK consisting of the constructive witnesses of the category of subclassical logics and their theories |
 | **Philosophy** | The overarching implications of logical pluralism and the inversion principle |
