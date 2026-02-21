@@ -1,0 +1,48 @@
+# Git attributes for CategoricalReasoner
+
+# Set default behavior, in case users don't have core.autocrlf set
+* text=auto
+
+# Explicitly declare text files that should be lf normalized
+*.java text eol=lf
+*.py text eol=lf
+*.sh text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.xml text eol=lf
+*.tex text eol=lf
+*.bib text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.rq text eol=lf
+*.sparql text eol=lf
+Makefile text eol=lf
+
+# Declare files that will never have CRLF line endings
+*.jar binary
+*.class binary
+*.pdf binary
+*.dvi binary
+*.ps binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.zip binary
+*.tar.gz binary
+
+# GitHub Language Statistics
+# This helps with accurate language statistics on GitHub
+*.java linguist-language=Java
+*.py linguist-language=Python
+*.tex linguist-language=TeX
+*.md linguist-language=Markdown
+*.yml linguist-language=YAML
+*.xml linguist-language=XML
+*.sparql linguist-language=SPARQL
+
+# Documentation files
+docs/**/*.md linguist-documentation=true
+README.md linguist-documentation=true
+CHANGELOG.md linguist-documentation=true
+LICENSE linguist-documentation=true

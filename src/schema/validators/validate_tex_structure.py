@@ -288,7 +288,7 @@ def main():
     parser.add_argument(
         '--tex-dir',
         type=Path,
-        default=Path('thesis/chapters'),
+        default=Path('docs/dissertation/chapters'),
         help='Directory containing TeX files to validate'
     )
     parser.add_argument(

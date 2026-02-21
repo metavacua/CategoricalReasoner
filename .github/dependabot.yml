@@ -1,0 +1,60 @@
+# Dependabot configuration for CategoricalReasoner
+# Dependabot helps keep your dependencies up to date
+
+version: 2
+enable-beta-ecosystem: true
+
+updates:
+  # Enable version updates for Maven dependencies
+  - package-ecosystem: maven
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: UTC
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "build"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "maven"
+    reviewers:
+      - "metavacua/java-maintainers"
+
+  # Enable version updates for Python dependencies
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: UTC
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "build"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "python"
+    reviewers:
+      - "metavacua/python-maintainers"
+
+  # GitHub Actions updates
+  - package-ecosystem: github-actions
+    directory: "/.github"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: UTC
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "ci"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "github-actions"
+    reviewers:
+      - "metavacua/ci-maintainers"

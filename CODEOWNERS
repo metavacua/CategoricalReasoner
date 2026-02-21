@@ -1,0 +1,21 @@
+# Code Owners for CategoricalReasoner
+
+# Default owners for everything in the repository
+*       @metavacua/maintainers
+
+# LaTeX thesis
+docs/                    @metavacua/maintainers
+
+# Java source code
+src/main/java/           @metavacua/java-maintainers
+
+# Java tests
+src/test/java/           @metavacua/java-maintainers
+
+# Python scripts
+src/scripts/             @metavacua/python-maintainers
+src/tests/               @metavacua/python-maintainers
+src/benchmarks/          @metavacua/python-maintainers
+
+# CI/CD configuration
+.github/                 @metavacua/ci-maintainers

@@ -1,0 +1,5 @@
+# Java source files for CategoricalReasoner
+# This directory contains the Java implementation for the categorical reasoner.
+#
+# See docs/dissertation/bibliography/README.md for the citation system requirements.
+# See pom.xml for build configuration.

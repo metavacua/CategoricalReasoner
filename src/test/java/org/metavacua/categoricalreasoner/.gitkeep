@@ -1,0 +1,4 @@
+# Java test files for CategoricalReasoner
+# This directory contains unit tests for the Java implementation.
+#
+# Tests should follow JUnit 5 conventions and be named *Test.java or *Tests.java.
