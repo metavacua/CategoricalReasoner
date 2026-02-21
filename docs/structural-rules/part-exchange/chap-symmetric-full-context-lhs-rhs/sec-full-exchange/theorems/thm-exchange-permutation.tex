@@ -1,0 +1,59 @@
+% Theorem: Exchange as Permutation Invariance in Classical Logic (LK)
+% ID: thm-exchange-perm-lk
+% Variant: Full (Classical LK)
+
+\input{../../../../../thm-preamble}
+
+\title{Theorem: Exchange Permutation Invariance in LK}
+\date{}
+
+\begin{document}
+
+\thmid{exchange-perm-lk}
+
+\begin{theorem}[Permutation Invariance via Exchange in LK]
+\label{thm:exchange-perm-lk}
+In classical sequent calculus LK with full exchange, if $\Gamma \vdash \Delta$ is derivable, then $\Gamma' \vdash \Delta'$ is derivable for any permutation $\Gamma'$ of $\Gamma$ and $\Delta'$ of $\Delta$.
+\end{theorem}
+
+\begin{proof}
+We prove by induction on derivation depth using root-first decomposition.
+
+\textbf{Base Case:} Identity axiom.
+
+\[
+\infer[\text{Id}]{A \vdash A}{}
+\]
+
+Any permutation of $A \vdash A$ is identical, so invariance holds.
+
+\textbf{Inductive Step:} Consider left rule application.
+
+\[
+\infer[\land L_1]{\Gamma, A \land B, \Delta \vdash \Sigma}{
+    \Gamma, A, \Delta \vdash \Sigma}
+\]
+
+By induction hypothesis, $\Gamma, A, \Delta \vdash \Sigma$ is permutation invariant. Exchange rules allow permuting $A \land B$ with any formula in $\Gamma$ or $\Delta$:
+
+\[
+\infer[\text{Exchange}_L^*]{\Gamma', A \land B, \Delta' \vdash \Sigma'}{\Gamma, A \land B, \Delta \vdash \Sigma}
+\]
+
+where $\Gamma', \Delta', \Sigma'$ are permutations and Exchange$_L^*$ denotes multiple exchange applications.
+
+\textbf{Right rules:} Symmetric argument using Exchange$_R$.
+
+The exchange rules generate the symmetric group:
+\[
+\infer[\text{Exchange}_L]{\Gamma, B, A, \Delta \vdash \Sigma}{\Gamma, A, B, \Delta \vdash \Sigma}
+\]
+
+Since any permutation decomposes into adjacent transpositions, complete permutation invariance follows.
+\end{proof}
+
+\begin{remark}
+In LK, exchange makes contexts behave as multisets. For ordered contexts (without exchange), see Linear Exchange and Relevant Exchange sections for non-commutative variants.
+\end{remark}
+
+\end{document}

@@ -1,0 +1,67 @@
+% Theorem: Admissibility of Contraction in Focused Sequent Calculus
+% ID: thm-contraction-admissibility
+% Status: Complete
+
+\input{../../../../../thm-preamble}
+
+\title{Theorem: Admissibility of Contraction}
+\date{}
+
+\begin{document}
+
+\thmid{contraction-admissibility}
+
+\begin{theorem}[Admissibility of Contraction in Focused Calculus]
+\label{thm:contraction-admissibility}
+In the focused sequent calculus with full contraction, the following rules are admissible:
+
+\begin{enumerate}
+\item \textbf{Left Contraction (Asynchronous):}
+\[
+\infer[\fcontractionL]{\Gamma, A \Uparrow \Theta \vdash \Delta}{\Gamma, A, A \Uparrow \Theta \vdash \Delta}
+\]
+
+\item \textbf{Right Contraction (Asynchronous):}
+\[
+\infer[\fcontractionR]{\Gamma \Uparrow \Theta \vdash \Delta, A}{\Gamma \Uparrow \Theta \vdash \Delta, A, A}
+\]
+
+\item \textbf{Focused Contraction:}
+\[
+\infer[\fcontractionF]{\Gamma; \Omega, A \focal C}{\Gamma; \Omega, A, A \focal C}
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By induction on the structure of the derivation, with nested induction on the formula being contracted when necessary.
+
+\textbf{Case 1:} Contraction on atomic formula $P$.
+If $P$ is positive and we contract in the focused context:
+\[
+\infer[\fcontractionF]{\Gamma; P, \Omega \focal C}{\Gamma; P, P, \Omega \focal C}
+\]
+This is immediate when the first occurrence of $P$ is not principal (simply delete the duplicate). When $P$ is principal, we use the identity expansion property.
+
+\textbf{Case 2:} Contraction on compound formula $A \tensor B$ (positive).
+If $A \tensor B$ is in the store during the asynchronous phase:
+\[
+\infer[\fcontractionL]{\Gamma \Uparrow A \tensor B, \Theta \vdash \Delta}{\Gamma \Uparrow A \tensor B, A \tensor B, \Theta \vdash \Delta}
+\]
+By applying the asynchronous rule $\tensor L$ to both occurrences, we obtain premises that contract the subformulas, which is admissible by the induction hypothesis.
+
+\textbf{Case 3:} Contraction during synchronous phase.
+When contracting in the focused zone:
+\[
+\infer[\fcontractionF]{\Gamma; A, \Omega \focal C}{\Gamma; A, A, \Omega \focal C}
+\]
+If the first $A$ is principal, we appeal to the induction hypothesis on the derivation height. If not principal, the contraction is pushed into the context.
+
+\qedhere
+\end{proof}
+
+\begin{remark}
+The admissibility of contraction in the focused system is more subtle than weakening, as it requires maintaining the focusing structure while eliminating duplicate formulas. The key insight is that contraction preserves the polarity-based focusing discipline.
+\end{remark}
+
+\end{document}

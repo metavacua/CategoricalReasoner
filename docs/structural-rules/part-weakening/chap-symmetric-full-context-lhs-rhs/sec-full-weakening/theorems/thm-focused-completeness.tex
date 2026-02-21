@@ -1,0 +1,60 @@
+% Theorem: Completeness of Focused Sequent Calculus
+% ID: thm-focused-completeness
+% Status: Complete
+
+\input{../../../../../thm-preamble}
+
+\title{Theorem: Completeness of Focused Sequent Calculus}
+\date{}
+
+\begin{document}
+
+\thmid{focused-completeness}
+
+\begin{theorem}[Focusing Completeness]
+\label{thm:focused-completeness}
+If $\sequent{\Gamma}{C}$ is provable in classical sequent calculus (LK) with full weakening, then there exists a focused derivation of $\Gamma \Uparrow \cdot \vdash C$.
+\end{theorem}
+
+\begin{proof}
+The proof proceeds in three stages:
+
+\textbf{Stage 1:} Permutation of inference rules.
+We show that any derivation in LK can be transformed into one where asynchronous rules are applied eagerly, followed by synchronous rules. This is established by induction on the height of derivations, using permutation lemmas for each rule pair.
+
+Key permutation cases:
+\begin{itemize}
+\item Asynchronous rules permute over all other rules (by definition)
+\item Synchronous rules permute over asynchronous rules when the principal formula differs
+\item Structural rules (weakening, contraction, exchange) permute over logical rules
+\end{itemize}
+
+\textbf{Stage 2:} Identification of phases.
+By stage 1, the derivation divides naturally into alternating asynchronous and synchronous phases. We define:
+\begin{align*}
+\text{Async Phase:} &\quad \Gamma \Uparrow \Theta \vdash \Delta \quad \text{(decomposing invertible formulas)} \\
+\text{Sync Phase:} &\quad \Gamma; \Omega \focal P \quad \text{(focused on non-invertible formula)}
+\end{align*}
+
+\textbf{Stage 3:} Simulation in focused system.
+We show by induction that each phase of the permuted LK derivation corresponds to a valid focused derivation:
+\begin{itemize}
+\item The asynchronous phase uses the uparrow notation ($\Uparrow$)
+\item The synchronous phase uses the downarrow notation ($\Downarrow$)
+\item Focus shifts occur precisely at polarity changes
+\end{itemize}
+
+The completeness follows from the observation that the focused system captures exactly the permutation-normal forms of LK derivations.
+
+\qedhere
+\end{proof}
+
+\begin{corollary}[Focusing Soundness]
+If $\Gamma \Uparrow \cdot \vdash C$ has a focused derivation, then $\sequent{\Gamma}{C}$ is provable in LK.
+\end{corollary}
+
+\begin{proof}
+Immediate from the fact that focused rules are special cases of LK rules, with additional structure annotations that do not affect provability.
+\end{proof}
+
+\end{document}

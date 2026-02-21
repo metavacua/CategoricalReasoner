@@ -7,64 +7,46 @@ A standalone monograph examining the three fundamental structural rules of seque
 
 ### Part I: Weakening
 
-**File:** `parts/part-weakening.tex`
+**Directory:** `part-weakening/`
+**File:** `part-weakening/part-weakening.tex`
 
 | Section | ID | Status | Description |
 |---------|-----|--------|-------------|
-| Introduction | `sec-weakening-intro` | Skeleton | Motivation and historical context for weakening rules |
-| Additive Weakening | `sec-weakening-additive` | Planned | Weakening in additive context; resource-insensitive expansion |
-| Multiplicative Weakening | `sec-weakening-multiplicative` | Planned | Weakening in multiplicative context; controlled resource introduction |
-| Weakening-Free Logics | `sec-weakening-free` | Planned | Logics without weakening: relevant, linear, affine |
-| Categorical Semantics | `sec-weakening-categorical` | Planned | Cartesian structure and terminal objects |
-
-**Subsections to Develop:**
-- `parts/sec-weakening-history.tex` - Historical development from Gentzen to Girard
-- `parts/sec-weakening-additive-formal.tex` - Formal presentation of additive weakening
-- `parts/sec-weakening-multiplicative-formal.tex` - Formal presentation of multiplicative weakening
-- `parts/sec-weakening-semantics.tex` - Model-theoretic and categorical semantics
-- `parts/sec-weakening-computational.tex` - Computational interpretations
+| Introduction | `sec-weakening-intro` | Skeleton | Motivation and historical context |
+| Full Weakening | `sec-full-weakening` | Planned | Classical weakening in LK |
+| Linear Weakening | `sec-linear-weakening` | Planned | Resource-sensitive weakening |
+| Affine Weakening | `sec-affine-weakening` | Planned | Weakening without contraction |
+| Relevant Weakening | `sec-relevant-weakening` | Planned | Weakening rejected |
 
 ---
 
 ### Part II: Contraction
 
-**File:** `parts/part-contraction.tex`
+**Directory:** `part-contraction/`
+**File:** `part-contraction/part-contraction.tex`
 
 | Section | ID | Status | Description |
 |---------|-----|--------|-------------|
-| Introduction | `sec-contraction-intro` | Skeleton | Motivation and historical context for contraction rules |
-| Additive Contraction | `sec-contraction-additive` | Planned | Contraction in additive context; implicit duplication |
-| Multiplicative Contraction | `sec-contraction-multiplicative` | Planned | Contraction in multiplicative context; explicit resource management |
-| Contraction-Free Logics | `sec-contraction-free` | Planned | Logics without contraction: linear, affine, relevant |
-| Categorical Semantics | `sec-contraction-categorical` | Planned | Cartesian structure and diagonal maps |
-
-**Subsections to Develop:**
-- `parts/sec-contraction-history.tex` - Historical development
-- `parts/sec-contraction-additive-formal.tex` - Formal presentation of additive contraction
-- `parts/sec-contraction-multiplicative-formal.tex` - Formal presentation of multiplicative contraction
-- `parts/sec-contraction-semantics.tex` - Model-theoretic and categorical semantics
-- `parts/sec-contraction-computational.tex` - Computational interpretations (contraction as duplication)
+| Introduction | `sec-contraction-intro` | Skeleton | Motivation and historical context |
+| Full Contraction | `sec-full-contraction` | Planned | Classical contraction in LK |
+| Linear Contraction | `sec-linear-contraction` | Planned | Resource-sensitive contraction |
+| Affine Contraction | `sec-affine-contraction` | Planned | Contraction in affine logic |
+| Relevant Contraction | `sec-relevant-contraction` | Planned | Contraction in relevance logic |
 
 ---
 
 ### Part III: Exchange
 
-**File:** `parts/part-exchange.tex`
+**Directory:** `part-exchange/`
+**File:** `part-exchange/part-exchange.tex`
 
 | Section | ID | Status | Description |
 |---------|-----|--------|-------------|
-| Introduction | `sec-exchange-intro` | Skeleton | Motivation and historical context for exchange rules |
-| Permutation of Antecedents | `sec-exchange-antecedent` | Planned | Reordering premises in sequent contexts |
-| Permutation of Succedents | `sec-exchange-succedent` | Planned | Reordering conclusions in sequent contexts |
-| Exchange-Free Logics | `sec-exchange-free` | Planned | Non-commutative logics: Lambek, bunched implications |
-| Categorical Semantics | `sec-exchange-categorical` | Planned | Symmetric monoidal structure and braidings |
-
-**Subsections to Develop:**
-- `parts/sec-exchange-history.tex` - Historical development
-- `parts/sec-exchange-antecedent-formal.tex` - Formal presentation of antecedent exchange
-- `parts/sec-exchange-succedent-formal.tex` - Formal presentation of succedent exchange
-- `parts/sec-exchange-semantics.tex` - Model-theoretic and categorical semantics
-- `parts/sec-exchange-computational.tex` - Computational interpretations (exchange as permutation)
+| Introduction | `sec-exchange-intro` | Skeleton | Motivation and historical context |
+| Full Exchange | `sec-full-exchange` | Planned | Classical exchange in LK |
+| Linear Exchange | `sec-linear-exchange` | Planned | Exchange in linear logic |
+| Affine Exchange | `sec-affine-exchange` | Planned | Exchange in affine logic |
+| Relevant Exchange | `sec-relevant-exchange` | Planned | Exchange in relevance logic |
 
 ---
 
@@ -77,6 +59,33 @@ The three structural rules govern the manipulation of sequent contexts:
 | **Weakening (W)** | $\dfrac{\Gamma \vdash C}{\Gamma, A \vdash C}$ | Add irrelevant premises | Terminal object, projection |
 | **Contraction (C)** | $\dfrac{\Gamma, A, A \vdash C}{\Gamma, A \vdash C}$ | Reuse premises | Diagonal map, comonoid |
 | **Exchange (E)** | $\dfrac{\Gamma, A, B, \Delta \vdash C}{\Gamma, B, A, \Delta \vdash C}$ | Reorder premises | Symmetry, braiding |
+
+---
+
+## Directory Organization
+
+The directory structure mirrors the LaTeX book document class hierarchy:
+
+```
+structural-rules/
+├── part-weakening/          # Part I
+│   ├── chap-symmetric-full-context-lhs-rhs/
+│   ├── chap-asymmetric-full-context-lhs-single-succedent/
+│   ├── chap-asymmetric-single-antecedent-full-context-rhs/
+│   └── chap-symmetric-single-antecedent-single-succedent/
+├── part-contraction/        # Part II
+│   └── (parallel chapter structure)
+└── part-exchange/           # Part III
+    └── (parallel chapter structure)
+```
+
+Each chapter contains four sections:
+- Full (classical form)
+- Linear (linear logic with modalities)
+- Affine (affine logic)
+- Relevant (relevance logic)
+
+See `AGENTS.md` for complete directory structure encoding and DAG linking references.
 
 ---
 
@@ -94,14 +103,22 @@ make view   # Build and open PDF
 
 Each part is organized for atomic development:
 
-1. **Skeleton files** (`part-*.tex`) contain the Part structure and `\input{}` statements for subsections
-2. **Subsection files** (`sec-*.tex`) are 250-1000 word atomic documents
-3. **Each subsection** corresponds to a single PR for focused review
+1. **Skeleton files** (`part-*/part-*.tex`) contain the Part structure
+2. **Chapter directories** (`chap-*/`) contain chapter-level content
+3. **Section directories** (`sec-*/`) contain section-level content
+4. **Subsection files** (`subsec-*.tex`) are 250-1000 word atomic documents
 
 ---
 
 ## Related Documents
 
-- Main thesis: `../dissertation/`
-- Architecture appendix: `../dissertation/architecture-appendix.tex`
-- AGENTS.md constraints apply to all generated content
+- `AGENTS.md` - Directory structure and shared references
+- `main.tex` - Main document entry point
+- `preamble.tex` - Shared LaTeX preamble
+- `../dissertation/` - Main thesis
+
+---
+
+## Validation
+
+All artifacts must pass automated validation against the thesis structure schema.

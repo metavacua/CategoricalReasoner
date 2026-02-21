@@ -1,0 +1,52 @@
+% Theorem: Contraction Associativity in Classical Logic (LK)
+% ID: thm-contraction-assoc-lk
+% Variant: Full (Classical LK)
+
+\input{../../../../../thm-preamble}
+
+\title{Theorem: Contraction Idempotence in LK}
+\date{}
+
+\begin{document}
+
+\thmid{contraction-assoc-lk}
+
+\begin{theorem}[Contraction Idempotence in Classical Sequent Calculus LK]
+\label{thm:contraction-assoc-lk}
+In LK with full contraction, multiple contractions on the same formula can be applied in any order with the same result. For any context $\Gamma$ with formula $A$:
+\[
+\infer=[C_L]{\Gamma, A \vdash \Delta}{\Gamma, A, A, A \vdash \Delta}
+\]
+is equivalent to sequential pairwise contractions, regardless of order.
+\end{theorem}
+
+\begin{proof}
+We demonstrate using root-first decomposition that contraction is idempotent.
+
+Given three occurrences of $A$ in the antecedent:
+
+\[
+\infer[C_L]{\Gamma, A \vdash \Delta}{
+    \infer[C_L]{\Gamma, A, A \vdash \Delta}{\Gamma, A, A, A \vdash \Delta}}
+\]
+
+Alternatively, contracting different pairs:
+
+\[
+\infer[C_L]{\Gamma, A \vdash \Delta}{
+    \infer[C_L]{\Gamma, A, A \vdash \Delta}{\Gamma, A, A, A \vdash \Delta}}
+\]
+
+Both derivations yield identical result due to the structural nature of contraction in LK.
+
+The categorical interpretation corresponds to the coassociativity of the diagonal map $\delta : A \to A \times A$ in cartesian closed categories:
+\[
+(\delta \times \text{id}) \circ \delta = (\text{id} \times \delta) \circ \delta
+\]
+\end{proof}
+
+\begin{remark}
+In classical LK, contraction applies freely to all formulas. For restricted contraction (Linear, Affine variants), see the corresponding sections.
+\end{remark}
+
+\end{document}

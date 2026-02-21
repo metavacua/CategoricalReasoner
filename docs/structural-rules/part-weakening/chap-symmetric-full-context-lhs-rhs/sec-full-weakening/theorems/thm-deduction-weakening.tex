@@ -1,0 +1,53 @@
+% Theorem: Deduction Theorem in Classical Logic (LK)
+% ID: thm-deduction-lk
+% Variant: Full (Classical LK)
+
+\input{../../../../../thm-preamble}
+
+\title{Theorem: Deduction Theorem in LK}
+\date{}
+
+\begin{document}
+
+\thmid{deduction-lk}
+
+\begin{theorem}[Deduction Theorem in Classical Sequent Calculus LK]
+\label{thm:deduction-lk}
+For any formulas $A$ and $B$ in classical propositional logic LK with full weakening and contraction:
+\[
+\Gamma, A \vdash B \quad \text{if and only if} \quad \Gamma \vdash A \rightarrow B
+\]
+where weakening and contraction are freely available on both sides.
+\end{theorem}
+
+\begin{proof}
+We prove both directions using root-first decomposition.
+
+$(\Rightarrow)$ Assume $\Gamma, A \vdash_{LK} B$. We construct $\Gamma \vdash_{LK} A \rightarrow B$.
+
+\[
+\infer[\rightarrow_R]{\Gamma \vdash A \rightarrow B}{
+    \infer[{[W_R]}]{\Gamma, A \vdash B}{\Gamma, A \vdash B}}
+\]
+
+The derivation uses implication right rule, with weakening on the right to manage contexts.
+
+$(\Leftarrow)$ Assume $\Gamma \vdash_{LK} A \rightarrow B$. We construct $\Gamma, A \vdash_{LK} B$.
+
+\[
+\infer[\text{Cut}]{\Gamma, A \vdash B}{
+    \infer[\text{Id}]{A \vdash A}{} & 
+    \infer[{[W_L]}]{\Gamma, A \rightarrow B, A \vdash B}{
+        \infer[\rightarrow_L]{\Gamma, A \rightarrow B \vdash B}{
+            \Gamma \vdash A, B & 
+            \infer[\text{Id}]{B \vdash B}{}}}}
+\]
+
+The proof uses cut with identity axioms and structural rules available in LK.
+\end{proof}
+
+\begin{remark}
+This theorem holds in LK with full structural rules. For substructural variants (Linear, Affine, Relevant), see the corresponding sections under Linear Weakening, Affine Weakening, and Relevant Weakening.
+\end{remark}
+
+\end{document}
