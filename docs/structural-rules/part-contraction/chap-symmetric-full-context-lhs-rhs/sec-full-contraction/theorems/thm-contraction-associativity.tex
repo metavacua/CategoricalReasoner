@@ -1,70 +1,52 @@
-% Theorem: Contraction and Associative Resource Management
-% ID: thm-contraction-associativity
-% Research Source: DBpedia - Associativity isomorphism, Structural proof theory
+% Theorem: Contraction Associativity in Classical Logic (LK)
+% ID: thm-contraction-assoc-lk
+% Variant: Full (Classical LK)
 
 \input{../../../../../thm-preamble}
 
-\title{Theorem: Contraction as Resource Identification}
+\title{Theorem: Contraction Idempotence in LK}
 \date{}
 
 \begin{document}
 
-\thmid{contraction-associativity}
+\thmid{contraction-assoc-lk}
 
-\begin{theorem}[Contraction and Associative Resource Composition]
-\label{thm:contraction-associativity}
-In classical sequent calculus (LK) with full contraction, the contraction rules satisfy an associativity-like property: multiple contractions can be performed in any order with the same result, making the identification of duplicate formulas associative.
+\begin{theorem}[Contraction Idempotence in Classical Sequent Calculus LK]
+\label{thm:contraction-assoc-lk}
+In LK with full contraction, multiple contractions on the same formula can be applied in any order with the same result. For any context $\Gamma$ with formula $A$:
+\[
+\infer=[C_L]{\Gamma, A \vdash \Delta}{\Gamma, A, A, A \vdash \Delta}
+\]
+is equivalent to sequential pairwise contractions, regardless of order.
 \end{theorem}
 
 \begin{proof}
-Consider a context with three occurrences of formula $A$: $\Gamma, A, A, A, \Delta$.
+We demonstrate using root-first decomposition that contraction is idempotent.
 
-We show that contracting the first two, then the result with the third, equals contracting different pairs first.
+Given three occurrences of $A$ in the antecedent:
 
-Using left contraction twice:
 \[
-\infer[\text{C}_L]{\Gamma, A, \Delta}{\infer[\text{C}_L]{\Gamma, A, A, \Delta}{\Gamma, A, A, A, \Delta}}
+\infer[C_L]{\Gamma, A \vdash \Delta}{
+    \infer[C_L]{\Gamma, A, A \vdash \Delta}{\Gamma, A, A, A \vdash \Delta}}
 \]
 
-The associativity of contraction follows from the structural nature of the rule. Given any multiset of $n$ occurrences of $A$, repeated application of contraction yields exactly one occurrence, regardless of the order of pairwise contractions.
+Alternatively, contracting different pairs:
 
-Formally, define $\text{contract}(\Gamma)$ as the result of applying left and right contraction maximally to $\Gamma$. Then for any $\Gamma$ with multiple formula occurrences:
 \[
-\text{contract}(\text{contract}(\Gamma)) = \text{contract}(\Gamma)
+\infer[C_L]{\Gamma, A \vdash \Delta}{
+    \infer[C_L]{\Gamma, A, A \vdash \Delta}{\Gamma, A, A, A \vdash \Delta}}
 \]
-showing that contraction is idempotent, and for different contraction sequences $\sigma_1, \sigma_2$:
+
+Both derivations yield identical result due to the structural nature of contraction in LK.
+
+The categorical interpretation corresponds to the coassociativity of the diagonal map $\delta : A \to A \times A$ in cartesian closed categories:
 \[
-\sigma_1(\Gamma) = \sigma_2(\Gamma) = \text{contract}(\Gamma)
+(\delta \times \text{id}) \circ \delta = (\text{id} \times \delta) \circ \delta
 \]
-demonstrating that contraction order does not affect the final result.
 \end{proof}
 
-\begin{corollary}[Contraction as Diagonal]
-In categorical semantics, contraction corresponds to the diagonal map $\delta_A : A \to A \times A$. The associativity of contraction reflects the coassociativity of the comonoid structure on $A$ in a cartesian category.
-\end{corollary}
-
-\begin{proof}[Proof of Corollary]
-In a cartesian closed category, every object $A$ has a canonical comonoid structure with:
-\begin{align*}
-\delta_A &: A \to A \times A \quad \text{(diagonal/copying)} \\
-\epsilon_A &: A \to 1 \quad \text{(weakening/terminal)}
-\end{align*}
-
-The coassociativity condition states:
-\[
-(\delta_A \times \text{id}_A) \circ \delta_A = (\text{id}_A \times \delta_A) \circ \delta_A : A \to A \times A \times A
-\]
-
-This categorical property exactly corresponds to the associativity of contraction in logic: copying $A$ twice then copying one result equals copying $A$ then copying the result twice, with both yielding three copies of $A$.
-\end{proof}
-
-\begin{remark}[Linear Logic Without Contraction]
-In linear logic, where contraction is restricted to exponential modalities $\oc A$:
-\begin{itemize}
-\item Only formulas marked with $\oc$ can be contracted
-\item The diagonal map exists only for $\oc A$, not arbitrary $A$
-\item This corresponds to the categorical structure of linear categories
-\end{itemize}
+\begin{remark}
+In classical LK, contraction applies freely to all formulas. For restricted contraction (Linear, Affine variants), see the corresponding sections.
 \end{remark}
 
 \end{document}
