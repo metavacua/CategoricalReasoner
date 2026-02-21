@@ -29,6 +29,24 @@ make clean
 make
 ```
 
+### Java Build
+
+Ensure Java 21+ and Maven 3.9+ are installed:
+
+```sh
+mvn -B -V test
+```
+
+### Python Environment
+
+Install Python dependencies with pip-tools:
+
+```sh
+python -m pip install -r requirements-dev.txt
+pip-compile requirements.in
+pip-compile requirements-dev.in
+```
+
 ### Ontology Validation
 
 Validate the RDF and run benchmarks locally (requires `rdflib` and `pyshacl`):
