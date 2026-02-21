@@ -1,0 +1,39 @@
+\chapter*{Build and Dependency Architecture}
+\addcontentsline{toc}{chapter}{Build and Dependency Architecture}
+
+The \catty\ framework employs a sophisticated build system designed for high parallelizability and strict dependency management. This ensures that categorical artifacts are produced in a logically sound sequence.
+
+\section*{Phase-Based Execution}
+The build process is divided into four primary phases, as specified in \code{.catty/phases.yaml}:
+
+\begin{enumerate}
+    \item \textbf{Phase 0: Foundation}: Initialization of the repository structure and initial semantic web audits.
+    \item \textbf{Phase 1: Core Ontology}: Construction of the categorical schema, logic instances, morphism catalogs, and advanced structures (lattices, Curry-Howard models).
+    \item \textbf{Phase 2: Thesis}: Generation of the LaTeX thesis chapters and compilation of the final PDF.
+    \item \textbf{Phase 3: Validation}: Execution of the unified validation framework across all produced artifacts.
+\end{enumerate}
+
+\section*{Critical Path Analysis}
+The critical path for the \catty\ build system is estimated at 400 minutes (6.7 hours) of sequential work. It is dominated by the construction of the core ontology and the writing of complex thesis chapters.
+
+\section*{Parallelization Strategies}
+To optimize execution, the framework identifies multiple parallelization opportunities:
+\begin{itemize}
+    \item \textbf{Phase 0}: Simultaneous initialization and audit.
+    \item \textbf{Phase 1d}: Parallel generation of examples, SHACL shapes, and SPARQL queries.
+    \item \textbf{Phase 2b}: Concurrent writing of parallelizable chapters (e.g., Introduction and Audit).
+    \item \textbf{Phase 3b}: Parallel validation of ontology and thesis artifacts.
+\end{itemize}
+
+Optimized execution using maximum parallelization reduces the total build time to approximately 260 minutes (4.3 hours), representing a 45\% reduction in duration.
+
+\section*{Unified Website Architecture}
+The \catty\ framework produces a unified digital presence rather than independent documentation sites. The build system composes the JavaDoc technical documentation directly with the TeX-based white paper and categorical models. This integration ensures that high-level theoretical concepts are directly linked to their corresponding implementation details, providing a seamless navigation experience from mathematical definitions to executable code.
+
+\section*{Artifact Transformation Pipeline}
+The build system coordinates the transformation of formal specifications into multiple formats:
+\begin{itemize}
+    \item \textbf{TeX $\to$ PDF}: Formal thesis compilation.
+    \item \textbf{JSON-LD $\to$ HTML}: Generation of documentation and web-ready categorical models.
+    \item \textbf{JavaPoet $\to$ Java}: Code generation for validation and transformation tools.
+\end{itemize}

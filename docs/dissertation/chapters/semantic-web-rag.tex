@@ -1,0 +1,67 @@
+\chapter{Report: Semantic Web Extraction and RAG Implementation}
+\label{chap:semantic-web-rag}
+
+\section{Purpose}
+This report documents the actual process of extracting semantic data from external SPARQL endpoints (Wikidata and DBpedia) for the Catty thesis project. It highlights the difficulties encountered, solutions implemented, and provides recommendations for future RAG (Retrieval-Augmented Generation) and code generation architectures.
+
+\section{Extraction Process Evidence}
+Successful extraction of RDF data was performed using \code{src/benchmarks/run.py} against the following endpoints:
+
+\begin{itemize}
+    \item \textbf{Wikidata} (\url{https://query.wikidata.org/sparql}):
+    \begin{itemize}
+        \item \textbf{Query}: \code{wikidata-logics.rq} (CONSTRUCT pattern)
+        \item \textbf{Result}: \code{results/wikidata-logics.ttl}
+        \item \textbf{Outcome}: Successfully extracted 10+ logic-related entities with labels and class memberships.
+    \end{itemize}
+    \item \textbf{DBpedia} (\url{https://dbpedia.org/sparql}):
+    \begin{itemize}
+        \item \textbf{Query}: \code{dbpedia-category-theory.rq} (CONSTRUCT pattern)
+        \item \textbf{Result}: \code{results/dbpedia-category-theory.ttl}
+        \item \textbf{Outcome}: Successfully extracted concepts related to Category Theory.
+    \end{itemize}
+\end{itemize}
+
+\section{Encountered Difficulties and Solutions}
+
+\subsection{Endpoint Security and User-Agent Filtering}
+\begin{itemize}
+    \item \textbf{Issue}: Initial attempts to query Wikidata resulted in 403 Forbidden errors.
+    \item \textbf{Cause}: Wikidata requires a non-generic \code{User-Agent} header that identifies the bot/script.
+    \item \textbf{Solution}: Implemented a custom header \code{CattyThesisAgent/1.0} in the \code{requests} call within \code{run.py}.
+\end{itemize}
+
+\subsection{SPARQL Store Limitations in RDFLib}
+\begin{itemize}
+    \item \textbf{Issue}: The default \code{rdflib.plugins.stores.sparqlstore.SPARQLStore} lacked sufficient control over HTTP headers.
+    \item \textbf{Solution}: Rewrote \code{run.py} to use the \code{requests} library directly for remote SPARQL execution, allowing for precise control over \code{Accept} headers and \code{User-Agent}.
+\end{itemize}
+
+\subsection{GIGO (Garbage In, Garbage Out) from LLM-Generated Queries}
+\begin{itemize}
+    \item \textbf{Issue}: LLMs frequently generate SPARQL queries using incorrect prefixes or hallucinated property IDs (e.g., using \code{dbo:Logic} instead of verifying the actual DBpedia ontology).
+    \item \textbf{Solution}: Adopting the \textbf{Discovery Pattern} described in \code{docs/dissertation/architecture/part-knowledge-hierarchy.tex}, where an agent first queries the endpoint to find correct URIs/Properties before attempting complex data extraction.
+\end{itemize}
+
+\section{Recommendations for Semantic Web RAG}
+
+\subsection{Multi-Step Semantic Resolution}
+Instead of a single-shot RAG query, agents should follow a 3-step process:
+\begin{enumerate}
+    \item \textbf{Entity Resolution}: Convert natural language terms to URIs using Search APIs (e.g., \code{wbsearchentities}).
+    \item \textbf{Neighborhood Extraction}: Use \code{DESCRIBE} or \code{CONSTRUCT} queries to pull the immediate graph neighborhood of the resolved URIs.
+    \item \textbf{Contextual Synthesis}: Provide the extracted TTL to the LLM. TTL is superior to JSON-LD for RAG context because it is more concise and its indentation clearly represents graph structure.
+\end{enumerate}
+
+\subsection{Real-time SPARQL Validation}
+Coding agents must be equipped with a local or remote SPARQL engine to validate queries before including them in documentation or codebases. This prevents the "hallucination loop" where an agent generates a query, never runs it, and assumes it works.
+
+\subsection{TTL-based Knowledge Injection}
+For code generation, especially in categorical logic, the formal constraints of the domain should be injected as SHACL shapes. This allows the agent to validate its own generated RDF artifacts against the project's schema before final submission.
+
+\section{Future Research and Development}
+\begin{itemize}
+    \item \textbf{SPARQL Query Optimization Agents}: Developing specialized agents that can take a naive "GIGO" query and optimize it for performance and accuracy against specific endpoints.
+    \item \textbf{Ontology-Driven Code Generation}: Using Jena JavaPoet integration to generate Java classes directly from extracted RDF schemas, ensuring type safety matches semantic definitions.
+    \item \textbf{Federated RAG}: Researching how to perform RAG across multiple federated SPARQL endpoints to synthesize knowledge that doesn't exist in a single repository.
+\end{itemize}

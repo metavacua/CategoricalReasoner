@@ -1,0 +1,161 @@
+\chapter*{Curry-Howard Correspondence: Categorical View}
+\addcontentsline{toc}{chapter}{Curry-Howard Correspondence: Categorical View}
+
+\section*{Overview}
+
+The Curry-Howard correspondence establishes a fundamental isomorphism between proof theory and type theory. This chapter presents the categorical formulation of this correspondence as an equivalence between the category of logics and the category of type theories, extracted from the deleted ontology content.
+
+\section*{Categorical Formulation}
+
+\subsection*{Category of Logics}
+
+The category $\mathbf{Logic}$ has:
+\begin{itemize}
+    \item \textbf{Objects}: Formal logics (LJ, LL, ALL, etc.)
+    \item \textbf{Morphisms}: Proof-theoretic relationships
+    \begin{itemize}
+        \item Sequent restrictions
+        \item Structural rule embeddings
+        \item Proof system translations
+        \item Functorial mappings
+    \end{itemize}
+    \item \textbf{Composition}: Composition of logical translations
+\end{itemize}
+
+\subsection*{Category of Type Theories}
+
+The category $\mathbf{Type}$ has:
+\begin{itemize}
+    \item \textbf{Objects}: Type theories
+    \begin{itemize}
+        \item Simply Typed Lambda Calculus (STLC)
+        \item System F (Polymorphic lambda calculus)
+        \item Linear Type Systems
+        \item Affine Type Systems
+    \end{itemize}
+    \item \textbf{Morphisms}: Type-theoretic transformations
+    \begin{itemize}
+        \item Type translations
+        \item Type embeddings
+        \item Functorial mappings
+    \end{itemize}
+\end{itemize}
+
+\section*{The Curry-Howard Equivalence}
+
+There is an equivalence of categories:
+$$F: \mathbf{Logic} \cong \mathbf{Type}: G$$
+where $F$ maps logics to their corresponding type theories and $G$ maps type theories back to logics.
+
+\subsection*{Object Mapping}
+
+The functor $F$ maps:
+\begin{center}
+\begin{tabular}{ll}
+    \textbf{Logic} & \textbf{Type Theory} \\ \hline
+    LJ (Intuitionistic) & STLC (Simply Typed Lambda Calculus) \\
+    LL (Linear) & Linear Type System \\
+    ALL (Affine) & Affine Type System \\
+    LK (Classical) & Classical type theories with control operators
+\end{tabular}
+\end{center}
+
+\subsection*{Proposition-as-Type}
+
+The Curry-Howard mapping from propositions to types:
+$$\text{Proposition} \mapsto \text{Type}$$
+
+Specifically:
+\begin{center}
+\begin{tabular}{ll}
+    \textbf{Logic} & \textbf{Type Theory} \\ \hline
+    $A \to B$ (implication) & $A \to B$ (function type) \\
+    $A \wedge B$ (conjunction) & $A \times B$ (product type) \\
+    $A \vee B$ (disjunction) & $A + B$ (sum type) \\
+    $\top$ (truth) & $\mathbf{1}$ (unit type) \\
+    $\bot$ (falsity) & $\mathbf{0}$ (empty type)
+\end{tabular}
+\end{center}
+
+\subsection*{Proof-as-Program}
+
+The Curry-Howard mapping from proofs to terms:
+$$\text{Proof of } A \vdash B \mapsto \text{Term of type } A \to B$$
+
+A proof corresponds to a lambda term (program) inhabiting the corresponding type.
+
+\subsection*{Sequent Rule as Type Constructor}
+
+\begin{center}
+\begin{tabular}{ll}
+    \textbf{Sequent Rule} & \textbf{Type Constructor} \\ \hline
+    Conjunction introduction & Product type ($\times$) \\
+    Implication introduction & Function type ($\to$) \\
+    Disjunction introduction & Sum type ($+$) \\
+    Conjunction elimination & Projection \\
+    Implication elimination & Application
+\end{tabular}
+\end{center}
+
+\section*{Categorical Semantics}
+
+\subsection*{Intuitionistic Logic and CCCs}
+
+The category of intuitionistic proofs is equivalent to the category of morphisms in a \textbf{Cartesian Closed Category} (CCC).
+
+Specifically:
+\begin{itemize}
+    \item Types are objects in the CCC
+    \item Function types $A \to B$ are exponential objects $B^A$
+    \item Product types $A \times B$ are categorical products
+    \item Programs are morphisms between types
+\end{itemize}
+
+\subsection*{Linear Logic and *-Autonomous Categories}
+
+The category of linear logic proofs is equivalent to the category of morphisms in a \textbf{*-autonomous category}.
+
+Specifically:
+\begin{itemize}
+    \item Multiplicative conjunction $\otimes$ is the monoidal product
+    \item Linear implication $A \multimap B$ is the internal hom
+    \item Additives $\oplus$, $\&$ give biproduct structure
+    \item Exponentials $!A$, $?A$ model controlled structural rules
+\end{itemize}
+
+\section*{Natural Transformations}
+
+\begin{description}
+    \item[Curry-Howard Natural Transformation] $\eta: \text{Id}_{\mathbf{Logic}} \to G \circ F$ maps each logic to its corresponding logic under the round-trip Curry-Howard correspondence. For core correspondences (e.g., LJ $\to$ STLC $\to$ LJ), this is the identity.
+    \item[Inverse Natural Transformation] $\varepsilon: \text{Id}_{\mathbf{Type}} \to F \circ G$ maps each type theory to its corresponding type theory under the round-trip.
+\end{description}
+
+\section*{Translations}
+
+\subsection*{Double Negation Translation}
+
+The Gödel-Gentzen double negation translation provides a categorical embedding of classical logic into intuitionistic logic:
+$$\text{DN}: \mathbf{LK} \to \mathbf{LJ}$$
+
+\subsection*{CPS Translation}
+
+The Continuation-Passing Style translation embeds classical logic with control operators into linear/intuitionistic logic:
+$$\text{CPS}: \text{Classical} \to \text{Linear}$$
+
+\section*{Key Insight}
+
+The Curry-Howard correspondence at the categorical level demonstrates that:
+\begin{enumerate}
+    \item Logic and computation are fundamentally the same structure viewed from different perspectives
+    \item Proof normalization corresponds to program execution
+    \item The category-theoretic formulation provides a rigorous foundation for understanding this correspondence
+\end{enumerate}
+
+\section*{Source Information}
+
+This content was extracted from a deleted ontology file:
+\begin{itemize}
+    \item \texttt{src/ontology/curry-howard-categorical-model.jsonld} (previously existed)
+\end{itemize}
+
+All content has been verified against standard categorical logic literature.

@@ -1,0 +1,47 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Structural Rules in Substructural Logic"
+  author: "Ian Douglas Lawrence Norman McLean"
+  date: "2025-12-29"
+
+  chapters:
+    - index.md
+    - chapters/structural-weakening.md
+    - chapters/structural-contraction.md
+    - chapters/structural-exchange.md
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+    css: ../styles.css
+    include-in-header:
+      - text: |
+          <script>
+          MathJax = {
+            tex: {
+              packages: ['base', 'ams', 'amscd', 'newcommand', 'configMacros']
+            }
+          };
+          </script>
+
+  pdf:
+    documentclass: report
+    keep-tex: false
+    include-in-header:
+      - ../preamble.tex
+    toc: true
+    number-sections: true
+    geometry:
+      - margin=1in
+    fontsize: 12pt
+
+execute:
+  echo: false
+  warning: false
+
+lang: en

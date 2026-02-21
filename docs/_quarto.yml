@@ -1,91 +1,23 @@
+# Root Quarto Configuration
+# This file configures the docs/ directory as a Quarto workspace
+# containing multiple book projects
+
+# Each subdirectory with its own _quarto.yml is an independent book:
+# - dissertation/      : Theoretical Metalinguistics (main thesis)
+# - structural-rules/  : Structural Rules monograph
+
+# To render a specific book:
+#   cd dissertation && quarto render
+#   cd structural-rules && quarto render
+
+# To render all books:
+#   quarto render dissertation
+#   quarto render structural-rules
+
 project:
-  type: book
-  output-dir: _book
-
-book:
-  title: "Theoretical Metalinguistics"
-  author: "Ian Douglas Lawrence Norman McLean"
-  date: "2025-12-29"
-  
-  chapters:
-    - index.md
-    - part: "Foundations"
-      chapters:
-        - chapters/introduction.md
-        - chapters/sequents.md
-        - chapters/genesis.md
-    - part: "Architecture and Structure"
-      chapters:
-        - chapters/architecture.md
-        - chapters/morphisms.md
-        - chapters/universes.md
-        - chapters/witness.md
-    - part: "Formalization"
-      chapters:
-        - chapters/formalization.md
-        - chapters/categorical-semantic-audit.md
-        - chapters/integration.md
-    - part: "Philosophy and Context"
-      chapters:
-        - chapters/philosophy.md
-    - part: "Methodology"
-      chapters:
-        - chapters/sparql-validation-protocol.md
-        - chapters/semantic-web-rag.md
-        - chapters/logic-lattice-extracted.md
-        - chapters/curry-howard-extracted.md
-    - part: "Structural Rules"
-      chapters:
-        - chapters/structural-weakening.md
-        - chapters/structural-contraction.md
-        - chapters/structural-exchange.md
-    - chapters/appendices.md
-
-format:
-  html:
-    theme: cosmo
-    toc: true
-    number-sections: true
-    css: styles.css
-    include-in-header:
-      - text: |
-          <script>
-          MathJax = {
-            tex: {
-              packages: ['base', 'ams', 'amscd', 'newcommand', 'configMacros']
-            }
-          };
-          </script>
-  
-  pdf:
-    documentclass: report
-    keep-tex: false
-    include-in-header:
-      - preamble.tex
-    toc: true
-    number-sections: true
-    geometry:
-      - margin=1in
-    fontsize: 12pt
-
-bibliography: dissertation/bibliography/references.bib
-
-execute:
-  echo: false
-  warning: false
-
-lang: en
-
-keywords:
-  - categorical logic
-  - logical pluralism
-  - sequent calculus
-  - proof theory
-  - type theory
-
-abstract: |
-  This work presents Catty, a formal investigation of categorical foundations 
-  for logics and their morphisms. Rather than following a conventional linear 
-  progression, this thesis serves as a review of the literature and a foundational 
-  common reference for understanding logics as coordinate objects in a categorical 
-  structure.
+  type: default
+  render:
+    - "*/*.qmd"
+    - "*/*.md"
+    - "!dissertation/**"
+    - "!structural-rules/**"

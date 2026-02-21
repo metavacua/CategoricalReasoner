@@ -1,0 +1,60 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Theoretical Metalinguistics"
+  author: "Ian Douglas Lawrence Norman McLean"
+  date: "2025-12-29"
+
+  chapters:
+    - index.md
+    - part: "Foundations"
+      chapters:
+        - chapters/introduction.md
+        - chapters/sequents.md
+        - chapters/genesis.md
+    - part: "Architecture and Structure"
+      chapters:
+        - chapters/architecture.md
+        - chapters/morphisms.md
+        - chapters/universes.md
+    - part: "Context"
+      chapters:
+        - chapters/philosophy.md
+        - chapters/curry-howard-extracted.md
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true
+    css: ../styles.css
+    include-in-header:
+      - text: |
+          <script>
+          MathJax = {
+            tex: {
+              packages: ['base', 'ams', 'amscd', 'newcommand', 'configMacros']
+            }
+          };
+          </script>
+
+  pdf:
+    documentclass: report
+    keep-tex: false
+    include-in-header:
+      - ../preamble.tex
+    toc: true
+    number-sections: true
+    geometry:
+      - margin=1in
+    fontsize: 12pt
+
+bibliography: bibliography/references.bib
+
+execute:
+  echo: false
+  warning: false
+
+lang: en

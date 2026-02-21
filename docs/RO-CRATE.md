@@ -19,22 +19,51 @@ RO-Crates should be generated at the following milestones:
 
 ## RO-Crate Structure
 
+The repository contains multiple book projects, each with its own RO-Crate package:
+
+### Dissertation: "Theoretical Metalinguistics"
+
 ```
-ro-crate/
+ro-crate-dissertation/
 ├── ro-crate-metadata.json    # RO-Crate metadata (JSON-LD)
 ├── ro-crate-preview.html     # Human-readable preview
-├── data/
-│   ├── thesis/
-│   │   ├── source/           # Markdown source files
-│   │   ├── rendered/
-│   │   │   ├── html/         # Quarto HTML output
-│   │   │   └── pdf/          # Quarto PDF output
-│   │   └── figures/          # Generated diagrams
-│   ├── ontologies/           # RDF/OWL files
-│   ├── queries/              # SPARQL query collections
-│   ├── benchmarks/           # Performance data
-│   └── code/                 # Source code snapshots
-└── README.md                 # Package documentation
+└── data/
+    ├── dissertation/         # Source: docs/dissertation/
+    │   ├── _quarto.yml
+    │   ├── index.md
+    │   ├── preamble.tex
+    │   └── chapters/
+    ├── rendered/
+    │   ├── html/             # Quarto HTML output
+    │   └── pdf/              # Quarto PDF output
+    └── figures/              # Generated diagrams
+```
+
+### Monograph: "Structural Rules in Substructural Logic"
+
+```
+ro-crate-structural-rules/
+├── ro-crate-metadata.json
+├── ro-crate-preview.html
+└── data/
+    ├── structural-rules/     # Source: docs/structural-rules/
+    │   ├── _quarto.yml
+    │   ├── index.md
+    │   └── chapters/
+    └── rendered/
+        ├── html/
+        └── pdf/
+```
+
+### Shared Resources
+
+```
+ro-crate-shared/
+└── data/
+    ├── ontologies/           # RDF/OWL files
+    ├── queries/              # SPARQL query collections
+    ├── benchmarks/           # Performance data
+    └── code/                 # Source code snapshots
 ```
 
 ## Metadata Requirements
@@ -94,25 +123,31 @@ Quarto YAML frontmatter maps to RO-Crate properties:
 
 ### Steps
 
-1. **Build Documents**
+1. **Build Dissertation**
    ```bash
-   quarto render docs/
+   cd docs/dissertation && quarto render
    ```
 
-2. **Generate RO-Crate**
+2. **Build Structural Rules Monograph** (if applicable)
+   ```bash
+   cd docs/structural-rules && quarto render
+   ```
+
+3. **Generate RO-Crate(s)**
    ```bash
    cd src/rocrate-generator
    ./mvnw exec:java -Dexec.mainClass="org.catty.rocrate.Generator"
    ```
 
-3. **Validate Package**
+4. **Validate Package(s)**
    ```bash
-   rocrate validate ro-crate/
+   rocrate validate ro-crate-dissertation/
+   rocrate validate ro-crate-structural-rules/
    ```
 
-4. **Deposit (if applicable)**
+5. **Deposit (if applicable)**
    - Upload to institutional repository
-   - Obtain DOI
+   - Obtain DOI(s)
    - Update `ro-crate-metadata.json` with permanent identifier
 
 ## Java Implementation

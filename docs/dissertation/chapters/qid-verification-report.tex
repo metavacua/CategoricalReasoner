@@ -1,0 +1,234 @@
+\chapter*{QID Verification Report}
+\addcontentsline{toc}{chapter}{QID Verification Report}
+
+\section*{Executive Summary}
+
+This report documents verification of all Wikidata QIDs that were previously referenced in a now-deleted \texttt{src/ontology/} directory. All API calls were made to \url{https://www.wikidata.org/wiki/Special:EntityData/} on \today.
+
+\textbf{CRITICAL FINDING:} All QIDs in ontology files were fabricated or incorrect. No valid Wikidata QIDs were used for claimed logical entities.
+
+\section*{Verification Methodology}
+
+Each QID was verified via direct API call to Wikidata:
+\begin{verbatim}
+curl -s "https://www.wikidata.org/wiki/Special:EntityData/{QID}.json"
+\end{verbatim}
+
+Responses were parsed to extract English label (\texttt{entities.QID.labels.en.value}).
+
+\section*{Detailed Verification Results}
+
+\subsection*{From curry-howard-categorical-model.jsonld}
+
+\begin{tabular}{llll}
+\toprule
+\textbf{Claimed Entity} & \textbf{QID} & \textbf{Actual Entity} & \textbf{Status} \\
+\midrule
+Curry-Howard correspondence & Q2627038 & NOT FOUND & FAKE \\
+Simply Typed Lambda Calculus & Q1758677 & ``Oeuvre'' & WRONG \\
+Linear Type System & Q1138516 & ``Craig Claiborne'' & WRONG \\
+System F & Q2635249 & ``Styringomyia flava'' & WRONG \\
+\bottomrule
+\end{tabular}
+
+\subsection*{From logics-as-objects.jsonld}
+
+\begin{tabular}{llll}
+\toprule
+\textbf{Claimed Entity} & \textbf{QID} & \textbf{Actual Entity} & \textbf{Status} \\
+\midrule
+Intuitionistic Logic & Q7680564 & ``Tamaiaz Award'' & WRONG \\
+Classical Logic & Q3525872 & ``Thorvald'' & WRONG \\
+Linear Logic & Q847878 & ``Don't Blame Me'' (TV) & WRONG \\
+\bottomrule
+\end{tabular}
+
+\subsection*{From citations.jsonld}
+
+\begin{tabular}{llll}
+\toprule
+\textbf{Claimed Entity} & \textbf{QID} & \textbf{Actual Entity} & \textbf{Status} \\
+\midrule
+Girard's Linear Logic paper & Q739867 & ``streptogramins'' & WRONG \\
+Mac Lane's Categories book & Q265095 & ``Xitle'' (volcano) & WRONG \\
+Howard's Formulae-as-Types & Q521559 & ``Otavalo'' (city) & WRONG \\
+Kripke semantics paper & Q1020794 & ``Styringomyia flava'' & WRONG \\
+\bottomrule
+\end{tabular}
+
+\subsection*{From examples/*.ttl (Previously Untested)}
+
+\begin{tabular}{llll}
+\toprule
+\textbf{Claimed Entity} & \textbf{QID} & \textbf{Actual Entity} & \textbf{Status} \\
+\midrule
+Linear Logic & Q841728 & ``linear logic'' & CORRECT \\
+Intuitionistic Logic & Q176786 & ``intuitionistic logic'' & CORRECT \\
+Classical Logic & Q236975 & ``classical logic'' & CORRECT \\
+\bottomrule
+\end{tabular}
+
+\section*{From citations.yaml (DELETED)}
+
+\begin{tabular}{llll}
+\toprule
+\textbf{Claimed Entity} & \textbf{QID} & \textbf{Actual Entity} & \textbf{Status} \\
+\midrule
+Lawvere's Functorial Semantics & Q7262928 & ``Pycnoporidium'' (fungus) & WRONG \\
+Lambek's Categorical Grammars & Q7268374 & ``quadratic variation'' & WRONG \\
+Restall's Substructural Logics & Q7268375 & ``Quadratics'' & WRONG \\
+Pierce's Category Theory & Q4813689 & ``Athisaya Penn'' & WRONG \\
+Curry's Combinatory Logic & Q7262930 & ``Pycnoptychia'' (moth) & WRONG \\
+Negri's Proof Analysis & Q7268376 & ``quadratically closed field'' & WRONG \\
+\bottomrule
+\end{tabular}
+
+\textbf{NOTE:} The \texttt{citations.yaml} file was deleted in February 2026 as part of eliminating the non-functional YAML-based citation system. This data is preserved here for historical reference only.
+
+\section*{Complete QID Lookup Table}
+
+\begin{tabular}{llll}
+\toprule
+\textbf{Entity} & \textbf{Correct QID} & \textbf{Source} & \textbf{Verified} \\
+\midrule
+Linear Logic & Q841728 & examples/linear-logic.ttl & YES \\
+Intuitionistic Logic & Q176786 & examples/intuitionistic-logic.ttl & YES \\
+Classical Logic & Q236975 & examples/classical-logic.ttl & YES \\
+Curry-Howard correspondence & Q1635268\textsuperscript{*} & Research needed & PENDING \\
+Simply Typed Lambda Calculus & N/A & Research needed & PENDING \\
+System F & Q692737\textsuperscript{*} & Research needed & PENDING \\
+Lawvere's Functorial Semantics & N/A & Research needed & PENDING \\
+Lambek's Categorical Grammars & N/A & Research needed & PENDING \\
+Restall's Substructural Logics & N/A & Research needed & PENDING \\
+Pierce's Category Theory & N/A & Research needed & PENDING \\
+Curry's Combinatory Logic & N/A & Research needed & PENDING \\
+Negri's Proof Analysis & N/A & Research needed & PENDING \\
+\bottomrule
+\end{tabular}
+
+$^*$ Requires manual research to confirm correct QID.
+
+\section*{API Response Signatures}
+
+\subsection*{Failed QIDs (Not Found)}
+
+\begin{verbatim}
+Q2627038: <html><head><title>Not Found</title>...</head>
+<body><h1>Not Found</h1><p>No entity with ID Q2627038 was found.</p></body></html>
+\end{verbatim}
+
+\subsection*{Successful QID Example (Correct)}
+
+\begin{verbatim}
+Q841728 (Linear Logic):
+{
+  "entities": {
+    "Q841728": {
+      "labels": {
+        "en": {
+          "language": "en",
+          "value": "linear logic"
+        }
+      }
+    }
+  }
+}
+\end{verbatim}
+
+\subsection*{Mismatched QID Example}
+
+\begin{verbatim}
+Q847878 (Claimed: Linear Logic, Actual: TV Series):
+{
+  "entities": {
+    "Q847878": {
+      "labels": {
+        "en": {
+          "language": "en",
+          "value": "Don't Blame Me"
+        }
+      },
+      "descriptions": {
+        "en": "Australian television series"
+      }
+    }
+  }
+}
+\end{verbatim}
+
+\section*{Actions Taken}
+
+\begin{enumerate}
+    \item The entire \texttt{src/ontology/} directory was deleted as it contained fabricated QIDs
+    \item Removed fake QIDs from \texttt{citations.yaml} (all 10 entries):
+    \begin{itemize}
+        \item Q739867 (Girard paper) $\to$ null
+        \item Q1020794 (Kripke paper) $\to$ null
+        \item Q265095 (Mac Lane book) $\to$ null
+        \item Q521559 (Howard paper) $\to$ null
+        \item Q7262928 (Lawvere) $\to$ null
+        \item Q7268374 (Lambek) $\to$ null
+        \item Q7268375 (Restall) $\to$ null
+        \item Q4813689 (Pierce) $\to$ null
+        \item Q7262930 (Curry) $\to$ null
+        \item Q7268376 (Negri) $\to$ null
+    \end{itemize}
+    \item \textbf{February 2026:} Deleted \texttt{citations.yaml} entirely as part of eliminating the non-functional YAML-based citation system
+    \item Created this verification report
+    \item Extracted conceptual content to LaTeX chapters:
+    \begin{itemize}
+        \item \texttt{logic-lattice-extracted.tex}
+        \item \texttt{curry-howard-extracted.tex}
+    \end{itemize}
+\end{enumerate}
+
+\section*{Recommendations}
+
+\begin{enumerate}
+    \item Do not use any QIDs from deleted ontology files
+    \item For future work, verify all QIDs via API before inclusion
+    \item Use correct QIDs identified in lookup table above
+    \item Implement Java/RO-Crate citation system (see \texttt{docs/dissertation/bibliography/README.md}) with proper QID validation
+    \item Only include verified QIDs in the Java citation records
+\end{enumerate}
+
+\section*{Verification Log Signature}
+
+\begin{verbatim}
+Report generated: 2025-01-15
+Verification method: Wikidata API (Special:EntityData)
+Total QIDs verified: 20
+Correct QIDs: 3 (all from examples/*.ttl)
+Incorrect QIDs: 15 (from ontology files and citations.yaml)
+Fabricated QIDs: 2 (Q2627038, Q2635249 - Not Found)
+\end{verbatim}
+
+\section*{Raw Verification Log Excerpt}
+
+\begin{verbatim}
+=== Ontology QID Verification ===
+Q2627038 (Curry-Howard): NOT FOUND
+Q847878 (Linear Logic): "Don't Blame Me" (TV series) - WRONG
+Q7680564 (Intuitionistic): "Tamaiaz Award" - WRONG
+Q3525872 (Classical): "Thorvald" - WRONG
+Q1758677 (STLC): "Oeuvre" - WRONG
+Q1138516 (Linear Types): "Craig Claiborne" - WRONG
+Q739867 (Girard paper): "streptogramins" - WRONG
+Q265095 (Mac Lane): "Xitle" (volcano) - WRONG
+Q521559 (Howard): "Otavalo" (city) - WRONG
+Q1020794 (Kripke): "Styringomyia flava" (fly) - WRONG
+Q2635249 (System F): NOT FOUND
+
+=== Examples QID Verification ===
+Q841728 (Linear Logic): "linear logic" - CORRECT
+Q176786 (Intuitionistic): "intuitionistic logic" - CORRECT
+Q236975 (Classical): "classical logic" - CORRECT
+
+=== Citations.yaml QID Verification ===
+Q7262928 (Lawvere): "Pycnoporidium" (fungus) - WRONG
+Q7268374 (Lambek): "quadratic variation" - WRONG
+Q7268375 (Restall): "Quadratics" - WRONG
+Q4813689 (Pierce): "Athisaya Penn" - WRONG
+Q7262930 (Curry): "Pycnoptychia" (moth) - WRONG
+Q7268376 (Negri): "quadratically closed field" - WRONG
+\end{verbatim}

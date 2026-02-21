@@ -1,0 +1,49 @@
+% Part I: Weakening
+% ID: part-weakening
+
+\part{Weakening}
+
+\chapter*{Introduction to Weakening}
+\label{sec-weakening-intro}
+\phantomsection
+\addcontentsline{toc}{chapter}{Introduction to Weakening}
+
+Weakening, also known as \emph{thinning} or \emph{expansion}, is a structural rule that permits the introduction of arbitrary formulas into a sequent context without affecting derivability. In its classical form, weakening allows the inference from $\Gamma \vdash C$ to $\Gamma, A \vdash C$, thereby adding irrelevant premises.
+
+This part examines weakening from multiple perspectives: proof-theoretic, model-theoretic, and categorical. We trace the historical development from Gentzen's original sequent calculi through to Girard's linear logic, where weakening is controlled through explicit resource management.
+
+\section*{Additive Weakening}
+\label{sec-weakening-additive}
+% TODO: \input{sec-weakening-additive-formal}
+
+Additive weakening operates in contexts where formulas are implicitly shared across premises. In additive sequent calculi, weakening allows the introduction of formulas into contexts without cost, reflecting an implicit assumption of unlimited resources.
+
+\section*{Multiplicative Weakening}
+\label{sec-weakening-multiplicative}
+% TODO: \input{sec-weakening-multiplicative-formal}
+
+Multiplicative weakening, in contrast, operates in contexts where resources are explicitly tracked. In linear logic, weakening is available only for formulas marked with the exponential modality $\oc A$, indicating ``unlimited'' availability.
+
+\section*{Weakening-Free Logics}
+\label{sec-weakening-free}
+% TODO: \input{sec-weakening-free}
+
+Logics that reject weakening include:
+\begin{itemize}
+    \item \textbf{Relevant logic}: Premises must be relevant to conclusions
+    \item \textbf{Linear logic}: Resources cannot be freely created
+    \item \textbf{Affine logic}: Weakening is admitted but contraction is rejected
+\end{itemize}
+
+\section*{Categorical Semantics}
+\label{sec-weakening-categorical}
+% TODO: \input{sec-weakening-semantics}
+
+Categorically, weakening corresponds to the existence of \emph{terminal objects} and \emph{projection maps}. In a Cartesian closed category, the natural transformation $\pi_A : A \times B \to A$ witnesses weakening in the computational interpretation.
+
+% Subsection inputs (to be created as separate files)
+% \input{sec-weakening-history}
+% \input{sec-weakening-additive-formal}
+% \input{sec-weakening-multiplicative-formal}
+% \input{sec-weakening-semantics}
+% \input{sec-weakening-computational}
