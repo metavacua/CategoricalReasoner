@@ -26,17 +26,9 @@ Following Beall and Restall, we distinguish:
 
 Catty provides:
 
-1. A **categorical framework** for relating plural logics
+1. A **categorical framework** for relating plural logics; this is a restricted set of all reasoning systems; there is no claim about ALL logics as this was developed in the effort to clarify the classification and categorization of logics that are compatible with classical logic and those which are not, and this is a continuing effort to define strictly the term "non-classical logic" or "deviant logic" and similar epithets. There exists non-classical logics that are compatible with classical logic--these are what we define as superclassical or subclassical logics--and there are non-classical logics that are not compatible with classical logic like connexive logic; a definition or delineation becomes apparent in that there are non-classical logics that lack certain classical features but can be consistently extended to classical logic; there are non-classical logics that extend classical logic such as certain logics of formal inconsistency; there are logics that have certain principles, axioms, or structures that directly contradict classical principles such that if they are ever combined in certain naive ways with classical principles they result in trivialization or inconsistency or semantic paradoxes.
 2. **Computational witnesses** for each logic's validity
 3. **Morphisms** showing how logics extend or restrict each other
-
-## The Inversion Principle {#subsec-inversion}
-
-The inversion principle, following Gentzen and Prawitz, states that the 
-elimination rules for a connective are inverses of its introduction rules.
-
-In Catty's framework, the inversion principle becomes a **categorical 
-adjunction**, providing a structural account of harmony between rules.
 
 ## Implications for Mathematical Practice {#subsec-implications}
 
