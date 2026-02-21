@@ -25,5 +25,4 @@ The Curry-Howard correspondence provides the bridge between logic and computatio
 
 ## Implementation in Systems Programming {#subsec-systems}
 
-Catty's DSL implementation connects to systems programming paradigms, 
-including Rust's ownership system which shares affinities with linear logic.
+This has practical implications for the interpretation, design, and development of programming languages. Rust for example has relationships with certain substructural logics with at least partial resource-sensitivity. There exists logics with consistency-as-resources or completeness-as-resources semantics related to subclassical logics of formal inconsistency or subclassical logics of formal undeterminedness; LJ extended by a completeness operation or LDJ extended by a consistent operation are examples.
