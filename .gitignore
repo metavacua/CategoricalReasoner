@@ -34,7 +34,19 @@ __pycache__/
 venv/
 env/
 ENV/
-.venv
+.venv/
+
+# Java / Maven
+.mvn/
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.iml
+.classpath
+.project
+.settings/
 
 # OS / editor
 .DS_Store
@@ -45,8 +57,3 @@ ENV/
 
 # Benchmark results
 results/
-
-# Python
-__pycache__/
-*.py[cod]
-*$py.class

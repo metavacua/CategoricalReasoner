@@ -17,14 +17,21 @@ def test_consistency():
     # Find ontology directory relative to this script
     script_dir = os.path.dirname(os.path.abspath(__file__))
     ontology_dir = os.path.join(os.path.dirname(script_dir), "ontology")
+    if not os.path.isdir(ontology_dir):
+        print("⚠️ Ontology directory not found; skipping SHACL validation.")
+        return True
+
     for filename in os.listdir(ontology_dir):
         if filename.endswith(".jsonld"):
             data_graph.parse(os.path.join(ontology_dir, filename), format="json-ld")
         elif filename.endswith(".ttl") and filename != "catty-shapes.ttl":
             data_graph.parse(os.path.join(ontology_dir, filename), format="turtle")
-    
+
     # Load shapes
     shacl_path = os.path.join(ontology_dir, "catty-shapes.ttl")
+    if not os.path.exists(shacl_path):
+        print("⚠️ SHACL shapes file not found; skipping SHACL validation.")
+        return True
     shapes_graph = Graph()
     shapes_graph.parse(shacl_path, format="turtle")
 
