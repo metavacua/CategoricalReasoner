@@ -1,0 +1,70 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  quality-gates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: pip install rdflib pyshacl pyyaml requests
+
+      - name: Install LaTeX dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            make \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-pictures \
+            texlive-fonts-recommended \
+            texlive-extra-utils
+
+      - name: Validate TeX structure
+        run: python src/schema/validators/validate_tex_structure.py --tex-dir docs/dissertation/chapters --schema src/schema/thesis-structure.schema.yaml
+
+      - name: Build dissertation PDF
+        run: |
+          cd docs/dissertation
+          make clean
+          make
+
+      - name: Python syntax check
+        run: python -m compileall src
+
+      - name: Validate RDF (if ontology directory exists)
+        run: |
+          if [ -d ontology ]; then
+            python src/scripts/validate_rdf.py
+          else
+            echo "Skipping RDF validation: ontology directory not found."
+          fi
+
+      - name: SHACL consistency (if ontology directory exists)
+        run: |
+          if [ -d src/ontology ]; then
+            python src/tests/test_consistency.py
+          else
+            echo "Skipping SHACL consistency: src/ontology directory not found."
+          fi
+
+      - name: SPARQL benchmarks (DBpedia)
+        run: python src/benchmarks/run.py --endpoint https://dbpedia.org/sparql --query dbpedia-category-theory.rq --timeout 60 --output-dir results/dbpedia
+
+      - name: SPARQL benchmarks (Wikidata)
+        run: python src/benchmarks/run.py --endpoint https://query.wikidata.org/sparql --query wikidata-logics.rq --timeout 60 --output-dir results/wikidata
