@@ -46,18 +46,19 @@ jobs:
 
       - name: Convert TeX to HTML (Pandoc)
         run: |
-          mkdir -p site
+          SITE_DIR="$GITHUB_WORKSPACE/site"
+          mkdir -p "$SITE_DIR"
           cd docs/dissertation
-          latexpand main.tex > ../site/main.expanded.tex
-          pandoc -f latex -t html -s ../site/main.expanded.tex -o ../site/index.html
-          cp main.pdf ../site/main.pdf
-          rm ../site/main.expanded.tex
+          latexpand main.tex > "$SITE_DIR/main.expanded.tex"
+          pandoc -f latex -t html -s "$SITE_DIR/main.expanded.tex" -o "$SITE_DIR/index.html"
+          cp main.pdf "$SITE_DIR/main.pdf"
+          rm "$SITE_DIR/main.expanded.tex"
 
       - name: Upload build preview artifact
         uses: actions/upload-artifact@v4
         with:
           name: dissertation-preview
-          path: site
+          path: ${{ github.workspace }}/site
 
   build-and-deploy:
     if: github.event_name != 'pull_request'
@@ -91,31 +92,33 @@ jobs:
 
       - name: Convert TeX to HTML (Pandoc)
         run: |
-          mkdir -p site
+          SITE_DIR="$GITHUB_WORKSPACE/site"
+          mkdir -p "$SITE_DIR"
           cd docs/dissertation
-          latexpand main.tex > ../site/main.expanded.tex
-          pandoc -f latex -t html -s ../site/main.expanded.tex -o ../site/index.html
-          cp main.pdf ../site/main.pdf
-          rm ../site/main.expanded.tex
+          latexpand main.tex > "$SITE_DIR/main.expanded.tex"
+          pandoc -f latex -t html -s "$SITE_DIR/main.expanded.tex" -o "$SITE_DIR/index.html"
+          cp main.pdf "$SITE_DIR/main.pdf"
+          rm "$SITE_DIR/main.expanded.tex"
 
       - name: Copy Ontologies and Queries to Site
         run: |
-          mkdir -p site/ontology
+          SITE_DIR="$GITHUB_WORKSPACE/site"
+          mkdir -p "$SITE_DIR/ontology"
           if [ -d ontology ]; then
-            cp ontology/*.jsonld site/ontology/ || true
-            cp ontology/*.ttl site/ontology/ || true
+            cp ontology/*.jsonld "$SITE_DIR/ontology/" || true
+            cp ontology/*.ttl "$SITE_DIR/ontology/" || true
           fi
-          mkdir -p site/benchmarks/queries
+          mkdir -p "$SITE_DIR/benchmarks/queries"
           if [ -d src/benchmarks/queries ]; then
-            cp src/benchmarks/queries/*.rq site/benchmarks/queries/ || true
+            cp src/benchmarks/queries/*.rq "$SITE_DIR/benchmarks/queries/" || true
           fi
           # Create a basic landing page for ontologies
-          echo "<html><body><h1>Catty Ontologies</h1><ul>" > site/ontology/index.html
-          for f in site/ontology/*.jsonld site/ontology/*.ttl; do
-            filename=$(basename $f)
-            echo "<li><a href='$filename'>$filename</a></li>" >> site/ontology/index.html
+          echo "<html><body><h1>Catty Ontologies</h1><ul>" > "$SITE_DIR/ontology/index.html"
+          for f in "$SITE_DIR"/ontology/*.jsonld "$SITE_DIR"/ontology/*.ttl; do
+            filename=$(basename "$f")
+            echo "<li><a href='$filename'>$filename</a></li>" >> "$SITE_DIR/ontology/index.html"
           done
-          echo "</ul></body></html>" >> site/ontology/index.html
+          echo "</ul></body></html>" >> "$SITE_DIR/ontology/index.html"
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -123,7 +126,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: ${{ github.workspace }}/site
 
       - name: Deploy to GitHub Pages
         id: deployment
