@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Added CI quality gates with changelog enforcement, TeX validation, LaTeX build, and SPARQL benchmarks
 - Added SPARQL benchmark timeouts and non-empty result enforcement
+- Added preamble-only command checks to the TeX structure validator
 - Added fallback definition for linear logic `\parr` and corrected a dissertation table column count
 - Added `docs/quality-gate-investigation.tex` documenting quality-gate decisions
 - Updated `AGENTS.md` (root) to reflect citation system under development

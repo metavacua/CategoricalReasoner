@@ -80,6 +80,8 @@ class TeXStructureValidator:
         with open(tex_file, 'r', encoding='utf-8') as f:
             lines = f.readlines()
 
+        self.validate_preamble_only_commands(tex_file, lines)
+
         for i, line in enumerate(lines, start=1):
             # Parse theorems: \begin{theorem}[id]{title}
             theorem_match = re.search(r'\\begin\{theorem\}\s*\[([^\]]+)\]\s*\{([^}]+)\}', line)
@@ -161,6 +163,24 @@ class TeXStructureValidator:
                 continue
 
         return elements
+
+    def validate_preamble_only_commands(self, tex_file: Path, lines: List[str]):
+        """Ensure preamble-only commands are not used in included TeX files."""
+        forbidden_commands = [
+            r"\\documentclass",
+            r"\\usepackage",
+            r"\\begin\{document\}",
+            r"\\end\{document\}",
+        ]
+
+        for i, line in enumerate(lines, start=1):
+            if any(re.search(command, line) for command in forbidden_commands):
+                self.errors.append(ValidationError(
+                    file=str(tex_file),
+                    line=i,
+                    message="Preamble-only command used in included TeX file",
+                    severity="ERROR"
+                ))
 
     def validate_id_pattern(self, element: TeXElement) -> bool:
         """Validate ID pattern matches schema"""

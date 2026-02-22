@@ -30,6 +30,10 @@ jobs:
 
       - name: Check CHANGELOG updated
         run: |
+          if [ "${{ github.event_name }}" != "pull_request" ]; then
+            echo "Skipping CHANGELOG check on non-PR event."
+            exit 0
+          fi
           if ! git diff --name-only origin/main...HEAD | grep -q "CHANGELOG.md"; then
             echo "❌ CHANGELOG.md must be updated for every PR"
             exit 1
