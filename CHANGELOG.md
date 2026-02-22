@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Added CI quality gates with changelog enforcement, TeX validation, LaTeX build, and SPARQL benchmarks
+- Added CI quality gates with changelog enforcement, TeX validation, LaTeX build, SPARQL benchmarks, and CodeQL scanning
 - Added SPARQL benchmark timeouts and non-empty result enforcement
 - Added inclusion tracing and preamble-only command checks to the TeX structure validator
 - Added fallback definition for linear logic `\parr`, moved `xcolor` to the dissertation preamble, corrected a dissertation table column count, escaped `content\_spec`, and replaced emoji checkmarks in the development cycle chapter

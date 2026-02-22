@@ -2,6 +2,9 @@ name: Deploy
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -38,14 +41,14 @@ jobs:
 
       - name: Build PDF
         run: |
-          cd thesis
+          cd docs/dissertation
           make clean
           make
 
       - name: Convert TeX to HTML (Pandoc)
         run: |
           mkdir -p site
-          cd thesis
+          cd docs/dissertation
           latexpand main.tex > ../site/main.expanded.tex
           pandoc -f latex -t html -s ../site/main.expanded.tex -o ../site/index.html
           cp main.pdf ../site/main.pdf
@@ -54,10 +57,14 @@ jobs:
       - name: Copy Ontologies and Queries to Site
         run: |
           mkdir -p site/ontology
-          cp ontology/*.jsonld site/ontology/
-          cp ontology/*.ttl site/ontology/
+          if [ -d ontology ]; then
+            cp ontology/*.jsonld site/ontology/ || true
+            cp ontology/*.ttl site/ontology/ || true
+          fi
           mkdir -p site/benchmarks/queries
-          cp benchmarks/queries/*.rq site/benchmarks/queries/
+          if [ -d src/benchmarks/queries ]; then
+            cp src/benchmarks/queries/*.rq site/benchmarks/queries/ || true
+          fi
           # Create a basic landing page for ontologies
           echo "<html><body><h1>Catty Ontologies</h1><ul>" > site/ontology/index.html
           for f in site/ontology/*.jsonld site/ontology/*.ttl; do
