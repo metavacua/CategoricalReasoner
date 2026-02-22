@@ -52,7 +52,7 @@ jobs:
             texlive-extra-utils
 
       - name: Validate TeX structure
-        run: python src/schema/validators/validate_tex_structure.py --tex-dir docs/dissertation/chapters --schema src/schema/thesis-structure.schema.yaml
+        run: python src/schema/validators/validate_tex_structure.py --main-tex docs/dissertation/main.tex --schema src/schema/thesis-structure.schema.yaml
 
       - name: Build dissertation PDF
         run: |

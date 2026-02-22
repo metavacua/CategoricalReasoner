@@ -30,6 +30,7 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
   \item Validator \(V\) proves \(\vdash_V \text{StructureValid}(\text{tex})\) over surface syntax and ID uniqueness.
   \item LaTeX compiler \(L\) proves \(\vdash_L \text{Compiles}(\text{tex})\) over full expansion and preamble semantics.
   \item A compilation failure with validator success is a constructive witness that \(V\) is incomplete with respect to \(L\).
+  \item The validator originally scanned \texttt{chapters/} only, while the build target also includes \texttt{architecture/} files.
 \end{itemize}
 
 \subsection*{Approaches Considered}
@@ -58,7 +59,7 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
 \subsection*{Independence Witness and Refinement}
 \begin{itemize}
   \item The validator and compiler accept different languages: \(V_{valid} \nsubseteq L_{valid}\).
-  \item The refinement adds preamble-only command checks to the validator to approximate compilation semantics for included files.
+  \item The refinement adds preamble-only command checks and inclusion tracing so the validator follows the build target, including \texttt{architecture/} inputs.
 \end{itemize}
 
 \subsection*{Revised Plan for the Coding Agent}
@@ -66,7 +67,7 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
   \item Update the CI workflow to enforce \texttt{CHANGELOG.md} updates for every PR.
   \item Add the same changelog gate to CTO.new Code Checks for fast feedback.
   \item Keep the existing build/test/lint/SPARQL gates aligned between CTO.new and GitHub Actions.
-  \item Extend the TeX validator with preamble-only command checks to narrow the validator/compiler gap.
+  \item Extend the TeX validator with inclusion tracing and preamble-only command checks to narrow the validator/compiler gap.
   \item Run \texttt{docs/dissertation} builds in CI with explicit LaTeX package installation.
 \end{enumerate}
 
@@ -75,7 +76,7 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
   \item Added \texttt{.github/workflows/ci.yml} to run quality gates:
     \begin{itemize}
       \item Changelog update check.
-      \item TeX structure validation with corrected path.
+      \item TeX structure validation by tracing inclusions from \texttt{main.tex}.
       \item LaTeX build.
       \item Python syntax check.
       \item SPARQL benchmarks (DBpedia, Wikidata).
@@ -86,12 +87,17 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
       \item Added request timeouts for remote SPARQL queries.
       \item Enforced non-empty results for both \texttt{CONSTRUCT} and \texttt{SELECT} queries.
     \end{itemize}
-  \item Extended the TeX structure validator with preamble-only command checks.
-  \item Added LaTeX fallbacks for linear logic notation and corrected a table column count.
+  \item Extended the TeX structure validator with inclusion tracing and preamble-only command checks.
+  \item Added LaTeX fallbacks for linear logic notation, moved \texttt{xcolor} to the dissertation preamble, and corrected a table column count.
 \end{itemize}
 
 \subsection*{Verification}
 \begin{itemize}
+  \item TeX structure validation: \textbf{failed locally} due to missing \texttt{pyyaml} dependency.
+    \begin{itemize}
+      \item Command: \texttt{python src/schema/validators/validate\_tex\_structure.py --main-tex docs/dissertation/main.tex}
+      \item Error: \texttt{PyYAML is required. Install with: pip install pyyaml}
+    \end{itemize}
   \item \texttt{docs/dissertation} LaTeX build: \textbf{failed locally} due to missing \texttt{pdflatex} in the environment.
     \begin{itemize}
       \item Command: \texttt{make clean \&\& make}
