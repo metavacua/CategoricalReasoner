@@ -48,10 +48,19 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
     \end{itemize}
 \end{enumerate}
 
+\subsection*{Revised Plan for the Coding Agent}
+\begin{enumerate}
+  \item Update the CI workflow to enforce \texttt{CHANGELOG.md} updates for every PR.
+  \item Add the same changelog gate to CTO.new Code Checks for fast feedback.
+  \item Keep the existing build/test/lint/SPARQL gates aligned between CTO.new and GitHub Actions.
+  \item Run \texttt{docs/dissertation} builds in CI with explicit LaTeX package installation.
+\end{enumerate}
+
 \subsection*{Changes Implemented}
 \begin{itemize}
   \item Added \texttt{.github/workflows/ci.yml} to run quality gates:
     \begin{itemize}
+      \item Changelog update check.
       \item TeX structure validation with corrected path.
       \item LaTeX build.
       \item Python syntax check.
@@ -63,6 +72,7 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
       \item Added request timeouts for remote SPARQL queries.
       \item Enforced non-empty results for both \texttt{CONSTRUCT} and \texttt{SELECT} queries.
     \end{itemize}
+  \item Added LaTeX fallbacks for linear logic notation and corrected a table column count.
 \end{itemize}
 
 \subsection*{Verification}
