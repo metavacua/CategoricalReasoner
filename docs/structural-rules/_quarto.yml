@@ -1,0 +1,36 @@
+project:
+  output-dir: _output
+  render:
+    - "*.md"
+
+book:
+  title: "Structural Rules"
+  subtitle: "A Categorical Investigation"
+  author: "Ian Douglas Lawrence Norman McLean"
+  date: "now"
+  
+  parts:
+    - part: part-weakening/
+      title: "Part I: Weakening"
+      chapters:
+        - part: part-weakening/chap-full-full/chapter.md
+          title: "Full Context LHS and RHS"
+        - part: part-weakening/chap-full-single/chapter.md
+          title: "Full Context LHS / Single Succedent"
+        - part: part-weakening/chap-single-full/chapter.md
+          title: "Single Antecedent / Full Context RHS"
+        - part: part-weakening/chap-single-single/chapter.md
+          title: "Single Antecedent and Succedent"
+
+bibliography: bibliography/references.bib
+
+format:
+  pdf:
+    documentclass: report
+    keep-tex: true
+  html:
+    theme: default
+    
+execute:
+  echo: false
+  warning: false

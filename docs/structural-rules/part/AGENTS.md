@@ -3,6 +3,25 @@
 ## Scope
 This directory contains the hierarchical structure for the Weakening (Part I) of the Structural Rules monograph.
 
+## Part Structure
+The monograph has multiple parts:
+- `part-weakening/` - Weakening structural rule (this directory)
+- `part-contraction/` - Contraction structural rule (future)
+- `part-exchange/` - Exchange structural rule (future)
+
+## Chapter Context Configurations
+
+Each part contains chapters organized by context configuration:
+
+| Directory | LHS Context | RHS Context | Example Logic |
+|-----------|-------------|-------------|---------------|
+| `chap-full-full` | Full (unrestricted) | Full (unrestricted) | Classical LK |
+| `chap-full-single` | Full | Single | Intuitionistic LJ |
+| `chap-single-full` | Single | Full | Dual intuitionistic |
+| `chap-single-single` | Single | Single | Minimal logic |
+
+**Important**: These chapters are NOT named after logics. LK, LJ, etc. are examples of logics that fit a context configuration, not definitions of the chapter. The chapter defines the structural rule under investigation in a given context configuration.
+
 ## TeX Assembly Algorithm
 
 This section describes the procedural algorithm for assembling the TeX Part from the chapter, section, and subsection files.
@@ -15,23 +34,21 @@ FUNCTION AssembleWeakeningPart(output_file):
     INITIALIZE latex_document with preamble
     
     # Process each chapter in order
-    FOR each chapter_dir IN ["chap-symmetric-full-context-lhs-rhs",
-                             "chap-asymmetric-full-context-lhs-single-succedent",
-                             "chap-asymmetric-single-antecedent-full-context-rhs",
-                             "chap-symmetric-single-antecedent-single-succedent"]:
+    FOR each chapter_dir IN ["chap-full-full",
+                             "chap-full-single",
+                             "chap-single-full",
+                             "chap-single-single"]:
         
-        chapter_file = READ chapter_dir + "/chapter.tex"  # If exists
+        chapter_file = READ chapter_dir + "/chapter.md"  # Quarto processes .md
         chapter_title = EXTRACT_TITLE(chapter_file)
         
         ADD "\chapter{" + chapter_title + "}" TO latex_document
         
         # Process sections within chapter
-        FOR each section_dir IN ["sec-full-weakening",
-                                 "sec-linear-weakening",
-                                 "sec-affine-weakening",
-                                 "sec-relevant-weakening"]:
+        FOR each section_dir IN ["sec-lhs-rules",
+                                 "sec-rhs-rules"]:
             
-            section_file = READ chapter_dir + "/" + section_dir + "/section.tex"  # If exists
+            section_file = READ chapter_dir + "/" + section_dir + "/section.md"
             section_title = EXTRACT_TITLE(section_file)
             
             ADD "\section{" + section_title + "}" TO latex_document
@@ -39,7 +56,7 @@ FUNCTION AssembleWeakeningPart(output_file):
             
             # Process subsections within section (if any)
             FOR each subsection_dir IN LIST_SUBDIRS(chapter_dir + "/" + section_dir):
-                subsection_file = READ subsection_dir + "/subsection.tex"
+                subsection_file = READ subsection_dir + "/subsection.md"
                 subsection_title = EXTRACT_TITLE(subsection_file)
                 
                 ADD "\subsection{" + subsection_title + "}" TO latex_document
@@ -56,36 +73,26 @@ FUNCTION AssembleWeakeningPart(output_file):
 
 ### File Resolution Order
 
-1. **Part-level files**: `parts/part-weakening.tex` provides structure and `\input{}` directives
-2. **Chapter files**: `chap-*/chapter.tex` or direct content
-3. **Section files**: `chap-*/sec-*/section.tex`
-4. **Subsection files**: `chap-*/sec-*/subsec-*/subsection.tex`
+1. **Part-level files**: `part-weakening/part.md` provides structure and content
+2. **Chapter files**: `chap-*/chapter.md` - Markdown processed by Quarto
+3. **Section files**: `chap-*/sec-*/section.md`
+4. **Subsection files**: `chap-*/sec-*/subsec-*/subsection.md`
 
-### Compilation Process
+### Compilation Process (Quarto)
 
 ```
-1. pdflatex main.tex        # First pass (generates .aux)
-2. biber references.bib     # Process bibliography  
-3. pdflatex main.tex        # Second pass (resolves cross-references)
-4. pdflatex main.tex        # Third pass (final)
+quarto render docs/structural-rules/
 ```
 
-### Key TeX Commands Used
-
-- `\part{Weakening}` - Part declaration
-- `\chapter{...}` - Chapter declarations
-- `\section{...}` - Section declarations  
-- `\subsection{...}` - Subsection declarations
-- `\input{path}` - Include external TeX files
-- `\label{...}` and `\ref{...}` - Cross-referencing
+Quarto handles the full pipeline from `.md` → `.tex` → PDF.
 
 ## Core Constraints
-- **Formats**: Read/write `*.md`, `*.tex`. Create subdirectories as needed.
-- **IDs**: All IDs globally unique following patterns: `sec-*`, `subsec-*`.
-- **TeX Files**: Subsections should be a page to a few pages of text. Do not create files smaller than subsection.
+- **Formats**: Primary `.md`, compiled via Quarto. Also `*.tex` for compatibility.
+- **IDs**: All IDs globally unique following patterns: `sec-*`, `subsec-*`, `thm-*`, `def-*`, `lem-*`.
+- **Content Files**: Should be a page to a few pages of text minimum.
 - **Content Structure**: 
   - `chap-*/` - Contains chapter-level content
-  - `sec-*/` - Contains section-level content
+  - `sec-*/` - Contains section-level content (lhs-rules, rhs-rules)
 
 ## Exchange and Contraction Independence
 
@@ -100,7 +107,7 @@ The admission of Exchange, its explicit inclusion, its modalization, or its oper
 
 ## Special Consideration: Symmetric Single Antecedent and Succedent
 
-The "Symmetric Weakening with Single Antecedent and Single Succedent" chapter requires special handling:
+The "chap-single-single" (Symmetric Single Antecedent and Single Succedent) chapter requires special handling:
 
 **Asymmetric Weakening Rule**: Weakening on one side EXCLUDES weakening on the other side:
 - **If LHS can be weakened**, then RHS CANNOT be weakened
@@ -111,33 +118,15 @@ If we naively allow weakening arbitrarily on both sides, we would derive the emp
 
 This corresponds to **Minimal Logic** (*Minimalkalkül*) by Ingebrigt Johansson (1936).
 
-## Weakening Content Requirements
-
-This part covers:
-1. **Symmetric Full Context (Classical LK)**: Both LHS and RHS can be freely extended
-2. **Asymmetric Full Context LHS / Single Succedent (Intuitionistic LJ)**: LHS unrestricted, RHS restricted to at most one formula
-   - Note: RHS "at most one" relates to $\bot$ (bottom) and explosion principle
-3. **Asymmetric Single Antecedent / Full Context RHS (Dual Intuitionistic LDJ)**: LHS restricted to at most one formula, RHS unrestricted
-   - Note: LHS "at most one" relates to $\top$ (top) and dual logic to Minimalkalkül
-4. **Symmetric Single Antecedent and Single Succedent (Minimal Logic)**: Both restricted with asymmetric weakening rule
-
-Each chapter contains four sections:
-- **Full Weakening**: Classical weakening allowing arbitrary formula introduction
-- **Linear Weakening**: Resource-sensitive via exponential modality
-- **Affine Weakening**: Weakening admitted, contraction rejected
-- **Relevant Weakening**: Weakening entirely rejected
-
-Additional topics:
-- Additive vs multiplicative weakening via linear logic translation
-- Sub-intuitionistic and sub-dual-intuitionistic logics
-- Absence of weakening on LHS/RHS/both corresponding to quantum theorems
-- Logical explosion principle and its dependence on weakening
-- LFI and linear modalities involvement
-- Paola Zizzi's work on absence of weakening and no erasure
+## Theorem Scoping
+Theorems in this part follow scoping rules:
+- Root theorems in `docs/structural-rules/theorems/` apply to all parts
+- Part-level theorems (in `part-weakening/theorems/`) apply to all chapters in this part
+- Chapter theorems apply only within that chapter
 
 ## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+All artifacts must pass automated validation against the structure schema.
 
 ## See Also
-- `/docs/structural-rules/README.md` - Parent directory
-- `/docs/structural-rules/parts/part-weakening.tex` - Main part file
+- `/docs/structural-rules/AGENTS.md` - Monograph policies
+- `/docs/structural-rules/theorems/AGENTS.md` - Theorem policies
