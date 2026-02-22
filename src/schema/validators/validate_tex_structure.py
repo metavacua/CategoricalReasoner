@@ -172,9 +172,11 @@ class TeXStructureValidator:
 
     def validate_preamble_only_commands(self, tex_file: Path, lines: List[str], context: InclusionContext):
         """Ensure preamble-only commands appear only in preamble context."""
-        forbidden_commands = [
+        preamble_only = [
             r"\\documentclass",
             r"\\usepackage",
+        ]
+        included_forbidden = preamble_only + [
             r"\\begin\{document\}",
             r"\\end\{document\}",
         ]
@@ -186,7 +188,7 @@ class TeXStructureValidator:
                 if in_preamble and re.search(r"\\begin\{document\}", stripped):
                     in_preamble = False
 
-                if not in_preamble and any(re.search(command, stripped) for command in forbidden_commands):
+                if not in_preamble and any(re.search(command, stripped) for command in preamble_only):
                     self.errors.append(ValidationError(
                         file=str(tex_file),
                         line=i,
@@ -196,7 +198,7 @@ class TeXStructureValidator:
         else:
             for i, line in enumerate(lines, start=1):
                 stripped = self.strip_comments(line)
-                if any(re.search(command, stripped) for command in forbidden_commands):
+                if any(re.search(command, stripped) for command in included_forbidden):
                     self.errors.append(ValidationError(
                         file=str(tex_file),
                         line=i,

@@ -93,10 +93,10 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
 
 \subsection*{Verification}
 \begin{itemize}
-  \item TeX structure validation: \textbf{failed locally} due to missing \texttt{pyyaml} dependency.
+  \item TeX structure validation: \textbf{passed locally} using a virtual environment.
     \begin{itemize}
-      \item Command: \texttt{python src/schema/validators/validate\_tex\_structure.py --main-tex docs/dissertation/main.tex}
-      \item Error: \texttt{PyYAML is required. Install with: pip install pyyaml}
+      \item Command: \texttt{.venv/bin/python src/schema/validators/validate\_tex\_structure.py --main-tex docs/dissertation/main.tex --schema src/schema/thesis-structure.schema.yaml}
+      \item Result: \texttt{\checkmark{} No validation errors found}
     \end{itemize}
   \item \texttt{docs/dissertation} LaTeX build: \textbf{failed locally} due to missing \texttt{pdflatex} in the environment.
     \begin{itemize}
