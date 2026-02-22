@@ -1,0 +1,48 @@
+project:
+  output-dir: _output
+  render:
+    - "*.md"
+
+book:
+  title: "Theoretical Metalinguistics"
+  author: "Ian Douglas Lawrence Norman McLean"
+  date: "now"
+  
+  chapters:
+    - index.md
+    - part: chapters/introduction.md
+      title: "Introduction"
+    - part: chapters/genesis.md
+      title: "Genesis"
+    - part: chapters/philosophy.md
+      title: "Philosophy"
+    - part: chapters/sequents.md
+      title: "Sequents"
+    - part: chapters/formalization.md
+      title: "Formalization"
+    - part: chapters/morphisms.md
+      title: "Morphisms"
+    - part: chapters/universes.md
+      title: "Universes"
+    - part: chapters/witness.md
+      title: "Witness"
+    - part: chapters/integration.md
+      title: "Integration"
+    - part: chapters/appendices.md
+      title: "Appendices"
+
+bibliography: bibliography/references.bib
+
+format:
+  pdf:
+    documentclass: report
+    keep-tex: true
+    include-in-header: macros/header.tex
+    include-before-body: macros/before-body.tex
+  html:
+    theme: default
+    css: styles.css
+    
+execute:
+  echo: false
+  warning: false
