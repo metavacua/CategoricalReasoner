@@ -39,26 +39,87 @@ jobs:
             exit 1
           fi
 
-      - name: Install LaTeX dependencies
+      - name: Check if LaTeX files changed
+        id: changed-files
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            CHANGED=$(git diff --name-only origin/main...HEAD)
+          else
+            CHANGED=$(git diff --name-only HEAD~1 HEAD || echo "all")
+          fi
+
+          if echo "$CHANGED" | grep -qE "\.(tex|sty|cls|bib)$"; then
+            echo "latex_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "latex_changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Analyze LaTeX dependencies
+        id: tex-deps
+        if: steps.changed-files.outputs.latex_changed == 'true'
+        run: |
+          PACKAGES=$(grep -hroP '\\(usepackage|RequirePackage)(\[[^\]]*\])?\{\K[^}]+' docs/dissertation --include="*.tex" | tr ',' '\n' | sort -u | tr '\n' ' ')
+          DEPS=""
+          for pkg in $PACKAGES; do
+            case $pkg in
+              tikz|pgf|pgffor) DEPS="$DEPS texlive-pictures" ;;
+              amsmath|amssymb|amsfonts) DEPS="$DEPS texlive-latex-recommended" ;;
+              hyperref|listings|booktabs|xcolor) DEPS="$DEPS texlive-latex-extra" ;;
+            esac
+          done
+          DEPS=$(echo $DEPS | tr ' ' '\n' | sort -u | tr '\n' ' ')
+          echo "packages=$DEPS" >> $GITHUB_OUTPUT
+          echo "Detected packages: $DEPS"
+
+      - name: Install minimal TeX Live
+        if: steps.changed-files.outputs.latex_changed == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
             make \
             texlive-latex-base \
-            texlive-latex-recommended \
-            texlive-latex-extra \
-            texlive-pictures \
-            texlive-fonts-recommended \
-            texlive-extra-utils
+            texlive-binaries \
+            wget \
+            xz-utils
+          tlmgr init-usertree || true
+
+      - name: Install required TeX packages
+        if: steps.changed-files.outputs.latex_changed == 'true'
+        run: |
+          for pkg in ${{ steps.tex-deps.outputs.packages }}; do
+            sudo apt-get install -y --no-install-recommends "$pkg" || true
+          done
+          tlmgr install amsmath amssymb tikz hyperref listings booktabs xcolor latexmk || true
+
+      - name: Cache LaTeX intermediates
+        if: steps.changed-files.outputs.latex_changed == 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            docs/dissertation/*.aux
+            docs/dissertation/*.toc
+            docs/dissertation/*.bbl
+            docs/dissertation/*.blg
+            docs/dissertation/*.fdb_latexmk
+            docs/dissertation/*.fls
+          key: latex-${{ hashFiles('docs/dissertation/**/*.tex') }}
+          restore-keys: |
+            latex-
 
       - name: Validate TeX structure
+        if: steps.changed-files.outputs.latex_changed == 'true'
         run: python src/schema/validators/validate_tex_structure.py --main-tex docs/dissertation/main.tex --schema src/schema/thesis-structure.schema.yaml
 
       - name: Build dissertation PDF
+        if: steps.changed-files.outputs.latex_changed == 'true'
         run: |
           cd docs/dissertation
-          make clean
-          make
+          if command -v latexmk >/dev/null 2>&1; then
+            latexmk -pdf -interaction=nonstopmode main.tex
+          else
+            make clean
+            make
+          fi
 
       - name: Python syntax check
         run: python -m compileall src

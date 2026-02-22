@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+  pull_request:
 
 permissions:
   contents: read
@@ -16,7 +17,50 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  build-preview:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install LaTeX + Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            make \
+            pandoc \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-pictures \
+            texlive-fonts-recommended \
+            texlive-extra-utils
+
+      - name: Build PDF
+        run: |
+          cd docs/dissertation
+          make clean
+          make
+
+      - name: Convert TeX to HTML (Pandoc)
+        run: |
+          mkdir -p site
+          cd docs/dissertation
+          latexpand main.tex > ../site/main.expanded.tex
+          pandoc -f latex -t html -s ../site/main.expanded.tex -o ../site/index.html
+          cp main.pdf ../site/main.pdf
+          rm ../site/main.expanded.tex
+
+      - name: Upload build preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dissertation-preview
+          path: site
+
   build-and-deploy:
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

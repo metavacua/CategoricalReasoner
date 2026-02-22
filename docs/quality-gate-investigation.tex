@@ -77,12 +77,13 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
     \begin{itemize}
       \item Changelog update check.
       \item TeX structure validation by tracing inclusions from \texttt{main.tex}.
-      \item LaTeX build.
+      \item LaTeX dependency analysis, minimal TeX Live installation, and cached intermediates.
       \item Python syntax check.
       \item SPARQL benchmarks (DBpedia, Wikidata).
       \item Conditional RDF and SHACL validation based on directory existence.
     \end{itemize}
   \item Added \texttt{.github/workflows/codeql.yml} to enable CodeQL scanning on pull requests and main.
+  \item Updated \texttt{.github/workflows/deploy.yml} to build from \texttt{docs/dissertation}, run preview builds on pull requests, and deploy on non-PR events.
   \item Updated \texttt{src/benchmarks/run.py}:
     \begin{itemize}
       \item Added request timeouts for remote SPARQL queries.
