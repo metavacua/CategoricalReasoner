@@ -48,9 +48,15 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
   - Added request timeouts for remote SPARQL queries
   - Enforced non-empty results for both `CONSTRUCT` and `SELECT` queries
 
+## Verification
+- `docs/dissertation` LaTeX build: **failed locally** due to missing `pdflatex` in the environment.
+  - Command: `make clean && make`
+  - Error: `make: pdflatex: No such file or directory`
+
 ## Assumptions
 - CTO.new and GitHub branch protection are configured manually; repository changes cannot apply those settings directly.
 - External SPARQL endpoints are available and respond within the timeout when CI runs.
+- CI environments install LaTeX dependencies (as configured in `.github/workflows/ci.yml`).
 - Future ontology directories will be added under `ontology/` or `src/ontology/` and will then enable the RDF/SHACL checks.
 
 ## Decision Rationale
