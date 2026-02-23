@@ -47,12 +47,30 @@ jobs:
       - name: Convert TeX to HTML (Pandoc)
         run: |
           SITE_DIR="$GITHUB_WORKSPACE/site"
-          mkdir -p "$SITE_DIR"
+          BOOKSHELF_DIR="$SITE_DIR/bookshelf"
+          DISSERTATION_DIR="$BOOKSHELF_DIR/dissertation"
+          STRUCTURAL_DIR="$BOOKSHELF_DIR/structural-rules"
+          mkdir -p "$DISSERTATION_DIR" "$STRUCTURAL_DIR"
+
           cd docs/dissertation
-          latexpand main.tex > "$SITE_DIR/main.expanded.tex"
-          pandoc -f latex -t html -s "$SITE_DIR/main.expanded.tex" -o "$SITE_DIR/index.html"
-          cp main.pdf "$SITE_DIR/main.pdf"
-          rm "$SITE_DIR/main.expanded.tex"
+          latexpand main.tex > "$DISSERTATION_DIR/main.expanded.tex"
+          pandoc -f latex -t html -s "$DISSERTATION_DIR/main.expanded.tex" -o "$DISSERTATION_DIR/index.html"
+          cp main.pdf "$DISSERTATION_DIR/main.pdf"
+          rm "$DISSERTATION_DIR/main.expanded.tex"
+
+          cd "$GITHUB_WORKSPACE/docs/structural-rules"
+          latexpand main.tex > "$STRUCTURAL_DIR/main.expanded.tex"
+          pandoc -f latex -t html -s "$STRUCTURAL_DIR/main.expanded.tex" -o "$STRUCTURAL_DIR/index.html"
+          rm "$STRUCTURAL_DIR/main.expanded.tex"
+
+          echo "<html><body><h1>Catty Bookshelf</h1><ul>" > "$BOOKSHELF_DIR/index.html"
+          echo "<li><a href='dissertation/index.html'>Dissertation</a></li>" >> "$BOOKSHELF_DIR/index.html"
+          echo "<li><a href='structural-rules/index.html'>Structural Rules</a></li>" >> "$BOOKSHELF_DIR/index.html"
+          echo "</ul></body></html>" >> "$BOOKSHELF_DIR/index.html"
+
+          echo "<html><body><h1>Catty Documentation</h1><ul>" > "$SITE_DIR/index.html"
+          echo "<li><a href='bookshelf/index.html'>Bookshelf</a></li>" >> "$SITE_DIR/index.html"
+          echo "</ul></body></html>" >> "$SITE_DIR/index.html"
 
       - name: Upload build preview artifact
         uses: actions/upload-artifact@v4
@@ -93,12 +111,30 @@ jobs:
       - name: Convert TeX to HTML (Pandoc)
         run: |
           SITE_DIR="$GITHUB_WORKSPACE/site"
-          mkdir -p "$SITE_DIR"
+          BOOKSHELF_DIR="$SITE_DIR/bookshelf"
+          DISSERTATION_DIR="$BOOKSHELF_DIR/dissertation"
+          STRUCTURAL_DIR="$BOOKSHELF_DIR/structural-rules"
+          mkdir -p "$DISSERTATION_DIR" "$STRUCTURAL_DIR"
+
           cd docs/dissertation
-          latexpand main.tex > "$SITE_DIR/main.expanded.tex"
-          pandoc -f latex -t html -s "$SITE_DIR/main.expanded.tex" -o "$SITE_DIR/index.html"
-          cp main.pdf "$SITE_DIR/main.pdf"
-          rm "$SITE_DIR/main.expanded.tex"
+          latexpand main.tex > "$DISSERTATION_DIR/main.expanded.tex"
+          pandoc -f latex -t html -s "$DISSERTATION_DIR/main.expanded.tex" -o "$DISSERTATION_DIR/index.html"
+          cp main.pdf "$DISSERTATION_DIR/main.pdf"
+          rm "$DISSERTATION_DIR/main.expanded.tex"
+
+          cd "$GITHUB_WORKSPACE/docs/structural-rules"
+          latexpand main.tex > "$STRUCTURAL_DIR/main.expanded.tex"
+          pandoc -f latex -t html -s "$STRUCTURAL_DIR/main.expanded.tex" -o "$STRUCTURAL_DIR/index.html"
+          rm "$STRUCTURAL_DIR/main.expanded.tex"
+
+          echo "<html><body><h1>Catty Bookshelf</h1><ul>" > "$BOOKSHELF_DIR/index.html"
+          echo "<li><a href='dissertation/index.html'>Dissertation</a></li>" >> "$BOOKSHELF_DIR/index.html"
+          echo "<li><a href='structural-rules/index.html'>Structural Rules</a></li>" >> "$BOOKSHELF_DIR/index.html"
+          echo "</ul></body></html>" >> "$BOOKSHELF_DIR/index.html"
+
+          echo "<html><body><h1>Catty Documentation</h1><ul>" > "$SITE_DIR/index.html"
+          echo "<li><a href='bookshelf/index.html'>Bookshelf</a></li>" >> "$SITE_DIR/index.html"
+          echo "</ul></body></html>" >> "$SITE_DIR/index.html"
 
       - name: Copy Ontologies and Queries to Site
         run: |
