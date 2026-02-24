@@ -98,10 +98,10 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
 
 \subsection*{Verification}
 \begin{itemize}
-  \item Workflow validation: \textbf{failed locally} due to missing \texttt{pyyaml} dependency.
+  \item Workflow validation: \textbf{passed locally}.
     \begin{itemize}
       \item Command: \texttt{python src/scripts/validate\_workflows.py}
-      \item Error: \texttt{ModuleNotFoundError: No module named 'yaml'}
+      \item Result: \texttt{Workflow validation passed.}
     \end{itemize}
   \item TeX structure validation: \textbf{passed locally} using a virtual environment.
     \begin{itemize}
