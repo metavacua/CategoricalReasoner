@@ -50,6 +50,10 @@ def ensure_deploy_workflow(errors: list):
         require("$GITHUB_WORKSPACE/site" in joined, f"{job_name} missing site output path", errors)
         require("latexpand" in joined and "pandoc" in joined, f"{job_name} missing pandoc conversion", errors)
 
+    deploy_job = jobs.get("build-and-deploy", {})
+    job_if = deploy_job.get("if", "")
+    require("pull_request" in job_if, "build-and-deploy must run on pull_request", errors)
+
 
 def ensure_codeql_workflow(errors: list):
     path = WORKFLOW_DIR / "codeql.yml"
