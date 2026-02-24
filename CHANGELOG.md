@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Added CI quality gates with changelog enforcement, TeX validation, LaTeX build optimizations, SPARQL benchmarks, and CodeQL scanning
+- Added CI quality gates with changelog enforcement, TeX validation, LaTeX build optimizations, SPARQL benchmarks, CodeQL scanning, workflow validation hooks, and self-review automation
 - Added SPARQL benchmark timeouts and non-empty result enforcement
 - Added inclusion tracing and preamble-only command checks to the TeX structure validator
 - Updated GitHub Pages deployment to build from docs/dissertation, run on pull requests, and use a consistent site output directory

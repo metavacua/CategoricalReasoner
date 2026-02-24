@@ -78,12 +78,15 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
       \item Changelog update check.
       \item TeX structure validation by tracing inclusions from \texttt{main.tex}.
       \item LaTeX dependency analysis, minimal TeX Live installation, and cached intermediates.
+      \item Workflow validation via \texttt{src/scripts/validate\_workflows.py}.
       \item Python syntax check.
       \item SPARQL benchmarks (DBpedia, Wikidata).
       \item Conditional RDF and SHACL validation based on directory existence.
     \end{itemize}
   \item Added \texttt{.github/workflows/codeql.yml} to enable CodeQL scanning on pull requests and main.
   \item Updated \texttt{.github/workflows/deploy.yml} to build from \texttt{docs/dissertation}, run preview builds on pull requests, deploy on non-PR events, emit site output to a consistent directory, and publish a bookshelf HTML stack for dissertation and structural rules.
+  \item Added \texttt{.github/workflows/self-review.yml} to request changes on PRs until required checks pass.
+  \item Added \texttt{.pre-commit-config.yaml} and workflow validation hooks to enforce consistency before commits.
   \item Updated \texttt{src/benchmarks/run.py}:
     \begin{itemize}
       \item Added request timeouts for remote SPARQL queries.
@@ -95,6 +98,11 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
 
 \subsection*{Verification}
 \begin{itemize}
+  \item Workflow validation: \textbf{failed locally} due to missing \texttt{pyyaml} dependency.
+    \begin{itemize}
+      \item Command: \texttt{python src/scripts/validate\_workflows.py}
+      \item Error: \texttt{ModuleNotFoundError: No module named 'yaml'}
+    \end{itemize}
   \item TeX structure validation: \textbf{passed locally} using a virtual environment.
     \begin{itemize}
       \item Command: \texttt{.venv/bin/python src/schema/validators/validate\_tex\_structure.py --main-tex docs/dissertation/main.tex --schema src/schema/thesis-structure.schema.yaml}

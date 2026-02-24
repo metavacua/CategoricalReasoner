@@ -121,6 +121,9 @@ jobs:
             make
           fi
 
+      - name: Validate workflows
+        run: python src/scripts/validate_workflows.py
+
       - name: Python syntax check
         run: python -m compileall src
 
