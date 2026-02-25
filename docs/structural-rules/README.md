@@ -3,6 +3,8 @@
 A standalone monograph examining the three fundamental structural rules of sequent calculi:
 **Weakening**, **Contraction**, and **Exchange**.
 
+Directory structure should be structural-rules/part-[ID]/chapter-[ID]/section-[ID]/subsection[ID]. There should be a structural-rules/standards/ subdirectory that includes a standards-compliant subdirectory layout for W3C, OMG, ISO, and relevant standards-defining members of the International Science Council such as but not limited to Committee on Data (CODATA) and World Data System (WDS).
+
 ## Table of Contents / Outline
 
 ### Part I: Weakening
