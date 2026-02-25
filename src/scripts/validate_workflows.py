@@ -28,6 +28,8 @@ def ensure_deploy_workflow(errors: list):
     require("deploy-pages:" in text, "deploy.yml missing deploy-pages job", errors)
     require("deploy-pages-main:" in text, "deploy.yml missing deploy-pages-main job", errors)
     require("candidate-" in text, "deploy.yml missing candidate tag trigger", errors)
+    create_tag_path = WORKFLOW_DIR / "create-candidate-tag.yml"
+    require(create_tag_path.exists(), "create-candidate-tag.yml missing", errors)
     require("$GITHUB_WORKSPACE/site" in text, "deploy.yml missing site output path", errors)
     require("latexpand" in text and "pandoc" in text, "deploy.yml missing pandoc conversion", errors)
     require("build-and-deploy:" in text and "pull_request" in text, "build-and-deploy must run on pull_request", errors)

@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added CI quality gates with changelog enforcement, TeX validation, LaTeX build optimizations, SPARQL benchmarks, CodeQL scanning, workflow validation hooks, and self-review automation
 - Added SPARQL benchmark timeouts and non-empty result enforcement
 - Added inclusion tracing and preamble-only command checks to the TeX structure validator
-- Updated GitHub Pages deployment to build from docs/dissertation, run build-and-deploy and deploy-pages on pull requests, and deploy on main/manual or candidate-* tags
+- Updated GitHub Pages deployment to build from docs/dissertation, run build-and-deploy and deploy-pages on pull requests, and deploy on main/manual or candidate-* tags with auto-tagging
 - Added fallback definition for linear logic `\parr`, moved `xcolor` to the dissertation preamble, corrected a dissertation table column count, escaped `content\_spec`, replaced emoji checkmarks in the development cycle chapter, and added bookshelf HTML output for dissertation and structural rules
 - Added `docs/quality-gate-investigation.tex` documenting quality-gate decisions
 - Updated `AGENTS.md` (root) to reflect citation system under development
