@@ -7,23 +7,29 @@ on:
     tags:
       - "candidate-*"
   pull_request:
+    branches:
+      - main
 
 permissions:
   contents: write
   pages: write
   id-token: write
 
+# This ensures that a PR deployment cancels an older one for the same PR
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  # 1. Unified Build Job
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          # Standard checkout works for modern rules; 
+          # GitHub knows this is the PR's merge commit.
+          fetch-depth: 0
 
       - name: Install LaTeX + Pandoc
         run: |
@@ -103,11 +109,10 @@ jobs:
         with:
           path: ${{ github.workspace }}/site
 
-  # 2. Deployment Job
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    # This environment name triggers the deployment rule requirement
+    # This is the environment that the Branch Protection Rule is waiting for.
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
