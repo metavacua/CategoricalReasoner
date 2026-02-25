@@ -1,7 +1,7 @@
 # AGENTS.md - Catty Thesis Repository
 
 ## Scope
-This repository implements the Catty thesis: categorical foundations for logics and their morphisms. Agents must generate LaTeX thesis content and validation artifacts. Semantic web data is consumed from external sources (SPARQL endpoints, linked data, GGG) via Jena, not authored locally.
+This repository attempts to implement the Categorical Reasoner "Catty" thesis: categorical foundations for morphisms between logics rather than morphisms within logics; there are expected reflections from the category of subclassical sequent calculi into sequent calculi as categories or internal logics of categories, but the repository fundamentally concerns the category of subclassical sequent calculi. Semantic web data is consumed from external sources (SPARQL endpoints, linked data, GGG) via Jena, bash scripts, or curl during development. Semantic HTML documentation collects the semantic web data and standard ontologies published online and othe relevant information for software development, formal methods, engineering practices, category theory, java development, meta-linguistics, meta-mathematical theory development, computational theories, sequent calculi, strong normalization, canonical methods, formal verification, W3C standards, OMG DOL standards, ISO COLORE standards, and more.
 
 ## Core Constraints
 - **Presumption of inconsistency**: the repository's present and past state is assumed to be corrupt, non-functional, partially implemented, or otherwise formally incorrect such that strict preservation of previous conflicting information will predictably preserve broken or incorrect behaviors. Local finite consistency must be proven, and global consistency requires the highest standards of proof with relative consistency proofs being the expected norm.
@@ -18,7 +18,10 @@ This repository implements the Catty thesis: categorical foundations for logics 
 - **Extraction Protocol**: Follow the discovery and verification patterns for external QIDs and URIs. Document all difficulties and issues encountered during extraction.
 
 ## Validation
-Standard validation tools must always be used; critically, compilation processes for Java are considered restricted validators; minimization of DIY, roll your own, re-inventing the wheel, and non-standard implementations of validators is required. 
+Standard validation tools must always be used; critically, compilation processes for Java are considered restricted validators; minimization of DIY, roll your own, re-inventing the wheel, and non-standard implementations of validators is required. KeY is the correct technology for Java; the first major morphism to define is the transformation from semantic HTML web pages to Java and specifically Java records via Java documentation annotations that conform to KeY, Openllet, and Jena.
+
+To minimize development and usage of "roll-your-own" validators and the use of the Java ecosystem (Jena, JavaPoet)—the automation of this morphism should leverage the Java Compiler API (javax.tools) and Annotation Processing (JSR 269).
+By treating Semantic HTML as the source of truth, the JDK can automate the construction of records where the "proof terms" are embedded during the compilation phase.
 
 ## See Also
 - `src/schema/AGENTS.md` - Citation and ID constraints
