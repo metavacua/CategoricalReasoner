@@ -10,7 +10,7 @@ A standard development cycle for a single task follows an eight-step protocol:
     \item \textbf{Verification}: Ensure all required dependencies exist and are valid.
     \item \textbf{Specification}: Read the target artifact specification (path, format, content spec, schema).
     \item \textbf{Execution}: Follow the operational instructions in the task description exactly.
-    \item \textbf{Content Validation}: Verify the artifact satisfies its \code{content_spec}.
+    \item \textbf{Content Validation}: Verify the artifact satisfies its \code{content\_spec}.
     \item \textbf{Criteria Testing}: Evaluate the boolean acceptance criteria.
     \item \textbf{Formal Validation}: Run the automated \code{validate.py} script (syntax, RDF, SHACL).
     \item \textbf{Completion}: Mark the task as complete and proceed to the next node in the dependency graph.
@@ -19,9 +19,9 @@ A standard development cycle for a single task follows an eight-step protocol:
 \section*{Acceptance Criteria Philosophy}
 Every task in the framework must have testable boolean acceptance criteria. The framework explicitly forbids aspirational or subjective criteria (e.g., "high quality", "comprehensive"). Instead, criteria must be binary and verifiable:
 \begin{itemize}
-    \item ✅ \textit{Testable}: "File \code{src/ontology/logics-as-objects.jsonld} exists."
-    \item ✅ \textit{Testable}: "Contains at least 7 logic instances."
-    \item ✅ \textit{Testable}: "Validates against \code{logics-as-objects.shacl}."
+    \item $\checkmark$ \textit{Testable}: "File \code{src/ontology/logics-as-objects.jsonld} exists."
+    \item $\checkmark$ \textit{Testable}: "Contains at least 7 logic instances."
+    \item $\checkmark$ \textit{Testable}: "Validates against \code{logics-as-objects.shacl}."
 \end{itemize}
 
 \section*{Continuous Validation}

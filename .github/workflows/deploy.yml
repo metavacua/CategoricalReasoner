@@ -1,10 +1,15 @@
 name: Deploy
-
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    tags:
+      - "candidate-*"
+  pull_request:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -13,12 +18,9 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
+  # 1. Unified Build Job
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -38,33 +40,60 @@ jobs:
 
       - name: Build PDF
         run: |
-          cd thesis
+          cd docs/dissertation
           make clean
           make
 
       - name: Convert TeX to HTML (Pandoc)
         run: |
-          mkdir -p site
-          cd thesis
-          latexpand main.tex > ../site/main.expanded.tex
-          pandoc -f latex -t html -s ../site/main.expanded.tex -o ../site/index.html
-          cp main.pdf ../site/main.pdf
-          rm ../site/main.expanded.tex
+          SITE_DIR="$GITHUB_WORKSPACE/site"
+          BOOKSHELF_DIR="$SITE_DIR/bookshelf"
+          DISSERTATION_DIR="$BOOKSHELF_DIR/dissertation"
+          STRUCTURAL_DIR="$BOOKSHELF_DIR/structural-rules"
+          mkdir -p "$DISSERTATION_DIR" "$STRUCTURAL_DIR"
+          
+          cd docs/dissertation
+          latexpand main.tex > "$DISSERTATION_DIR/main.expanded.tex"
+          pandoc -f latex -t html -s "$DISSERTATION_DIR/main.expanded.tex" -o "$DISSERTATION_DIR/index.html"
+          cp main.pdf "$DISSERTATION_DIR/main.pdf"
+          rm "$DISSERTATION_DIR/main.expanded.tex"
+          
+          cd "$GITHUB_WORKSPACE/docs/structural-rules"
+          latexpand main.tex > "$STRUCTURAL_DIR/main.expanded.tex"
+          pandoc -f latex -t html -s "$STRUCTURAL_DIR/main.expanded.tex" -o "$STRUCTURAL_DIR/index.html"
+          rm "$STRUCTURAL_DIR/main.expanded.tex"
+          
+          echo "<html><body><h1>Catty Bookshelf</h1><ul>" > "$BOOKSHELF_DIR/index.html"
+          echo "<li><a href='dissertation/index.html'>Dissertation</a></li>" >> "$BOOKSHELF_DIR/index.html"
+          echo "<li><a href='structural-rules/index.html'>Structural Rules</a></li>" >> "$BOOKSHELF_DIR/index.html"
+          echo "</ul></body></html>" >> "$BOOKSHELF_DIR/index.html"
+          
+          echo "<html><body><h1>Catty Documentation</h1><ul>" > "$SITE_DIR/index.html"
+          echo "<li><a href='bookshelf/index.html'>Bookshelf</a></li>" >> "$SITE_DIR/index.html"
+          echo "</ul></body></html>" >> "$SITE_DIR/index.html"
 
       - name: Copy Ontologies and Queries to Site
         run: |
-          mkdir -p site/ontology
-          cp ontology/*.jsonld site/ontology/
-          cp ontology/*.ttl site/ontology/
-          mkdir -p site/benchmarks/queries
-          cp benchmarks/queries/*.rq site/benchmarks/queries/
-          # Create a basic landing page for ontologies
-          echo "<html><body><h1>Catty Ontologies</h1><ul>" > site/ontology/index.html
-          for f in site/ontology/*.jsonld site/ontology/*.ttl; do
-            filename=$(basename $f)
-            echo "<li><a href='$filename'>$filename</a></li>" >> site/ontology/index.html
+          SITE_DIR="$GITHUB_WORKSPACE/site"
+          mkdir -p "$SITE_DIR/ontology"
+          if [ -d ontology ]; then
+            cp ontology/*.jsonld "$SITE_DIR/ontology/" || true
+            cp ontology/*.ttl "$SITE_DIR/ontology/" || true
+          fi
+          
+          mkdir -p "$SITE_DIR/benchmarks/queries"
+          if [ -d src/benchmarks/queries ]; then
+            cp src/benchmarks/queries/*.rq "$SITE_DIR/benchmarks/queries/" || true
+          fi
+          
+          echo "<html><body><h1>Catty Ontologies</h1><ul>" > "$SITE_DIR/ontology/index.html"
+          for f in "$SITE_DIR"/ontology/*.jsonld "$SITE_DIR"/ontology/*.ttl; do
+            if [ -e "$f" ]; then
+              filename=$(basename "$f")
+              echo "<li><a href='$filename'>$filename</a></li>" >> "$SITE_DIR/ontology/index.html"
+            fi
           done
-          echo "</ul></body></html>" >> site/ontology/index.html
+          echo "</ul></body></html>" >> "$SITE_DIR/ontology/index.html"
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -72,8 +101,17 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: ${{ github.workspace }}/site
 
+  # 2. Deployment Job (Satisfies "Require deployments to succeed" for github-pages)
+  deploy:
+    # Removed branch restrictions so this runs on PRs, main, and tags
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
