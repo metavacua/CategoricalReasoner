@@ -84,7 +84,7 @@ Configure CTO.new quality gates for the Catty repository, including CI workflow 
       \item Conditional RDF and SHACL validation based on directory existence.
     \end{itemize}
   \item Added \texttt{.github/workflows/codeql.yml} to enable CodeQL scanning on pull requests and main.
-  \item Updated \texttt{.github/workflows/deploy.yml} to build from \texttt{docs/dissertation}, run build-and-deploy on pull requests, deploy to PR-specific pages branches, deploy on main/manual events, emit site output to a consistent directory, and publish a bookshelf HTML stack for dissertation and structural rules.
+  \item Updated \texttt{.github/workflows/deploy.yml} to build from \texttt{docs/dissertation}, run build-and-deploy and deploy-pages on pull requests, deploy on main/manual events, emit site output to a consistent directory, and publish a bookshelf HTML stack for dissertation and structural rules.
   \item Added \texttt{.github/workflows/self-review.yml} to request changes on PRs until required checks pass.
   \item Added \texttt{.pre-commit-config.yaml} and workflow validation hooks to enforce consistency before commits.
   \item Updated \texttt{src/benchmarks/run.py}:

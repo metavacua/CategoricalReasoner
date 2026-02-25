@@ -25,12 +25,13 @@ def ensure_deploy_workflow(errors: list):
     require("pull_request:" in text, "deploy.yml missing pull_request trigger", errors)
     require("push:" in text and "- main" in text, "deploy.yml missing push trigger for main", errors)
     require("build-and-deploy:" in text, "deploy.yml missing build-and-deploy job", errors)
-    require("deploy-pr-site:" in text, "deploy.yml missing deploy-pr-site job", errors)
     require("deploy-pages:" in text, "deploy.yml missing deploy-pages job", errors)
+    require("deploy-pages-main:" in text, "deploy.yml missing deploy-pages-main job", errors)
     require("$GITHUB_WORKSPACE/site" in text, "deploy.yml missing site output path", errors)
     require("latexpand" in text and "pandoc" in text, "deploy.yml missing pandoc conversion", errors)
     require("build-and-deploy:" in text and "pull_request" in text, "build-and-deploy must run on pull_request", errors)
-    require("peaceiris/actions-gh-pages" in text, "deploy-pr-site missing gh-pages action", errors)
+    require("deploy-pages:" in text and "pull_request" in text, "deploy-pages must run on pull_request", errors)
+    require("peaceiris/actions-gh-pages" in text, "deploy-pages missing gh-pages action", errors)
 
 
 def ensure_codeql_workflow(errors: list):
