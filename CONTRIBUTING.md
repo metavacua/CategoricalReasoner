@@ -17,6 +17,15 @@ This project follows the **Semantic Web Technology Index (SWTI)** criteria from 
 - **S4 (Evaluation)**: Include reproducible evaluation queries in `src/benchmarks/queries/`.
 - **S6 (Reasoning)**: Ensure the ontology is consistent and passes SHACL validation.
 
+## Pre-commit hooks
+
+Install pre-commit hooks to enforce workflow validation before commits:
+
+```sh
+pip install pre-commit
+pre-commit install
+```
+
 ## Local checks
 
 ### Thesis Build
