@@ -1,30 +1,39 @@
 # AGENTS.md - Catty Thesis Repository
 
 ## Scope
-This repository attempts to implement the Categorical Reasoner "Catty" thesis: categorical foundations for morphisms between logics rather than morphisms within logics; there are expected reflections from the category of subclassical sequent calculi into sequent calculi as categories or internal logics of categories, but the repository fundamentally concerns the category of subclassical sequent calculi. Semantic web data is consumed from external sources (SPARQL endpoints, linked data, GGG) via Jena, bash scripts, or curl during development. Semantic HTML documentation collects the semantic web data and standard ontologies published online and othe relevant information for software development, formal methods, engineering practices, category theory, java development, meta-linguistics, meta-mathematical theory development, computational theories, sequent calculi, strong normalization, canonical methods, formal verification, W3C standards, OMG DOL standards, ISO COLORE standards, open science, open source software and hardware and firmware, and more.
+
+This repository attempts to implement the Categorical Reasoner "Catty" thesis: categorical foundations for morphisms between logics rather than morphisms within logics; there are expected reflections from the category of subclassical sequent calculi into sequent calculi as categories or internal logics of categories, but the repository fundamentally concerns the category of subclassical sequent calculi. Semantic web data is consumed from external sources (SPARQL endpoints, linked data, GGG) via Jena, bash scripts, or curl during development. Semantic HTML documentation collects the semantic web data and standard ontologies published online and other relevant information for software development, formal methods, engineering practices, category theory, Java development, meta-linguistics, meta-mathematical theory development, computational theories, sequent calculi, strong normalization, canonical methods, formal verification, W3C standards, OMG DOL standards, ISO COLORE standards, open science, open source software and hardware and firmware, and more.
 
 ## Core Constraints
-- **Presumption of inconsistency or paraconsistency**: the repository's present and past state is assumed to be corrupt, non-functional, partially implemented, or otherwise formally incorrect such that strict preservation of previous conflicting information will predictably preserve broken or incorrect behaviors. Local finite consistency must be proven, and global consistency requires the highest standards of proof with relative consistency proofs being the expected norm.
-- **Tool exemptions**: the AGENTS.md contexts govern the behaviors of the LLMs and agents NOT the non-LLM deterministic tools.
-- **Standards**: the docs directory should have and collect relevant standards in a standards subdirectory for the repository and the development of its projects and derivatives.
-- **Languages**: W3C compliant HTML5 for documentation and Java (primary ecosystem for validation and transformation) for code; tex and markup is to be derived by qualified deterministic and formally verified standard compliant tools; the docs directory generally and documentation specifically is under the Creative Commons BY-SA v4 international license which has a strict one way conversion to the AGLPv3 license that governs the source code and programs of the repository.
-- **Licenses**: The repostiory should conform to and utilize https://reuse.software/dev/ for the dual licensing; where AGPLv3 and CC BY-SA v4 international conflict and both have standing, AGPLv3 is the more restrictive license so it prevails at the intersection or a subset of it that is compatible with both AGPLv3 and CC BY-SA v4 does.
-- **Reports**: Reports must be returned in semantic HTML or whatever format any tools use, and all documentation is to be contained in the docs directory with the sole exception being special files permitted for Github (e.g. README.md) and for specific tools like Maven.
-- **Citations**: the Citation system and citations must conform to relevant academic and industrial standards for open science, open source, and international learned society practices; OAIS is a minimal standards compliance. The OAIS model (ISO 14721:2025) requires that information remains understandable to the "Designated Community" over the long term.
+
+- **Presumption of Inconsistency**: The repository's present and past state is assumed to be corrupt, non-functional, partially implemented, or otherwise formally incorrect such that strict preservation of previous conflicting information will predictably preserve broken or incorrect behaviors. Local finite consistency must be proven, and global consistency requires the highest standards of proof with relative consistency proofs being the expected norm.
+- **Standards Collection**: The docs directory should have and collect relevant standards in a standards subdirectory for the repository and the development of its projects and derivatives.
+- **Language Constraint**: W3C compliant HTML5 for documentation and Java (primary ecosystem for validation and transformation) for code; tex and markup is to be derived by qualified deterministic and formally verified standard compliant tools.
+- **License Constraint**: The repository should conform to and utilize https://reuse.software/dev/ for the dual licensing; where AGPLv3 and CC BY-SA v4 international conflict and both have standing, AGPLv3 is the more restrictive license so it prevails at the intersection.
+- **Report Constraint**: Reports must be returned in semantic HTML or whatever format any tools use, and all documentation is to be contained in the docs directory with the sole exception being special files permitted for Github (e.g. README.md) and for specific tools like Maven.
+- **Citation Constraint**: The Citation system and citations must conform to relevant academic and industrial standards for open science, open source, and international learned society practices; OAIS is a minimal standards compliance. The OAIS model (ISO 14721:2025) requires that information remains understandable to the Designated Community over the long term.
 - **Technology Stack**: Core validation and transformation uses Java ecosystem (Jena, OpenLlet, JavaPoet, JUnit, KeY).
 - **Semantic Web Data**: Consumed from external sources. Any and all local authoring of semantic linked data should be handled via the docs to src transformation, and local semantic web ontologies should be handled strictly within Java, Jena, and Openllet.
-- **Domain Restriction**: Do not use `http://catty.org/`. The only associated webpage is the MetaVacua GitHub repository (`https://github.com/metavacua/CategoricalReasoner`). Any script or artifact using `catty.org` is invalid; for testing and development purposes any locally authored semantic web technologies that need a namespace should use URNs; local authoring of ontologies, schema, and similar technologies should ONLY be contemplated AFTER all canonical, normative, and standard solutions have been exhausted by formal search and inquiry.
+- **Domain Restriction**: Do not use http://catty.org/. The only associated webpage is the MetaVacua GitHub repository (https://github.com/metavacua/CategoricalReasoner). Any script or artifact using catty.org is invalid; for testing and development purposes any locally authored semantic web technologies that need a namespace should use URNs.
 - **SPARQL Execution**: All documented queries must be actually ran against external endpoints. Evidence must be returned as valid and relevant format. No faking or internal generation of results.
-- **SPARQL Syntax**: SPARQL queries must NOT be wrapped in LaTeX environments (like `lstlisting`) when being processed or saved for execution.
+- **SPARQL Syntax**: SPARQL queries must NOT be wrapped in LaTeX environments (like lstlisting) when being processed or saved for execution.
 - **Query Quality**: Well-formed queries must return error-free non-empty results. Empty result sets or timeouts (over 60s) are considered failures.
 - **Extraction Protocol**: Follow the discovery and verification patterns for external QIDs and URIs. Document all difficulties and issues encountered during extraction.
 
 ## Validation
-Standard validation tools must always be used; critically, compilation processes for Java are considered restricted validators; minimization of DIY, roll your own, re-inventing the wheel, and non-standard implementations of validators is required. KeY is the correct technology for Java; the first major morphism to define is the transformation from semantic HTML web pages to Java and specifically Java records via Java documentation annotations that conform to KeY, Openllet, and Jena.
 
-To minimize development and usage of "roll-your-own" validators and the use of the Java ecosystem (Jena, JavaPoet)—the automation of this morphism should leverage the Java Compiler API (javax.tools) and Annotation Processing (JSR 269).
-By treating Semantic HTML as the source of truth, the JDK can automate the construction of records where the "proof terms" are embedded during the compilation phase.
+- **Standard Tools**: Standard validation tools must always be used; critically, compilation processes for Java are considered restricted validators; minimization of DIY, roll your own, re-inventing the wheel, and non-standard implementations of validators is required.
+- **KeY Validation**: KeY is the correct technology for Java; the first major morphism to define is the transformation from semantic HTML web pages to Java and specifically Java records via Java documentation annotations that conform to KeY, Openllet, and Jena.
+- **Annotation Processing**: The automation of morphisms should leverage the Java Compiler API (javax.tools) and Annotation Processing (JSR 269). By treating Semantic HTML as the source of truth, the JDK can automate the construction of records where the proof terms are embedded during the compilation phase.
 
 ## See Also
-- `docs/AGENTS.md` - Documentation constraints (derives from root)
-- `src/AGENTS.md` - Source code constraints (derives from root)
+
+- `docs/AGENTS.md` - Documentation Directory
+- `src/AGENTS.md` - Source Code Directory
+
+## Specification
+
+This file is derived from the canonical semantic web specification:
+- `docs/standards/repository-constraints.ttl` - RDF/Turtle specification
+- `docs/standards/derivation-queries.sparql` - SPARQL queries for derivation
+

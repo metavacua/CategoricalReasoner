@@ -1,0 +1,372 @@
+# Repository Constraints Ontology
+# Canonical specification for AGENTS.md derivation
+# 
+# This ontology defines the hierarchical structure and constraints
+# for the CategoricalReasoner repository using standard vocabularies.
+#
+# Namespace: urn:repo:categoricalreasoner:
+# Vocabularies: SKOS, SHACL, PROV-O, DCTERMS
+
+@prefix : <urn:repo:categoricalreasoner:agents#> .
+@prefix agents: <urn:repo:categoricalreasoner:agents#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# ========================================
+# ONTOLOGY METADATA
+# ========================================
+
+<urn:repo:categoricalreasoner:agents> a owl:Ontology ;
+    dcterms:title "CategoricalReasoner Repository Constraints Ontology" ;
+    dcterms:description "Canonical specification for repository governance and AGENTS.md derivation"@en ;
+    dcterms:creator <https://github.com/metavacua> ;
+    dcterms:license <https://www.gnu.org/licenses/agpl-3.0.html> ;
+    dcterms:created "2025-02-25"^^xsd:date ;
+    rdfs:comment "This ontology defines constraints using SKOS concepts, SHACL shapes, and PROV-O derivation relationships."@en .
+
+# ========================================
+# CONCEPT SCHEME: Repository Governance
+# ========================================
+
+agents:GovernanceScheme a skos:ConceptScheme ;
+    dcterms:title "Repository Governance Concept Scheme" ;
+    skos:hasTopConcept agents:CoreConstraint ;
+    skos:hasTopConcept agents:ValidationStandard ;
+    skos:hasTopConcept agents:LicensingConstraint .
+
+# ========================================
+# CORE CONSTRAINTS (SKOS Concepts)
+# ========================================
+
+agents:CoreConstraint a skos:Concept ;
+    skos:prefLabel "Core Constraint"@en ;
+    skos:definition "A fundamental constraint governing repository behavior and agent actions."@en ;
+    skos:topConceptOf agents:GovernanceScheme ;
+    skos:narrower agents:InconsistencyPresumption ;
+    skos:narrower agents:StandardsCollection ;
+    skos:narrower agents:LanguageConstraint ;
+    skos:narrower agents:LicenseConstraint ;
+    skos:narrower agents:ReportConstraint ;
+    skos:narrower agents:CitationConstraint ;
+    skos:narrower agents:TechnologyStack ;
+    skos:narrower agents:SemanticWebData ;
+    skos:narrower agents:DomainRestriction ;
+    skos:narrower agents:SPARQLExecution ;
+    skos:narrower agents:SPARQLSyntax ;
+    skos:narrower agents:QueryQuality ;
+    skos:narrower agents:ExtractionProtocol .
+
+agents:InconsistencyPresumption a skos:Concept ;
+    skos:prefLabel "Presumption of Inconsistency"@en ;
+    skos:definition "The repository's present and past state is assumed to be corrupt, non-functional, partially implemented, or otherwise formally incorrect such that strict preservation of previous conflicting information will predictably preserve broken or incorrect behaviors. Local finite consistency must be proven, and global consistency requires the highest standards of proof with relative consistency proofs being the expected norm."@en ;
+    skos:broader agents:CoreConstraint ;
+    skos:scopeNote "Applies to all repository activities."@en .
+
+agents:StandardsCollection a skos:Concept ;
+    skos:prefLabel "Standards Collection"@en ;
+    skos:definition "The docs directory should have and collect relevant standards in a standards subdirectory for the repository and the development of its projects and derivatives."@en ;
+    skos:broader agents:CoreConstraint ;
+    skos:scopeNote "Applies to docs/ directory."@en .
+
+agents:LanguageConstraint a skos:Concept ;
+    skos:prefLabel "Language Constraint"@en ;
+    skos:definition "W3C compliant HTML5 for documentation and Java (primary ecosystem for validation and transformation) for code; tex and markup is to be derived by qualified deterministic and formally verified standard compliant tools."@en ;
+    skos:broader agents:CoreConstraint ;
+    skos:scopeNote "docs/ uses CC BY-SA v4; src/ uses AGPLv3."@en .
+
+agents:LicenseConstraint a skos:Concept ;
+    skos:prefLabel "License Constraint"@en ;
+    skos:definition "The repository should conform to and utilize https://reuse.software/dev/ for the dual licensing; where AGPLv3 and CC BY-SA v4 international conflict and both have standing, AGPLv3 is the more restrictive license so it prevails at the intersection."@en ;
+    skos:broader agents:CoreConstraint ;
+    dcterms:relation <https://spdx.org/licenses/AGPL-3.0-or-later.html> ;
+    dcterms:relation <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+
+agents:ReportConstraint a skos:Concept ;
+    skos:prefLabel "Report Constraint"@en ;
+    skos:definition "Reports must be returned in semantic HTML or whatever format any tools use, and all documentation is to be contained in the docs directory with the sole exception being special files permitted for Github (e.g. README.md) and for specific tools like Maven."@en ;
+    skos:broader agents:CoreConstraint ;
+    skos:scopeNote "Applies to all generated reports."@en .
+
+agents:CitationConstraint a skos:Concept ;
+    skos:prefLabel "Citation Constraint"@en ;
+    skos:definition "The Citation system and citations must conform to relevant academic and industrial standards for open science, open source, and international learned society practices; OAIS is a minimal standards compliance. The OAIS model (ISO 14721:2025) requires that information remains understandable to the Designated Community over the long term."@en ;
+    skos:broader agents:CoreConstraint ;
+    dcterms:relation <https://www.iso.org/standard/76552.html> .
+
+agents:TechnologyStack a skos:Concept ;
+    skos:prefLabel "Technology Stack"@en ;
+    skos:definition "Core validation and transformation uses Java ecosystem (Jena, OpenLlet, JavaPoet, JUnit, KeY)."@en ;
+    skos:broader agents:CoreConstraint ;
+    skos:scopeNote "Primary: src/ directory."@en .
+
+agents:SemanticWebData a skos:Concept ;
+    skos:prefLabel "Semantic Web Data"@en ;
+    skos:definition "Consumed from external sources. Any and all local authoring of semantic linked data should be handled via the docs to src transformation, and local semantic web ontologies should be handled strictly within Java, Jena, and Openllet."@en ;
+    skos:broader agents:CoreConstraint ;
+    skos:scopeNote "Use URNs for local namespaces."@en .
+
+agents:DomainRestriction a skos:Concept ;
+    skos:prefLabel "Domain Restriction"@en ;
+    skos:definition "Do not use http://catty.org/. The only associated webpage is the MetaVacua GitHub repository (https://github.com/metavacua/CategoricalReasoner). Any script or artifact using catty.org is invalid; for testing and development purposes any locally authored semantic web technologies that need a namespace should use URNs."@en ;
+    skos:broader agents:CoreConstraint ;
+    skos:scopeNote "Local authoring of ontologies ONLY AFTER all canonical solutions exhausted."@en .
+
+agents:SPARQLExecution a skos:Concept ;
+    skos:prefLabel "SPARQL Execution"@en ;
+    skos:definition "All documented queries must be actually ran against external endpoints. Evidence must be returned as valid and relevant format. No faking or internal generation of results."@en ;
+    skos:broader agents:CoreConstraint ;
+    skos:scopeNote "Applies to all SPARQL queries."@en .
+
+agents:SPARQLSyntax a skos:Concept ;
+    skos:prefLabel "SPARQL Syntax"@en ;
+    skos:definition "SPARQL queries must NOT be wrapped in LaTeX environments (like lstlisting) when being processed or saved for execution."@en ;
+    skos:broader agents:CoreConstraint .
+
+agents:QueryQuality a skos:Concept ;
+    skos:prefLabel "Query Quality"@en ;
+    skos:definition "Well-formed queries must return error-free non-empty results. Empty result sets or timeouts (over 60s) are considered failures."@en ;
+    skos:broader agents:CoreConstraint .
+
+agents:ExtractionProtocol a skos:Concept ;
+    skos:prefLabel "Extraction Protocol"@en ;
+    skos:definition "Follow the discovery and verification patterns for external QIDs and URIs. Document all difficulties and issues encountered during extraction."@en ;
+    skos:broader agents:CoreConstraint .
+
+# ========================================
+# VALIDATION STANDARDS
+# ========================================
+
+agents:ValidationStandard a skos:Concept ;
+    skos:prefLabel "Validation Standard"@en ;
+    skos:definition "Standards for validation using canonical tools."@en ;
+    skos:topConceptOf agents:GovernanceScheme ;
+    skos:narrower agents:StandardTools ;
+    skos:narrower agents:KeYValidation ;
+    skos:narrower agents:AnnotationProcessing .
+
+agents:StandardTools a skos:Concept ;
+    skos:prefLabel "Standard Tools"@en ;
+    skos:definition "Standard validation tools must always be used; critically, compilation processes for Java are considered restricted validators; minimization of DIY, roll your own, re-inventing the wheel, and non-standard implementations of validators is required."@en ;
+    skos:broader agents:ValidationStandard .
+
+agents:KeYValidation a skos:Concept ;
+    skos:prefLabel "KeY Validation"@en ;
+    skos:definition "KeY is the correct technology for Java; the first major morphism to define is the transformation from semantic HTML web pages to Java and specifically Java records via Java documentation annotations that conform to KeY, Openllet, and Jena."@en ;
+    skos:broader agents:ValidationStandard ;
+    dcterms:relation <https://key-project.org/> .
+
+agents:AnnotationProcessing a skos:Concept ;
+    skos:prefLabel "Annotation Processing"@en ;
+    skos:definition "The automation of morphisms should leverage the Java Compiler API (javax.tools) and Annotation Processing (JSR 269). By treating Semantic HTML as the source of truth, the JDK can automate the construction of records where the proof terms are embedded during the compilation phase."@en ;
+    skos:broader agents:ValidationStandard .
+
+# ========================================
+# REPOSITORY STRUCTURE (Hierarchy)
+# ========================================
+
+agents:RepositoryNode a rdfs:Class ;
+    rdfs:label "Repository Node"@en ;
+    rdfs:comment "A node in the repository directory hierarchy."@en .
+
+agents:RootNode a agents:RepositoryNode ;
+    rdfs:label "Root Directory"@en ;
+    agents:hasAgentsFile "AGENTS.md" ;
+    agents:contains agents:DocsNode ;
+    agents:contains agents:SrcNode ;
+    agents:derivesTo agents:DocsNode ;
+    agents:derivesTo agents:SrcNode .
+
+agents:DocsNode a agents:RepositoryNode ;
+    rdfs:label "Documentation Directory"@en ;
+    agents:path "docs/" ;
+    agents:hasAgentsFile "docs/AGENTS.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SrcNode a agents:RepositoryNode ;
+    rdfs:label "Source Code Directory"@en ;
+    agents:path "src/" ;
+    agents:hasAgentsFile "src/AGENTS.md" ;
+    agents:license <https://spdx.org/licenses/AGPL-3.0-or-later.html> ;
+    agents:derivesFrom agents:RootNode ;
+    agents:contains agents:BenchmarksNode ;
+    agents:contains agents:ScriptsNode ;
+    agents:contains agents:TestsNode ;
+    agents:derivesTo agents:BenchmarksNode ;
+    agents:derivesTo agents:ScriptsNode ;
+    agents:derivesTo agents:TestsNode .
+
+agents:BenchmarksNode a agents:RepositoryNode ;
+    rdfs:label "Benchmarks Directory"@en ;
+    agents:path "src/benchmarks/" ;
+    agents:hasAgentsFile "src/benchmarks/AGENTS.md" ;
+    agents:license <https://spdx.org/licenses/AGPL-3.0-or-later.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:ScriptsNode a agents:RepositoryNode ;
+    rdfs:label "Scripts Directory"@en ;
+    agents:path "src/scripts/" ;
+    agents:hasAgentsFile "src/scripts/AGENTS.md" ;
+    agents:license <https://spdx.org/licenses/AGPL-3.0-or-later.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:TestsNode a agents:RepositoryNode ;
+    rdfs:label "Tests Directory"@en ;
+    agents:path "src/tests/" ;
+    agents:hasAgentsFile "src/tests/AGENTS.md" ;
+    agents:license <https://spdx.org/licenses/AGPL-3.0-or-later.html> ;
+    agents:derivesFrom agents:RootNode .
+
+# ========================================
+# DERIVATION RELATIONSHIPS (PROV-O)
+# ========================================
+
+agents:derivesFrom a owl:ObjectProperty ;
+    rdfs:label "derives from"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range agents:RepositoryNode ;
+    rdfs:subPropertyOf prov:wasDerivedFrom ;
+    rdfs:comment "Indicates that a repository node's AGENTS.md derives from another node's AGENTS.md"@en .
+
+agents:derivesTo a owl:ObjectProperty ;
+    rdfs:label "derives to"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range agents:RepositoryNode ;
+    owl:inverseOf agents:derivesFrom ;
+    rdfs:comment "Indicates that a repository node's AGENTS.md is the source for another node's AGENTS.md"@en .
+
+agents:contains a owl:ObjectProperty ;
+    rdfs:label "contains"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range agents:RepositoryNode ;
+    rdfs:comment "Indicates directory containment relationship"@en .
+
+agents:hasAgentsFile a owl:DatatypeProperty ;
+    rdfs:label "has AGENTS.md file"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Path to the AGENTS.md file for this node"@en .
+
+agents:path a owl:DatatypeProperty ;
+    rdfs:label "path"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range xsd:string ;
+    rdfs:comment "Directory path relative to repository root"@en .
+
+agents:license a owl:ObjectProperty ;
+    rdfs:label "license"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range rdfs:Resource ;
+    rdfs:comment "SPDX license identifier for the directory"@en .
+
+# ========================================
+# CONSTRAINT APPLICABILITY
+# ========================================
+
+agents:applicableConstraint a owl:ObjectProperty ;
+    rdfs:label "applicable constraint"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range skos:Concept ;
+    rdfs:comment "Links a repository node to applicable constraints"@en .
+
+# Root node applies all constraints
+agents:RootNode agents:applicableConstraint agents:CoreConstraint .
+
+# Docs node applies documentation-specific constraints
+agents:DocsNode agents:applicableConstraint agents:StandardsCollection ;
+    agents:applicableConstraint agents:LanguageConstraint ;
+    agents:applicableConstraint agents:LicenseConstraint ;
+    agents:applicableConstraint agents:ReportConstraint ;
+    agents:applicableConstraint agents:CitationConstraint .
+
+# Src node applies code-specific constraints
+agents:SrcNode agents:applicableConstraint agents:InconsistencyPresumption ;
+    agents:applicableConstraint agents:TechnologyStack ;
+    agents:applicableConstraint agents:SemanticWebData ;
+    agents:applicableConstraint agents:SPARQLExecution ;
+    agents:applicableConstraint agents:SPARQLSyntax ;
+    agents:applicableConstraint agents:QueryQuality ;
+    agents:applicableConstraint agents:StandardTools ;
+    agents:applicableConstraint agents:KeYValidation ;
+    agents:applicableConstraint agents:AnnotationProcessing .
+
+# Benchmarks node
+agents:BenchmarksNode agents:applicableConstraint agents:InconsistencyPresumption ;
+    agents:applicableConstraint agents:TechnologyStack ;
+    agents:applicableConstraint agents:StandardTools ;
+    agents:applicableConstraint agents:ReportConstraint .
+
+# Scripts node
+agents:ScriptsNode agents:applicableConstraint agents:InconsistencyPresumption ;
+    agents:applicableConstraint agents:SemanticWebData ;
+    agents:applicableConstraint agents:SPARQLExecution ;
+    agents:applicableConstraint agents:DomainRestriction .
+
+# Tests node
+agents:TestsNode agents:applicableConstraint agents:InconsistencyPresumption ;
+    agents:applicableConstraint agents:TechnologyStack ;
+    agents:applicableConstraint agents:StandardTools ;
+    agents:applicableConstraint agents:SPARQLExecution ;
+    agents:applicableConstraint agents:QueryQuality .
+
+# ========================================
+# SHACL SHAPES FOR VALIDATION
+# ========================================
+
+agents:RepositoryNodeShape a sh:NodeShape ;
+    sh:targetClass agents:RepositoryNode ;
+    sh:property [
+        sh:path agents:hasAgentsFile ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Each repository node must have exactly one AGENTS.md file path"@en
+    ] ;
+    sh:property [
+        sh:path agents:path ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:message "Repository node may have at most one path"@en
+    ] ;
+    sh:property [
+        sh:path agents:derivesFrom ;
+        sh:class agents:RepositoryNode ;
+        sh:message "derivesFrom must reference a RepositoryNode"@en
+    ] .
+
+agents:DerivationShape a sh:NodeShape ;
+    sh:targetSubjectsOf agents:derivesFrom ;
+    sh:property [
+        sh:path agents:derivesFrom ;
+        sh:qualifiedMinCount 1 ;
+        sh:qualifiedValueShape [
+            sh:targetNode agents:RootNode
+        ] ;
+        sh:message "All non-root nodes must derive from root"@en
+    ] .
+
+# ========================================
+# SPARQL QUERIES FOR DERIVATION
+# ========================================
+
+# Query to extract constraints for a specific node:
+# SELECT ?constraint ?prefLabel ?definition
+# WHERE {
+#   <urn:repo:categoricalreasoner:agents#DocsNode> agents:applicableConstraint ?constraint .
+#   ?constraint skos:prefLabel ?prefLabel .
+#   ?constraint skos:definition ?definition .
+# }
+
+# Query to get derivation chain:
+# SELECT ?node ?path ?derivesFrom
+# WHERE {
+#   ?node a agents:RepositoryNode .
+#   OPTIONAL { ?node agents:path ?path . }
+#   OPTIONAL { ?node agents:derivesFrom ?derivesFrom . }
+# }
