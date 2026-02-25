@@ -78,8 +78,69 @@ jobs:
           name: dissertation-preview
           path: ${{ github.workspace }}/site
 
+  build-and-deploy-pr:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install LaTeX + Pandoc
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            make \
+            pandoc \
+            texlive-latex-base \
+            texlive-latex-recommended \
+            texlive-latex-extra \
+            texlive-pictures \
+            texlive-fonts-recommended \
+            texlive-extra-utils
+
+      - name: Build PDF
+        run: |
+          cd docs/dissertation
+          make clean
+          make
+
+      - name: Convert TeX to HTML (Pandoc)
+        run: |
+          SITE_DIR="$GITHUB_WORKSPACE/site"
+          BOOKSHELF_DIR="$SITE_DIR/bookshelf"
+          DISSERTATION_DIR="$BOOKSHELF_DIR/dissertation"
+          STRUCTURAL_DIR="$BOOKSHELF_DIR/structural-rules"
+          mkdir -p "$DISSERTATION_DIR" "$STRUCTURAL_DIR"
+
+          cd docs/dissertation
+          latexpand main.tex > "$DISSERTATION_DIR/main.expanded.tex"
+          pandoc -f latex -t html -s "$DISSERTATION_DIR/main.expanded.tex" -o "$DISSERTATION_DIR/index.html"
+          cp main.pdf "$DISSERTATION_DIR/main.pdf"
+          rm "$DISSERTATION_DIR/main.expanded.tex"
+
+          cd "$GITHUB_WORKSPACE/docs/structural-rules"
+          latexpand main.tex > "$STRUCTURAL_DIR/main.expanded.tex"
+          pandoc -f latex -t html -s "$STRUCTURAL_DIR/main.expanded.tex" -o "$STRUCTURAL_DIR/index.html"
+          rm "$STRUCTURAL_DIR/main.expanded.tex"
+
+          echo "<html><body><h1>Catty Bookshelf</h1><ul>" > "$BOOKSHELF_DIR/index.html"
+          echo "<li><a href='dissertation/index.html'>Dissertation</a></li>" >> "$BOOKSHELF_DIR/index.html"
+          echo "<li><a href='structural-rules/index.html'>Structural Rules</a></li>" >> "$BOOKSHELF_DIR/index.html"
+          echo "</ul></body></html>" >> "$BOOKSHELF_DIR/index.html"
+
+          echo "<html><body><h1>Catty Documentation</h1><ul>" > "$SITE_DIR/index.html"
+          echo "<li><a href='bookshelf/index.html'>Bookshelf</a></li>" >> "$SITE_DIR/index.html"
+          echo "</ul></body></html>" >> "$SITE_DIR/index.html"
+
+      - name: Upload build-and-deploy preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-and-deploy-preview
+          path: ${{ github.workspace }}/site
+
   build-and-deploy:
-    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     environment:
       name: github-pages

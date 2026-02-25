@@ -25,10 +25,11 @@ def ensure_deploy_workflow(errors: list):
     require("pull_request:" in text, "deploy.yml missing pull_request trigger", errors)
     require("push:" in text and "- main" in text, "deploy.yml missing push trigger for main", errors)
     require("build-preview:" in text, "deploy.yml missing build-preview job", errors)
+    require("build-and-deploy-pr:" in text, "deploy.yml missing build-and-deploy-pr job", errors)
     require("build-and-deploy:" in text, "deploy.yml missing build-and-deploy job", errors)
     require("$GITHUB_WORKSPACE/site" in text, "deploy.yml missing site output path", errors)
     require("latexpand" in text and "pandoc" in text, "deploy.yml missing pandoc conversion", errors)
-    require("build-and-deploy:" in text and "pull_request" in text, "build-and-deploy must run on pull_request", errors)
+    require("build-and-deploy-pr:" in text and "pull_request" in text, "build-and-deploy-pr must run on pull_request", errors)
 
 
 def ensure_codeql_workflow(errors: list):
