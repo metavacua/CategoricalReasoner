@@ -78,6 +78,33 @@ jobs:
           name: dissertation-preview
           path: ${{ github.workspace }}/site
 
+      - name: Upload deploy artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy-site
+          path: ${{ github.workspace }}/site
+
+  deploy-pr-site:
+    if: github.event_name == 'pull_request'
+    needs: build-and-deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download deploy artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: deploy-site
+          path: site
+
+      - name: Deploy PR site branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: pr-${{ github.event.pull_request.number }}-pages
+          publish_dir: site
+
   deploy-pages:
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
