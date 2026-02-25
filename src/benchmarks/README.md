@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The `src/benchmarks/` directory contains SPARQL query performance tests and evaluation scripts for measuring the performance of semantic web data access and processing.
+The `src/benchmarks/` directory contains SPARQL query performance tests and evaluation scripts for measuring the performance of semantic web data access and processing. This is towards the development of a Java and Github Actions based toolchain that completely handles all SPARQL queries and transforms their results into valid objects for the CategoricalReasoner repository.
 
 ## Data Sources
 
@@ -49,31 +49,6 @@ WHERE {
 }
 ```
 
-### `run.py`
-
-Benchmark execution script that runs all queries without manual intervention.
-
-**Features**:
-- Measure execution time for each query
-- Validate result patterns against expected outputs
-- Record performance metrics for regression detection
-- Generate benchmark reports
-
-**Usage**:
-```bash
-# Run all benchmarks
-python src/benchmarks/run.py
-
-# Run specific benchmark
-python src/benchmarks/run.py --query src/benchmarks/queries/category-theory.sparql
-
-# Run against specific endpoint
-python src/benchmarks/run.py --endpoint https://dbpedia.org/sparql
-
-# Verbose output
-python src/benchmarks/run.py --verbose
-```
-
 ## Benchmark Categories
 
 ### 1. Query Performance
@@ -104,27 +79,6 @@ Compares performance across different SPARQL endpoints.
 - DBPedia SPARQL endpoint
 - Wikidata Query Service
 - Local Blazegraph instance (if available)
-
-## Running Benchmarks
-
-### Prerequisites
-
-- Python ≥3.8
-- `requests` and `rdflib` libraries
-- Network access to external endpoints (for remote benchmarks)
-
-### Execution
-
-```bash
-# Run all benchmarks against local ontology
-python src/benchmarks/run.py
-
-# Run against Wikidata
-python src/benchmarks/run.py --endpoint https://query.wikidata.org/sparql --query wikidata-logics.rq
-
-# Run against DBPedia
-python src/benchmarks/run.py --endpoint https://dbpedia.org/sparql --query dbpedia-category-theory.rq
-```
 
 ### Challenges and Lessons Learned
 
@@ -173,25 +127,6 @@ Benchmarks validate:
 2. **Result Patterns**: Query results must match expected patterns (structure, if not exact data)
 3. **Performance Thresholds**: Query execution time must be within acceptable limits
 4. **Regression Detection**: Performance metrics compared against previous runs
-
-## Integration with CI/CD
-
-Benchmarks can be integrated into CI/CD workflows to detect performance regressions:
-
-```yaml
-# Example GitHub Actions workflow
-- name: Run benchmarks
-  run: python src/benchmarks/run.py --output results.json
-
-- name: Check performance
-  run: |
-    if python src/scripts/check-performance.py --threshold '10%' results.json; then
-      echo "Performance check passed"
-    else
-      echo "Performance regression detected!"
-      exit 1
-    fi
-```
 
 ## Technology Note
 
