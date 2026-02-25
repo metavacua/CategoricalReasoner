@@ -12,7 +12,7 @@ This repository attempts to implement the Categorical Reasoner "Catty" thesis: c
 - **Reports**: Reports must be returned in semantic HTML, and all documentation is to be contained in the docs directory with the sole exception being special files permitted for Github (e.g. README.md) and for specific tools like Maven.
 - **Citations**: the Citation system and citations must conform to relevant academic and industrial standards for open science, open source, and international learned society practices; OAIS is a minimal standards compliance. The OAIS model (ISO 14721:2025) requires that information remains understandable to the "Designated Community" over the long term.
 - **Technology Stack**: Core validation and transformation uses Java ecosystem (Jena, OpenLlet, JavaPoet, JUnit).
-- **Semantic Web Data**: Consumed from external sources. Any and all local authoring of semantic linked data should be handled via the docs to src transformation, and local semantic web ontologies should be handled strictly within Java, Jena, and Openllet. 
+- **Semantic Web Data**: Consumed from external sources. Any and all local authoring of semantic linked data should be handled via the docs to src transformation, and local semantic web ontologies should be handled strictly within Java, Jena, and Openllet.
 - **Domain Restriction**: Do not use `http://catty.org/`. The only associated webpage is the MetaVacua GitHub repository (`https://github.com/metavacua/CategoricalReasoner`). Any script or artifact using `catty.org` is invalid; for testing and development purposes any locally authored semantic web technologies that need a namespace should use URNs; local authoring of ontologies, schema, and similar technologies should ONLY be contemplated AFTER all canonical, normative, and standard solutions have been exhausted by formal search and inquiry.
 - **SPARQL Execution**: All documented queries must be actually ran against external endpoints. Evidence must be returned as valid and relevant format. No faking or internal generation of results.
 - **SPARQL Syntax**: SPARQL queries must NOT be wrapped in LaTeX environments (like `lstlisting`) when being processed or saved for execution.
@@ -26,4 +26,5 @@ To minimize development and usage of "roll-your-own" validators and the use of t
 By treating Semantic HTML as the source of truth, the JDK can automate the construction of records where the "proof terms" are embedded during the compilation phase.
 
 ## See Also
-- `src/schema/AGENTS.md` - Citation and ID constraints
+- `docs/AGENTS.md` - Documentation constraints (derives from root)
+- `src/AGENTS.md` - Source code constraints (derives from root)

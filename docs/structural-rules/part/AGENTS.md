@@ -13,44 +13,44 @@ This section describes the procedural algorithm for assembling the TeX Part from
 FUNCTION AssembleWeakeningPart(output_file):
     # Initialize the main document
     INITIALIZE latex_document with preamble
-    
+
     # Process each chapter in order
     FOR each chapter_dir IN ["chap-symmetric-full-context-lhs-rhs",
                              "chap-asymmetric-full-context-lhs-single-succedent",
                              "chap-asymmetric-single-antecedent-full-context-rhs",
                              "chap-symmetric-single-antecedent-single-succedent"]:
-        
+
         chapter_file = READ chapter_dir + "/chapter.tex"  # If exists
         chapter_title = EXTRACT_TITLE(chapter_file)
-        
+
         ADD "\chapter{" + chapter_title + "}" TO latex_document
-        
+
         # Process sections within chapter
         FOR each section_dir IN ["sec-full-weakening",
                                  "sec-linear-weakening",
                                  "sec-affine-weakening",
                                  "sec-relevant-weakening"]:
-            
+
             section_file = READ chapter_dir + "/" + section_dir + "/section.tex"  # If exists
             section_title = EXTRACT_TITLE(section_file)
-            
+
             ADD "\section{" + section_title + "}" TO latex_document
             ADD section_content TO latex_document
-            
+
             # Process subsections within section (if any)
             FOR each subsection_dir IN LIST_SUBDIRS(chapter_dir + "/" + section_dir):
                 subsection_file = READ subsection_dir + "/subsection.tex"
                 subsection_title = EXTRACT_TITLE(subsection_file)
-                
+
                 ADD "\subsection{" + subsection_title + "}" TO latex_document
                 ADD subsection_content TO latex_document
-    
+
     # Add bibliography and indices
     ADD bibliography TO latex_document
-    
+
     # Write final document
     WRITE latex_document TO output_file
-    
+
     RETURN output_file
 ```
 
@@ -65,7 +65,7 @@ FUNCTION AssembleWeakeningPart(output_file):
 
 ```
 1. pdflatex main.tex        # First pass (generates .aux)
-2. biber references.bib     # Process bibliography  
+2. biber references.bib     # Process bibliography
 3. pdflatex main.tex        # Second pass (resolves cross-references)
 4. pdflatex main.tex        # Third pass (final)
 ```
@@ -74,7 +74,7 @@ FUNCTION AssembleWeakeningPart(output_file):
 
 - `\part{Weakening}` - Part declaration
 - `\chapter{...}` - Chapter declarations
-- `\section{...}` - Section declarations  
+- `\section{...}` - Section declarations
 - `\subsection{...}` - Subsection declarations
 - `\input{path}` - Include external TeX files
 - `\label{...}` and `\ref{...}` - Cross-referencing
@@ -83,7 +83,7 @@ FUNCTION AssembleWeakeningPart(output_file):
 - **Formats**: Read/write `*.md`, `*.tex`. Create subdirectories as needed.
 - **IDs**: All IDs globally unique following patterns: `sec-*`, `subsec-*`.
 - **TeX Files**: Subsections should be a page to a few pages of text. Do not create files smaller than subsection.
-- **Content Structure**: 
+- **Content Structure**:
   - `chap-*/` - Contains chapter-level content
   - `sec-*/` - Contains section-level content
 
