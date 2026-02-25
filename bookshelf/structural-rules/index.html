@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Ian Douglas Lawrence Norman McLean" />
+  <meta name="dcterms.date" content="2026-02-25" />
+  <title>Structural Rules A Categorical Investigation of Weakening, Contraction, and Exchange</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Structural Rules<br />
+A Categorical Investigation of Weakening, Contraction, and Exchange</h1>
+<p class="author">Ian Douglas Lawrence Norman McLean</p>
+<p class="date">2026-02-25</p>
+</header>
+<div class="center">
+<p><a href="main.pdf">Download PDF</a></p>
+</div>
+<h1 id="weakening">Weakening</h1>
+<h2 class="unnumbered" id="sec-weakening-intro">Introduction to
+Weakening</h2>
+<p>Weakening, also known as <em>thinning</em> or <em>expansion</em>, is
+a structural rule that permits the introduction of arbitrary formulas
+into a sequent context without affecting derivability. In its classical
+form, weakening allows the inference from <span
+class="math inline"><em>Γ</em> ⊢ <em>C</em></span> to <span
+class="math inline"><em>Γ</em>, <em>A</em> ⊢ <em>C</em></span>, thereby
+adding irrelevant premises.</p>
+<p>This part examines weakening from multiple perspectives:
+proof-theoretic, model-theoretic, and categorical. We trace the
+historical development from Gentzen’s original sequent calculi through
+to Girard’s linear logic, where weakening is controlled through explicit
+resource management.</p>
+<h3 class="unnumbered" id="sec-weakening-additive">Additive
+Weakening</h3>
+<p>Additive weakening operates in contexts where formulas are implicitly
+shared across premises. In additive sequent calculi, weakening allows
+the introduction of formulas into contexts without cost, reflecting an
+implicit assumption of unlimited resources.</p>
+<h3 class="unnumbered" id="sec-weakening-multiplicative">Multiplicative
+Weakening</h3>
+<p>Multiplicative weakening, in contrast, operates in contexts where
+resources are explicitly tracked. In linear logic, weakening is
+available only for formulas marked with the exponential modality <span
+class="math inline">$\oc A$</span>, indicating “unlimited”
+availability.</p>
+<h3 class="unnumbered" id="sec-weakening-free">Weakening-Free
+Logics</h3>
+<p>Logics that reject weakening include:</p>
+<ul>
+<li><p><strong>Relevant logic</strong>: Premises must be relevant to
+conclusions</p></li>
+<li><p><strong>Linear logic</strong>: Resources cannot be freely
+created</p></li>
+<li><p><strong>Affine logic</strong>: Weakening is admitted but
+contraction is rejected</p></li>
+</ul>
+<h3 class="unnumbered" id="sec-weakening-categorical">Categorical
+Semantics</h3>
+<p>Categorically, weakening corresponds to the existence of <em>terminal
+objects</em> and <em>projection maps</em>. In a Cartesian closed
+category, the natural transformation <span
+class="math inline"><em>π</em><sub><em>A</em></sub> : <em>A</em> × <em>B</em> → <em>A</em></span>
+witnesses weakening in the computational interpretation.</p>
+<h1 id="contraction">Contraction</h1>
+<h2 class="unnumbered" id="sec-contraction-intro">Introduction to
+Contraction</h2>
+<p>Contraction is a structural rule that permits the identification of
+duplicate formulas within a sequent context. In its classical form,
+contraction allows the inference from <span
+class="math inline"><em>Γ</em>, <em>A</em>, <em>A</em> ⊢ <em>C</em></span>
+to <span class="math inline"><em>Γ</em>, <em>A</em> ⊢ <em>C</em></span>,
+thereby enabling the reuse of premises.</p>
+<p>This part examines contraction as the dual of weakening: while
+weakening creates resources, contraction consumes them through
+identification. The interplay between weakening and contraction
+characterizes classical logic, while their restriction leads to
+substructural logics.</p>
+<h3 class="unnumbered" id="sec-contraction-additive">Additive
+Contraction</h3>
+<p>Additive contraction operates in contexts where duplicate formulas
+are implicitly merged. In additive sequent calculi, contraction reflects
+the implicit assumption that premises can be used multiple times without
+explicit accounting.</p>
+<h3 class="unnumbered"
+id="sec-contraction-multiplicative">Multiplicative Contraction</h3>
+<p>Multiplicative contraction, in contrast, operates in contexts where
+duplicates must be explicitly managed. In linear logic, contraction is
+available only for formulas marked with the exponential modality <span
+class="math inline">$\oc A$</span>, indicating that the formula may be
+“copied” as needed.</p>
+<h3 class="unnumbered" id="sec-contraction-free">Contraction-Free
+Logics</h3>
+<p>Logics that reject contraction include:</p>
+<ul>
+<li><p><strong>Linear logic</strong>: Resources cannot be duplicated
+freely</p></li>
+<li><p><strong>Affine logic</strong>: Weakening admitted, contraction
+rejected</p></li>
+<li><p><strong>Relevant logic</strong>: Both weakening and contraction
+rejected</p></li>
+</ul>
+<h3 class="unnumbered" id="sec-contraction-categorical">Categorical
+Semantics</h3>
+<p>Categorically, contraction corresponds to the existence of
+<em>diagonal maps</em>. In a Cartesian closed category, the natural
+transformation <span
+class="math inline"><em>δ</em><sub><em>A</em></sub> : <em>A</em> → <em>A</em> × <em>A</em></span>
+witnesses contraction, providing the computational interpretation of
+“copying” or “duplication.”</p>
+<h1 id="exchange">Exchange</h1>
+<h2 class="unnumbered" id="sec-exchange-intro">Introduction to
+Exchange</h2>
+<p>Exchange is a structural rule that permits the reordering of formulas
+within a sequent context. In its classical form, exchange allows the
+inference from <span
+class="math inline"><em>Γ</em>, <em>A</em>, <em>B</em>, <em>Δ</em> ⊢ <em>C</em></span>
+to <span
+class="math inline"><em>Γ</em>, <em>B</em>, <em>A</em>, <em>Δ</em> ⊢ <em>C</em></span>,
+thereby treating contexts as multisets rather than sequences.</p>
+<p>This part examines exchange as the most fundamental structural rule:
+unlike weakening and contraction, exchange does not change the number of
+formula occurrences, only their arrangement. The rejection of exchange
+leads to non-commutative logics with rich algebraic structure.</p>
+<h3 class="unnumbered" id="sec-exchange-antecedent">Permutation of
+Antecedents</h3>
+<p>Antecedent exchange governs the reordering of premises in the
+left-hand side of a sequent. In classical and intuitionistic logics,
+antecedents are treated as unordered collections, making exchange
+implicit.</p>
+<h3 class="unnumbered" id="sec-exchange-succedent">Permutation of
+Succedents</h3>
+<p>Succedent exchange governs the reordering of conclusions in the
+right-hand side of a sequent. In classical logic with multiple
+conclusions, exchange applies symmetrically to both sides.</p>
+<h3 class="unnumbered" id="sec-exchange-free">Exchange-Free Logics</h3>
+<p>Logics that reject exchange include:</p>
+<ul>
+<li><p><strong>Lambek calculus</strong>: Ordered type logic for natural
+language</p></li>
+<li><p><strong>Bunched implications</strong>: Separation logic and
+resource models</p></li>
+<li><p><strong>Non-commutative linear logic</strong>: Ordered resource
+management</p></li>
+</ul>
+<h3 class="unnumbered" id="sec-exchange-categorical">Categorical
+Semantics</h3>
+<p>Categorically, exchange corresponds to the existence of <em>symmetry
+isomorphisms</em> or <em>braidings</em>. In a symmetric monoidal
+category, the natural isomorphism <span
+class="math inline"><em>σ</em><sub><em>A</em>, <em>B</em></sub> : <em>A</em> ⊗ <em>B</em> → <em>B</em> ⊗ <em>A</em></span>
+witnesses exchange, while braided monoidal categories permit controlled
+forms of exchange.</p>
+</body>
+</html>

@@ -1,0 +1,2222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Ian Douglas Lawrence Norman McLean" />
+  <title>Theoretical Metalinguistics</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Theoretical Metalinguistics</h1>
+<p class="author">Ian Douglas Lawrence Norman McLean</p>
+<p class="date">29-12-2025</p>
+</header>
+<div class="center">
+<p><a href="main.pdf">Download PDF</a></p>
+</div>
+<h2 class="unnumbered" id="introduction">Introduction</h2>
+<p>This work presents Catty, a formal investigation of categorical
+foundations for logics and their morphisms. Rather than following a
+conventional linear progression, this thesis serves as a review of the
+literature and a foundational common reference for understanding logics
+as coordinate objects in a categorical structure.</p>
+<h3 class="unnumbered"
+id="motivation-and-philosophical-stance">Motivation and Philosophical
+Stance</h3>
+<p>The proliferation of formal logics demands a framework that captures
+their structural relationships without imposing a rigid hierarchy. Catty
+adopts a position of logical pluralism, where different logics are seen
+as distinct computational universes, each with its own valid internal
+reasoning.</p>
+<h3 class="unnumbered" id="initial-logics-and-logical-plurality">Initial
+Logics and Logical Plurality</h3>
+<p>A core tenet of this work is the use of "initial logics" to describe
+the categorized bases from which others extend. By identifying these
+initial objects, we can span the space of categorizable logics through
+formal morphisms that preserve or restrict logical properties.</p>
+<h3 class="unnumbered" id="proofs-as-witnesses">Proofs as Witnesses</h3>
+<p>Catty goes beyond descriptive documentation by providing
+computational witnesses. The existence of logical structures is proven
+through executable Domain-Specific Languages (DSLs), commutative
+diagrams, and formal ontologies. In this framework, syntactic minimality
+is shown to enable greater semantic power.</p>
+<h3 class="unnumbered" id="structure-of-the-reference">Structure of the
+Reference</h3>
+<p>This reference is organized into themes that explore the genesis,
+architecture, and formalization of the logic category:</p>
+<ul>
+<li><p><strong>Genesis</strong>: The foundational influences ranging
+from Linear Logic to Paraconsistent Reasoning.</p></li>
+<li><p><strong>Architecture</strong>: The geometry of the 2D lattice and
+its coordinate logic-space.</p></li>
+<li><p><strong>Morphisms</strong>: Formal relationships of extension and
+interpretation.</p></li>
+<li><p><strong>Universes</strong>: Logics as substrates for computation,
+including links to Rust and systems programming.</p></li>
+<li><p><strong>Witness</strong>: The implementation of the Catty DSL and
+executable categorical reasoning.</p></li>
+<li><p><strong>Formalization</strong>: Machine-readable RDF/OWL
+ontologies and knowledge graphs.</p></li>
+<li><p><strong>Integration</strong>: Connections to the broader semantic
+web and proof assistants like Isabelle.</p></li>
+<li><p><strong>Philosophy</strong>: The overarching implications of
+logical pluralism and the inversion principle.</p></li>
+</ul>
+<h2 class="unnumbered" id="anatomy-of-sequent-calculus">Anatomy of
+Sequent Calculus</h2>
+<h3 class="unnumbered" id="reflexive-axiom-schemata">Reflexive Axiom
+Schemata</h3>
+<p>The reflexive axiom <span class="math inline">$\frac{\Gamma, A \vdash
+A}{\Gamma \vdash A}$</span> forms the foundation of sequent calculus
+presentations. In LK, the reflexive axiom represents the basic identity
+principle. Different substructural calculi restrict or modify this axiom
+scheme, producing characteristically different logical behaviors.</p>
+<p>The matrix of reflexive axiom schemata determines what structures and
+operations a logic can prove. If a logic proves every reflexive axiom
+scheme of a given form, it will have specific structures or operations
+and a characterizing cut metarule. If a logic does not have
+corresponding structures and operations, then either they’re implicit or
+the logic is consistently characterized with respect to the reflexive
+axiom scheme.</p>
+<h3 class="unnumbered" id="cut-rules-and-sub-rule-preservation">Cut
+Rules and Sub-Rule Preservation</h3>
+<p>A fundamental characteristic of substructural calculi is that they
+preserve cut rules such that none contradict the cut rule of LK. They
+are all sub-rules of the LK cut rule. The degree of granularity requires
+examining each component:</p>
+<ul>
+<li><p>Cut elimination procedures</p></li>
+<li><p>Cut as a meta-rule</p></li>
+<li><p>Restrictions on cut applicability</p></li>
+<li><p>Relationship between cut and other structural rules</p></li>
+</ul>
+<p>The preservation of cut rules determines the computational complexity
+and proof-theoretic properties of each substructural logic.</p>
+<h3 class="unnumbered"
+id="structural-rules-the-logical-parameters">Structural Rules: The
+Logical Parameters</h3>
+<p>Structural rules serve as the primary parameters that distinguish
+substructural calculi:</p>
+<h4 class="unnumbered" id="weakening-rules">Weakening Rules</h4>
+<ul>
+<li><p>Left weakening: <span class="math inline">$\frac{\Gamma \vdash
+\Delta}{\Gamma, A \vdash \Delta}$</span></p></li>
+<li><p>Right weakening: <span class="math inline">$\frac{\Gamma \vdash
+\Delta}{\Gamma \vdash \Delta, A}$</span></p></li>
+<li><p>Their presence or absence fundamentally alters the logic’s
+character</p></li>
+</ul>
+<h4 class="unnumbered" id="contraction-rules">Contraction Rules</h4>
+<ul>
+<li><p>Left contraction: <span class="math inline">$\frac{\Gamma, A, A
+\vdash \Delta}{\Gamma \vdash \Delta}$</span></p></li>
+<li><p>Right contraction: <span class="math inline">$\frac{\Gamma \vdash
+\Delta, A, A}{\Gamma \vdash \Delta, A}$</span></p></li>
+<li><p>Critical for resource-sensitive reasoning and the explosion
+principle</p></li>
+</ul>
+<h4 class="unnumbered" id="exchange-rules">Exchange Rules</h4>
+<ul>
+<li><p>Permutation of antecedent formulas</p></li>
+<li><p>Permutation of succedent formulas</p></li>
+<li><p>Essential for non-commutative logics</p></li>
+</ul>
+<p>The matrix or vectorization of logical relations between units,
+axioms, rules, and operations is a key result that allows automatic
+construction of various categorizable logics in relation to each
+other.</p>
+<h3 class="unnumbered" id="operational-rules">Operational Rules</h3>
+<p>The operational rules define connectives and their
+introduction/elimination:</p>
+<h4 class="unnumbered" id="multiplicative-connectives">Multiplicative
+Connectives</h4>
+<ul>
+<li><p>Tensor (<span class="math inline">⊗</span>) and par (<span
+class="math inline">℘</span>)</p></li>
+<li><p>Their structural rules and interactions</p></li>
+<li><p>Relationship to linear logic’s resource semantics</p></li>
+</ul>
+<h4 class="unnumbered" id="additive-connectives">Additive
+Connectives</h4>
+<ul>
+<li><p>Conjunction (<span class="math inline">&amp;</span>) and
+disjunction (<span class="math inline">⊕</span>)</p></li>
+<li><p>Additive vs. multiplicative behavior</p></li>
+<li><p>Proof-theoretic significance</p></li>
+</ul>
+<h4 class="unnumbered" id="exponential-modality">Exponential
+Modality</h4>
+<ul>
+<li><p>Of course (<span class="math inline">!</span>) and why not (<span
+class="math inline">?</span>)</p></li>
+<li><p>Resource management in linear logic</p></li>
+<li><p>Relationship to structural rules</p></li>
+</ul>
+<h3 class="unnumbered"
+id="functional-incompleteness-and-classical-results">Functional
+Incompleteness and Classical Results</h3>
+<p>The substructural calculi exhibit classical functional
+incompleteness, which is related to:</p>
+<ul>
+<li><p>The inability to derive certain classical tautologies</p></li>
+<li><p>Independence results between different logical
+principles</p></li>
+<li><p>The relationship between syntax and semantics in restricted
+systems</p></li>
+</ul>
+<p>This functional incompleteness is not a deficiency but a feature that
+enables logical pluralism Catty advocates. The relationship between
+material implication and minimal logic is explored in detail by Diener
+and McKubre-Jordens <span class="citation"
+data-cites="diener2016classifying"></span>, who classify various forms
+of material implication over minimal logic.</p>
+<h3 class="unnumbered"
+id="from-lk-to-substructural-calculi-the-restriction-matrix">From LK to
+Substructural Calculi: The Restriction Matrix</h3>
+<p>Every valid substructural calculus can be characterized by its
+restriction matrix relative to LK:</p>
+<table>
+<caption>Restriction matrix for major logics</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">Logic</th>
+<th style="text-align: center;">Weakening</th>
+<th style="text-align: center;">Contraction</th>
+<th style="text-align: center;">Exchange</th>
+<th style="text-align: center;">Cut Rule</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">LK</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Full</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">LJ</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Restricted</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">LL</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Linear</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">LM</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">No</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Minimal</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">LDJ</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Yes</td>
+<td style="text-align: center;">Dual</td>
+</tr>
+</tbody>
+</table>
+<p>This matrix determines the computational and proof-theoretic
+properties of each logic. The existence of valid substructural calculi
+depends on which combinations of restrictions preserve consistency and
+meaningful proof theory.</p>
+<h3 class="unnumbered" id="dualization-and-asymmetry">Dualization and
+Asymmetry</h3>
+<p>The asymmetry between left and right structural rules (e.g., LJ vs
+LDJ) produces distinct logical behaviors:</p>
+<ul>
+<li><p>LJ: Trivializes structural rules on the right (single
+conclusion)</p></li>
+<li><p>LDJ: Trivializes structural rules on the left (single
+antecedent)</p></li>
+<li><p>This asymmetry is fundamental to understanding the logic
+space</p></li>
+</ul>
+<p>Understanding these asymmetries is crucial for constructing the full
+categorical model of substructural logics and their relationships.</p>
+<h2 class="unnumbered" id="genesis-where-catty-comes-from">Genesis —
+Where Catty Comes From</h2>
+<h3 class="unnumbered" id="the-resource-sensitive-revolution">The
+Resource-Sensitive Revolution</h3>
+<p>Classical linear logic (CLL) is a locally terminal object with
+respect to intuitionistic linear logic, dual intuitionistic linear logic
+or co-constructive linear logic, and monotonic linear logic. Monotonic
+linear logic, defined as a sublogic of Multiplicative-Additive Linear
+Logic without negation, XOR, Bicon, implication (lollipop), or
+non-implication, is initial. It is possible that additive-only linear
+logic is the further correct restriction as intuitionistic linear logic
+defines multiplicative conjunction and dual intuitionistic linear logic
+defines multiplicative disjunction.</p>
+<p>Given that linear logic extends to classical logic by inclusion of
+the weakening and contraction rules on left and right, the fact that
+there exists an initial logic with respect to LL that is not LL entails
+that the initial logic is also initial with respect to LK when LK is
+fixed as the terminal logic.</p>
+<h3 class="unnumbered"
+id="structural-rules-and-the-anatomy-of-sequents">Structural Rules and
+the Anatomy of Sequents</h3>
+<p>Structural rules (weakening, contraction, and exchange) serve as
+logical parameters. Catty incorporates initial logics specifically
+related to a sublogic of both Ardeshir and Vaezian’s U and Sambin et
+al’s Basic Sequent Calculus. The existence of U entails dualizations of
+U such that U and the dualizations share a common sublogic that excludes
+specifically implication, provability predicates, interpretation
+functions, non-implication, non-provability predicates, and
+non-interpretation functions. Implication and non-implication are
+extensions of the common sublogic.</p>
+<h3 class="unnumbered"
+id="constructive-foundations-and-the-witness-principle">Constructive
+Foundations and the Witness Principle</h3>
+<p>The BHK interpretation and Kripke semantics are most directly
+applicable to intuitionistic logic, which is one logic in the coordinate
+space. We can dualize them for LDJ or co-constructive logic where we
+have constructive assumptions but non-constructive consequences in proof
+theoretical terms or we have non-constructive assumptions but
+constructive consequences in refutation theoretical terms.</p>
+<p>LDJ and co-constructive subclassical logics are more conservative in
+their non-constructive proof consequences than classical logic, and this
+bifurcates the non-constructive classes into at least two classes where
+the anti-theorems of LDJ are a strict subset of the anti-theorems of LK.
+The law of non-contradiction is independent of LDJ unlike with LK, and
+LDJ invalidates double negation introduction which has consequences for
+many anti-theorems that are dual to double negation elimination,
+Peirce’s law, LEM, weak LEM, Tarski’s formula, and theorems that are
+enumerated in detail by Diener and McKubre-Jordens (2016).</p>
+<p>We are not imposing BHK and Kripke semantics on every logic; this is
+not possible. Instead, we are documenting and demonstrating how such
+correspondences and semantics relate to each other implicitly or
+explicitly through morphisms and dualizations. Specific fragments of BHK
+and Kripke semantics survive into the common sublogic, but the proper
+interpretations necessarily change because the common sublogic of LJ and
+LDJ has more restrictive syntax than either LJ or LDJ alone. BHK and
+dual-BHK have to be intersected to get the commonality of BHK and
+dual-BHK.</p>
+<h3 class="unnumbered"
+id="refutation-as-co-constructive-operation">Refutation as
+Co-Constructive Operation</h3>
+<p>Using the language of James Trafford, Catty integrates some
+refutations as co-constructive operations. There are non-constructive
+refutations at least in LK, though if we use a version of LK that is
+restricted to its polytime decidable fragment(s), then we would almost
+assuredly be restricting to refutations that are co-constructive to the
+corresponding constructive proofs. Catty draws from Nelson’s
+constructive negation, Igor Urbas’s Dual-Intuitionistic Logic <span
+class="citation" data-cites="urbas1996dual"></span>, and James
+Trafford’s co-constructive logic <span class="citation"
+data-cites="trafford2015coconstructive"></span>.</p>
+<h3 class="unnumbered" id="the-great-unification">The Great
+Unification</h3>
+<p>The Curry-Howard-Lambek correspondence has greatest direct affinity
+with LJ and intuitionistic logic. We need to formalize an explicit dual
+form, and we need to construct a commonality between the CHK
+correspondence and its dual. Catty’s DSL is a computational witness of
+this correspondence and its dual.</p>
+<h3 class="unnumbered"
+id="paraconsistent-reasoning-and-philosophy">Paraconsistent Reasoning
+and Philosophy</h3>
+<p>Logics that avoid explosion (Ex Falso Quodlibet) are represented,
+drawing from the work of João Marcos, Priest, Restall, Walter Carnielli,
+and Paola Zizzi.</p>
+<h3 class="unnumbered" id="quantum-logic-and-non-distributivity">Quantum
+Logic and Non-Distributivity</h3>
+<p>Lq is the proper "basic quantum logic" whereas the Birkhoff-Neumann
+logic is a distinct entity that is A quantum logic but not THE quantum
+logic, and it is more semi-classical than properly quantum. Zizzi’s work
+establishes Lq as the first logic which is substructural, many-valued
+and quantum at the same time. Lq introduces:</p>
+<ul>
+<li><p>A quantum metalanguage where metalinguistic links are quantum
+correlations</p></li>
+<li><p>A quantum cut rule interpreted as quantum projective
+measurement</p></li>
+<li><p>Quantum superpositions and entanglement as logical
+connectives</p></li>
+<li><p>An EPR rule allowing simultaneous proof of entangled
+theorems</p></li>
+<li><p>The qubit theorem as logical description of optical qubit state
+preparation</p></li>
+</ul>
+<p>Based on Paola Zizzi’s quantum metalanguage <span class="citation"
+data-cites="zizzi2010quantum"></span> and Sambin’s Basic Logic.</p>
+<h3 class="unnumbered" id="category-theory-as-metalanguage">Category
+Theory as Metalanguage</h3>
+<p>Category theory <span class="citation"
+data-cites="maclane1971categories pierce1991category lawvere1963functorial"></span>
+provides the formal metalanguage for Catty’s structure.</p>
+<h2 class="unnumbered"
+id="architecture-the-lattice-of-logics">Architecture — The Lattice of
+Logics</h2>
+<h3 class="unnumbered" id="the-two-dimensional-lattice-structure">The
+Two-Dimensional Lattice Structure</h3>
+<p>The lattice is organized along two primary axes that define the
+logic-space:</p>
+<ul>
+<li><p><strong>Horizontal Axis</strong>: Represents sequent
+restrictions. It is symmetric at the origin, with single-succedent
+restrictions on the right and single-antecedent restrictions on the
+left.</p></li>
+<li><p><strong>Vertical Axis</strong>: Represents structural rule
+configurations (weakening, contraction, exchange).</p></li>
+</ul>
+<p>The 2D lattice serves as a basis for the category that constitutes
+the thesis.</p>
+<h3 class="unnumbered" id="initial-logics">Initial Logics</h3>
+<p>Catty utilizes "initial logics" as the language for categorizable
+logics, avoiding namespace clashes with existing "Minimal" or "Basic"
+logics. Initial logics are relative to the category in question.</p>
+<p>LM serves as an initial common sublogic for variants such as LJ and
+LDJ. It is related to the work of Sambin <span class="citation"
+data-cites="sambin2000basic"></span> as a reduction or fragment of Basic
+Logic.</p>
+<p>LL serves as an initial object in substructural contexts, containing
+three sub-linear logics that reflect linearized versions of foundational
+basis logics (LM, LJ, and LDJ).</p>
+<h3 class="unnumbered" id="terminal-objects-and-closure">Terminal
+Objects and Closure</h3>
+<p>LK is the terminal logic in the category of subclassical logics.
+Every logic in the category extends toward classical closure.</p>
+<h3 class="unnumbered" id="geometric-and-cubic-structures">Geometric and
+Cubic Structures</h3>
+<p>The basis of the category can be represented as a cubic structure or
+polytope, where each dimension represents the inclusion of symmetric
+structural rules. This can be complexified by examining the asymmetry
+between left and right structural rules (e.g., LJ vs LDJ).</p>
+<h2 class="unnumbered" id="morphisms-how-logics-relate">Morphisms — How
+Logics Relate</h2>
+<h3 class="unnumbered" id="extension-morphisms">Extension Morphisms</h3>
+<p>The addition of specific axioms is generally equivalent in the
+sequent presentation to the addition of specific operations,
+combinations of operations, or combinations of operations and structural
+rules. This matrix or vectorization of the logical relations between
+units, axioms, rules, and operations is a key result that allows
+automatic construction of various categorizable logics in relation to
+each other.</p>
+<p>This is deeply related to the form of the reflexive axiom schemata
+for sequent calculi. If a logic proves every reflexive axiom scheme of a
+given form, it will have specific structures or operations and a
+characterizing cut metarule. If the logic does not have the
+corresponding structures and operations, then either they’re implicit or
+the logic is inconsistently characterized with respect to the reflexive
+axiom scheme. This is again related to the classical functional
+incompleteness of the subclassical logics.</p>
+<h3 class="unnumbered" id="interpretation-morphisms">Interpretation
+Morphisms</h3>
+<p>Given that the initial logics are closely related to or isomorphic to
+logics of qubits, the embedding problems are related to the embedding of
+quantum logics into classical logics and the embedding of classical
+logic into intuitionistic or linear logic. Interpretation morphisms
+represent these fundamental embedding relationships and their
+preservation or loss of logical properties.</p>
+<h3 class="unnumbered" id="functors-between-logic-categories">Functors
+Between Logic Categories</h3>
+<p>Higher-order morphisms that map between different logical frameworks
+while preserving their internal structure, such as the Curry-Howard
+functor.</p>
+<h2 class="unnumbered"
+id="universes-logics-as-computational-substrates">Universes — Logics as
+Computational Substrates</h2>
+<h3 class="unnumbered" id="the-logic-universe-correspondence">The
+Logic-Universe Correspondence</h3>
+<p>Establishing each logic as a distinct computational universe with
+specific tradeoffs. Catty provides the constraints necessary to
+construct the basis of each logic on demand.</p>
+<h3 class="unnumbered"
+id="rust-as-partial-linear-logic-implementation">Rust as Partial Linear
+Logic Implementation</h3>
+<p>Empirical evidence of resource-sensitive reasoning in modern systems
+programming.</p>
+<h3 class="unnumbered" id="decidability-boundaries">Decidability
+Boundaries</h3>
+<p>Exploring tractable fragments of substructural logics, such as Light
+Linear Logic, and their computational implications.</p>
+<h2 class="unnumbered" id="witness-proofs-as-programs">Witness — Proofs
+as Programs</h2>
+<h3 class="unnumbered" id="the-catty-dsl">The Catty DSL</h3>
+<p>Catty is viewed as a library of functionality and relationality. The
+DSL provides a means to span the space from a given basis, utilizing
+Directed Acyclic Graph (DAG) and regular language representations of the
+category.</p>
+<h3 class="unnumbered"
+id="commutative-diagrams-as-computation">Commutative Diagrams as
+Computation</h3>
+<p>Treating categorical diagrams as executable proofs that verify the
+structure of the logic-space.</p>
+<h3 class="unnumbered" id="library-of-relationality">Library of
+Relationality</h3>
+<p>The repository contains working prototypes demonstrating the
+functionality of the Catty library and the toolchains necessary for
+tractable categorical reasoning.</p>
+<h2 class="unnumbered"
+id="formalization-rdfowl-ontologies">Formalization — RDF/OWL
+Ontologies</h2>
+<h3 class="unnumbered"
+id="categorical-schema-and-knowledge-graphs">Categorical Schema and
+Knowledge Graphs</h3>
+<p>Formalizing category theory for logics using RDF/OWL to enable
+machine reasoning.</p>
+<h3 class="unnumbered"
+id="decomposition-of-rules-and-axioms">Decomposition of Rules and
+Axioms</h3>
+<p>Decomposing each rule and axiom into reusable components, allowing
+for the just-in-time construction of arbitrary logics. This approach is
+directly analogous to programming language specifications or APIs.</p>
+<h2 class="unnumbered"
+id="categorical-semantic-audit-rdfowl-schemas-and-knowledge-graphs">Categorical
+Semantic Audit: RDF/OWL Schemas and Knowledge Graphs</h2>
+<p>This chapter presents a systematic audit of RDF/OWL schemas and
+knowledge graphs that support a category-theoretic model of formal
+logics. We document existing semantic resources, their categorical
+structures, and their applicability to representing logics as objects in
+a category with morphisms representing sequent restrictions and
+structural rules.</p>
+<h3 id="category-theory-foundation-rdfowl-representations">Category
+Theory Foundation: RDF/OWL Representations</h3>
+<h4 id="dbpedia-category-theory-schema">DBPedia Category Theory
+Schema</h4>
+<p>DBPedia provides a comprehensive RDF representation of category
+theory concepts extracted from Wikipedia. The following categories and
+properties are relevant:</p>
+<h5 id="core-categorical-concepts">Core Categorical Concepts</h5>
+<ul>
+<li><p><code>dbo:Category (mathematics)</code>: The primary concept for
+mathematical categories</p></li>
+<li><p><code>dbo:Category (topos theory)</code>: Specific to topoi as
+categories</p></li>
+<li><p><code>dbo:Functor</code>: Maps between categories with
+preservation of structure</p></li>
+<li><p><code>dbo:Monoid</code>: Single-object categories underlying
+algebraic structures</p></li>
+<li><p><code>dbo:Group</code>: Categories with invertible
+morphisms</p></li>
+<li><p><code>dbo:Limit (category theory)</code>: Universal constructions
+(products, pullbacks, etc.)</p></li>
+<li><p><code>dbo:Colimit (category theory)</code>: Dual
+constructions</p></li>
+<li><p><code>dbo:Adjoint functors</code>: Fundamental relationships
+between categories</p></li>
+<li><p><code>dbo:Natural transformation</code>: Morphisms between
+functors</p></li>
+</ul>
+<h5 id="key-properties">Key Properties</h5>
+<ul>
+<li><p><code>dbo:domain</code>: Domain of a morphism or functor</p></li>
+<li><p><code>dbo:codomain</code>: Codomain of a morphism or
+functor</p></li>
+<li><p><code>dbo:morphism</code>: Composition structure</p></li>
+<li><p><code>dbo:object</code>: Objects in a category</p></li>
+</ul>
+<p><strong>Assessment</strong>: DBPedia provides excellent coverage of
+basic categorical concepts but lacks specific representations for
+logics-as-objects or the two-dimensional lattice structure needed for
+Catty. The schema is MIT-licensed and can be extended or referenced.</p>
+<h4 id="wikidata-mathematical-ontology">Wikidata Mathematical
+Ontology</h4>
+<p>Wikidata provides a more structured ontology with explicit typing and
+property definitions:</p>
+<ul>
+<li><p><code>Q719395</code>: Category (mathematics)
+<code>wd:Q719395</code></p></li>
+<li><p><code>Q864475</code>: Functor <code>wd:Q864475</code></p></li>
+<li><p><code>Q1442189</code>: Natural transformation
+<code>wd:Q1442189</code></p></li>
+<li><p><code>Q357858</code>: Adjoint functors
+<code>wd:Q357858</code></p></li>
+</ul>
+<p>Key properties for categorical relationships:</p>
+<ul>
+<li><p><code>P155</code>: “domain” for morphisms/functors</p></li>
+<li><p><code>P156</code>: “codomain” for morphisms/functors</p></li>
+<li><p><code>P154</code>: “inverse element” for isomorphisms</p></li>
+<li><p><code>P1552</code>: “maps to” for functors</p></li>
+</ul>
+<p><strong>Assessment</strong>: Wikidata’s ontology is CC0 (public
+domain), making it highly compatible with Catty. However, it requires
+significant extension to model logics as categorical objects with
+sequent-specific properties.</p>
+<h3 id="existing-logic-ontologies-with-categorical-potential">Existing
+Logic Ontologies with Categorical Potential</h3>
+<h4 id="colore-common-logic-ontology-repository">COLORE (Common Logic
+Ontology RepOsitory)</h4>
+<p>COLORE is a repository of modular ontologies that includes:</p>
+<ul>
+<li><p>DOLCE (Descriptive Ontology for Linguistic and Cognitive
+Engineering)</p></li>
+<li><p>BFO (Basic Formal Ontology)</p></li>
+<li><p>Logic-specific modules for first-order logic</p></li>
+</ul>
+<p><strong>Relevance</strong>: COLORE provides foundational ontology
+structures but lacks categorical semantics. License: Creative Commons
+Attribution 4.0. Can be extended with categorical axioms.</p>
+<h4 id="foundational-ontology-of-logic-fol-ontology">Foundational
+Ontology of Logic (FOL-ontology)</h4>
+<p>Several academic projects have attempted to formalize logic systems
+in OWL:</p>
+<ul>
+<li><p>Logic-specific ontologies defining proof systems, inference
+rules, and sequent structures</p></li>
+<li><p>Typically model logics as classes with properties (e.g.,
+<code>hasStructuralRule</code>, <code>hasSequentForm</code>)</p></li>
+</ul>
+<p><strong>Assessment</strong>: Most existing logic ontologies treat
+logics as flat classes without categorical structure. However, they
+provide useful property definitions that can be incorporated into
+Catty’s categorical model.</p>
+<h3 id="type-theory-knowledge-graphs">Type Theory Knowledge Graphs</h3>
+<h4 id="nlab-semantic-linked-data">nLab Semantic Linked Data</h4>
+<p>The nLab (categorically-focused mathematics wiki) has experimental
+RDF exports:</p>
+<ul>
+<li><p>Category theory entries with structured content</p></li>
+<li><p>Type theory connections</p></li>
+<li><p>Curry-Howard correspondences</p></li>
+</ul>
+<p><strong>Relevance</strong>: nLab provides high-quality categorical
+content but limited RDF structure. License: Creative Commons
+Attribution-ShareAlike 3.0. Can be referenced for external
+discovery.</p>
+<h4 id="hott-homotopy-type-theory-knowledge-graph">HoTT (Homotopy Type
+Theory) Knowledge Graph</h4>
+<p>The HoTT community has developed semantic resources:</p>
+<ul>
+<li><p>OWL representations of type-theoretic constructs</p></li>
+<li><p>Connections to categorical semantics (topoi, <span
+class="math inline">∞</span>-groupoids)</p></li>
+<li><p>Proof representations as paths</p></li>
+</ul>
+<p><strong>Assessment</strong>: HoTT resources are valuable for
+Curry-Howard modeling but are specialized. License varies by
+project.</p>
+<h3 id="proof-assistant-export-formats">Proof Assistant Export
+Formats</h3>
+<h4 id="coq-categorical-logic-libraries">Coq Categorical Logic
+Libraries</h4>
+<p>Several Coq libraries export categorical structures:</p>
+<ul>
+<li><p>Mathematical Components (MathComp) with categorical
+modules</p></li>
+<li><p>Univalent Foundations libraries</p></li>
+<li><p>Export to XML/JSON formats</p></li>
+</ul>
+<h4 id="lean-categorical-logic">Lean Categorical Logic</h4>
+<p>Lean 3/4 has extensive categorical logic libraries:</p>
+<ul>
+<li><p><code>Mathlib.CategoryTheory</code>: Comprehensive category
+theory formalization</p></li>
+<li><p>Export to Lean’s internal representation (structured
+data)</p></li>
+</ul>
+<p><strong>Assessment</strong>: Proof assistants provide high-fidelity
+categorical representations but require custom parsing. Most libraries
+are Apache 2.0 licensed (compatible).</p>
+<h4 id="isabellehol-categorical-exports">Isabelle/HOL Categorical
+Exports</h4>
+<p>Isabelle exports include:</p>
+<ul>
+<li><p>AFP (Archive of Formal Proofs) categorical logic entries</p></li>
+<li><p>Export to Isabelle/ML or Isabelle/Scala data structures</p></li>
+</ul>
+<h3 id="mathematical-semantic-resources">Mathematical Semantic
+Resources</h3>
+<h4 id="openmath-content-dictionaries">OpenMath Content
+Dictionaries</h4>
+<p>OpenMath provides XML-based encodings of mathematical structures:</p>
+<ul>
+<li><p><code>category1.cd</code>: Basic category theory symbols</p></li>
+<li><p><code>fns1.cd</code>: Function and morphism structures</p></li>
+<li><p><code>logic1.cd</code>: Logic-specific symbols</p></li>
+</ul>
+<p><strong>License</strong>: OpenMath is BSD-style licensed
+(compatible). Can be transformed to RDF/OWL for Catty.</p>
+<h4 id="omdoc-with-category-theory-markup">OMDoc with Category Theory
+Markup</h4>
+<p>OMDoc (Open Mathematical Documents) supports:</p>
+<ul>
+<li><p>Structured mathematical documents with semantic markup</p></li>
+<li><p>Category theory specific tags</p></li>
+<li><p>Interoperability with RDF/OWL via OMDoc-to-RDF
+transformations</p></li>
+</ul>
+<h4 id="proofwiki-categorical-sections">ProofWiki Categorical
+Sections</h4>
+<p>ProofWiki has structured content on:</p>
+<ul>
+<li><p>Category theory definitions</p></li>
+<li><p>Sequent calculus categorically</p></li>
+<li><p>Proof-theoretic semantics</p></li>
+</ul>
+<p><strong>Assessment</strong>: ProofWiki content is Creative Commons
+Attribution-ShareAlike 3.0. No native RDF but can be semantically
+annotated.</p>
+<h3 id="proposed-categorical-schema-for-catty">Proposed Categorical
+Schema for Catty</h3>
+<p>Based on the audit, we propose the following RDF/OWL schema extension
+for representing logics categorically.</p>
+<h4 id="core-classes">Core Classes</h4>
+<pre><code>:LogicCategory a owl:Class ;
+    rdfs:label &quot;Logic Category&quot; ;
+    rdfs:comment &quot;A category whose objects are formal logics&quot; ;
+    rdfs:subClassOf :Category .
+
+:Logic a owl:Class ;
+    rdfs:label &quot;Logic&quot; ;
+    rdfs:comment &quot;A formal logic characterized by a logical signature and axioms&quot; ;
+    rdfs:subClassOf :Object .
+
+:LogicalTheory a owl:Class ;
+    rdfs:label &quot;Logical Theory&quot; ;
+    rdfs:comment &quot;A theory consisting of signatures and axioms&quot; ;
+    rdfs:subClassOf :Object .
+
+:LogicalSignature a owl:Class ;
+    rdfs:label &quot;Logical Signature&quot; ;
+    rdfs:comment &quot;The set of symbols and connectives used by a logic&quot; .
+
+:LogicalAxiom a owl:Class ;
+    rdfs:label &quot;Logical Axiom&quot; ;
+    rdfs:comment &quot;An axiom that is part of the logic&#39;s definition&quot; .</code></pre>
+<h4 id="key-properties-for-logics-as-objects">Key Properties for
+Logics-as-Objects</h4>
+<pre><code>:hasLogicalSignature a owl:ObjectProperty ;
+    rdfs:domain [:Logic, :LogicalTheory] ;
+    rdfs:range :LogicalSignature .
+
+:hasLogicalAxiom a owl:ObjectProperty ;
+    rdfs:domain [:Logic, :LogicalTheory] ;
+    rdfs:range :LogicalAxiom .
+
+:hasStructuralRule a owl:ObjectProperty ;
+    rdfs:domain :Logic ;
+    rdfs:range :StructuralRule ;
+    rdfs:label &quot;has structural rule&quot; .
+
+:LHSWeakening a owl:Class ; rdfs:subClassOf :Weakening .
+:RHSWeakening a owl:Class ; rdfs:subClassOf :Weakening .
+:LHSContraction a owl:Class ; rdfs:subClassOf :Contraction .
+:RHSContraction a owl:Class ; rdfs:subClassOf :Contraction .</code></pre>
+<h4 id="morphism-types">Morphism Types</h4>
+<pre><code>:LogicMorphism a owl:Class ;
+    rdfs:label &quot;Logic Morphism&quot; ;
+    rdfs:subClassOf :Morphism .
+
+:Extension a owl:Class ;
+    rdfs:subClassOf :LogicMorphism ;
+    rdfs:label &quot;Extension&quot; ;
+    rdfs:comment &quot;A morphism where the target extends the source&quot; .
+
+:Interpretation a owl:Class ;
+    rdfs:subClassOf :LogicMorphism ;
+    rdfs:label &quot;Interpretation&quot; ;
+    rdfs:comment &quot;Morphism representing interpretability&quot; .</code></pre>
+<h4 id="two-dimensional-lattice-as-category">Two-Dimensional Lattice as
+Category</h4>
+<p>The lattice is modeled as a poset category:</p>
+<pre><code>:LogicLattice a owl:Class ;
+    rdfs:subClassOf :PosetCategory ;
+    rdfs:label &quot;Logic Lattice&quot; ;
+    rdfs:comment &quot;The 2D lattice of logics organized by sequent restrictions and structural rules&quot; .
+
+:latticeCoordinate a owl:DatatypeProperty ;
+    rdfs:domain :Logic ;
+    rdfs:range xsd:string ;
+    rdfs:comment &quot;Coordinate pair (x,y) in the lattice&quot; .</code></pre>
+<h3 id="curry-howard-categorical-model">Curry-Howard Categorical
+Model</h3>
+<h4 id="equivalence-of-categories">Equivalence of Categories</h4>
+<p>The Curry-Howard correspondence is modeled as a categorical
+equivalence:</p>
+<pre><code>:CurryHowardEquivalence a owl:Class ;
+    rdfs:subClassOf :EquivalenceOfCategories ;
+    rdfs:label &quot;Curry-Howard Equivalence&quot; ;
+    rdfs:comment &quot;The equivalence between Logic-as-Category and Type-Theory-as-Category&quot; .
+
+:LogicAsCategory a owl:Class ;
+    rdfs:subClassOf :Category ;
+    rdfs:label &quot;Logic as Category&quot; ;
+    rdfs:comment &quot;Category of logics with proof-theoretic morphisms&quot; .
+
+:TypeTheoryAsCategory a owl:Class ;
+    rdfs:subClassOf :Category ;
+    rdfs:label &quot;Type Theory as Category&quot; ;
+    rdfs:comment &quot;Category of type theories with type-theoretic morphisms&quot; .
+
+:proofAsProgram a owl:ObjectProperty ;
+    rdfs:domain :LogicMorphism ;
+    rdfs:range :TypeMorphism ;
+    rdfs:label &quot;proof as program&quot; ;
+    rdfs:comment &quot;Correspondence between proof transformations and program transformations&quot; .</code></pre>
+<h3 id="categorical-morphisms-and-structural-relevance">Categorical
+Morphisms and Structural Relevance</h3>
+<p>Morphisms in Catty represent the extension or interpretation of
+logics. Specifically, extending a logic by adding an axiom (e.g., LEM,
+LNC, Explosion) or a structural rule (e.g., Weakening, Contraction) is
+formalized as a categorical morphism.</p>
+<p>The presence of specific axioms is structurally linked to the
+configuration of structural rules:</p>
+<ul>
+<li><p><strong>Full structural rules</strong> (LK) allow for the
+validation of all classical principles.</p></li>
+<li><p><strong>Resource-sensitive rules</strong> (LL) correspond to the
+absence of axioms related to cloning and erasure.</p></li>
+<li><p><strong>Sequent restrictions</strong> (LHS/RHS) directly impact
+the validity of dual classical principles like LEM and LNC.</p></li>
+</ul>
+<h3 id="integration-roadmap">Integration Roadmap</h3>
+<h4 id="direct-import-resources">Direct Import Resources</h4>
+<p>The following resources can be directly imported into Catty’s
+ontology:</p>
+<ol>
+<li><p><strong>DBPedia Category Theory</strong>: Reference for basic
+categorical concepts</p></li>
+<li><p><strong>Wikidata Mathematics</strong>: CC0-licensed, can be
+linked directly</p></li>
+<li><p><strong>OpenMath Content Dictionaries</strong>: Transform to
+RDF/OWL</p></li>
+</ol>
+<h4 id="extension-required-resources">Extension Required Resources</h4>
+<p>These resources provide foundations but require categorical
+extensions:</p>
+<ol>
+<li><p><strong>COLORE</strong>: Add categorical axioms and
+logic-as-object modeling</p></li>
+<li><p><strong>FOL Ontologies</strong>: Add morphism and functor
+relationships</p></li>
+<li><p><strong>nLab RDF</strong>: Add structured categorical
+definitions</p></li>
+</ol>
+<h4 id="reference-only-resources">Reference-Only Resources</h4>
+<p>Use these for external discovery and human-readable
+documentation:</p>
+<ol>
+<li><p><strong>ProofWiki</strong>: Cross-reference definitions</p></li>
+<li><p><strong>Stanford Encyclopedia of Philosophy</strong>: Semantic
+grounding</p></li>
+<li><p><strong>nLab</strong>: Deep categorical insights (reference
+only)</p></li>
+</ol>
+<h4 id="agent-based-reasoning-support">Agent-Based Reasoning
+Support</h4>
+<p>For SynthPlayground agent reasoning, prioritize:</p>
+<ol>
+<li><p><strong>Well-structured RDF/OWL</strong>: Full OWL 2 RL profile
+for reasoning</p></li>
+<li><p><strong>JSON-LD Contexts</strong>: Machine-readable semantic
+descriptions</p></li>
+<li><p><strong>SHACL Shapes</strong>: Validation constraints for
+logic-lattice queries</p></li>
+</ol>
+<h3 id="license-compatibility-assessment">License Compatibility
+Assessment</h3>
+<p>All referenced external resources are assessed for compatibility with
+Catty’s **GNU Affero General Public License v3.0 (AGPL-3.0)**.</p>
+<table>
+<caption>License compatibility assessment for Catty</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><strong>Resource</strong></th>
+<th style="text-align: left;"><strong>License</strong></th>
+<th style="text-align: left;"><strong>Catty Compatibility</strong></th>
+<th style="text-align: left;"><strong>Notes</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">DBPedia</td>
+<td style="text-align: left;">CC BY-SA 3.0</td>
+<td style="text-align: left;">Compatible (Attribution)</td>
+<td style="text-align: left;">Must credit source</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Wikidata</td>
+<td style="text-align: left;">CC0</td>
+<td style="text-align: left;">Fully Compatible</td>
+<td style="text-align: left;">Public domain</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">OpenMath</td>
+<td style="text-align: left;">BSD 3-Clause</td>
+<td style="text-align: left;">Fully Compatible</td>
+<td style="text-align: left;">Permissive</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">COLORE</td>
+<td style="text-align: left;">CC BY 4.0</td>
+<td style="text-align: left;">Compatible (Attribution)</td>
+<td style="text-align: left;">Must credit source</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">nLab</td>
+<td style="text-align: left;">CC BY-SA 3.0</td>
+<td style="text-align: left;">Compatible (Attribution)</td>
+<td style="text-align: left;">Share-alike required</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Coq Libraries</td>
+<td style="text-align: left;">Apache 2.0</td>
+<td style="text-align: left;">Fully Compatible</td>
+<td style="text-align: left;">Permissive</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Lean MathLib</td>
+<td style="text-align: left;">Apache 2.0</td>
+<td style="text-align: left;">Fully Compatible</td>
+<td style="text-align: left;">Permissive</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Isabelle AFP</td>
+<td style="text-align: left;">BSD 3-Clause</td>
+<td style="text-align: left;">Fully Compatible</td>
+<td style="text-align: left;">Permissive</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conclusions-and-recommendations">Conclusions and
+Recommendations</h3>
+<h4 id="summary-of-findings">Summary of Findings</h4>
+<ol>
+<li><p><strong>Category Theory Coverage</strong>: DBPedia and Wikidata
+provide good coverage of basic categorical concepts but lack
+logic-specific modeling.</p></li>
+<li><p><strong>Logic Ontologies</strong>: Existing logic ontologies
+model logics as flat classes without categorical structure.</p></li>
+<li><p><strong>Type Theory Resources</strong>: HoTT and proof assistant
+exports provide categorical semantics but are specialized.</p></li>
+<li><p><strong>License Compatibility</strong>: All major resources are
+compatible with Catty (MIT/Apache-2.0 based thesis).</p></li>
+</ol>
+<h4 id="recommended-approach">Recommended Approach</h4>
+<ol>
+<li><p><strong>Custom Schema Development</strong>: Create a
+Catty-specific RDF/OWL schema extending standard categorical
+concepts.</p></li>
+<li><p><strong>Selective Integration</strong>: Import from Wikidata
+(CC0) and OpenMath (BSD) for foundations.</p></li>
+<li><p><strong>Cross-Reference Only</strong>: Use DBPedia, nLab,
+ProofWiki for external discovery and human readability.</p></li>
+<li><p><strong>Proof Assistant Parsing</strong>: Develop custom parsers
+for Coq/Lean/Isabelle exports as needed.</p></li>
+</ol>
+<h4 id="next-steps">Next Steps</h4>
+<ol>
+<li><p>Implement the proposed categorical schema in RDF/OWL</p></li>
+<li><p>Create JSON-LD contexts for agent-based reasoning</p></li>
+<li><p>Develop import scripts for compatible resources</p></li>
+<li><p>Create cross-reference links to external resources</p></li>
+</ol>
+<h2 class="unnumbered"
+id="integration-connecting-to-external-systems">Integration — Connecting
+to External Systems</h2>
+<h3 class="unnumbered" id="semantic-web-integration">Semantic Web
+Integration</h3>
+<p>Conforming to the Semantic Web Technology Index (SWTI) criteria,
+Catty integrates with the semantic web to import well-founded knowledge
+and connect logics and morphisms back to the global literature. This
+includes RDF/OWL standards compliance, linked open data principles, and
+knowledge graph integration.</p>
+<h3 class="unnumbered" id="proof-assistant-interoperability">Proof
+Assistant Interoperability</h3>
+<p>Connecting Catty to established provers. Isabelle is considered the
+most significant among these (including Coq, Lean, and Agda) due to its
+extensive library of proofs and theories, which Catty aims to make more
+accessible to the semantic web.</p>
+<h2 class="unnumbered" id="philosophy-what-catty-means">Philosophy —
+What Catty Means</h2>
+<h3 class="unnumbered" id="logical-pluralism">Logical Pluralism</h3>
+<p>Advocating for coordinate rather than hierarchical relationships
+between logics. Catty does not claim to model all possible logics, but
+rather focuses on some definitive and widely used logics in
+international and historic reasoning.</p>
+<h3 class="unnumbered" id="the-inversion-principle">The Inversion
+Principle</h3>
+<p>The central insight that syntactic minimality enables semantic power.
+This principle is related to model-theoretical results and theoretical
+findings concerning functional incompleteness and commutativity between
+subclassical logics and LK.</p>
+<h3 class="unnumbered"
+id="review-of-literature-and-common-reference">Review of Literature and
+Common Reference</h3>
+<p>Positioning the thesis as a review of existing literature and a
+foundational common reference for categorical logic.</p>
+<h2 id="sec:sparql-validation-protocol">SPARQL Validation Protocol</h2>
+<h3 id="framework">Framework</h3>
+<p>This chapter documents the logical validity framework for SPARQL
+query execution in the context of the Catty thesis. When querying
+external semantic web endpoints, we must distinguish between three
+distinct outcomes:</p>
+<ol>
+<li><p><strong>Empty results + successful execution</strong>: A
+well-formed query executes without error but returns zero results. This
+constitutes a <em>proof of negative</em>—demonstrating that no matching
+data exists in the queried endpoint’s knowledge graph.</p></li>
+<li><p><strong>Runtime errors / compilation failures</strong>: A query
+fails to execute due to syntax errors, type mismatches, or endpoint
+issues. This indicates a <em>malformed query</em> and is considered
+inconclusive.</p></li>
+<li><p><strong>Non-empty results + successful execution</strong>: A
+well-formed query executes without error and returns one or more
+results. This constitutes a <em>constructive witness</em>—demonstrating
+the existence of matching data in the queried endpoint’s knowledge
+graph.</p></li>
+</ol>
+<p>This framework aligns with model-theoretic semantics for query
+languages <span class="citation"
+data-cites="maclane1971categories"></span>, where query execution
+provides evidence about the structure of the underlying model.</p>
+<h3 id="logical-validity-framework">Logical Validity Framework</h3>
+<h4 id="model-theoretic-interpretation">Model-Theoretic
+Interpretation</h4>
+<p>From a model-theoretic perspective, a SPARQL endpoint can be viewed
+as an interpretation function <span class="math inline">ℐ</span> mapping
+RDF triples to truth values. A query <span
+class="math inline"><em>Q</em></span> can be interpreted as a formula
+<span class="math inline"><em>ϕ</em><sub><em>Q</em></sub></span> over
+this interpretation. The execution of <span
+class="math inline"><em>Q</em></span> against endpoint <span
+class="math inline"><em>E</em></span> yields:</p>
+<ul>
+<li><p><span
+class="math inline">ℐ<sub><em>E</em></sub> ⊨ <em>ϕ</em><sub><em>Q</em></sub></span>
+(satisfied): Non-empty results (constructive witness)</p></li>
+<li><p><span
+class="math inline">ℐ<sub><em>E</em></sub> ⊭ <em>ϕ</em><sub><em>Q</em></sub></span>
+(not satisfied): Empty results (proof of negative)</p></li>
+<li><p><span class="math inline"><em>ϕ</em><sub><em>Q</em></sub></span>
+is ill-formed: Compilation/execution error (malformed query)</p></li>
+</ul>
+<p>This interpretation respects the Curry-Howard correspondence <span
+class="citation" data-cites="curyhoward1934 howard1969formulae"></span>,
+where query results serve as witnesses for the existence of certain
+structures in the knowledge graph.</p>
+<h4 id="outcome-categories">Outcome Categories</h4>
+<h5 id="proof-of-negative">Proof of Negative</h5>
+<p>When a well-formed SPARQL query executes successfully but returns
+zero results, this provides constructive evidence that the queried
+endpoint does not contain data matching the query pattern. This is
+fundamentally different from a failed execution.</p>
+<p><em>Example</em>: Querying Wikidata for instances of a non-existent
+class using valid SPARQL syntax returns empty results, proving that no
+such instances exist in Wikidata’s knowledge graph.</p>
+<h5 id="malformed-query">Malformed Query</h5>
+<p>A query that fails to compile or execute due to syntax errors, prefix
+declarations, or type mismatches provides no information about the
+underlying data model. Such queries must be corrected before they can
+serve as valid queries.</p>
+<p><em>Example</em>: A SPARQL query with an undefined prefix or
+malformed triple pattern fails during parsing, indicating a query
+formulation problem rather than a data availability issue.</p>
+<h5 id="constructive-witness">Constructive Witness</h5>
+<p>A well-formed query that executes successfully and returns non-empty
+results provides direct evidence of the existence of matching structures
+in the queried endpoint. These results can be treated as witnesses <span
+class="citation" data-cites="negri2011proof"></span> for the query’s
+satisfaction.</p>
+<p><em>Example</em>: Querying Wikidata for logic-related entities
+returns a list of QIDs and labels, demonstrating that such entities
+exist and are structured according to Wikidata’s ontology.</p>
+<h3 id="implementation">Implementation</h3>
+<h4 id="query-execution-protocol">Query Execution Protocol</h4>
+<p>All SPARQL queries in this project are executed against external
+endpoints following a strict protocol:</p>
+<ol>
+<li><p>Query formulation using well-defined prefixes (e.g.,
+<code>wd:</code>, <code>dbo:</code>) from authoritative
+namespaces</p></li>
+<li><p>Syntax validation ensuring well-formed SPARQL</p></li>
+<li><p>Execution with appropriate HTTP headers (User-Agent,
+Accept)</p></li>
+<li><p>Capture of execution time and result count</p></li>
+<li><p>Validation of result format (TTL for CONSTRUCT, JSON for
+SELECT)</p></li>
+</ol>
+<h4 id="valid-query-examples">Valid Query Examples</h4>
+<h5 id="wikidata-logics-query">Wikidata Logics Query</h5>
+<p>The following query extracts logic-related entities from
+Wikidata:</p>
+<pre><code>PREFIX wd: &lt;http://www.wikidata.org/entity/&gt;
+PREFIX wdt: &lt;http://www.wikidata.org/prop/direct/&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+
+# Extract logic-related entities from Wikidata
+CONSTRUCT {
+  ?logic rdfs:label ?label ;
+         wdt:P31 wd:Q8078 .
+}
+WHERE {
+  ?logic wdt:P31 wd:Q8078 .
+  ?logic rdfs:label ?label .
+  FILTER(LANG(?label) = &quot;en&quot;)
+}</code></pre>
+<p>This query uses the Wikidata namespace (authority:
+<code>wikidata.org</code>) and queries for instances of "logic" (QID:
+Q8078). When executed, it provides a constructive witness of
+logic-related entities in Wikidata.</p>
+<h5 id="dbpedia-category-theory-query">DBPedia Category Theory
+Query</h5>
+<p>The following query extracts category theory concepts from
+DBPedia:</p>
+<pre><code>PREFIX dbo: &lt;http://dbpedia.org/ontology/&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;
+PREFIX dct: &lt;http://purl.org/dc/terms/&gt;
+
+# Extract categories related to Category Theory from DBPedia
+CONSTRUCT {
+  ?concept rdfs:label ?label ;
+           rdf:type dbo:MathematicalConcept .
+}
+WHERE {
+  ?concept rdfs:label ?label .
+  ?concept dct:subject &lt;http://dbpedia.org/resource/Category:Category_theory&gt; .
+  FILTER(LANG(?label) = &quot;en&quot;)
+}</code></pre>
+<p>This query uses the DBPedia ontology namespace (authority:
+<code>dbpedia.org</code>) and queries for concepts classified under
+category theory. When executed, it provides a constructive witness of
+category theory resources in DBPedia; as of Feb 15 2026, this returns
+424 RDF statements.</p>
+<pre><code>@prefix rdf:    &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix dbr:    &lt;http://dbpedia.org/resource/&gt; .
+@prefix dbo:    &lt;http://dbpedia.org/ontology/&gt; .
+dbr:Point-surjective_morphism   rdf:type    dbo:MathematicalConcept .
+@prefix rdfs:   &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+dbr:Point-surjective_morphism   rdfs:label  &quot;Point-surjective morphism&quot;@en .
+dbr:Associativity_isomorphism   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Associativity isomorphism&quot;@en .
+&lt;http://dbpedia.org/resource/Dual_(category_theory)&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Dual (category theory)&quot;@en .
+dbr:AB5_category    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;AB5 category&quot;@en .
+&lt;http://dbpedia.org/resource/Element_(category_theory)&gt; rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Element (category theory)&quot;@en .
+dbr:Cotangent_complex   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Cotangent complex&quot;@en .
+dbr:Coinduction rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Coinduction&quot;@en .
+&lt;http://dbpedia.org/resource/Beck\u0027s_monadicity_theorem&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Beck&#39;s monadicity theorem&quot;@en .
+dbr:Subcategory rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Subcategory&quot;@en .
+dbr:Homotopy_colimit_and_limit  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Homotopy colimit and limit&quot;@en .
+dbr:Grothendieck_universe   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Grothendieck universe&quot;@en .
+dbr:Subquotient rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Subquotient&quot;@en .
+dbr:Category_algebra    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Category algebra&quot;@en .
+dbr:Category_theory rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Category theory&quot;@en .
+&lt;http://dbpedia.org/resource/Kernel_(category_theory)&gt;  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Kernel (category theory)&quot;@en .
+dbr:Categorification    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Categorification&quot;@en .
+dbr:Model_category  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Model category&quot;@en .
+&lt;http://dbpedia.org/resource/Bundle_(mathematics)&gt;  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Bundle (mathematics)&quot;@en .
+dbr:Interchange_law rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Interchange law&quot;@en .
+&lt;http://dbpedia.org/resource/Modification_(mathematics)&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Modification (mathematics)&quot;@en .
+dbr:Modular_group_representation    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Modular group representation&quot;@en .
+dbr:Skeletonization_of_fusion_categories    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Skeletonization of fusion categories&quot;@en .
+dbr:Anamorphism rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Anamorphism&quot;@en .
+dbr:Opposite_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Opposite category&quot;@en .
+&lt;http://dbpedia.org/resource/Eckmann\u2013Hilton_argument&gt;  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Eckmann\u2013Hilton argument&quot;@en .
+dbr:Olog    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Olog&quot;@en .
+dbr:Isbell_duality  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Isbell duality&quot;@en .
+dbr:F-coalgebra rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;F-coalgebra&quot;@en .
+dbr:Semigroupoid    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Semigroupoid&quot;@en .
+&lt;http://dbpedia.org/resource/Quiver_(mathematics)&gt;  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Quiver (mathematics)&quot;@en .
+dbr:Categorical_set_theory  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Categorical set theory&quot;@en .
+dbr:Mathematical_object rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Mathematical object&quot;@en .
+&lt;http://dbpedia.org/resource/Image_(category_theory)&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Image (category theory)&quot;@en .
+&lt;http://dbpedia.org/resource/Allegory_(mathematics)&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Allegory (mathematics)&quot;@en .
+dbr:Freyd_cover rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Freyd cover&quot;@en .
+dbr:Mac_Lane_coherence_theorem  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Mac Lane coherence theorem&quot;@en .
+&lt;http://dbpedia.org/resource/Grothendieck\u0027s_relative_point_of_view&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Grothendieck&#39;s relative point of view&quot;@en .
+&lt;http://dbpedia.org/resource/Brown\u0027s_representability_theorem&gt; rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Brown&#39;s representability theorem&quot;@en .
+dbr:Internal_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Internal category&quot;@en .
+&lt;http://dbpedia.org/resource/Polygraph_(mathematics)&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Polygraph (mathematics)&quot;@en .
+&lt;http://dbpedia.org/resource/Lift_(mathematics)&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Lift (mathematics)&quot;@en .
+dbr:Bousfield_localization  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Bousfield localization&quot;@en .
+dbr:Applied_category_theory rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Applied category theory&quot;@en .
+dbr:Localizing_subcategory  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Localizing subcategory&quot;@en .
+&lt;http://dbpedia.org/resource/Center_(category_theory)&gt;  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Center (category theory)&quot;@en .
+&lt;http://dbpedia.org/resource/Seifert\u2013Van_Kampen_theorem&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Seifert\u2013Van Kampen theorem&quot;@en .
+dbr:T-structure rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;T-structure&quot;@en .
+&lt;http://dbpedia.org/resource/Monad_(category_theory)&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Monad (category theory)&quot;@en .
+dbr:Multicategory   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Multicategory&quot;@en .
+dbr:Cokernel    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Cokernel&quot;@en .
+&lt;http://dbpedia.org/resource/Fra\u00EFss\u00E9_limit&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Fra\u00EFss\u00E9&#39;s theorem&quot;@en ,
+        &quot;Fra\u00EFss\u00E9 limit&quot;@en ,
+        &quot;Age (model theory)&quot;@en .
+dbr:Giraud_subcategory  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Giraud subcategory&quot;@en .
+&lt;http://dbpedia.org/resource/Sieve_(category_theory)&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Sieve (category theory)&quot;@en .
+&lt;http://dbpedia.org/resource/Stack_(mathematics)&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Stack (mathematics)&quot;@en .
+dbr:Universal_property  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Universal property&quot;@en .
+dbr:Factorization_system    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Factorization system&quot;@en .
+&lt;http://dbpedia.org/resource/Section_(category_theory)&gt; rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Section (category theory)&quot;@en .
+&lt;http://dbpedia.org/resource/Coherency_(homotopy_theory)&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Coherence theorem&quot;@en ,
+        &quot;Coherency (homotopy theory)&quot;@en .
+dbr:Endomorphism_ring   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Endomorphism ring&quot;@en .
+dbr:Waldhausen_category rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Waldhausen category&quot;@en .
+dbr:Monoid  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Monoid&quot;@en .
+dbr:Setoid  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Setoid&quot;@en .
+dbr:Duality_theory_for_distributive_lattices    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Duality theory for distributive lattices&quot;@en .
+&lt;http://dbpedia.org/resource/Krohn\u2013Rhodes_theory&gt;  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Krohn\u2013Rhodes theory&quot;@en .
+dbr:Double_groupoid rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Double groupoid&quot;@en .
+dbr:Diagonal_functor    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Diagonal functor&quot;@en .
+dbr:Concrete_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Concrete category&quot;@en .
+dbr:Karoubi_envelope    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Karoubi envelope&quot;@en .
+dbr:Pointed_set rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Pointed set&quot;@en .
+dbr:Chu_space   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Chu space&quot;@en .
+&lt;http://dbpedia.org/resource/Gabriel\u2013Popescu_theorem&gt;  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Gabriel\u2013Popescu theorem&quot;@en .
+dbr:Localization_of_a_category  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Localization of a category&quot;@en .
+dbr:Quotient_of_an_abelian_category rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Quotient of an abelian category&quot;@en .
+dbr:Lifting_property    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Lifting property&quot;@en .
+dbr:Categories_for_the_Working_Mathematician    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Categories for the Working Mathematician&quot;@en .
+&lt;http://dbpedia.org/resource/Nerve_(category_theory)&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Nerve (category theory)&quot;@en .
+dbr:Globular_set    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Globular set&quot;@en .
+dbr:Nodal_decomposition rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Nodal decomposition&quot;@en .
+dbr:Pointless_topology  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Pointless topology&quot;@en .
+dbr:Kan_extension   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Kan extension&quot;@en .
+dbr:Embedding   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Embedding&quot;@en .
+dbr:Enriched_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Enriched category&quot;@en .
+&lt;http://dbpedia.org/resource/Skeleton_(category_theory)&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Skeleton (category theory)&quot;@en .
+dbr:Dialectica_space    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Dialectica space&quot;@en .
+&lt;http://dbpedia.org/resource/Esquisse_d\u0027un_Programme&gt;  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Esquisse d&#39;un Programme&quot;@en .
+dbr:Filtered_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Filtered category&quot;@en .
+dbr:Finitely_generated_object   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Finitely generated object&quot;@en .
+dbr:Commutative_diagram rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Commutative diagram&quot;@en .
+&lt;http://dbpedia.org/resource/Category_(mathematics)&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Category (mathematics)&quot;@en .
+dbr:Operad  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Operad&quot;@en .
+&lt;http://dbpedia.org/resource/Hylomorphism_(computer_science)&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Hylomorphism (computer science)&quot;@en .
+&lt;http://dbpedia.org/resource/Cone_(category_theory)&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Cone (category theory)&quot;@en .
+dbr:Glossary_of_category_theory rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Glossary of category theory&quot;@en .
+&lt;http://dbpedia.org/resource/Envelope_(category_theory)&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Envelope (category theory)&quot;@en .
+dbr:Groupoid    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Groupoid&quot;@en .
+&lt;http://dbpedia.org/resource/Sketch_(mathematics)&gt;  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Sketch (mathematics)&quot;@en .
+dbr:Symplectic_category rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Symplectic category&quot;@en .
+dbr:Categorical_quantum_mechanics   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Categorical quantum mechanics&quot;@en .
+dbr:DisCoCat    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;DisCoCat&quot;@en .
+dbr:Abstract_nonsense   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Abstract nonsense&quot;@en .
+dbr:Equivalence_of_categories   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Equivalence of categories&quot;@en .
+&lt;http://dbpedia.org/resource/Refinement_(category_theory)&gt;  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Refinement (category theory)&quot;@en .
+dbr:Corecursion rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Corecursion&quot;@en .
+dbr:F-algebra   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;F-algebra&quot;@en .
+dbr:Injective_object    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Injective object&quot;@en .
+dbr:Abstract_elementary_class   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Abstract elementary class&quot;@en .
+&lt;http://dbpedia.org/resource/Descent_(mathematics)&gt; rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Descent (mathematics)&quot;@en .
+dbr:Fibred_category rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Fibred category&quot;@en .
+&lt;http://dbpedia.org/resource/Krull\u2013Schmidt_category&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Krull\u2013Schmidt category&quot;@en .
+dbr:Catamorphism    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Catamorphism&quot;@en .
+dbr:Outline_of_category_theory  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Outline of category theory&quot;@en .
+dbr:R-algebroid rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;R-algebroid&quot;@en .
+dbr:Isomorphism-closed_subcategory  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Isomorphism-closed subcategory&quot;@en .
+dbr:Segal_category  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Segal category&quot;@en .
+dbr:Semiautomaton   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Semiautomaton&quot;@en .
+dbr:Hopfian_object  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Hopfian object&quot;@en .
+dbr:Topological_category    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Topological category&quot;@en .
+dbr:Exact_completion    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Exact completion&quot;@en .
+dbr:Fusion_category rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Fusion category&quot;@en .
+dbr:Day_convolution rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Day convolution&quot;@en .
+dbr:K-theory_of_a_category  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;K-theory of a category&quot;@en .
+dbr:Structural_Ramsey_theory    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Structural Ramsey theory&quot;@en .
+dbr:Pseudo-abelian_category rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Pseudo-abelian category&quot;@en .
+dbr:Timeline_of_category_theory_and_related_mathematics rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Timeline of category theory and related mathematics&quot;@en .
+dbr:Induced_homomorphism    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Induced homomorphism&quot;@en ,
+        &quot;Induced homomorphism (fundamental group)&quot;@en .
+dbr:Overcategory    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Overcategory&quot;@en .
+&lt;http://dbpedia.org/resource/2-Yoneda_lemma&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;2-Yoneda lemma&quot;@en .
+&lt;http://dbpedia.org/resource/3-category&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;3-category&quot;@en .
+&lt;http://dbpedia.org/resource/Accessible_\u221E-category&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Accessible \u221E-category&quot;@en .
+&lt;http://dbpedia.org/resource/Join_(category_theory)&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Join (category theory)&quot;@en .
+&lt;http://dbpedia.org/resource/Twisted_diagonal_(category_theory)&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Twisted diagonal (category theory)&quot;@en .
+dbr:Tower_of_objects    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Tower of objects&quot;@en .
+&lt;http://dbpedia.org/resource/Lawvere\u0027s_fixed-point_theorem&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Lawvere&#39;s fixed-point theorem&quot;@en .
+dbr:Burnside_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Burnside category&quot;@en .
+dbr:Distributive_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Distributive category&quot;@en .
+dbr:Global_element  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Global element&quot;@en .
+dbr:Graded_category rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Graded category&quot;@en .
+&lt;http://dbpedia.org/resource/Grothendieck\u0027s_Galois_theory&gt; rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Grothendieck&#39;s Galois theory&quot;@en .
+dbr:Grothendieck_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Grothendieck category&quot;@en .
+dbr:Categorical_probability rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Categorical probability&quot;@en .
+dbr:Completions_in_category_theory  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Completions in category theory&quot;@en .
+dbr:Giry_monad  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Giry monad&quot;@en .
+dbr:Topological_functor rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Topological functor&quot;@en .
+&lt;http://dbpedia.org/resource/Brugui\u00E8res_modularity_theorem&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Brugui\u00E8res modularity theorem&quot;@en .
+dbr:Core_of_a_category  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Core of a category&quot;@en .
+&lt;http://dbpedia.org/resource/Homotopy_category_of_an_\u221E-category&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Homotopy category of an \u221E-category&quot;@en .
+&lt;http://dbpedia.org/resource/Joyal\u0027s_theta_category&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Joyal&#39;s theta category&quot;@en .
+dbr:Modular_tensor_category rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Modular tensor category&quot;@en .
+&lt;http://dbpedia.org/resource/M\u00FCger\u0027s_theorem&gt; rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;M\u00FCger&#39;s theorem&quot;@en .
+dbr:Rank-finiteness rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Rank-finiteness&quot;@en .
+dbr:Reedy_category  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Reedy category&quot;@en .
+&lt;http://dbpedia.org/resource/Schauenburg\u2013Ng_theorem&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Schauenburg\u2013Ng theorem&quot;@en .
+dbr:Small_object_argument   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Small object argument&quot;@en .
+dbr:Unitary_modular_tensor_category rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Unitary modular tensor category&quot;@en .
+dbr:Essential_monomorphism  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Essential monomorphism&quot;@en .
+dbr:Indexed_category    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Indexed category&quot;@en .
+dbr:Indiscrete_category rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Indiscrete category&quot;@en .
+dbr:Subterminal_object  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Subterminal object&quot;@en .
+dbr:Simplicially_enriched_category  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Simplicially enriched category&quot;@en .
+dbr:Size_functor    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Size functor&quot;@en .
+dbr:Generalized_metric_space    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Generalized metric space&quot;@en .
+dbr:Stable_module_category  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Stable module category&quot;@en .
+dbr:Coimage rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Coimage&quot;@en .
+dbr:Inserter_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Inserter category&quot;@en .
+dbr:Conservative_functor    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Conservative functor&quot;@en .
+&lt;http://dbpedia.org/resource/Doctrine_(mathematics)&gt;    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Doctrine (mathematics)&quot;@en .
+&lt;http://dbpedia.org/resource/Compact_object_(mathematics)&gt;  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Compact object (mathematics)&quot;@en .
+dbr:Isomorphism_class   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Isomorphism class&quot;@en .
+dbr:Product_category    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Product category&quot;@en .
+dbr:Adhesive_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Adhesive category&quot;@en .
+&lt;http://dbpedia.org/resource/Generator_(category_theory)&gt;   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Generator (category theory)&quot;@en .
+dbr:Groupoid_object rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Groupoid object&quot;@en .
+dbr:Higher-dimensional_algebra  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Higher-dimensional algebra&quot;@en .
+dbr:Cartesian_monoidal_category rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Cartesian monoidal category&quot;@en .
+dbr:Tame_abstract_elementary_class  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Tame abstract elementary class&quot;@en .
+dbr:Opetope rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Opetope&quot;@en .
+dbr:Categorical_trace   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Categorical trace&quot;@en .
+dbr:Codensity_monad rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Codensity monad&quot;@en .
+dbr:Pseudoalgebra   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Pseudoalgebra&quot;@en .
+dbr:Q-category  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Q-category&quot;@en .
+dbr:Segal_space rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Segal space&quot;@en .
+dbr:Well-pointed_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Well-pointed category&quot;@en .
+dbr:Cosheaf rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Cosheaf&quot;@en .
+dbr:Cotriple_homology   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Cotriple homology&quot;@en .
+dbr:Fiber_functor   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Fiber functor&quot;@en .
+dbr:Simplicial_localization rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Simplicial localization&quot;@en .
+dbr:Spherical_category  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Spherical category&quot;@en .
+dbr:Stable_model_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Stable model category&quot;@en .
+dbr:Extensive_category  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Extensive category&quot;@en .
+dbr:Balanced_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Balanced category&quot;@en .
+dbr:Compositional_game_theory   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Compositional game theory&quot;@en .
+dbr:Accessible_category rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Accessible category&quot;@en .
+dbr:Gamma-object    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Gamma-object&quot;@en .
+dbr:Limit_and_colimit_of_presheaves rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Limit and colimit of presheaves&quot;@en .
+dbr:Lie_operad  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Lie operad&quot;@en .
+dbr:Permutation_category    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Permutation category&quot;@en .
+dbr:Corestriction   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Corestriction&quot;@en .
+dbr:H-object    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;H-object&quot;@en .
+dbr:Double_category rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Double category&quot;@en .
+dbr:Strictification rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Strictification&quot;@en .
+dbr:Polyad  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Polyad&quot;@en .
+dbr:Posetal_category    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Posetal category&quot;@en .
+dbr:Projective_cover    rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Projective cover&quot;@en .
+dbr:Pulation_square rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Pulation square&quot;@en .
+dbr:Quantaloid  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Quantaloid&quot;@en .
+dbr:Quotient_category   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Quotient category&quot;@en .
+dbr:List_of_types_of_functions  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;List of types of functions&quot;@en .
+&lt;http://dbpedia.org/resource/Cosmos_(category_theory)&gt;  rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Cosmos (category theory)&quot;@en .
+dbr:Initial_algebra rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Initial algebra&quot;@en .
+dbr:Injective_cogenerator   rdf:type    dbo:MathematicalConcept ;
+    rdfs:label  &quot;Injective cogenerator&quot;@en .</code></pre>
+<h3 id="invalid-query-patterns">Invalid Query Patterns</h3>
+<h4 id="local-ontology-prefixes">Local Ontology Prefixes</h4>
+<p>Queries using prefixes like <code>catty:</code> that reference
+non-existent local ontologies are invalid for external endpoint queries.
+Such prefixes may be used only with local RDF files, and only when those
+files exist.</p>
+<p><em>Invalid Example</em>:</p>
+<pre><code>PREFIX catty: &lt;https://github.com/metavacua/CategoricalReasoner/ontology/&gt;
+
+SELECT ?logic ?label
+WHERE {
+  ?logic a catty:Logic ;
+         rdfs:label ?label .
+}</code></pre>
+<p>This query attempts to use a <code>catty:</code> prefix against
+external endpoints where no such ontology exists. It may return empty
+results (proof of negative) or fail depending on endpoint behavior, but
+it serves no valid purpose against external sources.</p>
+<h4 id="execution-evidence">Execution Evidence</h4>
+<p>All documented queries must be actually executed against external
+endpoints, with execution evidence preserved as valid TTL (for CONSTRUCT
+queries) or CSV (for SELECT queries). Fabricating results or using
+internal knowledge to simulate query output is strictly prohibited.</p>
+<h3 id="query-quality-requirements">Query Quality Requirements</h3>
+<p>Well-formed SPARQL queries in this project must satisfy the following
+quality criteria:</p>
+<ol>
+<li><p><strong>Syntax Validity</strong>: Query must parse and compile
+without errors</p></li>
+<li><p><strong>Prefix Authority</strong>: All prefixes must reference
+authoritative namespaces (e.g., wikidata.org, dbpedia.org,
+w3.org)</p></li>
+<li><p><strong>Execution Success</strong>: Query must execute without
+runtime errors</p></li>
+<li><p><strong>Result Format</strong>: Results must be in valid TTL or
+JSON format</p></li>
+<li><p><strong>Timeout Compliance</strong>: Query execution must
+complete within 60 seconds</p></li>
+</ol>
+<p>Queries that satisfy these criteria but return empty results are
+considered valid (proof of negative). Queries that fail any criterion
+are considered malformed and must be corrected.</p>
+<h3 id="demonstration-results">Demonstration Results</h3>
+<h4 id="wikidata-execution-results">Wikidata Execution Results</h4>
+<p>Execution of the Wikidata logics query against
+<code>https://query.wikidata.org/sparql</code> typically returns 10
+logic-related entities with QIDs and labels. This serves as a
+constructive witness that Wikidata contains structured data about formal
+logics.</p>
+<p>Example result structure:</p>
+<pre><code>&lt;http://www.wikidata.org/entity/Q11448&gt; a &lt;http://www.wikidata.org/prop/direct/P31&gt; ;
+    &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;logic&quot;@en .</code></pre>
+<h4 id="dbpedia-execution-results">DBPedia Execution Results</h4>
+<p>Execution of the DBPedia category theory query against
+<code>https://dbpedia.org/sparql</code> typically returns 424
+mathematical concepts with labels and classifications. This serves as a
+constructive witness that DBPedia contains structured data about
+category theory.</p>
+<p>Example result structure:</p>
+<pre><code>&lt;http://dbpedia.org/resource/Category_theory&gt; a &lt;http://dbpedia.org/ontology/MathematicalConcept&gt; ;
+    &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; &quot;Category theory&quot;@en .</code></pre>
+<h3 id="integration-with-thesis-development">Integration with Thesis
+Development</h3>
+<p>The SPARQL validation protocol directly supports thesis development
+by:</p>
+<ul>
+<li><p>Providing evidence-based citations from external semantic web
+sources</p></li>
+<li><p>Enabling verification of QID and URI references used in thesis
+content</p></li>
+<li><p>Supporting the extraction of authoritative definitions and
+classifications</p></li>
+<li><p>Facilitating the discovery of related work through structured
+queries</p></li>
+</ul>
+<p>All SPARQL-derived content in the thesis must be traceable to actual
+query executions with preserved evidence, maintaining the thesis’s
+commitment to rigorous methodology <span class="citation"
+data-cites="lawvere1963functorial"></span>.</p>
+<h2 id="chap:semantic-web-rag">Report: Semantic Web Extraction and RAG
+Implementation</h2>
+<h3 id="purpose">Purpose</h3>
+<p>This report documents the actual process of extracting semantic data
+from external SPARQL endpoints (Wikidata and DBpedia) for the Catty
+thesis project. It highlights the difficulties encountered, solutions
+implemented, and provides recommendations for future RAG
+(Retrieval-Augmented Generation) and code generation architectures.</p>
+<h3 id="extraction-process-evidence">Extraction Process Evidence</h3>
+<p>Successful extraction of RDF data was performed using
+<code>src/benchmarks/run.py</code> against the following endpoints:</p>
+<ul>
+<li><p><strong>Wikidata</strong> (<a
+href="https://query.wikidata.org/sparql"
+class="uri">https://query.wikidata.org/sparql</a>):</p>
+<ul>
+<li><p><strong>Query</strong>: <code>wikidata-logics.rq</code>
+(CONSTRUCT pattern)</p></li>
+<li><p><strong>Result</strong>:
+<code>results/wikidata-logics.ttl</code></p></li>
+<li><p><strong>Outcome</strong>: Successfully extracted 10+
+logic-related entities with labels and class memberships.</p></li>
+</ul></li>
+<li><p><strong>DBpedia</strong> (<a href="https://dbpedia.org/sparql"
+class="uri">https://dbpedia.org/sparql</a>):</p>
+<ul>
+<li><p><strong>Query</strong>: <code>dbpedia-category-theory.rq</code>
+(CONSTRUCT pattern)</p></li>
+<li><p><strong>Result</strong>:
+<code>results/dbpedia-category-theory.ttl</code></p></li>
+<li><p><strong>Outcome</strong>: Successfully extracted concepts related
+to Category Theory.</p></li>
+</ul></li>
+</ul>
+<h3 id="encountered-difficulties-and-solutions">Encountered Difficulties
+and Solutions</h3>
+<h4 id="endpoint-security-and-user-agent-filtering">Endpoint Security
+and User-Agent Filtering</h4>
+<ul>
+<li><p><strong>Issue</strong>: Initial attempts to query Wikidata
+resulted in 403 Forbidden errors.</p></li>
+<li><p><strong>Cause</strong>: Wikidata requires a non-generic
+<code>User-Agent</code> header that identifies the bot/script.</p></li>
+<li><p><strong>Solution</strong>: Implemented a custom header
+<code>CattyThesisAgent/1.0</code> in the <code>requests</code> call
+within <code>run.py</code>.</p></li>
+</ul>
+<h4 id="sparql-store-limitations-in-rdflib">SPARQL Store Limitations in
+RDFLib</h4>
+<ul>
+<li><p><strong>Issue</strong>: The default
+<code>rdflib.plugins.stores.sparqlstore.SPARQLStore</code> lacked
+sufficient control over HTTP headers.</p></li>
+<li><p><strong>Solution</strong>: Rewrote <code>run.py</code> to use the
+<code>requests</code> library directly for remote SPARQL execution,
+allowing for precise control over <code>Accept</code> headers and
+<code>User-Agent</code>.</p></li>
+</ul>
+<h4 id="gigo-garbage-in-garbage-out-from-llm-generated-queries">GIGO
+(Garbage In, Garbage Out) from LLM-Generated Queries</h4>
+<ul>
+<li><p><strong>Issue</strong>: LLMs frequently generate SPARQL queries
+using incorrect prefixes or hallucinated property IDs (e.g., using
+<code>dbo:Logic</code> instead of verifying the actual DBpedia
+ontology).</p></li>
+<li><p><strong>Solution</strong>: Adopting the <strong>Discovery
+Pattern</strong> described in
+<code>docs/dissertation/architecture/part-knowledge-hierarchy.tex</code>,
+where an agent first queries the endpoint to find correct
+URIs/Properties before attempting complex data extraction.</p></li>
+</ul>
+<h3 id="recommendations-for-semantic-web-rag">Recommendations for
+Semantic Web RAG</h3>
+<h4 id="multi-step-semantic-resolution">Multi-Step Semantic
+Resolution</h4>
+<p>Instead of a single-shot RAG query, agents should follow a 3-step
+process:</p>
+<ol>
+<li><p><strong>Entity Resolution</strong>: Convert natural language
+terms to URIs using Search APIs (e.g.,
+<code>wbsearchentities</code>).</p></li>
+<li><p><strong>Neighborhood Extraction</strong>: Use
+<code>DESCRIBE</code> or <code>CONSTRUCT</code> queries to pull the
+immediate graph neighborhood of the resolved URIs.</p></li>
+<li><p><strong>Contextual Synthesis</strong>: Provide the extracted TTL
+to the LLM. TTL is superior to JSON-LD for RAG context because it is
+more concise and its indentation clearly represents graph
+structure.</p></li>
+</ol>
+<h4 id="real-time-sparql-validation">Real-time SPARQL Validation</h4>
+<p>Coding agents must be equipped with a local or remote SPARQL engine
+to validate queries before including them in documentation or codebases.
+This prevents the "hallucination loop" where an agent generates a query,
+never runs it, and assumes it works.</p>
+<h4 id="ttl-based-knowledge-injection">TTL-based Knowledge
+Injection</h4>
+<p>For code generation, especially in categorical logic, the formal
+constraints of the domain should be injected as SHACL shapes. This
+allows the agent to validate its own generated RDF artifacts against the
+project’s schema before final submission.</p>
+<h3 id="future-research-and-development">Future Research and
+Development</h3>
+<ul>
+<li><p><strong>SPARQL Query Optimization Agents</strong>: Developing
+specialized agents that can take a naive "GIGO" query and optimize it
+for performance and accuracy against specific endpoints.</p></li>
+<li><p><strong>Ontology-Driven Code Generation</strong>: Using Jena
+JavaPoet integration to generate Java classes directly from extracted
+RDF schemas, ensuring type safety matches semantic definitions.</p></li>
+<li><p><strong>Federated RAG</strong>: Researching how to perform RAG
+across multiple federated SPARQL endpoints to synthesize knowledge that
+doesn’t exist in a single repository.</p></li>
+</ul>
+<h1 id="part:architecture">Architecture of Catty</h1>
+<h2 class="unnumbered" id="introduction-1">Introduction</h2>
+<p>This part specifies the software and operational architecture of the
+<strong>Catty</strong> framework. It consolidates previous
+markdown-based documentation into a formal, literate programming
+specification.</p>
+<h2 class="unnumbered" id="knowledge-hierarchy">Knowledge Hierarchy</h2>
+<p>The <strong>Catty</strong> framework adopts a strict hierarchy for
+knowledge sourcing to ensure semantic integrity and avoid the common
+pitfalls of LLM-based content generation.</p>
+<h3 class="unnumbered" id="sourcing-priority-chain">Sourcing Priority
+Chain</h3>
+<p>Knowledge is consumed and validated according to the following
+priority chain. We prioritize in each step open source and open science
+alternatives over any closed source or proprietary sources:</p>
+<ol>
+<li><p><strong>Canonical systems</strong>: Primary expressions,
+representations, and code.</p></li>
+<li><p><strong>International standards</strong>: ISO/IEC, IETF, and
+other formal global specifications.</p></li>
+<li><p><strong>Community standards</strong>: De facto standards and
+community-driven specifications (e.g., Wikidata, DBPedia).</p></li>
+<li><p><strong>Original Research</strong>: Specific innovations and
+novel contributions of the Catty thesis.</p></li>
+</ol>
+<h3 class="unnumbered" id="wikidata-discovery-protocol">Wikidata
+Discovery Protocol</h3>
+<p>To prevent the corruption of the semantic knowledge graph with
+hallucinated identifiers, agents must follow the dynamic discovery
+protocol.</p>
+<h4 class="unnumbered" id="the-problem-hallucinated-qids">The Problem:
+Hallucinated QIDs</h4>
+<p>LLMs often produce plausible-looking but incorrect Wikidata QIDs. For
+example, claiming "Classical Logic" is <code>Q192960</code> (which
+actually refers to Baibars).</p>
+<p><strong>Mandatory Rule</strong>: Never guess a QID. All QIDs must be
+verified against the live Wikidata endpoint before use in the
+repository.</p>
+<h4 class="unnumbered" id="verification-and-discovery">Verification and
+Discovery</h4>
+<p>To verify a QID, use a SPARQL query. Note: When executing, extract
+ONLY the SPARQL code, excluding any LaTeX environment markers:</p>
+<pre class="sparql" data-language="SPARQL"><code>SELECT ?label ?description WHERE {
+  wd:Q193138 rdfs:label ?label .
+  wd:Q193138 schema:description ?description .
+  FILTER(LANG(?label) = &quot;en&quot;)
+}</code></pre>
+<p>If a QID is unknown, discover it using a more efficient label-based
+query. Note that Wikidata labels for mathematical concepts are typically
+lowercase:</p>
+<pre class="sparql" data-language="SPARQL"><code>SELECT DISTINCT ?item ?label ?description WHERE {
+  ?item rdfs:label &quot;natural transformation&quot;@en .
+  ?item schema:description ?description .
+  FILTER(LANG(?description) = &quot;en&quot;)
+}
+LIMIT 5</code></pre>
+<h3 class="unnumbered" id="core-domain-registry">Core Domain
+Registry</h3>
+<p>The following verified identifiers constitute the core of the
+<strong>Catty</strong> domain model:</p>
+<table>
+<caption>Core Wikidata Identifiers</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Concept</th>
+<th style="text-align: left;">QID</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Category Theory</td>
+<td style="text-align: left;"><code>wd:Q217413</code></td>
+<td style="text-align: left;">Branch of mathematics</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Category</td>
+<td style="text-align: left;"><code>wd:Q719395</code></td>
+<td style="text-align: left;">Algebraic structure</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Functor</td>
+<td style="text-align: left;"><code>wd:Q864475</code></td>
+<td style="text-align: left;">Mapping between categories</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Logic</td>
+<td style="text-align: left;"><code>wd:Q8078</code></td>
+<td style="text-align: left;">Study of correct reasoning</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sequent Calculus</td>
+<td style="text-align: left;"><code>wd:Q1771121</code></td>
+<td style="text-align: left;">Formal argumentation style</td>
+</tr>
+</tbody>
+</table>
+<h2 class="unnumbered" id="the-literate-programming-paradigm">The
+Literate Programming Paradigm</h2>
+<p>The <strong>Catty</strong> framework is built on the principles of
+literate programming, where the documentation and implementation are
+inextricably linked. The primary technology stack for validation and
+transformation is centered on the Java ecosystem, while Python serves as
+an auxiliary orchestrator for CI/CD.</p>
+<h3 class="unnumbered" id="tangle-and-weave">Tangle and Weave</h3>
+<p>The <strong>Catty</strong> framework implements literate programming
+through the processes of <em>tangling</em> and <em>weaving</em>, as
+pioneered by Donald Knuth.</p>
+<ul>
+<li><p><strong>Tangle</strong>: The extraction of executable logic and
+code from the literate specification. In <strong>Catty</strong>, this
+includes the generation of Java classes via JavaPoet and the derivation
+of SHACL shapes from categorical models.</p></li>
+<li><p><strong>Weave</strong>: The generation of human-readable
+documentation from the same specification. This produces the LaTeX-based
+thesis and the integrated Javadoc.</p></li>
+</ul>
+<p>The Planning Agent is responsible for the bidirectional extraction
+process, maintaining integrity between the "tangled" logic and the
+"woven" documentation, ensuring that changes in one are reflected in the
+other.</p>
+<h3 class="unnumbered" id="javadoc-first-implementation">JavaDoc-First
+Implementation</h3>
+<p>The implementation follows a <em>JavaDoc-first</em> approach. Every
+component, especially those involving RDF transformation and SHACL
+validation, must be documented before and during implementation. This
+ensures that the technical specification is always in sync with the
+code. Java records are a critical part of the JUnit and Javadoc code
+generation paradigm or pattern.</p>
+<h3 class="unnumbered" id="junit-first-validation">JUnit-First
+Validation</h3>
+<p>Consistency and correctness are enforced through a
+<em>JUnit-first</em> methodology. Complex transformations between
+categorical structures and their logical counterparts are verified by an
+extensive suite of automated tests.</p>
+<h3 class="unnumbered" id="technology-stack">Technology Stack</h3>
+<p>The core logic of the <strong>Catty</strong> framework leverages the
+following Java libraries:</p>
+<ul>
+<li><p><strong>Apache Jena</strong>: For RDF processing, SPARQL
+execution, and triple-store management.</p></li>
+<li><p><strong>OpenLlet</strong>: An OWL 2 DL reasoner used for
+consistency checking of the core ontologies.</p></li>
+<li><p><strong>JavaPoet</strong>: Used for generating Java source code
+from formal categorical specifications.</p></li>
+<li><p><strong>JUnit</strong>: The primary framework for unit testing
+and automated validation.</p></li>
+</ul>
+<h3 class="unnumbered" id="python-auxiliary-layer">Python Auxiliary
+Layer</h3>
+<p>Python scripts, primarily located in <code>.catty/validation/</code>,
+are used for higher-level orchestration. These scripts:</p>
+<ul>
+<li><p>Coordinate the execution of Java-based validation tools.</p></li>
+<li><p>Perform structural checks on LaTeX documents.</p></li>
+<li><p>Validate citation registry compliance.</p></li>
+<li><p>Integrate with CI/CD pipelines to provide unified pass/fail
+reports.</p></li>
+</ul>
+<h2 class="unnumbered" id="build-and-dependency-architecture">Build and
+Dependency Architecture</h2>
+<p>The <strong>Catty</strong> framework employs a sophisticated build
+system designed for high parallelizability and strict dependency
+management. This ensures that categorical artifacts are produced in a
+logically sound sequence.</p>
+<h3 class="unnumbered" id="phase-based-execution">Phase-Based
+Execution</h3>
+<p>The build process is divided into four primary phases, as specified
+in <code>.catty/phases.yaml</code>:</p>
+<ol>
+<li><p><strong>Phase 0: Foundation</strong>: Initialization of the
+repository structure and initial semantic web audits.</p></li>
+<li><p><strong>Phase 1: Core Ontology</strong>: Construction of the
+categorical schema, logic instances, morphism catalogs, and advanced
+structures (lattices, Curry-Howard models).</p></li>
+<li><p><strong>Phase 2: Thesis</strong>: Generation of the LaTeX thesis
+chapters and compilation of the final PDF.</p></li>
+<li><p><strong>Phase 3: Validation</strong>: Execution of the unified
+validation framework across all produced artifacts.</p></li>
+</ol>
+<h3 class="unnumbered" id="critical-path-analysis">Critical Path
+Analysis</h3>
+<p>The critical path for the <strong>Catty</strong> build system is
+estimated at 400 minutes (6.7 hours) of sequential work. It is dominated
+by the construction of the core ontology and the writing of complex
+thesis chapters.</p>
+<h3 class="unnumbered" id="parallelization-strategies">Parallelization
+Strategies</h3>
+<p>To optimize execution, the framework identifies multiple
+parallelization opportunities:</p>
+<ul>
+<li><p><strong>Phase 0</strong>: Simultaneous initialization and
+audit.</p></li>
+<li><p><strong>Phase 1d</strong>: Parallel generation of examples, SHACL
+shapes, and SPARQL queries.</p></li>
+<li><p><strong>Phase 2b</strong>: Concurrent writing of parallelizable
+chapters (e.g., Introduction and Audit).</p></li>
+<li><p><strong>Phase 3b</strong>: Parallel validation of ontology and
+thesis artifacts.</p></li>
+</ul>
+<p>Optimized execution using maximum parallelization reduces the total
+build time to approximately 260 minutes (4.3 hours), representing a 45%
+reduction in duration.</p>
+<h3 class="unnumbered" id="unified-website-architecture">Unified Website
+Architecture</h3>
+<p>The <strong>Catty</strong> framework produces a unified digital
+presence rather than independent documentation sites. The build system
+composes the JavaDoc technical documentation directly with the TeX-based
+white paper and categorical models. This integration ensures that
+high-level theoretical concepts are directly linked to their
+corresponding implementation details, providing a seamless navigation
+experience from mathematical definitions to executable code.</p>
+<h3 class="unnumbered" id="artifact-transformation-pipeline">Artifact
+Transformation Pipeline</h3>
+<p>The build system coordinates the transformation of formal
+specifications into multiple formats:</p>
+<ul>
+<li><p><strong>TeX <span class="math inline">→</span> PDF</strong>:
+Formal thesis compilation.</p></li>
+<li><p><strong>JSON-LD <span class="math inline">→</span> HTML</strong>:
+Generation of documentation and web-ready categorical models.</p></li>
+<li><p><strong>JavaPoet <span class="math inline">→</span>
+Java</strong>: Code generation for validation and transformation
+tools.</p></li>
+</ul>
+<h2 class="unnumbered" id="agent-roles-and-responsibilities">Agent Roles
+and Responsibilities</h2>
+<p>The <strong>Catty</strong> framework defines clear roles and
+responsibilities for autonomous agents, ensuring that complex tasks are
+executed with high fidelity to the formal specification.</p>
+<h3 class="unnumbered" id="core-agent-types">Core Agent Types</h3>
+<ul>
+<li><p><strong>Planning Agent</strong>: Responsible for analyzing
+<code>.catty/phases.yaml</code> and <code>.catty/operations.yaml</code>
+to determine the optimal execution sequence and resolve
+dependencies.</p></li>
+<li><p><strong>Coding Agent</strong>: Executes the operational
+instructions found in task descriptions to produce artifacts (LaTeX,
+JSON-LD, Python).</p></li>
+<li><p><strong>Validation Agent</strong>: Executes the
+<code>.catty/validation/validate.py</code> script and interprets
+SHACL/JSON Schema reports to verify artifact compliance.</p></li>
+</ul>
+<h3 class="unnumbered" id="operational-constraints">Operational
+Constraints</h3>
+<p>Agents are bound by strict operational constraints to maintain the
+integrity of the thesis:</p>
+<ul>
+<li><p><strong>Format Fidelity</strong>: Must adhere to the specified
+file formats (JSON-LD, RDF, TeX, YAML).</p></li>
+<li><p><strong>ID Uniqueness</strong>: Must ensure all identifiers
+(<code>thm-*</code>, <code>def-*</code>, <code>sec-*</code>) are
+globally unique.</p></li>
+<li><p><strong>Citation Compliance</strong>: Must only use
+pre-registered citation keys from the central registry.</p></li>
+<li><p><strong>Deterministic Execution</strong>: Tasks must be executed
+exactly as described in the operational instructions, without creative
+interpretation.</p></li>
+</ul>
+<h3 class="unnumbered" id="runtime-specification">Runtime
+Specification</h3>
+<p>The <strong>Catty</strong> framework utilizes a Java-based runtime
+specification to enforce model constraints and task execution protocols
+through the following mechanisms:</p>
+<ul>
+<li><p><strong>Custom Annotations</strong>: Use of
+<code>@TaskDescription</code> and <code>@ModelConstraint</code> to
+declaratively define agent expectations and domain boundaries.</p></li>
+<li><p><strong>Reflection API</strong>: Dynamic inspection of annotated
+components at runtime to ensure compliance with the operational
+model.</p></li>
+<li><p><strong>Generics</strong>: Type-safe agent templates that ensure
+data passed between planning, coding, and validation agents adheres to
+the required categorical schemas.</p></li>
+</ul>
+<h3 class="unnumbered" id="error-handling-and-recovery">Error Handling
+and Recovery</h3>
+<p>When an agent encounters a validation failure or an unexpected state,
+it must follow a structured recovery protocol:</p>
+<ol>
+<li><p><strong>Analyze</strong>: Read the error report from the
+validation agent (e.g., SHACL violation message).</p></li>
+<li><p><strong>Locate</strong>: Identify the specific line and property
+in the artifact causing the failure.</p></li>
+<li><p><strong>Remediate</strong>: Update the artifact to satisfy the
+formal constraint.</p></li>
+<li><p><strong>Verify</strong>: Re-run the validation suite until all
+criteria evaluate to true.</p></li>
+</ol>
+<p>In the event of an irreconcilable conflict (e.g., a missing required
+citation), the agent must halt execution and report the constraint
+violation to the oversight system.</p>
+<h2 class="unnumbered" id="the-software-development-lifecycle">The
+Software Development Lifecycle</h2>
+<p>The development lifecycle of the <strong>Catty</strong> framework is
+a deterministic process designed to eliminate ambiguity and ensure that
+every artifact meets formal acceptance criteria.</p>
+<h3 class="unnumbered" id="development-workflow">Development
+Workflow</h3>
+<p>A standard development cycle for a single task follows an eight-step
+protocol:</p>
+<ol>
+<li><p><strong>Ingestion</strong>: Read the task specification from
+<code>operations.yaml</code>.</p></li>
+<li><p><strong>Verification</strong>: Ensure all required dependencies
+exist and are valid.</p></li>
+<li><p><strong>Specification</strong>: Read the target artifact
+specification (path, format, content spec, schema).</p></li>
+<li><p><strong>Execution</strong>: Follow the operational instructions
+in the task description exactly.</p></li>
+<li><p><strong>Content Validation</strong>: Verify the artifact
+satisfies its <code>content_spec</code>.</p></li>
+<li><p><strong>Criteria Testing</strong>: Evaluate the boolean
+acceptance criteria.</p></li>
+<li><p><strong>Formal Validation</strong>: Run the automated
+<code>validate.py</code> script (syntax, RDF, SHACL).</p></li>
+<li><p><strong>Completion</strong>: Mark the task as complete and
+proceed to the next node in the dependency graph.</p></li>
+</ol>
+<h3 class="unnumbered" id="acceptance-criteria-philosophy">Acceptance
+Criteria Philosophy</h3>
+<p>Every task in the framework must have testable boolean acceptance
+criteria. The framework explicitly forbids aspirational or subjective
+criteria (e.g., "high quality", "comprehensive"). Instead, criteria must
+be binary and verifiable:</p>
+<ul>
+<li><p><span class="math inline">✓</span> <em>Testable</em>: "File
+<code>src/ontology/logics-as-objects.jsonld</code> exists."</p></li>
+<li><p><span class="math inline">✓</span> <em>Testable</em>: "Contains
+at least 7 logic instances."</p></li>
+<li><p><span class="math inline">✓</span> <em>Testable</em>: "Validates
+against <code>logics-as-objects.shacl</code>."</p></li>
+</ul>
+<h3 class="unnumbered" id="continuous-validation">Continuous
+Validation</h3>
+<p>Validation is not a final step but a continuous process. Artifacts
+are validated immediately upon creation or modification. The Giant
+Global Graph integration means that semantic web data is validated
+against live Wikidata endpoints to prevent identifier decay.</p>
+<h3 class="unnumbered" id="licensing-and-open-source">Licensing and Open
+Source</h3>
+<p>All software components of the <strong>Catty</strong> framework are
+licensed under <strong>AGPLv3</strong>, while documentation and thesis
+content are licensed under <strong>CC BY-SA 4.0</strong>. This ensures
+that both the categorical theoretical foundations and their software
+implementations remain open and reproducible.</p>
+<h2 class="unnumbered" id="appendices">Appendices</h2>
+<h3 class="unnumbered" id="citation-registry">Citation Registry</h3>
+<p>The master list of approved citations for the Catty framework.</p>
+<h3 class="unnumbered" id="dsl-reference">DSL Reference</h3>
+<p>Full specification for the Catty Domain-Specific Language.</p>
+<h3 class="unnumbered" id="sparql-query-reference">SPARQL Query
+Reference</h3>
+<p>Reference for exploring the categorical knowledge graph.</p>
+<h3 class="unnumbered" id="shacl-shape-reference">SHACL Shape
+Reference</h3>
+<p>Validation constraints for the formal ontology.</p>
+</body>
+</html>
