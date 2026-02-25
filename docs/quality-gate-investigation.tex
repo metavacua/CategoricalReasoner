@@ -1,0 +1,128 @@
+\section*{Quality Gate Investigation Report}
+
+\subsection*{Scope}
+Configure CTO.new quality gates for the Catty repository, including CI workflow additions and guidance for CTO.new code checks and GitHub branch protection. This report documents the investigation, choices, and assumptions made.
+
+\subsection*{Files Examined}
+\begin{itemize}
+  \item \texttt{AGENTS.md} (repository-wide constraints)
+  \item \texttt{CONTRIBUTING.md} (local check instructions)
+  \item \texttt{.github/workflows/deploy.yml} (existing GitHub workflow)
+  \item \texttt{docs/dissertation/Makefile} (LaTeX build system)
+  \item \texttt{src/scripts/validate\_rdf.py} (RDF validation)
+  \item \texttt{src/tests/test\_consistency.py} (SHACL validation)
+  \item \texttt{src/schema/validators/validate\_rdf.py} (full RDF/SHACL validator)
+  \item \texttt{src/schema/validators/validate\_tex\_structure.py} (TeX structure validator)
+  \item \texttt{src/benchmarks/run.py} (SPARQL benchmark runner)
+  \item \texttt{src/benchmarks/queries/*.rq} (SPARQL queries)
+\end{itemize}
+
+\subsection*{Patterns Found}
+\begin{itemize}
+  \item LaTeX build uses \texttt{make} under \texttt{docs/dissertation/}.
+  \item TeX structure validation defaults to \texttt{thesis/chapters}, but actual content is in \texttt{docs/dissertation/chapters}.
+  \item RDF/SHACL scripts assume \texttt{ontology/} or \texttt{src/ontology/} directories which do not exist in the repository.
+  \item SPARQL benchmark queries target DBpedia and Wikidata, requiring non-empty results and an external network.
+\end{itemize}
+
+\subsection*{Formal Characterization}
+\begin{itemize}
+  \item Validator \(V\) proves \(\vdash_V \text{StructureValid}(\text{tex})\) over surface syntax and ID uniqueness.
+  \item LaTeX compiler \(L\) proves \(\vdash_L \text{Compiles}(\text{tex})\) over full expansion and preamble semantics.
+  \item A compilation failure with validator success is a constructive witness that \(V\) is incomplete with respect to \(L\).
+  \item The validator originally scanned \texttt{chapters/} only, while the build target also includes \texttt{architecture/} files.
+\end{itemize}
+
+\subsection*{Approaches Considered}
+\begin{enumerate}
+  \item \textbf{Single CI workflow with all gates} (chosen).
+    \begin{itemize}
+      \item Ensures a single, required status check in branch protection.
+      \item Enables shared dependency installation and consistent execution order.
+    \end{itemize}
+  \item \textbf{Separate CI jobs for build/test/benchmarks} (rejected).
+    \begin{itemize}
+      \item Avoids complex branch-protection configuration and redundant setup.
+    \end{itemize}
+  \item \textbf{Always run RDF/SHACL validation} (rejected).
+    \begin{itemize}
+      \item Repository lacks ontology directories; unconditional execution would block PRs.
+      \item Implemented conditional checks instead.
+    \end{itemize}
+  \item \textbf{Benchmarks optional/skippable} (rejected).
+    \begin{itemize}
+      \item Repository constraints require non-empty SPARQL results.
+      \item Implemented timeouts and explicit non-empty result enforcement.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Independence Witness and Refinement}
+\begin{itemize}
+  \item The validator and compiler accept different languages: \(V_{valid} \nsubseteq L_{valid}\).
+  \item The refinement adds preamble-only command checks and inclusion tracing so the validator follows the build target, including \texttt{architecture/} inputs.
+\end{itemize}
+
+\subsection*{Revised Plan for the Coding Agent}
+\begin{enumerate}
+  \item Update the CI workflow to enforce \texttt{CHANGELOG.md} updates for every PR.
+  \item Add the same changelog gate to CTO.new Code Checks for fast feedback.
+  \item Keep the existing build/test/lint/SPARQL gates aligned between CTO.new and GitHub Actions.
+  \item Extend the TeX validator with inclusion tracing and preamble-only command checks to narrow the validator/compiler gap.
+  \item Run \texttt{docs/dissertation} builds in CI with explicit LaTeX package installation.
+\end{enumerate}
+
+\subsection*{Changes Implemented}
+\begin{itemize}
+  \item Added \texttt{.github/workflows/ci.yml} to run quality gates:
+    \begin{itemize}
+      \item Changelog update check.
+      \item TeX structure validation by tracing inclusions from \texttt{main.tex}.
+      \item LaTeX dependency analysis, minimal TeX Live installation, and cached intermediates.
+      \item Workflow validation via \texttt{src/scripts/validate\_workflows.py}.
+      \item Python syntax check.
+      \item SPARQL benchmarks (DBpedia, Wikidata).
+      \item Conditional RDF and SHACL validation based on directory existence.
+    \end{itemize}
+  \item Added \texttt{.github/workflows/codeql.yml} to enable CodeQL scanning on pull requests and main.
+  \item Updated \texttt{.github/workflows/deploy.yml} to build from \texttt{docs/dissertation}, run build-and-deploy and deploy-pages on pull requests, deploy on main/manual events or candidate-* tags, emit site output to a consistent directory, and publish a bookshelf HTML stack for dissertation and structural rules.
+  \item Added \texttt{.github/workflows/create-candidate-tag.yml} to push candidate-* tags for PRs, triggering protected deployments.
+  \item Added \texttt{.github/workflows/self-review.yml} to request changes on PRs until required checks pass.
+  \item Added \texttt{.pre-commit-config.yaml} and workflow validation hooks to enforce consistency before commits.
+  \item Updated \texttt{src/benchmarks/run.py}:
+    \begin{itemize}
+      \item Added request timeouts for remote SPARQL queries.
+      \item Enforced non-empty results for both \texttt{CONSTRUCT} and \texttt{SELECT} queries.
+    \end{itemize}
+  \item Extended the TeX structure validator with inclusion tracing and preamble-only command checks.
+  \item Added LaTeX fallbacks for linear logic notation, moved \texttt{xcolor} to the dissertation preamble, corrected a table column count, escaped \texttt{content\_spec}, and replaced emoji checkmarks in the development cycle chapter.
+\end{itemize}
+
+\subsection*{Verification}
+\begin{itemize}
+  \item Workflow validation: \textbf{passed locally}.
+    \begin{itemize}
+      \item Command: \texttt{python src/scripts/validate\_workflows.py}
+      \item Result: \texttt{Workflow validation passed.}
+    \end{itemize}
+  \item TeX structure validation: \textbf{passed locally} using a virtual environment.
+    \begin{itemize}
+      \item Command: \texttt{.venv/bin/python src/schema/validators/validate\_tex\_structure.py --main-tex docs/dissertation/main.tex --schema src/schema/thesis-structure.schema.yaml}
+      \item Result: \texttt{\checkmark{} No validation errors found}
+    \end{itemize}
+  \item \texttt{docs/dissertation} LaTeX build: \textbf{failed locally} due to missing \texttt{pdflatex} in the environment.
+    \begin{itemize}
+      \item Command: \texttt{make clean \&\& make}
+      \item Error: \texttt{make: pdflatex: No such file or directory}
+    \end{itemize}
+\end{itemize}
+
+\subsection*{Assumptions}
+\begin{itemize}
+  \item CTO.new and GitHub branch protection are configured manually; repository changes cannot apply those settings directly.
+  \item External SPARQL endpoints are available and respond within the timeout when CI runs.
+  \item CI environments install LaTeX dependencies (as configured in \texttt{.github/workflows/ci.yml}).
+  \item Future ontology directories will be added under \texttt{ontology/} or \texttt{src/ontology/} and will then enable the RDF/SHACL checks.
+\end{itemize}
+
+\subsection*{Decision Rationale}
+The selected CI configuration balances strict quality enforcement with pragmatic handling of missing ontology directories. It aligns with repository constraints that require non-empty SPARQL results and formal LaTeX validation, while ensuring CI remains actionable for current repository contents.
