@@ -103,11 +103,11 @@ jobs:
         with:
           path: ${{ github.workspace }}/site
 
-  # 2. Deployment Job (Satisfies "Require deployments to succeed" for github-pages)
+  # 2. Deployment Job
   deploy:
-    # Removed branch restrictions so this runs on PRs, main, and tags
     needs: build
     runs-on: ubuntu-latest
+    # This environment name triggers the deployment rule requirement
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
