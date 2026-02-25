@@ -5,7 +5,7 @@ import argparse
 import requests
 from rdflib import Graph
 
-def run_benchmarks(endpoint=None, query_file=None, output_dir="results", verbose=False):
+def run_benchmarks(endpoint=None, query_file=None, output_dir="results", verbose=False, timeout=60):
     query_dir = "src/benchmarks/queries"
     os.makedirs(output_dir, exist_ok=True)
     
@@ -21,10 +21,7 @@ def run_benchmarks(endpoint=None, query_file=None, output_dir="results", verbose
         queries = [os.path.join(query_dir, f) for f in os.listdir(query_dir) if f.endswith(".rq") or f.endswith(".sparql")]
     
     all_success = True
-    
-    for q_path in queries:
-        q_file = os.path.basename(q_path)
-    
+
     # Load local graph once if needed
     g = None
     if not endpoint:
@@ -58,20 +55,31 @@ def run_benchmarks(endpoint=None, query_file=None, output_dir="results", verbose
                 if verbose:
                     print(f"Querying {endpoint}...")
                 
-                response = requests.post(endpoint, data={"query": query_str}, headers=headers)
+                response = requests.post(endpoint, data={"query": query_str}, headers=headers, timeout=timeout)
                 response.raise_for_status()
-                
+
                 duration = time.time() - start_time
-                
+
                 if is_construct:
-                    print(f"✅ {q_file} (CONSTRUCT) succeeded in {duration:.4f}s.")
+                    graph = Graph()
+                    graph.parse(data=response.text, format="turtle")
+                    triple_count = len(graph)
+                    if triple_count == 0:
+                        print(f"❌ {q_file} (CONSTRUCT) returned 0 triples in {duration:.4f}s.")
+                        all_success = False
+                        continue
+                    print(f"✅ {q_file} (CONSTRUCT) succeeded in {duration:.4f}s. Triples: {triple_count}")
                     output_path = os.path.join(output_dir, q_file.replace(".rq", ".ttl").replace(".sparql", ".ttl"))
-                    with open(output_path, "wb") as out:
-                        out.write(response.content)
+                    graph.serialize(destination=output_path, format="turtle")
                     print(f"   Results saved to {output_path}")
                 else:
                     data = response.json()
-                    print(f"✅ {q_file} (SELECT) succeeded in {duration:.4f}s. Rows: {len(data.get('results', {}).get('bindings', []))}")
+                    row_count = len(data.get("results", {}).get("bindings", []))
+                    if row_count == 0:
+                        print(f"❌ {q_file} (SELECT) returned 0 rows in {duration:.4f}s.")
+                        all_success = False
+                        continue
+                    print(f"✅ {q_file} (SELECT) succeeded in {duration:.4f}s. Rows: {row_count}")
                     output_path = os.path.join(output_dir, q_file.replace(".rq", ".csv").replace(".sparql", ".csv"))
                     # Very simple CSV conversion for demonstration
                     with open(output_path, "w") as out:
@@ -87,11 +95,22 @@ def run_benchmarks(endpoint=None, query_file=None, output_dir="results", verbose
                 duration = time.time() - start_time
                 
                 if is_construct:
-                    print(f"✅ {q_file} (CONSTRUCT) succeeded in {duration:.4f}s.")
+                    graph = results.graph if hasattr(results, "graph") and results.graph is not None else results
+                    triple_count = len(graph)
+                    if triple_count == 0:
+                        print(f"❌ {q_file} (CONSTRUCT) returned 0 triples in {duration:.4f}s.")
+                        all_success = False
+                        continue
+                    print(f"✅ {q_file} (CONSTRUCT) succeeded in {duration:.4f}s. Triples: {triple_count}")
                     output_path = os.path.join(output_dir, q_file.replace(".rq", ".ttl").replace(".sparql", ".ttl"))
-                    results.serialize(destination=output_path, format="turtle")
+                    graph.serialize(destination=output_path, format="turtle")
                 else:
-                    print(f"✅ {q_file} (SELECT) succeeded in {duration:.4f}s. Rows: {len(results)}")
+                    row_count = len(results)
+                    if row_count == 0:
+                        print(f"❌ {q_file} (SELECT) returned 0 rows in {duration:.4f}s.")
+                        all_success = False
+                        continue
+                    print(f"✅ {q_file} (SELECT) succeeded in {duration:.4f}s. Rows: {row_count}")
                     output_path = os.path.join(output_dir, q_file.replace(".rq", ".csv").replace(".sparql", ".csv"))
                     results.serialize(destination=output_path, format="csv")
                 print(f"   Results saved to {output_path}")
@@ -107,11 +126,12 @@ if __name__ == "__main__":
     parser.add_argument("--endpoint", help="Remote SPARQL endpoint URL")
     parser.add_argument("--query", help="Specific query file name or path")
     parser.add_argument("--output-dir", default="results", help="Directory to save results")
+    parser.add_argument("--timeout", type=int, default=60, help="Timeout in seconds for remote SPARQL requests")
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
     
     args = parser.parse_args()
     
-    if run_benchmarks(endpoint=args.endpoint, query_file=args.query, output_dir=args.output_dir, verbose=args.verbose):
+    if run_benchmarks(endpoint=args.endpoint, query_file=args.query, output_dir=args.output_dir, verbose=args.verbose, timeout=args.timeout):
         sys.exit(0)
     else:
         sys.exit(1)
