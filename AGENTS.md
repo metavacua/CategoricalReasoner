@@ -20,6 +20,11 @@ This repository attempts to implement the Categorical Reasoner "Catty" thesis: c
 - **Query Quality**: Well-formed queries must return error-free non-empty results. Empty result sets or timeouts (over 60s) are considered failures.
 - **Extraction Protocol**: Follow the discovery and verification patterns for external QIDs and URIs. Document all difficulties and issues encountered during extraction.
 
+## Semantic Canonicalization
+Canonical N-Quads	RDFC-1.0	Highest (Unique for isomorphic graphs)
+Expanded JSON-LD (Sorted)	JSON-LD 1.1	High (If key/array sorting is enforced)
+Canonical XML (C14N)	XML C14N	Absolute (For literals and XML-subtrees)
+
 ## Validation
 
 - **Standard Tools**: Standard validation tools must always be used; critically, compilation processes for Java are considered restricted validators; minimization of DIY, roll your own, re-inventing the wheel, and non-standard implementations of validators is required.
