@@ -1,6 +1,6 @@
 # Catty
 
-An algorithmic thesis exploring categorical foundations for formal logics and their morphisms.
+SUPERCEDED BY metavacua-patch-1 AGENTS.md; all subsequent text should be removed and refreshed based on the root AGENTS.md.
 
 ## Abstract
 
