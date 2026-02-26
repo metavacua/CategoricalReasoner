@@ -1,0 +1,387 @@
+<urn:repo:categoricalreasoner:agents#AnnotationProcessing> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#AnnotationProcessing> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#ValidationStandard> .
+<urn:repo:categoricalreasoner:agents#AnnotationProcessing> <http://www.w3.org/2004/02/skos/core#definition> "The automation of morphisms should leverage the Java Compiler API (javax.tools) and Annotation Processing (JSR 269). By treating Semantic HTML as the source of truth, the JDK can automate the construction of records where the proof terms are embedded during the compilation phase. The usage of abstract classes and interfaces as well as the canonical constructors for Java Records is expected to be a basic application of the technologies."@en .
+<urn:repo:categoricalreasoner:agents#AnnotationProcessing> <http://www.w3.org/2004/02/skos/core#prefLabel> "Annotation Processing"@en .
+<urn:repo:categoricalreasoner:agents#BenchmarksNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#BenchmarksNode> <http://www.w3.org/2000/01/rdf-schema#label> "Benchmarks Directory"@en .
+<urn:repo:categoricalreasoner:agents#BenchmarksNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#InconsistencyPresumption> .
+<urn:repo:categoricalreasoner:agents#BenchmarksNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#ReportConstraint> .
+<urn:repo:categoricalreasoner:agents#BenchmarksNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#StandardTools> .
+<urn:repo:categoricalreasoner:agents#BenchmarksNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#TechnologyStack> .
+<urn:repo:categoricalreasoner:agents#BenchmarksNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#BenchmarksNode> <urn:repo:categoricalreasoner:agents#hasAgentsFile> "src/benchmarks/AGENTS.md" .
+<urn:repo:categoricalreasoner:agents#BenchmarksNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "src/benchmarks/README.md" .
+<urn:repo:categoricalreasoner:agents#BenchmarksNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/AGPL-3.0-or-later.html> .
+<urn:repo:categoricalreasoner:agents#BenchmarksNode> <urn:repo:categoricalreasoner:agents#path> "src/benchmarks/" .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricLhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricLhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Asymmetric Full Context LHS Single Succedent"@en .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricLhsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymLhsNode> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricLhsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymLhsNode> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricLhsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymLhsNode> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricLhsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymLhsNode> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricLhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricLhsNode> <urn:repo:categoricalreasoner:agents#hasAgentsFile> "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/AGENTS.md" .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricLhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/README.md" .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricLhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricLhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/" .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricRhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricRhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Asymmetric Single Antecedent Full Context RHS"@en .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricRhsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymRhsNode> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricRhsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymRhsNode> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricRhsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymRhsNode> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricRhsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymRhsNode> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricRhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricRhsNode> <urn:repo:categoricalreasoner:agents#hasAgentsFile> "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/AGENTS.md" .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricRhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/README.md" .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricRhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#ChapAsymmetricRhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/" .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricLhsRhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricLhsRhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Symmetric Full Context LHS RHS"@en .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricLhsRhsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymLhsRhsNode> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricLhsRhsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecFullWeakeningSymLhsRhsNode> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricLhsRhsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymLhsRhsNode> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricLhsRhsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymLhsRhsNode> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricLhsRhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricLhsRhsNode> <urn:repo:categoricalreasoner:agents#hasAgentsFile> "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/AGENTS.md" .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricLhsRhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/README.md" .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricLhsRhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricLhsRhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/" .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricSingleNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricSingleNode> <http://www.w3.org/2000/01/rdf-schema#label> "Symmetric Single Antecedent Single Succedent"@en .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricSingleNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymSingleNode> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricSingleNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecFullWeakeningSymSingleNode> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricSingleNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymSingleNode> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricSingleNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymSingleNode> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricSingleNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricSingleNode> <urn:repo:categoricalreasoner:agents#hasAgentsFile> "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/AGENTS.md" .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricSingleNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/README.md" .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricSingleNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#ChapSymmetricSingleNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/" .
+<urn:repo:categoricalreasoner:agents#CitationConstraint> <http://purl.org/dc/terms/relation> <https://www.iso.org/standard/76552.html> .
+<urn:repo:categoricalreasoner:agents#CitationConstraint> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#CitationConstraint> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#CitationConstraint> <http://www.w3.org/2004/02/skos/core#definition> "The documentation system, citation system, and citations must conform to relevant academic and industrial standards for open science, open source, and international learned society practices; OAIS (ISO 14721:2025) and (ISO 16363:2025) are minimal required standards compliance."@en .
+<urn:repo:categoricalreasoner:agents#CitationConstraint> <http://www.w3.org/2004/02/skos/core#prefLabel> "Citation Constraint"@en .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#definition> "A fundamental constraint governing repository behavior and agent actions."@en .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#CitationConstraint> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#DomainRestriction> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#ExtractionProtocol> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#InconsistencyPresumption> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#LanguageConstraint> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#LicenseConstraint> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#QueryQuality> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#ReportConstraint> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#SPARQLExecution> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#SPARQLSyntax> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#SemanticWebData> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#StandardsCollection> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#TechnologyStack> .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#prefLabel> "Core Constraint"@en .
+<urn:repo:categoricalreasoner:agents#CoreConstraint> <http://www.w3.org/2004/02/skos/core#topConceptOf> <urn:repo:categoricalreasoner:agents#GovernanceScheme> .
+<urn:repo:categoricalreasoner:agents#DissertationNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#DissertationNode> <http://www.w3.org/2000/01/rdf-schema#label> "Dissertation Directory"@en .
+<urn:repo:categoricalreasoner:agents#DissertationNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#DissertationNode> <urn:repo:categoricalreasoner:agents#hasAgentsFile> "docs/dissertation/AGENTS.md" .
+<urn:repo:categoricalreasoner:agents#DissertationNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/dissertation/README.md" .
+<urn:repo:categoricalreasoner:agents#DissertationNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#DissertationNode> <urn:repo:categoricalreasoner:agents#path> "docs/dissertation/" .
+<urn:repo:categoricalreasoner:agents#DocsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#DocsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Documentation Directory"@en .
+<urn:repo:categoricalreasoner:agents#DocsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#CitationConstraint> .
+<urn:repo:categoricalreasoner:agents#DocsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#LanguageConstraint> .
+<urn:repo:categoricalreasoner:agents#DocsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#LicenseConstraint> .
+<urn:repo:categoricalreasoner:agents#DocsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#ReportConstraint> .
+<urn:repo:categoricalreasoner:agents#DocsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#StandardsCollection> .
+<urn:repo:categoricalreasoner:agents#DocsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#DissertationNode> .
+<urn:repo:categoricalreasoner:agents#DocsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#StandardsNode> .
+<urn:repo:categoricalreasoner:agents#DocsNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#StructuralRulesNode> .
+<urn:repo:categoricalreasoner:agents#DocsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#DocsNode> <urn:repo:categoricalreasoner:agents#hasAgentsFile> "docs/AGENTS.md" .
+<urn:repo:categoricalreasoner:agents#DocsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/README.md" .
+<urn:repo:categoricalreasoner:agents#DocsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#DocsNode> <urn:repo:categoricalreasoner:agents#path> "docs/" .
+<urn:repo:categoricalreasoner:agents#DomainRestriction> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#DomainRestriction> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#DomainRestriction> <http://www.w3.org/2004/02/skos/core#definition> "Do not use http://catty.org/. The only associated webpage is the MetaVacua GitHub repository (https://github.com/metavacua/CategoricalReasoner). Any script or artifact using catty.org is invalid; for testing and development purposes any locally authored semantic web technologies that need a namespace should use URNs."@en .
+<urn:repo:categoricalreasoner:agents#DomainRestriction> <http://www.w3.org/2004/02/skos/core#prefLabel> "Domain Restriction"@en .
+<urn:repo:categoricalreasoner:agents#ExtractionProtocol> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#ExtractionProtocol> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#ExtractionProtocol> <http://www.w3.org/2004/02/skos/core#definition> "Follow the discovery and verification patterns for external QIDs and URIs. Document all difficulties and issues encountered during extraction."@en .
+<urn:repo:categoricalreasoner:agents#ExtractionProtocol> <http://www.w3.org/2004/02/skos/core#prefLabel> "Extraction Protocol"@en .
+<urn:repo:categoricalreasoner:agents#GovernanceScheme> <http://purl.org/dc/terms/title> "Repository Governance Concept Scheme" .
+<urn:repo:categoricalreasoner:agents#GovernanceScheme> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#ConceptScheme> .
+<urn:repo:categoricalreasoner:agents#GovernanceScheme> <http://www.w3.org/2004/02/skos/core#hasTopConcept> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#GovernanceScheme> <http://www.w3.org/2004/02/skos/core#hasTopConcept> <urn:repo:categoricalreasoner:agents#ValidationStandard> .
+<urn:repo:categoricalreasoner:agents#InconsistencyPresumption> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#InconsistencyPresumption> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#InconsistencyPresumption> <http://www.w3.org/2004/02/skos/core#definition> "The repository's present and past state is assumed to be corrupt, non-functional, partially implemented, or otherwise formally incorrect such that strict preservation of previous conflicting information will predictably preserve broken or incorrect behaviors. Local finite consistency must be proven, and global consistency requires the highest standards of proof with relative consistency proofs being the expected norm."@en .
+<urn:repo:categoricalreasoner:agents#InconsistencyPresumption> <http://www.w3.org/2004/02/skos/core#prefLabel> "Presumption of Inconsistency"@en .
+<urn:repo:categoricalreasoner:agents#KeYValidation> <http://purl.org/dc/terms/relation> <https://key-project.org/> .
+<urn:repo:categoricalreasoner:agents#KeYValidation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#KeYValidation> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#ValidationStandard> .
+<urn:repo:categoricalreasoner:agents#KeYValidation> <http://www.w3.org/2004/02/skos/core#definition> "KeY is the correct technology for Java; the first major morphism to define is the transformation from semantic HTML web pages to Java and specifically Java records via Java documentation annotations that conform to KeY, Openllet, and Jena."@en .
+<urn:repo:categoricalreasoner:agents#KeYValidation> <http://www.w3.org/2004/02/skos/core#prefLabel> "KeY Validation"@en .
+<urn:repo:categoricalreasoner:agents#LanguageConstraint> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#LanguageConstraint> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#LanguageConstraint> <http://www.w3.org/2004/02/skos/core#definition> "W3C compliant HTML5 for documentation and Java (primary ecosystem for validation and transformation) for code with mathematically canonical forms prioritized; tex and markup is to be derived by qualified deterministic and formally verified standard compliant tools. There is a strict separation between developer tooling and tools that should be committed to the repository; python scripts, bash scripts, curl calls, and similar can be used for development but should not be committed in general to the repository."@en .
+<urn:repo:categoricalreasoner:agents#LanguageConstraint> <http://www.w3.org/2004/02/skos/core#prefLabel> "Language Constraint"@en .
+<urn:repo:categoricalreasoner:agents#LicenseConstraint> <http://purl.org/dc/terms/relation> <https://spdx.org/licenses/AGPL-3.0-or-later.html> .
+<urn:repo:categoricalreasoner:agents#LicenseConstraint> <http://purl.org/dc/terms/relation> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#LicenseConstraint> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#LicenseConstraint> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#LicenseConstraint> <http://www.w3.org/2004/02/skos/core#definition> "The repository should conform to and utilize https://reuse.software/dev/ for the dual licensing; where AGPLv3 and CC BY-SA v4 international conflict and both have standing, AGPLv3 is the more restrictive license so it prevails at the intersection."@en .
+<urn:repo:categoricalreasoner:agents#LicenseConstraint> <http://www.w3.org/2004/02/skos/core#prefLabel> "License Constraint"@en .
+<urn:repo:categoricalreasoner:agents#PartNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#PartNode> <http://www.w3.org/2000/01/rdf-schema#label> "Part Directory"@en .
+<urn:repo:categoricalreasoner:agents#PartNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#ChapAsymmetricLhsNode> .
+<urn:repo:categoricalreasoner:agents#PartNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#ChapAsymmetricRhsNode> .
+<urn:repo:categoricalreasoner:agents#PartNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#ChapSymmetricLhsRhsNode> .
+<urn:repo:categoricalreasoner:agents#PartNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#ChapSymmetricSingleNode> .
+<urn:repo:categoricalreasoner:agents#PartNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#PartNode> <urn:repo:categoricalreasoner:agents#hasAgentsFile> "docs/structural-rules/part/AGENTS.md" .
+<urn:repo:categoricalreasoner:agents#PartNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/README.md" .
+<urn:repo:categoricalreasoner:agents#PartNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#PartNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/" .
+<urn:repo:categoricalreasoner:agents#QueryQuality> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#QueryQuality> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#QueryQuality> <http://www.w3.org/2004/02/skos/core#definition> "Well-formed queries must return error-free non-empty results. Empty result sets or timeouts (over 60s) are considered failures."@en .
+<urn:repo:categoricalreasoner:agents#QueryQuality> <http://www.w3.org/2004/02/skos/core#prefLabel> "Query Quality"@en .
+<urn:repo:categoricalreasoner:agents#ReportConstraint> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#ReportConstraint> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#ReportConstraint> <http://www.w3.org/2004/02/skos/core#definition> "Reports must be returned in semantic XHTML conformant to C14N or whatever format any tools use, and all documentation is to be contained in the docs directory with the sole exception being special files permitted for Github (e.g. README.md) and for specific tools like Maven."@en .
+<urn:repo:categoricalreasoner:agents#ReportConstraint> <http://www.w3.org/2004/02/skos/core#prefLabel> "Report Constraint"@en .
+<urn:repo:categoricalreasoner:agents#RepositoryNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Class> .
+<urn:repo:categoricalreasoner:agents#RepositoryNode> <http://www.w3.org/2000/01/rdf-schema#comment> "A node in the repository directory hierarchy."@en .
+<urn:repo:categoricalreasoner:agents#RepositoryNode> <http://www.w3.org/2000/01/rdf-schema#label> "Repository Node"@en .
+<urn:repo:categoricalreasoner:agents#RootNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#RootNode> <http://www.w3.org/2000/01/rdf-schema#label> "Root Directory"@en .
+<urn:repo:categoricalreasoner:agents#RootNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#DocsNode> .
+<urn:repo:categoricalreasoner:agents#RootNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#SrcNode> .
+<urn:repo:categoricalreasoner:agents#RootNode> <urn:repo:categoricalreasoner:agents#derivesTo> <urn:repo:categoricalreasoner:agents#DocsNode> .
+<urn:repo:categoricalreasoner:agents#RootNode> <urn:repo:categoricalreasoner:agents#derivesTo> <urn:repo:categoricalreasoner:agents#SrcNode> .
+<urn:repo:categoricalreasoner:agents#RootNode> <urn:repo:categoricalreasoner:agents#hasAgentsFile> "AGENTS.md" .
+<urn:repo:categoricalreasoner:agents#RootNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "README.md" .
+<urn:repo:categoricalreasoner:agents#SPARQLExecution> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#SPARQLExecution> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#SPARQLExecution> <http://www.w3.org/2004/02/skos/core#definition> "All documented queries must be actually ran against external endpoints using standard SPARQL query tools. Evidence must be returned as valid and relevant format; the non-empty return requirements constitute a formal relevance condition. No faking or internal generation of results."@en .
+<urn:repo:categoricalreasoner:agents#SPARQLExecution> <http://www.w3.org/2004/02/skos/core#prefLabel> "SPARQL Execution"@en .
+<urn:repo:categoricalreasoner:agents#SPARQLSyntax> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#SPARQLSyntax> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#SPARQLSyntax> <http://www.w3.org/2004/02/skos/core#definition> "SPARQL queries must NOT be wrapped in LaTeX environments (like lstlisting) when being processed or saved for execution."@en .
+<urn:repo:categoricalreasoner:agents#SPARQLSyntax> <http://www.w3.org/2004/02/skos/core#prefLabel> "SPARQL Syntax"@en .
+<urn:repo:categoricalreasoner:agents#ScriptsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#ScriptsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Scripts Directory"@en .
+<urn:repo:categoricalreasoner:agents#ScriptsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#DomainRestriction> .
+<urn:repo:categoricalreasoner:agents#ScriptsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#InconsistencyPresumption> .
+<urn:repo:categoricalreasoner:agents#ScriptsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#SPARQLExecution> .
+<urn:repo:categoricalreasoner:agents#ScriptsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#SemanticWebData> .
+<urn:repo:categoricalreasoner:agents#ScriptsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#ScriptsNode> <urn:repo:categoricalreasoner:agents#hasAgentsFile> "src/scripts/AGENTS.md" .
+<urn:repo:categoricalreasoner:agents#ScriptsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "src/scripts/README.md" .
+<urn:repo:categoricalreasoner:agents#ScriptsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/AGPL-3.0-or-later.html> .
+<urn:repo:categoricalreasoner:agents#ScriptsNode> <urn:repo:categoricalreasoner:agents#path> "src/scripts/" .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymLhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymLhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Affine Weakening (Asymmetric LHS)"@en .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-affine-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-affine-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymRhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymRhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Affine Weakening (Asymmetric RHS)"@en .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-affine-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-affine-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymLhsRhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymLhsRhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Affine Weakening (Symmetric LHS RHS)"@en .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-affine-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-affine-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymSingleNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymSingleNode> <http://www.w3.org/2000/01/rdf-schema#label> "Affine Weakening (Symmetric Single)"@en .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-affine-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecAffineWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-affine-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymLhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymLhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Full Weakening (Asymmetric LHS)"@en .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-full-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-full-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymRhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymRhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Full Weakening (Asymmetric RHS)"@en .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-full-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-full-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningSymLhsRhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningSymLhsRhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Full Weakening (Symmetric LHS RHS)"@en .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-full-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-full-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningSymSingleNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningSymSingleNode> <http://www.w3.org/2000/01/rdf-schema#label> "Full Weakening (Symmetric Single)"@en .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-full-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecFullWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-full-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymLhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymLhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Linear Weakening (Asymmetric LHS)"@en .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-linear-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-linear-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymRhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymRhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Linear Weakening (Asymmetric RHS)"@en .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-linear-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-linear-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymLhsRhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymLhsRhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Linear Weakening (Symmetric LHS RHS)"@en .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-linear-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-linear-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymSingleNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymSingleNode> <http://www.w3.org/2000/01/rdf-schema#label> "Linear Weakening (Symmetric Single)"@en .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-linear-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecLinearWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-linear-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymLhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymLhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Relevant Weakening (Asymmetric LHS)"@en .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-relevant-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymLhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-relevant-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymRhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymRhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Relevant Weakening (Asymmetric RHS)"@en .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-relevant-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningAsymRhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-relevant-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymLhsRhsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymLhsRhsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Relevant Weakening (Symmetric LHS RHS)"@en .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-relevant-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymLhsRhsNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-relevant-weakening/" .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymSingleNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymSingleNode> <http://www.w3.org/2000/01/rdf-schema#label> "Relevant Weakening (Symmetric Single)"@en .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-relevant-weakening/README.md" .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#SecRelevantWeakeningSymSingleNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-relevant-weakening/" .
+<urn:repo:categoricalreasoner:agents#SemanticWebData> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#SemanticWebData> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#SemanticWebData> <http://www.w3.org/2004/02/skos/core#definition> "Consumed from external sources. Any and all local authoring of semantic linked data should be handled via the docs to src transformation, and local semantic web ontologies should be handled strictly within Java, Jena, and Openllet."@en .
+<urn:repo:categoricalreasoner:agents#SemanticWebData> <http://www.w3.org/2004/02/skos/core#prefLabel> "Semantic Web Data"@en .
+<urn:repo:categoricalreasoner:agents#SrcNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <http://www.w3.org/2000/01/rdf-schema#label> "Source Code Directory"@en .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#AnnotationProcessing> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#InconsistencyPresumption> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#KeYValidation> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#QueryQuality> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#SPARQLExecution> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#SPARQLSyntax> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#SemanticWebData> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#StandardTools> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#TechnologyStack> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#BenchmarksNode> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#ScriptsNode> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#TestsNode> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#hasAgentsFile> "src/AGENTS.md" .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/AGPL-3.0-or-later.html> .
+<urn:repo:categoricalreasoner:agents#SrcNode> <urn:repo:categoricalreasoner:agents#path> "src/" .
+<urn:repo:categoricalreasoner:agents#StandardTools> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#StandardTools> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#ValidationStandard> .
+<urn:repo:categoricalreasoner:agents#StandardTools> <http://www.w3.org/2004/02/skos/core#definition> "Standard validation tools must always be used; critically, compilation processes for Java are considered restricted validators; minimization of DIY, roll your own, re-inventing the wheel, and non-standard implementations of validators is required."@en .
+<urn:repo:categoricalreasoner:agents#StandardTools> <http://www.w3.org/2004/02/skos/core#prefLabel> "Standard Tools"@en .
+<urn:repo:categoricalreasoner:agents#StandardsCollection> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#StandardsCollection> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#StandardsCollection> <http://www.w3.org/2004/02/skos/core#definition> "The docs directory should have and collect relevant standards in a standards subdirectory for the repository and the development of its projects and derivatives."@en .
+<urn:repo:categoricalreasoner:agents#StandardsCollection> <http://www.w3.org/2004/02/skos/core#prefLabel> "Standards Collection"@en .
+<urn:repo:categoricalreasoner:agents#StandardsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#StandardsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Standards Directory"@en .
+<urn:repo:categoricalreasoner:agents#StandardsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#StandardsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/standards/README.md" .
+<urn:repo:categoricalreasoner:agents#StandardsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#StandardsNode> <urn:repo:categoricalreasoner:agents#path> "docs/standards/" .
+<urn:repo:categoricalreasoner:agents#StructuralRulesNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#StructuralRulesNode> <http://www.w3.org/2000/01/rdf-schema#label> "Structural Rules Directory"@en .
+<urn:repo:categoricalreasoner:agents#StructuralRulesNode> <urn:repo:categoricalreasoner:agents#contains> <urn:repo:categoricalreasoner:agents#PartNode> .
+<urn:repo:categoricalreasoner:agents#StructuralRulesNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#StructuralRulesNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "docs/structural-rules/README.md" .
+<urn:repo:categoricalreasoner:agents#StructuralRulesNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<urn:repo:categoricalreasoner:agents#StructuralRulesNode> <urn:repo:categoricalreasoner:agents#path> "docs/structural-rules/" .
+<urn:repo:categoricalreasoner:agents#TechnologyStack> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#TechnologyStack> <http://www.w3.org/2004/02/skos/core#broader> <urn:repo:categoricalreasoner:agents#CoreConstraint> .
+<urn:repo:categoricalreasoner:agents#TechnologyStack> <http://www.w3.org/2004/02/skos/core#definition> "Core validation and transformation uses Java ecosystem (Jena, OpenLlet, JavaPoet, JUnit, KeY)."@en .
+<urn:repo:categoricalreasoner:agents#TechnologyStack> <http://www.w3.org/2004/02/skos/core#prefLabel> "Technology Stack"@en .
+<urn:repo:categoricalreasoner:agents#TestsNode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#TestsNode> <http://www.w3.org/2000/01/rdf-schema#label> "Tests Directory"@en .
+<urn:repo:categoricalreasoner:agents#TestsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#InconsistencyPresumption> .
+<urn:repo:categoricalreasoner:agents#TestsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#QueryQuality> .
+<urn:repo:categoricalreasoner:agents#TestsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#SPARQLExecution> .
+<urn:repo:categoricalreasoner:agents#TestsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#StandardTools> .
+<urn:repo:categoricalreasoner:agents#TestsNode> <urn:repo:categoricalreasoner:agents#applicableConstraint> <urn:repo:categoricalreasoner:agents#TechnologyStack> .
+<urn:repo:categoricalreasoner:agents#TestsNode> <urn:repo:categoricalreasoner:agents#derivesFrom> <urn:repo:categoricalreasoner:agents#RootNode> .
+<urn:repo:categoricalreasoner:agents#TestsNode> <urn:repo:categoricalreasoner:agents#hasAgentsFile> "src/tests/AGENTS.md" .
+<urn:repo:categoricalreasoner:agents#TestsNode> <urn:repo:categoricalreasoner:agents#hasReadmeFile> "src/tests/README.md" .
+<urn:repo:categoricalreasoner:agents#TestsNode> <urn:repo:categoricalreasoner:agents#license> <https://spdx.org/licenses/AGPL-3.0-or-later.html> .
+<urn:repo:categoricalreasoner:agents#TestsNode> <urn:repo:categoricalreasoner:agents#path> "src/tests/" .
+<urn:repo:categoricalreasoner:agents#ValidationStandard> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#ValidationStandard> <http://www.w3.org/2004/02/skos/core#definition> "Standards for validation using canonical tools."@en .
+<urn:repo:categoricalreasoner:agents#ValidationStandard> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#AnnotationProcessing> .
+<urn:repo:categoricalreasoner:agents#ValidationStandard> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#KeYValidation> .
+<urn:repo:categoricalreasoner:agents#ValidationStandard> <http://www.w3.org/2004/02/skos/core#narrower> <urn:repo:categoricalreasoner:agents#StandardTools> .
+<urn:repo:categoricalreasoner:agents#ValidationStandard> <http://www.w3.org/2004/02/skos/core#prefLabel> "Validation Standard"@en .
+<urn:repo:categoricalreasoner:agents#ValidationStandard> <http://www.w3.org/2004/02/skos/core#topConceptOf> <urn:repo:categoricalreasoner:agents#GovernanceScheme> .
+<urn:repo:categoricalreasoner:agents#applicableConstraint> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<urn:repo:categoricalreasoner:agents#applicableConstraint> <http://www.w3.org/2000/01/rdf-schema#domain> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#applicableConstraint> <http://www.w3.org/2000/01/rdf-schema#label> "applicable constraint"@en .
+<urn:repo:categoricalreasoner:agents#applicableConstraint> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2004/02/skos/core#Concept> .
+<urn:repo:categoricalreasoner:agents#contains> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<urn:repo:categoricalreasoner:agents#contains> <http://www.w3.org/2000/01/rdf-schema#domain> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#contains> <http://www.w3.org/2000/01/rdf-schema#label> "contains"@en .
+<urn:repo:categoricalreasoner:agents#contains> <http://www.w3.org/2000/01/rdf-schema#range> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#derivesFrom> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<urn:repo:categoricalreasoner:agents#derivesFrom> <http://www.w3.org/2000/01/rdf-schema#comment> "Indicates that a repository node's AGENTS.md or README.md derives from the root AGENTS.md"@en .
+<urn:repo:categoricalreasoner:agents#derivesFrom> <http://www.w3.org/2000/01/rdf-schema#domain> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#derivesFrom> <http://www.w3.org/2000/01/rdf-schema#label> "derives from"@en .
+<urn:repo:categoricalreasoner:agents#derivesFrom> <http://www.w3.org/2000/01/rdf-schema#range> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#derivesFrom> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/ns/prov#wasDerivedFrom> .
+<urn:repo:categoricalreasoner:agents#derivesTo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<urn:repo:categoricalreasoner:agents#derivesTo> <http://www.w3.org/2000/01/rdf-schema#domain> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#derivesTo> <http://www.w3.org/2000/01/rdf-schema#label> "derives to"@en .
+<urn:repo:categoricalreasoner:agents#derivesTo> <http://www.w3.org/2000/01/rdf-schema#range> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#derivesTo> <http://www.w3.org/2002/07/owl#inverseOf> <urn:repo:categoricalreasoner:agents#derivesFrom> .
+<urn:repo:categoricalreasoner:agents#hasAgentsFile> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<urn:repo:categoricalreasoner:agents#hasAgentsFile> <http://www.w3.org/2000/01/rdf-schema#domain> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#hasAgentsFile> <http://www.w3.org/2000/01/rdf-schema#label> "has AGENTS.md file"@en .
+<urn:repo:categoricalreasoner:agents#hasAgentsFile> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<urn:repo:categoricalreasoner:agents#hasReadmeFile> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<urn:repo:categoricalreasoner:agents#hasReadmeFile> <http://www.w3.org/2000/01/rdf-schema#domain> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#hasReadmeFile> <http://www.w3.org/2000/01/rdf-schema#label> "has README.md file"@en .
+<urn:repo:categoricalreasoner:agents#hasReadmeFile> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<urn:repo:categoricalreasoner:agents#license> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<urn:repo:categoricalreasoner:agents#license> <http://www.w3.org/2000/01/rdf-schema#domain> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#license> <http://www.w3.org/2000/01/rdf-schema#label> "license"@en .
+<urn:repo:categoricalreasoner:agents#license> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2000/01/rdf-schema#Resource> .
+<urn:repo:categoricalreasoner:agents#path> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<urn:repo:categoricalreasoner:agents#path> <http://www.w3.org/2000/01/rdf-schema#domain> <urn:repo:categoricalreasoner:agents#RepositoryNode> .
+<urn:repo:categoricalreasoner:agents#path> <http://www.w3.org/2000/01/rdf-schema#label> "path"@en .
+<urn:repo:categoricalreasoner:agents#path> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<urn:repo:categoricalreasoner:agents> <http://purl.org/dc/terms/created> "2025-02-25"^^<http://www.w3.org/2001/XMLSchema#date> .
+<urn:repo:categoricalreasoner:agents> <http://purl.org/dc/terms/creator> <https://github.com/metavacua> .
+<urn:repo:categoricalreasoner:agents> <http://purl.org/dc/terms/description> "Canonical specification for repository governance and AGENTS.md derivation"@en .
+<urn:repo:categoricalreasoner:agents> <http://purl.org/dc/terms/license> <https://www.gnu.org/licenses/agpl-3.0.html> .
+<urn:repo:categoricalreasoner:agents> <http://purl.org/dc/terms/title> "CategoricalReasoner Repository Constraints Ontology" .
+<urn:repo:categoricalreasoner:agents> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
+<urn:repo:categoricalreasoner:agents> <http://www.w3.org/2000/01/rdf-schema#comment> "This ontology defines constraints using SKOS concepts, SHACL shapes, and PROV-O derivation relationships."@en .
