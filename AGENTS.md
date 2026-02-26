@@ -1,5 +1,6 @@
 # AGENTS.md - Catty Thesis Repository
 All other AGENTS.md and README.md files are derivatives of this file.
+
 ## Scope
 
 This repository attempts to implement the Categorical Reasoner "Catty" thesis: categorical foundations for morphisms between logics rather than morphisms within logics; there are expected reflections from the category of subclassical sequent calculi into sequent calculi as categories or internal logics of categories, but the repository fundamentally concerns the category of subclassical sequent calculi. Semantic web data is consumed from external sources (SPARQL endpoints, linked data, GGG) via Jena, bash scripts, or curl during development. Semantic HTML documentation collects the semantic web data and standard ontologies published online and other relevant information for software development, formal methods, engineering practices, category theory, Java development, meta-linguistics, meta-mathematical theory development, computational theories, sequent calculi, strong normalization, canonical methods, formal verification, W3C standards, OMG DOL standards, ISO COLORE standards, open science, open source software and hardware and firmware, and more.
@@ -19,11 +20,6 @@ This repository attempts to implement the Categorical Reasoner "Catty" thesis: c
 - **SPARQL Syntax**: SPARQL queries must NOT be wrapped in LaTeX environments (like lstlisting) when being processed or saved for execution.
 - **Query Quality**: Well-formed queries must return error-free non-empty results. Empty result sets or timeouts (over 60s) are considered failures.
 - **Extraction Protocol**: Follow the discovery and verification patterns for external QIDs and URIs. Document all difficulties and issues encountered during extraction.
-
-## Semantic Canonicalization
-Canonical N-Quads	RDFC-1.0	Highest (Unique for isomorphic graphs)
-Expanded JSON-LD (Sorted)	JSON-LD 1.1	High (If key/array sorting is enforced)
-Canonical XML (C14N)	XML C14N	Absolute (For literals and XML-subtrees)
 
 ## Validation
 

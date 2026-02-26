@@ -1,47 +1,21 @@
-# AGENTS.md - Symmetric Weakening with Full Context on LHS and RHS
+# AGENTS.md - Symmetric Full Context LHS RHS
 
 ## Scope
-This chapter covers symmetric weakening where both the left-hand side (antecedent) and right-hand side (succedent) contexts can be freely extended with arbitrary formulas. This is the classical (LK) presentation.
 
-## Core Constraints
-- **IDs**: All IDs globally unique following patterns: `sec-*`, `subsec-*`.
-- **Content**: Each section should be a page to a few pages of text minimum.
+This file governs all materials under the `docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/` directory. All contents derive from and must comply with the root `AGENTS.md` constraints.
 
-## Exchange and Contraction Independence
+## Subdirectories
 
-**IMPORTANT**: This chapter is ambivalent to whether Exchange or Contraction hold. We consider:
-- The case where Exchange holds (commutative logic)
-- The case where Exchange is stripped to non-commutative "order logic"
-- The case where Contraction holds or is rejected
+- `docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-affine-weakening/` - Affine Weakening (Symmetric LHS RHS)
+- `docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-full-weakening/` - Full Weakening (Symmetric LHS RHS)
+- `docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-linear-weakening/` - Linear Weakening (Symmetric LHS RHS)
+- `docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-relevant-weakening/` - Relevant Weakening (Symmetric LHS RHS)
 
-The admission of Exchange, its explicit inclusion, its modalization, or its operationalization are independent of the weakening dimensions studied here.
+## Licensing
 
-## Section Content Requirements
-
-### Full Weakening (sec-full-weakening)
-- Classical weakening rule in LK sequent calculus
-- Both LHS and RHS can be extended arbitrarily
-- Connection to logical explosion (ex falso quodlibet)
-- Paola Zizzi's work on absence of weakening and no erasure
-
-### Linear Weakening (sec-linear-weakening)
-- Weakening controlled via exponential modality $\oc A$ in linear logic
-- Resource-sensitive: formulas marked with $\oc$ can be weakened
-- Distinction between linear and non-linear contexts
-
-### Affine Weakening (sec-affine-weakening)
-- Affine logic: weakening admitted, contraction rejected
-- Resources can be discarded but not duplicated
-- Connection to substructural logic hierarchies
-
-### Relevant Weakening (sec-relevant-weakening)
-- Relevant logic: both weakening and contraction rejected
-- Premises must be relevant to conclusions
-- No arbitrary formula introduction permitted
-
-## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+All contents of this directory are licensed under CC-BY-SA-4.0.html.
 
 ## See Also
-- `/docs/structural-rules/part/README.md` - Parent directory
-- `/docs/structural-rules/parts/part-weakening.tex` - Main part file
+
+- `AGENTS.md` (root) - Core repository constraints
+

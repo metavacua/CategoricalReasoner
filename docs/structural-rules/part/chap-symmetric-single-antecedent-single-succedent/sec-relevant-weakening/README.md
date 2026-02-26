@@ -1,34 +1,18 @@
-# Section: Relevant Weakening
+# Relevant Weakening (Symmetric Single)
 
-## Scope
-This section covers relevant weakening with single formula contexts on both sides, within the minimal logic (*Minimalkalkül*) framework.
+## Overview
 
-## Asymmetric Weakening Rule
+This directory contains materials for `docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-relevant-weakening/`.
 
-**CRITICAL**: In minimal relevant logic with single formula contexts, since relevant logic REJECTS weakening entirely, the asymmetric constraint means:
-- LHS cannot be weakened AND RHS cannot be weakened
-- Both sides must remain non-empty
+## Derivation
 
-## Exchange and Contraction Independence
+This file derives from the root `AGENTS.md` constraints.
 
-**Important**: This section is ambivalent to whether Exchange or Contraction hold. We consider:
-- Exchange holds (commutative) or is stripped to order logic
-- Contraction is rejected by definition in relevant logic
 
-## Minimal Logic Context
-In the minimal logic setting with single formula contexts:
-- Both LHS and RHS restricted to at most one formula
-- Relevant logic: both weakening and contraction rejected
-- Strictest relevance requirements
+## License
 
-## Content
-- Relevant logic with single formula contexts
-- Both weakening and contraction rejected
-- Strictest relevance requirements
-- Minimal relevant logic characterization
+CC-BY-SA-4.0.html
 
-## Historical Reference
-Johansson, I. (1936). "Der Minimalkalkül, ein reduzierter intuitionistischer Formalismus." *Compositio Mathematica*, 4, 119–136.
+## See Also
 
-## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+- `AGENTS.md` (root) - Core repository constraints

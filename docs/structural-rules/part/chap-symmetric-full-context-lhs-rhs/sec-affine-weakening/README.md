@@ -1,17 +1,18 @@
-# Section: Affine Weakening
+# Affine Weakening (Symmetric LHS RHS)
 
-## Scope
-This section covers affine weakening where resources can be discarded but not duplicated.
+## Overview
 
-## Content
-- Affine logic: weakening admitted, contraction rejected
-- Connection to bunched implications
-- Substructural logic hierarchy position
-- Categorical semantics via relevant graphs
+This directory contains materials for `docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-affine-weakening/`.
 
-## References
-- Affine logic literature
-- bunched implication logic (BI)
+## Derivation
 
-## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+This file derives from the root `AGENTS.md` constraints.
+
+
+## License
+
+CC-BY-SA-4.0.html
+
+## See Also
+
+- `AGENTS.md` (root) - Core repository constraints

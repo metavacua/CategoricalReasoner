@@ -1,5 +1,18 @@
-# Thesis Directory
+# Dissertation Directory
 
-## Purpose
+## Overview
 
-TODO: define based on derivation of requirements, standards, and canonical forms from the /docs/AGENTS.md
+This directory contains materials for `docs/dissertation/`.
+
+## Derivation
+
+This file derives from the root `AGENTS.md` constraints.
+
+
+## License
+
+CC-BY-SA-4.0.html
+
+## See Also
+
+- `AGENTS.md` (root) - Core repository constraints

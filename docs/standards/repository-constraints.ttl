@@ -1,0 +1,527 @@
+# Repository Constraints Ontology
+# Canonical specification for AGENTS.md and README.md derivation
+#
+# This ontology defines the hierarchical structure and constraints
+# for the CategoricalReasoner repository using standard vocabularies.
+#
+# Namespace: urn:repo:categoricalreasoner:
+# Vocabularies: SKOS, SHACL, PROV-O, DCTERMS
+
+@prefix : <urn:repo:categoricalreasoner:agents#> .
+@prefix agents: <urn:repo:categoricalreasoner:agents#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# ========================================
+# ONTOLOGY METADATA
+# ========================================
+
+<urn:repo:categoricalreasoner:agents> a owl:Ontology ;
+    dcterms:title "CategoricalReasoner Repository Constraints Ontology" ;
+    dcterms:description "Canonical specification for repository governance and AGENTS.md derivation"@en ;
+    dcterms:creator <https://github.com/metavacua> ;
+    dcterms:license <https://www.gnu.org/licenses/agpl-3.0.html> ;
+    dcterms:created "2025-02-25"^^xsd:date ;
+    rdfs:comment "This ontology defines constraints using SKOS concepts, SHACL shapes, and PROV-O derivation relationships."@en .
+
+# ========================================
+# CONCEPT SCHEME: Repository Governance
+# ========================================
+
+agents:GovernanceScheme a skos:ConceptScheme ;
+    dcterms:title "Repository Governance Concept Scheme" ;
+    skos:hasTopConcept agents:CoreConstraint ;
+    skos:hasTopConcept agents:ValidationStandard .
+
+# ========================================
+# CORE CONSTRAINTS (SKOS Concepts)
+# ========================================
+
+agents:CoreConstraint a skos:Concept ;
+    skos:prefLabel "Core Constraint"@en ;
+    skos:definition "A fundamental constraint governing repository behavior and agent actions."@en ;
+    skos:topConceptOf agents:GovernanceScheme ;
+    skos:narrower agents:InconsistencyPresumption ;
+    skos:narrower agents:StandardsCollection ;
+    skos:narrower agents:LanguageConstraint ;
+    skos:narrower agents:LicenseConstraint ;
+    skos:narrower agents:ReportConstraint ;
+    skos:narrower agents:CitationConstraint ;
+    skos:narrower agents:TechnologyStack ;
+    skos:narrower agents:SemanticWebData ;
+    skos:narrower agents:DomainRestriction ;
+    skos:narrower agents:SPARQLExecution ;
+    skos:narrower agents:SPARQLSyntax ;
+    skos:narrower agents:QueryQuality ;
+    skos:narrower agents:ExtractionProtocol .
+
+agents:InconsistencyPresumption a skos:Concept ;
+    skos:prefLabel "Presumption of Inconsistency"@en ;
+    skos:definition "The repository's present and past state is assumed to be corrupt, non-functional, partially implemented, or otherwise formally incorrect such that strict preservation of previous conflicting information will predictably preserve broken or incorrect behaviors. Local finite consistency must be proven, and global consistency requires the highest standards of proof with relative consistency proofs being the expected norm."@en ;
+    skos:broader agents:CoreConstraint .
+
+agents:StandardsCollection a skos:Concept ;
+    skos:prefLabel "Standards Collection"@en ;
+    skos:definition "The docs directory should have and collect relevant standards in a standards subdirectory for the repository and the development of its projects and derivatives."@en ;
+    skos:broader agents:CoreConstraint .
+
+agents:LanguageConstraint a skos:Concept ;
+    skos:prefLabel "Language Constraint"@en ;
+    skos:definition "W3C compliant HTML5 for documentation and Java (primary ecosystem for validation and transformation) for code with mathematically canonical forms prioritized; tex and markup is to be derived by qualified deterministic and formally verified standard compliant tools. There is a strict separation between developer tooling and tools that should be committed to the repository; python scripts, bash scripts, curl calls, and similar can be used for development but should not be committed in general to the repository."@en ;
+    skos:broader agents:CoreConstraint .
+
+agents:LicenseConstraint a skos:Concept ;
+    skos:prefLabel "License Constraint"@en ;
+    skos:definition "The repository should conform to and utilize https://reuse.software/dev/ for the dual licensing; where AGPLv3 and CC BY-SA v4 international conflict and both have standing, AGPLv3 is the more restrictive license so it prevails at the intersection."@en ;
+    skos:broader agents:CoreConstraint ;
+    dcterms:relation <https://spdx.org/licenses/AGPL-3.0-or-later.html> ;
+    dcterms:relation <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+
+agents:ReportConstraint a skos:Concept ;
+    skos:prefLabel "Report Constraint"@en ;
+    skos:definition "Reports must be returned in semantic XHTML conformant to C14N or whatever format any tools use, and all documentation is to be contained in the docs directory with the sole exception being special files permitted for Github (e.g. README.md) and for specific tools like Maven."@en ;
+    skos:broader agents:CoreConstraint .
+
+agents:CitationConstraint a skos:Concept ;
+    skos:prefLabel "Citation Constraint"@en ;
+    skos:definition "The documentation system, citation system, and citations must conform to relevant academic and industrial standards for open science, open source, and international learned society practices; OAIS (ISO 14721:2025) and (ISO 16363:2025) are minimal required standards compliance."@en ;
+    skos:broader agents:CoreConstraint ;
+    dcterms:relation <https://www.iso.org/standard/76552.html> .
+
+agents:TechnologyStack a skos:Concept ;
+    skos:prefLabel "Technology Stack"@en ;
+    skos:definition "Core validation and transformation uses Java ecosystem (Jena, OpenLlet, JavaPoet, JUnit, KeY)."@en ;
+    skos:broader agents:CoreConstraint .
+
+agents:SemanticWebData a skos:Concept ;
+    skos:prefLabel "Semantic Web Data"@en ;
+    skos:definition "Consumed from external sources. Any and all local authoring of semantic linked data should be handled via the docs to src transformation, and local semantic web ontologies should be handled strictly within Java, Jena, and Openllet."@en ;
+    skos:broader agents:CoreConstraint .
+
+agents:DomainRestriction a skos:Concept ;
+    skos:prefLabel "Domain Restriction"@en ;
+    skos:definition "Do not use http://catty.org/. The only associated webpage is the MetaVacua GitHub repository (https://github.com/metavacua/CategoricalReasoner). Any script or artifact using catty.org is invalid; for testing and development purposes any locally authored semantic web technologies that need a namespace should use URNs."@en ;
+    skos:broader agents:CoreConstraint .
+
+agents:SPARQLExecution a skos:Concept ;
+    skos:prefLabel "SPARQL Execution"@en ;
+    skos:definition "All documented queries must be actually ran against external endpoints using standard SPARQL query tools. Evidence must be returned as valid and relevant format; the non-empty return requirements constitute a formal relevance condition. No faking or internal generation of results."@en ;
+    skos:broader agents:CoreConstraint .
+
+agents:SPARQLSyntax a skos:Concept ;
+    skos:prefLabel "SPARQL Syntax"@en ;
+    skos:definition "SPARQL queries must NOT be wrapped in LaTeX environments (like lstlisting) when being processed or saved for execution."@en ;
+    skos:broader agents:CoreConstraint .
+
+agents:QueryQuality a skos:Concept ;
+    skos:prefLabel "Query Quality"@en ;
+    skos:definition "Well-formed queries must return error-free non-empty results. Empty result sets or timeouts (over 60s) are considered failures."@en ;
+    skos:broader agents:CoreConstraint .
+
+agents:ExtractionProtocol a skos:Concept ;
+    skos:prefLabel "Extraction Protocol"@en ;
+    skos:definition "Follow the discovery and verification patterns for external QIDs and URIs. Document all difficulties and issues encountered during extraction."@en ;
+    skos:broader agents:CoreConstraint .
+
+# ========================================
+# VALIDATION STANDARDS
+# ========================================
+
+agents:ValidationStandard a skos:Concept ;
+    skos:prefLabel "Validation Standard"@en ;
+    skos:definition "Standards for validation using canonical tools."@en ;
+    skos:topConceptOf agents:GovernanceScheme ;
+    skos:narrower agents:StandardTools ;
+    skos:narrower agents:KeYValidation ;
+    skos:narrower agents:AnnotationProcessing .
+
+agents:StandardTools a skos:Concept ;
+    skos:prefLabel "Standard Tools"@en ;
+    skos:definition "Standard validation tools must always be used; critically, compilation processes for Java are considered restricted validators; minimization of DIY, roll your own, re-inventing the wheel, and non-standard implementations of validators is required."@en ;
+    skos:broader agents:ValidationStandard .
+
+agents:KeYValidation a skos:Concept ;
+    skos:prefLabel "KeY Validation"@en ;
+    skos:definition "KeY is the correct technology for Java; the first major morphism to define is the transformation from semantic HTML web pages to Java and specifically Java records via Java documentation annotations that conform to KeY, Openllet, and Jena."@en ;
+    skos:broader agents:ValidationStandard ;
+    dcterms:relation <https://key-project.org/> .
+
+agents:AnnotationProcessing a skos:Concept ;
+    skos:prefLabel "Annotation Processing"@en ;
+    skos:definition "The automation of morphisms should leverage the Java Compiler API (javax.tools) and Annotation Processing (JSR 269). By treating Semantic HTML as the source of truth, the JDK can automate the construction of records where the proof terms are embedded during the compilation phase. The usage of abstract classes and interfaces as well as the canonical constructors for Java Records is expected to be a basic application of the technologies."@en ;
+    skos:broader agents:ValidationStandard .
+
+# ========================================
+# REPOSITORY STRUCTURE (Hierarchy)
+# ========================================
+
+agents:RepositoryNode a rdfs:Class ;
+    rdfs:label "Repository Node"@en ;
+    rdfs:comment "A node in the repository directory hierarchy."@en .
+
+# ========================================
+# LEVEL 0: Root
+# ========================================
+
+agents:RootNode a agents:RepositoryNode ;
+    rdfs:label "Root Directory"@en ;
+    agents:hasAgentsFile "AGENTS.md" ;
+    agents:hasReadmeFile "README.md" ;
+    agents:contains agents:DocsNode ;
+    agents:contains agents:SrcNode ;
+    agents:derivesTo agents:DocsNode ;
+    agents:derivesTo agents:SrcNode .
+
+# ========================================
+# LEVEL 1: docs/ and src/
+# ========================================
+
+agents:DocsNode a agents:RepositoryNode ;
+    rdfs:label "Documentation Directory"@en ;
+    agents:path "docs/" ;
+    agents:hasAgentsFile "docs/AGENTS.md" ;
+    agents:hasReadmeFile "docs/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode ;
+    agents:contains agents:DissertationNode ;
+    agents:contains agents:StructuralRulesNode ;
+    agents:contains agents:StandardsNode .
+
+agents:SrcNode a agents:RepositoryNode ;
+    rdfs:label "Source Code Directory"@en ;
+    agents:path "src/" ;
+    agents:hasAgentsFile "src/AGENTS.md" ;
+    agents:license <https://spdx.org/licenses/AGPL-3.0-or-later.html> ;
+    agents:derivesFrom agents:RootNode ;
+    agents:contains agents:BenchmarksNode ;
+    agents:contains agents:ScriptsNode ;
+    agents:contains agents:TestsNode .
+
+# ========================================
+# LEVEL 2: docs subdirectories
+# ========================================
+
+agents:StandardsNode a agents:RepositoryNode ;
+    rdfs:label "Standards Directory"@en ;
+    agents:path "docs/standards/" ;
+    agents:hasReadmeFile "docs/standards/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:DissertationNode a agents:RepositoryNode ;
+    rdfs:label "Dissertation Directory"@en ;
+    agents:path "docs/dissertation/" ;
+    agents:hasAgentsFile "docs/dissertation/AGENTS.md" ;
+    agents:hasReadmeFile "docs/dissertation/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:StructuralRulesNode a agents:RepositoryNode ;
+    rdfs:label "Structural Rules Directory"@en ;
+    agents:path "docs/structural-rules/" ;
+    agents:hasReadmeFile "docs/structural-rules/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode ;
+    agents:contains agents:PartNode .
+
+agents:PartNode a agents:RepositoryNode ;
+    rdfs:label "Part Directory"@en ;
+    agents:path "docs/structural-rules/part/" ;
+    agents:hasAgentsFile "docs/structural-rules/part/AGENTS.md" ;
+    agents:hasReadmeFile "docs/structural-rules/part/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode ;
+    agents:contains agents:ChapAsymmetricLhsNode ;
+    agents:contains agents:ChapAsymmetricRhsNode ;
+    agents:contains agents:ChapSymmetricLhsRhsNode ;
+    agents:contains agents:ChapSymmetricSingleNode .
+
+# ========================================
+# LEVEL 3: Chapter directories
+# ========================================
+
+agents:ChapAsymmetricLhsNode a agents:RepositoryNode ;
+    rdfs:label "Asymmetric Full Context LHS Single Succedent"@en ;
+    agents:path "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/" ;
+    agents:hasAgentsFile "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/AGENTS.md" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode ;
+    agents:contains agents:SecAffineWeakeningAsymLhsNode ;
+    agents:contains agents:SecFullWeakeningAsymLhsNode ;
+    agents:contains agents:SecLinearWeakeningAsymLhsNode ;
+    agents:contains agents:SecRelevantWeakeningAsymLhsNode .
+
+agents:ChapAsymmetricRhsNode a agents:RepositoryNode ;
+    rdfs:label "Asymmetric Single Antecedent Full Context RHS"@en ;
+    agents:path "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/" ;
+    agents:hasAgentsFile "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/AGENTS.md" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode ;
+    agents:contains agents:SecAffineWeakeningAsymRhsNode ;
+    agents:contains agents:SecFullWeakeningAsymRhsNode ;
+    agents:contains agents:SecLinearWeakeningAsymRhsNode ;
+    agents:contains agents:SecRelevantWeakeningAsymRhsNode .
+
+agents:ChapSymmetricLhsRhsNode a agents:RepositoryNode ;
+    rdfs:label "Symmetric Full Context LHS RHS"@en ;
+    agents:path "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/" ;
+    agents:hasAgentsFile "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/AGENTS.md" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode ;
+    agents:contains agents:SecAffineWeakeningSymLhsRhsNode ;
+    agents:contains agents:SecFullWeakeningSymLhsRhsNode ;
+    agents:contains agents:SecLinearWeakeningSymLhsRhsNode ;
+    agents:contains agents:SecRelevantWeakeningSymLhsRhsNode .
+
+agents:ChapSymmetricSingleNode a agents:RepositoryNode ;
+    rdfs:label "Symmetric Single Antecedent Single Succedent"@en ;
+    agents:path "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/" ;
+    agents:hasAgentsFile "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/AGENTS.md" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode ;
+    agents:contains agents:SecAffineWeakeningSymSingleNode ;
+    agents:contains agents:SecFullWeakeningSymSingleNode ;
+    agents:contains agents:SecLinearWeakeningSymSingleNode ;
+    agents:contains agents:SecRelevantWeakeningSymSingleNode .
+
+# ========================================
+# LEVEL 4: Section directories (README.md only)
+# ========================================
+
+agents:SecAffineWeakeningAsymLhsNode a agents:RepositoryNode ;
+    rdfs:label "Affine Weakening (Asymmetric LHS)"@en ;
+    agents:path "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-affine-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-affine-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecFullWeakeningAsymLhsNode a agents:RepositoryNode ;
+    rdfs:label "Full Weakening (Asymmetric LHS)"@en ;
+    agents:path "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-full-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-full-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecLinearWeakeningAsymLhsNode a agents:RepositoryNode ;
+    rdfs:label "Linear Weakening (Asymmetric LHS)"@en ;
+    agents:path "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-linear-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-linear-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecRelevantWeakeningAsymLhsNode a agents:RepositoryNode ;
+    rdfs:label "Relevant Weakening (Asymmetric LHS)"@en ;
+    agents:path "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-relevant-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-relevant-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecAffineWeakeningAsymRhsNode a agents:RepositoryNode ;
+    rdfs:label "Affine Weakening (Asymmetric RHS)"@en ;
+    agents:path "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-affine-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-affine-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecFullWeakeningAsymRhsNode a agents:RepositoryNode ;
+    rdfs:label "Full Weakening (Asymmetric RHS)"@en ;
+    agents:path "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-full-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-full-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecLinearWeakeningAsymRhsNode a agents:RepositoryNode ;
+    rdfs:label "Linear Weakening (Asymmetric RHS)"@en ;
+    agents:path "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-linear-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-linear-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecRelevantWeakeningAsymRhsNode a agents:RepositoryNode ;
+    rdfs:label "Relevant Weakening (Asymmetric RHS)"@en ;
+    agents:path "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-relevant-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-relevant-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecAffineWeakeningSymLhsRhsNode a agents:RepositoryNode ;
+    rdfs:label "Affine Weakening (Symmetric LHS RHS)"@en ;
+    agents:path "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-affine-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-affine-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecFullWeakeningSymLhsRhsNode a agents:RepositoryNode ;
+    rdfs:label "Full Weakening (Symmetric LHS RHS)"@en ;
+    agents:path "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-full-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-full-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecLinearWeakeningSymLhsRhsNode a agents:RepositoryNode ;
+    rdfs:label "Linear Weakening (Symmetric LHS RHS)"@en ;
+    agents:path "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-linear-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-linear-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecRelevantWeakeningSymLhsRhsNode a agents:RepositoryNode ;
+    rdfs:label "Relevant Weakening (Symmetric LHS RHS)"@en ;
+    agents:path "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-relevant-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-relevant-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecAffineWeakeningSymSingleNode a agents:RepositoryNode ;
+    rdfs:label "Affine Weakening (Symmetric Single)"@en ;
+    agents:path "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-affine-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-affine-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecFullWeakeningSymSingleNode a agents:RepositoryNode ;
+    rdfs:label "Full Weakening (Symmetric Single)"@en ;
+    agents:path "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-full-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-full-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecLinearWeakeningSymSingleNode a agents:RepositoryNode ;
+    rdfs:label "Linear Weakening (Symmetric Single)"@en ;
+    agents:path "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-linear-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-linear-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:SecRelevantWeakeningSymSingleNode a agents:RepositoryNode ;
+    rdfs:label "Relevant Weakening (Symmetric Single)"@en ;
+    agents:path "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-relevant-weakening/" ;
+    agents:hasReadmeFile "docs/structural-rules/part/chap-symmetric-single-antecedent-single-succedent/sec-relevant-weakening/README.md" ;
+    agents:license <https://spdx.org/licenses/CC-BY-SA-4.0.html> ;
+    agents:derivesFrom agents:RootNode .
+
+# ========================================
+# LEVEL 2: src subdirectories
+# ========================================
+
+agents:BenchmarksNode a agents:RepositoryNode ;
+    rdfs:label "Benchmarks Directory"@en ;
+    agents:path "src/benchmarks/" ;
+    agents:hasAgentsFile "src/benchmarks/AGENTS.md" ;
+    agents:hasReadmeFile "src/benchmarks/README.md" ;
+    agents:license <https://spdx.org/licenses/AGPL-3.0-or-later.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:ScriptsNode a agents:RepositoryNode ;
+    rdfs:label "Scripts Directory"@en ;
+    agents:path "src/scripts/" ;
+    agents:hasAgentsFile "src/scripts/AGENTS.md" ;
+    agents:hasReadmeFile "src/scripts/README.md" ;
+    agents:license <https://spdx.org/licenses/AGPL-3.0-or-later.html> ;
+    agents:derivesFrom agents:RootNode .
+
+agents:TestsNode a agents:RepositoryNode ;
+    rdfs:label "Tests Directory"@en ;
+    agents:path "src/tests/" ;
+    agents:hasAgentsFile "src/tests/AGENTS.md" ;
+    agents:hasReadmeFile "src/tests/README.md" ;
+    agents:license <https://spdx.org/licenses/AGPL-3.0-or-later.html> ;
+    agents:derivesFrom agents:RootNode .
+
+# ========================================
+# DERIVATION RELATIONSHIPS (PROV-O)
+# ========================================
+
+agents:derivesFrom a owl:ObjectProperty ;
+    rdfs:label "derives from"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range agents:RepositoryNode ;
+    rdfs:subPropertyOf prov:wasDerivedFrom ;
+    rdfs:comment "Indicates that a repository node's AGENTS.md or README.md derives from the root AGENTS.md"@en .
+
+agents:derivesTo a owl:ObjectProperty ;
+    rdfs:label "derives to"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range agents:RepositoryNode ;
+    owl:inverseOf agents:derivesFrom .
+
+agents:contains a owl:ObjectProperty ;
+    rdfs:label "contains"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range agents:RepositoryNode .
+
+agents:hasAgentsFile a owl:DatatypeProperty ;
+    rdfs:label "has AGENTS.md file"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range xsd:string .
+
+agents:hasReadmeFile a owl:DatatypeProperty ;
+    rdfs:label "has README.md file"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range xsd:string .
+
+agents:path a owl:DatatypeProperty ;
+    rdfs:label "path"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range xsd:string .
+
+agents:license a owl:ObjectProperty ;
+    rdfs:label "license"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range rdfs:Resource .
+
+# ========================================
+# CONSTRAINT APPLICABILITY
+# ========================================
+
+agents:applicableConstraint a owl:ObjectProperty ;
+    rdfs:label "applicable constraint"@en ;
+    rdfs:domain agents:RepositoryNode ;
+    rdfs:range skos:Concept .
+
+# docs/ applies documentation constraints
+agents:DocsNode agents:applicableConstraint agents:StandardsCollection ;
+    agents:applicableConstraint agents:LanguageConstraint ;
+    agents:applicableConstraint agents:LicenseConstraint ;
+    agents:applicableConstraint agents:ReportConstraint ;
+    agents:applicableConstraint agents:CitationConstraint .
+
+# src/ applies code constraints
+agents:SrcNode agents:applicableConstraint agents:InconsistencyPresumption ;
+    agents:applicableConstraint agents:TechnologyStack ;
+    agents:applicableConstraint agents:SemanticWebData ;
+    agents:applicableConstraint agents:SPARQLExecution ;
+    agents:applicableConstraint agents:SPARQLSyntax ;
+    agents:applicableConstraint agents:QueryQuality ;
+    agents:applicableConstraint agents:StandardTools ;
+    agents:applicableConstraint agents:KeYValidation ;
+    agents:applicableConstraint agents:AnnotationProcessing .
+
+# Benchmarks
+agents:BenchmarksNode agents:applicableConstraint agents:InconsistencyPresumption ;
+    agents:applicableConstraint agents:TechnologyStack ;
+    agents:applicableConstraint agents:StandardTools ;
+    agents:applicableConstraint agents:ReportConstraint .
+
+# Scripts
+agents:ScriptsNode agents:applicableConstraint agents:InconsistencyPresumption ;
+    agents:applicableConstraint agents:SemanticWebData ;
+    agents:applicableConstraint agents:SPARQLExecution ;
+    agents:applicableConstraint agents:DomainRestriction .
+
+# Tests
+agents:TestsNode agents:applicableConstraint agents:InconsistencyPresumption ;
+    agents:applicableConstraint agents:TechnologyStack ;
+    agents:applicableConstraint agents:StandardTools ;
+    agents:applicableConstraint agents:SPARQLExecution ;
+    agents:applicableConstraint agents:QueryQuality .

@@ -1,8 +1,8 @@
-# Affine Weakening (Asymmetric LHS)
+# Standards Directory
 
 ## Overview
 
-This directory contains materials for `docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-affine-weakening/`.
+This directory contains materials for `docs/standards/`.
 
 ## Derivation
 
