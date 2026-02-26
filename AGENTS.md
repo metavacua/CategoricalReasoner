@@ -29,16 +29,10 @@ Canonical XML (C14N)	XML C14N	Absolute (For literals and XML-subtrees)
 
 - **Standard Tools**: Standard validation tools must always be used; critically, compilation processes for Java are considered restricted validators; minimization of DIY, roll your own, re-inventing the wheel, and non-standard implementations of validators is required.
 - **KeY Validation**: KeY is the correct technology for Java; the first major morphism to define is the transformation from semantic HTML web pages to Java and specifically Java records via Java documentation annotations that conform to KeY, Openllet, and Jena.
-- **Annotation Processing**: The automation of morphisms should leverage the Java Compiler API (javax.tools) and Annotation Processing (JSR 269). By treating Semantic HTML as the source of truth, the JDK can automate the construction of records where the proof terms are embedded during the compilation phase.
+- **Annotation Processing**: The automation of morphisms should leverage the Java Compiler API (javax.tools) and Annotation Processing (JSR 269). By treating Semantic HTML as the source of truth, the JDK can automate the construction of records where the proof terms are embedded during the compilation phase. The usage of abstract classes and interfaces as well as the canonical constructors for Java Records is expected to be a basic application of the technologies.
 
 ## See Also
 
 - `docs/AGENTS.md` - Documentation Directory
 - `src/AGENTS.md` - Source Code Directory
-
-## Specification
-
-This file is derived from the canonical semantic web specification:
-- `docs/standards/repository-constraints.ttl` - RDF/Turtle specification
-- `docs/standards/derivation-queries.sparql` - SPARQL queries for derivation
 
