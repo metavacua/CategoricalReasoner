@@ -2,7 +2,7 @@
 
 ## Overview
 
-This directory contains canonical specifications for repository governance.
+This directory contains specifications for repository governance using **industry-standard vocabularies** only.
 
 ## Canonical Specification
 
@@ -10,38 +10,51 @@ This directory contains canonical specifications for repository governance.
 
 **Format**: N-Triples (canonical form)
 
-**Characteristics**:
-- One triple per line
-- All URIs absolute (no prefixes)
-- Space-separated subject, predicate, object
-- Each line ends with " ."
-- Lines sorted lexicographically
-- 387 triples
+**Vocabularies Used** (all industry standards, zero local ontology):
 
-## Validation Protocol
+| Vocabulary | Purpose | Standard Body |
+|------------|---------|---------------|
+| schema.org | SoftwareSourceCode, CodeRepository, SoftwareApplication | W3C/Google/Microsoft/Yahoo |
+| DOAP | Project, programming_language | W3C Community |
+| DCTERMS | Standard, isPartOf, title, identifier | Dublin Core Metadata Initiative |
+| SPDX | License identifiers | Linux Foundation |
 
-The specification was validated at 4 levels:
+## Conformance Mapping
 
-### Level 1: Syntactic Validation (N-Triples 1.1 Grammar)
-- Parser: rdflib 7.6.0
-- Result: **PASSED**
-- Triple count: 387
-- Line count matches triple count
+The specification was refactored from proprietary URIs to industry standards:
 
-### Level 2: Structural Validation (SHACL)
-- Engine: pyshacl 0.31.0
-- Result: **PASSED**
-- All RepositoryNode instances conform to shape constraints
+| Previous (Non-Standard) | Current (Industry Standard) |
+|-------------------------|------------------------------|
+| `urn:repo:...#RepositoryNode` | `schema:SoftwareSourceCode` |
+| `urn:repo:...#path` | `schema:filePath` |
+| `urn:repo:...#AnnotationProcessing` | `dcterms:Standard` (JSR 269) |
+| `urn:repo:...#ValidationStandard` | `dcterms:Standard` |
 
-### Level 3: Semantic Validation (RDFS Consistency)
-- Result: **PASSED**
-- 30 RepositoryNode instances found
-- No semantic contradictions detected
+## Entities Defined
 
-### Level 4: Domain Validation (Path Correspondence)
-- Result: **PASSED**
-- 29 path definitions found
-- All paths exist on disk
+### Repository
+- URI: `https://github.com/metavacua/CategoricalReasoner`
+- Type: `schema:CodeRepository`
+- License: AGPL-3.0-or-later (SPDX)
+
+### Project
+- URI: `https://github.com/metavacua/CategoricalReasoner#project`
+- Type: `doap:Project`
+- Programming Language: Java
+
+### Source Directories
+- `#docs` - Documentation (CC-BY-SA-4.0)
+- `#src` - Source Code (AGPL-3.0-or-later)
+
+### Standards
+- ISO 14721:2025 (OAIS Reference Model)
+- ISO 16363:2025 (Audit and Certification)
+- JSR 269 (Pluggable Annotation Processing API)
+
+### Technology Stack
+- Apache Jena (Semantic Web Framework)
+- OpenLlet (OWL Reasoner)
+- KeY (Formal Verification)
 
 ## Derivation
 
@@ -50,10 +63,12 @@ The specification was validated at 4 levels:
 2. Every statement in F2 is either copied from F1 or logically entailed by F1
 3. F2 can be regenerated deterministically from F1
 
-In this repository:
-- `AGENTS.md` (root) is the authoritative source for governance constraints
-- All other `AGENTS.md` and `README.md` files derive from root `AGENTS.md`
-- The derivation relationship is formally defined using PROV-O vocabulary in `repository-constraints.nt`
+## Validation
+
+- **Level 1 (Syntactic)**: N-Triples parse success
+- **Level 2 (Structural)**: Schema.org vocabulary conformance
+- **Level 3 (Semantic)**: Standard vocabulary usage
+- **Level 4 (Domain)**: All filePath values verified
 
 ## License
 
