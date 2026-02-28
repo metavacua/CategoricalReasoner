@@ -14,27 +14,27 @@ This directory contains specifications for repository governance using **industr
 
 | Vocabulary | Purpose | Standard Body |
 |------------|---------|---------------|
-| schema.org | SoftwareSourceCode, CodeRepository, SoftwareApplication | W3C/Google/Microsoft/Yahoo |
+| schema.org | CreativeWork, Collection, ArchiveComponent, SoftwareSourceCode, Thesis, MathSolver | W3C/Google/Microsoft/Yahoo |
 | DOAP | Project, programming_language | W3C Community |
 | DCTERMS | Standard, isPartOf, title, identifier | Dublin Core Metadata Initiative |
 | SPDX | License identifiers | Linux Foundation |
 
-## Conformance Mapping
+## schema.org Type Mapping
 
-The specification was refactored from proprietary URIs to industry standards:
-
-| Previous (Non-Standard) | Current (Industry Standard) |
-|-------------------------|------------------------------|
-| `urn:repo:...#RepositoryNode` | `schema:SoftwareSourceCode` |
-| `urn:repo:...#path` | `schema:filePath` |
-| `urn:repo:...#AnnotationProcessing` | `dcterms:Standard` (JSR 269) |
-| `urn:repo:...#ValidationStandard` | `dcterms:Standard` |
+| Entity | schema.org Types |
+|--------|------------------|
+| Repository root | `schema:CreativeWork` + `schema:Collection` |
+| docs/ directory | `schema:ArchiveComponent` + `schema:CreativeWork` |
+| src/ directory | `schema:ArchiveComponent` + `schema:SoftwareSourceCode` |
+| docs/dissertation/ | `schema:Thesis` + `schema:ArchiveComponent` |
+| docs/standards/ | `schema:ArchiveComponent` |
+| Categorical Reasoner | `schema:MathSolver` |
 
 ## Entities Defined
 
-### Repository
+### Root Repository
 - URI: `https://github.com/metavacua/CategoricalReasoner`
-- Type: `schema:CodeRepository`
+- Types: `schema:CreativeWork`, `schema:Collection`
 - License: AGPL-3.0-or-later (SPDX)
 
 ### Project
@@ -42,9 +42,16 @@ The specification was refactored from proprietary URIs to industry standards:
 - Type: `doap:Project`
 - Programming Language: Java
 
+### MathSolver
+- URI: `https://github.com/metavacua/CategoricalReasoner#solver`
+- Type: `schema:MathSolver`
+- Description: Categorical foundations for morphisms between logics
+
 ### Source Directories
-- `#docs` - Documentation (CC-BY-SA-4.0)
-- `#src` - Source Code (AGPL-3.0-or-later)
+- `#docs` - Documentation (`schema:ArchiveComponent` + `schema:CreativeWork`, CC-BY-SA-4.0)
+- `#src` - Source Code (`schema:ArchiveComponent` + `schema:SoftwareSourceCode`, AGPL-3.0-or-later)
+- `#dissertation` - Thesis (`schema:Thesis` + `schema:ArchiveComponent`)
+- `#standards` - Standards (`schema:ArchiveComponent`)
 
 ### Standards
 - ISO 14721:2025 (OAIS Reference Model)
@@ -62,13 +69,6 @@ The specification was refactored from proprietary URIs to industry standards:
 1. F1 is the authoritative source
 2. Every statement in F2 is either copied from F1 or logically entailed by F1
 3. F2 can be regenerated deterministically from F1
-
-## Validation
-
-- **Level 1 (Syntactic)**: N-Triples parse success
-- **Level 2 (Structural)**: Schema.org vocabulary conformance
-- **Level 3 (Semantic)**: Standard vocabulary usage
-- **Level 4 (Domain)**: All filePath values verified
 
 ## License
 

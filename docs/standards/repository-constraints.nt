@@ -2,26 +2,49 @@
 <https://github.com/Galigator/openllet#software> <http://schema.org/name> "OpenLlet" .
 <https://github.com/Galigator/openllet#software> <http://schema.org/programmingLanguage> "Java" .
 <https://github.com/Galigator/openllet#software> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/SoftwareApplication> .
+<https://github.com/metavacua/CategoricalReasoner#dissertation> <http://purl.org/dc/terms/isPartOf> <https://github.com/metavacua/CategoricalReasoner#docs> .
+<https://github.com/metavacua/CategoricalReasoner#dissertation> <http://schema.org/filePath> "docs/dissertation/" .
+<https://github.com/metavacua/CategoricalReasoner#dissertation> <http://schema.org/isPartOf> <https://github.com/metavacua/CategoricalReasoner#docs> .
+<https://github.com/metavacua/CategoricalReasoner#dissertation> <http://schema.org/license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<https://github.com/metavacua/CategoricalReasoner#dissertation> <http://schema.org/name> "Dissertation" .
+<https://github.com/metavacua/CategoricalReasoner#dissertation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/ArchiveComponent> .
+<https://github.com/metavacua/CategoricalReasoner#dissertation> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Thesis> .
 <https://github.com/metavacua/CategoricalReasoner#docs> <http://purl.org/dc/terms/isPartOf> <https://github.com/metavacua/CategoricalReasoner> .
 <https://github.com/metavacua/CategoricalReasoner#docs> <http://schema.org/filePath> "docs/" .
+<https://github.com/metavacua/CategoricalReasoner#docs> <http://schema.org/isPartOf> <https://github.com/metavacua/CategoricalReasoner> .
 <https://github.com/metavacua/CategoricalReasoner#docs> <http://schema.org/license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
 <https://github.com/metavacua/CategoricalReasoner#docs> <http://schema.org/name> "Documentation" .
-<https://github.com/metavacua/CategoricalReasoner#docs> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/SoftwareSourceCode> .
+<https://github.com/metavacua/CategoricalReasoner#docs> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/ArchiveComponent> .
+<https://github.com/metavacua/CategoricalReasoner#docs> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork> .
 <https://github.com/metavacua/CategoricalReasoner#project> <http://usefulinc.com/ns/doap#license> <https://spdx.org/licenses/AGPL-3.0-or-later.html> .
 <https://github.com/metavacua/CategoricalReasoner#project> <http://usefulinc.com/ns/doap#name> "Catty" .
 <https://github.com/metavacua/CategoricalReasoner#project> <http://usefulinc.com/ns/doap#programming_language> "Java" .
 <https://github.com/metavacua/CategoricalReasoner#project> <http://usefulinc.com/ns/doap#shortdesc> "Categorical Reasoner" .
 <https://github.com/metavacua/CategoricalReasoner#project> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://usefulinc.com/ns/doap#Project> .
+<https://github.com/metavacua/CategoricalReasoner#solver> <http://schema.org/description> "Categorical foundations for morphisms between logics" .
+<https://github.com/metavacua/CategoricalReasoner#solver> <http://schema.org/name> "Catty Categorical Reasoner" .
+<https://github.com/metavacua/CategoricalReasoner#solver> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/MathSolver> .
 <https://github.com/metavacua/CategoricalReasoner#src> <http://purl.org/dc/terms/isPartOf> <https://github.com/metavacua/CategoricalReasoner> .
 <https://github.com/metavacua/CategoricalReasoner#src> <http://schema.org/filePath> "src/" .
+<https://github.com/metavacua/CategoricalReasoner#src> <http://schema.org/isPartOf> <https://github.com/metavacua/CategoricalReasoner> .
 <https://github.com/metavacua/CategoricalReasoner#src> <http://schema.org/license> <https://spdx.org/licenses/AGPL-3.0-or-later.html> .
 <https://github.com/metavacua/CategoricalReasoner#src> <http://schema.org/name> "Source Code" .
+<https://github.com/metavacua/CategoricalReasoner#src> <http://schema.org/programmingLanguage> "Java" .
+<https://github.com/metavacua/CategoricalReasoner#src> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/ArchiveComponent> .
 <https://github.com/metavacua/CategoricalReasoner#src> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/SoftwareSourceCode> .
+<https://github.com/metavacua/CategoricalReasoner#standards> <http://purl.org/dc/terms/isPartOf> <https://github.com/metavacua/CategoricalReasoner#docs> .
+<https://github.com/metavacua/CategoricalReasoner#standards> <http://schema.org/filePath> "docs/standards/" .
+<https://github.com/metavacua/CategoricalReasoner#standards> <http://schema.org/isPartOf> <https://github.com/metavacua/CategoricalReasoner#docs> .
+<https://github.com/metavacua/CategoricalReasoner#standards> <http://schema.org/license> <https://spdx.org/licenses/CC-BY-SA-4.0.html> .
+<https://github.com/metavacua/CategoricalReasoner#standards> <http://schema.org/name> "Standards" .
+<https://github.com/metavacua/CategoricalReasoner#standards> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/ArchiveComponent> .
+<https://github.com/metavacua/CategoricalReasoner> <http://schema.org/codeRepository> <https://github.com/metavacua/CategoricalReasoner> .
+<https://github.com/metavacua/CategoricalReasoner> <http://schema.org/creator> <https://github.com/metavacua> .
 <https://github.com/metavacua/CategoricalReasoner> <http://schema.org/description> "Categorical foundations for morphisms between logics" .
 <https://github.com/metavacua/CategoricalReasoner> <http://schema.org/license> <https://spdx.org/licenses/AGPL-3.0-or-later.html> .
 <https://github.com/metavacua/CategoricalReasoner> <http://schema.org/name> "CategoricalReasoner" .
-<https://github.com/metavacua/CategoricalReasoner> <http://usefulinc.com/ns/doap#homepage> <https://github.com/metavacua/CategoricalReasoner> .
-<https://github.com/metavacua/CategoricalReasoner> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CodeRepository> .
+<https://github.com/metavacua/CategoricalReasoner> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/Collection> .
+<https://github.com/metavacua/CategoricalReasoner> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://schema.org/CreativeWork> .
 <https://jcp.org/en/jsr/detail?id=269#specification> <http://purl.org/dc/terms/identifier> "JSR 269" .
 <https://jcp.org/en/jsr/detail?id=269#specification> <http://purl.org/dc/terms/title> "Pluggable Annotation Processing API" .
 <https://jcp.org/en/jsr/detail?id=269#specification> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://purl.org/dc/terms/Standard> .
