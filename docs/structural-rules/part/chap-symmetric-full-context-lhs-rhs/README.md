@@ -1,34 +1,18 @@
-# Chapter: Symmetric Weakening with Full Context on LHS and RHS
+# Symmetric Full Context LHS RHS
 
-## Scope
-This chapter examines symmetric weakening where both the left-hand side (antecedent) and right-hand side (succedent) contexts can be freely extended with arbitrary formulas. This represents the classical approach to weakening where context is unrestricted on both sides of the sequent.
+## Overview
 
-## Exchange and Contraction Independence
+This directory contains materials for `docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/`.
 
-**Important**: This chapter is ambivalent to whether Exchange or Contraction hold. We consider:
-- The case where Exchange holds (commutative logic)
-- The case where Exchange is stripped to non-commutative "order logic"
-- The case where Contraction holds or is rejected
+## Derivation
 
-The admission of Exchange, its explicit inclusion, its modalization, or its operationalization are independent of the weakening dimensions studied here.
+This file derives from the root `AGENTS.md` constraints.
 
-## Content
 
-This chapter covers:
-- **Full Weakening**: Classical weakening allowing arbitrary formula introduction on both LHS and RHS
-- **Linear Weakening**: Resource-sensitive weakening in linear logic with exponential modality
-- **Affine Weakening**: Weakening without contraction (resources can be discarded but not duplicated)
-- **Relevant Weakening**: Weakening rejected entirely (premises must be relevant to conclusions)
+## License
 
-## Sequent Calculus Representation
-
-In classical sequent calculus (LK), symmetric weakening is expressed as:
-- Left weakening: $\dfrac{\Gamma \vdash \Delta}{\Gamma, A \vdash \Delta}$
-- Right weakening: $\dfrac{\Gamma \vdash \Delta}{\Gamma \vdash \Delta, A}$
-
-## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+CC-BY-SA-4.0.html
 
 ## See Also
-- `/docs/structural-rules/part/README.md` - Parent directory
-- `/docs/structural-rules/parts/part-weakening.tex` - Main part file
+
+- `AGENTS.md` (root) - Core repository constraints

@@ -1,24 +1,18 @@
-# Section: Full Weakening
+# Full Weakening (Symmetric LHS RHS)
 
-## Scope
-This section covers full (classical) weakening where arbitrary formulas can be introduced into sequent contexts without restriction.
+## Overview
 
-## Exchange and Contraction Independence
+This directory contains materials for `docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-full-weakening/`.
 
-**Important**: This section is ambivalent to whether Exchange or Contraction hold. We consider:
-- Exchange holds (commutative logic) or is stripped to order logic
-- Contraction holds or is rejected
+## Derivation
 
-## Content
-- Classical weakening rule in LK sequent calculus
-- Left weakening: $\dfrac{\Gamma \vdash \Delta}{\Gamma, A \vdash \Delta}$
-- Right weakening: $\dfrac{\Gamma \vdash \Delta}{\Gamma \vdash \Delta, A}$
-- Connection to logical explosion (ex falso quodlibet)
-- Paola Zizzi's work on absence of weakening and no erasure correspondence
+This file derives from the root `AGENTS.md` constraints.
 
-## References
-- Paola Zizzi's research on quantum logic and weakening
-- Gentzen's original sequent calculus formulations
 
-## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+## License
+
+CC-BY-SA-4.0.html
+
+## See Also
+
+- `AGENTS.md` (root) - Core repository constraints

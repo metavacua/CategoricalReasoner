@@ -1,17 +1,18 @@
-# Section: Relevant Weakening
+# Relevant Weakening (Symmetric LHS RHS)
 
-## Scope
-This section covers relevant weakening where premises must be relevant to conclusions - weakening is entirely rejected.
+## Overview
 
-## Content
-- Relevant logic: both weakening and contraction rejected
-- Strict relevance requirements
-- Connection to relevant arithmetic
-- Categorical semantics via comprehension categories
+This directory contains materials for `docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-relevant-weakening/`.
 
-## References
-- Relevant logic literature (Anderson, Belnap)
-- Relevant arithmetic research
+## Derivation
 
-## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+This file derives from the root `AGENTS.md` constraints.
+
+
+## License
+
+CC-BY-SA-4.0.html
+
+## See Also
+
+- `AGENTS.md` (root) - Core repository constraints

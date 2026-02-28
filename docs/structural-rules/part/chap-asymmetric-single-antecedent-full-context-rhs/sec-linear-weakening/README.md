@@ -1,17 +1,18 @@
-# Section: Linear Weakening
+# Linear Weakening (Asymmetric RHS)
 
-## Scope
-This section covers linear weakening in the dual intuitionistic setting with single antecedent restriction.
+## Overview
 
-## Content
-- Linear logic interpretation with single antecedent
-- Exponential modality controls weakening availability
-- Connection to linear dual intuitionistic logic
-- Resource-sensitive non-constructive reasoning
+This directory contains materials for `docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-linear-weakening/`.
 
-## References
-- Girard's linear logic
-- Dual intuitionistic linear logic research
+## Derivation
 
-## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+This file derives from the root `AGENTS.md` constraints.
+
+
+## License
+
+CC-BY-SA-4.0.html
+
+## See Also
+
+- `AGENTS.md` (root) - Core repository constraints

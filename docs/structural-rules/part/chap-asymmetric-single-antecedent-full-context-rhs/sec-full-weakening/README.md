@@ -1,17 +1,18 @@
-# Section: Full Weakening
+# Full Weakening (Asymmetric RHS)
 
-## Scope
-This section covers full weakening in the dual intuitionistic (LDJ) setting where the left-hand side is restricted to a single formula but the right-hand side can be freely extended.
+## Overview
 
-## Content
-- Dual intuitionistic weakening in LDJ sequent calculus
-- Right weakening: $\dfrac{\Gamma \vdash B}{\Gamma \vdash B, A}$ (unrestricted)
-- Left weakening: Not available in pure LDJ
-- Restricted non-constructive character from LHS restriction
+This directory contains materials for `docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-full-weakening/`.
 
-## References
-- Gentzen's LDJ calculus
-- Dual intuitionistic logic literature
+## Derivation
 
-## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+This file derives from the root `AGENTS.md` constraints.
+
+
+## License
+
+CC-BY-SA-4.0.html
+
+## See Also
+
+- `AGENTS.md` (root) - Core repository constraints
