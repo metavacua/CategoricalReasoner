@@ -1,0 +1,121 @@
+# SPDX-FileCopyrightText: 2025 MetaVacua
+# SPDX-License-Identifier: AGPL-3.0-or-later AND CC-BY-SA-4.0
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix schema: <https://schema.org/> .
+@prefix spdx: <http://spdx.org/rdf/terms#> .
+@prefix repo: <https://github.com/metavacua/CategoricalReasoner#> .
+
+<https://github.com/metavacua/CategoricalReasoner>
+    a schema:CreativeWork , schema:Collection ;
+    rdfs:label "CategoricalReasoner Repository" ;
+    rdfs:comment "Algorithmic thesis repository implementing categorical foundations for morphisms between logics" ;
+    schema:url <https://github.com/metavacua/CategoricalReasoner> ;
+    schema:name "Catty" ;
+    schema:author "MetaVacua" ;
+    schema:license <https://www.gnu.org/licenses/agpl-3.0.html> , <https://creativecommons.org/licenses/by-sa/4.0/> ;
+    schema:programmingLanguage "Java" ;
+    schema:keywords "categorical logic", "sequent calculi", "morphisms between logics", "subclassical logic", "semantic web" ;
+    schema:inLanguage "en" ;
+    schema:hasPart repo:project ;
+    schema:hasPart <https://github.com/metavacua/CategoricalReasoner/tree/main/docs> ;
+    schema:hasPart <https://github.com/metavacua/CategoricalReasoner/tree/main/src> ;
+    dct:conformsTo <https://www.iso.org/standard/57284.html> ; # ISO 14721:2025 (OAIS)
+    dct:conformsTo <https://www.iso.org/standard/56510.html> . # ISO 16363 (Trusted Digital Repositories)
+
+repo:project
+    a doap:Project ;
+    rdfs:label "Catty Project" ;
+    rdfs:comment "Categorical Reasoner: algorithms and implementations for modeling formal logics as categorical structures" ;
+    doap:name "Catty" ;
+    doap:description "Develops algorithms and implementations for modeling formal logics as categorical structures. Provides computational tools for representing logics as objects in categories, with morphisms capturing sequent restrictions and structural rules." ;
+    doap:homepage <https://github.com/metavacua/CategoricalReasoner> ;
+    doap:maintainer <https://github.com/metavacua> ;
+    doap:category "Formal Methods", "Category Theory", "Logic", "Semantic Web" ;
+    doap:programming-language "Java" ;
+    doap:implements <https://www.w3.org/TR/sparql11-query/> ; # SPARQL 1.1
+    doap:implements <https://www.w3.org/TR/rdf-schema/> ; # RDF Schema
+    doap:implements <https://www.iso.org/standard/58068.html> ; # DOL (ISO/IEC 17347)
+    doap:repository <https://github.com/metavacua/CategoricalReasoner> ;
+    doap:bug-database <https://github.com/metavacua/CategoricalReasoner/issues> ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner> .
+
+repo:solver
+    a schema:SoftwareApplication ;
+    rdfs:label "Catty Solver" ;
+    rdfs:comment "Computational tool for categorical logic reasoning and morphism verification" ;
+    schema:name "Catty Solver" ;
+    schema:applicationCategory "Formal Verification Tool" ;
+    schema:operatingSystem "OS Independent" ;
+    schema:softwareVersion "0.1.0" ;
+    schema:license <https://www.gnu.org/licenses/agpl-3.0.html> ;
+    doap:repository <https://github.com/metavacua/CategoricalReasoner> .
+
+<urn:local:catty:license-agpl>
+    a spdx:License ;
+    rdfs:label "GNU Affero General Public License v3.0" ;
+    spdx:licenseId "AGPL-3.0" ;
+    spdx:isDeprecatedLicense false ;
+    spdx:isFsfLibre true ;
+    spdx:isOsiApproved true ;
+    spdx:seeAlso <https://www.gnu.org/licenses/agpl-3.0.html> .
+
+<urn:local:catty:license-ccbysa>
+    a spdx:License ;
+    rdfs:label "Creative Commons Attribution-ShareAlike 4.0 International" ;
+    spdx:licenseId "CC-BY-SA-4.0" ;
+    spdx:isDeprecatedLicense false ;
+    spdx:isFsfLibre true ;
+    spdx:seeAlso <https://creativecommons.org/licenses/by-sa/4.0/> .
+
+<https://jena.apache.org/>
+    a schema:SoftwareApplication ;
+    rdfs:label "Apache Jena" ;
+    rdfs:comment "Java framework for building Semantic Web and Linked Data applications" ;
+    schema:url <https://jena.apache.org/> ;
+    schema:license <https://www.apache.org/licenses/LICENSE-2.0.html> ;
+    doap:homepage <https://jena.apache.org/> .
+
+<https://github.com/Galigator/openllet>
+    a schema:SoftwareApplication ;
+    rdfs:label "OpenLlet" ;
+    rdfs:comment "Open-source OWL 2 reasoner" ;
+    schema:url <https://github.com/Galigator/openllet> ;
+    schema:license <https://www.apache.org/licenses/LICENSE-2.0.html> ;
+    doap:repository <https://github.com/Galigator/openllet> .
+
+<https://key-project.org/>
+    a schema:SoftwareApplication ;
+    rdfs:label "KeY" ;
+    rdfs:comment "Formal software development system with program verification" ;
+    schema:url <https://key-project.org/> ;
+    schema:license <https://www.gnu.org/licenses/gpl-2.0.html> ;
+    doap:homepage <https://key-project.org/> .
+
+<https://jcp.org/en/jsr/detail?id=269>
+    a schema:TechArticle ;
+    rdfs:label "JSR 269: Pluggable Annotation Processing API" ;
+    rdfs:comment "Java Specification Request for annotation processing" ;
+    schema:url <https://jcp.org/en/jsr/detail?id=269> .
+
+<https://www.w3.org/TR/sparql11-protocol/>
+    a schema:TechArticle ;
+    rdfs:label "SPARQL 1.1 Protocol" ;
+    rdfs:comment "W3C Recommendation for SPARQL protocol specification" ;
+    schema:url <https://www.w3.org/TR/sparql11-protocol/> .
+
+<https://www.iso.org/standard/58068.html>
+    a schema:TechArticle ;
+    rdfs:label "DOL (ISO/IEC 17347)" ;
+    rdfs:comment "Distributed Ontology, Model and Specification Language" ;
+    schema:url <https://www.iso.org/standard/58068.html> .
+
+<https://github.com/gruninger/colore>
+    a schema:WebSite ;
+    rdfs:label "COLORE" ;
+    rdfs:comment "Common Logic Repository" ;
+    schema:url <https://github.com/gruninger/colore> .
