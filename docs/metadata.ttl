@@ -1,0 +1,120 @@
+# SPDX-FileCopyrightText: 2025 MetaVacua
+# SPDX-License-Identifier: CC-BY-SA-4.0
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix schema: <https://schema.org/> .
+@prefix spdx: <http://spdx.org/rdf/terms#> .
+@prefix urnlocal: <urn:local:catty:docs:> .
+@prefix repo: <https://github.com/metavacua/CategoricalReasoner#> .
+
+<https://github.com/metavacua/CategoricalReasoner/tree/main/docs>
+    a schema:ArchiveComponent ;
+    rdfs:label "Documentation Archive" ;
+    rdfs:comment "Semantic HTML documentation for the CategoricalReasoner project" ;
+    schema:url <https://github.com/metavacua/CategoricalReasoner/tree/main/docs> ;
+    schema:name "docs" ;
+    schema:license <https://creativecommons.org/licenses/by-sa/4.0/> ;
+    schema:encodingFormat <https://www.w3.org/TR/html5/> ; # HTML5
+    schema:inLanguage "en" ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner> ;
+    schema:hasPart urnlocal:dissertation ;
+    schema:hasPart urnlocal:structural-rules ;
+    dct:hasFormat "text/html" ;
+    dct:conformsTo <https://www.w3.org/TR/html5/> ;
+    dct:conformsTo <https://www.w3.org/TR/REC-rdf-syntax/> . # RDF Syntax
+
+urnlocal:dissertation
+    a schema:ArchiveComponent ;
+    rdfs:label "Dissertation Documentation" ;
+    rdfs:comment "LaTeX source for thesis and supporting documentation" ;
+    schema:url <https://github.com/metavacua/CategoricalReasoner/tree/main/docs/dissertation> ;
+    schema:name "dissertation" ;
+    schema:license <https://creativecommons.org/licenses/by-sa/4.0/> ;
+    schema:encodingFormat <https://www.latex-project.org/> ; # LaTeX
+    schema:inLanguage "en" ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/docs> ;
+    schema:hasPart urnlocal:dissertation-chapters ;
+    dct:hasFormat "application/x-tex" ;
+    dct:description "Contains theoretical foundations, design decisions, and algorithmic approaches supporting the algorithmic contributions." .
+
+urnlocal:dissertation-chapters
+    a schema:ArchiveComponent ;
+    rdfs:label "Dissertation Chapters" ;
+    rdfs:comment "Thesis chapter files" ;
+    schema:url <https://github.com/metavacua/CategoricalReasoner/tree/main/docs/dissertation/chapters> ;
+    schema:name "chapters" ;
+    schema:license <https://creativecommons.org/licenses/by-sa/4.0/> ;
+    schema:encodingFormat <https://www.latex-project.org/> ;
+    schema:inLanguage "en" ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/docs/dissertation> ;
+    dct:hasFormat "application/x-tex" .
+
+urnlocal:structural-rules
+    a schema:ArchiveComponent ;
+    rdfs:label "Structural Rules Documentation" ;
+    rdfs:comment "Documentation for structural rules in sequent calculi" ;
+    schema:url <https://github.com/metavacua/CategoricalReasoner/tree/main/docs/structural-rules> ;
+    schema:name "structural-rules" ;
+    schema:license <https://creativecommons.org/licenses/by-sa/4.0/> ;
+    schema:encodingFormat <https://www.w3.org/TR/html5/> ;
+    schema:encodingFormat <https://www.latex-project.org/> ;
+    schema:inLanguage "en" ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/docs> ;
+    schema:hasPart urnlocal:structural-rules-part ;
+    schema:hasPart urnlocal:structural-rules-parts ;
+    dct:hasFormat "text/html" ;
+    dct:hasFormat "application/x-tex" ;
+    dct:description "Documentation for structural rules including weakening, contraction, and other sequent calculus operations." .
+
+urnlocal:structural-rules-part
+    a schema:ArchiveComponent ;
+    rdfs:label "Structural Rules Part" ;
+    rdfs:comment "Weakening part documentation" ;
+    schema:url <https://github.com/metavacua/CategoricalReasoner/tree/main/docs/structural-rules/part> ;
+    schema:name "part" ;
+    schema:license <https://creativecommons.org/licenses/by-sa/4.0/> ;
+    schema:encodingFormat <https://www.latex-project.org/> ;
+    schema:inLanguage "en" ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/docs/structural-rules> ;
+    dct:hasFormat "application/x-tex" .
+
+urnlocal:structural-rules-parts
+    a schema:ArchiveComponent ;
+    rdfs:label "Structural Rules Parts" ;
+    rdfs:comment "Structural rules parts documentation" ;
+    schema:url <https://github.com/metavacua/CategoricalReasoner/tree/main/docs/structural-rules/parts> ;
+    schema:name "parts" ;
+    schema:license <https://creativecommons.org/licenses/by-sa/4.0/> ;
+    schema:encodingFormat <https://www.latex-project.org/> ;
+    schema:inLanguage "en" ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/docs/structural-rules> ;
+    dct:hasFormat "application/x-tex" .
+
+urnlocal:license-ccbysa
+    a spdx:License ;
+    rdfs:label "Creative Commons Attribution-ShareAlike 4.0 International" ;
+    spdx:licenseId "CC-BY-SA-4.0" ;
+    spdx:isDeprecatedLicense false ;
+    spdx:isFsfLibre true ;
+    spdx:seeAlso <https://creativecommons.org/licenses/by-sa/4.0/> .
+
+<https://www.w3.org/TR/html5/>
+    a schema:TechArticle ;
+    rdfs:label "HTML5" ;
+    rdfs:comment "W3C Recommendation for HTML5 specification" ;
+    schema:url <https://www.w3.org/TR/html5/> .
+
+<https://www.latex-project.org/>
+    a schema:WebSite ;
+    rdfs:label "LaTeX" ;
+    rdfs:comment "Document preparation system" ;
+    schema:url <https://www.latex-project.org/> .
+
+<https://www.w3.org/TR/REC-rdf-syntax/>
+    a schema:TechArticle ;
+    rdfs:label "RDF 1.1 Syntax" ;
+    rdfs:comment "W3C Recommendation for RDF Syntax specification" ;
+    schema:url <https://www.w3.org/TR/REC-rdf-syntax/> .

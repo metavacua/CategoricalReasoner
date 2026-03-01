@@ -1,0 +1,151 @@
+# SPDX-FileCopyrightText: 2025 MetaVacua
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix schema: <https://schema.org/> .
+@prefix doap: <http://usefulinc.com/ns/doap#> .
+@prefix spdx: <http://spdx.org/rdf/terms#> .
+@prefix urnlocal: <urn:local:catty:src:> .
+@prefix repo: <https://github.com/metavacua/CategoricalReasoner#> .
+
+<https://github.com/metavacua/CategoricalReasoner/tree/main/src>
+    a schema:ArchiveComponent , schema:SoftwareSourceCode ;
+    rdfs:label "Source Code Archive" ;
+    rdfs:comment "Java source code for the CategoricalReasoner project" ;
+    schema:url <https://github.com/metavacua/CategoricalReasoner/tree/main/src> ;
+    schema:name "src" ;
+    schema:license <https://www.gnu.org/licenses/agpl-3.0.html> ;
+    schema:programmingLanguage "Java" ;
+    schema:codeRepository <https://github.com/metavacua/CategoricalReasoner> ;
+    schema:runtimePlatform "Java Virtual Machine" ;
+    schema:targetPlatform "OS Independent" ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner> ;
+    schema:hasPart urnlocal:benchmarks ;
+    schema:hasPart urnlocal:scripts ;
+    schema:hasPart urnlocal:tests ;
+    schema:hasPart urnlocal:schema ;
+    dct:hasFormat "text/x-java-source" ;
+    dct:conformsTo <https://openjdk.org/projects/jdk/17/> ; # Java 17 LTS baseline
+    dct:description "Contains Java implementations, SPARQL queries, validation schemas, utility scripts, and test suites for categorical logic reasoning." .
+
+urnlocal:benchmarks
+    a schema:SoftwareSourceComponent ;
+    rdfs:label "Benchmarks" ;
+    rdfs:comment "SPARQL queries and evaluation benchmarks for external knowledge graphs" ;
+    schema:url <https://github.com/metavacua/CategoricalReasoner/tree/main/src/benchmarks> ;
+    schema:name "benchmarks" ;
+    schema:license <https://www.gnu.org/licenses/agpl-3.0.html> ;
+    schema:programmingLanguage "SPARQL" ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/src> ;
+    schema:hasPart urnlocal:benchmarks-queries ;
+    dct:hasFormat "application/sparql-query" ;
+    dct:description "SPARQL queries for consuming semantic web data from external sources including Wikidata, DBpedia, and other knowledge graphs." .
+
+urnlocal:benchmarks-queries
+    a schema:SoftwareSourceComponent ;
+    rdfs:label "Benchmark Queries" ;
+    rdfs:comment "SPARQL query files for knowledge graph extraction" ;
+    schema:url <https://github.com/metavacua/CategoricalReasoner/tree/main/src/benchmarks/queries> ;
+    schema:name "queries" ;
+    schema:license <https://www.gnu.org/licenses/agpl-3.0.html> ;
+    schema:programmingLanguage "SPARQL" ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/src/benchmarks> ;
+    dct:hasFormat "application/sparql-query" .
+
+urnlocal:scripts
+    a schema:SoftwareSourceComponent ;
+    rdfs:label "Scripts" ;
+    rdfs:comment "Utility Python scripts for CI/CD orchestration and tooling" ;
+    schema:url <https://github.com/metavacua/CategoricalReasoner/tree/main/src/scripts> ;
+    schema:name "scripts" ;
+    schema:license <https://www.gnu.org/licenses/agpl-3.0.html> ;
+    schema:programmingLanguage "Python" ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/src> ;
+    dct:hasFormat "text/x-python" ;
+    dct:description "CI/CD orchestration, build automation, and utility functions supporting the Java architecture." .
+
+urnlocal:tests
+    a schema:SoftwareSourceComponent ;
+    rdfs:label "Tests" ;
+    rdfs:comment "Test suites for Java implementations" ;
+    schema:url <https://github.com/metavacua/CategoricalReasoner/tree/main/src/tests> ;
+    schema:name "tests" ;
+    schema:license <https://www.gnu.org/licenses/agpl-3.0.html> ;
+    schema:programmingLanguage "Java" ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/src> ;
+    dct:hasFormat "text/x-java-source" ;
+    dct:description "JUnit test suites for validating categorical logic algorithms and morphism implementations." .
+
+urnlocal:schema
+    a schema:SoftwareSourceComponent ;
+    rdfs:label "Schema" ;
+    rdfs:comment "Validation schemas and constraints" ;
+    schema:url <https://github.com/metavacua/CategoricalReasoner/tree/main/src/schema> ;
+    schema:name "schema" ;
+    schema:license <https://www.gnu.org/licenses/agpl-3.0.html> ;
+    schema:programmingLanguage "Java" ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/src> ;
+    dct:hasFormat "text/x-java-source" ;
+    dct:description "Validation schemas, RDF/OWL constraints, and formal verification specifications." .
+
+urnlocal:license-agpl
+    a spdx:License ;
+    rdfs:label "GNU Affero General Public License v3.0" ;
+    spdx:licenseId "AGPL-3.0" ;
+    spdx:isDeprecatedLicense false ;
+    spdx:isFsfLibre true ;
+    spdx:isOsiApproved true ;
+    spdx:seeAlso <https://www.gnu.org/licenses/agpl-3.0.html> .
+
+<https://jena.apache.org/>
+    a schema:SoftwareApplication ;
+    rdfs:label "Apache Jena" ;
+    rdfs:comment "Java framework for building Semantic Web and Linked Data applications" ;
+    schema:url <https://jena.apache.org/> ;
+    schema:license <https://www.apache.org/licenses/LICENSE-2.0.html> ;
+    doap:homepage <https://jena.apache.org/> .
+
+<https://github.com/Galigator/openllet>
+    a schema:SoftwareApplication ;
+    rdfs:label "OpenLlet" ;
+    rdfs:comment "Open-source OWL 2 reasoner" ;
+    schema:url <https://github.com/Galigator/openllet> ;
+    schema:license <https://www.apache.org/licenses/LICENSE-2.0.html> ;
+    doap:repository <https://github.com/Galigator/openllet> .
+
+<https://key-project.org/>
+    a schema:SoftwareApplication ;
+    rdfs:label "KeY" ;
+    rdfs:comment "Formal software development system with program verification" ;
+    schema:url <https://key-project.org/> ;
+    schema:license <https://www.gnu.org/licenses/gpl-2.0.html> ;
+    doap:homepage <https://key-project.org/> .
+
+<https://jcp.org/en/jsr/detail?id=269>
+    a schema:TechArticle ;
+    rdfs:label "JSR 269: Pluggable Annotation Processing API" ;
+    rdfs:comment "Java Specification Request for annotation processing" ;
+    schema:url <https://jcp.org/en/jsr/detail?id=269> .
+
+<https://openjdk.org/projects/jdk/17/>
+    a schema:TechArticle ;
+    rdfs:label "Java 17 LTS" ;
+    rdfs:comment "OpenJDK 17 Long-Term Support release" ;
+    schema:url <https://openjdk.org/projects/jdk/17/> .
+
+<https://junit.org/junit5/>
+    a schema:SoftwareApplication ;
+    rdfs:label "JUnit 5" ;
+    rdfs:comment "Java testing framework" ;
+    schema:url <https://junit.org/junit5/> ;
+    schema:license <https://www.eclipse.org/legal/epl-v20.html> .
+
+<https://square.github.io/javapoet/>
+    a schema:SoftwareApplication ;
+    rdfs:label "JavaPoet" ;
+    rdfs:comment "Java API for generating .java source files" ;
+    schema:url <https://square.github.io/javapoet/> ;
+    schema:license <https://www.apache.org/licenses/LICENSE-2.0.html> .
