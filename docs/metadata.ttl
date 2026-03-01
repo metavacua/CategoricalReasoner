@@ -7,8 +7,6 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix schema: <https://schema.org/> .
 @prefix spdx: <http://spdx.org/rdf/terms#> .
-@prefix urnlocal: <urn:local:catty:docs:> .
-@prefix repo: <https://github.com/metavacua/CategoricalReasoner#> .
 
 <https://github.com/metavacua/CategoricalReasoner/tree/main/docs>
     a schema:ArchiveComponent ;
@@ -20,13 +18,13 @@
     schema:encodingFormat <https://www.w3.org/TR/html5/> ; # HTML5
     schema:inLanguage "en" ;
     schema:isPartOf <https://github.com/metavacua/CategoricalReasoner> ;
-    schema:hasPart urnlocal:dissertation ;
-    schema:hasPart urnlocal:structural-rules ;
+    schema:hasPart <urn:local:catty:docs:dissertation> ;
+    schema:hasPart <urn:local:catty:docs:structural-rules> ;
     dct:hasFormat "text/html" ;
     dct:conformsTo <https://www.w3.org/TR/html5/> ;
     dct:conformsTo <https://www.w3.org/TR/REC-rdf-syntax/> . # RDF Syntax
 
-urnlocal:dissertation
+<urn:local:catty:docs:dissertation>
     a schema:ArchiveComponent ;
     rdfs:label "Dissertation Documentation" ;
     rdfs:comment "LaTeX source for thesis and supporting documentation" ;
@@ -36,11 +34,11 @@ urnlocal:dissertation
     schema:encodingFormat <https://www.latex-project.org/> ; # LaTeX
     schema:inLanguage "en" ;
     schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/docs> ;
-    schema:hasPart urnlocal:dissertation-chapters ;
+    schema:hasPart <urn:local:catty:docs:dissertation-chapters> ;
     dct:hasFormat "application/x-tex" ;
     dct:description "Contains theoretical foundations, design decisions, and algorithmic approaches supporting the algorithmic contributions." .
 
-urnlocal:dissertation-chapters
+<urn:local:catty:docs:dissertation-chapters>
     a schema:ArchiveComponent ;
     rdfs:label "Dissertation Chapters" ;
     rdfs:comment "Thesis chapter files" ;
@@ -49,10 +47,10 @@ urnlocal:dissertation-chapters
     schema:license <https://creativecommons.org/licenses/by-sa/4.0/> ;
     schema:encodingFormat <https://www.latex-project.org/> ;
     schema:inLanguage "en" ;
-    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/docs/dissertation> ;
+    schema:isPartOf <urn:local:catty:docs:dissertation> ;
     dct:hasFormat "application/x-tex" .
 
-urnlocal:structural-rules
+<urn:local:catty:docs:structural-rules>
     a schema:ArchiveComponent ;
     rdfs:label "Structural Rules Documentation" ;
     rdfs:comment "Documentation for structural rules in sequent calculi" ;
@@ -63,13 +61,13 @@ urnlocal:structural-rules
     schema:encodingFormat <https://www.latex-project.org/> ;
     schema:inLanguage "en" ;
     schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/docs> ;
-    schema:hasPart urnlocal:structural-rules-part ;
-    schema:hasPart urnlocal:structural-rules-parts ;
+    schema:hasPart <urn:local:catty:docs:structural-rules-part> ;
+    schema:hasPart <urn:local:catty:docs:structural-rules-parts> ;
     dct:hasFormat "text/html" ;
     dct:hasFormat "application/x-tex" ;
     dct:description "Documentation for structural rules including weakening, contraction, and other sequent calculus operations." .
 
-urnlocal:structural-rules-part
+<urn:local:catty:docs:structural-rules-part>
     a schema:ArchiveComponent ;
     rdfs:label "Structural Rules Part" ;
     rdfs:comment "Weakening part documentation" ;
@@ -78,10 +76,10 @@ urnlocal:structural-rules-part
     schema:license <https://creativecommons.org/licenses/by-sa/4.0/> ;
     schema:encodingFormat <https://www.latex-project.org/> ;
     schema:inLanguage "en" ;
-    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/docs/structural-rules> ;
+    schema:isPartOf <urn:local:catty:docs:structural-rules> ;
     dct:hasFormat "application/x-tex" .
 
-urnlocal:structural-rules-parts
+<urn:local:catty:docs:structural-rules-parts>
     a schema:ArchiveComponent ;
     rdfs:label "Structural Rules Parts" ;
     rdfs:comment "Structural rules parts documentation" ;
@@ -90,10 +88,10 @@ urnlocal:structural-rules-parts
     schema:license <https://creativecommons.org/licenses/by-sa/4.0/> ;
     schema:encodingFormat <https://www.latex-project.org/> ;
     schema:inLanguage "en" ;
-    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/docs/structural-rules> ;
+    schema:isPartOf <urn:local:catty:docs:structural-rules> ;
     dct:hasFormat "application/x-tex" .
 
-urnlocal:license-ccbysa
+<urn:local:catty:license-ccbysa>
     a spdx:License ;
     rdfs:label "Creative Commons Attribution-ShareAlike 4.0 International" ;
     spdx:licenseId "CC-BY-SA-4.0" ;

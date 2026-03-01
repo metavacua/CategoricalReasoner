@@ -8,8 +8,6 @@
 @prefix schema: <https://schema.org/> .
 @prefix doap: <http://usefulinc.com/ns/doap#> .
 @prefix spdx: <http://spdx.org/rdf/terms#> .
-@prefix urnlocal: <urn:local:catty:src:> .
-@prefix repo: <https://github.com/metavacua/CategoricalReasoner#> .
 
 <https://github.com/metavacua/CategoricalReasoner/tree/main/src>
     a schema:ArchiveComponent , schema:SoftwareSourceCode ;
@@ -23,15 +21,15 @@
     schema:runtimePlatform "Java Virtual Machine" ;
     schema:targetPlatform "OS Independent" ;
     schema:isPartOf <https://github.com/metavacua/CategoricalReasoner> ;
-    schema:hasPart urnlocal:benchmarks ;
-    schema:hasPart urnlocal:scripts ;
-    schema:hasPart urnlocal:tests ;
-    schema:hasPart urnlocal:schema ;
+    schema:hasPart <urn:local:catty:src:benchmarks> ;
+    schema:hasPart <urn:local:catty:src:scripts> ;
+    schema:hasPart <urn:local:catty:src:tests> ;
+    schema:hasPart <urn:local:catty:src:schema> ;
     dct:hasFormat "text/x-java-source" ;
     dct:conformsTo <https://openjdk.org/projects/jdk/17/> ; # Java 17 LTS baseline
     dct:description "Contains Java implementations, SPARQL queries, validation schemas, utility scripts, and test suites for categorical logic reasoning." .
 
-urnlocal:benchmarks
+<urn:local:catty:src:benchmarks>
     a schema:SoftwareSourceComponent ;
     rdfs:label "Benchmarks" ;
     rdfs:comment "SPARQL queries and evaluation benchmarks for external knowledge graphs" ;
@@ -40,11 +38,11 @@ urnlocal:benchmarks
     schema:license <https://www.gnu.org/licenses/agpl-3.0.html> ;
     schema:programmingLanguage "SPARQL" ;
     schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/src> ;
-    schema:hasPart urnlocal:benchmarks-queries ;
+    schema:hasPart <urn:local:catty:src:benchmarks-queries> ;
     dct:hasFormat "application/sparql-query" ;
     dct:description "SPARQL queries for consuming semantic web data from external sources including Wikidata, DBpedia, and other knowledge graphs." .
 
-urnlocal:benchmarks-queries
+<urn:local:catty:src:benchmarks-queries>
     a schema:SoftwareSourceComponent ;
     rdfs:label "Benchmark Queries" ;
     rdfs:comment "SPARQL query files for knowledge graph extraction" ;
@@ -52,10 +50,10 @@ urnlocal:benchmarks-queries
     schema:name "queries" ;
     schema:license <https://www.gnu.org/licenses/agpl-3.0.html> ;
     schema:programmingLanguage "SPARQL" ;
-    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner/tree/main/src/benchmarks> ;
+    schema:isPartOf <urn:local:catty:src:benchmarks> ;
     dct:hasFormat "application/sparql-query" .
 
-urnlocal:scripts
+<urn:local:catty:src:scripts>
     a schema:SoftwareSourceComponent ;
     rdfs:label "Scripts" ;
     rdfs:comment "Utility Python scripts for CI/CD orchestration and tooling" ;
@@ -67,7 +65,7 @@ urnlocal:scripts
     dct:hasFormat "text/x-python" ;
     dct:description "CI/CD orchestration, build automation, and utility functions supporting the Java architecture." .
 
-urnlocal:tests
+<urn:local:catty:src:tests>
     a schema:SoftwareSourceComponent ;
     rdfs:label "Tests" ;
     rdfs:comment "Test suites for Java implementations" ;
@@ -79,7 +77,7 @@ urnlocal:tests
     dct:hasFormat "text/x-java-source" ;
     dct:description "JUnit test suites for validating categorical logic algorithms and morphism implementations." .
 
-urnlocal:schema
+<urn:local:catty:src:schema>
     a schema:SoftwareSourceComponent ;
     rdfs:label "Schema" ;
     rdfs:comment "Validation schemas and constraints" ;
@@ -91,7 +89,7 @@ urnlocal:schema
     dct:hasFormat "text/x-java-source" ;
     dct:description "Validation schemas, RDF/OWL constraints, and formal verification specifications." .
 
-urnlocal:license-agpl
+<urn:local:catty:license-agpl>
     a spdx:License ;
     rdfs:label "GNU Affero General Public License v3.0" ;
     spdx:licenseId "AGPL-3.0" ;

@@ -8,7 +8,6 @@
 @prefix doap: <http://usefulinc.com/ns/doap#> .
 @prefix schema: <https://schema.org/> .
 @prefix spdx: <http://spdx.org/rdf/terms#> .
-@prefix urnlocal: <urn:local:catty:> .
 @prefix repo: <https://github.com/metavacua/CategoricalReasoner#> .
 
 <https://github.com/metavacua/CategoricalReasoner>
@@ -23,8 +22,8 @@
     schema:keywords "categorical logic", "sequent calculi", "morphisms between logics", "subclassical logic", "semantic web" ;
     schema:inLanguage "en" ;
     schema:hasPart repo:project ;
-    schema:hasPart urnlocal:docs ;
-    schema:hasPart urnlocal:src ;
+    schema:hasPart <https://github.com/metavacua/CategoricalReasoner/tree/main/docs> ;
+    schema:hasPart <https://github.com/metavacua/CategoricalReasoner/tree/main/src> ;
     dct:conformsTo <https://www.iso.org/standard/57284.html> ; # ISO 14721:2025 (OAIS)
     dct:conformsTo <https://www.iso.org/standard/56510.html> . # ISO 16363 (Trusted Digital Repositories)
 
@@ -42,7 +41,8 @@ repo:project
     doap:implements <https://www.w3.org/TR/rdf-schema/> ; # RDF Schema
     doap:implements <https://www.iso.org/standard/58068.html> ; # DOL (ISO/IEC 17347)
     doap:repository <https://github.com/metavacua/CategoricalReasoner> ;
-    doap:bug-database <https://github.com/metavacua/CategoricalReasoner/issues> .
+    doap:bug-database <https://github.com/metavacua/CategoricalReasoner/issues> ;
+    schema:isPartOf <https://github.com/metavacua/CategoricalReasoner> .
 
 repo:solver
     a schema:SoftwareApplication ;
@@ -55,7 +55,7 @@ repo:solver
     schema:license <https://www.gnu.org/licenses/agpl-3.0.html> ;
     doap:repository <https://github.com/metavacua/CategoricalReasoner> .
 
-urnlocal:license-agpl
+<urn:local:catty:license-agpl>
     a spdx:License ;
     rdfs:label "GNU Affero General Public License v3.0" ;
     spdx:licenseId "AGPL-3.0" ;
@@ -64,7 +64,7 @@ urnlocal:license-agpl
     spdx:isOsiApproved true ;
     spdx:seeAlso <https://www.gnu.org/licenses/agpl-3.0.html> .
 
-urnlocal:license-ccbysa
+<urn:local:catty:license-ccbysa>
     a spdx:License ;
     rdfs:label "Creative Commons Attribution-ShareAlike 4.0 International" ;
     spdx:licenseId "CC-BY-SA-4.0" ;
