@@ -114,8 +114,8 @@ repo:solver
     rdfs:comment "Distributed Ontology, Model and Specification Language" ;
     schema:url <https://www.iso.org/standard/58068.html> .
 
-<https://colore.oor.net/>
+<https://github.com/gruninger/colore>
     a schema:WebSite ;
     rdfs:label "COLORE" ;
     rdfs:comment "Common Logic Repository" ;
-    schema:url <https://colore.oor.net/> .
+    schema:url <https://github.com/gruninger/colore> .
