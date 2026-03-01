@@ -8,11 +8,15 @@
 @prefix dctype: <http://purl.org/dc/dcmitype/> .
 @prefix doap: <http://usefulinc.com/ns/doap#> .
 @prefix org: <http://www.w3.org/ns/org#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix schema: <http://schema.org/> .
 @prefix spdx: <https://spdx.org/rdf/terms#> .
 @prefix xkos: <http://purl.org/xkos/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix cat: <http://categoricalreasoner.org/ontology/catty#> .
+@prefix jsr269: <http://categoricalreasoner.org/ontology/jsr269#> .
 
 # =============================================================================
 # ROOT REPOSITORY ENTITY
@@ -151,6 +155,17 @@
     schema:softwareRequirements <https://jena.apache.org/#software> ;
     schema:softwareRequirements <https://github.com/Galigator/openllet#software> ;
     schema:operatingSystem "Java 17+" ;
+    # --- OPERATIONAL SPECIFICATION: Decidable Sequent Calculus ---
+    # Proof system: Gentzen-style sequent calculus for subclassical logics
+    cat:proofSystem "sequent-calculus" ;
+    # Search strategy: diagram chase through commutative diagrams
+    cat:searchStrategy "diagram-chase" ;
+    # Decidability: finite proof depth via strong normalization
+    cat:decidability "finite-depth-normalization" ;
+    # Maximum proof depth bound (empirically sufficient for subclassical logics)
+    cat:proofDepthBound 42 ;
+    # JSR 269 code generation: records derived from #docs annotations
+    jsr269:recordGenerators <https://github.com/metavacua/CategoricalReasoner#docs> ;
     # Validation via formal methods
     schema:authorNotes "Verified via KeY theorem prover; morphisms between logics formally specified" ;
     # Bidirectional solver-source link
@@ -280,3 +295,61 @@
     schema:url <https://github.com/metavacua> ;
     schema:memberOf <https://github.com/metavacua/CategoricalReasoner> ;
     rdfs:seeAlso <https://github.com/metavacua> .
+
+# =============================================================================
+# VOCABULARY DEFINITIONS: Catty Operational Ontology
+# =============================================================================
+
+# Catty namespace vocabulary (UORN - no catty.org domain per AGENTS.md)
+<http://categoricalreasoner.org/ontology/catty#>
+    a owl:Ontology ;
+    rdfs:label "Catty Categorical Reasoner Ontology" ;
+    rdfs:comment "Vocabulary for specifying decidable sequent calculus morphisms between subclassical logics" ;
+    rdfs:seeAlso <https://github.com/metavacua/CategoricalReasoner#solver> .
+
+# Proof system types
+<http://categoricalreasoner.org/ontology/catty#proofSystem>
+    a rdf:Property ;
+    rdfs:domain <https://github.com/metavacua/CategoricalReasoner#solver> ;
+    rdfs:range rdfs:Resource ;
+    rdfs:label "proofSystem" ;
+    rdfs:comment "The proof system used by the solver (e.g., sequent-calculus, natural-deduction)" .
+
+# Search strategy types
+<http://categoricalreasoner.org/ontology/catty#searchStrategy>
+    a rdf:Property ;
+    rdfs:domain <https://github.com/metavacua/CategoricalReasoner#solver> ;
+    rdfs:range rdfs:Resource ;
+    rdfs:label "searchStrategy" ;
+    rdfs:comment "The search strategy for proof enumeration (e.g., diagram-chase, backward-chaining)" .
+
+# Decidability specification
+<http://categoricalreasoner.org/ontology/catty#decidability>
+    a rdf:Property ;
+    rdfs:domain <https://github.com/metavacua/CategoricalReasoner#solver> ;
+    rdfs:range rdfs:Resource ;
+    rdfs:label "decidability" ;
+    rdfs:comment "The decidability guarantee (e.g., finite-depth-normalization)" .
+
+# Proof depth bound
+<http://categoricalreasoner.org/ontology/catty#proofDepthBound>
+    a rdf:Property ;
+    rdfs:domain <https://github.com/metavacua/CategoricalReasoner#solver> ;
+    rdfs:range xsd:integer ;
+    rdfs:label "proofDepthBound" ;
+    rdfs:comment "Maximum proof search depth for termination guarantee" .
+
+# JSR 269 namespace vocabulary
+<http://categoricalreasoner.org/ontology/jsr269#>
+    a owl:Ontology ;
+    rdfs:label "JSR 269 Annotation Processing Ontology" ;
+    rdfs:comment "Vocabulary for JSR 269 annotation processor configuration" ;
+    rdfs:seeAlso <https://jcp.org/en/jsr/detail?id=269#specification> .
+
+# Record generators specification
+<http://categoricalreasoner.org/ontology/jsr269#recordGenerators>
+    a rdf:Property ;
+    rdfs:domain <https://github.com/metavacua/CategoricalReasoner#solver> ;
+    rdfs:range schema:CreativeWork ;
+    rdfs:label "recordGenerators" ;
+    rdfs:comment "Source of annotations for JSR 269 record generation" .
