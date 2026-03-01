@@ -1,0 +1,365 @@
+version: "1.0"
+title: "TeX ↔ RDF Bidirectional Mapping Specification"
+description: "Defines how TeX thesis elements map to RDF classes and properties for bidirectional validation"
+
+namespaces:
+  catty: "http://metavacua.github.io/catty/"
+  dct: "http://purl.org/dc/terms/"
+  rdfs: "http://www.w3.org/2000/01/rdf-schema#"
+  owl: "http://www.w3.org/2002/07/owl#"
+  prov: "http://www.w3.org/ns/prov#"
+  skos: "http://www.w3.org/2004/02/skos/core#"
+
+mappings:
+  theorem:
+    rdf_class: "catty:Theorem"
+    tex_macro: "\\begin{theorem}[id={id}]{title}"
+    tex_end: "\\end{theorem}"
+    properties:
+      id:
+        rdf_property: "dct:identifier"
+        datatype: "xsd:string"
+        pattern: "^thm-[a-z0-9]+(-[a-z0-9]+)*$"
+        required: true
+      title:
+        rdf_property: "dct:title"
+        datatype: "xsd:string"
+        required: true
+      statement:
+        rdf_property: "catty:hasStatement"
+        datatype: "xsd:string"
+        required: true
+      proof:
+        rdf_property: "catty:hasProof"
+        rdf_range: "catty:Proof"
+        required: true
+      premises:
+        rdf_property: "catty:hasPremise"
+        datatype: "xsd:string"
+        cardinality: "0..*"
+      citations:
+        rdf_property: "dct:references"
+        rdf_range: "bibo:Document"
+        cardinality: "0..*"
+    validation:
+      - "Must have exactly one proof child"
+      - "All premise IDs must reference existing theorems/lemmas"
+      - "All citation keys must exist in bibliography/citations.yaml"
+
+  lemma:
+    rdf_class: "catty:Lemma"
+    rdfs_subClassOf: "catty:Theorem"
+    tex_macro: "\\begin{lemma}[id={id}]{title}"
+    tex_end: "\\end{lemma}"
+    properties:
+      id:
+        rdf_property: "dct:identifier"
+        pattern: "^lem-[a-z0-9]+(-[a-z0-9]+)*$"
+        required: true
+      title:
+        rdf_property: "dct:title"
+        required: true
+      statement:
+        rdf_property: "catty:hasStatement"
+        required: true
+      proof:
+        rdf_property: "catty:hasProof"
+        rdf_range: "catty:Proof"
+        required: true
+
+  proposition:
+    rdf_class: "catty:Proposition"
+    rdfs_subClassOf: "catty:Theorem"
+    tex_macro: "\\begin{proposition}[id={id}]{title}"
+    tex_end: "\\end{proposition}"
+    properties:
+      id:
+        rdf_property: "dct:identifier"
+        pattern: "^prop-[a-z0-9]+(-[a-z0-9]+)*$"
+        required: true
+      title:
+        rdf_property: "dct:title"
+        required: true
+      statement:
+        rdf_property: "catty:hasStatement"
+        required: true
+      proof:
+        rdf_property: "catty:hasProof"
+        required: true
+
+  corollary:
+    rdf_class: "catty:Corollary"
+    rdfs_subClassOf: "catty:Theorem"
+    tex_macro: "\\begin{corollary}[id={id}]{title}"
+    tex_end: "\\end{corollary}"
+    properties:
+      id:
+        rdf_property: "dct:identifier"
+        pattern: "^cor-[a-z0-9]+(-[a-z0-9]+)*$"
+        required: true
+      title:
+        rdf_property: "dct:title"
+        required: true
+      statement:
+        rdf_property: "catty:hasStatement"
+        required: true
+      follows_from:
+        rdf_property: "catty:followsFrom"
+        rdf_range: "catty:Theorem"
+        required: true
+
+  proof:
+    rdf_class: "catty:Proof"
+    tex_macro: "\\begin{proof}[id={id}]"
+    tex_end: "\\end{proof}"
+    properties:
+      id:
+        rdf_property: "dct:identifier"
+        pattern: "^proof-[a-z0-9]+(-[a-z0-9]+)*$"
+        required: true
+      steps:
+        rdf_property: "catty:hasProofStep"
+        rdf_range: "catty:ProofStep"
+        cardinality: "1..*"
+        required: true
+      conclusion:
+        rdf_property: "catty:hasConclusion"
+        datatype: "xsd:string"
+        required: true
+      citations:
+        rdf_property: "dct:references"
+        cardinality: "0..*"
+    validation:
+      - "Must have at least one proof step"
+      - "Cannot be nested inside another proof"
+
+  definition:
+    rdf_class: "catty:Definition"
+    tex_macro: "\\begin{definition}[id={id}]{title}"
+    tex_end: "\\end{definition}"
+    properties:
+      id:
+        rdf_property: "dct:identifier"
+        pattern: "^def-[a-z0-9]+(-[a-z0-9]+)*$"
+        required: true
+      title:
+        rdf_property: "dct:title"
+        required: true
+      term:
+        rdf_property: "skos:prefLabel"
+        datatype: "xsd:string"
+        required: true
+      meaning:
+        rdf_property: "skos:definition"
+        datatype: "xsd:string"
+        required: true
+      examples:
+        rdf_property: "skos:example"
+        datatype: "xsd:string"
+        cardinality: "0..*"
+      citations:
+        rdf_property: "dct:references"
+        cardinality: "0..*"
+    validation:
+      - "Term must be unique within thesis"
+      - "Use \\definedfrom{id}{citation-key} to link to source"
+
+  example:
+    rdf_class: "catty:Example"
+    tex_macro: "\\begin{example}[id={id}]{title}"
+    tex_end: "\\end{example}"
+    properties:
+      id:
+        rdf_property: "dct:identifier"
+        pattern: "^ex-[a-z0-9]+(-[a-z0-9]+)*$"
+        required: true
+      title:
+        rdf_property: "dct:title"
+        required: true
+      description:
+        rdf_property: "dct:description"
+        datatype: "xsd:string"
+        required: true
+      instantiation:
+        rdf_property: "catty:instantiates"
+        datatype: "xsd:string"
+        required: true
+      illustrates:
+        rdf_property: "catty:illustrates"
+        rdf_range: ["catty:Definition", "catty:Theorem"]
+        cardinality: "0..*"
+
+  remark:
+    rdf_class: "catty:Remark"
+    tex_macro: "\\begin{remark}[id={id}]{title}"
+    tex_end: "\\end{remark}"
+    properties:
+      id:
+        rdf_property: "dct:identifier"
+        pattern: "^rem-[a-z0-9]+(-[a-z0-9]+)*$"
+        required: true
+      title:
+        rdf_property: "dct:title"
+        required: true
+      content:
+        rdf_property: "catty:content"
+        datatype: "xsd:string"
+        required: true
+
+  conjecture:
+    rdf_class: "catty:Conjecture"
+    tex_macro: "\\begin{conjecture}[id={id}]{title}"
+    tex_end: "\\end{conjecture}"
+    properties:
+      id:
+        rdf_property: "dct:identifier"
+        pattern: "^conj-[a-z0-9]+(-[a-z0-9]+)*$"
+        required: true
+      title:
+        rdf_property: "dct:title"
+        required: true
+      statement:
+        rdf_property: "catty:hasStatement"
+        datatype: "xsd:string"
+        required: true
+      rationale:
+        rdf_property: "catty:rationale"
+        datatype: "xsd:string"
+        required: false
+
+  section:
+    rdf_class: "catty:Section"
+    tex_macro: "\\section{title}\\label{id}"
+    properties:
+      id:
+        rdf_property: "dct:identifier"
+        pattern: "^sec-[a-z0-9]+(-[a-z0-9]+)*$"
+        required: true
+      title:
+        rdf_property: "dct:title"
+        required: true
+      content:
+        rdf_property: "catty:contains"
+        rdf_range: ["catty:Theorem", "catty:Definition", "catty:Example", "catty:Subsection"]
+        cardinality: "1..*"
+      citations:
+        rdf_property: "dct:references"
+        cardinality: "0..*"
+      derived_from:
+        rdf_property: "prov:wasDerivedFrom"
+        rdf_range: "bibo:Document"
+        cardinality: "0..*"
+    validation:
+      - "Must contain at least one content element"
+
+  subsection:
+    rdf_class: "catty:Subsection"
+    rdfs_subClassOf: "catty:Section"
+    tex_macro: "\\subsection{title}\\label{id}"
+    properties:
+      id:
+        rdf_property: "dct:identifier"
+        pattern: "^subsec-[a-z0-9]+(-[a-z0-9]+)*$"
+        required: true
+      title:
+        rdf_property: "dct:title"
+        required: true
+      parent_section:
+        rdf_property: "catty:partOf"
+        rdf_range: "catty:Section"
+        required: true
+    validation:
+      - "Cannot contain another subsection"
+      - "Must be part of a section"
+
+  chapter:
+    rdf_class: "catty:Chapter"
+    tex_macro: "\\chapter{title}\\label{id}"
+    properties:
+      id:
+        rdf_property: "dct:identifier"
+        pattern: "^ch-[a-z0-9]+(-[a-z0-9]+)*$"
+        required: true
+      title:
+        rdf_property: "dct:title"
+        required: true
+      abstract:
+        rdf_property: "dct:abstract"
+        datatype: "xsd:string"
+        required: false
+      sections:
+        rdf_property: "catty:hasSection"
+        rdf_range: "catty:Section"
+        cardinality: "1..*"
+        required: true
+    validation:
+      - "Must contain at least one section"
+
+  part:
+    rdf_class: "catty:Part"
+    tex_macro: "\\part{title}\\label{id}"
+    properties:
+      id:
+        rdf_property: "dct:identifier"
+        pattern: "^part-[a-z0-9]+(-[a-z0-9]+)*$"
+        required: true
+      title:
+        rdf_property: "dct:title"
+        required: true
+      description:
+        rdf_property: "dct:description"
+        datatype: "xsd:string"
+        required: false
+      chapters:
+        rdf_property: "catty:hasChapter"
+        rdf_range: "catty:Chapter"
+        cardinality: "1..*"
+        required: true
+
+bidirectional_validation_rules:
+  forward_validation:
+    description: "TeX → RDF: Every TeX element must produce valid RDF"
+    rules:
+      - "Extract ID from TeX label/parameter"
+      - "Map TeX element type to RDF class"
+      - "Extract properties according to mapping specification"
+      - "Validate property datatypes and patterns"
+      - "Generate RDF resource with URI: catty:[element-type]/[id]"
+      - "Add provenance links for citations"
+
+  reverse_validation:
+    description: "RDF → TeX: Every RDF resource must be referenced in TeX"
+    rules:
+      - "Query RDF graph for all catty:Theorem, catty:Definition, etc."
+      - "For each resource, extract dct:identifier"
+      - "Search TeX files for corresponding label or ID"
+      - "Verify TeX element type matches RDF class"
+      - "Verify property values match between TeX and RDF"
+      - "Allow RDF resources marked as 'supplementary' to exist without TeX"
+
+  citation_consistency:
+    description: "Citations must be consistent across TeX, RDF, and registry"
+    rules:
+      - "Every \\cite{key} in TeX → dct:references in RDF"
+      - "Every dct:references in RDF → entry in citations.yaml"
+      - "Every entry in citations.yaml → resource in citations.jsonld"
+      - "Every RDF citation resource → at least one external link (DOI/Wikidata/URL)"
+
+nesting_constraints:
+  allowed:
+    - "chapter contains section"
+    - "section contains subsection"
+    - "section contains theorem, definition, example, remark"
+    - "subsection contains theorem, definition, example, remark"
+    - "theorem contains proof"
+
+  forbidden:
+    - "proof cannot contain theorem"
+    - "proof cannot contain definition"
+    - "subsection cannot contain subsection"
+    - "definition cannot contain theorem"
+
+id_uniqueness:
+  rule: "All IDs must be globally unique across entire thesis"
+  enforcement: "Validator maintains set of all IDs and rejects duplicates"
+  scope: "All theorem, definition, section, chapter, part IDs"
