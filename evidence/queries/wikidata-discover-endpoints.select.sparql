@@ -1,0 +1,38 @@
+# Discover candidate SPARQL endpoints via Wikidata property P5305 (SPARQL endpoint)
+# Endpoint: https://query.wikidata.org/sparql
+# Goal: find endpoints plausibly relevant to formal methods / logic / mathematics (broad, but constrained).
+
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+
+SELECT ?item ?itemLabel ?endpoint ?desc WHERE {
+  ?item wdt:P5305 ?endpoint .
+
+  OPTIONAL { ?item rdfs:label ?itemLabel FILTER(LANG(?itemLabel) = "en") }
+  OPTIONAL { ?item schema:description ?desc FILTER(LANG(?desc) = "en") }
+
+  BIND(LCASE(IF(BOUND(?itemLabel), STR(?itemLabel), "")) AS ?labelLc)
+  BIND(LCASE(IF(BOUND(?desc), STR(?desc), "")) AS ?descLc)
+
+  FILTER(
+    CONTAINS(?labelLc, "wikidata") ||
+    CONTAINS(?labelLc, "dbpedia") ||
+    CONTAINS(?labelLc, "ontolog") ||
+    CONTAINS(?labelLc, "linked") ||
+    CONTAINS(?labelLc, "sparql") ||
+    CONTAINS(?labelLc, "openmath") ||
+    CONTAINS(?labelLc, "proof") ||
+    CONTAINS(?labelLc, "theorem") ||
+    CONTAINS(?labelLc, "logic") ||
+    CONTAINS(?labelLc, "math") ||
+    CONTAINS(?descLc, "sparql") ||
+    CONTAINS(?descLc, "linked data") ||
+    CONTAINS(?descLc, "ontology") ||
+    CONTAINS(?descLc, "formal") ||
+    CONTAINS(?descLc, "logic")
+  )
+}
+ORDER BY ?itemLabel
+LIMIT 250

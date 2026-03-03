@@ -1,0 +1,75 @@
+# Broad, exploratory extraction focused on sequent calculus / LK-adjacent logic topics.
+# Endpoint: https://dbpedia.org/sparql
+# Result format: Turtle
+# Notes:
+# - Uses a small set of seed resources (high precision) plus keyword expansion (controlled recall).
+# - Avoids overly-generic keywords (e.g. plain "exchange") that produce noise.
+
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+CONSTRUCT {
+  ?s ?p ?o .
+  ?s rdfs:label ?label .
+  ?s rdfs:comment ?comment .
+  ?s dbo:abstract ?abstract .
+  ?s foaf:isPrimaryTopicOf ?page .
+}
+WHERE {
+  {
+    # High-precision seeds.
+    VALUES ?s {
+      dbr:Sequent_calculus
+      dbr:Proof_theory
+      dbr:Gerhard_Gentzen
+      dbr:Classical_logic
+      dbr:Intuitionistic_logic
+      dbr:Linear_logic
+      dbr:Structural_rule
+      dbr:Cut-elimination_theorem
+    }
+    OPTIONAL { ?s rdfs:label ?label FILTER(LANG(?label) = "en") }
+  }
+  UNION
+  {
+    # Controlled recall via keyword expansion.
+    ?s rdfs:label ?label .
+    FILTER(LANG(?label) = "en")
+
+    FILTER(
+      CONTAINS(LCASE(STR(?label)), "sequent calculus") ||
+      CONTAINS(LCASE(STR(?label)), "proof theory") ||
+      CONTAINS(LCASE(STR(?label)), "gentzen") ||
+      CONTAINS(LCASE(STR(?label)), "cut-elimination") ||
+      CONTAINS(LCASE(STR(?label)), "cut rule") ||
+      CONTAINS(LCASE(STR(?label)), "structural rule") ||
+      CONTAINS(LCASE(STR(?label)), "weakening rule") ||
+      CONTAINS(LCASE(STR(?label)), "contraction rule") ||
+      CONTAINS(LCASE(STR(?label)), "exchange rule") ||
+      CONTAINS(LCASE(STR(?label)), "intuitionistic logic") ||
+      CONTAINS(LCASE(STR(?label)), "linear logic") ||
+      CONTAINS(LCASE(STR(?label)), "classical logic")
+    )
+  }
+
+  OPTIONAL { ?s rdfs:comment ?comment FILTER(LANG(?comment) = "en") }
+  OPTIONAL { ?s dbo:abstract ?abstract FILTER(LANG(?abstract) = "en") }
+  OPTIONAL { ?s foaf:isPrimaryTopicOf ?page }
+
+  # Keep this broad but bounded: grab common descriptive relations.
+  VALUES ?p {
+    rdf:type
+    dct:subject
+    owl:sameAs
+    dbo:wikiPageExternalLink
+    dbo:wikiPageWikiLink
+  }
+
+  OPTIONAL { ?s ?p ?o }
+}
+LIMIT 1200
