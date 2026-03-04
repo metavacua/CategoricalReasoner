@@ -1,0 +1,26 @@
+# Purpose: Retrieve formal definitions of SDLC phases
+# SDLC Phase: Specification / Planning
+# Expected result structure: phaseName, sequenceOrder, gateCriteria, artifactTypes
+# Endpoint target: https://query.wikidata.org/sparql
+# Resource constraints: 30s timeout
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?phase ?phaseName ?sequenceOrder ?gateCriteria ?artifactTypes
+WHERE {
+  VALUES (?phase ?sequenceOrder) {
+    (wd:Q1122933 "1") # planning
+    (wd:Q1919421 "2") # software design
+    (wd:Q636141 "3")  # implementation
+    (wd:Q188953 "4")  # software testing
+    (wd:Q17054323 "5") # software deployment
+  }
+  ?phase rdfs:label ?phaseName .
+  FILTER(LANG(?phaseName) = "en")
+  
+  BIND("Validation against requirements" AS ?gateCriteria)
+  BIND("Documentation, Code" AS ?artifactTypes)
+}
+ORDER BY ?sequenceOrder

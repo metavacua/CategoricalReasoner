@@ -1,0 +1,16 @@
+# Purpose: Discover SPARQL endpoints from Wikidata registry
+# SDLC Phase: Discovery
+# Expected result structure: representativeQid, endpoint
+# Endpoint target: https://query.wikidata.org/sparql
+# Resource constraints: 30s timeout
+
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+SELECT (SAMPLE(?graph) AS ?representativeQid) ?endpoint
+WHERE {
+  ?graph wdt:P5305 ?endpoint .
+  FILTER (STRSTARTS(STR(?endpoint), "http") && 
+          !STRSTARTS(STR(?endpoint), "http://wikiba.se/ontology#") && 
+          !CONTAINS(STR(?endpoint), "/.well-known/genid/"))
+}
+GROUP BY ?endpoint
+ORDER BY ?endpoint
