@@ -1,7 +1,17 @@
+SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+
+SPDX-License-Identifier: CC-BY-SA-4.0
+
 # AGENTS.md - Structural Rules Part Directory
+
+## Formal Policy Framework
+ALL DOCUMENTATION POLICIES ARE FORMALLY DEFINED IN:
+- **[Formal Document Policy](../../formal-document-policy.html)** - Mathematical definitions, category-theoretic model
+- **[Implementation Guide](../../document-policy-implementation.html)** - Operational rules and validation
 
 ## Scope
 This directory contains the hierarchical structure for the Weakening (Part I) of the Structural Rules monograph.
+All content is classified as **Documentation** under the formal model.
 
 ## TeX Assembly Algorithm
 
@@ -135,9 +145,27 @@ Additional topics:
 - LFI and linear modalities involvement
 - Paola Zizzi's work on absence of weakening and no erasure
 
+## Classification
+- **Type:** Documentation (A_doc)
+- **License:** CC BY-SA v4.0 International
+- **Format:** LaTeX, Markdown, HTML (for web deployment)
+- **Copyrightable:** ⊤
+
+## Constraints
+- All files must include CC BY-SA v4.0 license headers
+- Documentation must be locally finite consistent
+- LaTeX must compile without errors
+- IDs must be globally unique following patterns: `sec-*`, `subsec-*`
+
 ## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+- LaTeX compilation (pdflatex)
+- License header completeness check
+- ID uniqueness verification
+- Cross-reference resolution check
 
 ## See Also
+- [Formal Document Policy](../../formal-document-policy.html) - Mathematical model
+- [Implementation Guide](../../document-policy-implementation.html) - Rules and procedures
+- [Root AGENTS.md](../../../AGENTS.md) - Repository-wide policies
 - `/docs/structural-rules/README.md` - Parent directory
 - `/docs/structural-rules/parts/part-weakening.tex` - Main part file

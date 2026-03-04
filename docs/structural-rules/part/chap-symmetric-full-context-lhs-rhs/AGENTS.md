@@ -1,7 +1,17 @@
+SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+
+SPDX-License-Identifier: CC-BY-SA-4.0
+
 # AGENTS.md - Symmetric Weakening with Full Context on LHS and RHS
+
+## Formal Policy Framework
+ALL DOCUMENTATION POLICIES ARE FORMALLY DEFINED IN:
+- **[Formal Document Policy](../../../formal-document-policy.html)** - Mathematical definitions, category-theoretic model
+- **[Implementation Guide](../../../document-policy-implementation.html)** - Operational rules and validation
 
 ## Scope
 This chapter covers symmetric weakening where both the left-hand side (antecedent) and right-hand side (succedent) contexts can be freely extended with arbitrary formulas. This is the classical (LK) presentation.
+All content is classified as **Documentation** under the formal model.
 
 ## Core Constraints
 - **IDs**: All IDs globally unique following patterns: `sec-*`, `subsec-*`.
@@ -39,9 +49,27 @@ The admission of Exchange, its explicit inclusion, its modalization, or its oper
 - Premises must be relevant to conclusions
 - No arbitrary formula introduction permitted
 
+## Classification
+- **Type:** Documentation (A_doc)
+- **License:** CC BY-SA v4.0 International
+- **Format:** LaTeX, Markdown, HTML (for web deployment)
+- **Copyrightable:** ⊤
+
+## Constraints
+- All files must include CC BY-SA v4.0 license headers
+- IDs globally unique following patterns: `sec-*`, `subsec-*`
+- Each section should be a page to a few pages of text minimum
+- Content must be locally finite consistent
+
 ## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+- LaTeX compilation (pdflatex)
+- License header completeness check
+- ID uniqueness verification
+- Thesis structure schema compliance
 
 ## See Also
+- [Formal Document Policy](../../../formal-document-policy.html) - Mathematical model
+- [Implementation Guide](../../../document-policy-implementation.html) - Rules and procedures
+- [Root AGENTS.md](../../../../AGENTS.md) - Repository-wide policies
 - `/docs/structural-rules/part/README.md` - Parent directory
 - `/docs/structural-rules/parts/part-weakening.tex` - Main part file
