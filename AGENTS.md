@@ -1,7 +1,21 @@
-TODO: Licensing REUSE header; CC BY-SA v4.0.
-
 # AGENTS.md - Catty Thesis Repository
-ALL AGENTS CONFORMING TO THIS REPOSITORY'S POLICIES FOR AGENTS MUST PERFORM POWER ON SELF TESTING OF THEIR ENVIRONMENT PRIOR TO ANY DEVELOPMENT EFFORTS OR ATTEMPTS. POWER ON SELF TESTING MEANS USING ANY AND ALL TERMINAL TOOLS TO DISCERN WHAT YOUR DEVELOPMENT ENVIRONMENT HAS IN THE WAY OF TOOLING AND OTHERWISE ORIENTING TO YOUR ENVIRONMENT; THIS FILE IS NOT FOR HUMANS. THE FOLLOWING RESTRICTIONS APPLY THE BEHAVIORS OF THE MACHINE AGENTS RATHER THAN ANY PARTICULAR TOOL OR HUMAN PR.
+Copyright (C) 2024 Ian Douglas Lawrence Norman McLean
+
+SPDX-License-Identifier: CC-BY-SA-4.0 OR AGPL-3.0-or-later
+
+This work is licensed under the Creative Commons Attribution-ShareAlike 4.0
+International License (CC BY-SA 4.0) and the GNU Affero General Public License
+v3.0 (AGPLv3). To view a copy of these licenses, visit:
+- CC BY-SA 4.0: https://creativecommons.org/licenses/by-sa/4.0/
+- AGPLv3: https://www.gnu.org/licenses/agpl-3.0.html
+
+ALL AGENTS CONFORMING TO THIS REPOSITORY'S POLICIES FOR AGENTS MUST PERFORM
+POWER ON SELF TESTING OF THEIR ENVIRONMENT PRIOR TO ANY DEVELOPMENT EFFORTS
+OR ATTEMPTS. POWER ON SELF TESTING MEANS USING ANY AND ALL TERMINAL TOOLS TO
+DISCERN WHAT YOUR DEVELOPMENT ENVIRONMENT HAS IN THE WAY OF TOOLING AND
+OTHERWISE ORIENTING TO YOUR ENVIRONMENT; THIS FILE IS NOT FOR HUMANS. THE
+FOLLOWING RESTRICTIONS APPLY THE BEHAVIORS OF THE MACHINE AGENTS RATHER THAN
+ANY PARTICULAR TOOL OR HUMAN PR.
 
 ## Documentation
 AGENTS.md is required to be in standard format with the exact filename; it is not an arbitrary file and must conform to the [AGENTS.md standards](https://github.com/agentmd/agent.md). Each directory and subdirectory can have an AGENTS.md, and the root for this repository should have an AGENTS.md.
@@ -53,6 +67,68 @@ Bagit
 - **Standard Tools**: Standard validation tools must always be used; critically, compilation processes for Java are considered restricted validators; minimization of DIY, roll your own, re-inventing the wheel, and non-standard implementations of validators is required.
 - **KeY Validation**: KeY is the correct technology for Java; the first major morphism to define is the transformation from semantic HTML web pages to Java and specifically Java records via Java documentation annotations that conform to KeY, Openllet, and Jena.
 - **Annotation Processing**: The automation of morphisms should leverage the Java Compiler API (javax.tools) and Annotation Processing (JSR 269). By treating Semantic HTML as the source of truth, the JDK can automate the construction of records where the proof terms are embedded during the compilation phase. The usage of abstract classes and interfaces as well as the canonical constructors for Java Records is expected to be a basic application of the technologies.
+
+## Mathematical Formalism: Canonical, Strongly Normalized, and Conventional Forms
+
+This section derives the formal consequences from the core constraints, establishing the mathematical basis for all data transformations within this repository.
+
+### Canonical Forms (Bijective Isomorphism)
+
+A representation is **metamathematically canonical** if, within a given formal system, there exists a unique, designated representation for every object in a set such that two objects are equal if and only if their canonical representations are identical.
+
+| Data Type | Canonical Form | Justification |
+| :---- | :---- | :---- |
+| **xsd:dateTimeStamp → Java OffsetDateTime** | Preserve timezone offset | xsd:dateTimeStamp requires offset by XSD 1.1 definition; bijective 1:1 mapping |
+| **SPARQL SELECT Results → Java Records** | Canonical constructor with proof terms | Records as frozen proof-objects; functorial mapping from KG to typed Category |
+| **RDF Literals → Immutable Value Types** | Preserve lexical form + datatype | Bijective isomorphism between RDF abstract syntax and Java value representation |
+
+### Strongly Normalized Forms (Church-Rosser Property)
+
+A system is **strongly normalizable** if every sequence of transformation steps terminates in a unique normal form.
+
+| Data Type | Normalization Strategy | Properties |
+| :---- | :---- | :---- |
+| **RFC 3987 IRIs** | Scheme/host lowercasing, percent-encoding case normalization | Confluent; Church-Rosser property holds |
+| **RDF Dataset Canonicalization** | RDFC 1.0 algorithm | Deterministic, unique canonical N-Quads output |
+| **LaTeX Source → Semantic HTML** | docstrip + semantic markup transformation | Weakly normalizable; information loss in visual rendering |
+
+### Conventional Forms (Protocol Compliance)
+
+When no formal normalization procedure exists, standards and conventions govern consistency.
+
+| Data Type | Convention | Justification |
+| :---- | :---- | :---- |
+| **xsd:anyURI** | Lexical validation per RFC 3986 | No universal equivalence algorithm |
+| **rdf:langString** | BCP 47 language tag validation | "en-US" ≠ "en" per W3C policy |
+| **Java Source Code** | Java Language Specification (JLS) | Canonical forms via Java Compiler API |
+
+### Subclassical Logic Considerations
+
+Per the **Presumption of Inconsistency** constraint:
+
+- **Light Linear Logic (LLL)**: Resource-aware transformations; canonical forms must respect linear decomposition
+- **Logics of Formal Inconsistency (LFI)**: Paraconsistent reasoning permitted; local finite consistency must be proven
+- **Logics of Formal Undeterminedness (LFU)**: Gaps in knowledge representation require explicit marking
+
+## Environment Status and Next Steps
+
+Based on the last power-on self test:
+
+### Available Tooling
+- Python3: Available at `/usr/bin/python3`
+- Git: Available at `/usr/bin/git`
+- Curl: Available at `/usr/bin/curl`
+
+### Missing Tooling (Blocking)
+- **Java 25 (OpenJDK)**: Required for Jena, Openllet, JavaPoet, JUnit, KeY
+- **Maven**: Required for build and dependency management
+
+### Immediate Next Steps (Priority Order)
+
+1. **Install Java 25 and Maven** - Without these, no code compilation or KeY validation is possible
+2. **Execute SPARQL Benchmarks** - Run queries against DBpedia and Wikidata endpoints to generate PROV-O records
+3. **Create docs/standards/ subdirectory** - Per Standards Collection constraint
+4. **Migrate dissertation LaTeX to Semantic HTML5** - Per Language Constraint
 
 ## See Also
 
