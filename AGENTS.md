@@ -14,10 +14,10 @@ This repository attempts to implement the Categorical Reasoner "Catty" thesis: c
 
 ## Core Constraints
 
-- **Presumption of Inconsistency**: The repository's present and past state is assumed to be corrupt, non-functional, partially implemented, or otherwise formally incorrect such that strict preservation of previous conflicting information will predictably preserve broken or incorrect behaviors. Local finite consistency must be proven, and global consistency requires the highest standards of proof with relative consistency proofs being the expected norm.
+- **Presumption of Inconsistency**: The repository's present and past state is assumed to be corrupt, non-functional, partially implemented, or otherwise formally incorrect such that strict preservation of previous conflicting information will predictably preserve broken or incorrect behaviors. Local finite consistency must be proven, and global consistency requires the highest standards of proof with relative consistency proofs being the expected norm. This shall conform to Light Linear Logic, Logics of Formal Inconsistency, and Logics of Formal Undeterminedness semantics for subclassical calculi and first order theories.
 - **Standards Collection**: The docs directory should have and collect relevant standards in a standards subdirectory for the repository and the development of its projects and derivatives; e.g. CCSDS 652.0-M-1, [RDFC 1.0](https://www.w3.org/TR/rdf-canon/), RFC 2119.
 - **Language Constraint**: W3C compliant HTML5 for documentation in the docs directory and Java (primary ecosystem for validation and transformation) for code with mathematically canonical forms prioritized; all agents are required to determine the list of special files allowable in the root based strictly on Github defined special files and special standard files for tooling such as pre-commit, AGENTS.md, CHANGELOG, Maven, and similar tooling; the primary restriction is that no arbitrary LLM generated files are permitted in the root. There is a strict separation between developer tooling and tools that should be committed to the repository; python scripts, bash scripts, curl calls, and similar can be used for development but should not be committed in general to the repository.
-- **License Constraint**: The repository shall conform to and utilize https://reuse.software/dev/ for the dual licensing based on the strict transformation of CC BY-SA v4 international media into AGPL v3 media.
+- **License Constraint**: The repository shall conform to and utilize https://reuse.software/dev/ for the dual licensing based on the strict transformation of CC BY-SA v4 international media into AGPL v3 media. The root license is creative commons BY-SA v4 international license; the CategoricalReasoner repository is the intellectual property of Ian Douglas Lawrence Norman McLean and classified as a schema.org Creative Work and specifically a Collection under that semantic ontology.
 - **Report Constraint**: Reports must be returned in semantic XHTML conformant to C14N or whatever format any tools use, and all documentation is to be contained in the docs directory with the sole exception being special files permitted for Github (e.g. README.md) and for specific tools like Maven.
 - **Citation Constraint**: The documentation system, citation system, and citations must conform to relevant academic and industrial standards for open science, open source, and international learned society practices; OAIS (ISO 14721:2025) and (ISO 16363:2025) are minimal required standards compliance.
 - **Technology Stack**: Core validation and transformation shall use Java 25 ecosystem (Jena, OpenLlet, JavaPoet, JUnit, KeY).
@@ -29,6 +29,24 @@ This repository attempts to implement the Categorical Reasoner "Catty" thesis: c
 
 ## Standards and Norms
 Maven projects with Java 25 open JDK including the full Java API documentation.
+
+## Workflows
+Semantic Versioning 2.0.0 (SemVer)
+Keep a Changelog 1.1.0
+Conventional Commits 1.0.0
+pre-commit framework
+RDFC 1.0 (RDF Dataset Canonicalization)
+REUSE Software Specification 3.0
+SLSA (Supply-chain Levels for Software Artifacts)
+CodeMeta
+Argument Ontology (ARGO)
+
+## Provenance (PROV-O) and Evidence Graph
+Implementation: Every time an agent runs a SPARQL query or a KeY validation or any non-no-op development activity, it must generate a PROV-O record. This record should link the Activity (The Query/Validation) to the Agent (The LLM) and the Entity (The Resulting Documentation/Code). Without this, the "academic quality" is unverifiable.
+
+## Research Object Crate
+Oxford Common File Layout
+Bagit
 
 ## Validation
 
