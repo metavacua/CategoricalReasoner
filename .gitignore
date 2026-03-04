@@ -21,9 +21,9 @@
 *.dvi
 *.ps
 
-# Pandoc / HTML outputs
-*.html
+# Pandoc / HTML outputs (generated)
 site/
+!docs/*.html
 
 # Python
 __pycache__/

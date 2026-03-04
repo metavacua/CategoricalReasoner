@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formal Document Policy: Categorical Reasoner Repository</title>
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <link rel="schema.doap" href="http://usefulinc.com/ns/doap#">
+    <meta name="dcterms.title" content="Formal Document Policy: Categorical Reasoner Repository">
+    <meta name="dcterms.creator" content="Ian Douglas Lawrence Norman McLean">
+    <meta name="dcterms.date" content="2025-03-04">
+    <meta name="dcterms.description" content="Formal model for copyrightable works, documentation, and special files with explicit licensing separation">
+    <meta name="dcterms.license" content="https://creativecommons.org/licenses/by-sa/4.0/">
+    <meta name="doap:name" content="CategoricalReasoner">
+    <meta name="doap:homepage" content="https://github.com/metavacua/CategoricalReasoner">
+    <meta name="doap:license" content="AGPL-3.0-or-later">
+</head>
+<body>
+    <header>
+        <h1>Formal Document Policy: Categorical Reasoner Repository</h1>
+        <p class="subtitle">Canonical Formal Model for Copyrightable Works, Documentation, and Special Files</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#abstract">Abstract</a></li>
+            <li><a href="#formal-definitions">Formal Definitions</a></li>
+            <li><a href="#copyrightable-works">Copyrightable Works Model</a></li>
+            <li><a href="#documentation-hierarchy">Documentation Hierarchy</a></li>
+            <li><a href="#special-files">Special Files Model</a></li>
+            <li><a href="#licensing-algebra">Licensing Algebra</a></li>
+            <li><a href="#inference-rules">Inference Rules</a></li>
+            <li><a href="#appendix">Appendix: Standards References</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="abstract">
+            <h2>Abstract</h2>
+            <p>
+                This document provides a formal, rigorous, and mathematically precise model for classifying
+                repository artifacts into copyrightable and non-copyrightable categories, with explicit
+                separation between works licensed under CC BY-SA v4.0 (documentation) and AGPL v3.0 (software).
+                The model is constructed using category-theoretic methods consistent with the repository's
+                foundational approach to subclassical sequent calculi.
+            </p>
+            <p>
+                <strong>Presumption of Inconsistency:</strong> As per repository policy, all classifications
+                must be locally provable and globally consistent. Ambiguity is treated as a formal refutation
+                requiring model revision.
+            </p>
+        </section>
+
+        <section id="formal-definitions">
+            <h2>1. Formal Definitions</h2>
+
+            <article>
+                <h3>1.1. The Repository as a Category</h3>
+                <div class="formal-definition">
+                    <p>
+                        Let <strong>Rep</strong> be the category whose objects are file system paths in the repository
+                        and whose morphisms are inclusion relations between directories.
+                    </p>
+                    <pre><code class="math">Ob(Rep) = {p | p is a valid path in the repository}</code></pre>
+                    <pre><code class="math">Hom(Rep)(p₁, p₂) = {⊆ | p₁ is a subdirectory of p₂}</code></pre>
+                    <p>
+                        The terminal object <strong>1</strong> ∈ Ob(Rep) is the root directory "/".
+                    </p>
+                </div>
+            </article>
+
+            <article>
+                <h3>1.2. The File Type Functor</h3>
+                <div class="formal-definition">
+                    <p>
+                        Let <strong>Type</strong>: Rep → Set be a functor mapping each file path to its type classification:
+                    </p>
+                    <pre><code class="math">Type: Rep → Set</code></pre>
+                    <pre><code class="math">Type(p) ∈ {Documentation, Software, Metadata, Special, NonCopyrightable}</code></pre>
+                </div>
+            </article>
+
+            <article>
+                <h3>1.3. The Copyrightability Predicate</h3>
+                <div class="formal-definition">
+                    <p>
+                        Let <strong>Copyable</strong>: Rep → {⊤, ⊥} be a predicate indicating copyrightability under
+                        international copyright law (Berne Convention, WIPO Copyright Treaty).
+                    </p>
+                    <pre><code class="math">Copyable(p) = ⊤  ⇔  p is subject to copyright protection</code></pre>
+                    <p>
+                        <strong>Non-copyrightable works</strong> (as established by judicial precedent in multiple jurisdictions):
+                    </p>
+                    <ul>
+                        <li>Purely functional code lacking creative expression (threshold of originality)</li>
+                        <li>Standardized file formats and protocols (RFCs, ISO standards text)</li>
+                        <li>Automatically generated boilerplate (within established limits)</li>
+                        <li>Mere facts and data compilations without creative selection/arrangement</li>
+                        <li>Copyrighted text when reproduced verbatim in licenses or attribution notices</li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+
+        <section id="copyrightable-works">
+            <h2>2. Copyrightable Works Model</h2>
+
+            <article>
+                <h3>2.1. Classification Schema</h3>
+                <div class="formal-definition">
+                    <p>
+                        The repository artifact space is partitioned as follows:
+                    </p>
+                    <pre><code class="math">Artifacts = A_doc ∪ A_soft ∪ A_meta ∪ A_spec ∪ A_nc</code></pre>
+                    <p>where all sets are pairwise disjoint:</p>
+                    <pre><code class="math">∀i,j ∈ {doc,soft,meta,spec,nc}, i≠j: A_i ∩ A_j = ∅</code></pre>
+                </div>
+
+                <table class="classification">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Set</th>
+                            <th>License</th>
+                            <th>Copyrightable</th>
+                            <th>Examples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Documentation</strong></td>
+                            <td>A_doc</td>
+                            <td>CC BY-SA v4.0</td>
+                            <td>⊤</td>
+                            <td>Thesis text, explanatory HTML, research prose</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Software</strong></td>
+                            <td>A_soft</td>
+                            <td>AGPL v3.0</td>
+                            <td>⊤</td>
+                            <td>Java source, compiled classes, scripts</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Metadata</strong></td>
+                            <td>A_meta</td>
+                            <td>CC BY-SA v4.0</td>
+                            <td>⊤</td>
+                            <td>Citation metadata, PROV-O records</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Special Files</strong></td>
+                            <td>A_spec</td>
+                            <td>Varies by tool</td>
+                            <td>⊤</td>
+                            <td>README.md, LICENSE, pom.xml</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Non-Copyrightable</strong></td>
+                            <td>A_nc</td>
+                            <td>N/A</td>
+                            <td>⊥</td>
+                            <td>License texts, RFC reproductions</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+
+            <article>
+                <h3>2.2. The Documentation Predicate</h3>
+                <div class="formal-definition">
+                    <p>
+                        A file <em>f</em> is classified as <strong>Documentation</strong> iff:
+                    </p>
+                    <pre><code class="math">Documentation(f) ⇔ (Location(f) = docs/*) ∧ (Format(f) ∈ {HTML, XHTML, MD}) ∧ (Purpose(f) = Exposition)</code></pre>
+                    <p>where <strong>Purpose</strong> is derived from the intent of the file:</p>
+                    <ul>
+                        <li><em>Exposition:</em> Explains theory, methodology, or design decisions</li>
+                        <li><em>Specification:</em> Defines formal properties, invariants, or contracts</li>
+                        <li><em>Instruction:</em> Provides usage guidance or operational procedures</li>
+                    </ul>
+                </div>
+                <aside class="note">
+                    <strong>Crucial Distinction:</strong> Documentation in the <code>docs/</code> directory is the <em>source of truth</em>
+                    for CC BY-SA v4.0 licensed works. Generated artifacts derived from these works (e.g., compiled Java
+                    records via annotation processing) inherit their license from the derivation rules, not the source.
+                </aside>
+            </article>
+
+            <article>
+                <h3>2.3. The Software Predicate</h3>
+                <div class="formal-definition">
+                    <p>
+                        A file <em>f</em> is classified as <strong>Software</strong> iff:
+                    </p>
+                    <pre><code class="math">Software(f) ⇔ (Location(f) = src/*) ∧ (Format(f) ∈ {Java, JAR, Class})</code></pre>
+                    <p>
+                        The <code>src/</code> directory constitutes the software implementation, which under the REUSE
+                        specification and repository policy, is licensed under AGPL v3.0.
+                    </p>
+                </div>
+            </article>
+        </section>
+
+        <section id="documentation-hierarchy">
+            <h2>3. Documentation Hierarchy</h2>
+
+            <article>
+                <h3>3.1. Canonical Documentation Structure</h3>
+                <div class="formal-definition">
+                    <p>
+                        The documentation tree <strong>T_doc</strong> is a rooted tree with structure:
+                    </p>
+                    <pre><code class="math">T_doc = (V, E)</code></pre>
+                    <pre><code class="math">V = {d ∈ paths | d starts with docs/}</code></pre>
+                    <pre><code class="math">E = {(d₁, d₂) | d₂ is immediate child of d₁ in filesystem}</code></pre>
+                    <p>
+                        Each node <em>d</em> ∈ V must contain exactly one <code>AGENTS.md</code> (policy) and optionally
+                        one <code>README.md</code> (exposition).
+                    </p>
+                </div>
+            </article>
+
+            <article>
+                <h3>3.2. Documentation Inclusion Principle</h3>
+                <div class="formal-principle">
+                    <p><strong>Principle:</strong> With the sole exception of GitHub special files, ALL documentation
+                    must reside under the <code>docs/</code> directory.</p>
+                    <pre><code class="math">∀f ∈ A_doc: (f ∉ Special_GitHub) → Location(f) = docs/*</code></pre>
+                    <p>This principle ensures a clean separation between user-facing documentation and
+                    implementation artifacts.</p>
+                </div>
+            </article>
+
+            <article>
+                <h3>3.3. AGENTS.md vs README.md</h3>
+                <div class="formal-definition">
+                    <p>
+                        The two standard documentation files have distinct purposes:
+                    </p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>AGENTS.md</th>
+                                <th>README.md</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Target Audience</strong></td>
+                                <td>Machine Agents (LLMs)</td>
+                                <td>Humans</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Purpose</strong></td>
+                                <td>Policy, constraints, procedures</td>
+                                <td>Exposition, context, motivation</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Format</strong></td>
+                                <td>Strict, structured, machine-parseable</td>
+                                <td>Narrative, explanatory, flexible</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Required</strong></td>
+                                <td>⊤ (every directory)</td>
+                                <td>⊥ (optional)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>License</strong></td>
+                                <td>CC BY-SA v4.0 (in docs/)</td>
+                                <td>CC BY-SA v4.0 (in docs/) or AGPL v3.0 (in src/)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+
+        <section id="special-files">
+            <h2>4. Special Files Model</h2>
+
+            <article>
+                <h3>4.1. Definition of "Special Files"</h3>
+                <div class="formal-definition">
+                    <p>
+                        <strong>Special Files</strong> are files with semantic meaning to GitHub, build tools, or
+                        licensing frameworks that must reside in specific locations to function correctly.
+                    </p>
+                    <pre><code class="math">Special(f) ⇔ (f ∈ GitHub_Special ∪ Tooling_Special ∪ REUSE_Special)</code></pre>
+                </div>
+
+                <h4>4.1.1. GitHub Special Files</h4>
+                <p>Files that GitHub recognizes and renders specially:</p>
+                <ul>
+                    <li><code>README.md</code> — Repository landing page (root only, exempt from docs/ rule)</li>
+                    <li><code>LICENSE</code> — License display and SPDX detection (root required)</li>
+                    <li><code>CONTRIBUTING.md</code> — PR contribution guidance</li>
+                    <li><code>CHANGELOG.md</code> — Version history (SemVer compliance)</li>
+                    <li><code>CODE_OF_CONDUCT.md</code> — Community standards</li>
+                    <li><code>AUTHORS.md</code> — Contributor attribution</li>
+                    <li><code>AGENTS.md</code> — Agent policies (repository-specific special file)</li>
+                    <li><code>.gitignore</code> — Git exclusion patterns (version control metadata)</li>
+                </ul>
+
+                <h4>4.1.2. Tooling Special Files</h4>
+                <p>Files required by build systems, frameworks, or development tools:</p>
+                <ul>
+                    <li><code>pom.xml</code> — Maven project descriptor (AGPL v3.0)</li>
+                    <li><code>build.gradle</code> / <code>build.gradle.kts</code> — Gradle build scripts (AGPL v3.0)</li>
+                    <li><code>.pre-commit-config.yaml</code> — Pre-commit framework configuration (tool metadata)</li>
+                    <li><code>codemeta.json</code> — CodeMeta citation metadata (CC BY-SA v4.0)</li>
+                </ul>
+
+                <h4>4.1.3. REUSE Specification Special Files</h4>
+                <p>Files required for REUSE.software compliance:</p>
+                <ul>
+                    <li><code>.reuse/dep5</code> — Debian copyright format file (license metadata)</li>
+                    <li>REUSE compliant headers in all copyrightable files (license metadata)</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>4.2. The Special File Location Theorem</h3>
+                <div class="theorem">
+                    <p><strong>Theorem:</strong> Special files may exist at root level <strong>iff</strong> required by the
+                    tooling system or GitHub platform, notwithstanding the documentation inclusion principle.</p>
+                    <pre><code class="math">∀f ∈ Special: (RequiredAtRoot(f)) → (Location(f) = /)</code></pre>
+                    <p><strong>Proof:</strong> By definition of special files as platform/tool requirements. ∎</p>
+                </div>
+            </article>
+
+            <article>
+                <h3>4.3. LLM-Generated Files Constraint</h3>
+                <div class="constraint">
+                    <p><strong>Constraint:</strong> No arbitrary LLM-generated files are permitted in the repository root.</p>
+                    <p><strong>Formal Statement:</strong></p>
+                    <pre><code class="math">∀f ∈ A_doc: (Location(f) = /) → (f ∈ Special_GitHub ∪ f ∈ Special_Tooling)</code></pre>
+                    <p><strong>Rationale:</strong> Prevents repository pollution by unstructured, non-canonical AI outputs.
+                    All LLM-generated documentation must be curated into <code>docs/</code> with proper validation.</p>
+                </div>
+            </article>
+        </section>
+
+        <section id="licensing-algebra">
+            <h2>5. Licensing Algebra</h2>
+
+            <article>
+                <h3>5.1. The License Functor</h3>
+                <div class="formal-definition">
+                    <p>
+                        Let <strong>Lic</strong>: Artifacts → Licenses be a functor assigning licenses to artifacts:
+                    </p>
+                    <pre><code class="math">Lic: A_doc ∪ A_soft ∪ A_meta ∪ A_spec ∪ A_nc → {CC_BY_SA_4, AGPL_3, NONE}</code></pre>
+                </div>
+            </article>
+
+            <article>
+                <h3>5.2. License Assignment Rules</h3>
+                <div class="formal-rules">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Rule</th>
+                                <th>Condition</th>
+                                <th>License Assignment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>DR-1</strong></td>
+                                <td>f ∈ A_doc</td>
+                                <td>Lic(f) = CC_BY_SA_4</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DR-2</strong></td>
+                                <td>f ∈ A_soft</td>
+                                <td>Lic(f) = AGPL_3</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DR-3</strong></td>
+                                <td>f ∈ A_meta</td>
+                                <td>Lic(f) = CC_BY_SA_4 (metadata inherits from documentation)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DR-4</strong></td>
+                                <td>f = LICENSE</td>
+                                <td>Lic(f) = NONE (license text is non-copyrightable)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DR-5</strong></td>
+                                <td>f = README.md (root)</td>
+                                <td>Lic(f) = AGPL_3 (special case: repository metadata)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DR-6</strong></td>
+                                <td>f ∈ AGENTS.md</td>
+                                <td>Lic(f) = CC_BY_SA_4 (documentation policies)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>DR-7</strong></td>
+                                <td>f ∈ REUSE_Headers</td>
+                                <td>Lic(f) = parent license (inherited)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+
+            <article>
+                <h3>5.3. The Dual Licensing Model</h3>
+                <div class="formal-definition">
+                    <p>
+                        The repository implements a transformation functor <strong>T</strong> that maps CC BY-SA v4.0
+                        documentation to AGPL v3.0 software:
+                    </p>
+                    <pre><code class="math">T: A_doc → A_soft</code></pre>
+                    <pre><code class="math">∀f ∈ A_doc: (T(f) ∈ A_soft) ∧ (Lic(T(f)) = AGPL_3)</code></pre>
+                    <p>
+                        <strong>Example:</strong> Semantic HTML documentation in <code>docs/</code> describing Java Records
+                        is transformed via annotation processing into AGPL v3.0 licensed Java source code in <code>src/</code>.
+                    </p>
+                    <aside class="note">
+                        <strong>Important:</strong> This transformation is consistent with the REUSE specification's
+                        allowance for dual licensing through explicit documentation of the transformation relationship.
+                    </aside>
+                </div>
+            </article>
+        </section>
+
+        <section id="inference-rules">
+            <h2>6. Inference Rules</h2>
+
+            <article>
+                <h3>6.1. Classification Inference System</h3>
+                <div class="inference-system">
+                    <p>The following inference rules determine artifact classification:</p>
+
+                    <h4>Rule C1: Documentation Classification</h4>
+                    <pre><code class="math">Location(f) = docs/*    Format(f) ∈ {HTML, XHTML, MD}
+—————————————————————————————————————————————————————————
+                  Documentation(f)</code></pre>
+
+                    <h4>Rule C2: Software Classification</h4>
+                    <pre><code class="math">Location(f) = src/*    Format(f) ∈ {Java, JAR, Class}
+——————————————————————————————————————————————————————
+                  Software(f)</code></pre>
+
+                    <h4>Rule C3: Special File Exemption</h4>
+                    <pre><code class="math">f ∈ Special_GitHub    Location(f) = /
+—————————————————————————————————————————————
+   ValidLocation(f)  (exempt from docs/ rule)</code></pre>
+
+                    <h4>Rule C4: LLM Generated File Rejection</h4>
+                    <pre><code class="math">Documentation(f)    Location(f) = /    f ∉ Special_GitHub
+——————————————————————————————————————————————————————————————
+                     ⊥  (contradiction, reject)</code></pre>
+                </div>
+            </article>
+
+            <article>
+                <h3>6.2. Consistency Checking</h3>
+                <div class="formal-method">
+                    <p>
+                        For any artifact <em>f</em>, the following consistency checks must hold:
+                    </p>
+                    <pre><code class="math">Consistent(f) ⇔ (Copyable(f) → Lic(f) ≠ NONE)</code></pre>
+                    <pre><code class="math">Consistent(f) ⇔ (¬Copyable(f) → Lic(f) = NONE)</code></pre>
+                    <p>
+                        These checks ensure that copyrightable works have licenses and non-copyrightable
+                        works do not claim copyright protection.
+                    </p>
+                </div>
+            </article>
+        </section>
+
+        <section id="appendix">
+            <h2>Appendix: Standards References</h2>
+
+            <article>
+                <h3>A.1. Copyright Law References</h3>
+                <ul>
+                    <li>Berne Convention for the Protection of Literary and Artistic Works (1886, as amended)</li>
+                    <li>WIPO Copyright Treaty (WCT) (1996)</li>
+                    <li>Feist Publications, Inc., v. Rural Telephone Service Co. (1991) — U.S. threshold of originality</li>
+                    <li>Computer Associates v. Altai (1992) — Abstraction-Filtration-Comparison test for software</li>
+                    <li>EU Database Directive (96/9/EC) — Sui generis database rights vs copyright</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>A.2. Software Licensing Standards</h3>
+                <ul>
+                    <li>Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)</li>
+                    <li>GNU Affero General Public License v3.0 (AGPL-3.0)</li>
+                    <li>Software Package Data Exchange (SPDX) License List</li>
+                    <li>REUSE Software Specification v3.0 (https://reuse.software/)</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>A.3. Technical Standards</h3>
+                <ul>
+                    <li>RFC 2119 — Key words for use in RFCs to Indicate Requirement Levels</li>
+                    <li>ISO/IEC 24707:2018 — Common Logic (CL): A Framework for a Family of Logic-Based Languages</li>
+                    <li>ISO/IEC 17347:2013 — DOL: Distributed Ontology, Model and Specification Language</li>
+                    <li>W3C RDF 1.1 Concepts and Abstract Syntax</li>
+                    <li>W3C RDF Dataset Canonicalization (RDFC 1.0)</li>
+                    <li>PROV-O: The PROV Ontology</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>A.4. Repository Standards</h3>
+                <ul>
+                    <li>AGENTS.md Standard (https://github.com/agentmd/agent.md)</li>
+                    <li>Semantic Versioning 2.0.0 (SemVer)</li>
+                    <li>Keep a Changelog 1.1.0</li>
+                    <li>Conventional Commits 1.0.0</li>
+                    <li>SLSA (Supply-chain Levels for Software Artifacts)</li>
+                    <li>Oxford Common File Layout (OCFL)</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>A.5. Academic and Archival Standards</h3>
+                <ul>
+                    <li>OAIS (ISO 14721:2025) — Open Archival Information System</li>
+                    <li>ISO 16363:2025 — Audit and Certification of Trustworthy Digital Repositories</li>
+                    <li>Bagit Specification — Packaging for digital preservation</li>
+                    <li>Research Object Crate — Packaging research outputs</li>
+                    <li>Crossref — DOI registration and metadata</li>
+                </ul>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            <strong>Document Classification:</strong> Documentation (A_doc)<br>
+            <strong>License:</strong> CC BY-SA 4.0 International<br>
+            <strong>Copyright:</strong> © 2025 Ian Douglas Lawrence Norman McLean<br>
+            <strong>Repository:</strong> <a href="https://github.com/metavacua/CategoricalReasoner">https://github.com/metavacua/CategoricalReasoner</a>
+        </p>
+        <p class="metadata">
+            <span class="schema-type">schema:CreativeWork</span> ·
+            <span class="schema-type">schema:Thesis</span> ·
+            <span class="doap">doap:Project</span>
+        </p>
+    </footer>
+
+    <style>
+        body {
+            font-family: 'TeX Gyre Pagella', 'Linux Libertine', 'Georgia', serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+            background: #fff;
+            color: #222;
+        }
+
+        header {
+            border-bottom: 2px solid #333;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: #000;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 0.5rem;
+            color: #333;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 1.8rem;
+            color: #444;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            color: #555;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        nav {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav li {
+            display: inline-block;
+            margin-right: 1.5rem;
+        }
+
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .formal-definition, .formal-principle, .formal-rules, .constraint, .theorem {
+            background: #fafafa;
+            border-left: 4px solid #0066cc;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'TeX Gyre Cursor', 'Linux Libertine Mono', 'Courier New', monospace;
+        }
+
+        .theorem {
+            border-left-color: #006633;
+        }
+
+        .constraint {
+            border-left-color: #cc3300;
+        }
+
+        pre {
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: 'TeX Gyre Cursor', 'Linux Libertine Mono', 'Courier New', monospace;
+            background: #f0f0f0;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .math {
+            font-family: 'Computer Modern', 'Latin Modern Math', serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .classification {
+            font-size: 0.9rem;
+        }
+
+        .classification tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        aside.note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .inference-system pre {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #333;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        footer a {
+            color: #0066cc;
+        }
+
+        .metadata {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        article {
+            margin-bottom: 2rem;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</body>
+</html>

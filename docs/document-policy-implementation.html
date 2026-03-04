@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Policy Implementation Guide</title>
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <link rel="schema.doap" href="http://usefulinc.com/ns/doap#">
+    <meta name="dcterms.title" content="Document Policy Implementation Guide">
+    <meta name="dcterms.creator" content="Ian Douglas Lawrence Norman McLean">
+    <meta name="dcterms.date" content="2025-03-04">
+    <meta name="dcterms.description" content="Implementation guidance for the formal document policy">
+    <meta name="dcterms.license" content="https://creativecommons.org/licenses/by-sa/4.0/">
+    <meta name="doap:name" content="CategoricalReasoner">
+</head>
+<body>
+    <header>
+        <h1>Document Policy Implementation Guide</h1>
+        <p class="subtitle">Operational Rules and Validation Procedures</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#purpose">Purpose</a></li>
+            <li><a href="#directory-structure">Directory Structure</a></li>
+            <li><a href="#file-placement-rules">File Placement Rules</a></li>
+            <li><a href="#license-headers">License Header Requirements</a></li>
+            <li><a href="#validation">Validation Procedures</a></li>
+            <li><a href="#examples">Examples</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="purpose">
+            <h2>Purpose</h2>
+            <p>
+                This document provides operational implementation guidance for the formal model defined in
+                <a href="formal-document-policy.html">Formal Document Policy: Categorical Reasoner Repository</a>.
+                It translates the mathematical definitions into actionable rules for contributors and automated tools.
+            </p>
+            <div class="warning">
+                <strong>Warning:</strong> Violations of these rules constitute formal inconsistencies that must be
+                resolved before commits are accepted.
+            </div>
+        </section>
+
+        <section id="directory-structure">
+            <h2>1. Repository Directory Structure</h2>
+
+            <pre class="tree">CategoricalReasoner/
+├── AGENTS.md                    # Special: Repository policy for machine agents
+├── README.md                    # Special: Repository landing page
+├── LICENSE                      # Special: License text (AGPL v3.0)
+├── CONTRIBUTING.md              # Special: Contribution guidelines
+├── CHANGELOG.md                 # Special: Version history (Keep a Changelog)
+├── .gitignore                   # Special: Git exclusion patterns
+├── pom.xml                      # Special: Maven build descriptor (if applicable)
+├── .reuse/                      # Special: REUSE specification compliance
+│   └── dep5                     #        Debian copyright format
+│
+├── docs/                        # DOCUMENTATION ROOT (CC BY-SA v4.0)
+│   ├── AGENTS.md               # Documentation directory policy
+│   ├── formal-document-policy.html
+│   ├── document-policy-implementation.html
+│   │
+│   ├── standards/              # Collected standards and specifications
+│   │   ├── README.md
+│   │   ├── RFC-2119.md
+│   │   ├── RDFC-1.0.md
+│   │   └── ...
+│   │
+│   ├── dissertation/           # Thesis materials
+│   │   ├── AGENTS.md
+│   │   ├── README.md
+│   │   └── ...                 # Chapter and section content
+│   │
+│   └── structural-rules/        # Sequent calculus documentation
+│       ├── AGENTS.md
+│       ├── README.md
+│       ├── part/
+│       │   ├── AGENTS.md
+│       │   ├── README.md
+│       │   ├── chap-asymmetric-full-context-lhs-single-succedent/
+│       │   │   ├── AGENTS.md
+│       │   │   ├── README.md
+│       │   │   └── sec-*/
+│       │   ├── chap-asymmetric-single-antecedent-full-context-rhs/
+│       │   └── chap-symmetric-full-context-lhs-rhs/
+│       └── ...
+│
+└── src/                         # SOFTWARE ROOT (AGPL v3.0)
+    ├── AGENTS.md               # Source directory policy
+    ├── benchmarks/
+    │   ├── AGENTS.md
+    │   ├── README.md
+    │   └── queries/
+    ├── scripts/
+    │   ├── AGENTS.md
+    │   └── README.md
+    └── tests/
+        ├── AGENTS.md
+        └── README.md</pre>
+        </section>
+
+        <section id="file-placement-rules">
+            <h2>2. File Placement Rules</h2>
+
+            <article>
+                <h3>2.1. The Golden Rule</h3>
+                <div class="rule golden">
+                    <strong>Golden Rule:</strong> With the sole exception of GitHub special files, ALL documentation
+                    must reside in the <code>docs/</code> directory.
+                </div>
+                <pre><code class="pseudocode">FOR EACH file f:
+    IF f IS documentation AND f IS NOT special:
+        ASSERT Location(f) STARTS WITH "docs/"
+    ELSE IF f IS documentation AND f IS special:
+        ASSERT Location(f) == "/" (root)
+    ELSE IF f IS software:
+        ASSERT Location(f) STARTS WITH "src/"
+    END IF
+END FOR</code></pre>
+            </article>
+
+            <article>
+                <h3>2.2. Documentation Placement</h3>
+                <div class="rule">
+                    <strong>Rule D-1:</strong> Explanatory prose, thesis text, and research exposition must be placed
+                    in <code>docs/</code>.
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Content Type</th>
+                            <th>Correct Location</th>
+                            <th>Incorrect Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Thesis chapters</td>
+                            <td><code>docs/dissertation/</code></td>
+                            <td><code>/thesis.md</code></td>
+                        </tr>
+                        <tr>
+                            <td>Mathematical definitions</td>
+                            <td><code>docs/structural-rules/</code></td>
+                            <td><code>/math-defs.md</code></td>
+                        </tr>
+                        <tr>
+                            <td>Standards reproductions</td>
+                            <td><code>docs/standards/</code></td>
+                            <td><code>/standards.md</code></td>
+                        </tr>
+                        <tr>
+                            <td>API documentation</td>
+                            <td><code>docs/api/</code></td>
+                            <td><code>/api.md</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+
+            <article>
+                <h3>2.3. Software Placement</h3>
+                <div class="rule">
+                    <strong>Rule S-1:</strong> All executable code, source files, and programmatic artifacts must be
+                    placed in <code>src/</code>.
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Content Type</th>
+                            <th>Correct Location</th>
+                            <th>Incorrect Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Java source files</td>
+                            <td><code>src/main/java/</code></td>
+                            <td><code>/MyClass.java</code></td>
+                        </tr>
+                        <tr>
+                            <td>Unit tests</td>
+                            <td><code>src/tests/</code></td>
+                            <td><code>/tests/</code></td>
+                        </tr>
+                        <tr>
+                            <td>Benchmark queries</td>
+                            <td><code>src/benchmarks/queries/</code></td>
+                            <td><code>/queries/</code></td>
+                        </tr>
+                        <tr>
+                            <td>Build scripts</td>
+                            <td><code>src/scripts/</code></td>
+                            <td><code>/build.sh</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+
+            <article>
+                <h3>2.4. Special Files Placement</h3>
+                <div class="rule">
+                    <strong>Rule SP-1:</strong> GitHub special files and tooling configuration files may exist at the
+                    repository root.
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Required Location</th>
+                            <th>Justification</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>README.md</td>
+                            <td>Root</td>
+                            <td>GitHub renders this on repository page</td>
+                        </tr>
+                        <tr>
+                            <td>LICENSE</td>
+                            <td>Root</td>
+                            <td>GitHub displays license badge</td>
+                        </tr>
+                        <tr>
+                            <td>AGENTS.md</td>
+                            <td>Root + each directory</td>
+                            <td>Repository-specific special file</td>
+                        </tr>
+                        <tr>
+                            <td>.gitignore</td>
+                            <td>Root</td>
+                            <td>Git configuration requires root placement</td>
+                        </tr>
+                        <tr>
+                            <td>pom.xml</td>
+                            <td>Root</td>
+                            <td>Maven requires project descriptor at root</td>
+                        </tr>
+                        <tr>
+                            <td>.reuse/dep5</td>
+                            <td>Root .reuse/ subdirectory</td>
+                            <td>REUSE specification requirement</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+
+            <article>
+                <h3>2.5. LLM-Generated Content</h3>
+                <div class="rule critical">
+                    <strong>Rule LLM-1:</strong> No arbitrary LLM-generated files are permitted in the repository root.
+                </div>
+                <p>All AI-generated documentation must be:</p>
+                <ol>
+                    <li>Curated and validated by a human</li>
+                    <li>Placed in the appropriate subdirectory under <code>docs/</code> or <code>src/</code></li>
+                    <l>Reviewed for compliance with the formal model</li>
+                    <li>Tagged with appropriate metadata (PROV-O records)</li>
+                </ol>
+                <div class="example bad">
+                    <strong>Bad:</strong> Committing <code>/ai-generated-analysis.md</code> to root
+                </div>
+                <div class="example good">
+                    <strong>Good:</strong> Committing <code>docs/dissertation/chapter4-analysis.html</code> with proper semantic markup
+                </div>
+            </article>
+        </section>
+
+        <section id="license-headers">
+            <h2>3. License Header Requirements</h2>
+
+            <article>
+                <h3>3.1. REUSE Specification Compliance</h3>
+                <p>
+                    All copyrightable files must include REUSE-compliant license headers as per
+                    <a href="https://reuse.software/">REUSE Software Specification v3.0</a>.
+                </p>
+            </article>
+
+            <article>
+                <h3>3.2. CC BY-SA v4.0 Header Pattern (Documentation)</h3>
+                <pre><code class="header">SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+
+SPDX-License-Identifier: CC-BY-SA-4.0</code></pre>
+                <p>
+                    This header applies to all files in the <code>docs/</code> directory, including:
+                </p>
+                <ul>
+                    <li>HTML/XHTML documentation files</li>
+                    <li>Markdown exposition files (README.md in docs/)</li>
+                    <li>AGENTS.md policy files</li>
+                    <li>Standards reproductions (where applicable)</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>3.3. AGPL v3.0 Header Pattern (Software)</h3>
+                <pre><code class="header">SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+
+SPDX-License-Identifier: AGPL-3.0-or-later</code></pre>
+                <p>
+                    This header applies to all files in the <code>src/</code> directory, including:
+                </p>
+                <ul>
+                    <li>Java source files</li>
+                    <li>Build scripts</li>
+                    <li>Test files</li>
+                    <li>Benchmark code</li>
+                    <li>AGENTS.md files in src/ (which describe software policies)</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>3.4. Non-Copyrightable Files</h3>
+                <p>
+                    The following files are explicitly non-copyrightable and must NOT include license headers:
+                </p>
+                <ul>
+                    <li>LICENSE file (contains license text)</li>
+                    <li>Verbatim reproductions of public domain works</li>
+                    <li>Factual data compilations without creative arrangement</li>
+                </ul>
+            </article>
+
+            <article>
+                <h3>3.5. License Header Placement</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>File Type</th>
+                            <th>Header Location</th>
+                            <th>Format</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Java</td>
+                            <td>Top of file, after package statement</td>
+                            <td><code>/* ... */</code> block comment</td>
+                        </tr>
+                        <tr>
+                            <td>HTML</td>
+                            <td>In <code>&lt;head&gt;</code> as <code>&lt;meta&gt;</code> tags</td>
+                            <td>SPDX metadata</td>
+                        </tr>
+                        <tr>
+                            <td>Markdown</td>
+                            <td>Top of file</td>
+                            <td>Comment-style with SPDX prefix</td>
+                        </tr>
+                        <tr>
+                            <td>Shell/Bash</td>
+                            <td>Shebang line</td>
+                            <td>Inline comment with SPDX prefix</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+
+        <section id="validation">
+            <h2>4. Validation Procedures</h2>
+
+            <article>
+                <h3>4.1. Automated Validation</h3>
+                <p>
+                    The following automated checks must be configured as pre-commit hooks and CI/CD gates:
+                </p>
+                <div class="validation-list">
+                    <h4>V-1: REUSE Compliance Check</h4>
+                    <pre><code class="bash">$ reuse lint
+# Must return exit code 0</code></pre>
+
+                    <h4>V-2: File Placement Check</h4>
+                    <pre><code class="bash">$ ./scripts/validate-file-placement.sh
+# Must reject LLM-generated files in root
+# Must enforce docs/ for documentation
+# Must enforce src/ for software</code></pre>
+
+                    <h4>V-3: AGENTS.md Consistency Check</h4>
+                    <pre><code class="bash">$ ./scripts/validate-agents-md.sh
+# Must verify AGENTS.md exists in each directory
+# Must verify compliance with AGENTS.md standard</code></pre>
+
+                    <h4>V-4: License Consistency Check</h4>
+                    <pre><code class="bash">$ ./scripts/validate-licenses.sh
+# Must verify docs/ files have CC-BY-SA-4.0
+# Must verify src/ files have AGPL-3.0-or-later
+# Must verify root special files have appropriate licenses</code></pre>
+                </div>
+            </article>
+
+            <article>
+                <h3>4.2. Manual Validation</h3>
+                <p>
+                    Before committing, contributors must manually verify:
+                </p>
+                <ol>
+                    <li>All documentation is placed under <code>docs/</code> (unless it's a GitHub special file)</li>
+                    <li>All software code is placed under <code>src/</code></li>
+                    <li>LLM-generated content is not arbitrarily placed at repository root</li>
+                    <li>Appropriate license headers are present on all copyrightable files</li>
+                    <li>AGENTS.md files are present and up-to-date in modified directories</li>
+                </ol>
+            </article>
+
+            <article>
+                <h3>4.3. Disambiguation Procedure</h3>
+                <p>
+                    When a file's classification is ambiguous:
+                </p>
+                <div class="procedure">
+                    <ol>
+                        <li><strong>Check Format:</strong> Is it code or prose?</li>
+                        <li><strong>Check Purpose:</strong> Is it explanatory or executable?</li>
+                        <li><strong>Check Intent:</strong> Was it generated as documentation or software?</li>
+                        <li><strong>Apply Heuristics:</strong>
+                            <ul>
+                                <li>If primarily human-readable exposition → <code>docs/</code></li>
+                                <li>If primarily machine-executable → <code>src/</code></li>
+                                <li>If metadata about documentation → <code>docs/</code></li>
+                                <li>If metadata about software → <code>src/</code></li>
+                            </ul>
+                        </li>
+                        <li><strong>Document Decision:</strong> Add comment or AGENTS.md entry explaining rationale</li>
+                    </ol>
+                </div>
+            </article>
+        </section>
+
+        <section id="examples">
+            <h2>5. Examples</h2>
+
+            <article>
+                <h3>5.1. Documentation Example</h3>
+                <div class="example">
+                    <h4>File: <code>docs/dissertation/README.md</code></h4>
+                    <pre><code>SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+
+SPDX-License-Identifier: CC-BY-SA-4.0
+
+# Dissertation Documentation
+
+This directory contains the doctoral dissertation materials for the
+Categorical Reasoner thesis. All files are licensed under CC BY-SA v4.0.
+
+## Structure
+
+- Chapter materials are organized by subdirectory
+- Each section has its own README.md for exposition
+- AGENTS.md files provide machine-readable policies for each section
+
+See also: [Formal Document Policy](../formal-document-policy.html)</code></pre>
+                </div>
+            </article>
+
+            <article>
+                <h3>5.2. Software Example</h3>
+                <div class="example">
+                    <h4>File: <code>src/main/java/com/catty/Sequent.java</code></h4>
+                    <pre><code>package com.catty;
+
+/*
+SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+*/
+
+import java.util.List;
+
+/**
+ * A sequent in subclassical logic.
+ *
+ * This file is part of the CategoricalReasoner software and is
+ * licensed under AGPL v3.0. See LICENSE file for details.
+ */
+public record Sequent(List&lt;Formula&gt; antecedents, Formula succedent) {
+    public Sequent {
+        if (antecedents == null || succedent == null) {
+            throw new IllegalArgumentException("Sequent components cannot be null");
+        }
+    }
+}</code></pre>
+                </div>
+            </article>
+
+            <article>
+                <h3>5.3. Root Special File Example</h3>
+                <div class="example">
+                    <h4>File: <code>/AGENTS.md</code></h4>
+                    <pre><code>SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+
+SPDX-License-Identifier: CC-BY-SA-4.0
+
+# AGENTS.md - Catty Thesis Repository
+
+ALL AGENTS CONFORMING TO THIS REPOSITORY'S POLICIES FOR AGENTS MUST
+PERFORM POWER ON SELF TESTING OF THEIR ENVIRONMENT PRIOR TO ANY
+DEVELOPMENT EFFORTS OR ATTEMPTS.
+
+[... policy content ...]
+
+## Document Policy References
+
+- [Formal Document Policy](docs/formal-document-policy.html)
+- [Implementation Guide](docs/document-policy-implementation.html)</code></pre>
+                </div>
+            </article>
+
+            <article>
+                <h3>5.4. LLM-Generated Content Example</h3>
+                <div class="example">
+                    <h4>Scenario: An agent generates analysis of structural rules</h4>
+                    <div class="example bad">
+                        <h5>INCORRECT:</h5>
+                        <pre><code># File: /structural-rules-analysis.md
+# LLM GENERATED - DO NOT EDIT
+# This file contains analysis of structural rules...</code></pre>
+                        <p><strong>Why wrong:</strong> LLM-generated file placed at repository root without curation.</p>
+                    </div>
+                    <div class="example good">
+                        <h5>CORRECT:</h5>
+                        <pre><code># File: docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-affine-weakening/analysis.html
+SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+SPDX-License-Identifier: CC-BY-SA-4.0
+
+&lt;article typeof="prov:Entity"&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Analysis of Affine Weakening Rules&lt;/h1&gt;
+    &lt;meta property="prov:wasGeneratedBy" content="agent_analysis_2025_03_04"/&gt;
+  &lt;/header&gt;
+
+  &lt;!-- Curated and validated content --&gt;
+&lt;/article&gt;</code></pre>
+                        <p><strong>Why correct:</strong> Placed in appropriate docs/ subdirectory, includes license header, semantic metadata, and has been curated/validated.</p>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            <strong>Document Classification:</strong> Documentation (A_doc)<br>
+            <strong>License:</strong> CC BY-SA 4.0 International<br>
+            <strong>Copyright:</strong> © 2025 Ian Douglas Lawrence Norman McLean<br>
+            <strong>Repository:</strong> <a href="https://github.com/metavacua/CategoricalReasoner">https://github.com/metavacua/CategoricalReasoner</a>
+        </p>
+    </footer>
+
+    <style>
+        body {
+            font-family: 'TeX Gyre Pagella', 'Linux Libertine', 'Georgia', serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+            background: #fff;
+            color: #222;
+        }
+
+        header {
+            border-bottom: 2px solid #333;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: #000;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 0.5rem;
+            color: #333;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 1.8rem;
+            color: #444;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            color: #555;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        nav {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav li {
+            display: inline-block;
+            margin-right: 1.5rem;
+        }
+
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .rule, .warning, .procedure, .validation-list {
+            background: #fafafa;
+            border-left: 4px solid #0066cc;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .rule.golden {
+            border-left-color: #d4af37;
+            background: #fff9e6;
+        }
+
+        .rule.critical {
+            border-left-color: #cc3300;
+            background: #ffe6e6;
+        }
+
+        .warning {
+            border-left-color: #cc3300;
+            background: #ffe6e6;
+            font-weight: 600;
+        }
+
+        pre {
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        .tree {
+            font-family: 'TeX Gyre Cursor', 'Linux Libertine Mono', 'Courier New', monospace;
+            font-size: 0.85rem;
+            background: #f8f8f8;
+            padding: 1.5rem;
+        }
+
+        code {
+            font-family: 'TeX Gyre Cursor', 'Linux Libertine Mono', 'Courier New', monospace;
+            background: #f0f0f0;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .example {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .example.good {
+            border-left: 4px solid #28a745;
+            background: #f0fff4;
+        }
+
+        .example.bad {
+            border-left: 4px solid #dc3545;
+            background: #fff5f5;
+        }
+
+        .validation-list h4 {
+            margin-top: 2rem;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 0.5rem;
+        }
+
+        .procedure {
+            background: #f8f9fa;
+            border-left-color: #0066cc;
+        }
+
+        .procedure ol {
+            margin-left: 1.5rem;
+        }
+
+        .procedure li {
+            margin-bottom: 0.75rem;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #333;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        footer a {
+            color: #0066cc;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</body>
+</html>

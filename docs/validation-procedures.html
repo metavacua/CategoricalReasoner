@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Procedures for Document Policy</title>
+    <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+    <link rel="schema.doap" href="http://usefulinc.com/ns/doap#">
+    <meta name="dcterms.title" content="Validation Procedures for Document Policy">
+    <meta name="dcterms.creator" content="Ian Douglas Lawrence Norman McLean">
+    <meta name="dcterms.date" content="2025-03-04">
+    <meta name="dcterms.description" content="Automated and manual validation procedures for document policy compliance">
+    <meta name="dcterms.license" content="https://creativecommons.org/licenses/by-sa/4.0/">
+    <meta name="doap:name" content="CategoricalReasoner">
+</head>
+<body>
+    <header>
+        <h1>Validation Procedures for Document Policy</h1>
+        <p class="subtitle">Automated and Manual Consistency Checking</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#automated-checks">Automated Validation</a></li>
+            <li><a href="#manual-checks">Manual Validation</a></li>
+            <li><a href="#ci-integration">CI/CD Integration</a></li>
+            <li><a href="#validation-matrix">Validation Matrix</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>
+                This document defines validation procedures to ensure compliance with the formal document policy
+                defined in <a href="formal-document-policy.html">Formal Document Policy</a> and
+                <a href="document-policy-implementation.html">Implementation Guide</a>.
+            </p>
+            <div class="principle">
+                <strong>Presumption of Inconsistency:</strong> All artifacts must be validated before commit.
+                Failed validations constitute formal refutations requiring resolution.
+            </div>
+        </section>
+
+        <section id="automated-checks">
+            <h2>1. Automated Validation</h2>
+
+            <article>
+                <h3>1.1. REUSE Specification Compliance</h3>
+                <div class="validation-step">
+                    <h4>Check V-1: License Headers</h4>
+                    <pre><code class="bash">$ reuse lint</code></pre>
+                    <p>
+                        <strong>Expected Result:</strong> Exit code 0, no violations reported
+                    </p>
+                    <p>
+                        <strong>What it checks:</strong>
+                    </p>
+                    <ul>
+                        <li>All copyrightable files have SPDX license headers</li>
+                        <li>License headers match file type conventions</li>
+                        <li>License identifiers are valid SPDX identifiers</li>
+                        <li>License text files exist where required</li>
+                    </ul>
+                    <div class="failure-mode">
+                        <strong>Failure Mode:</strong> Missing or incorrect license headers
+                    </div>
+                </div>
+            </article>
+
+            <article>
+                <h3>1.2. File Placement Validation</h3>
+                <div class="validation-step">
+                    <h4>Check V-2: Root Directory Cleanliness</h4>
+                    <pre><code class="bash">$ ./scripts/validate-root-files.sh</code></pre>
+                    <p>
+                        <strong>Expected Result:</strong> No arbitrary LLM-generated files in root
+                    </p>
+                    <p>
+                        <strong>What it checks:</strong>
+                    </p>
+                    <ul>
+                        <li>Only GitHub special files exist at repository root</li>
+                        <li>No arbitrary documentation files (.md, .html, .txt) in root</li>
+                        <li>No source code files (.java, .class) in root</li>
+                        <li>Special files match allowed list</li>
+                    </ul>
+                </div>
+
+                <div class="validation-step">
+                    <h4>Check V-3: Documentation Placement</h4>
+                    <pre><code class="bash">$ ./scripts/validate-docs-placement.sh</code></pre>
+                    <p>
+                        <strong>Expected Result:</strong> All documentation files in docs/
+                    </p>
+                    <p>
+                        <strong>What it checks:</strong>
+                    </p>
+                    <ul>
+                        <li>HTML/XHTML files only in docs/ (or subdirectories)</li>
+                        <li>Explanatory Markdown only in docs/ (except special files)</li>
+                        <li>Thesis content in docs/dissertation/</li>
+                        <li>Standards reproductions in docs/standards/</li>
+                    </ul>
+                </div>
+
+                <div class="validation-step">
+                    <h4>Check V-4: Software Placement</h4>
+                    <pre><code class="bash">$ ./scripts/validate-src-placement.sh</code></pre>
+                    <p>
+                        <strong>Expected Result:</strong> All code files in src/
+                    </p>
+                    <p>
+                        <strong>What it checks:</strong>
+                    </p>
+                    <ul>
+                        <li>Java source files only in src/</li>
+                        <li>Test files in src/tests/</li>
+                        <li>Benchmark queries in src/benchmarks/queries/</li>
+                        <li>Build scripts in src/scripts/</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article>
+                <h3>1.3. AGENTS.md Compliance</h3>
+                <div class="validation-step">
+                    <h4>Check V-5: AGENTS.md Presence</h4>
+                    <pre><code class="bash">$ ./scripts/validate-agents-md.sh</code></pre>
+                    <p>
+                        <strong>Expected Result:</strong> AGENTS.md in every directory with content
+                    </p>
+                    <p>
+                        <strong>What it checks:</strong>
+                    </p>
+                    <ul>
+                        <li>AGENTS.md exists in root</li>
+                        <li>AGENTS.md exists in docs/</li>
+                        <li>AGENTS.md exists in src/</li>
+                        <li>AGENTS.md exists in subdirectories with content</li>
+                        <li>AGENTS.md files follow standard format</li>
+                        <li>AGENTS.md files reference formal policy documents</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article>
+                <h3>1.4. License Consistency</h3>
+                <div class="validation-step">
+                    <h4>Check V-6: Directory-License Mapping</h4>
+                    <pre><code class="bash">$ ./scripts/validate-license-consistency.sh</code></pre>
+                    <p>
+                        <strong>Expected Result:</strong> Licenses match directory rules
+                    </p>
+                    <p>
+                        <strong>What it checks:</strong>
+                    </p>
+                    <ul>
+                        <li>Files in docs/ have CC-BY-SA-4.0 or correct special file license</li>
+                        <li>Files in src/ have AGPL-3.0-or-later</li>
+                        <li>LICENSE file has no license header (non-copyrightable)</li>
+                        <li>Root README.md has appropriate license</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article>
+                <h3>1.5. HTML Validation</h3>
+                <div class="validation-step">
+                    <h4>Check V-7: W3C Compliance</h4>
+                    <pre><code class="bash">$ ./scripts/validate-html.sh</code></pre>
+                    <p>
+                        <strong>Expected Result:</strong> Valid HTML5, no errors
+                    </p>
+                    <p>
+                        <strong>What it checks:</strong>
+                    </p>
+                    <ul>
+                        <li>Valid HTML5 DOCTYPE</li>
+                        <li>Proper DOCTYPE and charset declarations</li>
+                        <li>Valid semantic markup</li>
+                        <li>Embedded semantic linked data (RDFa/Microdata/JSON-LD)</li>
+                        <li>Proper nesting and closure of tags</li>
+                    </ul>
+                </div>
+            </article>
+        </section>
+
+        <section id="manual-checks">
+            <h2>2. Manual Validation</h2>
+
+            <article>
+                <h3>2.1. Pre-Commit Checklist</h3>
+                <div class="checklist">
+                    <h4>Documentation Files:</h4>
+                    <ul>
+                        <li><input type="checkbox" disabled> File placed in correct location under docs/</li>
+                        <li><input type="checkbox" disabled> CC BY-SA v4.0 license header present</li>
+                        <li><input type="checkbox" disabled> Valid HTML5 markup</li>
+                        <li><input type="checkbox" disabled> Semantic linked data included</li>
+                        <li><input type="checkbox" disabled> PROV-O metadata for agent-generated content</li>
+                        <li><input type="checkbox" disabled> Unicode NFC normalized</li>
+                        <li><input type="checkbox" disabled> References to formal policy included if relevant</li>
+                    </ul>
+
+                    <h4>Software Files:</h4>
+                    <ul>
+                        <li><input type="checkbox" disabled> File placed in correct location under src/</li>
+                        <li><input type="checkbox" disabled> AGPL v3.0 license header present</li>
+                        <li><input type="checkbox" disabled> Code compiles without errors</li>
+                        <li><input type="checkbox" disabled> KeY verification attempted (if applicable)</li>
+                        <li><input type="checkbox" disabled> PROV-O metadata in comments for agent-generated code</li>
+                        <li><input type="checkbox" disabled> Follows code quality standards</li>
+                    </ul>
+
+                    <h4>Root Files:</h4>
+                    <ul>
+                        <li><input type="checkbox" disabled> File is a GitHub special file or tooling configuration</li>
+                        <li><input type="checkbox" disabled> Not an arbitrary LLM-generated document</li>
+                        <li><input type="checkbox" disabled> License header present if copyrightable</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article>
+                <h3>2.2. Ambiguity Resolution</h3>
+                <div class="procedure">
+                    <p><strong>When classification is ambiguous:</strong></p>
+                    <ol>
+                        <li>Consult <a href="formal-document-policy.html">Formal Document Policy</a></li>
+                        <li>Apply classification predicates:</li>
+                        <ul>
+                            <li>Documentation(f) ⇔ (Location(f) = docs/*) ∧ (Purpose(f) = Exposition)</li>
+                            <li>Software(f) ⇔ (Location(f) = src/*) ∧ (Format(f) ∈ {Java, JAR, Class})</li>
+                        </ul>
+                        <li>Check format: Code vs prose?</li>
+                        <li>Check purpose: Explanatory vs executable?</li>
+                        <li>Document decision rationale in AGENTS.md</li>
+                    </ol>
+                </div>
+            </article>
+
+            <article>
+                <h3>2.3. Review Process</h3>
+                <div class="review-process">
+                    <p><strong>For PR Reviewers:</strong></p>
+                    <ol>
+                        <li>Verify all automated checks pass</li>
+                        <li>Review file placement against formal model</li>
+                        <li>Check license headers are correct</li>
+                        <li>Verify AGENTS.md files updated if directories modified</li>
+                        <li>Confirm no arbitrary LLM files at root</li>
+                        <li>Validate semantic markup in HTML documentation</li>
+                        <li>Check PROV-O metadata for agent-generated content</li>
+                    </ol>
+                </div>
+            </article>
+        </section>
+
+        <section id="ci-integration">
+            <h2>3. CI/CD Integration</h2>
+
+            <article>
+                <h3>3.1. Pre-commit Hooks</h3>
+                <div class="configuration">
+                    <p>
+                        The following pre-commit hooks should be configured in <code>.pre-commit-config.yaml</code>:
+                    </p>
+                    <pre><code class="yaml">repos:
+  - repo: https://github.com/fsfe/reuse-tool
+    rev: v3.0.2
+    hooks:
+      - id: reuse
+        name: REUSE compliance check
+
+  - repo: local
+    hooks:
+      - id: validate-file-placement
+        name: Validate file placement
+        entry: ./scripts/validate-file-placement.sh
+        language: script
+
+      - id: validate-agents-md
+        name: Validate AGENTS.md files
+        entry: ./scripts/validate-agents-md.sh
+        language: script
+
+      - id: validate-html
+        name: Validate HTML5
+        entry: ./scripts/validate-html.sh
+        language: script</code></pre>
+                </div>
+            </article>
+
+            <article>
+                <h3>3.2. GitHub Actions Workflow</h3>
+                <div class="configuration">
+                    <p>
+                        Example GitHub Actions workflow (<code>.github/workflows/validate.yml</code>):
+                    </p>
+                    <pre><code class="yaml">name: Validate Document Policy
+
+on: [push, pull_request]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install REUSE tool
+        run: pip install reuse
+
+      - name: REUSE compliance check
+        run: reuse lint
+
+      - name: Validate file placement
+        run: ./scripts/validate-file-placement.sh
+
+      - name: Validate AGENTS.md files
+        run: ./scripts/validate-agents-md.sh
+
+      - name: Validate HTML5
+        run: ./scripts/validate-html.sh</code></pre>
+                </div>
+            </article>
+        </section>
+
+        <section id="validation-matrix">
+            <h2>4. Validation Matrix</h2>
+
+            <article>
+                <h3>4.1. Summary Table</h3>
+                <div class="matrix">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Check</th>
+                                <th>Automated</th>
+                                <th>Manual</th>
+                                <th>Pre-commit</th>
+                                <th>CI/CD</th>
+                                <th>Critical</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>REUSE lint</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>File placement</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>AGENTS.md presence</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>License consistency</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>HTML validation</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>Semantic markup</td>
+                                <td>-</td>
+                                <td>✓</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>PROV-O metadata</td>
+                                <td>-</td>
+                                <td>✓</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>✓</td>
+                            </tr>
+                            <tr>
+                                <td>KeY verification</td>
+                                <td>-</td>
+                                <td>✓</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>✓</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            <strong>Document Classification:</strong> Documentation (A_doc)<br>
+            <strong>License:</strong> CC BY-SA 4.0 International<br>
+            <strong>Copyright:</strong> © 2025 Ian Douglas Lawrence Norman McLean<br>
+            <strong>Repository:</strong> <a href="https://github.com/metavacua/CategoricalReasoner">https://github.com/metavacua/CategoricalReasoner</a>
+        </p>
+    </footer>
+
+    <style>
+        body {
+            font-family: 'TeX Gyre Pagella', 'Linux Libertine', 'Georgia', serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            line-height: 1.6;
+            background: #fff;
+            color: #222;
+        }
+
+        header {
+            border-bottom: 2px solid #333;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: #000;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 0.5rem;
+            color: #333;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 1.8rem;
+            color: #444;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            color: #555;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        nav {
+            background: #f5f5f5;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 2rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav li {
+            display: inline-block;
+            margin-right: 1.5rem;
+        }
+
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .principle {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .validation-step {
+            background: #fafafa;
+            border-left: 4px solid #0066cc;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .failure-mode {
+            background: #ffe6e6;
+            border-left: 4px solid #dc3545;
+            padding: 0.75rem 1rem;
+            margin: 1rem 0;
+            font-weight: 600;
+        }
+
+        pre {
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        code {
+            font-family: 'TeX Gyre Cursor', 'Linux Libertine Mono', 'Courier New', monospace;
+            background: #f0f0f0;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        .checklist {
+            background: #f8f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .checklist ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+        }
+
+        .checklist input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+
+        .procedure {
+            background: #f8f9fa;
+            border-left: 4px solid #0066cc;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .procedure ol {
+            margin-left: 1.5rem;
+        }
+
+        .procedure li {
+            margin-bottom: 0.75rem;
+        }
+
+        .review-process {
+            background: #f0fff4;
+            border-left: 4px solid #28a745;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .configuration {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: center;
+        }
+
+        th {
+            background: #f5f5f5;
+            font-weight: 600;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid #333;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        footer a {
+            color: #0066cc;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</body>
+</html>

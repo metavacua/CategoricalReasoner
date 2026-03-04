@@ -1,12 +1,49 @@
-TODO: Licensing REUSE header; CC BY-SA v4.0.
+SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+
+SPDX-License-Identifier: CC-BY-SA-4.0
 
 # AGENTS.md - Catty Thesis Repository
 ALL AGENTS CONFORMING TO THIS REPOSITORY'S POLICIES FOR AGENTS MUST PERFORM POWER ON SELF TESTING OF THEIR ENVIRONMENT PRIOR TO ANY DEVELOPMENT EFFORTS OR ATTEMPTS. POWER ON SELF TESTING MEANS USING ANY AND ALL TERMINAL TOOLS TO DISCERN WHAT YOUR DEVELOPMENT ENVIRONMENT HAS IN THE WAY OF TOOLING AND OTHERWISE ORIENTING TO YOUR ENVIRONMENT; THIS FILE IS NOT FOR HUMANS. THE FOLLOWING RESTRICTIONS APPLY THE BEHAVIORS OF THE MACHINE AGENTS RATHER THAN ANY PARTICULAR TOOL OR HUMAN PR.
 
 ## Documentation
+
+### Formal Policy Framework
+ALL DOCUMENTATION POLICIES ARE NOW FORMALLY DEFINED IN THE FOLLOWING DOCUMENTS:
+- **Formal Model:** [`docs/formal-document-policy.html`](docs/formal-document-policy.html) - Mathematical definitions, category-theoretic model, and licensing algebra
+- **Implementation Guide:** [`docs/document-policy-implementation.html`](docs/document-policy-implementation.html) - Operational rules, validation procedures, and examples
+
+### Core Policy Principles
+1. **Golden Rule:** With the sole exception of GitHub special files, ALL documentation must reside in the `docs/` directory
+2. **Licensing Separation:** Documentation in `docs/` is CC BY-SA v4.0; software in `src/` is AGPL v3.0
+3. **No Arbitrary LLM Files in Root:** All AI-generated content must be curated and placed in appropriate subdirectories
+4. **Special Files Only at Root:** Only GitHub-defined special files and tooling configuration may exist at repository root
+
+### Special Files (Permitted at Repository Root)
+- `README.md` - GitHub repository landing page
+- `LICENSE` - License text (AGPL v3.0)
+- `AGENTS.md` - Machine agent policies (this file)
+- `CONTRIBUTING.md` - Contribution guidelines
+- `CHANGELOG.md` - Version history
+- `.gitignore` - Git exclusion patterns
+- `pom.xml` - Maven build descriptor (if applicable)
+- `.reuse/dep5` - REUSE specification compliance
+
+### Documentation Structure
+- `docs/` - All documentation (CC BY-SA v4.0)
+  - `standards/` - Collected standards and specifications
+  - `dissertation/` - Thesis materials
+  - `structural-rules/` - Sequent calculus documentation
+  - `formal-document-policy.html` - Formal policy model
+  - `document-policy-implementation.html` - Implementation guide
+
+### AGENTS.md Standard
 AGENTS.md is required to be in standard format with the exact filename; it is not an arbitrary file and must conform to the [AGENTS.md standards](https://github.com/agentmd/agent.md). Each directory and subdirectory can have an AGENTS.md, and the root for this repository should have an AGENTS.md.
 
-There are some specially defined files in Github which do not fall under the document policy particularly for contributions and commits to the docs directory and subdirectories.
+### Forbidden in Repository Root
+- Arbitrary LLM-generated markdown files
+- Documentation not required by GitHub or tooling
+- Source code files (.java, .class, .jar)
+- Test files or benchmarks
 
 ## Scope
 
@@ -56,6 +93,17 @@ Bagit
 
 ## See Also
 
-- `docs/AGENTS.md` - Documentation Directory
-- `src/AGENTS.md` - Source Code Directory
+- **Formal Policy Documents:**
+  - [Formal Document Policy](docs/formal-document-policy.html) - Category-theoretic model for copyrightable works, documentation, and special files
+  - [Implementation Guide](docs/document-policy-implementation.html) - Operational rules and validation procedures
+
+- **Directory Policies:**
+  - `docs/AGENTS.md` - Documentation Directory
+  - `src/AGENTS.md` - Source Code Directory
+
+- **Standards References:**
+  - [REUSE Software Specification](https://reuse.software/)
+  - [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+  - [AGPL v3.0](https://www.gnu.org/licenses/agpl-3.0.html)
+  - [AGENTS.md Standard](https://github.com/agentmd/agent.md)
 
