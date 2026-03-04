@@ -1,0 +1,324 @@
+SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+
+SPDX-License-Identifier: CC-BY-SA-4.0
+
+# Validation Scripts Implementation Guide
+
+This document describes the validation scripts and CI/CD workflows implemented for enforcing document policy compliance in the CategoricalReasoner repository.
+
+## Overview
+
+Validation scripts are automated tools that enforce the formal document policy defined in:
+- **[Formal Document Policy](formal-document-policy.html)** - Mathematical model
+- **[Implementation Guide](document-policy-implementation.html)** - Operational rules
+
+## Validation Scripts
+
+### 1. validate-file-placement.sh
+
+**Location:** `/scripts/validate-file-placement.sh`
+
+**Purpose:** Validates that files are placed in correct directories according to formal model.
+
+**Rules Enforced:**
+
+| Rule | Description | Formal Reference |
+|-------|-------------|------------------|
+| No arbitrary LLM-generated files in root | Section 4.3 (LLM-Generated Content Constraint) |
+| All documentation in `docs/` | Rule D-1 (Documentation Classification) |
+| All software in `src/` | Rule D-2, D-3 (Software Classification) |
+| All content directories have `AGENTS.md` | Repository policy requirement |
+
+**Checks Performed:**
+
+1. **Root Directory Scan:**
+   - Searches for arbitrary .md, .txt, .html files in root
+   - Excludes allowed special files (README.md, LICENSE, AGENTS.md, etc.)
+   - **Error:** Fails if arbitrary files found
+
+2. **Documentation Placement:**
+   - Ensures all documentation files are under `docs/`
+   - Checks for documentation files outside `docs/`
+   - **Error:** Fails if documentation found in root or `src/`
+
+3. **Software Placement:**
+   - Ensures all code files are under `src/`
+   - Checks for .java, .class, .jar files outside `src/`
+   - **Error:** Fails if software found outside `src/`
+
+4. **AGENTS.md Presence:**
+   - Checks for AGENTS.md files in all content directories
+   - **Warning:** Reports missing AGENTS.md files (non-fatal)
+
+**Exit Codes:**
+- `0`: All checks passed
+- `1`: One or more checks failed
+
+**Usage:**
+```bash
+./scripts/validate-file-placement.sh
+```
+
+---
+
+### 2. validate-license-headers.sh
+
+**Location:** `/scripts/validate-license-headers.sh`
+
+**Purpose:** Validates REUSE specification compliance and license header consistency.
+
+**Rules Enforced:**
+
+| Rule | Description | Formal Reference |
+|-------|-------------|------------------|
+| SPDX copyright headers present | REUSE Specification v3.0 |
+| Correct license identifiers | Section 5.2 (License Assignment Rules) |
+| License matches file classification | Section 2.3 (Classification Rules) |
+
+**Checks Performed:**
+
+1. **SPDX Copyright Header:**
+   - Validates `SPDX-FileCopyrightText:` present
+   - Extracts copyright holder name
+
+2. **SPDX License Identifier:**
+   - Validates `SPDX-License-Identifier:` present
+   - Extracts license identifier
+
+3. **License Validation:**
+   - Validates license against expected identifier for file type
+   - Documentation files: Must have `CC-BY-SA-4.0`
+   - Software files: Must have `AGPL-3.0-or-later`
+   - Special files: Varies by content
+
+**Expected License Mappings:**
+
+| File Pattern | Expected License |
+|-------------|----------------|
+| `docs/*.html` | CC-BY-SA-4.0 |
+| `docs/*.md` | CC-BY-SA-4.0 |
+| `docs/*.tex` | CC-BY-SA-4.0 |
+| `src/**/*.java` | AGPL-3.0-or-later |
+| `src/**/*.sh` | AGPL-3.0-or-later |
+| `src/**/*.py` | AGPL-3.0-or-later |
+| `docs/AGENTS.md` | CC-BY-SA-4.0 |
+| `src/AGENTS.md` | AGPL-3.0-or-later |
+| `/AGENTS.md` | CC-BY-SA-4.0 |
+
+**Exit Codes:**
+- `0`: All checks passed
+- `1`: One or more checks failed
+
+**Usage:**
+```bash
+./scripts/validate-license-headers.sh
+```
+
+---
+
+## CI/CD Integration
+
+### Pre-commit Hooks Configuration
+
+**Location:** `/.pre-commit-config.yaml`
+
+**Purpose:** Defines pre-commit hooks for automatic validation before commits.
+
+**Hooks Configured:**
+
+| Hook | Tool | Purpose |
+|-------|-------|---------|
+| reuse-lint | reuse tool | REUSE specification compliance |
+| validate-file-placement | validate-file-placement.sh | File placement validation |
+| validate-license-headers | validate-license-headers.sh | License header validation |
+| validate-agents-md | Bash script | AGENTS.md presence check |
+| markdownlint | markdownlint | Markdown style linting |
+| yamllint | yamllint | YAML syntax validation |
+| shellcheck | shellcheck | Shell script linting |
+
+**Hook Execution Order:**
+1. REUSE compliance check (blocking)
+2. File placement validation (blocking)
+3. License header validation (blocking)
+4. AGENTS.md validation (blocking)
+5. Linting checks (non-blocking, advisory)
+
+### GitHub Actions Workflow
+
+**Location:** `/.github/workflows/validate.yml`
+
+**Purpose:** Automated validation on push and pull requests.
+
+**Workflow Jobs:**
+
+| Job | Checks | Status |
+|------|---------|--------|
+| validate | File placement, license headers, AGENTS.md, HTML validation | Required |
+| license-scan | FOSSA license scanning (FOSSA API required) | Optional |
+
+**Trigger Events:**
+- Push to main/master branches
+- Pull requests to main/master branches
+
+## Validation Results
+
+### Current Status
+
+All validation scripts have been tested and verified:
+
+```
+=== File Placement Validation ===
+✓ No arbitrary LLM-generated files in root
+✓ All documentation files correctly placed in docs/
+✓ All software files correctly placed in src/
+✓ All content directories have AGENTS.md
+=== Validation Summary ===
+All file placement checks passed!
+```
+
+```
+=== License Header Validation ===
+✓ All AGENTS.md files have SPDX headers
+✓ All license identifiers match expected values
+✓ Copyrightability correctly stated
+=== Validation Summary ===
+All license header checks passed!
+```
+
+---
+
+## Compliance Verification
+
+### Formal Model Compliance
+
+All validation scripts enforce the following formal model rules:
+
+#### Documentation Classification (Rule D-1)
+```
+Location(f) = docs/* ∧ Format(f) ∈ {HTML, XHTML, Markdown}
+————————————————————————————————————————————————————————————
+                  Documentation(f)
+```
+
+**Implementation:** The `validate-file-placement.sh` script ensures no documentation files exist outside `docs/` directory.
+
+#### Software Classification (Rule S-1)
+```
+Location(f) = src/* ∧ Format(f) ∈ {Java, JAR, Class}
+——————————————————————————————————————————————
+                  Software(f)
+```
+
+**Implementation:** The `validate-file-placement.sh` script ensures no software files exist outside `src/` directory.
+
+#### License Consistency (Rules L1-L7)
+```
+Location(f) = docs/* → Lic(f) = CC_BY_SA_4
+Location(f) = src/* → Lic(f) = AGPL_3
+```
+
+**Implementation:** The `validate-license-headers.sh` script validates that all files have correct SPDX license headers.
+
+### REUSE Specification Compliance
+
+The repository uses [REUSE Software Specification v3.0](https://reuse.software/) for license management.
+
+**Implementation:**
+
+1. **SPDX Headers:** All files include SPDX license headers
+2. **License Files:** `.reuse/dep5` file contains copyright metadata
+3. **Validation:** `reuse lint` command validates compliance
+
+**Status:** ✅ All files are REUSE compliant
+
+---
+
+## Testing Validation Scripts
+
+### Manual Testing
+
+Run validation scripts manually:
+
+```bash
+# Test file placement
+./scripts/validate-file-placement.sh
+
+# Test license headers
+./scripts/validate-license-headers.sh
+
+# Run all pre-commit hooks
+pre-commit run --all-files
+```
+
+### Automated Testing
+
+Pre-commit hooks run automatically on:
+- `git commit`
+- `git commit --amend`
+
+GitHub Actions run automatically on:
+- Push to main/master
+- Pull requests
+
+---
+
+## Integration with Development Workflow
+
+### Commit Workflow
+
+1. Make changes to repository
+2. Stage files: `git add <files>`
+3. Pre-commit hooks run automatically
+4. If all checks pass, commit is created
+5. If any check fails, commit is blocked
+
+### Pull Request Workflow
+
+1. Create feature branch
+2. Make changes and commit with pre-commit validation
+3. Open pull request to main/master
+4. GitHub Actions validate automatically
+5. Merge only if all checks pass
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+**Issue:** "File placement validation fails but file is correct"
+
+**Solution:** 
+- Check if file is in `.gitignore`
+- Verify file path is relative to repository root
+- Check for whitespace in filenames
+
+**Issue:** "License header validation fails for correct license"
+
+**Solution:**
+- Verify SPDX identifier format (no spaces, correct hyphens)
+- Check for multiple SPDX-License-Identifier lines
+- Ensure license matches file classification
+
+**Issue:** "Pre-commit hooks not running"
+
+**Solution:**
+- Verify pre-commit is installed: `pip install pre-commit`
+- Install hooks: `pre-commit install`
+- Check `.pre-commit-config.yaml` syntax
+
+---
+
+## See Also
+
+- [Formal Document Policy](formal-document-policy.html) - Mathematical model
+- [Implementation Guide](document-policy-implementation.html) - Rules and procedures
+- [Validation Procedures](validation-procedures.html) - Complete validation documentation
+- [REUSE Specification](https://reuse.software/) - License management standard
+- [AGENTS.md Standard](https://github.com/agentmd/agent.md) - Agent policy standard
+
+---
+
+**Document Classification:** Documentation (A_doc)  
+**License:** CC BY-SA 4.0 International  
+**Copyright:** © 2025 Ian Douglas Lawrence Norman McLean

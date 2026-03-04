@@ -1,0 +1,94 @@
+name: Validate Document Policy Compliance
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install REUSE tool
+      run: |
+        pip install reuse
+        
+    - name: Install pre-commit
+      run: |
+        pip install pre-commit
+        
+    - name: Run pre-commit hooks
+      run: |
+        pre-commit run --all-files --show-diff-on-failure
+        
+    - name: Validate file placement
+      run: |
+        bash scripts/validate-file-placement.sh
+        
+    - name: Validate license headers
+      run: |
+        bash scripts/validate-license-headers.sh
+        
+    - name: Validate AGENTS.md files
+      run: |
+        bash -c '
+        missing=0
+        for dir in docs/* src/*; do
+          if [ -d "$dir" ] && [ ! -f "$dir/AGENTS.md" ] && [ "$(basename "$dir")" != "src" ] && [ "$(basename "$dir")" != "docs" ]; then
+            echo "Missing AGENTS.md in $(basename "$dir")"
+            missing=$((missing + 1))
+          fi
+        done
+        if [ $missing -gt 0 ]; then
+          echo "Error: $missing directories missing AGENTS.md"
+          exit 1
+        fi
+        '
+        
+    - name: Validate HTML files
+      run: |
+        find docs -name "*.html" -type f | while read file; do
+          # Basic HTML5 validation
+          if grep -q "<!DOCTYPE html>" "$file" || grep -q "<!DOCTYPE HTML>" "$file"; then
+            echo "Valid HTML5 DOCTYPE found in $file"
+          else
+            echo "Warning: No HTML5 DOCTYPE found in $file"
+            exit 1
+          fi
+        done
+        
+    - name: Check for LLM-generated files in root
+      run: |
+        arbitrary_files=$(find . -maxdepth 1 -type f \( -name "*.md" -o -name "*.txt" -o -name "*.html" \) ! -name "README.md" ! -name "LICENSE" ! -name "AGENTS.md" ! -name "CONTRIBUTING.md" ! -name "CHANGELOG.md" ! -name ".gitignore" ! -name "pom.xml" ! -name ".pre-commit-config.yaml" ! -name ".github" 2>/dev/null || true)
+        if [ -n "$arbitrary_files" ]; then
+          echo "No arbitrary LLM-generated files in root"
+        else
+          echo "Error: Found arbitrary files in root:"
+          echo "$arbitrary_files"
+          exit 1
+        fi
+        
+  license-scan:
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Run FOSSA License Scan
+      uses: fossas/fossa-action@v1.3.2
+      with:
+        fossa-api-key: ${{ secrets.FOSSA_API_KEY }}
+        fossa-api-token: ${{ secrets.FOSSA_API_TOKEN }}

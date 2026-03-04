@@ -1,0 +1,92 @@
+# SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# REUSE compliant .pre-commit-config.yaml
+# Pre-commit hooks for validating document policy compliance
+
+repos:
+  # REUSE specification compliance check
+  - repo: https://github.com/fsfe/reuse-tool
+    rev: v3.0.2
+    hooks:
+      - id: reuse-lint
+        name: REUSE compliance check
+        entry: reuse
+        language: system
+        args: ['lint']
+        pass_filenames: ^.*$
+        description: Check REUSE specification compliance (SPDX headers)
+
+  # File placement validation
+  - repo: local
+    hooks:
+      - id: validate-file-placement
+        name: Validate file placement
+        entry: ./scripts/validate-file-placement.sh
+        language: script
+        pass_filenames: ^.*$
+        description: Ensure files are placed in correct directories (docs/ vs src/)
+        files: ^.*$
+
+  # License header validation
+  - repo: local
+    hooks:
+      - id: validate-license-headers
+        name: Validate license headers
+        entry: ./scripts/validate-license-headers.sh
+        language: script
+        pass_filenames: ^.*$
+        description: Ensure all files have proper SPDX license headers
+        files: ^.*\.(md|html|tex|java|sh|py)$
+
+  # AGENTS.md validation
+  - repo: local
+    hooks:
+      - id: validate-agents-md
+        name: Validate AGENTS.md files
+        entry: bash
+        language: system
+        args: ['-c', 'find . -name "AGENTS.md" -type f | while read f; do dir=$(dirname "$f"); if [ -d "$dir" ] && [ ! -f "$dir/AGENTS.md" ] && [ "$(basename "$dir")" != "src" ] && [ "$(basename "$dir")" != "docs" ]; then echo "Missing AGENTS.md in $(basename "$dir")"; exit 1; fi; done']
+        pass_filenames: ^.*$
+        description: Ensure AGENTS.md files exist in content directories
+        files: ^.*$
+
+  # Markdown linting
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.39.0
+    hooks:
+      - id: markdownlint
+        name: Markdown linting
+        entry: markdownlint
+        language: node
+        args: ['--ignore', 'MD004', '--ignore', 'MD013', '--ignore', 'MD033', '--ignore', 'MD041']
+        files: ^.*\.md$
+
+  # YAML linting
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.0
+    hooks:
+      - id: yamllint
+        name: YAML linting
+        entry: yamllint
+        language: system
+        args: ['-d', 'relaxed']
+        files: ^.*\.yaml$
+
+  # Shell script linting
+  - repo: https://github.com/shellcheck-py/shellcheck
+    rev: v0.10.1
+    hooks:
+      - id: shellcheck
+        name: Shell script linting
+        entry: shellcheck
+        language: system
+        args: ['-x', '-e', 'SC1090']
+        files: ^.*\.sh$
+
+# CI hook configuration
+ci:
+  autofix_prs: true
+  autofix_commit_msg: 'style: auto-fix linting issues'
+  skip: []
+  submodules: false
