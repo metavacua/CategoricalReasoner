@@ -1,17 +1,18 @@
-# Section: Linear Weakening
+# Linear Weakening (Symmetric LHS RHS)
 
-## Scope
-This section covers linear weakening where resource sensitivity is enforced through the exponential modality.
+## Overview
 
-## Content
-- Weakening controlled via $\oc A$ modality in linear logic
-- Only formulas marked with $\oc$ can be weakened
-- Distinction between linear and non-linear contexts
-- Connection to proof nets and categorical semantics
+This directory contains materials for `docs/structural-rules/part/chap-symmetric-full-context-lhs-rhs/sec-linear-weakening/`.
 
-## References
-- Girard's linear logic (1987)
-- Proof net semantics
+## Derivation
 
-## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+This file derives from the root `AGENTS.md` constraints.
+
+
+## License
+
+CC-BY-SA-4.0.html
+
+## See Also
+
+- `AGENTS.md` (root) - Core repository constraints

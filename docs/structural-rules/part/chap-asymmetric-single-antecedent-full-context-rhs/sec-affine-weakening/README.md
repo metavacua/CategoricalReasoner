@@ -1,17 +1,18 @@
-# Section: Affine Weakening
+# Affine Weakening (Asymmetric RHS)
 
-## Scope
-This section covers affine weakening with single antecedent restriction.
+## Overview
 
-## Content
-- Affine logic variant with single antecedent
-- Weakening admitted, contraction rejected
-- Sub-dual-intuitionistic logic characterization
-- Connection to substructural hierarchies
+This directory contains materials for `docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-affine-weakening/`.
 
-## References
-- Affine logic literature
-- Substructural logics research
+## Derivation
 
-## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+This file derives from the root `AGENTS.md` constraints.
+
+
+## License
+
+CC-BY-SA-4.0.html
+
+## See Also
+
+- `AGENTS.md` (root) - Core repository constraints

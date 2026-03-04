@@ -1,17 +1,18 @@
-# Section: Relevant Weakening
+# Relevant Weakening (Asymmetric RHS)
 
-## Scope
-This section covers relevant weakening with single antecedent restriction.
+## Overview
 
-## Content
-- Relevant logic with single antecedent
-- Both weakening and contraction rejected
-- Strict relevance requirements
-- Sub-dual-intuitionistic logic characterization
+This directory contains materials for `docs/structural-rules/part/chap-asymmetric-single-antecedent-full-context-rhs/sec-relevant-weakening/`.
 
-## References
-- Relevant logic literature
-- Relevance principles research
+## Derivation
 
-## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+This file derives from the root `AGENTS.md` constraints.
+
+
+## License
+
+CC-BY-SA-4.0.html
+
+## See Also
+
+- `AGENTS.md` (root) - Core repository constraints

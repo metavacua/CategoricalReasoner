@@ -1,17 +1,18 @@
-# Section: Linear Weakening
+# Linear Weakening (Asymmetric LHS)
 
-## Scope
-This section covers linear weakening in the intuitionistic setting with single succedent restriction.
+## Overview
 
-## Content
-- Linear logic interpretation with single succedent
-- Exponential modality $\oc A$ controls weakening availability
-- Connection to linear intuitionistic logic
-- Resource-sensitive constructive reasoning
+This directory contains materials for `docs/structural-rules/part/chap-asymmetric-full-context-lhs-single-succedent/sec-linear-weakening/`.
 
-## References
-- Girard's linear logic
-- Linear intuitionistic logic research
+## Derivation
 
-## Validation
-All artifacts must pass automated validation against the thesis structure schema.
+This file derives from the root `AGENTS.md` constraints.
+
+
+## License
+
+CC-BY-SA-4.0.html
+
+## See Also
+
+- `AGENTS.md` (root) - Core repository constraints
