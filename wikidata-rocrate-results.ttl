@@ -1,0 +1,7 @@
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix schema: <http://schema.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+wd:Q1995545 a schema:Thing ;
+    rdfs:label "software package" ;
+    schema:description "bundle containing software, data and associated information needed for installation by a package manager." .
