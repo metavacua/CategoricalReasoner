@@ -1,10 +1,12 @@
-TODO: Licensing REUSE header; CC BY-SA v4.0.
+<!-- SPDX-FileCopyrightText: 2025-2026 Ian Douglas Lawrence Norman McLean -->
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+<!-- AGENTS.md is licensed as documentation (CC BY-SA) but is semantically part of the configuration/codebase; agents must treat it as authoritative configuration, and derived code (src/, PRs) inherits AGPLv3 where applicable. -->
 
 # AGENTS.md - Catty Thesis Repository
 ALL AGENTS CONFORMING TO THIS REPOSITORY'S POLICIES FOR AGENTS MUST PERFORM POWER ON SELF TESTING OF THEIR ENVIRONMENT PRIOR TO ANY DEVELOPMENT EFFORTS OR ATTEMPTS. POWER ON SELF TESTING MEANS USING ANY AND ALL TERMINAL TOOLS TO DISCERN WHAT YOUR DEVELOPMENT ENVIRONMENT HAS IN THE WAY OF TOOLING AND OTHERWISE ORIENTING TO YOUR ENVIRONMENT; THIS FILE IS NOT FOR HUMANS. THE FOLLOWING RESTRICTIONS APPLY THE BEHAVIORS OF THE MACHINE AGENTS RATHER THAN ANY PARTICULAR TOOL OR HUMAN PR.
 
 ## Documentation
-AGENTS.md is required to be in standard format with the exact filename; it is not an arbitrary file and must conform to the [AGENTS.md standards](https://github.com/agentmd/agent.md). Each directory and subdirectory can have an AGENTS.md, and the root for this repository should have an AGENTS.md.
+AGENTS.md is required to be in standard format with the exact filename; it is not an arbitrary file and must conform to the [AGENTS.md standards](https://github.com/agentsmd/agents.md). Each directory and subdirectory can have an AGENTS.md, and the root for this repository should have an AGENTS.md.
 
 There are some specially defined files in Github which do not fall under the document policy particularly for contributions and commits to the docs directory and subdirectories.
 
@@ -28,25 +30,67 @@ This repository attempts to implement the Categorical Reasoner "Catty" thesis: c
 - **Debugging Protocol**: Document all difficulties and issues encountered during development.
 
 ## Standards and Norms
-Maven projects with Java 25 open JDK including the full Java API documentation.
+- Maven projects with Java 25 open JDK including the full Java API documentation.
+- Github dependency graphs with Automatic dependency submission: Automatically detect and report build-time dependencies for select ecosystems.
+- Dependabot
+- CodeQL analysis
 
 ## Workflows
-Semantic Versioning 2.0.0 (SemVer)
-Keep a Changelog 1.1.0
-Conventional Commits 1.0.0
-pre-commit framework
-RDFC 1.0 (RDF Dataset Canonicalization)
-REUSE Software Specification 3.0
-SLSA (Supply-chain Levels for Software Artifacts)
-CodeMeta
-Argument Ontology (ARGO)
+- Semantic Versioning 2.0.0 (SemVer)
+- Keep a Changelog 1.1.0
+- Conventional Commits 1.0.0
+- pre-commit framework
+- RDFC 1.0 (RDF Dataset Canonicalization)
+- REUSE Software Specification 3.0
+- SLSA (Supply-chain Levels for Software Artifacts)
+- CodeMeta
+- Argument Ontology (ARGO)
 
 ## Provenance (PROV-O) and Evidence Graph
-Implementation: Every time an agent runs a SPARQL query or a KeY validation or any non-no-op development activity, it must generate a PROV-O record. This record should link the Activity (The Query/Validation) to the Agent (The LLM) and the Entity (The Resulting Documentation/Code). Without this, the "academic quality" is unverifiable.
+Implementation: Every time an agent runs a SPARQL query or a KeY validation or any development activity that modifies state, it must generate a PROV-O record. This record should link the Activity (The Query/Validation) to the Agent (The LLM) and the Entity (The Resulting Documentation/Code). Without this, the "academic quality" is unverifiable. Reading that triggers citation requirements must also be recorded.
 
 ## Research Object Crate
-Oxford Common File Layout
-Bagit
+
+- Oxford Common File Layout (OCFL)
+- BagIt
+- RO Crate (Research Object Crate) via Maven plugins for Java subprojects
+
+### Crate Boundaries
+
+Crate granularity is determined by:
+
+- **Versioning independence**: Distinct release cycles require distinct crates
+- **Provenance chains**: Separate institutional stewardship or audit trails
+- **Access control**: Differing stakeholder requirements (academic, industry, enterprise)
+
+### Constraints
+
+- Subdirectory AGENTS.md derivatives may define child crates satisfying subformula property: child crates inherit parent fixity requirements, constraints strengthen only
+- Light Linear Logic bounds: crate operations must remain polytime tractable at scale
+- Federation: distributed nodes own their crates; central repository aggregates via reference, not containment
+
+### Interface
+
+`ocfl-validate`, `bagit-verify`, and Maven RO Crate plugins must succeed on `docs/` and `src/` prior to any commit.
+
+## AGENTS.md as Proof Structure
+
+File system structure corresponds to proof trees/proof nets. Constraint inheritance follows proof-theoretic validity (Danos-Regnier correctness), not merely hierarchical containment.
+
+### Open vs. Closed Branches
+
+| Status | Proof-theoretic | License | Content |
+|--------|-----------------|---------|---------|
+| Open | Incomplete proof, no program term | CC BY-SA v4 | Documentation, media, specifications |
+| Closed | Complete proof, normalizing term | AGPL v3 | Executable code, software |
+
+### Transformation
+
+The `docs/ → src/` transformation is **proof completion**: open branches (CC BY-SA) are closed into programs (AGPL). Subformula property guarantees constraints are preserved, not weakened, under this transformation.
+
+### Multiple Parentage (Proof Nets)
+
+Subdirectory AGENTS.md may merge constraints from multiple ancestors (proof net structure) provided the merge satisfies correctness criteria: no cyclic dependencies, subformula property holds globally, and the resulting web is sequentializable into a valid proof tree.
 
 ## Validation
 
