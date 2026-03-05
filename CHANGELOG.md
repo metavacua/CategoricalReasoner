@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+
 # Changelog
 
 All notable changes to the CategoricalReasoner repository will be documented in this file.

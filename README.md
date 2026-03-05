@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+
 # Catty
 
 SUPERCEDED BY metavacua-patch-1 AGENTS.md; all subsequent text should be removed and refreshed based on the root AGENTS.md.

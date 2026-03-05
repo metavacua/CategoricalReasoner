@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+
 # AGENTS.md - Symmetric Weakening with Single Antecedent and Single Succedent
 
 ## Scope

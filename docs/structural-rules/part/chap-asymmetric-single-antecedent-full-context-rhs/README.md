@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+
 # Chapter: Asymmetric Weakening with Single Antecedent and Full Context on RHS
 
 ## Scope
