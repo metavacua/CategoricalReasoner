@@ -1,4 +1,4 @@
-# AGENTS.md - Structural Rules Part Directory
+# AGENT.md - Structural Rules Part Directory
 
 ## Scope
 This directory contains the hierarchical structure for the Weakening (Part I) of the Structural Rules monograph.
