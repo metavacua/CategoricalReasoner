@@ -1,6 +1,6 @@
 # Catty
 
-SUPERCEDED BY metavacua-patch-1 AGENTS.md; all subsequent text should be removed and refreshed based on the root AGENTS.md.
+SUPERCEDED BY metavacua-patch-1 AGENT.md; all subsequent text should be removed and refreshed based on the root AGENT.md.
 
 ## Abstract
 
@@ -46,7 +46,7 @@ The `docs/dissertation/` directory contains LaTeX source for the thesis and supp
 │   ├── schema/                # Validation schemas and constraints
 │   ├── scripts/               # Utility Python scripts
 │   └── tests/                # Test suites
-├── AGENTS.md                 # Agent specifications
+├── AGENT.md                 # Agent specifications
 └── README.md                 # This file
 ```
 
@@ -81,6 +81,6 @@ This project is licensed under the GNU Affero General Public License v3.0 (AGPL-
 
 ## Special Files
 
-- `AGENTS.md` - Machine-readable specifications for automated agents
+- `AGENT.md` - Machine-readable specifications for automated agents
 - `CONTRIBUTING.md` - Contribution guidelines and workflows
 - `LICENSE` - Full license text
