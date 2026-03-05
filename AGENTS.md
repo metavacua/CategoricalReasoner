@@ -28,25 +28,28 @@ This repository attempts to implement the Categorical Reasoner "Catty" thesis: c
 - **Debugging Protocol**: Document all difficulties and issues encountered during development.
 
 ## Standards and Norms
-Maven projects with Java 25 open JDK including the full Java API documentation.
+- Maven projects with Java 25 open JDK including the full Java API documentation.
+- Github dependency graphs with Automatic dependency submission: Automatically detect and report build-time dependencies for select ecosystems.
+- Dependabot
+- CodeQL analysis
 
 ## Workflows
-Semantic Versioning 2.0.0 (SemVer)
-Keep a Changelog 1.1.0
-Conventional Commits 1.0.0
-pre-commit framework
-RDFC 1.0 (RDF Dataset Canonicalization)
-REUSE Software Specification 3.0
-SLSA (Supply-chain Levels for Software Artifacts)
-CodeMeta
-Argument Ontology (ARGO)
+- Semantic Versioning 2.0.0 (SemVer)
+- Keep a Changelog 1.1.0
+- Conventional Commits 1.0.0
+- pre-commit framework
+- RDFC 1.0 (RDF Dataset Canonicalization)
+- REUSE Software Specification 3.0
+- SLSA (Supply-chain Levels for Software Artifacts)
+- CodeMeta
+- Argument Ontology (ARGO)
 
 ## Provenance (PROV-O) and Evidence Graph
 Implementation: Every time an agent runs a SPARQL query or a KeY validation or any non-no-op development activity, it must generate a PROV-O record. This record should link the Activity (The Query/Validation) to the Agent (The LLM) and the Entity (The Resulting Documentation/Code). Without this, the "academic quality" is unverifiable.
 
 ## Research Object Crate
-Oxford Common File Layout
-Bagit
+- Oxford Common File Layout
+- Bagit
 
 ## Validation
 
