@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+
 # Structural Rules: A Categorical Investigation
 
 A standalone monograph examining the three fundamental structural rules of sequent calculi:

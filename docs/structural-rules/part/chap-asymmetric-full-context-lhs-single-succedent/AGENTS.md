@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+SPDX-License-Identifier: CC-BY-SA-4.0
+-->
+
 # AGENTS.md - Asymmetric Weakening with Full Context on LHS and Single Succedent
 
 ## Scope

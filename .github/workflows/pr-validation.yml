@@ -1,0 +1,147 @@
+# SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+# SPDX-License-Identifier: CC-BY-SA-4.0
+
+# PR Validation Workflow
+# Enforces REUSE 3.0 compliance and validates repository integrity
+
+name: PR Validation
+
+on:
+  pull_request:
+    branches: [main, master]
+  push:
+    branches: [main, master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  reuse-compliance:
+    name: REUSE License Compliance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: REUSE Compliance Check
+        uses: fsfe/reuse-action@v3
+        with:
+          args: --include-submodules lint
+
+      - name: Verify LICENSES directory
+        run: |
+          test -d LICENSES || (echo "LICENSES directory missing" && exit 1)
+          test -f LICENSES/CC-BY-SA-4.0.txt || (echo "CC-BY-SA-4.0 license text missing" && exit 1)
+          test -f LICENSES/AGPL-3.0-or-later.txt || (echo "AGPL-3.0 license text missing" && exit 1)
+          echo "All license files present"
+
+  file-validation:
+    name: File Validation
+    runs-on: ubuntu-latest
+    needs: reuse-compliance
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for files without REUSE headers
+        run: |
+          # Find all tracked files that should have headers
+          missing_headers=0
+          while IFS= read -r file; do
+            # Skip license files and binary files
+            [[ "$file" == LICENSES/* ]] && continue
+            [[ "$file" == LICENSE ]] && continue
+            [[ "$file" == .gitignore ]] && continue
+            
+            # Check if file has SPDX header
+            if ! grep -q "SPDX-FileCopyrightText" "$file" 2>/dev/null; then
+              case "$file" in
+                *.md|*.tex|*.rq|Makefile|.pre-commit-config.yaml|.github/workflows/*.yml)
+                  echo "Missing REUSE header: $file"
+                  missing_headers=$((missing_headers + 1))
+                  ;;
+              esac
+            fi
+          done < <(git ls-files)
+          
+          if [ $missing_headers -gt 0 ]; then
+            echo "ERROR: $missing_headers files missing REUSE headers"
+            exit 1
+          fi
+          echo "All files have REUSE headers"
+
+      - name: Validate Markdown syntax
+        uses: DavidAnson/markdownlint-cli2-action@v15
+        with:
+          config: >
+            {
+              "MD013": false,
+              "MD033": false
+            }
+          globs: |
+            **/*.md
+            !docs/standards/**
+
+  structure-validation:
+    name: Repository Structure
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check required files exist
+        run: |
+          required_files=(
+            "AGENTS.md"
+            "README.md"
+            "CONTRIBUTING.md"
+            "CHANGELOG.md"
+            "LICENSE"
+            ".pre-commit-config.yaml"
+            "LICENSES/CC-BY-SA-4.0.txt"
+            "LICENSES/AGPL-3.0-or-later.txt"
+          )
+          
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "ERROR: Required file missing: $file"
+              exit 1
+            fi
+          done
+          echo "All required files present"
+
+      - name: Check docs/standards directory
+        run: |
+          if [ ! -d "docs/standards" ]; then
+            echo "WARNING: docs/standards directory not yet created"
+          else
+            echo "docs/standards directory exists"
+          fi
+
+  summary:
+    name: Validation Summary
+    runs-on: ubuntu-latest
+    needs: [reuse-compliance, file-validation, structure-validation]
+    if: always()
+    steps:
+      - name: Report status
+        run: |
+          echo "PR Validation Summary"
+          echo "====================="
+          echo "REUSE Compliance: ${{ needs.reuse-compliance.result }}"
+          echo "File Validation: ${{ needs.file-validation.result }}"
+          echo "Structure Validation: ${{ needs.structure-validation.result }}"
+          
+          if [ "${{ needs.reuse-compliance.result }}" != "success" ] || \
+             [ "${{ needs.file-validation.result }}" != "success" ] || \
+             [ "${{ needs.structure-validation.result }}" != "success" ]; then
+            echo ""
+            echo "VALIDATION FAILED"
+            exit 1
+          fi
+          
+          echo ""
+          echo "ALL VALIDATION PASSED"

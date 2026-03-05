@@ -1,0 +1,52 @@
+# SPDX-FileCopyrightText: 2025 Ian Douglas Lawrence Norman McLean
+# SPDX-License-Identifier: CC-BY-SA-4.0
+
+# pre-commit configuration for REUSE compliance
+# See https://pre-commit.com for more information
+# See https://reuse.software/ for REUSE specification
+
+repos:
+  # REUSE compliance checker
+  - repo: https://github.com/fsfe/reuse-tool
+    rev: v4.0.3
+    hooks:
+      - id: reuse
+        name: REUSE compliance check
+        description: Check that all files have SPDX license headers per REUSE specification
+        entry: reuse
+        args: [lint]
+        language: python
+        pass_filenames: false
+        always_run: true
+
+  # Basic file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        name: Trim trailing whitespace
+        description: Remove trailing whitespace from all files
+      - id: end-of-file-fixer
+        name: Fix end of files
+        description: Ensure files end with a single newline
+      - id: check-yaml
+        name: Check YAML syntax
+        description: Validate YAML file syntax
+      - id: check-added-large-files
+        name: Check for large files
+        description: Prevent committing files larger than 500KB
+        args: ["--maxkb=500"]
+
+  # Markdown linting (documentation quality)
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.39.0
+    hooks:
+      - id: markdownlint
+        name: Markdown linting
+        description: Check Markdown files for style issues
+        args: ["--disable=MD013,MD033"]
+        files: \\\.(md|markdown)$
+        exclude: >
+          (?x)^(
+            docs/standards/.*
+          )$
