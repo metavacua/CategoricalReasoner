@@ -1,10 +1,12 @@
-TODO: Licensing REUSE header; CC BY-SA v4.0.
+<!-- SPDX-FileCopyrightText: 2025-2026 Ian Douglas Lawrence Norman McLean -->
+<!-- SPDX-License-Identifier: CC-BY-SA-4.0 -->
+<!-- AGENT.md is licensed as documentation (CC BY-SA) but is semantically part of the configuration/codebase; agents must treat it as authoritative configuration, and derived code (src/, PRs) inherits AGPLv3 where applicable. -->
 
-# AGENTS.md - Catty Thesis Repository
+# AGENT.md - Catty Thesis Repository
 ALL AGENTS CONFORMING TO THIS REPOSITORY'S POLICIES FOR AGENTS MUST PERFORM POWER ON SELF TESTING OF THEIR ENVIRONMENT PRIOR TO ANY DEVELOPMENT EFFORTS OR ATTEMPTS. POWER ON SELF TESTING MEANS USING ANY AND ALL TERMINAL TOOLS TO DISCERN WHAT YOUR DEVELOPMENT ENVIRONMENT HAS IN THE WAY OF TOOLING AND OTHERWISE ORIENTING TO YOUR ENVIRONMENT; THIS FILE IS NOT FOR HUMANS. THE FOLLOWING RESTRICTIONS APPLY THE BEHAVIORS OF THE MACHINE AGENTS RATHER THAN ANY PARTICULAR TOOL OR HUMAN PR.
 
 ## Documentation
-AGENTS.md is required to be in standard format with the exact filename; it is not an arbitrary file and must conform to the [AGENTS.md standards](https://github.com/agentmd/agent.md). Each directory and subdirectory can have an AGENTS.md, and the root for this repository should have an AGENTS.md.
+AGENT.md is required to be in standard format with the exact filename; it is not an arbitrary file and must conform to the [AGENT.md standards](https://github.com/agentmd/agent.md). Each directory and subdirectory can have an AGENT.md, and the root for this repository should have an AGENT.md.
 
 There are some specially defined files in Github which do not fall under the document policy particularly for contributions and commits to the docs directory and subdirectories.
 
@@ -16,7 +18,7 @@ This repository attempts to implement the Categorical Reasoner "Catty" thesis: c
 
 - **Presumption of Inconsistency**: The repository's present and past state is assumed to be corrupt, non-functional, partially implemented, or otherwise formally incorrect such that strict preservation of previous conflicting information will predictably preserve broken or incorrect behaviors. Local finite consistency must be proven, and global consistency requires the highest standards of proof with relative consistency proofs being the expected norm. This shall conform to Light Linear Logic, Logics of Formal Inconsistency, and Logics of Formal Undeterminedness semantics for subclassical calculi and first order theories.
 - **Standards Collection**: The docs directory should have and collect relevant standards in a standards subdirectory for the repository and the development of its projects and derivatives; e.g. CCSDS 652.0-M-1, [RDFC 1.0](https://www.w3.org/TR/rdf-canon/), RFC 2119.
-- **Language Constraint**: W3C compliant HTML5 for documentation in the docs directory and Java (primary ecosystem for validation and transformation) for code with mathematically canonical forms prioritized; all agents are required to determine the list of special files allowable in the root based strictly on Github defined special files and special standard files for tooling such as pre-commit, AGENTS.md, CHANGELOG, Maven, and similar tooling; the primary restriction is that no arbitrary LLM generated files are permitted in the root. There is a strict separation between developer tooling and tools that should be committed to the repository; python scripts, bash scripts, curl calls, and similar can be used for development but should not be committed in general to the repository.
+- **Language Constraint**: W3C compliant HTML5 for documentation in the docs directory and Java (primary ecosystem for validation and transformation) for code with mathematically canonical forms prioritized; all agents are required to determine the list of special files allowable in the root based strictly on Github defined special files and special standard files for tooling such as pre-commit, AGENT.md, CHANGELOG, Maven, and similar tooling; the primary restriction is that no arbitrary LLM generated files are permitted in the root. There is a strict separation between developer tooling and tools that should be committed to the repository; python scripts, bash scripts, curl calls, and similar can be used for development but should not be committed in general to the repository.
 - **License Constraint**: The repository shall conform to and utilize https://reuse.software/dev/ for the dual licensing based on the strict transformation of CC BY-SA v4 international media into AGPL v3 media. The root license is creative commons BY-SA v4 international license; the CategoricalReasoner repository is the intellectual property of Ian Douglas Lawrence Norman McLean and classified as a schema.org Creative Work and specifically a Collection under that semantic ontology.
 - **Report Constraint**: Reports must be returned in semantic XHTML conformant to C14N or whatever format any tools use, and all documentation is to be contained in the docs directory with the sole exception being special files permitted for Github (e.g. README.md) and for specific tools like Maven.
 - **Citation Constraint**: The documentation system, citation system, and citations must conform to relevant academic and industrial standards for open science, open source, and international learned society practices; OAIS (ISO 14721:2025) and (ISO 16363:2025) are minimal required standards compliance.
@@ -45,11 +47,50 @@ This repository attempts to implement the Categorical Reasoner "Catty" thesis: c
 - Argument Ontology (ARGO)
 
 ## Provenance (PROV-O) and Evidence Graph
-Implementation: Every time an agent runs a SPARQL query or a KeY validation or any non-no-op development activity, it must generate a PROV-O record. This record should link the Activity (The Query/Validation) to the Agent (The LLM) and the Entity (The Resulting Documentation/Code). Without this, the "academic quality" is unverifiable.
+Implementation: Every time an agent runs a SPARQL query or a KeY validation or any development activity that modifies state, it must generate a PROV-O record. This record should link the Activity (The Query/Validation) to the Agent (The LLM) and the Entity (The Resulting Documentation/Code). Without this, the "academic quality" is unverifiable. Reading that triggers citation requirements must also be recorded.
 
 ## Research Object Crate
-- Oxford Common File Layout
-- Bagit
+
+- Oxford Common File Layout (OCFL)
+- BagIt
+- RO Crate (Research Object Crate) via Maven plugins for Java subprojects
+
+### Crate Boundaries
+
+Crate granularity is determined by:
+
+- **Versioning independence**: Distinct release cycles require distinct crates
+- **Provenance chains**: Separate institutional stewardship or audit trails
+- **Access control**: Differing stakeholder requirements (academic, industry, enterprise)
+
+### Constraints
+
+- Subdirectory AGENT.md derivatives may define child crates satisfying subformula property: child crates inherit parent fixity requirements, constraints strengthen only
+- Light Linear Logic bounds: crate operations must remain polytime tractable at scale
+- Federation: distributed nodes own their crates; central repository aggregates via reference, not containment
+
+### Interface
+
+`ocfl-validate`, `bagit-verify`, and Maven RO Crate plugins must succeed on `docs/` and `src/` prior to any commit.
+
+## AGENT.md as Proof Structure
+
+File system structure corresponds to proof trees/proof nets. Constraint inheritance follows proof-theoretic validity (Danos-Regnier correctness), not merely hierarchical containment.
+
+### Open vs. Closed Branches
+
+| Status | Proof-theoretic | License | Content |
+|--------|-----------------|---------|---------|
+| Open | Incomplete proof, no program term | CC BY-SA v4 | Documentation, media, specifications |
+| Closed | Complete proof, normalizing term | AGPL v3 | Executable code, software |
+
+### Transformation
+
+The `docs/ → src/` transformation is **proof completion**: open branches (CC BY-SA) are closed into programs (AGPL). Subformula property guarantees constraints are preserved, not weakened, under this transformation.
+
+### Multiple Parentage (Proof Nets)
+
+Subdirectory AGENT.md may merge constraints from multiple ancestors (proof net structure) provided the merge satisfies correctness criteria: no cyclic dependencies, subformula property holds globally, and the resulting web is sequentializable into a valid proof tree.
 
 ## Validation
 
@@ -59,6 +100,6 @@ Implementation: Every time an agent runs a SPARQL query or a KeY validation or a
 
 ## See Also
 
-- `docs/AGENTS.md` - Documentation Directory
-- `src/AGENTS.md` - Source Code Directory
+- `docs/AGENT.md` - Documentation Directory
+- `src/AGENT.md` - Source Code Directory
 
