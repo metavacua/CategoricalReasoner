@@ -23,11 +23,34 @@ As stated in root AGENTS.md:
 
 ## Contents
 
-- `HelloWorld.java` - Minimal Java class serving as the "witness" proof
+This directory contains a Maven project demonstrating the full technology stack:
+
+- `pom.xml` - Maven build with Jena, OpenLlet, JavaPoet, JUnit 5
+- `main/java/catty/helloworld/`
+  - `HelloWorld.java` - Main entry point demonstrating Jena + OpenLlet + PROV-O
+  - `CattyFormula.java` - JSR 269 annotation for semantic HTML transformation
+  - `prov/` - PROV-O (W3C Provenance Ontology) implementation
+  - `processor/` - Annotation processor using JavaPoet
+- `main/resources/helloworld.owl` - OWL 2 RL ontology
+- `test/java/catty/helloworld/HelloWorldTest.java` - JUnit 5 tests
+
+## Technology Stack
+
+Per root AGENTS.md, this project implements:
+
+- **Java 25** - Primary ecosystem
+- **Jena** - RDF/OWL semantic web framework
+- **OpenLlet** - OWL 2 RL reasoner
+- **JavaPoet** - Code generation for annotation processing
+- **JUnit 5** - Testing framework
+- **PROV-O** - W3C Provenance Ontology for evidence graphs
+- **JSR 269** - Annotation processing for docs→src transformation
 
 ## Validation
 
-Standard Java compilation serves as the validator for this source directory. The successful compilation of HelloWorld.java demonstrates proof completion.
+- Maven compilation serves as the primary validator
+- JUnit 5 tests verify PROV-O, Jena, OWL API, and JavaPoet functionality
+- Annotation processing runs during compilation (SOURCE retention)
 
 ## See Also
 

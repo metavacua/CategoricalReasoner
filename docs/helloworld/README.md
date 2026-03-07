@@ -34,6 +34,63 @@ This minimal example serves as the template pattern for all other documentation 
 3. An AGENTS.md inheriting constraints from root
 4. A src/AGENTS.md specifying AGPL 3.0 license
 
+## Technology Stack
+
+This project demonstrates the full technology stack from root AGENTS.md:
+
+| Technology | Purpose |
+|------------|---------|
+| **Java 25** | Primary ecosystem |
+| **Maven** | Build and dependency management |
+| **Jena** | RDF/OWL semantic web framework |
+| **OpenLlet** | OWL 2 RL reasoner |
+| **JavaPoet** | Code generation for annotation processing |
+| **JUnit 5** | Testing framework |
+| **PROV-O** | W3C Provenance Ontology for evidence graphs |
+| **JSR 269** | Annotation processing for docs→src transformation |
+
+## Project Structure
+
+```
+docs/helloworld/
+├── README.md                    # This file (open branch, CC BY-SA)
+├── AGENTS.md                    # Child crate constraints
+└── src/                         # Closed branch (AGPL 3.0)
+    ├── pom.xml                  # Maven build configuration
+    ├── main/
+    │   ├── java/catty/helloworld/
+    │   │   ├── HelloWorld.java           # Main entry point
+    │   │   ├── CattyFormula.java         # JSR 269 annotation
+    │   │   ├── prov/                     # PROV-O implementation
+    │   │   │   ├── PROVEntity.java
+    │   │   │   ├── PROVActivity.java
+    │   │   │   └── PROVAgent.java
+    │   │   └── processor/                # Annotation processor
+    │   │       └── CattyFormulaProcessor.java
+    │   └── resources/
+    │       └── helloworld.owl            # OWL 2 RL ontology
+    └── test/
+        └── java/catty/helloworld/
+            └── HelloWorldTest.java       # JUnit 5 tests
+```
+
+## Key Demonstrations
+
+1. **Jena RDF Model**: Creates RDF triples demonstrating semantic web data handling
+2. **OpenLlet OWL Reasoning**: Shows OWL 2 RL ontology creation and reasoning API
+3. **PROV-O Provenance**: Records agent activities as W3C-compliant evidence graphs
+4. **JSR 269 Annotation Processing**: Automatic code generation from annotations
+5. **JUnit 5 Testing**: Comprehensive test coverage of all components
+
+## Validation
+
+Run the following to validate:
+
+```bash
+cd docs/helloworld/src
+mvn clean compile test
+```
+
 ## See Also
 
 - `/AGENTS.md` - Root configuration

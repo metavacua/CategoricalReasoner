@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE rdf:RDF [
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+    <!ENTITY catty "https://catty.example.org/helloworld#" >
+]>
+<rdf:RDF xmlns="https://catty.example.org/helloworld"
+         xml:base="https://catty.example.org/helloworld"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+
+    <!-- Ontology Declaration -->
+    <owl:Ontology rdf:about="https://catty.example.org/helloworld">
+        <rdfs:comment>
+            HelloWorld OWL 2 RL ontology demonstrating the Catty thesis
+            technology stack for the docs→src transformation proof-of-concept.
+        </rdfs:comment>
+        <rdfs:seeAlso rdf:resource="https://github.com/metavacua/CategoricalReasoner"/>
+    </owl:Ontology>
+
+    <!-- Classes -->
+    <owl:Class rdf:about="&catty;Program">
+        <rdfs:label>Program</rdfs:label>
+        <rdfs:comment>A computational program or software system</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="&catty;Application">
+        <rdfs:label>Application</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&catty;Program"/>
+        <rdfs:comment>A software application</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="&catty;LogicalFormula">
+        <rdfs:label>Logical Formula</rdfs:label>
+        <rdfs:comment>A formula in the categorical sequent calculus</rdfs:comment>
+    </owl:Class>
+
+    <owl:Class rdf:about="&catty;StructuralRule">
+        <rdfs:label>Structural Rule</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&catty;LogicalFormula"/>
+        <rdfs:comment>A structural rule in sequent calculus</rdfs:comment>
+    </owl:Class>
+
+    <!-- Individuals -->
+    <owl:NamedIndividual rdf:about="&catty;HelloWorld">
+        <rdf:type rdf:resource="&catty;Application"/>
+        <rdfs:label>Hello World</rdfs:label>
+        <rdfs:comment>
+            A minimal program demonstrating the docs→src transformation
+            pattern from the Catty thesis.
+        </rdfs:comment>
+    </owl:NamedIndividual>
+
+    <!-- Object Properties -->
+    <owl:ObjectProperty rdf:about="&catty;author">
+        <rdfs:label>author</rdfs:label>
+        <rdfs:domain rdf:resource="&catty;Program"/>
+        <rdfs:range rdf:resource="&catty;Person"/>
+    </owl:ObjectProperty>
+
+    <owl:ObjectProperty rdf:about="&catty;implements">
+        <rdfs:label>implements</rdfs:label>
+        <rdfs:domain rdf:resource="&catty;Program"/>
+        <rdfs:range rdf:resource="&catty;LogicalFormula"/>
+    </owl:ObjectProperty>
+
+    <!-- Data Properties -->
+    <owl:DatatypeProperty rdf:about="&catty;version">
+        <rdfs:label>version</rdfs:label>
+        <rdfs:domain rdf:resource="&catty;Program"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+
+    <!-- OWL 2 RL Axioms -->
+    <rdf:Description rdf:about="&catty;Program">
+        <rdf:type rdf:resource="&owl;Class"/>
+        <owl:equivalentClass>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="&owl;Thing"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="&catty;version"/>
+                        <owl:someValuesFrom rdf:resource="&xsd;string"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </owl:equivalentClass>
+    </rdf:Description>
+
+</rdf:RDF>
