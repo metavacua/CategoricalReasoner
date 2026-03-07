@@ -1,0 +1,32 @@
+# SPDX-FileCopyrightText: 2025-2026 Ian Douglas Lawrence Norman McLean
+# SPDX-License-Identifier: CC-BY-SA-4.0
+
+# REUSE.software configuration for Catty HelloWorld
+# See https://reuse.software/spec/
+
+# Version of the REUSE specification used
+version = 3.0
+
+# Annotation style used
+[[annotations]]
+path = "**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025-2026 Ian Douglas Lawrence Norman McLean"
+
+# License for documentation files (README, AGENTS.md)
+[[annotations]]
+path = "README.md"
+path = "AGENTS.md"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
+
+# License for source code files (Java, pom.xml)
+[[annotations]]
+path = "src/**/*.java"
+path = "pom.xml"
+SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# License for configuration files
+[[annotations]]
+path = ".pre-commit-config.yaml"
+path = ".github/**/*"
+SPDX-License-Identifier = "CC-BY-SA-4.0"
