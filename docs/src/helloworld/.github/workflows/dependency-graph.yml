@@ -1,0 +1,42 @@
+# SPDX-FileCopyrightText: 2025-2026 Ian Douglas Lawrence Norman McLean
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# GitHub workflow for dependency graph submission
+# Documentation file - licensed under CC BY-SA 4.0
+
+name: Dependency Graph
+
+on:
+  push:
+    branches:
+      - main
+      - 'cto/**'
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-graph:
+    name: Generate Dependency Graph
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+
+      - name: Build project
+        run: mvn compile -f docs/src/helloworld/pom.xml
+
+      - name: Upload dependency graph
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-graph
+          path: target/dependency-graph/

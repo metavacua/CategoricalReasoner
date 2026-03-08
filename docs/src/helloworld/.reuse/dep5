@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2025-2026 Ian Douglas Lawrence Norman McLean
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# REUSE Specification 3.0 configuration
+# This file is documentation (CC BY-SA)
+
+version = 3
+SPDX-PackageName = Catty HelloWorld
+SPDX-PackageSupplier = Ian Douglas Lawrence Norman McLean
+SPDX-PackageDownloadLocation = https://github.com/metavacua/CategoricalReasoner
+SPDX-PackageVerificationCode = 0000 (see .reuse/dep5 for exclusions)
+SPDX-PackageLicenseDeclared = AGPL-3.0-or-later
+SPDX-PackageCopyrightText = 2025-2026 Ian Douglas Lawrence Norman McLean
+SPDX-LicenseComment = The AGPLv3 license applies to all source code files
+
+[mapping]
+# Files in src/ are AGPL-licensed
+PathIsSource = ^src/
+# All other files are CC BY-SA licensed
+PathIsDocumentation = ^.*$
+
+[deployment]
+# Dual licensing: CC BY-SA for docs, AGPL for source
