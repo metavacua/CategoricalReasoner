@@ -61,9 +61,18 @@ SPDX-License-Identifier: AGPL-3.0-or-later
                 <version>3.5.0</version>
             </plugin>
             <plugin>
-                <groupId>org. REUSE.toml</groupId>
+                <groupId>com.github.fschoen</groupId>
                 <artifactId>reuse-maven-plugin</artifactId>
-                <version>0.1.0</version>
+                <version>1.1.0</version>
+                <executions>
+                    <execution>
+                        <id>reuse-check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
