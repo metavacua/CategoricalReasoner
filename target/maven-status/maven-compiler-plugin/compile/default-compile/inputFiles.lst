@@ -1,0 +1,7 @@
+/home/engine/project/src/main/java/org/catty/sparql/federation/discovery/WikidataEndpointDiscovery.java
+/home/engine/project/src/main/java/org/catty/sparql/federation/SelectQueryExecutor.java
+/home/engine/project/src/main/java/org/catty/sparql/federation/impl/JenaSelectQueryFederation.java
+/home/engine/project/src/main/java/org/catty/sparql/federation/impl/JenaSelectQueryExecutor.java
+/home/engine/project/src/main/java/org/catty/sparql/federation/SelectQueryResult.java
+/home/engine/project/src/main/java/org/catty/sparql/federation/SelectQueryFederation.java
+/home/engine/project/src/main/java/org/catty/sparql/federation/SdlcSpecificationGenerator.java
