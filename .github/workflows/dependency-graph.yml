@@ -34,10 +34,10 @@ jobs:
           java-version: '25'
 
       - name: Build helloworld project
-        run: mvn compile -f docs/src/helloworld/pom.xml -DskipTests
+        run: mvn compile -f docs/helloworld/pom.xml -DskipTests
 
       - name: Generate dependency snapshot
-        run: mvn org.apache.maven.plugins:maven-dependency-plugin:3.6.1:tree -f docs/src/helloworld/pom.xml -DoutputType=text -DoutputFile=dependency-tree.txt
+        run: mvn org.apache.maven.plugins:maven-dependency-plugin:3.6.1:tree -f docs/helloworld/pom.xml -DoutputType=text -DoutputFile=dependency-tree.txt
 
       - name: Upload dependency graph artifact
         uses: actions/upload-artifact@v4

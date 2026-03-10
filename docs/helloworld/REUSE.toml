@@ -11,7 +11,7 @@ SPDX-PackageDownloadLocation = "https://github.com/metavacua/CategoricalReasoner
 SPDX-PackageLicenseDeclared = "AGPL-3.0-or-later"
 SPDX-PackageCopyrightText = "2025-2026 Ian Douglas Lawrence Norman McLean"
 
-# Files in src/ are AGPL-licensed
+# Files in src/ are AGPL-licensed (relative to this REUSE.toml location)
 [[mapping]]
 path-pattern = "^src/"
 license-expression = "AGPL-3.0-or-later"
