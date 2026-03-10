@@ -1,0 +1,16 @@
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?item ?itemLabel ?description
+WHERE {
+  VALUES ?searchTerm { "category" "logic" "categorical logic" "topos" "functor" }
+  ?item rdfs:label ?itemLabel .
+  FILTER(LANG(?itemLabel) = "en")
+  FILTER(CONTAINS(LCASE(?itemLabel), ?searchTerm))
+  OPTIONAL { 
+    ?item <http://schema.org/description> ?description .
+    FILTER(LANG(?description) = "en")
+  }
+}
+LIMIT 50

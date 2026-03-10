@@ -1,0 +1,33 @@
+=== Catty Semantic Web Discovery ===
+SPARQL Endpoint: https://query.wikidata.org/sparql
+Query: queries/discovery.rq
+Output: ro-crate-metadata.json
+
+Executing discovery query...
+[DiscoveryEngine] Loading query from: queries/discovery.rq
+[DiscoveryEngine] Query loaded successfully
+=== SPARQL QUERY ===
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?item ?itemLabel ?description
+WHERE {
+  VALUES ?searchTerm { "category" "logic" "categorical logic" "topos" "functor" }
+  ?item rdfs:label ?itemLabel .
+  FILTER(LANG(?itemLabel) = "en")
+  FILTER(CONTAINS(LCASE(?itemLabel), ?searchTerm))
+  OPTIONAL { 
+    ?item <http://schema.org/description> ?description .
+    FILTER(LANG(?description) = "en")
+  }
+}
+LIMIT 50
+
+=== END QUERY ===
+
+[DiscoveryEngine] Query parsed successfully
+[DiscoveryEngine] Connecting to endpoint: https://query.wikidata.org/sparql
+[DiscoveryEngine] Connection established
+[DiscoveryEngine] Query start time: 2026-02-08T23:45:41.996972673Z
+[DiscoveryEngine] Executing query...
