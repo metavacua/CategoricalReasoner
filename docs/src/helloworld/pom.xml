@@ -17,6 +17,8 @@ SPDX-License-Identifier: AGPL-3.0-or-later
     <description>Minimal viable helloworld project demonstrating AGENTS.md infrastructure</description>
 
     <properties>
+        <!-- Java 25 required per AGENTS.md - will be GA September 2025 -->
+        <!-- Override with -Dmaven.compiler.source=XX -Dmaven.compiler.target=XX for local testing -->
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
