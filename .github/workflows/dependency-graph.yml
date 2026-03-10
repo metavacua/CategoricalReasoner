@@ -33,14 +33,14 @@ jobs:
           distribution: 'temurin'
           java-version: '25'
 
-      - name: Build project
+      - name: Build helloworld project
         run: mvn compile -f docs/src/helloworld/pom.xml -DskipTests
 
       - name: Generate dependency snapshot
         run: mvn org.apache.maven.plugins:maven-dependency-plugin:3.6.1:tree -f docs/src/helloworld/pom.xml -DoutputType=text -DoutputFile=dependency-tree.txt
 
-      - name: Upload dependency graph
+      - name: Upload dependency graph artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dependency-graph
+          name: helloworld-dependency-graph
           path: docs/src/helloworld/dependency-tree.txt

@@ -41,7 +41,8 @@ jobs:
 
       - name: Build
         run: |
-          mvn compile -f docs/src/helloworld/pom.xml
+          # Build the helloworld demonstration project
+          mvn compile -f docs/src/helloworld/pom.xml -DskipTests
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3

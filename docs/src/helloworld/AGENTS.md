@@ -18,14 +18,14 @@ This project inherits all constraints from:
 
 - Documentation files (this AGENTS.md, markdown, YAML configs): CC BY-SA 4.0
 - Source code (src/main/java/): AGPLv3
-- Configuration follows REUSE Specification 3.0
+- Configuration follows REUSE Specification 3.0+
 
 ## Standards
 
 - Maven with Java 25
-- REUSE headers on all files
+- REUSE headers on all files (REUSE.toml format, not deprecated dep5)
 - pre-commit framework for validation
-- GitHub dependency graphs and CodeQL
+- GitHub dependency graphs and CodeQL (workflows in repository root .github/workflows/)
 
 ## See Also
 

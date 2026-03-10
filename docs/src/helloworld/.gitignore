@@ -16,6 +16,9 @@ buildNumber.properties
 *.war
 *.ear
 
+# Dependency graph artifacts
+dependency-tree.txt
+
 # IDE
 .idea/
 *.iml
