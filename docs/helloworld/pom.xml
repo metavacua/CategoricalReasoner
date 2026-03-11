@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 SPDX-FileCopyrightText: 2025-2026 Ian Douglas Lawrence Norman McLean
-SPDX-License-Identifier: AGPL-3.0-or-later
+SPDX-License-Identifier: CC-BY-SA-4.0
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"

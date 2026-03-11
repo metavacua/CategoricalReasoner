@@ -43,4 +43,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: helloworld-dependency-graph
-          path: docs/src/helloworld/dependency-tree.txt
+          path: docs/helloworld/dependency-tree.txt
