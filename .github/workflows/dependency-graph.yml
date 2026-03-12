@@ -20,7 +20,7 @@ env:
 
 permissions:
   contents: read
-  packages: write
+  packages: read
 
 jobs:
   dependency-graph:
