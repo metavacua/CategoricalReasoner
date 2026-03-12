@@ -25,7 +25,15 @@ This project inherits all constraints from:
 - Maven with Java 25
 - REUSE headers on all files (REUSE.toml format, not deprecated dep5)
 - pre-commit framework for validation
-- GitHub dependency graphs and CodeQL (workflows in repository root .github/workflows/)
+- GitHub dependency graphs via marketplace action `advanced-security/maven-dependency-submission-action@v5` and CodeQL (workflows in repository root .github/workflows/)
+
+## Dependency Graph Submission
+
+The helloworld project uses the official GitHub-authored marketplace action `advanced-security/maven-dependency-submission-action@v5` for automatic dependency graph submission. This action:
+- Automatically runs `mvn dependency:tree` internally
+- Submits dependency snapshots to the GitHub Dependency Graph
+- Requires `dependency-graph: read` permission in the workflow
+- Is maintained by GitHub's Advanced Security team (38k+ usage count)
 
 ## See Also
 

@@ -34,8 +34,6 @@ This repository attempts to implement the Categorical Reasoner "Catty" thesis: c
 - Github dependency graphs with Automatic dependency submission: Automatically detect and report build-time dependencies for select ecosystems.
 - Dependabot
 - CodeQL analysis
-
-## Workflows
 - Semantic Versioning 2.0.0 (SemVer)
 - Keep a Changelog 1.1.0
 - Conventional Commits 1.0.0
@@ -45,6 +43,37 @@ This repository attempts to implement the Categorical Reasoner "Catty" thesis: c
 - SLSA (Supply-chain Levels for Software Artifacts)
 - CodeMeta
 - Argument Ontology (ARGO)
+
+## Marketplace Research Protocol
+All GitHub Actions must be sourced from the GitHub Marketplace using the official actions authored by GitHub or verified creators. DIY implementations are prohibited in favor of standard, community-validated tools.
+
+### Discovery and Validation
+1. **Search Marketplace First**: Before implementing any CI/CD functionality, search the GitHub Marketplace for official or verified creator actions
+2. **Verify Authorship**: Prefer actions authored by GitHub (github/*) or verified marketplace creators
+3. **Check Usage Statistics**: Actions with high usage counts (>10k) indicate community trust and stability
+4. **Review Source Code**: For critical actions, review the source repository to ensure no malicious patterns
+5. **Check Updates**: Ensure the action is actively maintained (recent commits within 6 months)
+
+### Validation Criteria
+- Action must have a valid license (preferably MIT, Apache 2.0, or GitHub standard license)
+- Must have a published release/tag for version pinning
+- Must not require excessive permissions beyond the minimum required
+- Must not make network calls to external services beyond their documented purpose
+- Must pass security scans (CodeQL, Dependabot alerts)
+
+### Documentation Requirements
+When adopting a marketplace action:
+1. Document the action name, version, and author in the workflow file comments
+2. Document the research finding in the relevant AGENTS.md (proving the research was done)
+3. If the action is critical infrastructure, document the verification steps
+
+### Current Marketplace Actions Used
+- `actions/checkout@v5` - GitHub-authored, official repository checkout
+- `actions/setup-java@v5` - GitHub-authored, official Java setup
+- `actions/upload-artifact@v4` - GitHub-authored, official artifact upload
+- `advanced-security/maven-dependency-submission-action@v5` - GitHub-authored, official dependency graph submission
+- `github/codeql-action/init@v4` - GitHub-authored, official CodeQL analysis
+- `github/codeql-action/analyze@v4` - GitHub-authored, official CodeQL analysis
 
 ## Provenance (PROV-O) and Evidence Graph
 Implementation: Every time an agent runs a SPARQL query or a KeY validation or any development activity that modifies state, it must generate a PROV-O record. This record should link the Activity (The Query/Validation) to the Agent (The LLM) and the Entity (The Resulting Documentation/Code). Without this, the "academic quality" is unverifiable. Reading that triggers citation requirements must also be recorded.
