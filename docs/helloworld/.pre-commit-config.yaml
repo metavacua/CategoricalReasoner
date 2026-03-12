@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2025-2026 Ian Douglas Lawrence Norman McLean
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# pre-commit configuration for HelloWorld project
+# This file is documentation (CC BY-SA)
+
+repos:
+  # REUSE compliance check - validates SPDX headers
+  - repo: https://github.com/fsfe/reuse-tool
+    rev: v4.0.3
+    hooks:
+      - id: reuse
+        args: ['lint']
+
+  # Standard file checks - no external downloads needed
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ['--maxkb=1000']
+
+fail_fast: false
+default_install_hook_types: [pre-commit, commit-msg]
+default_stages: [pre-commit]

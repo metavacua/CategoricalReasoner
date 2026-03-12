@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2025-2026 Ian Douglas Lawrence Norman McLean
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# GitHub workflow for dependency graph submission
+# Documentation file - licensed under CC BY-SA 4.0
+
+name: Dependency Graph
+
+on:
+  push:
+    branches:
+      - main
+      - 'cto/**'
+  pull_request:
+    branches:
+      - main
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+permissions:
+  contents: read
+  packages: read
+
+jobs:
+  dependency-graph:
+    name: Generate Dependency Graph
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: '25'
+
+      - name: Build helloworld project
+        run: mvn compile -f docs/helloworld/pom.xml -DskipTests
+
+      - name: Generate dependency snapshot
+        run: mvn org.apache.maven.plugins:maven-dependency-plugin:3.6.1:tree -f docs/helloworld/pom.xml -DoutputType=text -DoutputFile=dependency-tree.txt
+
+      - name: Upload dependency graph artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: helloworld-dependency-graph
+          path: docs/helloworld/dependency-tree.txt

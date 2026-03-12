@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: 2025-2026 Ian Douglas Lawrence Norman McLean
+# SPDX-License-Identifier: CC-BY-SA-4.0
+#
+# REUSE Specification 3.0+ configuration (TOML format)
+# This file is documentation (CC BY-SA)
+
+version = 3
+SPDX-PackageName = "Catty HelloWorld"
+SPDX-PackageSupplier = "Ian Douglas Lawrence Norman McLean"
+SPDX-PackageDownloadLocation = "https://github.com/metavacua/CategoricalReasoner"
+SPDX-PackageLicenseDeclared = "CC-BY-SA-4.0 AND AGPL-3.0-or-later"
+SPDX-PackageCopyrightText = "2025-2026 Ian Douglas Lawrence Norman McLean"
+
+# Files in src/ have AGPL headers in their individual SPDX tags
+[[mapping]]
+path-pattern = "^src/"
+license-expression = "AGPL-3.0-or-later"
+
+# Configuration files and documentation have CC BY-SA headers
+[[mapping]]
+path-pattern = "^(AGENTS.md|REUSE.toml|pom.xml|\\.pre-commit-config.yaml|\\.gitignore|\\.github/)"
+license-expression = "CC-BY-SA-4.0"
+
+# All other files default to CC BY-SA
+[[mapping]]
+path-pattern = "^.*$"
+license-expression = "CC-BY-SA-4.0"
