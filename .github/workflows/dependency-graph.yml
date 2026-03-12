@@ -21,10 +21,11 @@ env:
 permissions:
   contents: read
   packages: read
+  dependency-graph: write
 
 jobs:
   dependency-graph:
-    name: Generate Dependency Graph
+    name: Submit Dependency Graph
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -39,11 +40,12 @@ jobs:
       - name: Build helloworld project
         run: mvn compile -f docs/helloworld/pom.xml -DskipTests
 
-      - name: Generate dependency snapshot
-        run: mvn org.apache.maven.plugins:maven-dependency-plugin:3.6.1:tree -f docs/helloworld/pom.xml -DoutputType=text -DoutputFile=dependency-tree.txt
-
-      - name: Upload dependency graph artifact
-        uses: actions/upload-artifact@v4
+      - name: Submit dependency graph
+        # Action: advanced-security/maven-dependency-submission-action@v5
+        # Author: GitHub (Advanced Security Team)
+        # Research: Official GitHub action for Maven dependency graph submission
+        # Usage: 38k+ | License: MIT | Maintained: Active
+        uses: advanced-security/maven-dependency-submission-action@v5
         with:
-          name: helloworld-dependency-graph
-          path: docs/helloworld/dependency-tree.txt
+          maven-pom-file: docs/helloworld/pom.xml
+          dependency-categories: runtime,compile
