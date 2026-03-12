@@ -21,7 +21,7 @@ env:
 permissions:
   contents: read
   packages: read
-  dependency-graph: read
+  dependency-graph: write
 
 jobs:
   dependency-graph:
@@ -41,6 +41,10 @@ jobs:
         run: mvn compile -f docs/helloworld/pom.xml -DskipTests
 
       - name: Submit dependency graph
+        # Action: advanced-security/maven-dependency-submission-action@v5
+        # Author: GitHub (Advanced Security Team)
+        # Research: Official GitHub action for Maven dependency graph submission
+        # Usage: 38k+ | License: MIT | Maintained: Active
         uses: advanced-security/maven-dependency-submission-action@v5
         with:
           maven-pom-file: docs/helloworld/pom.xml

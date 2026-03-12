@@ -70,7 +70,6 @@ When adopting a marketplace action:
 ### Current Marketplace Actions Used
 - `actions/checkout@v5` - GitHub-authored, official repository checkout
 - `actions/setup-java@v5` - GitHub-authored, official Java setup
-- `actions/upload-artifact@v4` - GitHub-authored, official artifact upload
 - `advanced-security/maven-dependency-submission-action@v5` - GitHub-authored, official dependency graph submission
 - `github/codeql-action/init@v4` - GitHub-authored, official CodeQL analysis
 - `github/codeql-action/analyze@v4` - GitHub-authored, official CodeQL analysis
