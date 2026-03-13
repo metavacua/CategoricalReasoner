@@ -10,6 +10,11 @@ Reset the repository to a likely safe state and hopefully significantly clarifie
 
 ## [Unreleased]
 
+### Added
+
+- Test PR submission workflow
+- Second test entry for PR workflow verification
+
 ### Removed
 
 - **BREAKING**: Eliminated `docs/dissertation/bibliography/citations.yaml` citation registry system
