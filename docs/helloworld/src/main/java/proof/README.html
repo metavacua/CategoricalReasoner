@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Proof-Theoretic Infrastructure</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; max-width: 900px; margin: 0 auto; padding: 2rem; line-height: 1.6; }
+        h1 { border-bottom: 2px solid #333; padding-bottom: 0.5rem; }
+        h2 { border-bottom: 1px solid #ccc; margin-top: 2rem; }
+        h3 { margin-top: 1.5rem; }
+        code { background: #f4f4f4; padding: 0.2em 0.4em; border-radius: 3px; }
+        pre { background: #f4f4f4; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+        pre code { background: none; padding: 0; }
+        .proof-rule { font-family: monospace; background: #f8f8f8; padding: 1rem; margin: 1rem 0; border-left: 4px solid #007bff; }
+        ul { margin-left: 1.5rem; }
+    </style>
+</head>
+<body>
+    <h1>Proof-Theoretic Infrastructure</h1>
+    <p>This package contains the core infrastructure for the Curry-Howard license-by-compilation architecture.</p>
+
+    <h2>Package Structure</h2>
+
+    <h3>proof.licensing</h3>
+    <ul>
+        <li><strong>LicenseClassification</strong>: Enum representing proof-theoretic license classifications
+            <ul>
+                <li><code>CLOSED_AGPL</code>: Successful compilation (closed proof)</li>
+                <li><code>OPEN_CCBYSA</code>: Documentation only (open branch)</li>
+                <li><code>INVALID</code>: Compilation failure (ill-typed)</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>proof.metadata</h3>
+    <ul>
+        <li><strong>ProofMetadata</strong>: Record capturing proof normalization results
+            <ul>
+                <li>Classification, timestamp, git context</li>
+                <li>JSON generation for SBOM integration</li>
+                <li>Provenance tracking</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Curry-Howard Correspondence</h2>
+    <p>This package implements the formal correspondence between:</p>
+    <ul>
+        <li><strong>Logic</strong>: Propositions, proofs, proof normalization</li>
+        <li><strong>Computation</strong>: Types, programs, compilation</li>
+    </ul>
+
+    <h3>Proof Classification Rules</h3>
+    <div class="proof-rule">
+        <pre>Γ ⊢ Java : Type      Γ ⊢ compile(Java) = 0
+──────────────────────────────────────────
+          Γ ⊢ AGPL(Java)
+
+Γ ⊢ Doc : Documentation  Γ ⊢ ¬compile(Doc)
+────────────────────────────────────────────
+          Γ ⊢ CC-BY-SA(Doc)
+
+Γ ⊢ Java : ¬Type      Γ ⊢ compile(Java) ≠ 0
+─────────────────────────────────────────────
+              ⊥</pre>
+    </div>
+
+    <h2>Usage</h2>
+    <pre><code>// Classify based on compilation result
+LicenseClassification classification = compilationSucceeded
+    ? LicenseClassification.CLOSED_AGPL
+    : LicenseClassification.INVALID;
+
+// Create metadata for provenance tracking
+ProofMetadata metadata = ProofMetadata.create(
+    classification,
+    "main",
+    gitCommitHash
+);
+
+// Generate JSON for SBOM
+String json = metadata.toJson();</code></pre>
+
+    <h2>Integration</h2>
+    <ul>
+        <li><strong>Maven Plugins</strong>: license-maven-plugin, spdx-maven-plugin</li>
+        <li><strong>Pre-commit</strong>: scripts/compilation-gate.sh</li>
+        <li><strong>GitHub Actions</strong>: .github/workflows/formal-verification.yml</li>
+    </ul>
+
+    <h2>Documentation</h2>
+    <ul>
+        <li><code>PROOF-THEORETIC-LICENSE.html</code>: Complete formal specification</li>
+        <li><code>../AGENTS.md</code>: Project constraints</li>
+        <li><code>/home/engine/project/AGENTS.md</code>: Repository-wide constraints</li>
+    </ul>
+
+    <footer>
+        <p><small>Last updated: 2025-03-13</small></p>
+    </footer>
+</body>
+</html>

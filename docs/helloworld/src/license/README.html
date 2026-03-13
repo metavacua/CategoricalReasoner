@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>License Header Templates</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; max-width: 800px; margin: 0 auto; padding: 2rem; line-height: 1.6; }
+        h1 { border-bottom: 2px solid #333; padding-bottom: 0.5rem; }
+        h2 { border-bottom: 1px solid #ccc; margin-top: 2rem; }
+        code { background: #f4f4f4; padding: 0.2em 0.4em; border-radius: 3px; }
+        ul { margin-left: 1.5rem; }
+    </style>
+</head>
+<body>
+    <h1>License Header Templates</h1>
+    <p>This directory contains license header templates used by the license-maven-plugin to apply proof-theoretic license classification.</p>
+
+    <h2>Templates</h2>
+    <ul>
+        <li><strong>AGPL-3.0-or-later.txt</strong>: Template for Java source files (closed proof terms)
+            <ul>
+                <li>Applied during <code>compile</code> phase after successful compilation</li>
+                <li>Contains proof-theoretic classification metadata</li>
+            </ul>
+        </li>
+        <li><strong>CC-BY-SA-4.0.txt</strong>: Template for documentation files (open branches)
+            <ul>
+                <li>Applied during <code>process-sources</code> phase</li>
+                <li>Contains proof-theoretic classification metadata</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h2>Usage</h2>
+    <p>The license-maven-plugin is configured in <code>pom.xml</code> to:</p>
+    <ol>
+        <li>Apply AGPL-3.0-or-later headers to Java files after successful compilation</li>
+        <li>Apply CC-BY-SA-4.0 headers to documentation files</li>
+        <li>Verify that headers are correctly applied</li>
+    </ol>
+
+    <h2>Curry-Howard Correspondence</h2>
+    <p>These templates implement the proof-theoretic license classification:</p>
+    <ul>
+        <li><strong>AGPL</strong>: Applied to files that successfully compile (closed proof)</li>
+        <li><strong>CC-BY-SA</strong>: Applied to documentation that doesn't require compilation (open branch)</li>
+    </ul>
+    <p>See <code>PROOF-THEORETIC-LICENSE.html</code> for formal details.</p>
+
+    <footer>
+        <p><small>Last updated: 2025-03-13</small></p>
+    </footer>
+</body>
+</html>

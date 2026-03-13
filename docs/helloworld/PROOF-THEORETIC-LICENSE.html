@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Proof-Theoretic License Classification</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; max-width: 900px; margin: 0 auto; padding: 2rem; line-height: 1.6; }
+        h1 { border-bottom: 2px solid #333; padding-bottom: 0.5rem; }
+        h2 { border-bottom: 1px solid #ccc; margin-top: 2rem; padding-bottom: 0.3rem; }
+        h3 { margin-top: 1.5rem; }
+        code { background: #f4f4f4; padding: 0.2em 0.4em; border-radius: 3px; }
+        pre { background: #f4f4f4; padding: 1rem; border-radius: 5px; overflow-x: auto; }
+        pre code { background: none; padding: 0; }
+        table { border-collapse: collapse; width: 100%; margin: 1rem 0; }
+        th, td { border: 1px solid #ddd; padding: 0.75rem; text-align: left; }
+        th { background: #f8f8f8; }
+        .proof-rule { font-family: monospace; background: #f8f8f8; padding: 1rem; margin: 1rem 0; border-left: 4px solid #007bff; }
+    </style>
+</head>
+<body>
+    <h1>Proof-Theoretic License Classification</h1>
+    <p>This document formalizes the Curry-Howard correspondence for the Catty HelloWorld project, defining how Maven compilation phases implement proof normalization to determine license classification.</p>
+
+    <h2>Curry-Howard Correspondence Overview</h2>
+    <p>The Curry-Howard isomorphism establishes a correspondence between:</p>
+    <ul>
+        <li><strong>Logic</strong> (propositions, proofs) and <strong>Computation</strong> (types, programs)</li>
+        <li><strong>Proof normalization</strong> (cut elimination) and <strong>Program execution</strong> (β-reduction)</li>
+        <li><strong>Closed proof terms</strong> and <strong>Executable programs</strong></li>
+    </ul>
+    <p>In this architecture:</p>
+    <ul>
+        <li>Java source files with valid type annotations = well-typed λ-terms</li>
+        <li>Maven compilation phase = proof normalization procedure</li>
+        <li>Successful compilation (exit 0) = β-η normalization succeeds → <strong>Closed Branch</strong></li>
+        <li>Compilation failure = ill-typed/non-terminating → <strong>GIGO</strong> (reject)</li>
+        <li>Documentation-only changes = no compilation needed → <strong>Open Branch</strong></li>
+    </ul>
+
+    <h2>Sequent Calculus Formalization</h2>
+
+    <h3>Proof Classification</h3>
+    <p>We define a sequent calculus <code>Γ ⊢ A</code> where:</p>
+    <ul>
+        <li><code>Γ</code> is the context (repository state, dependencies, constraints)</li>
+        <li><code>A</code> is the proposition (license classification artifact)</li>
+    </ul>
+
+    <h3>Closed Branch Theorem</h3>
+    <div class="proof-rule">
+        <pre>Γ ⊢ Java : Type      (Type correctness)
+─────────────────────
+Γ ⊢ compile(Java) = 0  (Compilation succeeds)
+─────────────────────────────────────────────────────
+Γ ⊢ AGPL(Java)        (Closed Branch → AGPL v3)</pre>
+    </div>
+    <p><strong>Interpretation</strong>: If Java source type-checks and compiles successfully, it constitutes a closed proof term and is licensed under AGPL v3.</p>
+
+    <h3>Open Branch Theorem</h3>
+    <div class="proof-rule">
+        <pre>Γ ⊢ Doc : Documentation      (Documentation artifact)
+────────────────────────────
+Γ ⊢ ¬compile(Doc)           (No compilation performed)
+───────────────────────────────────────────────────────
+Γ ⊢ CC-BY-SA(Doc)           (Open Branch → CC BY-SA 4.0)</pre>
+    </div>
+    <p><strong>Interpretation</strong>: Documentation artifacts are open branches (incomplete proofs) and remain under CC BY-SA 4.0.</p>
+
+    <h3>GIGO Rejection Theorem</h3>
+    <div class="proof-rule">
+        <pre>Γ ⊢ Java : ¬Type      (Type error)
+────────────────────
+Γ ⊢ compile(Java) ≠ 0  (Compilation fails)
+────────────────────────────────────────
+⊥                        (Contradiction → Reject)</pre>
+    </div>
+    <p><strong>Interpretation</strong>: Ill-typed Java code is a contradiction in the proof system and must be rejected.</p>
+
+    <h2>Maven Implementation</h2>
+
+    <h3>Phase Bindings</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Maven Phase</th>
+                <th>Proof-Theoretic Operation</th>
+                <th>License Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><code>validate</code></td><td>Context consistency check</td><td>Verify AGENTS.md constraints</td></tr>
+            <tr><td><code>generate-sources</code></td><td>Context extension</td><td>Generate code from semantic HTML</td></tr>
+            <tr><td><code>process-sources</code></td><td>License classification (open)</td><td>Apply CC-BY-SA headers</td></tr>
+            <tr><td><code>compile</code></td><td><strong>Proof normalization</strong></td><td>Apply AGPL headers on success</td></tr>
+            <tr><td><code>test</code></td><td>Proof verification</td><td>Run unit tests as lemmas</td></tr>
+            <tr><td><code>package</code></td><td>Proof closure</td><td>Generate SBOM with provenance</td></tr>
+        </tbody>
+    </table>
+
+    <h2>See Also</h2>
+    <ul>
+        <li><code>/home/engine/project/AGENTS.md</code> - Root proof structure</li>
+        <li><code>/home/engine/project/docs/helloworld/AGENTS.md</code> - Project constraints</li>
+        <li><code>/home/engine/project/docs/helloworld/pom.xml</code> - Maven configuration</li>
+    </ul>
+
+    <footer>
+        <p><small>Last updated: 2025-03-13</small></p>
+    </footer>
+</body>
+</html>

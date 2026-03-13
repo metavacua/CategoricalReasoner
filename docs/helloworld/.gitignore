@@ -30,3 +30,7 @@ dependency-tree.txt
 # OS
 .DS_Store
 Thumbs.db
+
+# Git metadata (internal use only)
+.git/proof-theoretic-metadata.json
+

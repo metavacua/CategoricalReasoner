@@ -106,11 +106,13 @@ The project includes dependencies for proof-theoretic infrastructure:
 
 ## Documentation
 
-- `PROOF-THEORETIC-LICENSE.md`: Formal Curry-Howard documentation with sequent calculus notation
+- `PROOF-THEORETIC-LICENSE.html`: Formal Curry-Howard documentation with sequent calculus notation
+- `src/license/README.html`: License header template documentation
+- `src/main/java/proof/README.html`: Proof-theoretic infrastructure documentation
 
 ## See Also
 
 - Root AGENTS.md
 - docs/AGENTS.md
-- PROOF-THEORETIC-LICENSE.md
+- PROOF-THEORETIC-LICENSE.html
 

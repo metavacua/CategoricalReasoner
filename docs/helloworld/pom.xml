@@ -24,8 +24,8 @@ SPDX-License-Identifier: CC-BY-SA-4.0
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.11.0</junit.version>
         <javapoet.version>1.13.0</javapoet.version>
-        <jena.version>5.2.0</jena.version>
-        <openllet.version>3.1.0</openllet.version>
+        <jena.version>4.10.0</jena.version>
+        <openllet.version>2.6.5</openllet.version>
     </properties>
 
     <dependencies>
@@ -56,23 +56,21 @@ SPDX-License-Identifier: CC-BY-SA-4.0
         </dependency>
         <dependency>
             <groupId>org.apache.jena</groupId>
-            <artifactId>jena-tdb</artifactId>
+            <artifactId>jena-tdb2</artifactId>
             <version>${jena.version}</version>
         </dependency>
 
         <!-- OpenLlet: OWL reasoning (descendant of Pellet) -->
         <dependency>
-            <groupId>org.semanticweb.openllet</groupId>
-            <artifactId>openllet-owlapi</artifactId>
-            <version>${openllet.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.semanticweb.openllet</groupId>
-            <artifactId>openllet-jena</artifactId>
+            <groupId>com.github.ansell.pellet</groupId>
+            <artifactId>pellet-jena</artifactId>
             <version>${openllet.version}</version>
         </dependency>
 
-        <!-- KeY: Formal verification (profile activation for Java 25 compatibility) -->
+        <!-- KeY: Formal verification - Placeholder for Java 25 compatibility -->
+        <!-- KeY 2.13.0 is available from KeY project repository -->
+        <!-- Marked as optional since Java 25 support is pending -->
+        <!-- Uncomment when Java 25 support is available:
         <dependency>
             <groupId>org.key-project</groupId>
             <artifactId>key.core</artifactId>
@@ -85,6 +83,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
             <version>2.13.0</version>
             <scope>provided</scope>
         </dependency>
+        -->
     </dependencies>
 
     <build>
