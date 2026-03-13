@@ -64,11 +64,13 @@ SPDX-License-Identifier: CC-BY-SA-4.0
             <artifactId>jena-tdb2</artifactId>
             <version>${jena.version}</version>
         </dependency>
+        </dependencies>
 
         <!-- KeY 2.13.0: Formal verification for Java 25 -->
         <!-- KeY 2.13.0 targets Java 25 support. Use provided scope to avoid
-        <!-- conflicts with standard application classpath. Verification engine runs outside
-        <!-- standard classpath to prevent conflicts with modern JDK internals. -->
+        conflicts with standard application classpath. Verification engine runs outside
+        standard classpath to prevent conflicts with modern JDK internals. -->
+        <dependencies>
         <dependency>
             <groupId>org.key-project</groupId>
             <artifactId>key.core</artifactId>
@@ -81,7 +83,7 @@ SPDX-License-Identifier: CC-BY-SA-4.0
             <version>${key.version}</version>
             <scope>provided</scope>
         </dependency>
-    </dependencies>
+        </dependencies>
 
     <build>
         <plugins>
