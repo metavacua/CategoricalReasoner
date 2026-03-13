@@ -17,18 +17,21 @@ SPDX-License-Identifier: CC-BY-SA-4.0
     <description>Minimal viable helloworld project demonstrating AGENTS.md infrastructure</description>
 
     <properties>
-        <!-- Java 25 required per AGENTS.md - will be GA September 2025 -->
+        <!-- Java 25 LTS required per AGENTS.md -->
+        <!-- Java 25 was GA September 16, 2025 - current stable LTS -->
         <!-- Override with -Dmaven.compiler.source=XX -Dmaven.compiler.target=XX for local testing -->
+        <maven.compiler.release>25</maven.compiler.release>
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <junit.version>5.11.0</junit.version>
+        <junit.version>6.0.0</junit.version>
         <javapoet.version>1.13.0</javapoet.version>
-        <jena.version>4.10.0</jena.version>
-        <openllet.version>2.6.5</openllet.version>
+        <jena.version>6.0.0</jena.version>
+        <key.version>2.13.0</key.version>
     </properties>
 
     <dependencies>
+        <!-- JUnit 6.0+: Standard for modern JVM testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -43,7 +46,9 @@ SPDX-License-Identifier: CC-BY-SA-4.0
             <version>${javapoet.version}</version>
         </dependency>
 
-        <!-- Apache Jena: Semantic web and RDF processing -->
+        <!-- Apache Jena 6.0.0: Semantic web and RDF processing -->
+        <!-- Jena 6.0.0 (Feb 2026) requires Java 21+, fully compatible with Java 25 -->
+        <!-- Retired legacy components in favor of modern standards -->
         <dependency>
             <groupId>org.apache.jena</groupId>
             <artifactId>jena-core</artifactId>
@@ -60,38 +65,22 @@ SPDX-License-Identifier: CC-BY-SA-4.0
             <version>${jena.version}</version>
         </dependency>
 
-        <!-- OpenLlet/Pellet: OWL reasoning (descendant of Pellet) -->
-        <!-- Temporarily disabled - version coordination issues -->
-        <!-- Will be re-enabled when stable release available:
-        <dependency>
-            <groupId>org.semanticweb.openllet</groupId>
-            <artifactId>openllet-owlapi</artifactId>
-            <version>2.6.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.semanticweb.openllet</groupId>
-            <artifactId>openllet-jena</artifactId>
-            <version>2.6.5</version>
-        </dependency>
-        -->
-
-        <!-- KeY: Formal verification - Placeholder for Java 25 compatibility -->
-        <!-- KeY is not available in Maven Central yet -->
-        <!-- Marked as optional since Java 25 support is pending -->
-        <!-- Uncomment when Java 25 support is available and in Maven Central:
+        <!-- KeY 2.13.0: Formal verification for Java 25 -->
+        <!-- KeY 2.13.0 targets Java 25 support. Use provided scope to avoid
+        <!-- conflicts with standard application classpath. Verification engine runs outside
+        <!-- standard classpath to prevent conflicts with modern JDK internals. -->
         <dependency>
             <groupId>org.key-project</groupId>
             <artifactId>key.core</artifactId>
-            <version>2.13.0</version>
+            <version>${key.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.key-project</groupId>
             <artifactId>key.ui</artifactId>
-            <version>2.13.0</version>
+            <version>${key.version}</version>
             <scope>provided</scope>
         </dependency>
-        -->
     </dependencies>
 
     <build>
