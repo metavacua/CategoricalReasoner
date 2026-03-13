@@ -22,6 +22,21 @@ repos:
       - id: check-added-large-files
         args: ['--maxkb=1000']
 
+  # Curry-Howard compilation gate - proof-theoretic classification
+  - repo: local
+    hooks:
+      - id: maven-compilation-gate
+        name: Curry-Howard Compilation Gate
+        entry: ./scripts/compilation-gate.sh
+        language: script
+        pass_filenames: false
+        always_run: true
+        description: >
+          Implements proof-theoretic classification:
+          - Exit 0 + Java changes → Closed Proof (AGPL)
+          - Exit 0 + Documentation only → Open Branch (CC-BY-SA)
+          - Exit ≠ 0 + Java changes → GIGO (Reject commit)
+
 fail_fast: false
 default_install_hook_types: [pre-commit, commit-msg]
 default_stages: [pre-commit]

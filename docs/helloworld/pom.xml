@@ -23,6 +23,9 @@ SPDX-License-Identifier: CC-BY-SA-4.0
         <maven.compiler.target>25</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.11.0</junit.version>
+        <javapoet.version>1.13.0</javapoet.version>
+        <jena.version>5.2.0</jena.version>
+        <openllet.version>3.1.0</openllet.version>
     </properties>
 
     <dependencies>
@@ -32,19 +35,60 @@ SPDX-License-Identifier: CC-BY-SA-4.0
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- JavaPoet: Code generation for proof-theoretic infrastructure -->
+        <dependency>
+            <groupId>com.squareup</groupId>
+            <artifactId>javapoet</artifactId>
+            <version>${javapoet.version}</version>
+        </dependency>
+
+        <!-- Apache Jena: Semantic web and RDF processing -->
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-core</artifactId>
+            <version>${jena.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-arq</artifactId>
+            <version>${jena.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jena</groupId>
+            <artifactId>jena-tdb</artifactId>
+            <version>${jena.version}</version>
+        </dependency>
+
+        <!-- OpenLlet: OWL reasoning (descendant of Pellet) -->
+        <dependency>
+            <groupId>org.semanticweb.openllet</groupId>
+            <artifactId>openllet-owlapi</artifactId>
+            <version>${openllet.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.semanticweb.openllet</groupId>
+            <artifactId>openllet-jena</artifactId>
+            <version>${openllet.version}</version>
+        </dependency>
+
+        <!-- KeY: Formal verification (profile activation for Java 25 compatibility) -->
+        <dependency>
+            <groupId>org.key-project</groupId>
+            <artifactId>key.core</artifactId>
+            <version>2.13.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.key-project</groupId>
+            <artifactId>key.ui</artifactId>
+            <version>2.13.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
-                <configuration>
-                    <source>25</source>
-                    <target>25</target>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -75,6 +119,127 @@ SPDX-License-Identifier: CC-BY-SA-4.0
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- License Maven Plugin: Curry-Howard license-by-compilation -->
+            <!-- Binds AGPL headers to successful compilation (proof normalization) -->
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>5.0.0</version>
+                <executions>
+                    <execution>
+                        <id>apply-agpl-headers</id>
+                        <!-- Bind to compile phase: successful compilation = closed proof = AGPL -->
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                        <configuration>
+                            <mapping>
+                                <java>AGPL_STYLE</java>
+                            </mapping>
+                            <licenseSets>
+                                <licenseSet>
+                                    <header>src/license/AGPL-3.0-or-later.txt</header>
+                                    <includes>
+                                        <include>src/main/java/**/*.java</include>
+                                        <include>src/test/java/**/*.java</include>
+                                    </includes>
+                                    <excludes>
+                                        <exclude>**/package-info.java</exclude>
+                                    </excludes>
+                                </licenseSet>
+                            </licenseSets>
+                            <properties>
+                                <owner>Ian Douglas Lawrence Norman McLean</owner>
+                                <yearRange>2025-2026</yearRange>
+                            </properties>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>apply-ccbysa-headers</id>
+                        <!-- Documentation gets CC-BY-SA headers -->
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                        <configuration>
+                            <mapping>
+                                <md>CCBYSA_STYLE</md>
+                                <yaml>CCBYSA_STYLE</yaml>
+                                <toml>CCBYSA_STYLE</toml>
+                            </mapping>
+                            <licenseSets>
+                                <licenseSet>
+                                    <header>src/license/CC-BY-SA-4.0.txt</header>
+                                    <includes>
+                                        <include>**/*.md</include>
+                                        <include>**/*.yaml</include>
+                                        <include>**/*.yml</include>
+                                        <include>**/*.toml</include>
+                                    </includes>
+                                </licenseSet>
+                            </licenseSets>
+                            <properties>
+                                <owner>Ian Douglas Lawrence Norman McLean</owner>
+                                <yearRange>2025-2026</yearRange>
+                            </properties>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>check-licenses</id>
+                        <!-- Verify licenses are applied correctly -->
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- SPDX Maven Plugin: SBOM generation with proof-theoretic provenance -->
+            <plugin>
+                <groupId>org.spdx</groupId>
+                <artifactId>spdx-maven-plugin</artifactId>
+                <version>1.0.3</version>
+                <executions>
+                    <execution>
+                        <id>create-spdx-sbom</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>createSPDX</goal>
+                        </goals>
+                        <configuration>
+                            <spdxDocumentFile>${project.build.directory}/${project.artifactId}-${project.version}.spdx.json</spdxDocumentFile>
+                            <licenseListVersion>3.23</licenseListVersion>
+                            <includedFiles>
+                                <includedFile>${project.build.directory}/${project.artifactId}-${project.version}.jar</includedFile>
+                            </includedFiles>
+                            <!-- Proof-theoretic metadata for provenance -->
+                            <documentNamespace>https://github.com/metavacua/CategoricalReasoner/docs/helloworld/${project.version}/spdx</documentNamespace>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <!-- Maven Compiler Plugin with JML annotation support -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>25</source>
+                    <target>25</target>
+                    <compilerArgs>
+                        <!-- Enable JML annotation processing for KeY integration -->
+                        <arg>-Aopenjml.jmlpath=${project.basedir}/src/main/jml</arg>
+                    </compilerArgs>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.key-project</groupId>
+                            <artifactId>key.core</artifactId>
+                            <version>2.13.0</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
             </plugin>
         </plugins>
     </build>

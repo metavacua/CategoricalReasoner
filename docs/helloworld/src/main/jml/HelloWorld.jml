@@ -1,0 +1,42 @@
+// SPDX-FileCopyrightText: 2025-2026 Ian Douglas Lawrence Norman McLean
+// SPDX-License-Identifier: AGPL-3.0-or-later
+//
+// This JML specification file provides proof obligations for KeY verification.
+// It demonstrates the integration of formal verification with the Curry-Howard
+// license-by-compilation architecture.
+
+/*@ public invariant true; @*/
+
+public class HelloWorld {
+
+    /*@
+      @ public normal_behavior
+      @   requires args != null;
+      @   requires args.length >= 0;
+      @   assignable java.lang.System.out;
+      @   ensures true;
+      @*/
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+
+    /*@
+      @ public normal_behavior
+      @   ensures \result != null;
+      @   ensures \result.length() > 0;
+      @*/
+    public static String hello() {
+        return "Hello, World!";
+    }
+
+    /*@
+      @ public normal_behavior
+      @   requires s != null;
+      @   requires s.length() > 0;
+      @   ensures \result != null;
+      @   ensures \result.length() == s.length();
+      @*/
+    public static String reverseString(String s) {
+        return new StringBuilder(s).reverse().toString();
+    }
+}

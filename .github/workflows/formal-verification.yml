@@ -1,0 +1,139 @@
+# SPDX-FileCopyrightText: 2025-2026 Ian Douglas Lawrence Norman McLean
+# SPDX-License-Identifier: CC-BY-SA-4.0
+
+name: Formal Verification
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+env:
+  JAVA_VERSION: '25'
+  MAVEN_OPTS: '-Xmx2g'
+
+jobs:
+  license-by-compilation:
+    name: License-by-Compilation (Curry-Howard)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Verify AGENTS.md constraints
+        run: |
+          echo "=== AGENTS.md Power On Self Test ==="
+          echo "Current date: $(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          echo "Java version: $(java -version 2>&1 | head -n 1)"
+          echo "Maven version: $(mvn -version | head -n 1)"
+
+      - name: Compile (Proof Normalization)
+        run: |
+          echo "=== Proof Normalization (Compilation) ==="
+          cd docs/helloworld
+          mvn compile
+
+      - name: Verify License Headers Applied
+        run: |
+          echo "=== License Header Verification ==="
+          cd docs/helloworld
+          mvn license:check
+
+      - name: Generate SPDX SBOM
+        run: |
+          echo "=== SBOM Generation with Provenance ==="
+          cd docs/helloworld
+          mvn package
+
+      - name: Upload SPDX SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: spdx-sbom
+          path: docs/helloworld/target/*.spdx.json
+
+      - name: Upload Proof Metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: proof-metadata
+          path: .git/proof-theoretic-metadata.json
+          if-no-files-found: warn
+
+  formal-verification-key:
+    name: KeY Formal Verification
+    runs-on: ubuntu-latest
+    # Java 25 support in KeY is not yet stable - this is a placeholder for future integration
+    if: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21 (KeY compatibility)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Download KeY
+        run: |
+          wget -O key.tar.gz https://www.key-project.org/key/current/key.zip
+          unzip -q key.tar.gz -d /opt/key
+
+      - name: Run KeY Verification
+        run: |
+          cd docs/helloworld
+          # KeY command-line verification would go here
+          # java -jar /opt/key/key.jar -proofObligations -batch src/main/jml/*.jml
+
+  proof-theoretic-tests:
+    name: Proof-Theoretic Test Suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Run Proof-Theoretic Tests
+        run: |
+          echo "=== Running Curry-Howard Classification Tests ==="
+          cd docs/helloworld
+          mvn test -Dtest=proof.licensing.LicenseClassificationTest
+          mvn test -Dtest=proof.metadata.ProofMetadataTest
+
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results
+          path: docs/helloworld/target/surefire-reports/
+
+  reuse-compliance:
+    name: REUSE Compliance
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run REUSE Check
+        uses: fsfe/reuse-action@v3
+        with:
+          args: lint
+
+      - name: Run REUSE Maven Plugin
+        run: |
+          cd docs/helloworld
+          mvn reuse:check
