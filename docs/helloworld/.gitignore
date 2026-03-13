@@ -34,3 +34,7 @@ Thumbs.db
 # Git metadata (internal use only)
 .git/proof-theoretic-metadata.json
 
+# HTML files for documentation (local override of global .gitignore)
+!*.html
+
+
