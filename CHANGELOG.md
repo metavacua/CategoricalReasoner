@@ -13,6 +13,7 @@ Reset the repository to a likely safe state and hopefully significantly clarifie
 ### Added
 
 - Test PR submission workflow
+- Second test entry for PR workflow verification
 
 ### Removed
 
