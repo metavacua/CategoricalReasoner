@@ -1,0 +1,438 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix catty: <http://metavacua.github.io/catty/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+
+# =============================================================================
+# THEOREM SHAPE
+# =============================================================================
+
+catty:TheoremShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Theorem ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^thm-[a-z0-9]+(-[a-z0-9]+)*$" ;
+        sh:message "Theorem ID must match pattern: thm-[lowercase-hyphenated]" ;
+    ] ;
+    sh:property [
+        sh:path dct:title ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:message "Theorem must have exactly one non-empty title" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasStatement ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:message "Theorem must have exactly one statement" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasProof ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class catty:Proof ;
+        sh:message "Theorem must have exactly one proof" ;
+    ] ;
+    sh:property [
+        sh:path dct:references ;
+        sh:class bibo:Document ;
+        sh:message "All theorem citations must reference valid bibliography entries" ;
+    ] .
+
+# =============================================================================
+# LEMMA SHAPE
+# =============================================================================
+
+catty:LemmaShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Lemma ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:pattern "^lem-[a-z0-9]+(-[a-z0-9]+)*$" ;
+        sh:message "Lemma ID must match pattern: lem-[lowercase-hyphenated]" ;
+    ] ;
+    sh:property [
+        sh:path dct:title ;
+        sh:minCount 1 ;
+        sh:message "Lemma must have a title" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasStatement ;
+        sh:minCount 1 ;
+        sh:message "Lemma must have a statement" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasProof ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class catty:Proof ;
+    ] .
+
+# =============================================================================
+# PROPOSITION SHAPE
+# =============================================================================
+
+catty:PropositionShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Proposition ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:pattern "^prop-[a-z0-9]+(-[a-z0-9]+)*$" ;
+        sh:message "Proposition ID must match pattern: prop-[lowercase-hyphenated]" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasProof ;
+        sh:minCount 1 ;
+    ] .
+
+# =============================================================================
+# COROLLARY SHAPE
+# =============================================================================
+
+catty:CorollaryShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Corollary ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:pattern "^cor-[a-z0-9]+(-[a-z0-9]+)*$" ;
+        sh:message "Corollary ID must match pattern: cor-[lowercase-hyphenated]" ;
+    ] ;
+    sh:property [
+        sh:path catty:followsFrom ;
+        sh:minCount 1 ;
+        sh:or (
+            [ sh:class catty:Theorem ]
+            [ sh:class catty:Lemma ]
+        ) ;
+        sh:message "Corollary must follow from at least one theorem or lemma" ;
+    ] .
+
+# =============================================================================
+# PROOF SHAPE
+# =============================================================================
+
+catty:ProofShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Proof ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:pattern "^proof-[a-z0-9]+(-[a-z0-9]+)*$" ;
+        sh:message "Proof ID must match pattern: proof-[lowercase-hyphenated]" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasProofStep ;
+        sh:minCount 1 ;
+        sh:class catty:ProofStep ;
+        sh:message "Proof must have at least one proof step" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasConclusion ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:message "Proof must have exactly one conclusion" ;
+    ] .
+
+# =============================================================================
+# DEFINITION SHAPE
+# =============================================================================
+
+catty:DefinitionShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Definition ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:pattern "^def-[a-z0-9]+(-[a-z0-9]+)*$" ;
+        sh:message "Definition ID must match pattern: def-[lowercase-hyphenated]" ;
+    ] ;
+    sh:property [
+        sh:path dct:title ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Definition must have a title" ;
+    ] ;
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:message "Definition must define exactly one term (skos:prefLabel)" ;
+    ] ;
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:message "Definition must have exactly one meaning (skos:definition)" ;
+    ] .
+
+# =============================================================================
+# EXAMPLE SHAPE
+# =============================================================================
+
+catty:ExampleShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Example ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:pattern "^ex-[a-z0-9]+(-[a-z0-9]+)*$" ;
+        sh:message "Example ID must match pattern: ex-[lowercase-hyphenated]" ;
+    ] ;
+    sh:property [
+        sh:path dct:title ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path dct:description ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:message "Example must have a description" ;
+    ] ;
+    sh:property [
+        sh:path catty:instantiates ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:message "Example must provide instantiation" ;
+    ] .
+
+# =============================================================================
+# REMARK SHAPE
+# =============================================================================
+
+catty:RemarkShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Remark ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:pattern "^rem-[a-z0-9]+(-[a-z0-9]+)*$" ;
+    ] ;
+    sh:property [
+        sh:path catty:content ;
+        sh:minCount 1 ;
+    ] .
+
+# =============================================================================
+# CONJECTURE SHAPE
+# =============================================================================
+
+catty:ConjectureShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Conjecture ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:pattern "^conj-[a-z0-9]+(-[a-z0-9]+)*$" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasStatement ;
+        sh:minCount 1 ;
+    ] .
+
+# =============================================================================
+# SECTION SHAPE
+# =============================================================================
+
+catty:SectionShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Section ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:pattern "^sec-[a-z0-9]+(-[a-z0-9]+)*$" ;
+        sh:message "Section ID must match pattern: sec-[lowercase-hyphenated]" ;
+    ] ;
+    sh:property [
+        sh:path dct:title ;
+        sh:minCount 1 ;
+    ] .
+
+# =============================================================================
+# SUBSECTION SHAPE
+# =============================================================================
+
+catty:SubsectionShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Subsection ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:pattern "^subsec-[a-z0-9]+(-[a-z0-9]+)*$" ;
+    ] ;
+    sh:property [
+        sh:path catty:partOf ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class catty:Section ;
+        sh:message "Subsection must be part of exactly one section" ;
+    ] .
+
+# =============================================================================
+# CHAPTER SHAPE
+# =============================================================================
+
+catty:ChapterShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Chapter ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:pattern "^ch-[a-z0-9]+(-[a-z0-9]+)*$" ;
+        sh:message "Chapter ID must match pattern: ch-[lowercase-hyphenated]" ;
+    ] ;
+    sh:property [
+        sh:path dct:title ;
+        sh:minCount 1 ;
+    ] ;
+    sh:property [
+        sh:path catty:hasSection ;
+        sh:minCount 1 ;
+        sh:class catty:Section ;
+        sh:message "Chapter must contain at least one section" ;
+    ] .
+
+# =============================================================================
+# PART SHAPE
+# =============================================================================
+
+catty:PartShape
+    a sh:NodeShape ;
+    sh:targetClass catty:Part ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:pattern "^part-[a-z0-9]+(-[a-z0-9]+)*$" ;
+    ] ;
+    sh:property [
+        sh:path catty:hasChapter ;
+        sh:minCount 1 ;
+        sh:class catty:Chapter ;
+    ] .
+
+# =============================================================================
+# CITATION SHAPE (SWTI S2 compliance)
+# =============================================================================
+
+catty:CitationShape
+    a sh:NodeShape ;
+    sh:targetClass bibo:Document ;
+    sh:property [
+        sh:path dct:identifier ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[a-z]+[0-9]{4}[a-z]+$" ;
+        sh:message "Citation identifier must match pattern: [lastname][year][shortname]" ;
+    ] ;
+    sh:property [
+        sh:path dct:creator ;
+        sh:minCount 1 ;
+        sh:message "Citation must have at least one creator" ;
+    ] ;
+    sh:property [
+        sh:path dct:title ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:minLength 1 ;
+        sh:message "Citation must have exactly one title" ;
+    ] ;
+    sh:property [
+        sh:path dct:issued ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:message "Citation must have publication year" ;
+    ] ;
+    # External link requirement (SWTI S2)
+    sh:or (
+        [ sh:property [ sh:path bibo:doi ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path owl:sameAs ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path rdfs:seeAlso ; sh:minCount 1 ] ]
+    ) ;
+    sh:message "Citation must have at least one external link (DOI, owl:sameAs, or rdfs:seeAlso)" .
+
+# =============================================================================
+# PROVENANCE LINK SHAPE (SWTI S2 compliance)
+# =============================================================================
+
+catty:ProvenanceLinkShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf dct:references ;
+    sh:property [
+        sh:path dct:references ;
+        sh:nodeKind sh:IRI ;
+        sh:message "All dct:references must point to valid IRI resources" ;
+    ] .
+
+catty:DerivedFromShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf prov:wasDerivedFrom ;
+    sh:property [
+        sh:path prov:wasDerivedFrom ;
+        sh:class bibo:Document ;
+        sh:message "prov:wasDerivedFrom must point to bibliography entry" ;
+    ] .
+
+# =============================================================================
+# UNIQUENESS SHAPE (enforces global ID uniqueness)
+# =============================================================================
+
+catty:UniquenessShape
+    a sh:NodeShape ;
+    sh:targetNode catty:thesis ;
+    sh:sparql [
+        sh:message "All IDs must be globally unique across thesis" ;
+        sh:prefixes [
+            sh:declare [
+                sh:prefix "dct" ;
+                sh:namespace "http://purl.org/dc/terms/"^^xsd:anyURI ;
+            ]
+        ] ;
+        sh:select """
+            SELECT ?id (COUNT(?entity) AS ?count)
+            WHERE {
+                ?entity dct:identifier ?id .
+            }
+            GROUP BY ?id
+            HAVING (?count > 1)
+        """ ;
+    ] .
+
+# =============================================================================
+# EXTERNAL LINK VALIDATION SHAPE (SWTI S2)
+# =============================================================================
+
+catty:ExternalLinkShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf owl:sameAs ;
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:pattern "^(http://www\\.wikidata\\.org/entity/Q[0-9]+|http://dbpedia\\.org/resource/.*|https?://.+)$" ;
+        sh:message "owl:sameAs must link to Wikidata Q-ID, DBpedia resource, or valid URL" ;
+    ] .
+
+catty:DOIShape
+    a sh:NodeShape ;
+    sh:targetSubjectsOf bibo:doi ;
+    sh:property [
+        sh:path bibo:doi ;
+        sh:pattern "^10\\.[0-9]{4,}/.*$" ;
+        sh:message "DOI must match pattern: 10.xxxx/..." ;
+    ] .

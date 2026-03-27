@@ -1,0 +1,213 @@
+% citations.tex - Machine-readable citation macros for Catty thesis
+% This file enforces structured, validated citations and prevents LLM invention of sources
+
+% =============================================================================
+% LLM CONSTRAINT INSTRUCTIONS
+% =============================================================================
+% LLM INSTRUCTION: You may only use \cite{key} where key exists in
+% bibliography/citations.yaml. Do not invent new keys.
+% If you need to cite a source not in the registry, STOP and
+% report the missing citation. Do not proceed until it is added.
+%
+% Available citation keys (as of 2026-01-05):
+%   - girard1987linear
+%   - kripke1965semantical
+%   - sambin2003basic
+%   - lawvere1963functorial
+%   - maclane1971categories
+%   - prawitz1965natural
+%   - troelstra2000basic
+%   - abramsky1994proofs
+%   - seely1989linear
+%   - jacobs1999categorical
+%   - lambek1988introduction
+%   - barr1990category
+%   - urban2015categorical
+%   - trafford2020categorical
+%   - curry1958combinatory
+%   - howard1980formulae
+%
+% Your output will be validated; validation failures are fatal.
+% =============================================================================
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{citations}[2026/01/05 v1.0 Catty Thesis Citation Macros]
+
+% Required packages
+\RequirePackage{xparse}
+\RequirePackage{xstring}
+\RequirePackage{etoolbox}
+
+% =============================================================================
+% CITATION REGISTRY (validated against bibliography/citations.yaml)
+% =============================================================================
+
+% Define list of valid citation keys
+\newcommand{\@validcitationkeys}{%
+  girard1987linear,%
+  kripke1965semantical,%
+  sambin2003basic,%
+  lawvere1963functorial,%
+  maclane1971categories,%
+  prawitz1965natural,%
+  troelstra2000basic,%
+  abramsky1994proofs,%
+  seely1989linear,%
+  jacobs1999categorical,%
+  lambek1988introduction,%
+  barr1990category,%
+  urban2015categorical,%
+  trafford2020categorical,%
+  curry1958combinatory,%
+  howard1980formulae%
+}
+
+% Validation function (checks if key is in registry)
+\newcommand{\@validatecitationkey}[1]{%
+  \IfSubStr{\@validcitationkeys}{#1}{}{%
+    \PackageError{citations}{%
+      Citation key '#1' not found in registry.\MessageBreak
+      Valid keys: \@validcitationkeys\MessageBreak
+      Add the source to bibliography/citations.yaml first%
+    }{%
+      Stop and report missing citation to add it to the registry.%
+    }%
+  }%
+}
+
+% =============================================================================
+% BASE CITATION MACROS
+% =============================================================================
+
+% Standard citation (validates key)
+\RenewDocumentCommand{\cite}{m}{%
+  \@validatecitationkey{#1}%
+  \textcite{#1}%
+  \label{cite:#1}%
+}
+
+% Parenthetical citation
+\NewDocumentCommand{\citep}{m}{%
+  \@validatecitationkey{#1}%
+  \parencite{#1}%
+  \label{cite:#1}%
+}
+
+% Author-year citation
+\NewDocumentCommand{\citeauthor}{m}{%
+  \@validatecitationkey{#1}%
+  \textcite{#1}%
+}
+
+% Year only
+\NewDocumentCommand{\citeyear}{m}{%
+  \@validatecitationkey{#1}%
+  \citeyear*{#1}%
+}
+
+% =============================================================================
+% EXTENDED CITATION MACROS
+% =============================================================================
+
+% Citation with page number
+\NewDocumentCommand{\citepage}{m m}{%
+  \@validatecitationkey{#1}%
+  \textcite[#2]{#1}%
+  \label{cite:#1}%
+}
+
+% Citation with figure/table number
+\NewDocumentCommand{\citefigure}{m m}{%
+  \@validatecitationkey{#1}%
+  \textcite[Fig.~#2]{#1}%
+  \label{cite:#1}%
+}
+
+% Citation with theorem/definition number
+\NewDocumentCommand{\citetheorem}{m m}{%
+  \@validatecitationkey{#1}%
+  \textcite[Thm.~#2]{#1}%
+  \label{cite:#1}%
+}
+
+% =============================================================================
+% PROVENANCE MACROS (for definitions and theorems)
+% =============================================================================
+
+% Definition cites source (generates RDF provenance link)
+\NewDocumentCommand{\definedfrom}{m m}{%
+  \@validatecitationkey{#2}%
+  % Annotation for RDF extraction: DEF:#1 CITES:#2
+  \marginpar{\tiny\texttt{def:#1 $\leftarrow$ #2}}%
+  \cite{#2}%
+}
+
+% Theorem cites proof source (generates RDF provenance link)
+\NewDocumentCommand{\provedfrom}{m m}{%
+  \@validatecitationkey{#2}%
+  % Annotation for RDF extraction: THM:#1 CITES:#2
+  \marginpar{\tiny\texttt{thm:#1 $\leftarrow$ #2}}%
+  \cite{#2}%
+}
+
+% Section derived from source (generates prov:wasDerivedFrom)
+\NewDocumentCommand{\derivedfrom}{m m}{%
+  \@validatecitationkey{#2}%
+  % Annotation for RDF extraction: SEC:#1 DERIVED-FROM:#2
+  \marginpar{\tiny\texttt{sec:#1 $\Leftarrow$ #2}}%
+  Based on \cite{#2}.%
+}
+
+% Multiple citations (validates all keys)
+\NewDocumentCommand{\cites}{>{\SplitList{,}}m}{%
+  \ProcessList{#1}{\@validatecitationkey}%
+  \textcites#1%
+}
+
+% =============================================================================
+% CROSS-REFERENCE HELPERS
+% =============================================================================
+
+% Reference a cited work (by label)
+\NewDocumentCommand{\refcite}{m}{%
+  \ref{cite:#1}%
+}
+
+% =============================================================================
+% DEBUGGING AND VALIDATION
+% =============================================================================
+
+% List all valid citation keys (for debugging)
+\NewDocumentCommand{\listvalidcitations}{}{%
+  \begin{itemize}
+    \item girard1987linear - Girard (1987) Linear Logic
+    \item kripke1965semantical - Kripke (1965) Semantical Analysis of Intuitionistic Logic
+    \item sambin2003basic - Sambin et al. (2003) Basic Logic
+    \item lawvere1963functorial - Lawvere (1963) Functorial Semantics
+    \item maclane1971categories - Mac Lane (1971) Categories for the Working Mathematician
+    \item prawitz1965natural - Prawitz (1965) Natural Deduction
+    \item troelstra2000basic - Troelstra \& Schwichtenberg (2000) Basic Proof Theory
+    \item abramsky1994proofs - Abramsky (1994) Proofs as Processes
+    \item seely1989linear - Seely (1989) Linear Logic and *-Autonomous Categories
+    \item jacobs1999categorical - Jacobs (1999) Categorical Logic and Type Theory
+    \item lambek1988introduction - Lambek \& Scott (1988) Higher Order Categorical Logic
+    \item barr1990category - Barr \& Wells (1990) Category Theory for Computing Science
+    \item urban2015categorical - Urban (2015) Categorical Structures and Ontologies
+    \item trafford2020categorical - Trafford (2020) Categorical Semantic Models
+    \item curry1958combinatory - Curry \& Feys (1958) Combinatory Logic
+    \item howard1980formulae - Howard (1980) Formulae-as-Types
+  \end{itemize}
+}
+
+% =============================================================================
+% MACHINE-READABLE OUTPUT (for validator extraction)
+% =============================================================================
+
+% Every \cite command generates a comment in the .aux file for validation
+\AtEndDocument{%
+  \immediate\write\@auxout{%
+    \string\@writefile{cit}{CITATION_VALIDATION_COMPLETE}%
+  }%
+}
+
+\endinput
