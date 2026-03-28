@@ -1,0 +1,86 @@
+# Broad, exploratory extraction focused on sequent calculus / LK and nearby concepts.
+# Endpoint: https://query.wikidata.org/sparql
+# Result format: Turtle
+# Notes: Uses mwapi EntitySearch for controlled breadth; then extracts a curated set of truthy (wdt:) properties.
+
+PREFIX wd: <http://www.wikidata.org/entity/>
+PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+PREFIX bd: <http://www.bigdata.com/rdf#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX schema: <http://schema.org/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX mwapi: <https://www.mediawiki.org/ontology#API/>
+
+CONSTRUCT {
+  ?item ?p ?o .
+  ?item rdfs:label ?label .
+  ?item schema:description ?desc .
+  ?item skos:altLabel ?altLabel .
+  ?o rdfs:label ?oLabel .
+}
+WHERE {
+  VALUES ?search {
+    "sequent calculus"
+    "LK sequent calculus"
+    "Gentzen"
+    "proof theory"
+    "cut-elimination theorem"
+    "cut rule"
+    "structural rule"
+    "weakening rule"
+    "contraction rule"
+    "exchange rule"
+    "inference rule"
+    "axiom"
+    "classical logic"
+    "intuitionistic logic"
+    "linear logic"
+    "substructural logic"
+  }
+
+  SERVICE wikibase:mwapi {
+    bd:serviceParam wikibase:api "EntitySearch" ;
+      wikibase:endpoint "www.wikidata.org" ;
+      mwapi:search ?search ;
+      mwapi:language "en" ;
+      mwapi:limit "6" .
+
+    ?item wikibase:apiOutputItem mwapi:item .
+  }
+
+  OPTIONAL { ?item rdfs:label ?label FILTER(LANG(?label) = "en") }
+  OPTIONAL { ?item schema:description ?desc FILTER(LANG(?desc) = "en") }
+  OPTIONAL { ?item skos:altLabel ?altLabel FILTER(LANG(?altLabel) = "en") }
+
+  # Curated, high-signal properties: typing, hierarchy, topicality, provenance, and potential endpoint discovery.
+  VALUES ?p {
+    wdt:P31      # instance of
+    wdt:P279     # subclass of
+    wdt:P361     # part of
+    wdt:P527     # has part
+    wdt:P1269    # facet of
+    wdt:P921     # main subject
+    wdt:P2579    # studied by
+    wdt:P1343    # described by source
+    wdt:P50      # author
+    wdt:P61      # discoverer or inventor
+    wdt:P571     # inception
+    wdt:P577     # publication date
+    wdt:P144     # based on
+    wdt:P178     # developer
+    wdt:P856     # official website
+    wdt:P953     # full work available at
+    wdt:P2888    # exact match
+    wdt:P5305    # SPARQL endpoint
+    wdt:P1325    # external data available at
+    wdt:P31      # instance of (duplicated in case of query planner changes)
+  }
+
+  OPTIONAL { ?item ?p ?o }
+  OPTIONAL {
+    ?o rdfs:label ?oLabel
+    FILTER(isIRI(?o))
+    FILTER(LANG(?oLabel) = "en")
+  }
+}
